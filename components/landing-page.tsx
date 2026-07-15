@@ -142,7 +142,7 @@ export function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-20 md:px-8" id="about">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl text-center md:text-left">
           <Badge>Company Profile</Badge>
           <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-5xl">
             Memposisikan BidTech sebagai partner teknologi modern yang kredibel dan terpercaya.
@@ -176,7 +176,7 @@ export function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-20 md:px-8" id="services">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl text-center md:text-left">
           <Badge>Layanan Utama</Badge>
           <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-5xl">
             Layanan yang dirancang untuk membantu bisnis tumbuh lebih cepat dan lebih terarah.
@@ -205,7 +205,7 @@ export function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-20 md:px-8">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl text-center md:text-left">
           <Badge>Why BidTech</Badge>
           <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-5xl">
             Alasan mengapa BidTech layak menjadi partner digital untuk bisnis Anda.
@@ -234,7 +234,7 @@ export function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-20 md:px-8" id="process">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl text-center md:text-left">
           <Badge>Alur Delivery</Badge>
           <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-5xl">
             Proses kerja yang jelas, nyaman diikuti, dan berorientasi pada hasil.
@@ -259,7 +259,7 @@ export function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-5 py-20 md:px-8">
-        <div className="max-w-3xl">
+        <div className="max-w-3xl text-center md:text-left">
           <Badge>Solusi Kami</Badge>
           <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-5xl">
             Bentuk solusi yang dapat disiapkan sesuai kebutuhan dan arah pertumbuhan bisnis Anda.
@@ -290,7 +290,7 @@ export function LandingPage() {
       <section className="mx-auto max-w-7xl px-5 py-20 md:px-8" id="contact">
         <Card className="overflow-hidden bg-[linear-gradient(135deg,rgba(190,242,100,0.14),transparent_36%),rgba(10,12,12,0.92)]">
           <CardContent className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
-            <div className="max-w-2xl">
+            <div className="max-w-2xl text-center md:text-left">
               <Badge>Langkah Berikutnya</Badge>
               <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-5xl">
                 Mari mulai percakapan untuk menemukan solusi digital yang tepat bagi bisnis Anda.
