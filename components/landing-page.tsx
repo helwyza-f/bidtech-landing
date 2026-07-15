@@ -302,7 +302,7 @@ export function LandingPage() {
             </div>
 
             <div className="flex flex-col gap-3 sm:flex-row">
-              <a href="https://wa.me/6281234567890" target="_blank" rel="noreferrer">
+              <a href="https://wa.me/628217601455" target="_blank" rel="noreferrer">
                 <Button size="lg">
                   <MessageCircleMore className="mr-2 size-4" />
                   Konsultasi via WhatsApp
