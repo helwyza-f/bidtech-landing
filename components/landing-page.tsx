@@ -74,17 +74,19 @@ export function LandingPage() {
       <div className="absolute inset-x-0 top-0 -z-10 h-[560px] bg-[radial-gradient(circle_at_top_right,rgba(190,242,100,0.18),transparent_32%),radial-gradient(circle_at_left,rgba(34,211,238,0.1),transparent_26%)]" />
 
       <section className="mx-auto grid min-h-[calc(100vh-81px)] max-w-7xl gap-14 px-5 py-12 md:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:py-16" id="hero">
-        <div>
-          <Badge>Software House • Web • Mobile • Cloud</Badge>
-          <h1 className="mt-6 max-w-4xl font-[family-name:var(--font-sora)] text-5xl font-semibold leading-none tracking-tight text-white md:text-7xl">
+        <div className="text-center lg:text-left">
+          <div className="flex justify-center lg:justify-start">
+            <Badge>Software House • Web • Mobile • Cloud</Badge>
+          </div>
+          <h1 className="mx-auto mt-6 max-w-4xl font-[family-name:var(--font-sora)] text-5xl font-semibold leading-none tracking-tight text-white md:text-7xl lg:mx-0">
             Bangun solusi digital yang cepat, kredibel, dan siap scale.
           </h1>
-          <p className="mt-6 max-w-2xl text-base leading-8 text-zinc-400 md:text-lg">
+          <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-zinc-400 md:text-lg lg:mx-0">
             BidTech membantu bisnis Anda menghadirkan website, aplikasi, dan solusi digital yang terlihat profesional,
             mudah digunakan, dan siap mendukung pertumbuhan usaha.
           </p>
 
-          <div className="mt-10 flex flex-wrap gap-4">
+          <div className="mt-10 flex flex-wrap justify-center gap-4 lg:justify-start">
             <a href="#contact">
               <Button size="lg">
                 Jadwalkan Diskusi
@@ -98,7 +100,7 @@ export function LandingPage() {
             </a>
           </div>
 
-          <div className="mt-10 grid gap-4 md:grid-cols-3">
+          <div className="mt-10 grid gap-4 text-left md:grid-cols-3">
             {[
               ["End-to-end", "Dari strategi sampai deployment"],
               ["Solusi Kustom", "Bukan delivery berbasis template"],
