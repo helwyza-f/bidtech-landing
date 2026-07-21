@@ -11,18 +11,24 @@ export function StatCounter({
   suffix?: string;
   duration?: number;
 }) {
-  const [count, setCount] = useState(0);
+  const [count, setCount] = useState(value);
   const ref = useRef<HTMLSpanElement>(null);
   const started = useRef(false);
 
   useEffect(() => {
     const node = ref.current;
     if (!node) return;
+    if (!("IntersectionObserver" in window) || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    let animationFrame = 0;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (!entry.isIntersecting || started.current) return;
         started.current = true;
+        setCount(0);
 
         const startTime = performance.now();
 
@@ -30,16 +36,19 @@ export function StatCounter({
           const progress = Math.min((now - startTime) / duration, 1);
           const eased = 1 - Math.pow(1 - progress, 3);
           setCount(Math.round(eased * value));
-          if (progress < 1) requestAnimationFrame(tick);
+          if (progress < 1) animationFrame = requestAnimationFrame(tick);
         };
 
-        requestAnimationFrame(tick);
+        animationFrame = requestAnimationFrame(tick);
       },
-      { threshold: 0.4 }
+      { threshold: 0.1, rootMargin: "0px 0px -5% 0px" }
     );
 
     observer.observe(node);
-    return () => observer.disconnect();
+    return () => {
+      observer.disconnect();
+      cancelAnimationFrame(animationFrame);
+    };
   }, [value, duration]);
 
   return (
