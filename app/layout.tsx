@@ -21,11 +21,6 @@ export const metadata: Metadata = {
   title: "BidTech | Business Innovative Digital Solutions",
   description:
     "BidTech is a software house focused on web, mobile, cloud, and scalable digital product delivery for modern businesses.",
-  icons: {
-    icon: "/icon.png",
-    shortcut: "/icon.png",
-    apple: "/icon.png",
-  },
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {

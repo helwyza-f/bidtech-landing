@@ -126,7 +126,7 @@ export function SiteHeader() {
             {(["id", "en"] as const).map((code) => (
               <button
                 className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase ${
-                  lang === code ? "border-lime-300 bg-lime-300 text-black" : "border-white/15 text-zinc-300"
+                  lang === code ? "border-[#63E009] bg-[#63E009] text-black" : "border-white/15 text-zinc-300"
                 }`}
                 key={code}
                 onClick={() => {

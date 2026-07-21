@@ -106,7 +106,7 @@ export function LandingPage() {
           <div className="flex justify-center">
             <Badge className="uppercase tracking-widest">{t.hero.badge}</Badge>
           </div>
-          <h1 className="mx-auto mt-5 max-w-3xl font-[Tahoma,Arial,sans-serif] text-3xl font-semibold leading-tight tracking-tight text-white sm:text-4xl md:mt-6 md:text-5xl lg:text-6xl">
+          <h1 className="mx-auto mt-5 max-w-3xl font-[Tahoma,Arial,sans-serif] text-3xl font-normal leading-tight tracking-tight text-white sm:text-4xl md:mt-6 md:text-5xl lg:text-6xl">
             {t.hero.titleWhite} <span className="text-[#63E009]">{t.hero.titleGreen}</span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-zinc-400 md:text-lg">{t.hero.subtitle}</p>
@@ -144,7 +144,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section className="mx-4 grid max-w-7xl grid-cols-2 gap-3 sm:mx-5 sm:gap-4 md:mx-8 lg:mx-auto lg:grid-cols-4" aria-label="BidTech stats">
+      <section className="mx-4 mb-4 mt-8 grid max-w-7xl grid-cols-2 gap-3 sm:mx-5 sm:mb-6 sm:mt-12 sm:gap-4 md:mx-8 lg:mx-auto lg:mb-8 lg:mt-14 lg:grid-cols-4" aria-label="BidTech stats">
         {t.stats.map((stat) => (
           <div
             className="flex min-h-36 flex-col items-center justify-center rounded-[20px] border border-lime-300/15 bg-black/60 px-3 py-7 text-center shadow-[0_16px_50px_rgba(0,0,0,0.28)] sm:min-h-0 sm:rounded-[24px] sm:px-5 sm:py-8"
@@ -231,13 +231,15 @@ export function LandingPage() {
               key={service.title}
             >
               <CardContent className="space-y-4">
-                <div className="flex size-11 items-center justify-center rounded-xl bg-lime-300/10">
-                  <Image src={serviceIcons[index]} alt="" width={22} height={22} className="size-5" />
+                <div className="flex items-center gap-4">
+                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10">
+                    <Image src={serviceIcons[index]} alt="" width={22} height={22} className="size-5" />
+                  </div>
+                  <h3 className="font-[family-name:var(--font-sora)] text-lg font-semibold text-[#63E009]">
+                    {service.title}
+                  </h3>
                 </div>
-                <div>
-                  <h3 className="font-[family-name:var(--font-sora)] text-lg font-semibold text-[#63E009]">{service.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-zinc-400">{service.description}</p>
-                </div>
+                <p className="text-sm leading-6 text-zinc-400">{service.description}</p>
                 <ul className="space-y-2 border-t border-white/10 pt-4">
                   {service.features.map((feature) => (
                     <li className="flex items-center gap-2 text-sm text-zinc-300" key={feature}>
@@ -267,7 +269,7 @@ export function LandingPage() {
               <button
                 aria-label={`Lihat ${service.title}`}
                 className={`h-2.5 rounded-full transition-all ${
-                  activeServiceSlide === index ? "w-8 bg-lime-400" : "w-2.5 bg-zinc-600"
+                  activeServiceSlide === index ? "w-8 bg-[#63E009]" : "w-2.5 bg-zinc-600"
                 }`}
                 key={service.title}
                 onClick={() => moveServiceSlide(index)}
@@ -344,7 +346,7 @@ export function LandingPage() {
               <button
                 aria-label={`Lihat ${item.title}`}
                 className={`h-2 rounded-full transition-all ${
-                  activeSpecializationSlide === index ? "w-6 bg-lime-400" : "w-2 bg-zinc-600"
+                  activeSpecializationSlide === index ? "w-6 bg-[#63E009]" : "w-2 bg-zinc-600"
                 }`}
                 key={item.title}
                 onClick={() => moveSpecializationSlide(index)}
@@ -381,7 +383,7 @@ export function LandingPage() {
                 alt={product.title}
                 width={600}
                 height={400}
-                className="h-44 w-full object-cover"
+                className="h-auto w-full object-contain"
               />
               <CardContent className="space-y-3">
                 <span className="text-xs font-semibold uppercase tracking-widest text-[#63E009]">{product.tag}</span>
@@ -428,9 +430,9 @@ export function LandingPage() {
                   aria-label={`${step.title} (${index + 1})`}
                   className={`relative z-10 flex size-10 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-300 ${
                     activeStep === index
-                      ? "scale-110 border-lime-300 bg-lime-300 text-black shadow-[0_0_0_6px_rgba(190,242,100,0.15)]"
+                      ? "scale-110 border-[#63E009] bg-[#63E009] text-black shadow-[0_0_0_6px_rgba(99,224,9,0.15)]"
                       : index < activeStep
-                        ? "border-lime-300 bg-lime-300/20 text-[#63E009]"
+                        ? "border-[#63E009] bg-[#63E009]/20 text-[#63E009]"
                         : "border-slate-900/20 bg-white/70 text-slate-900 hover:border-green-600/50"
                   }`}
                   onClick={() => setActiveStep(index)}
@@ -474,7 +476,7 @@ export function LandingPage() {
             <button
               className={`min-w-0 rounded-full border px-2 py-2 text-[10px] font-semibold uppercase tracking-wide transition-colors sm:px-5 sm:text-xs sm:tracking-widest ${
                 activePricingTab === index
-                  ? "border-lime-300 bg-lime-300 text-black"
+                  ? "border-[#63E009] bg-[#63E009] text-black"
                   : "border-slate-900/20 text-slate-700 hover:border-green-600/50"
               }`}
               key={tab.key}
@@ -516,9 +518,9 @@ export function LandingPage() {
             return (
             <Card
               key={plan.name}
-              className={`flex w-full min-w-full shrink-0 snap-start flex-col transition-all duration-300 md:min-w-0 md:shrink ${
+              className={`flex w-full min-w-full shrink-0 snap-start flex-col shadow-none transition-all duration-300 md:min-w-0 md:shrink ${
                 isSelected
-                  ? "border-lime-300 bg-[#0b0f12] shadow-[0_0_0_2px_rgba(190,242,100,0.18),0_20px_50px_rgba(0,0,0,0.35)]"
+                  ? "border-lime-300 bg-[#0b0f12] shadow-[0_0_0_2px_rgba(190,242,100,0.18)]"
                   : plan.featured
                     ? "border-lime-300/40 bg-[#0b0f12] xl:-translate-y-3"
                     : "bg-[#0b0f12]"
@@ -579,7 +581,7 @@ export function LandingPage() {
               <button
                 aria-label={`Lihat paket ${plan.name}`}
                 className={`h-2.5 rounded-full transition-all ${
-                  activePricingSlide === index ? "w-8 bg-lime-400" : "w-2.5 bg-zinc-600"
+                  activePricingSlide === index ? "w-8 bg-[#63E009]" : "w-2.5 bg-zinc-600"
                 }`}
                 key={plan.name}
                 onClick={() => movePricingSlide(index)}
