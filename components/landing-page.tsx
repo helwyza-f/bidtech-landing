@@ -617,7 +617,7 @@ export function LandingPage() {
           ref={testimonialsRef}
         >
           {t.testimonials.items.map((item) => (
-            <Card className="w-full min-w-full shrink-0 snap-start bg-[#0b0f12] md:min-w-0 md:shrink" key={item.name}>
+            <Card className="w-full min-w-full shrink-0 snap-start bg-[#0b0f12] shadow-none md:min-w-0 md:shrink" key={item.name}>
               <CardContent className="flex h-full min-h-72 flex-col space-y-5 sm:min-h-64 md:min-h-0">
                 <div className="flex gap-1 text-[#63E009]">
                   {Array.from({ length: 5 }).map((_, i) => (
