@@ -518,7 +518,7 @@ export function LandingPage() {
             return (
             <Card
               key={plan.name}
-              className={`flex w-full min-w-full shrink-0 snap-start flex-col shadow-none transition-all duration-300 md:min-w-0 md:shrink ${
+              className={`flex w-full min-w-full shrink-0 snap-start flex-col !shadow-none transition-all duration-300 md:min-w-0 md:shrink ${
                 isSelected
                   ? "border-lime-300 bg-[#0b0f12] shadow-[0_0_0_2px_rgba(190,242,100,0.18)]"
                   : plan.featured
@@ -617,7 +617,7 @@ export function LandingPage() {
           ref={testimonialsRef}
         >
           {t.testimonials.items.map((item) => (
-            <Card className="w-full min-w-full shrink-0 snap-start bg-[#0b0f12] shadow-none md:min-w-0 md:shrink" key={item.name}>
+            <Card className="w-full min-w-full shrink-0 snap-start bg-[#0b0f12] !shadow-none md:min-w-0 md:shrink" key={item.name}>
               <CardContent className="flex h-full min-h-72 flex-col space-y-5 sm:min-h-64 md:min-h-0">
                 <div className="flex gap-1 text-[#63E009]">
                   {Array.from({ length: 5 }).map((_, i) => (
