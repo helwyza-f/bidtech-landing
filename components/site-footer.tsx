@@ -35,9 +35,9 @@ export function SiteFooter() {
 
   return (
     <footer className="border-t border-white/8 bg-black/60">
-      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-5 sm:py-16 md:px-8">
-        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.2fr_1fr_1fr_1fr]">
-          <div>
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-5 sm:py-14 md:px-8 lg:py-16">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-14">
+          <div className="flex flex-col items-center text-center lg:w-[30%] lg:shrink-0 lg:items-start lg:text-left">
             <div className="flex items-center gap-2">
               <Image
                 src="/images/Logo.png"
@@ -47,7 +47,7 @@ export function SiteFooter() {
                 className="h-7 w-auto object-contain"
               />
             </div>
-            <p className="mt-4 max-w-xs text-sm leading-6 text-zinc-400">{t.footer.description}</p>
+            <p className="mt-4 max-w-md text-sm leading-6 text-zinc-400 lg:max-w-xs">{t.footer.description}</p>
             <div className="mt-5 flex gap-3">
               {socials.map((social) => {
                 const Icon = social.icon;
@@ -55,7 +55,7 @@ export function SiteFooter() {
                 return (
                   <a
                     aria-label={social.label}
-                    className="flex size-9 items-center justify-center rounded-full border border-white/10 text-zinc-300 transition hover:border-lime-300/40 hover:text-lime-300"
+                    className="flex size-9 items-center justify-center rounded-full border border-white/10 text-zinc-300 transition hover:border-lime-300/40 hover:text-[#63E009]"
                     href={social.href}
                     key={social.label}
                     rel="noreferrer"
@@ -68,12 +68,13 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div>
-            <p className="text-sm font-semibold text-white">{t.footer.navTitle}</p>
-            <ul className="mt-4 space-y-3">
+          <div className="grid w-full grid-cols-3 gap-x-3 sm:gap-x-6 lg:flex-1">
+          <div className="min-w-0 text-center lg:text-left">
+            <p className="text-xs font-semibold text-white sm:text-sm">{t.footer.navTitle}</p>
+            <ul className="mt-4 space-y-2.5 sm:space-y-3">
               {t.footer.navItems.map((item) => (
                 <li key={item.label}>
-                  <a className="text-sm text-zinc-400 transition hover:text-lime-300" href={item.href}>
+                  <a className="break-words text-[11px] leading-5 text-zinc-400 transition hover:text-[#63E009] sm:text-sm" href={item.href}>
                     {item.label}
                   </a>
                 </li>
@@ -81,12 +82,12 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div>
-            <p className="text-sm font-semibold text-white">{t.footer.servicesTitle}</p>
-            <ul className="mt-4 space-y-3">
+          <div className="min-w-0 text-center lg:text-left">
+            <p className="text-xs font-semibold text-white sm:text-sm">{t.footer.servicesTitle}</p>
+            <ul className="mt-4 space-y-2.5 sm:space-y-3">
               {t.footer.servicesItems.map((item) => (
                 <li key={item}>
-                  <a className="text-sm text-zinc-400 transition hover:text-lime-300" href="#services">
+                  <a className="break-words text-[11px] leading-5 text-zinc-400 transition hover:text-[#63E009] sm:text-sm" href="#services">
                     {item}
                   </a>
                 </li>
@@ -94,21 +95,24 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div>
-            <p className="text-sm font-semibold text-white">{t.footer.helpTitle}</p>
-            <ul className="mt-4 space-y-3">
+          <div className="min-w-0 text-center lg:text-left">
+            <p className="text-xs font-semibold text-white sm:text-sm">{t.footer.helpTitle}</p>
+            <ul className="mt-4 space-y-2.5 sm:space-y-3">
               {t.footer.helpItems.map((item) => (
                 <li key={item}>
-                  <a className="text-sm text-zinc-400 transition hover:text-lime-300" href="#">
+                  <a className="break-words text-[11px] leading-5 text-zinc-400 transition hover:text-[#63E009] sm:text-sm" href="#">
                     {item}
                   </a>
                 </li>
               ))}
             </ul>
+          </div>
           </div>
         </div>
 
-        <div className="mt-12 border-t border-white/8 pt-6 text-center text-xs text-zinc-500">{t.footer.copyright}</div>
+        <div className="mt-10 border-t border-white/8 px-2 pt-6 text-center text-xs leading-5 text-zinc-500 lg:mt-12">
+          {t.footer.copyright}
+        </div>
       </div>
     </footer>
   );

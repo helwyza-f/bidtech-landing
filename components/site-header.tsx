@@ -49,7 +49,7 @@ export function SiteHeader() {
 
         <nav className="hidden items-center gap-8 text-sm text-zinc-300 md:flex">
           {navItems.map((item) => (
-            <a className="transition hover:text-lime-300" href={item.href} key={item.label}>
+            <a className="transition hover:text-[#63E009]" href={item.href} key={item.label}>
               {item.label}
             </a>
           ))}
@@ -58,7 +58,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="relative hidden md:block" ref={menuRef}>
             <button
-              className="flex items-center gap-1 text-sm text-zinc-300 transition hover:text-lime-300"
+              className="flex items-center gap-1 text-sm text-zinc-300 transition hover:text-[#63E009]"
               onClick={() => setOpen((v) => !v)}
               type="button"
             >
@@ -74,7 +74,7 @@ export function SiteHeader() {
                   ] as const
                 ).map((option) => (
                   <button
-                    className="flex w-full items-center justify-between px-3 py-2 text-left text-sm text-zinc-300 transition hover:bg-white/5 hover:text-lime-300"
+                    className="flex w-full items-center justify-between px-3 py-2 text-left text-sm text-zinc-300 transition hover:bg-white/5 hover:text-[#63E009]"
                     key={option.code}
                     onClick={() => {
                       setLang(option.code);
@@ -83,7 +83,7 @@ export function SiteHeader() {
                     type="button"
                   >
                     {option.label}
-                    {lang === option.code && <Check className="size-3.5 text-lime-300" />}
+                    {lang === option.code && <Check className="size-3.5 text-[#63E009]" />}
                   </button>
                 ))}
               </div>
@@ -113,7 +113,7 @@ export function SiteHeader() {
           <nav className="mx-auto grid max-w-7xl gap-1">
             {navItems.map((item) => (
               <a
-                className="rounded-xl px-3 py-3 text-sm text-zinc-300 transition hover:bg-white/5 hover:text-lime-300"
+                className="rounded-xl px-3 py-3 text-sm text-zinc-300 transition hover:bg-white/5 hover:text-[#63E009]"
                 href={item.href}
                 key={item.label}
                 onClick={() => setMobileOpen(false)}
