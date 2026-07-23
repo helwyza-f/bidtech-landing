@@ -77,7 +77,7 @@ export const id = {
         title: "Ayo Cuci",
         tag: "WEB & MOBILE",
         subtitle: "APLIKASI POS KASIR LAUNDRY",
-        image: "/images/ayocuci.webp",
+        image: "/images/ayocuci.png",
         description:
           "Kelola ribuan transaksi laundry dengan mudah dalam satu aplikasi. Dilengkapi fitur kasir digital, cetak/kirim nota otomatis via WhatsApp, hingga manajemen penjemputan kurir secara real-time.",
       },
@@ -85,7 +85,7 @@ export const id = {
         title: "Stokin",
         tag: "MOBILE",
         subtitle: "APLIKASI KELOLA STOK",
-        image: "/images/stokin.webp",
+        image: "/images/stokin.png",
         description:
           "Platform manajemen inventori yang memberikan visibilitas penuh atas ketersediaan barang, kategori produk, dan harga jual mendukung pengambilan keputusan bisnis yang lebih akurat.",
       },
@@ -93,7 +93,7 @@ export const id = {
         title: "Satu Rupiah",
         tag: "MOBILE",
         subtitle: "APLIKASI KEUANGAN",
-        image: "/images/saturupiah.webp",
+        image: "/images/saturupiah.png",
         description:
           "Solusi pencatatan keuangan yang membantu pengguna memantau transaksi, mengelola anggaran, dan menganalisis pola pengeluaran secara sistematis dan berbasis data.",
       },

@@ -14,14 +14,14 @@ export const specializationIcons = [
 ];
 
 export const specializationImages = [
-  "/images/expertise-1.webp",
-  "/images/expertise-2.webp",
-  "/images/expertise-3.webp",
-  "/images/expertise-4.webp",
-  "/images/expertise-5.webp",
-  "/images/expertise-6.webp",
-  "/images/expertise-7.webp",
-  "/images/expertise-8.webp",
+  "/images/bidtech-tech.jpeg",
+  "/images/bidtech-building.jpeg",
+  "/images/bidtech-logo.jpeg",
+  "/images/bidtech-tech.jpeg",
+  "/images/bidtech-building.jpeg",
+  "/images/bidtech-tech.jpeg",
+  "/images/bidtech-logo.jpeg",
+  "/images/bidtech-building.jpeg",
 ];
 
 export const whyIcons = [ShieldCheck, BadgeCheck, TrendingUp];

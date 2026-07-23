@@ -77,7 +77,7 @@ export const en = {
         title: "Ayo Cuci",
         tag: "WEB & MOBILE",
         subtitle: "LAUNDRY POS APPLICATION",
-        image: "/images/ayocuci.webp",
+        image: "/images/ayocuci.png",
         description:
           "Manage thousands of laundry transactions with ease in one app. Comes with a digital cashier, automatic receipt printing/WhatsApp delivery, and real-time courier pickup management.",
       },
@@ -85,7 +85,7 @@ export const en = {
         title: "Stokin",
         tag: "MOBILE",
         subtitle: "INVENTORY MANAGEMENT APPLICATION",
-        image: "/images/stokin.webp",
+        image: "/images/stokin.png",
         description:
           "An inventory management platform that gives full visibility into stock availability, product categories, and selling prices to support more accurate business decisions.",
       },
@@ -93,7 +93,7 @@ export const en = {
         title: "Satu Rupiah",
         tag: "MOBILE",
         subtitle: "FINANCE APPLICATION",
-        image: "/images/saturupiah.webp",
+        image: "/images/saturupiah.png",
         description:
           "A finance tracking solution that helps users monitor transactions, manage budgets, and analyze spending patterns systematically with data-driven insights.",
       },
