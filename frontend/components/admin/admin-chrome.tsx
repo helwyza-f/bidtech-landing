@@ -20,11 +20,11 @@ export function AdminChrome({ children }: { children: React.ReactNode }) {
   const title = pageTitles[pathname] ?? "Admin";
 
   return (
-    <div className="flex min-h-screen bg-[#050505] text-white">
+    <div className="flex min-h-screen bg-white text-slate-900">
       <AdminSidebar />
       <div className="flex flex-1 flex-col">
-        <header className="flex items-center justify-between border-b border-white/10 bg-[#0b0f12]/60 px-6 py-4 backdrop-blur">
-          <span className="text-sm font-semibold text-zinc-300">{title}</span>
+        <header className="flex items-center justify-between border-b border-slate-200 bg-white/90 px-6 py-4 backdrop-blur">
+          <span className="text-sm font-semibold text-slate-700">{title}</span>
           <LogoutButton />
         </header>
         <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">{children}</main>

@@ -6,9 +6,9 @@ import { useState } from "react";
 import type { Order } from "@/lib/types";
 
 const statusStyles: Record<Order["status"], string> = {
-  baru: "border-yellow-400/40 text-yellow-300",
-  dihubungi: "border-sky-400/40 text-sky-300",
-  selesai: "border-lime-400/40 text-[#63e009]",
+  baru: "border-amber-300 text-amber-700",
+  dihubungi: "border-sky-300 text-sky-700",
+  selesai: "border-lime-300 text-green-700",
 };
 
 export function StatusSelect({ id, status }: { id: number; status: Order["status"] }) {
@@ -33,7 +33,7 @@ export function StatusSelect({ id, status }: { id: number; status: Order["status
 
   return (
     <select
-      className={`rounded-lg border bg-black/40 px-2 py-1 text-xs disabled:opacity-60 ${statusStyles[value]}`}
+      className={`rounded-lg border bg-white px-2 py-1 text-xs disabled:opacity-60 ${statusStyles[value]}`}
       disabled={pending}
       onChange={(e) => handleChange(e.target.value as Order["status"])}
       value={value}
@@ -63,7 +63,7 @@ export function DeleteButton({ id }: { id: number }) {
 
   return (
     <button
-      className="rounded-lg border border-red-500/30 bg-red-500/10 px-2.5 py-1 text-xs text-red-300 disabled:opacity-60"
+      className="rounded-lg border border-red-200 bg-red-50 px-2.5 py-1 text-xs text-red-600 disabled:opacity-60"
       disabled={pending}
       onClick={handleDelete}
       type="button"
