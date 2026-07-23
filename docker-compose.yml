@@ -1,0 +1,49 @@
+services:
+  bidtech-admin-db:
+    image: postgres:16-alpine
+    container_name: BidTech-Admin-Db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: bidtech_admin
+      POSTGRES_USER: bidtech_admin
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - bidtech_admin_db_data:/var/lib/postgresql/data
+    networks:
+      - bidtech-admin
+
+  bidtech-admin-backend:
+    build: ./backend
+    container_name: BidTech-Admin-Backend
+    restart: unless-stopped
+    depends_on:
+      - bidtech-admin-db
+    environment:
+      PORT: 8080
+      DATABASE_URL: postgres://bidtech_admin:${DB_PASSWORD}@bidtech-admin-db:5432/bidtech_admin?sslmode=disable
+      ADMIN_USERNAME: ${ADMIN_USERNAME}
+      ADMIN_PASSWORD_HASH: ${ADMIN_PASSWORD_HASH}
+      SESSION_SECRET: ${SESSION_SECRET}
+      ALLOWED_ORIGIN: ${ALLOWED_ORIGIN}
+    networks:
+      - bidtech-admin
+
+  bidtech-admin-frontend:
+    build: ./frontend
+    container_name: BidTech-Admin-Frontend
+    restart: unless-stopped
+    depends_on:
+      - bidtech-admin-backend
+    environment:
+      BACKEND_URL: http://bidtech-admin-backend:8080
+      SESSION_SECRET: ${SESSION_SECRET}
+    ports:
+      - "127.0.0.1:3010:3000"
+    networks:
+      - bidtech-admin
+
+networks:
+  bidtech-admin:
+
+volumes:
+  bidtech_admin_db_data:
