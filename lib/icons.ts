@@ -13,4 +13,15 @@ export const specializationIcons = [
   "/icon/ic_setting.png",
 ];
 
+export const specializationImages = [
+  "/images/expertise-1.webp",
+  "/images/expertise-2.webp",
+  "/images/expertise-3.webp",
+  "/images/expertise-4.webp",
+  "/images/expertise-5.webp",
+  "/images/expertise-6.webp",
+  "/images/expertise-7.webp",
+  "/images/expertise-8.webp",
+];
+
 export const whyIcons = [ShieldCheck, BadgeCheck, TrendingUp];

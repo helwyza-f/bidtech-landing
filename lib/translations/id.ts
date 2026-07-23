@@ -42,7 +42,7 @@ export const id = {
       {
         title: "Mobile App Development",
         description: "Aplikasi mobile yang cepat, stabil, dan mudah digunakan.",
-        features: ["Android & iOS", "Flutter Development", "API Integration", "Maintenance"],
+        features: ["Android & iOS", "API Integration", "Maintenance"],
       },
       {
         title: "Custom Business System",
@@ -52,6 +52,7 @@ export const id = {
     ],
   },
   specializations: {
+    badge: "Keahlian Kami",
     title: "Spesialisasi Aplikasi",
     subtitle: "Kami menghadirkan solusi digital yang disesuaikan untuk berbagai sektor industri dengan teknologi terdepan.",
     items: [
@@ -75,23 +76,26 @@ export const id = {
       {
         title: "Ayo Cuci",
         tag: "WEB & MOBILE",
-        image: "/images/ayocuci.png",
+        subtitle: "APLIKASI POS KASIR LAUNDRY",
+        image: "/images/ayocuci.webp",
         description:
-          "Solusi manajemen laundry terlengkap untuk mengelola ribuan transaksi dengan mudah. Dilengkapi fitur kasir, manajemen kurir, hingga notifikasi WhatsApp ke pelanggan.",
+          "Kelola ribuan transaksi laundry dengan mudah dalam satu aplikasi. Dilengkapi fitur kasir digital, cetak/kirim nota otomatis via WhatsApp, hingga manajemen penjemputan kurir secara real-time.",
       },
       {
         title: "Stokin",
         tag: "MOBILE",
-        image: "/images/stokin.png",
+        subtitle: "APLIKASI KELOLA STOK",
+        image: "/images/stokin.webp",
         description:
-          "Solusi kelola stok terpadu yang membantu pemilik bisnis memantau ketersediaan barang, mengelola kategori dan harga produk, serta menganalisis nilai persediaan secara efisien dari satu aplikasi.",
+          "Platform manajemen inventori yang memberikan visibilitas penuh atas ketersediaan barang, kategori produk, dan harga jual mendukung pengambilan keputusan bisnis yang lebih akurat.",
       },
       {
         title: "Satu Rupiah",
         tag: "MOBILE",
-        image: "/images/saturupiah.png",
+        subtitle: "APLIKASI KEUANGAN",
+        image: "/images/saturupiah.webp",
         description:
-          "Solusi keuangan pribadi all in one yang membantu pengguna mencatat pemasukan, mengatur anggaran, dan memantau kesehatan finansial secara real time dari satu aplikasi.",
+          "Solusi pencatatan keuangan yang membantu pengguna memantau transaksi, mengelola anggaran, dan menganalisis pola pengeluaran secara sistematis dan berbasis data.",
       },
     ],
   },
@@ -166,34 +170,92 @@ export const id = {
         plans: [
           {
             name: "Starter",
+            badge: "Harga Normal",
+            originalPrice: "IDR 7.600.000",
             price: "Rp 5 Jt-an",
-            features: [
-              { text: "Web Landing Page", active: true },
-              { text: "Mobile Responsive", active: true },
-              { text: "1 Bulan Maintenance", active: true },
-              { text: "SEO Optimization", active: false },
+            featureGroups: [
+              {
+                title: "FITUR STANDAR",
+                items: [
+                  { text: "Web Landing Page", active: true },
+                  { text: "Mobile Responsive", active: true },
+                  { text: "UI/UX Design", active: true },
+                  { text: "Jumlah Page: Unlimited", active: true },
+                  { text: "Domain: .Com", active: true },
+                  { text: "Hosting: 5GB", active: true },
+                  { text: "Email: 5 Akun Bisnis", active: true },
+                ],
+              },
+              {
+                title: "LAYANAN & PERAWATAN",
+                items: [
+                  { text: "1 Bulan Maintenance", active: true },
+                  { text: "Jangka Waktu: 2 Minggu", active: true },
+                  { text: "Support", active: true },
+                  { text: "SEO Optimization", active: false },
+                  { text: "Business Branding", active: false },
+                ],
+              },
             ],
           },
           {
             name: "Professional",
+            badge: "Harga Normal",
+            originalPrice: "IDR 20.000.000",
             price: "Rp 15 Jt-an",
             featured: true,
-            features: [
-              { text: "Full Corporate Website", active: true },
-              { text: "Integrasi Sosial Media & Chat", active: true },
-              { text: "SEO Optimization", active: true },
-              { text: "3 Bulan Maintenance", active: true },
-              { text: "Email Bisnis Kustom", active: true },
+            featureGroups: [
+              {
+                title: "FITUR STANDAR",
+                items: [
+                  { text: "Full Corporate Website", active: true },
+                  { text: "Mobile Responsive", active: true },
+                  { text: "UI/UX Design", active: true },
+                  { text: "Jumlah Page: Unlimited", active: true },
+                  { text: "Domain: .Com", active: true },
+                  { text: "Hosting: 10GB", active: true },
+                  { text: "Email: 12 Akun / Email Bisnis Kustom", active: true },
+                  { text: "Integrasi Sosial Media & Chat", active: true },
+                ],
+              },
+              {
+                title: "LAYANAN & PERAWATAN",
+                items: [
+                  { text: "SEO Optimization", active: true },
+                  { text: "3 Bulan Maintenance", active: true },
+                  { text: "Jangka Waktu: 4 Minggu", active: true },
+                  { text: "Support", active: true },
+                  { text: "Business Branding", active: false },
+                ],
+              },
             ],
           },
           {
             name: "Enterprise",
             price: "Custom",
-            features: [
-              { text: "Mobile App iOS & Android", active: true },
-              { text: "Backend API & Database", active: true },
-              { text: "Support Eksklusif 24/7", active: true },
-              { text: "Scale-up Infrastructure", active: true },
+            featureGroups: [
+              {
+                title: "FITUR STANDAR & CUSTOM",
+                items: [
+                  { text: "Custom System", active: true },
+                  { text: "Mobile App iOS & Android", active: true },
+                  { text: "Backend API & Database Custom", active: true },
+                  { text: "Mobile Responsive", active: true },
+                  { text: "Custom Design", active: true },
+                  { text: "Domain: .Com", active: true },
+                ],
+              },
+              {
+                title: "LAYANAN & PERAWATAN",
+                items: [
+                  { text: "SEO Optimization", active: true },
+                  { text: "Support Eksklusif 24/7", active: true },
+                  { text: "Hosting: Scale-up Infrastructure", active: true },
+                  { text: "Email: 30 Akun Bisnis", active: true },
+                  { text: "Jangka Waktu: 6 Minggu", active: true },
+                  { text: "Business Branding", active: false },
+                ],
+              },
             ],
           },
         ],
@@ -205,33 +267,57 @@ export const id = {
           {
             name: "Starter",
             price: "Rp 10 Jt-an",
-            features: [
-              { text: "Aplikasi Mobile Single Platform", active: true },
-              { text: "UI/UX Design Dasar", active: true },
-              { text: "1 Bulan Maintenance", active: true },
-              { text: "Integrasi API Pihak Ketiga", active: false },
+            featureGroups: [
+              {
+                title: "FITUR STANDAR",
+                items: [
+                  { text: "Aplikasi Mobile Single Platform", active: true },
+                  { text: "UI/UX Design Dasar", active: true },
+                  { text: "Integrasi API Pihak Ketiga", active: false },
+                ],
+              },
+              {
+                title: "LAYANAN & PERAWATAN",
+                items: [{ text: "1 Bulan Maintenance", active: true }],
+              },
             ],
           },
           {
             name: "Professional",
             price: "Rp 25 Jt-an",
             featured: true,
-            features: [
-              { text: "Aplikasi iOS & Android", active: true },
-              { text: "Integrasi API Pihak Ketiga", active: true },
-              { text: "Push Notification", active: true },
-              { text: "3 Bulan Maintenance", active: true },
-              { text: "Admin Dashboard", active: true },
+            featureGroups: [
+              {
+                title: "FITUR STANDAR",
+                items: [
+                  { text: "Aplikasi iOS & Android", active: true },
+                  { text: "Integrasi API Pihak Ketiga", active: true },
+                  { text: "Push Notification", active: true },
+                  { text: "Admin Dashboard", active: true },
+                ],
+              },
+              {
+                title: "LAYANAN & PERAWATAN",
+                items: [{ text: "3 Bulan Maintenance", active: true }],
+              },
             ],
           },
           {
             name: "Enterprise",
             price: "Custom",
-            features: [
-              { text: "Mobile App iOS & Android", active: true },
-              { text: "Backend API & Database", active: true },
-              { text: "Support Eksklusif 24/7", active: true },
-              { text: "Scale-up Infrastructure", active: true },
+            featureGroups: [
+              {
+                title: "FITUR STANDAR & CUSTOM",
+                items: [
+                  { text: "Mobile App iOS & Android", active: true },
+                  { text: "Backend API & Database", active: true },
+                  { text: "Scale-up Infrastructure", active: true },
+                ],
+              },
+              {
+                title: "LAYANAN & PERAWATAN",
+                items: [{ text: "Support Eksklusif 24/7", active: true }],
+              },
             ],
           },
         ],
@@ -243,33 +329,57 @@ export const id = {
           {
             name: "Starter",
             price: "Rp 15 Jt-an",
-            features: [
-              { text: "Konsultasi & Analisis Kebutuhan", active: true },
-              { text: "Sistem Sederhana 1 Modul", active: true },
-              { text: "1 Bulan Maintenance", active: true },
-              { text: "Integrasi Sistem Lain", active: false },
+            featureGroups: [
+              {
+                title: "FITUR STANDAR",
+                items: [
+                  { text: "Konsultasi & Analisis Kebutuhan", active: true },
+                  { text: "Sistem Sederhana 1 Modul", active: true },
+                  { text: "Integrasi Sistem Lain", active: false },
+                ],
+              },
+              {
+                title: "LAYANAN & PERAWATAN",
+                items: [{ text: "1 Bulan Maintenance", active: true }],
+              },
             ],
           },
           {
             name: "Professional",
             price: "Rp 35 Jt-an",
             featured: true,
-            features: [
-              { text: "Sistem Multi Modul", active: true },
-              { text: "Integrasi Sistem Lain", active: true },
-              { text: "Dashboard & Reporting", active: true },
-              { text: "3 Bulan Maintenance", active: true },
-              { text: "Training Tim Internal", active: true },
+            featureGroups: [
+              {
+                title: "FITUR STANDAR",
+                items: [
+                  { text: "Sistem Multi Modul", active: true },
+                  { text: "Integrasi Sistem Lain", active: true },
+                  { text: "Dashboard & Reporting", active: true },
+                  { text: "Training Tim Internal", active: true },
+                ],
+              },
+              {
+                title: "LAYANAN & PERAWATAN",
+                items: [{ text: "3 Bulan Maintenance", active: true }],
+              },
             ],
           },
           {
             name: "Enterprise",
             price: "Custom",
-            features: [
-              { text: "Mobile App iOS & Android", active: true },
-              { text: "Backend API & Database", active: true },
-              { text: "Support Eksklusif 24/7", active: true },
-              { text: "Scale-up Infrastructure", active: true },
+            featureGroups: [
+              {
+                title: "FITUR STANDAR & CUSTOM",
+                items: [
+                  { text: "Mobile App iOS & Android", active: true },
+                  { text: "Backend API & Database", active: true },
+                  { text: "Scale-up Infrastructure", active: true },
+                ],
+              },
+              {
+                title: "LAYANAN & PERAWATAN",
+                items: [{ text: "Support Eksklusif 24/7", active: true }],
+              },
             ],
           },
         ],

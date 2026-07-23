@@ -9,8 +9,9 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { StatCounter } from "@/components/stat-counter";
 import { ContactForm } from "@/components/contact-form";
+import { Reveal } from "@/components/reveal";
 import { useLanguage } from "@/lib/i18n";
-import { serviceIcons, specializationIcons, whyIcons } from "@/lib/icons";
+import { serviceIcons, specializationIcons, specializationImages, whyIcons } from "@/lib/icons";
 
 export function LandingPage() {
   const { t } = useLanguage();
@@ -88,6 +89,24 @@ export function LandingPage() {
     return () => window.clearInterval(interval);
   }, []);
 
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      const slider = specializationsSliderRef.current;
+      if (!slider || window.innerWidth >= 640) return;
+
+      const slides = Array.from(slider.children) as HTMLElement[];
+      if (slides.length === 0) return;
+
+      setActiveSpecializationSlide((current) => {
+        const next = (current + 1) % slides.length;
+        slider.scrollTo({ left: slides[next].offsetLeft - slider.offsetLeft, behavior: "smooth" });
+        return next;
+      });
+    }, 3500);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
   return (
     <main className="relative overflow-hidden">
       <div className="absolute inset-x-0 top-0 -z-10 h-[560px] bg-[radial-gradient(circle_at_top_right,rgba(190,242,100,0.18),transparent_32%),radial-gradient(circle_at_left,rgba(34,211,238,0.1),transparent_26%)]" />
@@ -145,24 +164,23 @@ export function LandingPage() {
       </section>
 
       <section className="mx-4 mb-4 mt-8 grid max-w-7xl grid-cols-2 gap-3 sm:mx-5 sm:mb-6 sm:mt-12 sm:gap-4 md:mx-8 lg:mx-auto lg:mb-8 lg:mt-14 lg:grid-cols-4" aria-label="BidTech stats">
-        {t.stats.map((stat) => (
-          <div
-            className="flex min-h-36 flex-col items-center justify-center rounded-[20px] border border-lime-300/15 bg-black/60 px-3 py-7 text-center shadow-[0_16px_50px_rgba(0,0,0,0.28)] sm:min-h-0 sm:rounded-[24px] sm:px-5 sm:py-8"
-            key={stat.label}
-          >
-            <p className="font-[family-name:var(--font-sora)] text-3xl font-bold text-[#63E009] md:text-4xl">
-              <StatCounter value={stat.value} suffix={stat.suffix} />
-            </p>
-            <p className="mt-2 w-full text-center text-[10px] uppercase leading-5 tracking-wider text-zinc-400 sm:text-xs sm:tracking-widest">
-              {stat.label}
-            </p>
-          </div>
+        {t.stats.map((stat, index) => (
+          <Reveal delay={index * 80} key={stat.label}>
+            <div className="flex min-h-36 flex-col items-center justify-center rounded-[20px] border border-lime-300/15 bg-black/60 px-3 py-7 text-center shadow-[0_16px_50px_rgba(0,0,0,0.28)] sm:min-h-0 sm:rounded-[24px] sm:px-5 sm:py-8">
+              <p className="font-[family-name:var(--font-sora)] text-3xl font-bold text-[#63E009] md:text-4xl">
+                <StatCounter value={stat.value} suffix={stat.suffix} />
+              </p>
+              <p className="mt-2 w-full text-center text-[10px] uppercase leading-5 tracking-wider text-zinc-400 sm:text-xs sm:tracking-widest">
+                {stat.label}
+              </p>
+            </div>
+          </Reveal>
         ))}
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="about">
         <div className="grid items-center gap-8 md:grid-cols-[0.8fr_1.2fr]">
-          <div className="relative flex justify-center">
+          <Reveal className="relative flex justify-center" y={16}>
             <div className="absolute inset-0 rounded-[28px] bg-lime-300/10 blur-3xl" />
             <Image
               src="/images/mascot.webp"
@@ -171,9 +189,9 @@ export function LandingPage() {
               height={570}
               className="relative w-full max-w-[240px] object-contain"
             />
-          </div>
+          </Reveal>
 
-          <div>
+          <Reveal delay={100}>
             <h2 className="font-[family-name:var(--font-sora)] text-2xl font-semibold leading-tight text-white md:text-3xl">
               {t.why.title}
             </h2>
@@ -196,17 +214,17 @@ export function LandingPage() {
                 );
               })}
             </div>
-          </div>
+          </Reveal>
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="services">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-4xl">
             {t.services.title}
           </h2>
           <p className="mt-4 leading-7 text-zinc-400">{t.services.subtitle}</p>
-        </div>
+        </Reveal>
 
         <div
           className="mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
@@ -226,30 +244,33 @@ export function LandingPage() {
           ref={servicesSliderRef}
         >
           {t.services.items.map((service, index) => (
-            <Card
-              className="w-full min-w-full shrink-0 snap-start border-lime-300/20 bg-lime-300/[0.03] md:min-w-0 md:shrink"
+            <Reveal
+              className="w-full min-w-full shrink-0 snap-start md:min-w-0 md:shrink"
+              delay={index * 100}
               key={service.title}
             >
-              <CardContent className="space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10">
-                    <Image src={serviceIcons[index]} alt="" width={22} height={22} className="size-5" />
+              <Card className="border-lime-300/20 bg-lime-300/[0.03]">
+                <CardContent className="space-y-4">
+                  <div className="flex items-center gap-4">
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10">
+                      <Image src={serviceIcons[index]} alt="" width={22} height={22} className="size-5" />
+                    </div>
+                    <h3 className="font-[family-name:var(--font-sora)] text-lg font-semibold text-[#63E009]">
+                      {service.title}
+                    </h3>
                   </div>
-                  <h3 className="font-[family-name:var(--font-sora)] text-lg font-semibold text-[#63E009]">
-                    {service.title}
-                  </h3>
-                </div>
-                <p className="text-sm leading-6 text-zinc-400">{service.description}</p>
-                <ul className="space-y-2 border-t border-white/10 pt-4">
-                  {service.features.map((feature) => (
-                    <li className="flex items-center gap-2 text-sm text-zinc-300" key={feature}>
-                      <span className="size-1.5 shrink-0 rounded-full bg-lime-300" />
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-              </CardContent>
-            </Card>
+                  <p className="text-sm leading-6 text-zinc-400">{service.description}</p>
+                  <ul className="space-y-2 border-t border-white/10 pt-4">
+                    {service.features.map((feature) => (
+                      <li className="flex items-center gap-2 text-sm text-zinc-300" key={feature}>
+                        <span className="size-1.5 shrink-0 rounded-full bg-lime-300" />
+                        {feature}
+                      </li>
+                    ))}
+                  </ul>
+                </CardContent>
+              </Card>
+            </Reveal>
           ))}
         </div>
 
@@ -291,17 +312,21 @@ export function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
-        <div className="mx-auto max-w-2xl text-center">
-          <h2 className="font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-4xl">
-            {t.specializations.title}
-          </h2>
-          <p className="mt-4 leading-7 text-zinc-400">{t.specializations.subtitle}</p>
-        </div>
+        <Reveal className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+          <div>
+            <Badge className="border-green-700/20 bg-green-700/10 text-[#63E009]">{t.specializations.badge}</Badge>
+            <h2 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-4xl">
+              {t.specializations.title.split(" ")[0]}{" "}
+              <span className="text-[#63E009]">{t.specializations.title.split(" ").slice(1).join(" ")}</span>
+            </h2>
+          </div>
+          <p className="max-w-md leading-7 text-zinc-400 md:text-right">{t.specializations.subtitle}</p>
+        </Reveal>
 
         <div
-          className="mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden"
+          className="mt-10 flex w-full snap-x snap-mandatory gap-5 overflow-x-auto pb-2 [scrollbar-width:none] sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden"
           onScroll={(event) => {
-            if (window.innerWidth >= 768) return;
+            if (window.innerWidth >= 640) return;
             const slider = event.currentTarget;
             const slides = Array.from(slider.children) as HTMLElement[];
             const closest = slides.reduce(
@@ -316,21 +341,35 @@ export function LandingPage() {
           ref={specializationsSliderRef}
         >
           {t.specializations.items.map((item, index) => (
-            <Card className="w-full min-w-full shrink-0 snap-start md:min-w-0 md:shrink" key={item.title}>
-              <CardContent className="flex items-start gap-4">
-                <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10">
-                  <Image src={specializationIcons[index]} alt="" width={22} height={22} className="size-5" />
+            <Reveal
+              className="w-full min-w-full shrink-0 snap-start sm:min-w-0 sm:shrink"
+              delay={(index % 4) * 80}
+              key={item.title}
+            >
+              <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0b0f12] transition hover:border-lime-300/30">
+                <Image
+                  src={specializationImages[index]}
+                  alt={item.title}
+                  width={1200}
+                  height={680}
+                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                  className="h-auto w-full object-cover"
+                />
+                <div className="flex items-start gap-3 p-4">
+                  <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-lime-300/10">
+                    <Image src={specializationIcons[index]} alt="" width={18} height={18} className="size-4" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-semibold text-white">{item.title}</h3>
+                    <p className="mt-1 text-xs leading-5 text-zinc-400">{item.description}</p>
+                  </div>
                 </div>
-                <div className="min-w-0 flex-1">
-                  <h3 className="font-semibold text-white">{item.title}</h3>
-                  <p className="mt-1 text-sm leading-6 text-zinc-400">{item.description}</p>
-                </div>
-              </CardContent>
-            </Card>
+              </div>
+            </Reveal>
           ))}
         </div>
 
-        <div className="mt-6 flex items-center justify-center gap-3 md:hidden" aria-label="Navigasi spesialisasi">
+        <div className="mt-6 flex items-center justify-center gap-3 sm:hidden" aria-label="Navigasi spesialisasi">
           <button
             aria-label="Spesialisasi sebelumnya"
             className="flex size-10 shrink-0 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-lime-300 hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
@@ -341,7 +380,10 @@ export function LandingPage() {
             <ChevronLeft className="size-5" />
           </button>
 
-          <div className="flex items-center gap-1.5" aria-label={`Spesialisasi ${activeSpecializationSlide + 1} dari ${t.specializations.items.length}`}>
+          <div
+            className="flex items-center gap-1.5"
+            aria-label={`Spesialisasi ${activeSpecializationSlide + 1} dari ${t.specializations.items.length}`}
+          >
             {t.specializations.items.map((item, index) => (
               <button
                 aria-label={`Lihat ${item.title}`}
@@ -368,43 +410,46 @@ export function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="portfolio">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-4xl">
             {t.products.titleWhite} <span className="text-[#63E009]">{t.products.titleGreen}</span> {t.products.titleWhiteEnd}
           </h2>
           <p className="mt-4 leading-7 text-zinc-400">{t.products.subtitle}</p>
-        </div>
+        </Reveal>
 
         <div className="mt-8 grid gap-5 md:mt-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-          {t.products.items.map((product) => (
-            <Card key={product.title} className="overflow-hidden p-0">
-              <Image
-                src={product.image}
-                alt={product.title}
-                width={600}
-                height={400}
-                className="h-auto w-full object-contain"
-              />
-              <CardContent className="space-y-3">
-                <span className="text-xs font-semibold uppercase tracking-widest text-[#63E009]">{product.tag}</span>
-                <h3 className="font-[family-name:var(--font-sora)] text-xl font-bold text-white">{product.title}</h3>
-                <p className="text-sm leading-6 text-zinc-400">{product.description}</p>
-              </CardContent>
-            </Card>
+          {t.products.items.map((product, index) => (
+            <Reveal delay={index * 100} key={product.title}>
+              <Card className="overflow-hidden p-0">
+                <Image
+                  src={product.image}
+                  alt={product.title}
+                  width={600}
+                  height={400}
+                  className="h-auto w-full object-contain"
+                />
+                <CardContent className="space-y-3">
+                  <span className="text-xs font-semibold uppercase tracking-widest text-[#63E009]">{product.tag}</span>
+                  <h3 className="font-[family-name:var(--font-sora)] text-xl font-bold text-white">{product.title}</h3>
+                  <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{product.subtitle}</p>
+                  <p className="text-sm leading-6 text-zinc-400">{product.description}</p>
+                </CardContent>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <div className="bg-[#edf6e8]">
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
             <Badge className="border-green-700/20 bg-green-700/10 text-[#63E009]">{t.howItWorks.badge}</Badge>
           </div>
           <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
             {t.howItWorks.titleWhite} <span className="text-[#63E009]">{t.howItWorks.titleGreen}</span>
           </h2>
-        </div>
+        </Reveal>
 
         <div className="relative mt-14 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:flex lg:items-start lg:justify-between">
           <div
@@ -421,8 +466,9 @@ export function LandingPage() {
           </div>
 
           {t.howItWorks.steps.map((step, index) => (
-            <div
+            <Reveal
               className="relative z-10 flex flex-col items-center px-3 py-4 text-center lg:flex-1"
+              delay={index * 80}
               key={step.title}
             >
               <div className="relative flex h-10 w-full items-center justify-center">
@@ -455,13 +501,13 @@ export function LandingPage() {
               >
                 {step.description}
               </p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
             <Badge className="border-green-700/20 bg-green-700/10 text-[#63E009]">{t.pricing.badge}</Badge>
           </div>
@@ -469,7 +515,7 @@ export function LandingPage() {
             {t.pricing.title}
           </h2>
           <p className="mt-4 leading-7 text-slate-600">{t.pricing.subtitle}</p>
-        </div>
+        </Reveal>
 
         <div className="mt-8 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:justify-center">
           {t.pricing.tabs.map((tab, index) => (
@@ -510,7 +556,8 @@ export function LandingPage() {
           }}
           ref={pricingSliderRef}
         >
-          {t.pricing.tabs[activePricingTab].plans.map((plan) => {
+          {t.pricing.tabs[activePricingTab].plans.map((rawPlan) => {
+            const plan = rawPlan as typeof rawPlan & { badge?: string; originalPrice?: string };
             const isSelected =
               selectedPackage?.service === (t.contact.form.services[activePricingTab] ?? t.contact.form.services[0]) &&
               selectedPackage.plan === plan.name;
@@ -529,23 +576,46 @@ export function LandingPage() {
               <CardContent className="flex flex-1 flex-col space-y-6">
                 <div>
                   <p className="text-sm text-zinc-400">{plan.name}</p>
-                  <p className="mt-3 text-xs text-zinc-500">Mulai</p>
-                  <p className="mt-1 font-[family-name:var(--font-sora)] text-3xl font-bold text-[#63E009]">{plan.price}</p>
+                  {plan.badge ? (
+                    <span className="mt-3 inline-block rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-400">
+                      {plan.badge}
+                    </span>
+                  ) : null}
+                  {plan.originalPrice ? (
+                    <p className="mt-2 text-xs text-zinc-500 line-through">{plan.originalPrice}</p>
+                  ) : null}
+                  {!plan.badge && plan.price !== "Custom" ? <p className="mt-3 text-xs text-zinc-500">Mulai</p> : null}
+                  <p
+                    className={`font-[family-name:var(--font-sora)] font-bold text-[#63E009] ${
+                      plan.price === "Custom" ? "mt-3 text-4xl" : "mt-1 text-3xl"
+                    }`}
+                  >
+                    {plan.price}
+                  </p>
                 </div>
 
-                <ul className="flex-1 space-y-3">
-                  {plan.features.map((feature) => (
-                    <li
-                      className={`flex items-start gap-2 text-sm ${
-                        feature.active ? "text-zinc-300" : "text-zinc-600 line-through"
-                      }`}
-                      key={feature.text}
-                    >
-                      <Check className={`mt-0.5 size-4 shrink-0 ${feature.active ? "text-[#63E009]" : "text-zinc-600"}`} />
-                      {feature.text}
-                    </li>
+                <div className="flex-1 space-y-5">
+                  {plan.featureGroups.map((group) => (
+                    <div key={group.title}>
+                      <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{group.title}</p>
+                      <ul className="mt-3 space-y-3">
+                        {group.items.map((feature) => (
+                          <li
+                            className={`flex items-start gap-2 text-sm ${
+                              feature.active ? "text-zinc-300" : "text-zinc-600 line-through"
+                            }`}
+                            key={feature.text}
+                          >
+                            <Check
+                              className={`mt-0.5 size-4 shrink-0 ${feature.active ? "text-[#63E009]" : "text-zinc-600"}`}
+                            />
+                            {feature.text}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   ))}
-                </ul>
+                </div>
 
                 <Button
                   aria-pressed={isSelected}
@@ -553,11 +623,7 @@ export function LandingPage() {
                   onClick={() => selectPackage(plan)}
                   variant={isSelected ? "default" : "outline"}
                 >
-                  {isSelected
-                    ? t.pricing.selected
-                    : plan.price === "Custom"
-                      ? t.pricing.ctaEnterprise
-                      : t.pricing.ctaDefault}
+                  {isSelected ? t.pricing.selected : t.pricing.ctaDefault}
                 </Button>
               </CardContent>
             </Card>
@@ -603,54 +669,60 @@ export function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
             <Badge className="border-green-700/20 bg-green-700/10 text-[#63E009]">{t.testimonials.badge}</Badge>
           </div>
           <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
             {t.testimonials.title}
           </h2>
-        </div>
+        </Reveal>
 
         <div
           className="mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
           ref={testimonialsRef}
         >
-          {t.testimonials.items.map((item) => (
-            <Card className="w-full min-w-full shrink-0 snap-start bg-[#0b0f12] !shadow-none md:min-w-0 md:shrink" key={item.name}>
-              <CardContent className="flex h-full min-h-72 flex-col space-y-5 sm:min-h-64 md:min-h-0">
-                <div className="flex gap-1 text-[#63E009]">
-                  {Array.from({ length: 5 }).map((_, i) => (
-                    <Star className="size-4 fill-[#63E009]" key={i} />
-                  ))}
-                </div>
-                <p className="whitespace-normal break-words leading-7 text-zinc-300">&ldquo;{item.quote}&rdquo;</p>
-                <div className="mt-auto flex items-center gap-3 border-t border-white/10 pt-4">
-                  <div className="flex size-9 items-center justify-center rounded-full bg-lime-300/10 text-[#63E009]">
-                    <User className="size-4" />
+          {t.testimonials.items.map((item, index) => (
+            <Reveal
+              className="w-full min-w-full shrink-0 snap-start md:min-w-0 md:shrink"
+              delay={index * 100}
+              key={item.name}
+            >
+              <Card className="bg-[#0b0f12] !shadow-none">
+                <CardContent className="flex h-full min-h-72 flex-col space-y-5 sm:min-h-64 md:min-h-0">
+                  <div className="flex gap-1 text-[#63E009]">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star className="size-4 fill-[#63E009]" key={i} />
+                    ))}
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">{item.name}</p>
-                    <p className="text-xs text-zinc-400">{item.role}</p>
+                  <p className="whitespace-normal break-words leading-7 text-zinc-300">&ldquo;{item.quote}&rdquo;</p>
+                  <div className="mt-auto flex items-center gap-3 border-t border-white/10 pt-4">
+                    <div className="flex size-9 items-center justify-center rounded-full bg-lime-300/10 text-[#63E009]">
+                      <User className="size-4" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white">{item.name}</p>
+                      <p className="text-xs text-zinc-400">{item.role}</p>
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </Reveal>
           ))}
         </div>
       </section>
       </div>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="contact">
-        <div className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-4xl">
             {t.contact.title}
           </h2>
           <p className="mt-4 leading-7 text-zinc-400">{t.contact.subtitle}</p>
-        </div>
+        </Reveal>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <div className="space-y-4">
+          <Reveal className="space-y-4" y={16}>
             {t.contact.info.map((item, index) => {
               const Icon = [MessageCircleMore, Mail, MapPin][index];
 
@@ -669,16 +741,18 @@ export function LandingPage() {
                 </Card>
               );
             })}
-          </div>
+          </Reveal>
 
-          <Card>
-            <CardContent>
-              <ContactForm
-                key={selectedPackage ? `${selectedPackage.service}-${selectedPackage.plan}-${selectedPackage.price}` : "empty"}
-                selectedPackage={selectedPackage}
-              />
-            </CardContent>
-          </Card>
+          <Reveal delay={100} y={16}>
+            <Card>
+              <CardContent>
+                <ContactForm
+                  key={selectedPackage ? `${selectedPackage.service}-${selectedPackage.plan}-${selectedPackage.price}` : "empty"}
+                  selectedPackage={selectedPackage}
+                />
+              </CardContent>
+            </Card>
+          </Reveal>
         </div>
       </section>
     </main>

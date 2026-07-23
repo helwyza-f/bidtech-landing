@@ -24,6 +24,14 @@ export function ContactForm({ selectedPackage }: { selectedPackage: SelectedPack
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
+    fetch("/api/orders", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ name, whatsapp, company, service, description }),
+    }).catch(() => {
+      // Non-blocking: order storage failing shouldn't stop the user from reaching us via WhatsApp.
+    });
+
     const message = [
       `Halo BidTech, saya ${name || "-"} dari ${company || "-"}.`,
       `Nomor WhatsApp: ${whatsapp || "-"}`,

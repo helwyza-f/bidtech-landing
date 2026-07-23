@@ -42,7 +42,7 @@ export const en = {
       {
         title: "Mobile App Development",
         description: "Fast, stable, and easy-to-use mobile applications.",
-        features: ["Android & iOS", "Flutter Development", "API Integration", "Maintenance"],
+        features: ["Android & iOS",  "API Integration", "Maintenance"],
       },
       {
         title: "Custom Business System",
@@ -52,6 +52,7 @@ export const en = {
     ],
   },
   specializations: {
+    badge: "Our Expertise",
     title: "Application Specializations",
     subtitle: "We deliver digital solutions tailored to a wide range of industry sectors using cutting-edge technology.",
     items: [
@@ -75,23 +76,26 @@ export const en = {
       {
         title: "Ayo Cuci",
         tag: "WEB & MOBILE",
-        image: "/images/ayocuci.png",
+        subtitle: "LAUNDRY POS APPLICATION",
+        image: "/images/ayocuci.webp",
         description:
-          "A complete laundry management solution for handling thousands of transactions with ease. Comes with cashier features, courier management, and WhatsApp notifications for customers.",
+          "Manage thousands of laundry transactions with ease in one app. Comes with a digital cashier, automatic receipt printing/WhatsApp delivery, and real-time courier pickup management.",
       },
       {
         title: "Stokin",
         tag: "MOBILE",
-        image: "/images/stokin.png",
+        subtitle: "INVENTORY MANAGEMENT APPLICATION",
+        image: "/images/stokin.webp",
         description:
-          "An integrated inventory management solution that helps business owners track stock availability, manage product categories and prices, and analyze inventory value efficiently from one app.",
+          "An inventory management platform that gives full visibility into stock availability, product categories, and selling prices to support more accurate business decisions.",
       },
       {
         title: "Satu Rupiah",
         tag: "MOBILE",
-        image: "/images/saturupiah.png",
+        subtitle: "FINANCE APPLICATION",
+        image: "/images/saturupiah.webp",
         description:
-          "An all-in-one personal finance solution that helps users track income, manage budgets, and monitor financial health in real time from a single app.",
+          "A finance tracking solution that helps users monitor transactions, manage budgets, and analyze spending patterns systematically with data-driven insights.",
       },
     ],
   },
@@ -165,34 +169,92 @@ export const en = {
         plans: [
           {
             name: "Starter",
+            badge: "Regular Price",
+            originalPrice: "$490",
             price: "~$350",
-            features: [
-              { text: "Web Landing Page", active: true },
-              { text: "Mobile Responsive", active: true },
-              { text: "1 Month Maintenance", active: true },
-              { text: "SEO Optimization", active: false },
+            featureGroups: [
+              {
+                title: "STANDARD FEATURES",
+                items: [
+                  { text: "Web Landing Page", active: true },
+                  { text: "Mobile Responsive", active: true },
+                  { text: "UI/UX Design", active: true },
+                  { text: "Pages: Unlimited", active: true },
+                  { text: "Domain: .Com", active: true },
+                  { text: "Hosting: 5GB", active: true },
+                  { text: "Email: 5 Business Accounts", active: true },
+                ],
+              },
+              {
+                title: "SERVICE & MAINTENANCE",
+                items: [
+                  { text: "1 Month Maintenance", active: true },
+                  { text: "Timeline: 2 Weeks", active: true },
+                  { text: "Support", active: true },
+                  { text: "SEO Optimization", active: false },
+                  { text: "Business Branding", active: false },
+                ],
+              },
             ],
           },
           {
             name: "Professional",
+            badge: "Regular Price",
+            originalPrice: "$1,300",
             price: "~$950",
             featured: true,
-            features: [
-              { text: "Full Corporate Website", active: true },
-              { text: "Social Media & Chat Integration", active: true },
-              { text: "SEO Optimization", active: true },
-              { text: "3 Months Maintenance", active: true },
-              { text: "Custom Business Email", active: true },
+            featureGroups: [
+              {
+                title: "STANDARD FEATURES",
+                items: [
+                  { text: "Full Corporate Website", active: true },
+                  { text: "Mobile Responsive", active: true },
+                  { text: "UI/UX Design", active: true },
+                  { text: "Pages: Unlimited", active: true },
+                  { text: "Domain: .Com", active: true },
+                  { text: "Hosting: 10GB", active: true },
+                  { text: "Email: 12 Accounts / Custom Business Email", active: true },
+                  { text: "Social Media & Chat Integration", active: true },
+                ],
+              },
+              {
+                title: "SERVICE & MAINTENANCE",
+                items: [
+                  { text: "SEO Optimization", active: true },
+                  { text: "3 Months Maintenance", active: true },
+                  { text: "Timeline: 4 Weeks", active: true },
+                  { text: "Support", active: true },
+                  { text: "Business Branding", active: false },
+                ],
+              },
             ],
           },
           {
             name: "Enterprise",
             price: "Custom",
-            features: [
-              { text: "iOS & Android Mobile App", active: true },
-              { text: "Backend API & Database", active: true },
-              { text: "24/7 Exclusive Support", active: true },
-              { text: "Scalable Infrastructure", active: true },
+            featureGroups: [
+              {
+                title: "STANDARD & CUSTOM FEATURES",
+                items: [
+                  { text: "Custom System", active: true },
+                  { text: "iOS & Android Mobile App", active: true },
+                  { text: "Custom Backend API & Database", active: true },
+                  { text: "Mobile Responsive", active: true },
+                  { text: "Custom Design", active: true },
+                  { text: "Domain: .Com", active: true },
+                ],
+              },
+              {
+                title: "SERVICE & MAINTENANCE",
+                items: [
+                  { text: "SEO Optimization", active: true },
+                  { text: "24/7 Exclusive Support", active: true },
+                  { text: "Hosting: Scalable Infrastructure", active: true },
+                  { text: "Email: 30 Business Accounts", active: true },
+                  { text: "Timeline: 6 Weeks", active: true },
+                  { text: "Business Branding", active: false },
+                ],
+              },
             ],
           },
         ],
@@ -204,33 +266,57 @@ export const en = {
           {
             name: "Starter",
             price: "~$650",
-            features: [
-              { text: "Single-Platform Mobile App", active: true },
-              { text: "Basic UI/UX Design", active: true },
-              { text: "1 Month Maintenance", active: true },
-              { text: "Third-Party API Integration", active: false },
+            featureGroups: [
+              {
+                title: "STANDARD FEATURES",
+                items: [
+                  { text: "Single-Platform Mobile App", active: true },
+                  { text: "Basic UI/UX Design", active: true },
+                  { text: "Third-Party API Integration", active: false },
+                ],
+              },
+              {
+                title: "SERVICE & MAINTENANCE",
+                items: [{ text: "1 Month Maintenance", active: true }],
+              },
             ],
           },
           {
             name: "Professional",
             price: "~$1,600",
             featured: true,
-            features: [
-              { text: "iOS & Android App", active: true },
-              { text: "Third-Party API Integration", active: true },
-              { text: "Push Notifications", active: true },
-              { text: "3 Months Maintenance", active: true },
-              { text: "Admin Dashboard", active: true },
+            featureGroups: [
+              {
+                title: "STANDARD FEATURES",
+                items: [
+                  { text: "iOS & Android App", active: true },
+                  { text: "Third-Party API Integration", active: true },
+                  { text: "Push Notifications", active: true },
+                  { text: "Admin Dashboard", active: true },
+                ],
+              },
+              {
+                title: "SERVICE & MAINTENANCE",
+                items: [{ text: "3 Months Maintenance", active: true }],
+              },
             ],
           },
           {
             name: "Enterprise",
             price: "Custom",
-            features: [
-              { text: "iOS & Android Mobile App", active: true },
-              { text: "Backend API & Database", active: true },
-              { text: "24/7 Exclusive Support", active: true },
-              { text: "Scalable Infrastructure", active: true },
+            featureGroups: [
+              {
+                title: "STANDARD & CUSTOM FEATURES",
+                items: [
+                  { text: "iOS & Android Mobile App", active: true },
+                  { text: "Backend API & Database", active: true },
+                  { text: "Scalable Infrastructure", active: true },
+                ],
+              },
+              {
+                title: "SERVICE & MAINTENANCE",
+                items: [{ text: "24/7 Exclusive Support", active: true }],
+              },
             ],
           },
         ],
@@ -242,33 +328,57 @@ export const en = {
           {
             name: "Starter",
             price: "~$950",
-            features: [
-              { text: "Consultation & Needs Analysis", active: true },
-              { text: "Single-Module Simple System", active: true },
-              { text: "1 Month Maintenance", active: true },
-              { text: "Integration With Other Systems", active: false },
+            featureGroups: [
+              {
+                title: "STANDARD FEATURES",
+                items: [
+                  { text: "Consultation & Needs Analysis", active: true },
+                  { text: "Single-Module Simple System", active: true },
+                  { text: "Integration With Other Systems", active: false },
+                ],
+              },
+              {
+                title: "SERVICE & MAINTENANCE",
+                items: [{ text: "1 Month Maintenance", active: true }],
+              },
             ],
           },
           {
             name: "Professional",
             price: "~$2,200",
             featured: true,
-            features: [
-              { text: "Multi-Module System", active: true },
-              { text: "Integration With Other Systems", active: true },
-              { text: "Dashboard & Reporting", active: true },
-              { text: "3 Months Maintenance", active: true },
-              { text: "Internal Team Training", active: true },
+            featureGroups: [
+              {
+                title: "STANDARD FEATURES",
+                items: [
+                  { text: "Multi-Module System", active: true },
+                  { text: "Integration With Other Systems", active: true },
+                  { text: "Dashboard & Reporting", active: true },
+                  { text: "Internal Team Training", active: true },
+                ],
+              },
+              {
+                title: "SERVICE & MAINTENANCE",
+                items: [{ text: "3 Months Maintenance", active: true }],
+              },
             ],
           },
           {
             name: "Enterprise",
             price: "Custom",
-            features: [
-              { text: "iOS & Android Mobile App", active: true },
-              { text: "Backend API & Database", active: true },
-              { text: "24/7 Exclusive Support", active: true },
-              { text: "Scalable Infrastructure", active: true },
+            featureGroups: [
+              {
+                title: "STANDARD & CUSTOM FEATURES",
+                items: [
+                  { text: "iOS & Android Mobile App", active: true },
+                  { text: "Backend API & Database", active: true },
+                  { text: "Scalable Infrastructure", active: true },
+                ],
+              },
+              {
+                title: "SERVICE & MAINTENANCE",
+                items: [{ text: "24/7 Exclusive Support", active: true }],
+              },
             ],
           },
         ],
