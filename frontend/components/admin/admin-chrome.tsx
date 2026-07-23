@@ -23,14 +23,14 @@ export function AdminChrome({ children }: { children: React.ReactNode }) {
   const title = pageTitles[pathname] ?? "Admin";
 
   return (
-    <div className="flex min-h-screen bg-white text-slate-900">
+    <div className="flex min-h-screen bg-[#f4f7f4] text-slate-950">
       <AdminSidebar
         collapsed={sidebarCollapsed}
         mobileOpen={mobileSidebarOpen}
         onClose={() => setMobileSidebarOpen(false)}
       />
       <div className="flex min-w-0 flex-1 flex-col">
-        <header className="flex items-center justify-between border-b border-slate-200 bg-white/90 px-6 py-4 backdrop-blur">
+        <header className="flex min-h-20 items-center justify-between border-b border-slate-200 bg-white px-5 py-4 sm:px-8">
           <div className="flex items-center gap-3">
             <button
               aria-label="Buka sidebar"
@@ -56,11 +56,20 @@ export function AdminChrome({ children }: { children: React.ReactNode }) {
                 <span className="h-0.5 w-full rounded-full bg-current" />
               </span>
             </button>
-            <span className="text-sm font-semibold text-slate-700">{title}</span>
+            <span className="text-lg font-bold text-slate-950 sm:text-xl">{title} Admin</span>
           </div>
-          <LogoutButton />
+          <div className="flex items-center gap-3 text-right">
+            <div className="hidden sm:block">
+              <p className="text-sm font-bold text-slate-900">Administrator</p>
+              <p className="text-xs text-slate-500">BidTech</p>
+            </div>
+            <div className="flex size-10 items-center justify-center rounded-full bg-[#63e009]/20 text-sm font-extrabold text-green-700">
+              A
+            </div>
+            <LogoutButton />
+          </div>
         </header>
-        <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-8 sm:px-6">{children}</main>
+        <main className="w-full flex-1 px-4 py-8 sm:px-8 lg:px-10">{children}</main>
       </div>
     </div>
   );

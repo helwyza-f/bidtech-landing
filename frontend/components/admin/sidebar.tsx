@@ -54,9 +54,9 @@ export function AdminSidebar({ collapsed, mobileOpen, onClose }: AdminSidebarPro
       ) : null}
 
       <aside
-        className={`fixed inset-y-0 left-0 z-40 flex w-64 shrink-0 flex-col border-r border-slate-200 bg-white px-4 py-6 text-slate-900 shadow-xl transition-all duration-200 lg:static lg:translate-x-0 lg:shadow-none ${
+        className={`fixed inset-y-0 left-0 z-40 flex w-72 shrink-0 flex-col border-r border-slate-200 bg-white px-4 py-6 text-slate-900 shadow-xl transition-all duration-200 lg:static lg:translate-x-0 lg:shadow-none ${
           mobileOpen ? "translate-x-0" : "-translate-x-full"
-        } ${collapsed ? "lg:w-20" : "lg:w-64"}`}
+        } ${collapsed ? "lg:w-20" : "lg:w-72"}`}
       >
         <div className={`mb-10 flex items-center px-2 ${collapsed ? "lg:justify-center" : "justify-between"}`}>
           <div className="text-xl font-extrabold">
@@ -85,7 +85,7 @@ export function AdminSidebar({ collapsed, mobileOpen, onClose }: AdminSidebarPro
                   collapsed ? "lg:justify-center lg:gap-0" : "gap-3"
                 } ${
                   active
-                    ? "bg-[#63e009]/15 text-green-700"
+                    ? "bg-[#63e009] text-[#173b0b] shadow-[0_10px_24px_rgba(99,224,9,0.22)]"
                     : "text-slate-500 hover:bg-slate-100 hover:text-slate-900"
                 }`}
                 href={item.href}
