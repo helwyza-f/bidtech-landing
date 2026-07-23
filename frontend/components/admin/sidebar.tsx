@@ -33,37 +33,78 @@ const navItems = [
   { href: "/admin/pesanan", label: "Pesanan", icon: OrdersIcon },
 ];
 
-export function AdminSidebar() {
+interface AdminSidebarProps {
+  collapsed: boolean;
+  mobileOpen: boolean;
+  onClose: () => void;
+}
+
+export function AdminSidebar({ collapsed, mobileOpen, onClose }: AdminSidebarProps) {
   const pathname = usePathname();
 
   return (
-    <aside className="flex w-64 shrink-0 flex-col border-r border-white/10 bg-[#0b0f12] px-4 py-6">
-      <div className="mb-10 px-2 text-xl font-extrabold">
-        BID<span className="text-[#63e009]">TECH</span>
-      </div>
-      <nav className="flex flex-col gap-1">
-        {navItems.map((item) => {
-          const active = item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href);
-          const Icon = item.icon;
-          return (
-            <Link
-              className={`group relative flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition ${
-                active
-                  ? "bg-[#63e009]/10 text-[#63e009]"
-                  : "text-zinc-400 hover:bg-white/5 hover:text-white"
-              }`}
-              href={item.href}
-              key={item.href}
-            >
-              {active ? (
-                <span className="absolute -left-4 top-1/2 h-5 w-1 -translate-y-1/2 rounded-r-full bg-[#63e009]" />
-              ) : null}
-              <Icon />
-              {item.label}
-            </Link>
-          );
-        })}
-      </nav>
-    </aside>
+    <>
+      {mobileOpen ? (
+        <button
+          aria-label="Tutup sidebar"
+          className="fixed inset-0 z-30 bg-slate-950/25 backdrop-blur-[1px] lg:hidden"
+          onClick={onClose}
+          type="button"
+        />
+      ) : null}
+
+      <aside
+        className={`fixed inset-y-0 left-0 z-40 flex w-64 shrink-0 flex-col border-r border-slate-200 bg-white px-4 py-6 text-slate-900 shadow-xl transition-all duration-200 lg:static lg:translate-x-0 lg:shadow-none ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full"
+        } ${collapsed ? "lg:w-20" : "lg:w-64"}`}
+      >
+        <div className={`mb-10 flex items-center px-2 ${collapsed ? "lg:justify-center" : "justify-between"}`}>
+          <div className="text-xl font-extrabold">
+            <span className={collapsed ? "lg:hidden" : ""}>
+              BID<span className="text-[#63e009]">TECH</span>
+            </span>
+            <span className={`hidden text-[#63e009] ${collapsed ? "lg:inline" : ""}`}>B</span>
+          </div>
+          <button
+            aria-label="Tutup sidebar"
+            className="flex size-8 items-center justify-center rounded-lg text-slate-500 hover:bg-slate-100 hover:text-slate-900 lg:hidden"
+            onClick={onClose}
+            type="button"
+          >
+            ×
+          </button>
+        </div>
+
+        <nav className="flex flex-col gap-1">
+          {navItems.map((item) => {
+            const active = item.href === "/admin" ? pathname === "/admin" : pathname.startsWith(item.href);
+            const Icon = item.icon;
+            return (
+              <Link
+                className={`group relative flex items-center rounded-xl px-3 py-2.5 text-sm font-medium transition ${
+                  collapsed ? "lg:justify-center lg:gap-0" : "gap-3"
+                } ${
+                  active
+                    ? "bg-[#63e009]/15 text-green-700"
+                    : "text-slate-500 hover:bg-slate-100 hover:text-slate-900"
+                }`}
+                href={item.href}
+                key={item.href}
+                onClick={onClose}
+                title={collapsed ? item.label : undefined}
+              >
+                {active ? (
+                  <span className="absolute -left-4 top-1/2 h-5 w-1 -translate-y-1/2 rounded-r-full bg-[#63e009]" />
+                ) : null}
+                <span className="shrink-0">
+                  <Icon />
+                </span>
+                <span className={collapsed ? "lg:hidden" : ""}>{item.label}</span>
+              </Link>
+            );
+          })}
+        </nav>
+      </aside>
+    </>
   );
 }
