@@ -6,6 +6,10 @@ on:
       - main
   workflow_dispatch:
 
+concurrency:
+  group: bidtech-frontend-production
+  cancel-in-progress: false
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -14,24 +18,54 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Upload application source
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          source: "docker-compose.yml,frontend,backend"
-          target: ${{ secrets.DEPLOY_PATH }}
-          overwrite: true
-
-      - name: Build and restart containers
+      - name: Prepare frontend directory
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: mkdir -p /opt/bidtech-frontend
+
+      - name: Upload frontend source
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          source: "frontend"
+          target: /opt/bidtech-frontend
+          strip_components: 1
+          overwrite: true
+
+      - name: Build and restart frontend container
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          command_timeout: 15m
           script: |
             set -e
-            cd ${{ secrets.DEPLOY_PATH }}
-            test -f .env
-            docker compose up -d --build
+            cd /opt/bidtech-frontend
+            test -f Dockerfile
+            test -f /root/bidtech-frontend.env
+
+            docker build -t bidtech-frontend:${{ github.sha }} .
+            docker rm -f BidTech-Frontend 2>/dev/null || true
+            docker run -d \
+              --name BidTech-Frontend \
+              --restart unless-stopped \
+              --network bidtech-api \
+              -p 127.0.0.1:3010:3000 \
+              --env-file /root/bidtech-frontend.env \
+              bidtech-frontend:${{ github.sha }}
+
+            for attempt in 1 2 3 4 5 6; do
+              if wget -qO- http://127.0.0.1:3010/ >/dev/null; then
+                exit 0
+              fi
+              sleep 5
+            done
+
+            docker logs --tail 100 BidTech-Frontend
+            exit 1
