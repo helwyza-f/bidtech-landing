@@ -12,20 +12,24 @@ export default async function AdminDashboardPage() {
   const selesai = orders.filter((o) => o.status === "selesai").length;
 
   const cards = [
-    { label: "Total Pesanan", value: total, accent: "text-white" },
-    { label: "Baru", value: baru, accent: "text-yellow-300" },
-    { label: "Dihubungi", value: dihubungi, accent: "text-sky-300" },
-    { label: "Selesai", value: selesai, accent: "text-[#63e009]" },
+    { label: "Total Pesanan", value: total, accent: "text-white", bar: "bg-white/40" },
+    { label: "Baru", value: baru, accent: "text-yellow-300", bar: "bg-yellow-300" },
+    { label: "Dihubungi", value: dihubungi, accent: "text-sky-300", bar: "bg-sky-300" },
+    { label: "Selesai", value: selesai, accent: "text-[#63e009]", bar: "bg-[#63e009]" },
   ];
 
   return (
     <div>
-      <h1 className="text-2xl font-bold">Dashboard</h1>
-      <p className="mb-6 text-sm text-zinc-400">Ringkasan aktivitas BidTech</p>
+      <h1 className="text-2xl font-bold">Ringkasan</h1>
+      <p className="mb-6 text-sm text-zinc-400">Aktivitas BidTech hari ini</p>
 
       <div className="mb-6 grid grid-cols-2 gap-4 lg:grid-cols-4">
         {cards.map((card) => (
-          <div className="rounded-2xl border border-white/10 bg-white/[0.02] p-5" key={card.label}>
+          <div
+            className="relative overflow-hidden rounded-2xl border border-white/10 bg-white/[0.02] p-5 transition hover:border-white/20"
+            key={card.label}
+          >
+            <span className={`absolute left-0 top-0 h-full w-1 ${card.bar}`} />
             <p className="text-xs uppercase tracking-wide text-zinc-400">{card.label}</p>
             <p className={`mt-2 text-3xl font-bold ${card.accent}`}>{card.value}</p>
           </div>

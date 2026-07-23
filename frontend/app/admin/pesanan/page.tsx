@@ -35,7 +35,7 @@ export default async function AdminPesananPage() {
               </tr>
             ) : (
               orders.map((order) => (
-                <tr className="border-t border-white/10" key={order.id}>
+                <tr className="border-t border-white/10 transition hover:bg-white/[0.03]" key={order.id}>
                   <td className="whitespace-nowrap px-4 py-3 text-zinc-400">{order.created_at}</td>
                   <td className="whitespace-nowrap px-4 py-3">{order.name}</td>
                   <td className="whitespace-nowrap px-4 py-3">{order.whatsapp}</td>
