@@ -1,4 +1,4 @@
-name: Deploy BidTech Landing
+name: Deploy BidTech Frontend
 
 on:
   push:
