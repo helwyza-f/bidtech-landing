@@ -23,24 +23,45 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build static site
+      - name: Build Next.js application
         run: npm run build
 
-      - name: Upload site to server
+      - name: Prepare application directory
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: mkdir -p /opt/bidtech-frontend
+
+      - name: Upload application source
         uses: appleboy/scp-action@v0.1.7
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
-          source: "out/*"
-          target: ${{ secrets.DEPLOY_PATH }}
-          strip_components: 1
+          source: ".dockerignore,Dockerfile,app,components,lib,public,components.json,eslint.config.mjs,next-env.d.ts,next.config.ts,package.json,package-lock.json,postcss.config.mjs,proxy.ts,tsconfig.json"
+          target: /opt/bidtech-frontend
+          overwrite: true
 
-      - name: Fix deployed file permissions
+      - name: Build and restart frontend container
         uses: appleboy/ssh-action@v1.2.0
         with:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
           script: |
-            chmod -R 755 ${{ secrets.DEPLOY_PATH }}
+            set -e
+            cd /opt/bidtech-frontend
+            test -f /root/bidtech-frontend.env
+            docker build -t bidtech-frontend:${{ github.sha }} .
+            docker rm -f BidTech-Frontend 2>/dev/null || true
+            docker run -d \
+              --name BidTech-Frontend \
+              --restart unless-stopped \
+              --network bidtech-api \
+              -p 127.0.0.1:3010:3000 \
+              --env-file /root/bidtech-frontend.env \
+              bidtech-frontend:${{ github.sha }}
+            sleep 5
+            wget -qO- http://127.0.0.1:3010/ >/dev/null
