@@ -451,23 +451,10 @@ export function LandingPage() {
           </h2>
         </Reveal>
 
-        <div className="relative mt-14 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:flex lg:items-start lg:justify-between">
-          <div
-            className="pointer-events-none absolute top-9 z-0 hidden h-px bg-slate-900/15 lg:block"
-            style={{
-              left: `${50 / t.howItWorks.steps.length}%`,
-              right: `${50 / t.howItWorks.steps.length}%`,
-            }}
-          >
-            <div
-              className="h-full bg-lime-300 transition-all duration-500"
-              style={{ width: `${(activeStep / (t.howItWorks.steps.length - 1)) * 100}%` }}
-            />
-          </div>
-
+        <div className="relative mt-10 flex w-full snap-x snap-mandatory gap-3 overflow-x-auto px-0.5 pb-4 [scrollbar-width:none] sm:mt-14 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:pb-0 lg:grid-cols-6 [&::-webkit-scrollbar]:hidden">
           {t.howItWorks.steps.map((step, index) => (
             <Reveal
-              className="relative z-10 flex flex-col items-center px-3 py-4 text-center lg:flex-1"
+              className="relative z-10 flex min-h-64 w-[calc(50%_-_0.375rem)] min-w-[calc(50%_-_0.375rem)] shrink-0 snap-start flex-col items-center rounded-2xl border border-green-900/10 bg-white px-3 py-6 text-center shadow-[0_8px_28px_rgba(31,80,20,0.08)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-[#63E009]/40 hover:shadow-[0_14px_34px_rgba(31,80,20,0.13)] sm:min-h-60 sm:w-auto sm:min-w-0 sm:shrink lg:min-h-64 lg:px-4"
               delay={index * 80}
               key={step.title}
             >
@@ -488,14 +475,14 @@ export function LandingPage() {
                 </button>
               </div>
               <h3
-                className={`mt-4 font-[family-name:var(--font-sora)] text-base font-semibold transition-colors duration-300 ${
+                className={`mt-5 font-[family-name:var(--font-sora)] text-sm font-semibold transition-colors duration-300 sm:text-base ${
                   activeStep === index ? "text-[#63E009]" : "text-slate-950"
                 }`}
               >
                 {step.title}
               </h3>
               <p
-                className={`mt-2 text-sm leading-6 transition-colors duration-300 ${
+                className={`mt-3 text-xs leading-5 transition-colors duration-300 sm:text-sm sm:leading-6 ${
                   activeStep === index ? "text-slate-700" : "text-slate-600"
                 }`}
               >

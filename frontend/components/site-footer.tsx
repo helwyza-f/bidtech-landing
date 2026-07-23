@@ -40,7 +40,7 @@ export function SiteFooter() {
           <div className="flex flex-col items-center text-center lg:w-[30%] lg:shrink-0 lg:items-start lg:text-left">
             <div className="flex items-center gap-2">
               <Image
-                src="/icon/ic_footer.png"
+                src="/images/ic_footer.png"
                 alt="BidTech logo"
                 width={242}
                 height={66}
