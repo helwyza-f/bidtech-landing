@@ -2,6 +2,7 @@ export const id = {
   nav: {
     services: "Layanan",
     portfolio: "Portofolio",
+    pricing: "Harga",
     about: "Tentang Kami",
     contact: "Kontak",
   },
@@ -10,7 +11,7 @@ export const id = {
   },
   hero: {
     badge: "Solusi Digital untuk Bisnis",
-    titleWhite: "Solusi Website & Aplikasi untuk Membawa",
+    titleWhite: "Solusi Aplikasi & Website untuk Membawa",
     titleGreen: "Bisnis Lebih Jauh",
     subtitle:
       "Dari website hingga aplikasi custom, BIDTECH membangun solusi digital untuk membuat operasional lebih efektif dan terukur.",
@@ -169,63 +170,45 @@ export const id = {
         label: "Website",
         plans: [
           {
-            name: "Starter",
-            badge: "Harga Normal",
-            originalPrice: "IDR 7.600.000",
-            price: "Rp 5 Jt-an",
+            name: "Landing Page",
+            price: "Rp 500.000 - Rp 1.500.000",
             featureGroups: [
               {
-                title: "FITUR STANDAR",
+                title: "BENEFIT",
                 items: [
-                  { text: "Web Landing Page", active: true },
-                  { text: "Mobile Responsive", active: true },
-                  { text: "UI/UX Design", active: true },
-                  { text: "Jumlah Page: Unlimited", active: true },
-                  { text: "Domain: .Com", active: true },
-                  { text: "Hosting: 5GB", active: true },
-                  { text: "Email: 5 Akun Bisnis", active: true },
-                ],
-              },
-              {
-                title: "LAYANAN & PERAWATAN",
-                items: [
-                  { text: "1 Bulan Maintenance", active: true },
-                  { text: "Jangka Waktu: 2 Minggu", active: true },
-                  { text: "Support", active: true },
-                  { text: "SEO Optimization", active: false },
-                  { text: "Business Branding", active: false },
+                  { text: "Design Landing Page (1-5 Halaman)", active: true },
+                  { text: "Design Website Statis", active: true },
+                  { text: "Integrasi Whatsapp & Kontak", active: true },
+                  { text: "Integrasi Sosial Media", active: true },
+                  { text: "Standar Kontak Form", active: true },
+                  { text: "Website SSL", active: true },
+                  { text: "Free Support - 24/7", active: true },
+                  { text: "Advanced Copy Writing", active: true },
+                  { text: "Revisi 3 Kali", active: true },
+                  { text: "7 hari Deploy", active: true },
                 ],
               },
             ],
           },
           {
-            name: "Professional",
-            badge: "Harga Normal",
-            originalPrice: "IDR 20.000.000",
-            price: "Rp 15 Jt-an",
+            name: "Company Profile",
+            price: "Rp 1.500.000 - Rp 4.000.000",
             featured: true,
             featureGroups: [
               {
-                title: "FITUR STANDAR",
+                title: "BENEFIT",
                 items: [
-                  { text: "Full Corporate Website", active: true },
-                  { text: "Mobile Responsive", active: true },
-                  { text: "UI/UX Design", active: true },
-                  { text: "Jumlah Page: Unlimited", active: true },
-                  { text: "Domain: .Com", active: true },
-                  { text: "Hosting: 10GB", active: true },
-                  { text: "Email: 12 Akun / Email Bisnis Kustom", active: true },
-                  { text: "Integrasi Sosial Media & Chat", active: true },
-                ],
-              },
-              {
-                title: "LAYANAN & PERAWATAN",
-                items: [
-                  { text: "SEO Optimization", active: true },
-                  { text: "3 Bulan Maintenance", active: true },
-                  { text: "Jangka Waktu: 4 Minggu", active: true },
-                  { text: "Support", active: true },
-                  { text: "Business Branding", active: false },
+                  { text: "Design Landing Page (10 Halaman) ★", active: true },
+                  { text: "FREE Domain (.com/.id/.co.id) ★", active: true },
+                  { text: "Design Website Statis", active: true },
+                  { text: "Integrasi Whatsapp & Kontak", active: true },
+                  { text: "Integrasi Sosial Media", active: true },
+                  { text: "Standar Kontak Form", active: true },
+                  { text: "Website SSL", active: true },
+                  { text: "Free Support - 24/7", active: true },
+                  { text: "Advanced Copy Writing", active: true },
+                  { text: "Revisi 7 Kali ★", active: true },
+                  { text: "7 hari Deploy", active: true },
                 ],
               },
             ],
@@ -242,17 +225,16 @@ export const id = {
                   { text: "Backend API & Database Custom", active: true },
                   { text: "Mobile Responsive", active: true },
                   { text: "Custom Design", active: true },
-                  { text: "Domain: .Com", active: true },
+                  { text: "FREE Domain (.com/.id/.co.id)", active: true },
                 ],
               },
               {
                 title: "LAYANAN & PERAWATAN",
                 items: [
+                  { text: "Free Support - 24/7", active: true },
+                  { text: "Advanced Copy Writing", active: true },
+                  { text: "Unlimited Revision", active: true },
                   { text: "SEO Optimization", active: true },
-                  { text: "Support Eksklusif 24/7", active: true },
-                  { text: "Hosting: Scale-up Infrastructure", active: true },
-                  { text: "Email: 30 Akun Bisnis", active: true },
-                  { text: "Jangka Waktu: 6 Minggu", active: true },
                   { text: "Business Branding", active: false },
                 ],
               },
@@ -265,120 +247,29 @@ export const id = {
         label: "Aplikasi",
         plans: [
           {
-            name: "Starter",
-            price: "Rp 10 Jt-an",
-            featureGroups: [
-              {
-                title: "FITUR STANDAR",
-                items: [
-                  { text: "Aplikasi Mobile Single Platform", active: true },
-                  { text: "UI/UX Design Dasar", active: true },
-                  { text: "Integrasi API Pihak Ketiga", active: false },
-                ],
-              },
-              {
-                title: "LAYANAN & PERAWATAN",
-                items: [{ text: "1 Bulan Maintenance", active: true }],
-              },
-            ],
-          },
-          {
-            name: "Professional",
-            price: "Rp 25 Jt-an",
+            name: "Custom Mobile Application",
+            price: "Harga Custom",
+            description: "Disesuaikan dengan tingkat kompleksitas & kebutuhan fitur aplikasi Anda.",
+            ctaText: "Hubungi Kami",
             featured: true,
             featureGroups: [
               {
                 title: "FITUR STANDAR",
                 items: [
-                  { text: "Aplikasi iOS & Android", active: true },
-                  { text: "Integrasi API Pihak Ketiga", active: true },
-                  { text: "Push Notification", active: true },
-                  { text: "Admin Dashboard", active: true },
+                  { text: "Mobile App Android & iOS dengan tampilan kustom & responsif.", active: true },
+                  { text: "Backend & Database Custom", active: true },
+                  { text: "Infrastruktur cloud yang siap menangani lonjakan pengguna (auto-scaling).", active: true },
+                  { text: "Koneksi fleksibel ke Payment Gateway, WhatsApp API, atau API Pihak Ketiga.", active: true },
                 ],
               },
               {
                 title: "LAYANAN & PERAWATAN",
-                items: [{ text: "3 Bulan Maintenance", active: true }],
-              },
-            ],
-          },
-          {
-            name: "Enterprise",
-            price: "Custom",
-            featureGroups: [
-              {
-                title: "FITUR STANDAR & CUSTOM",
                 items: [
-                  { text: "Mobile App iOS & Android", active: true },
-                  { text: "Backend API & Database", active: true },
-                  { text: "Scale-up Infrastructure", active: true },
+                  { text: "1 Bulan Maintenance & Bug Fixing Gratis.", active: true },
+                  { text: "Support teknis 24/7 dengan garansi Uptime 99.9%.", active: true },
+                  { text: "Perjanjian Kerahasiaan Data resmi (NDA Contract).", active: true },
+                  { text: "Layanan prioritas dengan waktu respon cepat (< 24 jam).", active: true },
                 ],
-              },
-              {
-                title: "LAYANAN & PERAWATAN",
-                items: [{ text: "Support Eksklusif 24/7", active: true }],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        key: "custom",
-        label: "Custom",
-        plans: [
-          {
-            name: "Starter",
-            price: "Rp 15 Jt-an",
-            featureGroups: [
-              {
-                title: "FITUR STANDAR",
-                items: [
-                  { text: "Konsultasi & Analisis Kebutuhan", active: true },
-                  { text: "Sistem Sederhana 1 Modul", active: true },
-                  { text: "Integrasi Sistem Lain", active: false },
-                ],
-              },
-              {
-                title: "LAYANAN & PERAWATAN",
-                items: [{ text: "1 Bulan Maintenance", active: true }],
-              },
-            ],
-          },
-          {
-            name: "Professional",
-            price: "Rp 35 Jt-an",
-            featured: true,
-            featureGroups: [
-              {
-                title: "FITUR STANDAR",
-                items: [
-                  { text: "Sistem Multi Modul", active: true },
-                  { text: "Integrasi Sistem Lain", active: true },
-                  { text: "Dashboard & Reporting", active: true },
-                  { text: "Training Tim Internal", active: true },
-                ],
-              },
-              {
-                title: "LAYANAN & PERAWATAN",
-                items: [{ text: "3 Bulan Maintenance", active: true }],
-              },
-            ],
-          },
-          {
-            name: "Enterprise",
-            price: "Custom",
-            featureGroups: [
-              {
-                title: "FITUR STANDAR & CUSTOM",
-                items: [
-                  { text: "Mobile App iOS & Android", active: true },
-                  { text: "Backend API & Database", active: true },
-                  { text: "Scale-up Infrastructure", active: true },
-                ],
-              },
-              {
-                title: "LAYANAN & PERAWATAN",
-                items: [{ text: "Support Eksklusif 24/7", active: true }],
               },
             ],
           },
@@ -416,6 +307,7 @@ export const id = {
       { label: "Beranda", href: "#hero" },
       { label: "Layanan", href: "#services" },
       { label: "Portofolio", href: "#portfolio" },
+      { label: "Harga", href: "#pricing" },
       { label: "Tentang Kami", href: "#about" },
     ],
     servicesTitle: "Layanan",
