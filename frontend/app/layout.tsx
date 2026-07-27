@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Space_Grotesk, Sora } from "next/font/google";
 
+import { WhatsAppFloat } from "@/components/whatsapp-float";
 import { LanguageProvider } from "@/lib/i18n";
 
 import "./globals.css";
@@ -26,6 +27,7 @@ export default function RootLayout({ children }: Readonly<{ children: React.Reac
     <html lang="en">
       <body className={`${spaceGrotesk.variable} ${sora.variable} bg-[#050505] font-[family-name:var(--font-space-grotesk)] text-white antialiased`}>
         <LanguageProvider>{children}</LanguageProvider>
+        <WhatsAppFloat />
       </body>
     </html>
   );

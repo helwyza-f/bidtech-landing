@@ -11,8 +11,9 @@ export const en = {
   },
   hero: {
     badge: "Digital Solutions for Business",
-    titleWhite: "App & Website Solutions to Take Your",
-    titleGreen: "Business Further",
+    titleLine1: "App & Website Solutions for",
+    titleLine2White: "Taking Your Business",
+    titleLine2Green: "Further",
     subtitle:
       "From websites to custom applications, BIDTECH builds digital solutions to make your operations more effective and measurable.",
     ctaPrimary: "Free Consultation",
@@ -72,31 +73,96 @@ export const en = {
     titleGreen: "Featured",
     titleWhiteEnd: "Products",
     subtitle: "Explore our latest high-performance engineering projects for global innovators.",
-    viewLabel: "View",
-    items: [
+    tabs: [
       {
-        title: "Ayo Cuci",
-        tag: "WEB & MOBILE",
-        subtitle: "LAUNDRY POS APPLICATION",
-        image: "/images/ayocuci.png",
-        description:
-          "Manage thousands of laundry transactions with ease in one app. Comes with a digital cashier, automatic receipt printing/WhatsApp delivery, and real-time courier pickup management.",
+        key: "website",
+        label: "Website",
+        items: [
+          {
+            title: "Ayo Cuci",
+            tag: "WEBSITE",
+            subtitle: "LAUNDRY POS APPLICATION",
+            image: "/images/web_ayocuci.webp",
+            description:
+              "Manage thousands of laundry transactions with ease in one app. Comes with a digital cashier, automatic receipt printing/WhatsApp delivery, and real-time courier pickup management.",
+          },
+          {
+            title: "Stokin",
+            tag: "WEBSITE",
+            subtitle: "INVENTORY MANAGEMENT APPLICATION",
+            image: "/images/web_stokin.webp",
+            description:
+              "An inventory management platform that gives full visibility into stock availability, product categories, and selling prices to support more accurate business decisions.",
+          },
+          {
+            title: "Satu Rupiah",
+            tag: "WEBSITE",
+            subtitle: "FINANCE APPLICATION",
+            image: "/images/web_satuRupiah.webp",
+            description:
+              "A finance tracking solution that helps users monitor transactions, manage budgets, and analyze spending patterns systematically with data-driven insights.",
+          },
+        ],
       },
       {
-        title: "Stokin",
-        tag: "MOBILE",
-        subtitle: "INVENTORY MANAGEMENT APPLICATION",
-        image: "/images/stokin.png",
-        description:
-          "An inventory management platform that gives full visibility into stock availability, product categories, and selling prices to support more accurate business decisions.",
+        key: "mobile",
+        label: "Application",
+        items: [
+          {
+            title: "Ayo Cuci",
+            tag: "APPLICATION",
+            subtitle: "LAUNDRY POS APPLICATION",
+            image: "/images/apk_ayocuci.webp",
+            description:
+              "Manage thousands of laundry transactions with ease in one app. Comes with a digital cashier, automatic receipt printing/WhatsApp delivery, and real-time courier pickup management.",
+          },
+          {
+            title: "Stokin",
+            tag: "APPLICATION",
+            subtitle: "INVENTORY MANAGEMENT APPLICATION",
+            image: "/images/apk_stokin.webp",
+            description:
+              "An inventory management platform that gives full visibility into stock availability, product categories, and selling prices to support more accurate business decisions.",
+          },
+          {
+            title: "Satu Rupiah",
+            tag: "APPLICATION",
+            subtitle: "FINANCE APPLICATION",
+            image: "/images/apk_satuRupiah.webp",
+            description:
+              "A finance tracking solution that helps users monitor transactions, manage budgets, and analyze spending patterns systematically with data-driven insights.",
+          },
+        ],
       },
       {
-        title: "Satu Rupiah",
-        tag: "MOBILE",
-        subtitle: "FINANCE APPLICATION",
-        image: "/images/saturupiah.png",
-        description:
-          "A finance tracking solution that helps users monitor transactions, manage budgets, and analyze spending patterns systematically with data-driven insights.",
+        key: "custom",
+        label: "Custom",
+        items: [
+          {
+            title: "Ayo Cuci",
+            tag: "CUSTOM",
+            subtitle: "LAUNDRY POS APPLICATION",
+            image: "/images/cus_ayocuci.webp",
+            description:
+              "Manage thousands of laundry transactions with ease in one app. Comes with a digital cashier, automatic receipt printing/WhatsApp delivery, and real-time courier pickup management.",
+          },
+          {
+            title: "Stokin",
+            tag: "CUSTOM",
+            subtitle: "INVENTORY MANAGEMENT APPLICATION",
+            image: "/images/cus_stokin.webp",
+            description:
+              "An inventory management platform that gives full visibility into stock availability, product categories, and selling prices to support more accurate business decisions.",
+          },
+          {
+            title: "Satu Rupiah",
+            tag: "CUSTOM",
+            subtitle: "FINANCE APPLICATION",
+            image: "/images/cus_satuRupiah.webp",
+            description:
+              "A finance tracking solution that helps users monitor transactions, manage budgets, and analyze spending patterns systematically with data-driven insights.",
+          },
+        ],
       },
     ],
   },
@@ -158,7 +224,8 @@ export const en = {
   },
   pricing: {
     badge: "Pricing Plans",
-    title: "Choose the Plan That Fits Your Needs",
+    titlePrefix: "Choose the Plan That Fits Your",
+    titleHighlight: "Needs",
     subtitle: "Transparent, competitive software development solutions to accelerate your business's digital transformation.",
     ctaDefault: "Choose Plan",
     ctaEnterprise: "Contact Us",
@@ -169,8 +236,8 @@ export const en = {
         label: "Website",
         plans: [
           {
-            name: "Landing Page",
-            price: "Rp 500,000 - Rp 1,500,000",
+            name: "Starter",
+            price: "Rp 5 Jt-an",
             featureGroups: [
               {
                 title: "BENEFITS",
@@ -190,8 +257,8 @@ export const en = {
             ],
           },
           {
-            name: "Company Profile",
-            price: "Rp 1,500,000 - Rp 4,000,000",
+            name: "Professional",
+            price: "Rp 15 Jt-an",
             featured: true,
             featureGroups: [
               {
@@ -274,6 +341,29 @@ export const en = {
           },
         ],
       },
+      {
+        key: "custom",
+        label: "Custom",
+        plans: [
+          {
+            name: "Custom System",
+            price: "Custom Price",
+            description: "Cost estimates are tailored precisely to your application's features and workflow needs.",
+            ctaText: "Contact Us",
+            featured: true,
+            featureGroups: [
+              {
+                title: "HOW DOES IT WORK?",
+                items: [
+                  { text: "Needs Consultation (Free)", active: true },
+                  { text: "Transparent Proposal & Timeline", active: true },
+                  { text: "System Launch & NDA Guarantee", active: true },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   contact: {
@@ -283,7 +373,7 @@ export const en = {
     info: [
       { label: "WhatsApp", value: "0821-7601-455", note: "Chat Now" },
       { label: "Email", value: "cs@bidtech.co.id" },
-      { label: "Location", value: "Batam, Riau Islands" },
+      { label: "Location", value: "King Business Centre, Blok A5 No.3. Kel. Belian Kec.Batam Kota, Batam, 29464" },
     ],
     form: {
       nameLabel: "Full Name",

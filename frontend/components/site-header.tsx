@@ -39,12 +39,12 @@ export function SiteHeader() {
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2 px-4 py-3 sm:gap-4 sm:px-5 sm:py-4 md:px-8">
         <a className="flex items-center" href="#hero">
           <Image
-            src="/images/Logo.png"
+            src="/logo/Logo.webp"
             alt="BidTech logo"
-            width={396}
-            height={88}
+            width={256}
+            height={52}
             priority
-            className="h-7 w-auto object-contain sm:h-9"
+            className="h-8 w-auto object-contain sm:h-10 md:h-11"
           />
         </a>
 

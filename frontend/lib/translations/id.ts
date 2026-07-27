@@ -11,8 +11,9 @@ export const id = {
   },
   hero: {
     badge: "Solusi Digital untuk Bisnis",
-    titleWhite: "Solusi Aplikasi & Website untuk Membawa",
-    titleGreen: "Bisnis Lebih Jauh",
+    titleLine1: "Solusi Aplikasi & Website untuk",
+    titleLine2White: "Membawa Bisnis",
+    titleLine2Green: "Naik Level",
     subtitle:
       "Dari website hingga aplikasi custom, BIDTECH membangun solusi digital untuk membuat operasional lebih efektif dan terukur.",
     ctaPrimary: "Konsultasi Gratis",
@@ -31,7 +32,7 @@ export const id = {
     p2: "Melalui halaman ini, BidTech ditampilkan sebagai mitra yang siap membantu perusahaan membangun citra, layanan, dan kehadiran digital yang lebih kuat di mata pelanggan maupun mitra bisnis.",
   },
   services: {
-    badge: "Layanan Utama",
+    badge: "Our Service",
     title: "Layanan Unggulan Kami",
     subtitle: "Kami memberikan solusi teknologi komprehensif yang dirancang untuk mempercepat pertumbuhan bisnis digital Anda.",
     items: [
@@ -53,7 +54,7 @@ export const id = {
     ],
   },
   specializations: {
-    badge: "Keahlian Kami",
+    badge: "Our Expertise",
     title: "Spesialisasi Aplikasi",
     subtitle: "Kami menghadirkan solusi digital yang disesuaikan untuk berbagai sektor industri dengan teknologi terdepan.",
     items: [
@@ -72,31 +73,96 @@ export const id = {
     titleGreen: "Andalan",
     titleWhiteEnd: "Kami",
     subtitle: "Jelajahi proyek rekayasa berperforma tinggi terbaru kami untuk inovator global.",
-    viewLabel: "Lihat",
-    items: [
+    tabs: [
       {
-        title: "Ayo Cuci",
-        tag: "WEB & MOBILE",
-        subtitle: "APLIKASI POS KASIR LAUNDRY",
-        image: "/images/ayocuci.png",
-        description:
-          "Kelola ribuan transaksi laundry dengan mudah dalam satu aplikasi. Dilengkapi fitur kasir digital, cetak/kirim nota otomatis via WhatsApp, hingga manajemen penjemputan kurir secara real-time.",
+        key: "website",
+        label: "Website",
+        items: [
+          {
+            title: "Ayo Cuci",
+            tag: "WEBSITE",
+            subtitle: "APLIKASI POS KASIR LAUNDRY",
+            image: "/images/web_ayocuci.webp",
+            description:
+              "Kelola ribuan transaksi laundry dengan mudah dalam satu aplikasi. Dilengkapi fitur kasir digital, cetak/kirim nota otomatis via WhatsApp, hingga manajemen penjemputan kurir secara real-time.",
+          },
+          {
+            title: "Stokin",
+            tag: "WEBSITE",
+            subtitle: "APLIKASI KELOLA STOK",
+            image: "/images/web_stokin.webp",
+            description:
+              "Platform manajemen inventori yang memberikan visibilitas penuh atas ketersediaan barang, kategori produk, dan harga jual mendukung pengambilan keputusan bisnis yang lebih akurat.",
+          },
+          {
+            title: "Satu Rupiah",
+            tag: "WEBSITE",
+            subtitle: "APLIKASI KEUANGAN",
+            image: "/images/web_satuRupiah.webp",
+            description:
+              "Solusi pencatatan keuangan yang membantu pengguna memantau transaksi, mengelola anggaran, dan menganalisis pola pengeluaran secara sistematis dan berbasis data.",
+          },
+        ],
       },
       {
-        title: "Stokin",
-        tag: "MOBILE",
-        subtitle: "APLIKASI KELOLA STOK",
-        image: "/images/stokin.png",
-        description:
-          "Platform manajemen inventori yang memberikan visibilitas penuh atas ketersediaan barang, kategori produk, dan harga jual mendukung pengambilan keputusan bisnis yang lebih akurat.",
+        key: "mobile",
+        label: "Aplikasi",
+        items: [
+          {
+            title: "Ayo Cuci",
+            tag: "APLIKASI",
+            subtitle: "APLIKASI POS KASIR LAUNDRY",
+            image: "/images/apk_ayocuci.webp",
+            description:
+              "Kelola ribuan transaksi laundry dengan mudah dalam satu aplikasi. Dilengkapi fitur kasir digital, cetak/kirim nota otomatis via WhatsApp, hingga manajemen penjemputan kurir secara real-time.",
+          },
+          {
+            title: "Stokin",
+            tag: "APLIKASI",
+            subtitle: "APLIKASI KELOLA STOK",
+            image: "/images/apk_stokin.webp",
+            description:
+              "Platform manajemen inventori yang memberikan visibilitas penuh atas ketersediaan barang, kategori produk, dan harga jual mendukung pengambilan keputusan bisnis yang lebih akurat.",
+          },
+          {
+            title: "Satu Rupiah",
+            tag: "APLIKASI",
+            subtitle: "APLIKASI KEUANGAN",
+            image: "/images/apk_satuRupiah.webp",
+            description:
+              "Solusi pencatatan keuangan yang membantu pengguna memantau transaksi, mengelola anggaran, dan menganalisis pola pengeluaran secara sistematis dan berbasis data.",
+          },
+        ],
       },
       {
-        title: "Satu Rupiah",
-        tag: "MOBILE",
-        subtitle: "APLIKASI KEUANGAN",
-        image: "/images/saturupiah.png",
-        description:
-          "Solusi pencatatan keuangan yang membantu pengguna memantau transaksi, mengelola anggaran, dan menganalisis pola pengeluaran secara sistematis dan berbasis data.",
+        key: "custom",
+        label: "Custom",
+        items: [
+          {
+            title: "Ayo Cuci",
+            tag: "CUSTOM",
+            subtitle: "APLIKASI POS KASIR LAUNDRY",
+            image: "/images/cus_ayocuci.webp",
+            description:
+              "Kelola ribuan transaksi laundry dengan mudah dalam satu aplikasi. Dilengkapi fitur kasir digital, cetak/kirim nota otomatis via WhatsApp, hingga manajemen penjemputan kurir secara real-time.",
+          },
+          {
+            title: "Stokin",
+            tag: "CUSTOM",
+            subtitle: "APLIKASI KELOLA STOK",
+            image: "/images/cus_stokin.webp",
+            description:
+              "Platform manajemen inventori yang memberikan visibilitas penuh atas ketersediaan barang, kategori produk, dan harga jual mendukung pengambilan keputusan bisnis yang lebih akurat.",
+          },
+          {
+            title: "Satu Rupiah",
+            tag: "CUSTOM",
+            subtitle: "APLIKASI KEUANGAN",
+            image: "/images/cus_satuRupiah.webp",
+            description:
+              "Solusi pencatatan keuangan yang membantu pengguna memantau transaksi, mengelola anggaran, dan menganalisis pola pengeluaran secara sistematis dan berbasis data.",
+          },
+        ],
       },
     ],
   },
@@ -159,7 +225,8 @@ export const id = {
   },
   pricing: {
     badge: "Pricing Plans",
-    title: "Pilih Paket Sesuai Kebutuhan",
+    titlePrefix: "Pilih Paket Sesuai",
+    titleHighlight: "Kebutuhan",
     subtitle: "Solusi pengembangan software yang transparan dan kompetitif untuk mempercepat transformasi digital bisnis Anda.",
     ctaDefault: "Pilih Paket",
     ctaEnterprise: "Hubungi Kami",
@@ -170,8 +237,8 @@ export const id = {
         label: "Website",
         plans: [
           {
-            name: "Landing Page",
-            price: "Rp 500.000 - Rp 1.500.000",
+            name: "Starter",
+            price: "Rp 5 Jt-an",
             featureGroups: [
               {
                 title: "BENEFIT",
@@ -191,8 +258,8 @@ export const id = {
             ],
           },
           {
-            name: "Company Profile",
-            price: "Rp 1.500.000 - Rp 4.000.000",
+            name: "Professional",
+            price: "Rp 15 Jt-an",
             featured: true,
             featureGroups: [
               {
@@ -275,6 +342,29 @@ export const id = {
           },
         ],
       },
+      {
+        key: "custom",
+        label: "Custom",
+        plans: [
+          {
+            name: "Sistem Custom",
+            price: "Harga Custom",
+            description: "Estimasi biaya disesuaikan secara presisi dengan kebutuhan fitur dan alur kerja aplikasi Anda.",
+            ctaText: "Hubungi Kami",
+            featured: true,
+            featureGroups: [
+              {
+                title: "BAGAIMANA CARA KERJANYA?",
+                items: [
+                  { text: "Konsultasi Kebutuhan (Bebas Biaya)", active: true },
+                  { text: "Penawaran Transparan & Timeline", active: true },
+                  { text: "Peluncuran Sistem & Garansi NDA", active: true },
+                ],
+              },
+            ],
+          },
+        ],
+      },
     ],
   },
   contact: {
@@ -284,7 +374,7 @@ export const id = {
     info: [
       { label: "WhatsApp", value: "0821-7601-455", note: "Chat Sekarang" },
       { label: "Email", value: "cs@bidtech.co.id" },
-      { label: "Lokasi", value: "Batam, Kepulauan Riau" },
+      { label: "Lokasi", value: "King Business Centre, Blok A5 No.3. Kel. Belian Kec.Batam Kota, Batam, 29464" },
     ],
     form: {
       nameLabel: "Nama Lengkap",

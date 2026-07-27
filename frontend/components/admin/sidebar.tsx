@@ -59,11 +59,11 @@ export function AdminSidebar({ collapsed, mobileOpen, onClose }: AdminSidebarPro
         } ${collapsed ? "lg:w-20" : "lg:w-72"}`}
       >
         <div className={`mb-10 flex items-center px-2 ${collapsed ? "lg:justify-center" : "justify-between"}`}>
-          <div className="text-xl font-extrabold">
+          <div className="text-xl font-extrabold text-[#63e009]">
             <span className={collapsed ? "lg:hidden" : ""}>
-              BID<span className="text-[#63e009]">TECH</span>
+              BIDTECH
             </span>
-            <span className={`hidden text-[#63e009] ${collapsed ? "lg:inline" : ""}`}>B</span>
+            <span className={`hidden ${collapsed ? "lg:inline" : ""}`}>B</span>
           </div>
           <button
             aria-label="Tutup sidebar"

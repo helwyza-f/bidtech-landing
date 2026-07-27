@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
-import { ArrowRight, Check, ChevronLeft, ChevronRight, Mail, MapPin, MessageCircleMore, Star, User } from "lucide-react";
+import { ArrowRight, Check, ChevronLeft, ChevronRight, Mail, MapPin, MessageCircleMore, Star } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -23,7 +23,13 @@ export function LandingPage() {
   const [activePricingTab, setActivePricingTab] = useState(0);
   const [activePricingSlide, setActivePricingSlide] = useState(0);
   const pricingSliderRef = useRef<HTMLDivElement>(null);
+  const [activeProductTab, setActiveProductTab] = useState(0);
+  const [activeProductSlide, setActiveProductSlide] = useState(0);
+  const productSliderRef = useRef<HTMLDivElement>(null);
+  const howItWorksSliderRef = useRef<HTMLDivElement>(null);
+  const [activeHowItWorksPage, setActiveHowItWorksPage] = useState(0);
   const testimonialsRef = useRef<HTMLDivElement>(null);
+  const mitraSliderRef = useRef<HTMLDivElement>(null);
   const [selectedPackage, setSelectedPackage] = useState<{
     service: string;
     plan: string;
@@ -72,6 +78,8 @@ export function LandingPage() {
     }
   };
 
+  const howItWorksPages = Math.ceil(t.howItWorks.steps.length / 2);
+
   useEffect(() => {
     let activeSlide = 0;
 
@@ -85,6 +93,31 @@ export function LandingPage() {
       activeSlide = (activeSlide + 1) % slides.length;
       slider.scrollTo({ left: slides[activeSlide].offsetLeft - slider.offsetLeft, behavior: "smooth" });
     }, 4500);
+
+    return () => window.clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    const interval = window.setInterval(() => {
+      const slider = mitraSliderRef.current;
+      if (!slider) return;
+
+      const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
+      if (maxScrollLeft <= 0) return;
+
+      const nextScrollLeft = slider.scrollLeft - 180;
+      slider.scrollTo({
+        left: nextScrollLeft <= 4 ? maxScrollLeft : nextScrollLeft,
+        behavior: "smooth",
+      });
+    }, 2800);
+
+    window.setTimeout(() => {
+      const slider = mitraSliderRef.current;
+      if (!slider) return;
+
+      slider.scrollLeft = slider.scrollWidth - slider.clientWidth;
+    }, 0);
 
     return () => window.clearInterval(interval);
   }, []);
@@ -126,7 +159,10 @@ export function LandingPage() {
             <Badge className="uppercase tracking-widest">{t.hero.badge}</Badge>
           </div>
           <h1 className="mx-auto mt-5 max-w-3xl font-[Tahoma,Arial,sans-serif] text-3xl font-normal leading-tight tracking-tight text-white sm:text-4xl md:mt-6 md:text-5xl lg:text-6xl">
-            {t.hero.titleWhite} <span className="text-[#63E009]">{t.hero.titleGreen}</span>
+            <span className="block sm:whitespace-nowrap">{t.hero.titleLine1}</span>
+            <span className="block">
+              {t.hero.titleLine2White} <span className="text-[#63E009]">{t.hero.titleLine2Green}</span>
+            </span>
           </h1>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-zinc-400 md:text-lg">{t.hero.subtitle}</p>
 
@@ -144,21 +180,26 @@ export function LandingPage() {
             </a>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-7 gap-y-5 sm:mt-16 sm:gap-x-12 sm:gap-y-6">
-            {[
-              { name: "Beauty Go", src: "/icon/ic_beauty.webp" },
-              { name: "Sentosa Logistik", src: "/icon/ic_logistik.webp" },
-              { name: "Global Fin", src: "/icon/ic_global.webp" },
-            ].map((client) => (
-              <Image
-                key={client.name}
-                src={client.src}
-                alt={client.name}
-                width={140}
-                height={32}
-                className="h-5 w-auto max-w-[110px] object-contain opacity-80 sm:h-7 sm:max-w-none"
-              />
-            ))}
+          <div className="mt-12 sm:mt-16">
+            <p className="text-xs uppercase tracking-[0.35em] text-zinc-300/80">Our Client</p>
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:gap-x-12 sm:gap-y-6 md:flex-nowrap">
+              {[
+                { name: "Global Fin", src: "/logo/logo_globalFin.webp", width: 128 },
+                { name: "Ayocuci", src: "/logo/logo ayocuci.webp", width: 118 },
+                { name: "Beauty Go", src: "/logo/logo_beauty.webp", width: 124 },
+                { name: "Stokin", src: "/logo/logo_stokin.webp", width: 116 },
+                { name: "Satu Rupiah", src: "/logo/logo_satuRupiah.webp", width: 134 },
+              ].map((client) => (
+                <Image
+                  key={client.name}
+                  src={client.src}
+                  alt={client.name}
+                  width={client.width}
+                  height={36}
+                  className="h-6 w-auto object-contain opacity-90 sm:h-7"
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
@@ -191,9 +232,10 @@ export function LandingPage() {
             />
           </Reveal>
 
-          <Reveal delay={100}>
+          <Reveal className="text-center md:text-left" delay={100}>
             <h2 className="font-[family-name:var(--font-sora)] text-2xl font-semibold leading-tight text-white md:text-3xl">
-              {t.why.title}
+              <span>Mengapa Memilih</span>{" "}
+              <span className="text-[#63E009]">BIDTECH?</span>
             </h2>
             <p className="mt-3 leading-7 text-zinc-400">{t.why.subtitle}</p>
 
@@ -202,11 +244,11 @@ export function LandingPage() {
                 const Icon = whyIcons[index];
 
                 return (
-                  <div className="flex gap-3" key={item.title}>
+                  <div className="flex flex-col items-center gap-3 text-center md:flex-row md:items-start md:text-left" key={item.title}>
                     <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-lime-300/10">
                       <Icon className="size-4 text-[#63E009]" />
                     </div>
-                    <div>
+                    <div className="max-w-xl">
                       <h3 className="text-sm font-semibold text-white">{item.title}</h3>
                       <p className="mt-1 text-sm leading-6 text-zinc-400">{item.description}</p>
                     </div>
@@ -220,8 +262,11 @@ export function LandingPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="services">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <h2 className="font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-4xl">
-            {t.services.title}
+          <div className="flex justify-center">
+            <Badge className="border-green-700/20 bg-green-700/10 text-[#63E009]">{t.services.badge}</Badge>
+          </div>
+          <h2 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-4xl">
+            <span>Layanan Unggulan</span> <span className="text-[#63E009]">Kami</span>
           </h2>
           <p className="mt-4 leading-7 text-zinc-400">{t.services.subtitle}</p>
         </Reveal>
@@ -244,33 +289,27 @@ export function LandingPage() {
           ref={servicesSliderRef}
         >
           {t.services.items.map((service, index) => (
-            <Reveal
-              className="w-full min-w-full shrink-0 snap-start md:min-w-0 md:shrink"
-              delay={index * 100}
-              key={service.title}
-            >
-              <Card className="border-lime-300/20 bg-lime-300/[0.03]">
-                <CardContent className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10">
-                      <Image src={serviceIcons[index]} alt="" width={22} height={22} className="size-5" />
-                    </div>
-                    <h3 className="font-[family-name:var(--font-sora)] text-lg font-semibold text-[#63E009]">
-                      {service.title}
-                    </h3>
+            <Card className="w-full min-w-full shrink-0 snap-start border-lime-300/20 bg-lime-300/[0.03] md:min-w-0 md:shrink" key={service.title}>
+              <CardContent className="flex h-full min-h-[320px] flex-col space-y-4">
+                <div className="flex items-center gap-4">
+                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10">
+                    <Image src={serviceIcons[index]} alt="" width={22} height={22} className="size-5" />
                   </div>
-                  <p className="text-sm leading-6 text-zinc-400">{service.description}</p>
-                  <ul className="space-y-2 border-t border-white/10 pt-4">
-                    {service.features.map((feature) => (
-                      <li className="flex items-center gap-2 text-sm text-zinc-300" key={feature}>
-                        <span className="size-1.5 shrink-0 rounded-full bg-lime-300" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
-            </Reveal>
+                  <h3 className="font-[family-name:var(--font-sora)] text-lg font-semibold text-[#63E009]">
+                    {service.title}
+                  </h3>
+                </div>
+                <p className="text-sm leading-6 text-zinc-400">{service.description}</p>
+                <ul className="mt-auto space-y-2 border-t border-white/10 pt-4">
+                  {service.features.map((feature) => (
+                    <li className="flex items-center gap-2 text-sm text-zinc-300" key={feature}>
+                      <span className="size-1.5 shrink-0 rounded-full bg-lime-300" />
+                      {feature}
+                    </li>
+                  ))}
+                </ul>
+              </CardContent>
+            </Card>
           ))}
         </div>
 
@@ -312,7 +351,7 @@ export function LandingPage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
-        <Reveal className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
+        <Reveal className="flex flex-col items-center gap-4 text-center md:flex-row md:items-end md:justify-between md:text-left">
           <div>
             <Badge className="border-green-700/20 bg-green-700/10 text-[#63E009]">{t.specializations.badge}</Badge>
             <h2 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-4xl">
@@ -341,21 +380,19 @@ export function LandingPage() {
           ref={specializationsSliderRef}
         >
           {t.specializations.items.map((item, index) => (
-            <Reveal
-              className="w-full min-w-full shrink-0 snap-start sm:min-w-0 sm:shrink"
-              delay={(index % 4) * 80}
-              key={item.title}
-            >
-              <div className="overflow-hidden rounded-2xl border border-white/10 bg-[#0b0f12] transition hover:border-lime-300/30">
-                <Image
-                  src={specializationImages[index]}
-                  alt={item.title}
-                  width={1200}
-                  height={680}
-                  sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                  className="h-auto w-full object-cover"
-                />
-                <div className="flex items-start gap-3 p-4">
+            <div className="w-full min-w-full shrink-0 snap-start sm:min-w-0 sm:shrink" key={item.title}>
+              <div className="flex h-full min-h-[320px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0b0f12] transition hover:border-lime-300/30">
+                <div className="flex aspect-[16/10] items-center justify-center bg-[#081208] p-5">
+                  <Image
+                    src={specializationImages[index]}
+                    alt={item.title}
+                    width={1200}
+                    height={680}
+                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                    className="h-full w-full object-contain"
+                  />
+                </div>
+                <div className="flex flex-1 items-start gap-3 p-4">
                   <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-lime-300/10">
                     <Image src={specializationIcons[index]} alt="" width={18} height={18} className="size-4" />
                   </div>
@@ -365,7 +402,7 @@ export function LandingPage() {
                   </div>
                 </div>
               </div>
-            </Reveal>
+            </div>
           ))}
         </div>
 
@@ -411,32 +448,123 @@ export function LandingPage() {
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="portfolio">
         <Reveal className="mx-auto max-w-2xl text-center">
+          <div className="flex justify-center">
+            <Badge className="border-green-700/20 bg-green-700/10 text-[#63E009]">Our Products</Badge>
+          </div>
           <h2 className="font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-4xl">
             {t.products.titleWhite} <span className="text-[#63E009]">{t.products.titleGreen}</span> {t.products.titleWhiteEnd}
           </h2>
           <p className="mt-4 leading-7 text-zinc-400">{t.products.subtitle}</p>
         </Reveal>
 
-        <div className="mt-8 grid gap-5 md:mt-10 md:grid-cols-2 lg:grid-cols-3 lg:gap-6">
-          {t.products.items.map((product, index) => (
-            <Reveal delay={index * 100} key={product.title}>
-              <Card className="overflow-hidden p-0">
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
+          {t.products.tabs.map((tab, index) => (
+            <button
+              className={`rounded-full border px-5 py-2 text-xs font-semibold uppercase tracking-wider transition sm:px-6 sm:py-2.5 sm:text-sm sm:tracking-widest ${
+                activeProductTab === index
+                  ? "border-[#63E009] bg-[#63E009] text-black"
+                  : "border-white/15 text-zinc-300 hover:border-[#63E009]/50 hover:text-[#63E009]"
+              }`}
+              key={tab.key}
+              onClick={() => setActiveProductTab(index)}
+              type="button"
+            >
+              {tab.label}
+            </button>
+          ))}
+        </div>
+
+        <div
+          className="mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
+          onScroll={(event) => {
+            if (window.innerWidth >= 768) return;
+            const slider = event.currentTarget;
+            const slides = Array.from(slider.children) as HTMLElement[];
+            const closest = slides.reduce(
+              (best, slide, index) =>
+                Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) < best.distance
+                  ? { index, distance: Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) }
+                  : best,
+              { index: 0, distance: Number.POSITIVE_INFINITY },
+            );
+            setActiveProductSlide(closest.index);
+          }}
+          ref={productSliderRef}
+        >
+          {t.products.tabs[activeProductTab].items.map((product) => (
+            <Card className="w-full min-w-full shrink-0 snap-start overflow-hidden border-lime-300/15 bg-[#0b0f12] p-0 md:min-w-0 md:shrink" key={product.title}>
+              <div className="bg-[#0b0f12] p-3 sm:p-4">
                 <Image
                   src={product.image}
                   alt={product.title}
                   width={600}
                   height={400}
-                  className="h-auto w-full object-contain"
+                  className="h-auto w-full rounded-xl object-contain"
                 />
-                <CardContent className="space-y-3">
-                  <span className="text-xs font-semibold uppercase tracking-widest text-[#63E009]">{product.tag}</span>
-                  <h3 className="font-[family-name:var(--font-sora)] text-xl font-bold text-white">{product.title}</h3>
-                  <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{product.subtitle}</p>
-                  <p className="text-sm leading-6 text-zinc-400">{product.description}</p>
-                </CardContent>
-              </Card>
-            </Reveal>
+              </div>
+              <CardContent className="space-y-3 px-4 pb-5 pt-1 sm:px-5 sm:pb-6">
+                <span className="text-xs font-semibold uppercase tracking-widest text-[#63E009]">{product.tag}</span>
+                <h3 className="font-[family-name:var(--font-sora)] text-xl font-bold text-white">{product.title}</h3>
+                <p className="text-xs font-semibold uppercase tracking-wide text-zinc-500">{product.subtitle}</p>
+                <p className="text-sm leading-6 text-zinc-400">{product.description}</p>
+              </CardContent>
+            </Card>
           ))}
+        </div>
+        <div className="mt-6 flex items-center justify-center gap-3 md:hidden" aria-label="Navigasi produk">
+          <button
+            aria-label="Produk sebelumnya"
+            className="flex size-10 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-[#63E009] hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
+            disabled={activeProductSlide === 0}
+            onClick={() => {
+              const slider = productSliderRef.current;
+              const slides = slider ? (Array.from(slider.children) as HTMLElement[]) : [];
+              const nextSlide = Math.max(0, activeProductSlide - 1);
+              if (slider && slides[nextSlide]) {
+                slider.scrollTo({ left: slides[nextSlide].offsetLeft - slider.offsetLeft, behavior: "smooth" });
+              }
+            }}
+            type="button"
+          >
+            <ChevronLeft className="size-5" />
+          </button>
+
+          <div className="flex items-center gap-1.5">
+            {t.products.tabs[activeProductTab].items.map((product, index) => (
+              <button
+                aria-label={`Lihat ${product.title}`}
+                className={`h-2 rounded-full transition-all ${
+                  activeProductSlide === index ? "w-6 bg-[#63E009]" : "w-2 bg-zinc-600"
+                }`}
+                key={product.title}
+                onClick={() => {
+                  const slider = productSliderRef.current;
+                  const slides = slider ? (Array.from(slider.children) as HTMLElement[]) : [];
+                  if (slider && slides[index]) {
+                    slider.scrollTo({ left: slides[index].offsetLeft - slider.offsetLeft, behavior: "smooth" });
+                  }
+                }}
+                type="button"
+              />
+            ))}
+          </div>
+
+          <button
+            aria-label="Produk berikutnya"
+            className="flex size-10 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-[#63E009] hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
+            disabled={activeProductSlide === t.products.tabs[activeProductTab].items.length - 1}
+            onClick={() => {
+              const slider = productSliderRef.current;
+              const slides = slider ? (Array.from(slider.children) as HTMLElement[]) : [];
+              const nextSlide = Math.min(t.products.tabs[activeProductTab].items.length - 1, activeProductSlide + 1);
+              if (slider && slides[nextSlide]) {
+                slider.scrollTo({ left: slides[nextSlide].offsetLeft - slider.offsetLeft, behavior: "smooth" });
+              }
+            }}
+            type="button"
+          >
+            <ChevronRight className="size-5" />
+          </button>
         </div>
       </section>
 
@@ -451,11 +579,27 @@ export function LandingPage() {
           </h2>
         </Reveal>
 
-        <div className="relative mt-10 flex w-full snap-x snap-mandatory gap-3 overflow-x-auto px-0.5 pb-4 [scrollbar-width:none] sm:mt-14 sm:grid sm:grid-cols-3 sm:gap-4 sm:overflow-visible sm:pb-0 lg:grid-cols-6 [&::-webkit-scrollbar]:hidden">
+        <div
+          className="relative mt-14 flex w-full snap-x snap-mandatory gap-3 overflow-x-auto px-0.5 pb-4 [scrollbar-width:none] sm:hidden [&::-webkit-scrollbar]:hidden"
+          onScroll={(event) => {
+            if (window.innerWidth >= 640) return;
+            const slider = event.currentTarget;
+            const slides = Array.from(slider.children) as HTMLElement[];
+            const closest = slides.reduce(
+              (best, slide, index) =>
+                Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) < best.distance
+                  ? { index, distance: Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) }
+                  : best,
+              { index: 0, distance: Number.POSITIVE_INFINITY },
+            );
+            setActiveStep(closest.index);
+            setActiveHowItWorksPage(Math.floor(closest.index / 2));
+          }}
+          ref={howItWorksSliderRef}
+        >
           {t.howItWorks.steps.map((step, index) => (
-            <Reveal
-              className="relative z-10 flex min-h-64 w-[calc(50%_-_0.375rem)] min-w-[calc(50%_-_0.375rem)] shrink-0 snap-start flex-col items-center rounded-2xl border border-green-900/10 bg-white px-3 py-6 text-center shadow-[0_8px_28px_rgba(31,80,20,0.08)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-[#63E009]/40 hover:shadow-[0_14px_34px_rgba(31,80,20,0.13)] sm:min-h-60 sm:w-auto sm:min-w-0 sm:shrink lg:min-h-64 lg:px-4"
-              delay={index * 80}
+            <div
+              className="relative z-10 flex min-h-64 w-[calc(50%_-_0.375rem)] min-w-[calc(50%_-_0.375rem)] shrink-0 snap-start flex-col items-center rounded-2xl border border-green-900/10 bg-white px-3 py-6 text-center transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-[#63E009]/40 sm:min-h-60 sm:w-auto sm:min-w-0 sm:shrink lg:min-h-64 lg:px-4"
               key={step.title}
             >
               <div className="relative flex h-10 w-full items-center justify-center">
@@ -488,29 +632,128 @@ export function LandingPage() {
               >
                 {step.description}
               </p>
-            </Reveal>
+            </div>
+          ))}
+        </div>
+
+        <div className="mt-6 flex items-center justify-center gap-3 sm:hidden" aria-label="Navigasi how it works">
+          <button
+            aria-label="Langkah sebelumnya"
+            className="flex size-10 shrink-0 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-[#63E009] hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
+            disabled={activeHowItWorksPage === 0}
+            onClick={() => {
+              const slider = howItWorksSliderRef.current;
+              const slides = slider ? (Array.from(slider.children) as HTMLElement[]) : [];
+              const nextSlide = Math.max(0, activeHowItWorksPage * 2 - 2);
+              if (slider && slides[nextSlide]) {
+                slider.scrollTo({ left: slides[nextSlide].offsetLeft - slider.offsetLeft, behavior: "smooth" });
+              }
+            }}
+            type="button"
+          >
+            <ChevronLeft className="size-5" />
+          </button>
+
+          <div className="flex items-center gap-1.5">
+            {Array.from({ length: howItWorksPages }).map((_, pageIndex) => (
+              <button
+                aria-label={`Lihat langkah ${pageIndex + 1}`}
+                className={`h-2 rounded-full transition-all ${
+                  activeHowItWorksPage === pageIndex ? "w-6 bg-[#63E009] shadow-[0_0_0_1px_rgba(0,0,0,0.12)]" : "w-2 bg-zinc-700"
+                }`}
+                key={`how-it-works-dot-${pageIndex}`}
+                onClick={() => {
+                  const slider = howItWorksSliderRef.current;
+                  const slides = slider ? (Array.from(slider.children) as HTMLElement[]) : [];
+                  const target = pageIndex * 2;
+                  if (slider && slides[target]) {
+                    slider.scrollTo({ left: slides[target].offsetLeft - slider.offsetLeft, behavior: "smooth" });
+                  }
+                }}
+                type="button"
+              />
+            ))}
+          </div>
+
+          <button
+            aria-label="Langkah berikutnya"
+            className="flex size-10 shrink-0 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-[#63E009] hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
+            disabled={activeHowItWorksPage >= howItWorksPages - 1}
+            onClick={() => {
+              const slider = howItWorksSliderRef.current;
+              const slides = slider ? (Array.from(slider.children) as HTMLElement[]) : [];
+              const nextSlide = Math.min(t.howItWorks.steps.length - 1, activeHowItWorksPage * 2 + 2);
+              if (slider && slides[nextSlide]) {
+                slider.scrollTo({ left: slides[nextSlide].offsetLeft - slider.offsetLeft, behavior: "smooth" });
+              }
+            }}
+            type="button"
+          >
+            <ChevronRight className="size-5" />
+          </button>
+        </div>
+
+        <div className="hidden mt-14 sm:grid sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
+          {t.howItWorks.steps.map((step, index) => (
+            <div
+              className="flex min-h-64 flex-col items-center rounded-2xl border border-green-900/10 bg-white px-3 py-6 text-center shadow-[0_8px_28px_rgba(31,80,20,0.08)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-[#63E009]/40 hover:shadow-[0_14px_34px_rgba(31,80,20,0.13)] lg:min-h-64 lg:px-4"
+              key={step.title}
+            >
+              <div className="relative flex h-10 w-full items-center justify-center">
+                <button
+                  aria-label={`${step.title} (${index + 1})`}
+                  className={`relative z-10 flex size-10 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-300 ${
+                    activeStep === index
+                      ? "scale-110 border-[#63E009] bg-[#63E009] text-black shadow-[0_0_0_6px_rgba(99,224,9,0.15)]"
+                      : index < activeStep
+                        ? "border-[#63E009] bg-[#63E009]/20 text-[#63E009]"
+                        : "border-slate-900/20 bg-white/70 text-slate-900 hover:border-green-600/50"
+                  }`}
+                  onClick={() => setActiveStep(index)}
+                  type="button"
+                >
+                  {String(index + 1).padStart(2, "0")}
+                </button>
+              </div>
+              <h3
+                className={`mt-5 font-[family-name:var(--font-sora)] text-sm font-semibold transition-colors duration-300 sm:text-base ${
+                  activeStep === index ? "text-[#63E009]" : "text-slate-950"
+                }`}
+              >
+                {step.title}
+              </h3>
+              <p
+                className={`mt-3 text-xs leading-5 transition-colors duration-300 sm:text-sm sm:leading-6 ${
+                  activeStep === index ? "text-slate-700" : "text-slate-600"
+                }`}
+              >
+                {step.description}
+              </p>
+            </div>
           ))}
         </div>
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="pricing">
-        <Reveal className="mx-auto max-w-2xl text-center">
+        <Reveal className="mx-auto max-w-3xl text-center">
           <div className="flex justify-center">
             <Badge className="border-green-700/20 bg-green-700/10 text-[#63E009]">{t.pricing.badge}</Badge>
           </div>
           <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
-            {t.pricing.title}
+            {t.pricing.titlePrefix} <span className="text-[#63E009]">{t.pricing.titleHighlight}</span>
           </h2>
-          <p className="mt-4 leading-7 text-slate-600">{t.pricing.subtitle}</p>
+          <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
+            {t.pricing.subtitle}
+          </p>
         </Reveal>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div className="mt-8 flex flex-nowrap justify-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] sm:flex-wrap sm:gap-3 sm:overflow-visible [&::-webkit-scrollbar]:hidden">
           {t.pricing.tabs.map((tab, index) => (
             <button
-              className={`min-w-0 rounded-full border px-6 py-3 text-xs font-semibold uppercase tracking-wider transition-colors sm:px-10 sm:py-3.5 sm:text-sm sm:tracking-widest ${
+              className={`min-w-0 shrink-0 rounded-full border px-5 py-3 text-[11px] font-semibold uppercase tracking-wider transition-colors hover:border-[#63E009] hover:bg-[#63E009] hover:text-black sm:px-10 sm:py-3.5 sm:text-sm sm:tracking-widest ${
                 activePricingTab === index
                   ? "border-[#63E009] bg-[#63E009] text-black"
-                  : "border-slate-900/20 text-slate-700 hover:border-green-600/50"
+                  : "border-slate-900/20 text-slate-700"
               }`}
               key={tab.key}
               onClick={() => {
@@ -571,60 +814,115 @@ export function LandingPage() {
                   >
                     <CardContent className="flex flex-1 flex-col space-y-6">
                       {isSinglePlan ? (
-                        <div className="flex flex-col w-full text-center space-y-6">
-                          {/* Centered Title */}
-                          <div className="pb-4 border-b border-zinc-800/80">
-                            <h3 className="font-[family-name:var(--font-sora)] font-bold text-2xl text-[#63E009]">
-                              {plan.name}
-                            </h3>
-                          </div>
+                        activePricingTab === 2 ? (
+                          <div className="flex w-full flex-col space-y-6">
+                            <div className="space-y-4 text-center">
+                              <h3 className="font-[family-name:var(--font-sora)] text-2xl font-bold text-[#63E009]">
+                                {plan.name}
+                              </h3>
+                            </div>
 
-                          {/* Two Columns for Features */}
-                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-left py-2">
-                            {plan.featureGroups.map((group) => (
-                              <div key={group.title} className="space-y-4">
-                                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{group.title}</p>
-                                <ul className="space-y-4">
-                                  {group.items.map((feature) => (
-                                    <li
-                                      className={`flex items-start gap-3 text-sm leading-relaxed ${
-                                        feature.active ? "text-zinc-300" : "text-zinc-600 line-through"
-                                      }`}
-                                      key={feature.text}
-                                    >
-                                      <Check
-                                        className={`mt-0.5 size-5 shrink-0 ${feature.active ? "text-[#63E009]" : "text-zinc-600"}`}
-                                      />
-                                      <span>{feature.text}</span>
-                                    </li>
+                            <div className="space-y-8">
+                              <div className="space-y-5">
+                                <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-zinc-400">
+                                  {plan.featureGroups[0]?.title}
+                                </p>
+
+                                <div className="space-y-5 text-left">
+                                  {plan.featureGroups[0]?.items.map((feature, index) => (
+                                    <div className="flex gap-4" key={feature.text}>
+                                      <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full border border-[#63E009]/40 bg-[#63E009]/10 text-sm font-semibold text-[#63E009]">
+                                        {String(index + 1)}
+                                      </div>
+                                      <div className="space-y-1">
+                                        <p className="text-sm font-semibold text-zinc-100">{feature.text}</p>
+                                        <p className="text-sm leading-6 text-zinc-400">
+                                          {index === 0
+                                            ? 'Diskusi awal untuk memahami kebutuhan teknis & alur sistem.'
+                                            : index === 1
+                                              ? 'Kami menyusun proposal estimasi biaya & estimasi pengerjaan.'
+                                              : 'Peluncuran aplikasi ke sistem produksi yang siap pakai, dilindungi penuh oleh Perjanjian Kerahasiaan Data (NDA).'}
+                                        </p>
+                                      </div>
+                                    </div>
                                   ))}
-                                </ul>
+                                </div>
                               </div>
-                            ))}
-                          </div>
 
-                          {/* Bottom Panel */}
-                          <div className="bg-[#040608] rounded-xl p-6 md:p-8 border border-zinc-800/50 flex flex-col items-center text-center space-y-4 w-full">
-                            <p className="font-[family-name:var(--font-sora)] font-bold text-2xl text-zinc-100">
-                              {plan.price}
-                            </p>
-                            <p className="text-xs text-zinc-400 max-w-md">
-                              {(plan as any).description || t.pricing.subtitle}
-                            </p>
-                            <Button
-                              aria-pressed={isSelected}
-                              className="w-full max-w-md mt-2 bg-[#63E009] text-black hover:bg-[#52be07] border-none font-semibold py-6 text-base rounded-lg"
-                              onClick={() => selectPackage(plan)}
-                              variant="default"
-                            >
-                              {(plan as any).ctaText || (isSelected ? t.pricing.selected : t.pricing.ctaDefault)}
-                            </Button>
+                              <div className="rounded-2xl bg-[#1a2226] px-5 py-6 text-center sm:px-8 sm:py-8">
+                                <p className="font-[family-name:var(--font-sora)] text-2xl font-bold text-zinc-100 sm:text-3xl">
+                                  Harga Custom
+                                </p>
+                                <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-zinc-400">
+                                  Estimasi biaya disesuaikan secara presisi dengan kebutuhan fitur dan alur kerja aplikasi Anda.
+                                </p>
+                                <Button
+                                  aria-pressed={isSelected}
+                                  className="mt-6 w-full bg-[#63E009] py-6 text-base font-semibold text-black transition-colors hover:bg-[#52be07] hover:text-black"
+                                  onClick={() => selectPackage(plan)}
+                                  variant="default"
+                                >
+                                  {(plan as any).ctaText || (isSelected ? t.pricing.selected : t.pricing.ctaDefault)}
+                                </Button>
+                              </div>
+                            </div>
                           </div>
-                        </div>
+                        ) : (
+                          <div className="flex flex-col w-full text-center space-y-6">
+                            <div className="pb-4 border-b border-zinc-800/80">
+                              <h3 className="font-[family-name:var(--font-sora)] font-bold text-2xl text-[#63E009]">
+                                {plan.name}
+                              </h3>
+                            </div>
+
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-left py-2">
+                              {plan.featureGroups.map((group) => (
+                                <div key={group.title} className="space-y-4">
+                                  <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{group.title}</p>
+                                  <ul className="space-y-4">
+                                    {group.items.map((feature) => (
+                                      <li
+                                        className={`flex items-start gap-3 text-sm leading-relaxed ${
+                                          feature.active ? 'text-zinc-300' : 'text-zinc-600 line-through'
+                                        }`}
+                                        key={feature.text}
+                                      >
+                                        <Check
+                                          className={`mt-0.5 size-5 shrink-0 ${feature.active ? 'text-[#63E009]' : 'text-zinc-600'}`}
+                                        />
+                                        <span>{feature.text}</span>
+                                      </li>
+                                    ))}
+                                  </ul>
+                                </div>
+                              ))}
+                            </div>
+
+                            <div className="bg-[#040608] rounded-xl p-6 md:p-8 border border-zinc-800/50 flex flex-col items-center text-center space-y-4 w-full">
+                              <p className="font-[family-name:var(--font-sora)] font-bold text-2xl text-zinc-100">
+                                {plan.price}
+                              </p>
+                              <p className="text-xs text-zinc-400 max-w-md">
+                                {(plan as any).description || t.pricing.subtitle}
+                              </p>
+                              <Button
+                                aria-pressed={isSelected}
+                                className="w-full max-w-md mt-2 bg-[#63E009] text-black transition-colors hover:bg-[#52be07] hover:text-black border-none font-semibold py-6 text-base rounded-lg"
+                                onClick={() => selectPackage(plan)}
+                                variant="default"
+                              >
+                                {(plan as any).ctaText || (isSelected ? t.pricing.selected : t.pricing.ctaDefault)}
+                              </Button>
+                            </div>
+                          </div>
+                        )
                       ) : (
-                        /* Standard layout for multi-plan lists */
                         <>
-                          <div className={`flex flex-col min-h-[140px] ${plan.price === "Custom" ? "justify-center space-y-3" : "justify-between space-y-2"}`}>
+                          <div
+                            className={`flex flex-col min-h-[140px] ${
+                              plan.price === "Custom" ? "justify-center space-y-3" : "justify-between space-y-2"
+                            }`}
+                          >
                             <div>
                               <h3 className="font-[family-name:var(--font-sora)] font-bold text-xl text-zinc-100">
                                 {plan.name}
@@ -677,7 +975,7 @@ export function LandingPage() {
 
                           <Button
                             aria-pressed={isSelected}
-                            className="w-full"
+                            className="w-full transition-colors hover:border-[#63E009] hover:bg-[#63E009] hover:text-black"
                             onClick={() => selectPackage(plan)}
                             variant={isSelected ? "default" : "outline"}
                           >
@@ -692,44 +990,6 @@ export function LandingPage() {
             </div>
           );
         })()}
-
-        {t.pricing.tabs[activePricingTab].plans.length > 1 ? (
-          <div className="mt-6 flex items-center justify-center gap-4 md:hidden" aria-label="Navigasi paket">
-            <button
-              aria-label="Paket sebelumnya"
-              className="flex size-11 items-center justify-center rounded-full border border-slate-900/20 text-slate-900 transition hover:border-green-600 hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
-              disabled={activePricingSlide === 0}
-              onClick={() => movePricingSlide(activePricingSlide - 1)}
-              type="button"
-            >
-              <ChevronLeft className="size-5" />
-            </button>
-
-            <div className="flex items-center gap-2" aria-label={`Paket ${activePricingSlide + 1} dari 3`}>
-              {t.pricing.tabs[activePricingTab].plans.map((plan, index) => (
-                <button
-                  aria-label={`Lihat paket ${plan.name}`}
-                  className={`h-2.5 rounded-full transition-all ${
-                    activePricingSlide === index ? "w-8 bg-[#63E009]" : "w-2.5 bg-zinc-600"
-                  }`}
-                  key={plan.name}
-                  onClick={() => movePricingSlide(index)}
-                  type="button"
-                />
-              ))}
-            </div>
-
-            <button
-              aria-label="Paket berikutnya"
-              className="flex size-11 items-center justify-center rounded-full border border-slate-900/20 text-slate-900 transition hover:border-green-600 hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
-              disabled={activePricingSlide === t.pricing.tabs[activePricingTab].plans.length - 1}
-              onClick={() => movePricingSlide(activePricingSlide + 1)}
-              type="button"
-            >
-              <ChevronRight className="size-5" />
-            </button>
-          </div>
-        ) : null}
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
@@ -747,22 +1007,18 @@ export function LandingPage() {
           ref={testimonialsRef}
         >
           {t.testimonials.items.map((item, index) => (
-            <Reveal
-              className="w-full min-w-full shrink-0 snap-start md:min-w-0 md:shrink"
-              delay={index * 100}
-              key={item.name}
-            >
-              <Card className="bg-[#0b0f12] !shadow-none">
-                <CardContent className="flex h-full min-h-72 flex-col space-y-5 sm:min-h-64 md:min-h-0">
+            <div className="w-full min-w-full shrink-0 snap-start md:min-w-0 md:shrink" key={item.name}>
+              <Card className="h-full bg-[#0b0f12] !shadow-none">
+                <CardContent className="flex h-full min-h-80 flex-col space-y-5 p-6 sm:min-h-80 sm:p-7">
                   <div className="flex gap-1 text-[#63E009]">
                     {Array.from({ length: 5 }).map((_, i) => (
                       <Star className="size-4 fill-[#63E009]" key={i} />
                     ))}
                   </div>
-                  <p className="whitespace-normal break-words leading-7 text-zinc-300">&ldquo;{item.quote}&rdquo;</p>
+                  <p className="flex-1 whitespace-normal break-words leading-7 text-zinc-300">&ldquo;{item.quote}&rdquo;</p>
                   <div className="mt-auto flex items-center gap-3 border-t border-white/10 pt-4">
-                    <div className="flex size-9 items-center justify-center rounded-full bg-lime-300/10 text-[#63E009]">
-                      <User className="size-4" />
+                    <div className="relative size-11 shrink-0 overflow-hidden rounded-full border border-lime-300/20 bg-lime-300/10">
+                      <Image alt={item.name} className="object-cover" fill src={`/icon/ic_ava${(index % 3) + 1}.png`} />
                     </div>
                     <div>
                       <p className="text-sm font-semibold text-white">{item.name}</p>
@@ -771,16 +1027,50 @@ export function LandingPage() {
                   </div>
                 </CardContent>
               </Card>
-            </Reveal>
+            </div>
           ))}
         </div>
       </section>
       </div>
 
+      <section className="bg-[#050505] py-14 sm:py-16 md:py-20">
+        <div className="mx-auto max-w-7xl px-4 sm:px-5 md:px-8">
+          <div className="text-center">
+            <Badge className="border-green-700/20 bg-green-700/10 text-[#63E009]">Our Mitra</Badge>
+            <h2 className="mt-4 font-[family-name:var(--font-sora)] text-2xl font-semibold text-white md:text-3xl">
+              Mitra <span className="text-[#63E009]">Kami</span>
+            </h2>
+          </div>
+
+          <div
+            ref={mitraSliderRef}
+            className="mt-8 flex items-center gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {[
+              { src: "/images/Mitra1.png", alt: "Mitra 1" },
+              { src: "/images/Mitra2.png", alt: "Mitra 2" },
+              { src: "/images/Mitra3.png", alt: "Mitra 3" },
+              { src: "/images/Mitra4.png", alt: "Mitra 4" },
+              { src: "/images/Mitra1.png", alt: "Mitra 1" },
+              { src: "/images/Mitra2.png", alt: "Mitra 2" },
+              { src: "/images/Mitra3.png", alt: "Mitra 3" },
+              { src: "/images/Mitra4.png", alt: "Mitra 4" },
+            ].map((mitra, index) => (
+              <div
+                className="flex h-28 w-40 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white p-4 sm:h-32 sm:w-48"
+                key={`${mitra.alt}-${index}`}
+              >
+                <Image alt={mitra.alt} className="h-full w-full object-contain" height={160} src={mitra.src} width={240} />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="contact">
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-4xl">
-            {t.contact.title}
+            Siap Memulai Proyek <span className="text-[#63E009]">Anda</span>?
           </h2>
           <p className="mt-4 leading-7 text-zinc-400">{t.contact.subtitle}</p>
         </Reveal>
@@ -789,23 +1079,64 @@ export function LandingPage() {
           <Reveal className="space-y-4" y={16}>
             {t.contact.info.map((item, index) => {
               const Icon = [MessageCircleMore, Mail, MapPin][index];
+              const isWhatsApp = index === 0;
+              const content = (
+                <CardContent className="flex items-center gap-4">
+                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
+                    <Icon className="size-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{item.label}</p>
+                    <p className="text-sm text-zinc-400">{item.value}</p>
+                    {item.note && <p className="text-xs font-medium text-[#63E009]">{item.note}</p>}
+                  </div>
+                </CardContent>
+              );
 
-              return (
-                <Card key={item.label}>
-                  <CardContent className="flex items-center gap-4">
-                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
-                      <Icon className="size-5" />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-white">{item.label}</p>
-                      <p className="text-sm text-zinc-400">{item.value}</p>
-                      {item.note && <p className="text-xs font-medium text-[#63E009]">{item.note}</p>}
-                    </div>
-                  </CardContent>
-                </Card>
+              return isWhatsApp ? (
+                <a key={item.label} href="https://wa.me/628217601455" rel="noreferrer" target="_blank">
+                  <Card className="transition hover:border-[#63E009]/40 hover:bg-white/[0.03]">{content}</Card>
+                </a>
+              ) : (
+                <Card key={item.label}>{content}</Card>
               );
             })}
-          </Reveal>
+
+            <Card>
+              <CardContent className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
+                    <MapPin className="size-5" />
+                  </div>
+                  <div>
+                    <p className="text-sm font-semibold text-white">Peta Lokasi</p>
+                    <p className="text-sm text-zinc-400">King Business Centre, Batam</p>
+                  </div>
+                </div>
+
+                    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-black/30">
+                      <Image
+                        alt="Preview peta lokasi BidTech"
+                        className="h-72 w-full object-cover sm:h-80"
+                        height={1024}
+                        src="/images/location-preview.png"
+                        width={1536}
+                      />
+                      <a
+                        aria-label="Buka lokasi BidTech di Google Maps"
+                        className="absolute inset-0 flex items-end justify-center bg-transparent p-4"
+                        href="https://www.google.com/maps/search/?api=1&query=1.1059955%2C104.075364"
+                        rel="noreferrer"
+                        target="_blank"
+                      >
+                        <span className="rounded-full bg-black/70 px-4 py-2 text-xs font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100">
+                          Klik untuk buka di Google Maps
+                        </span>
+                      </a>
+                    </div>
+                </CardContent>
+              </Card>
+            </Reveal>
 
           <Reveal delay={100} y={16}>
             <Card>
@@ -822,3 +1153,4 @@ export function LandingPage() {
     </main>
   );
 }
+
