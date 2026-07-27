@@ -2,6 +2,7 @@ export const en = {
   nav: {
     services: "Services",
     portfolio: "Portfolio",
+    pricing: "Pricing",
     about: "About Us",
     contact: "Contact",
   },
@@ -10,7 +11,7 @@ export const en = {
   },
   hero: {
     badge: "Digital Solutions for Business",
-    titleWhite: "Website & App Solutions to Take Your",
+    titleWhite: "App & Website Solutions to Take Your",
     titleGreen: "Business Further",
     subtitle:
       "From websites to custom applications, BIDTECH builds digital solutions to make your operations more effective and measurable.",
@@ -168,63 +169,45 @@ export const en = {
         label: "Website",
         plans: [
           {
-            name: "Starter",
-            badge: "Regular Price",
-            originalPrice: "$490",
-            price: "~$350",
+            name: "Landing Page",
+            price: "Rp 500,000 - Rp 1,500,000",
             featureGroups: [
               {
-                title: "STANDARD FEATURES",
+                title: "BENEFITS",
                 items: [
-                  { text: "Web Landing Page", active: true },
-                  { text: "Mobile Responsive", active: true },
-                  { text: "UI/UX Design", active: true },
-                  { text: "Pages: Unlimited", active: true },
-                  { text: "Domain: .Com", active: true },
-                  { text: "Hosting: 5GB", active: true },
-                  { text: "Email: 5 Business Accounts", active: true },
-                ],
-              },
-              {
-                title: "SERVICE & MAINTENANCE",
-                items: [
-                  { text: "1 Month Maintenance", active: true },
-                  { text: "Timeline: 2 Weeks", active: true },
-                  { text: "Support", active: true },
-                  { text: "SEO Optimization", active: false },
-                  { text: "Business Branding", active: false },
+                  { text: "Landing Page Design (1-5 Pages)", active: true },
+                  { text: "Static Website Design", active: true },
+                  { text: "WhatsApp & Contact Integration", active: true },
+                  { text: "Social Media Integration", active: true },
+                  { text: "Standard Contact Form", active: true },
+                  { text: "Website SSL", active: true },
+                  { text: "Free Support - 24/7", active: true },
+                  { text: "Advanced Copy Writing", active: true },
+                  { text: "3x Revision", active: true },
+                  { text: "7 Days Deployment", active: true },
                 ],
               },
             ],
           },
           {
-            name: "Professional",
-            badge: "Regular Price",
-            originalPrice: "$1,300",
-            price: "~$950",
+            name: "Company Profile",
+            price: "Rp 1,500,000 - Rp 4,000,000",
             featured: true,
             featureGroups: [
               {
-                title: "STANDARD FEATURES",
+                title: "BENEFITS",
                 items: [
-                  { text: "Full Corporate Website", active: true },
-                  { text: "Mobile Responsive", active: true },
-                  { text: "UI/UX Design", active: true },
-                  { text: "Pages: Unlimited", active: true },
-                  { text: "Domain: .Com", active: true },
-                  { text: "Hosting: 10GB", active: true },
-                  { text: "Email: 12 Accounts / Custom Business Email", active: true },
-                  { text: "Social Media & Chat Integration", active: true },
-                ],
-              },
-              {
-                title: "SERVICE & MAINTENANCE",
-                items: [
-                  { text: "SEO Optimization", active: true },
-                  { text: "3 Months Maintenance", active: true },
-                  { text: "Timeline: 4 Weeks", active: true },
-                  { text: "Support", active: true },
-                  { text: "Business Branding", active: false },
+                  { text: "Landing Page Design (10 Pages) ★", active: true },
+                  { text: "FREE Domain (.com/.id/.co.id) ★", active: true },
+                  { text: "Static Website Design", active: true },
+                  { text: "WhatsApp & Contact Integration", active: true },
+                  { text: "Social Media Integration", active: true },
+                  { text: "Standard Contact Form", active: true },
+                  { text: "Website SSL", active: true },
+                  { text: "Free Support - 24/7", active: true },
+                  { text: "Advanced Copy Writing", active: true },
+                  { text: "7x Revision ★", active: true },
+                  { text: "7 Days Deployment", active: true },
                 ],
               },
             ],
@@ -241,17 +224,16 @@ export const en = {
                   { text: "Custom Backend API & Database", active: true },
                   { text: "Mobile Responsive", active: true },
                   { text: "Custom Design", active: true },
-                  { text: "Domain: .Com", active: true },
+                  { text: "FREE Domain (.com/.id/.co.id)", active: true },
                 ],
               },
               {
                 title: "SERVICE & MAINTENANCE",
                 items: [
+                  { text: "Free Support - 24/7", active: true },
+                  { text: "Advanced Copy Writing", active: true },
+                  { text: "Unlimited Revision", active: true },
                   { text: "SEO Optimization", active: true },
-                  { text: "24/7 Exclusive Support", active: true },
-                  { text: "Hosting: Scalable Infrastructure", active: true },
-                  { text: "Email: 30 Business Accounts", active: true },
-                  { text: "Timeline: 6 Weeks", active: true },
                   { text: "Business Branding", active: false },
                 ],
               },
@@ -264,120 +246,29 @@ export const en = {
         label: "App",
         plans: [
           {
-            name: "Starter",
-            price: "~$650",
-            featureGroups: [
-              {
-                title: "STANDARD FEATURES",
-                items: [
-                  { text: "Single-Platform Mobile App", active: true },
-                  { text: "Basic UI/UX Design", active: true },
-                  { text: "Third-Party API Integration", active: false },
-                ],
-              },
-              {
-                title: "SERVICE & MAINTENANCE",
-                items: [{ text: "1 Month Maintenance", active: true }],
-              },
-            ],
-          },
-          {
-            name: "Professional",
-            price: "~$1,600",
+            name: "Custom Mobile Application",
+            price: "Custom Price",
+            description: "Tailored to the complexity & feature requirements of your application.",
+            ctaText: "Contact Us",
             featured: true,
             featureGroups: [
               {
                 title: "STANDARD FEATURES",
                 items: [
-                  { text: "iOS & Android App", active: true },
-                  { text: "Third-Party API Integration", active: true },
-                  { text: "Push Notifications", active: true },
-                  { text: "Admin Dashboard", active: true },
+                  { text: "Android & iOS Mobile App with custom & responsive design.", active: true },
+                  { text: "Custom Backend & Database", active: true },
+                  { text: "Cloud infrastructure ready to handle user spikes (auto-scaling).", active: true },
+                  { text: "Flexible connection to Payment Gateways, WhatsApp API, or Third-Party APIs.", active: true },
                 ],
               },
               {
                 title: "SERVICE & MAINTENANCE",
-                items: [{ text: "3 Months Maintenance", active: true }],
-              },
-            ],
-          },
-          {
-            name: "Enterprise",
-            price: "Custom",
-            featureGroups: [
-              {
-                title: "STANDARD & CUSTOM FEATURES",
                 items: [
-                  { text: "iOS & Android Mobile App", active: true },
-                  { text: "Backend API & Database", active: true },
-                  { text: "Scalable Infrastructure", active: true },
+                  { text: "1 Month Free Maintenance & Bug Fixing.", active: true },
+                  { text: "24/7 Technical Support with 99.9% Uptime Guarantee.", active: true },
+                  { text: "Official Non-Disclosure Agreement (NDA Contract).", active: true },
+                  { text: "Priority service with fast response time (< 24 hours).", active: true },
                 ],
-              },
-              {
-                title: "SERVICE & MAINTENANCE",
-                items: [{ text: "24/7 Exclusive Support", active: true }],
-              },
-            ],
-          },
-        ],
-      },
-      {
-        key: "custom",
-        label: "Custom",
-        plans: [
-          {
-            name: "Starter",
-            price: "~$950",
-            featureGroups: [
-              {
-                title: "STANDARD FEATURES",
-                items: [
-                  { text: "Consultation & Needs Analysis", active: true },
-                  { text: "Single-Module Simple System", active: true },
-                  { text: "Integration With Other Systems", active: false },
-                ],
-              },
-              {
-                title: "SERVICE & MAINTENANCE",
-                items: [{ text: "1 Month Maintenance", active: true }],
-              },
-            ],
-          },
-          {
-            name: "Professional",
-            price: "~$2,200",
-            featured: true,
-            featureGroups: [
-              {
-                title: "STANDARD FEATURES",
-                items: [
-                  { text: "Multi-Module System", active: true },
-                  { text: "Integration With Other Systems", active: true },
-                  { text: "Dashboard & Reporting", active: true },
-                  { text: "Internal Team Training", active: true },
-                ],
-              },
-              {
-                title: "SERVICE & MAINTENANCE",
-                items: [{ text: "3 Months Maintenance", active: true }],
-              },
-            ],
-          },
-          {
-            name: "Enterprise",
-            price: "Custom",
-            featureGroups: [
-              {
-                title: "STANDARD & CUSTOM FEATURES",
-                items: [
-                  { text: "iOS & Android Mobile App", active: true },
-                  { text: "Backend API & Database", active: true },
-                  { text: "Scalable Infrastructure", active: true },
-                ],
-              },
-              {
-                title: "SERVICE & MAINTENANCE",
-                items: [{ text: "24/7 Exclusive Support", active: true }],
               },
             ],
           },
@@ -415,6 +306,7 @@ export const en = {
       { label: "Home", href: "#hero" },
       { label: "Services", href: "#services" },
       { label: "Portfolio", href: "#portfolio" },
+      { label: "Pricing", href: "#pricing" },
       { label: "About Us", href: "#about" },
     ],
     servicesTitle: "Services",

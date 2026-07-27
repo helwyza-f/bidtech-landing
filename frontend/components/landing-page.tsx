@@ -493,7 +493,7 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
+      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="pricing">
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
             <Badge className="border-green-700/20 bg-green-700/10 text-[#63E009]">{t.pricing.badge}</Badge>
@@ -504,10 +504,10 @@ export function LandingPage() {
           <p className="mt-4 leading-7 text-slate-600">{t.pricing.subtitle}</p>
         </Reveal>
 
-        <div className="mt-8 grid grid-cols-3 gap-2 sm:flex sm:flex-wrap sm:justify-center">
+        <div className="mt-8 flex flex-wrap justify-center gap-3">
           {t.pricing.tabs.map((tab, index) => (
             <button
-              className={`min-w-0 rounded-full border px-2 py-2 text-[10px] font-semibold uppercase tracking-wide transition-colors sm:px-5 sm:text-xs sm:tracking-widest ${
+              className={`min-w-0 rounded-full border px-6 py-3 text-xs font-semibold uppercase tracking-wider transition-colors sm:px-10 sm:py-3.5 sm:text-sm sm:tracking-widest ${
                 activePricingTab === index
                   ? "border-[#63E009] bg-[#63E009] text-black"
                   : "border-slate-900/20 text-slate-700 hover:border-green-600/50"
@@ -526,133 +526,210 @@ export function LandingPage() {
           ))}
         </div>
 
-        <div
-          className="mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 xl:grid-cols-3 xl:gap-6 [&::-webkit-scrollbar]:hidden"
-          onScroll={(event) => {
-            if (window.innerWidth >= 768) return;
-            const slider = event.currentTarget;
-            const slides = Array.from(slider.children) as HTMLElement[];
-            const closest = slides.reduce(
-              (best, slide, index) =>
-                Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) < best.distance
-                  ? { index, distance: Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) }
-                  : best,
-              { index: 0, distance: Number.POSITIVE_INFINITY },
-            );
-            setActivePricingSlide(closest.index);
-          }}
-          ref={pricingSliderRef}
-        >
-          {t.pricing.tabs[activePricingTab].plans.map((rawPlan) => {
-            const plan = rawPlan as typeof rawPlan & { badge?: string; originalPrice?: string };
-            const isSelected =
-              selectedPackage?.service === (t.contact.form.services[activePricingTab] ?? t.contact.form.services[0]) &&
-              selectedPackage.plan === plan.name;
+        {(() => {
+          const plans = t.pricing.tabs[activePricingTab].plans;
+          const isSinglePlan = plans.length === 1;
 
-            return (
-            <Card
-              key={plan.name}
-              className={`flex w-full min-w-full shrink-0 snap-start flex-col !shadow-none transition-all duration-300 md:min-w-0 md:shrink ${
-                isSelected
-                  ? "border-lime-300 bg-[#0b0f12] shadow-[0_0_0_2px_rgba(190,242,100,0.18)]"
-                  : plan.featured
-                    ? "border-lime-300/40 bg-[#0b0f12] xl:-translate-y-3"
-                    : "bg-[#0b0f12]"
+          return (
+            <div
+              className={`mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:pb-0 [&::-webkit-scrollbar]:hidden ${
+                isSinglePlan
+                  ? "md:flex md:justify-center md:overflow-visible"
+                  : "md:grid md:grid-cols-2 md:gap-5 md:overflow-visible xl:grid-cols-3 xl:gap-6"
               }`}
+              onScroll={(event) => {
+                if (window.innerWidth >= 768) return;
+                const slider = event.currentTarget;
+                const slides = Array.from(slider.children) as HTMLElement[];
+                const closest = slides.reduce(
+                  (best, slide, index) =>
+                    Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) < best.distance
+                      ? { index, distance: Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) }
+                      : best,
+                  { index: 0, distance: Number.POSITIVE_INFINITY },
+                );
+                setActivePricingSlide(closest.index);
+              }}
+              ref={pricingSliderRef}
             >
-              <CardContent className="flex flex-1 flex-col space-y-6">
-                <div>
-                  <p className="text-sm text-zinc-400">{plan.name}</p>
-                  {plan.badge ? (
-                    <span className="mt-3 inline-block rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-400">
-                      {plan.badge}
-                    </span>
-                  ) : null}
-                  {plan.originalPrice ? (
-                    <p className="mt-2 text-xs text-zinc-500 line-through">{plan.originalPrice}</p>
-                  ) : null}
-                  {!plan.badge && plan.price !== "Custom" ? <p className="mt-3 text-xs text-zinc-500">Mulai</p> : null}
-                  <p
-                    className={`font-[family-name:var(--font-sora)] font-bold text-[#63E009] ${
-                      plan.price === "Custom" ? "mt-3 text-4xl" : "mt-1 text-3xl"
-                    }`}
+              {plans.map((rawPlan) => {
+                const plan = rawPlan as typeof rawPlan & { badge?: string; originalPrice?: string };
+                const isSelected =
+                  selectedPackage?.service === (t.contact.form.services[activePricingTab] ?? t.contact.form.services[0]) &&
+                  selectedPackage.plan === plan.name;
+
+                return (
+                  <Card
+                    key={plan.name}
+                    className={`flex w-full min-w-full shrink-0 snap-start flex-col !shadow-none transition-all duration-300 md:min-w-0 ${
+                      isSelected
+                        ? "border-lime-300 bg-[#0b0f12] shadow-[0_0_0_2px_rgba(190,242,100,0.18)]"
+                        : plan.featured
+                          ? "border-lime-300/40 bg-[#0b0f12]"
+                          : "bg-[#0b0f12]"
+                    } ${isSinglePlan ? "md:max-w-3xl md:w-full" : "md:shrink md:w-full"}`}
                   >
-                    {plan.price}
-                  </p>
-                </div>
+                    <CardContent className="flex flex-1 flex-col space-y-6">
+                      {isSinglePlan ? (
+                        <div className="flex flex-col w-full text-center space-y-6">
+                          {/* Centered Title */}
+                          <div className="pb-4 border-b border-zinc-800/80">
+                            <h3 className="font-[family-name:var(--font-sora)] font-bold text-2xl text-[#63E009]">
+                              {plan.name}
+                            </h3>
+                          </div>
 
-                <div className="flex-1 space-y-5">
-                  {plan.featureGroups.map((group) => (
-                    <div key={group.title}>
-                      <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{group.title}</p>
-                      <ul className="mt-3 space-y-3">
-                        {group.items.map((feature) => (
-                          <li
-                            className={`flex items-start gap-2 text-sm ${
-                              feature.active ? "text-zinc-300" : "text-zinc-600 line-through"
-                            }`}
-                            key={feature.text}
+                          {/* Two Columns for Features */}
+                          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-left py-2">
+                            {plan.featureGroups.map((group) => (
+                              <div key={group.title} className="space-y-4">
+                                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{group.title}</p>
+                                <ul className="space-y-4">
+                                  {group.items.map((feature) => (
+                                    <li
+                                      className={`flex items-start gap-3 text-sm leading-relaxed ${
+                                        feature.active ? "text-zinc-300" : "text-zinc-600 line-through"
+                                      }`}
+                                      key={feature.text}
+                                    >
+                                      <Check
+                                        className={`mt-0.5 size-5 shrink-0 ${feature.active ? "text-[#63E009]" : "text-zinc-600"}`}
+                                      />
+                                      <span>{feature.text}</span>
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+
+                          {/* Bottom Panel */}
+                          <div className="bg-[#040608] rounded-xl p-6 md:p-8 border border-zinc-800/50 flex flex-col items-center text-center space-y-4 w-full">
+                            <p className="font-[family-name:var(--font-sora)] font-bold text-2xl text-zinc-100">
+                              {plan.price}
+                            </p>
+                            <p className="text-xs text-zinc-400 max-w-md">
+                              {(plan as any).description || t.pricing.subtitle}
+                            </p>
+                            <Button
+                              aria-pressed={isSelected}
+                              className="w-full max-w-md mt-2 bg-[#63E009] text-black hover:bg-[#52be07] border-none font-semibold py-6 text-base rounded-lg"
+                              onClick={() => selectPackage(plan)}
+                              variant="default"
+                            >
+                              {(plan as any).ctaText || (isSelected ? t.pricing.selected : t.pricing.ctaDefault)}
+                            </Button>
+                          </div>
+                        </div>
+                      ) : (
+                        /* Standard layout for multi-plan lists */
+                        <>
+                          <div className={`flex flex-col min-h-[140px] ${plan.price === "Custom" ? "justify-center space-y-3" : "justify-between space-y-2"}`}>
+                            <div>
+                              <h3 className="font-[family-name:var(--font-sora)] font-bold text-xl text-zinc-100">
+                                {plan.name}
+                              </h3>
+                              {plan.badge ? (
+                                <span className="mt-2 inline-block rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-400">
+                                  {plan.badge}
+                                </span>
+                              ) : null}
+                            </div>
+                            <div>
+                              {plan.originalPrice ? (
+                                <p className="text-xs text-zinc-500 line-through">{plan.originalPrice}</p>
+                              ) : null}
+                              <div>
+                                {!plan.badge && plan.price !== "Custom" ? <p className="text-xs text-zinc-500">Mulai</p> : null}
+                                <p
+                                  className={`font-[family-name:var(--font-sora)] font-bold text-[#63E009] ${
+                                    plan.price === "Custom" ? "text-4xl mt-1" : "text-3xl mt-0.5"
+                                  }`}
+                                >
+                                  {plan.price}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="flex-1 space-y-5">
+                            {plan.featureGroups.map((group) => (
+                              <div key={group.title}>
+                                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{group.title}</p>
+                                <ul className="mt-3 space-y-3">
+                                  {group.items.map((feature) => (
+                                    <li
+                                      className={`flex items-start gap-2 text-sm ${
+                                        feature.active ? "text-zinc-300" : "text-zinc-600 line-through"
+                                      }`}
+                                      key={feature.text}
+                                    >
+                                      <Check
+                                        className={`mt-0.5 size-4 shrink-0 ${feature.active ? "text-[#63E009]" : "text-zinc-600"}`}
+                                      />
+                                      {feature.text}
+                                    </li>
+                                  ))}
+                                </ul>
+                              </div>
+                            ))}
+                          </div>
+
+                          <Button
+                            aria-pressed={isSelected}
+                            className="w-full"
+                            onClick={() => selectPackage(plan)}
+                            variant={isSelected ? "default" : "outline"}
                           >
-                            <Check
-                              className={`mt-0.5 size-4 shrink-0 ${feature.active ? "text-[#63E009]" : "text-zinc-600"}`}
-                            />
-                            {feature.text}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  ))}
-                </div>
+                            {isSelected ? t.pricing.selected : t.pricing.ctaDefault}
+                          </Button>
+                        </>
+                      )}
+                    </CardContent>
+                  </Card>
+                );
+              })}
+            </div>
+          );
+        })()}
 
-                <Button
-                  aria-pressed={isSelected}
-                  className="w-full"
-                  onClick={() => selectPackage(plan)}
-                  variant={isSelected ? "default" : "outline"}
-                >
-                  {isSelected ? t.pricing.selected : t.pricing.ctaDefault}
-                </Button>
-              </CardContent>
-            </Card>
-            );
-          })}
-        </div>
+        {t.pricing.tabs[activePricingTab].plans.length > 1 ? (
+          <div className="mt-6 flex items-center justify-center gap-4 md:hidden" aria-label="Navigasi paket">
+            <button
+              aria-label="Paket sebelumnya"
+              className="flex size-11 items-center justify-center rounded-full border border-slate-900/20 text-slate-900 transition hover:border-green-600 hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
+              disabled={activePricingSlide === 0}
+              onClick={() => movePricingSlide(activePricingSlide - 1)}
+              type="button"
+            >
+              <ChevronLeft className="size-5" />
+            </button>
 
-        <div className="mt-6 flex items-center justify-center gap-4 md:hidden" aria-label="Navigasi paket">
-          <button
-            aria-label="Paket sebelumnya"
-            className="flex size-11 items-center justify-center rounded-full border border-slate-900/20 text-slate-900 transition hover:border-green-600 hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
-            disabled={activePricingSlide === 0}
-            onClick={() => movePricingSlide(activePricingSlide - 1)}
-            type="button"
-          >
-            <ChevronLeft className="size-5" />
-          </button>
+            <div className="flex items-center gap-2" aria-label={`Paket ${activePricingSlide + 1} dari 3`}>
+              {t.pricing.tabs[activePricingTab].plans.map((plan, index) => (
+                <button
+                  aria-label={`Lihat paket ${plan.name}`}
+                  className={`h-2.5 rounded-full transition-all ${
+                    activePricingSlide === index ? "w-8 bg-[#63E009]" : "w-2.5 bg-zinc-600"
+                  }`}
+                  key={plan.name}
+                  onClick={() => movePricingSlide(index)}
+                  type="button"
+                />
+              ))}
+            </div>
 
-          <div className="flex items-center gap-2" aria-label={`Paket ${activePricingSlide + 1} dari 3`}>
-            {t.pricing.tabs[activePricingTab].plans.map((plan, index) => (
-              <button
-                aria-label={`Lihat paket ${plan.name}`}
-                className={`h-2.5 rounded-full transition-all ${
-                  activePricingSlide === index ? "w-8 bg-[#63E009]" : "w-2.5 bg-zinc-600"
-                }`}
-                key={plan.name}
-                onClick={() => movePricingSlide(index)}
-                type="button"
-              />
-            ))}
+            <button
+              aria-label="Paket berikutnya"
+              className="flex size-11 items-center justify-center rounded-full border border-slate-900/20 text-slate-900 transition hover:border-green-600 hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
+              disabled={activePricingSlide === t.pricing.tabs[activePricingTab].plans.length - 1}
+              onClick={() => movePricingSlide(activePricingSlide + 1)}
+              type="button"
+            >
+              <ChevronRight className="size-5" />
+            </button>
           </div>
-
-          <button
-            aria-label="Paket berikutnya"
-            className="flex size-11 items-center justify-center rounded-full border border-slate-900/20 text-slate-900 transition hover:border-green-600 hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
-            disabled={activePricingSlide === t.pricing.tabs[activePricingTab].plans.length - 1}
-            onClick={() => movePricingSlide(activePricingSlide + 1)}
-            type="button"
-          >
-            <ChevronRight className="size-5" />
-          </button>
-        </div>
+        ) : null}
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
