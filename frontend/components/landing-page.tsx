@@ -29,7 +29,6 @@ export function LandingPage() {
   const howItWorksSliderRef = useRef<HTMLDivElement>(null);
   const [activeHowItWorksPage, setActiveHowItWorksPage] = useState(0);
   const testimonialsRef = useRef<HTMLDivElement>(null);
-  const mitraSliderRef = useRef<HTMLDivElement>(null);
   const [selectedPackage, setSelectedPackage] = useState<{
     service: string;
     plan: string;
@@ -93,31 +92,6 @@ export function LandingPage() {
       activeSlide = (activeSlide + 1) % slides.length;
       slider.scrollTo({ left: slides[activeSlide].offsetLeft - slider.offsetLeft, behavior: "smooth" });
     }, 4500);
-
-    return () => window.clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      const slider = mitraSliderRef.current;
-      if (!slider) return;
-
-      const maxScrollLeft = slider.scrollWidth - slider.clientWidth;
-      if (maxScrollLeft <= 0) return;
-
-      const nextScrollLeft = slider.scrollLeft - 180;
-      slider.scrollTo({
-        left: nextScrollLeft <= 4 ? maxScrollLeft : nextScrollLeft,
-        behavior: "smooth",
-      });
-    }, 2800);
-
-    window.setTimeout(() => {
-      const slider = mitraSliderRef.current;
-      if (!slider) return;
-
-      slider.scrollLeft = slider.scrollWidth - slider.clientWidth;
-    }, 0);
 
     return () => window.clearInterval(interval);
   }, []);
@@ -1042,30 +1016,47 @@ export function LandingPage() {
             </h2>
           </div>
 
-          <div
-            ref={mitraSliderRef}
-            className="mt-8 flex items-center gap-4 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          >
-            {[
-              { src: "/images/Mitra1.png", alt: "Mitra 1" },
-              { src: "/images/Mitra2.png", alt: "Mitra 2" },
-              { src: "/images/Mitra3.png", alt: "Mitra 3" },
-              { src: "/images/Mitra4.png", alt: "Mitra 4" },
-              { src: "/images/Mitra1.png", alt: "Mitra 1" },
-              { src: "/images/Mitra2.png", alt: "Mitra 2" },
-              { src: "/images/Mitra3.png", alt: "Mitra 3" },
-              { src: "/images/Mitra4.png", alt: "Mitra 4" },
-            ].map((mitra, index) => (
-              <div
-                className="flex h-28 w-40 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white p-4 sm:h-32 sm:w-48"
-                key={`${mitra.alt}-${index}`}
-              >
-                <Image alt={mitra.alt} className="h-full w-full object-contain" height={160} src={mitra.src} width={240} />
+              <div className="mt-8 overflow-hidden">
+                <div className="mitra-marquee-track flex w-max min-w-max items-center will-change-transform">
+                  {[0, 1].map((groupIndex) => (
+                    <div aria-hidden={groupIndex === 1} className="flex shrink-0 items-center gap-4" key={`mitra-group-${groupIndex}`}>
+                      {[
+                        { src: "/images/Mitra1.png", alt: "Mitra 1" },
+                        { src: "/images/Mitra2.png", alt: "Mitra 2" },
+                        { src: "/images/Mitra3.png", alt: "Mitra 3" },
+                        { src: "/images/Mitra4.png", alt: "Mitra 4" },
+                      ].map((mitra) => (
+                        <div
+                          className="flex h-28 w-40 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white p-4 sm:h-32 sm:w-48"
+                          key={`${mitra.alt}-${groupIndex}`}
+                        >
+                          <Image alt={mitra.alt} className="h-full w-full object-contain" height={160} src={mitra.src} width={240} />
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
+            </div>
+            <style jsx>{`
+            .mitra-marquee-track {
+              animation: mitra-marquee 24s linear infinite;
+            }
+
+            .mitra-marquee-track:hover {
+              animation-play-state: paused;
+            }
+
+            @keyframes mitra-marquee {
+              from {
+                transform: translate3d(0, 0, 0);
+              }
+              to {
+                transform: translate3d(-50%, 0, 0);
+              }
+            }
+          `}</style>
+        </section>
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="contact">
         <Reveal className="mx-auto max-w-2xl text-center">
