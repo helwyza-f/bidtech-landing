@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowRight, Check, ChevronLeft, ChevronRight, Mail, MapPin, MessageCircleMore, Star } from "lucide-react";
 
@@ -91,41 +91,6 @@ export function LandingPage() {
   };
 
   const howItWorksPages = Math.ceil(t.howItWorks.steps.length / 2);
-
-  useEffect(() => {
-    let activeSlide = 0;
-
-    const interval = window.setInterval(() => {
-      const slider = testimonialsRef.current;
-      if (!slider || window.innerWidth >= 768) return;
-
-      const slides = Array.from(slider.children) as HTMLElement[];
-      if (slides.length === 0) return;
-
-      activeSlide = (activeSlide + 1) % slides.length;
-      slider.scrollTo({ left: slides[activeSlide].offsetLeft - slider.offsetLeft, behavior: "smooth" });
-    }, 4500);
-
-    return () => window.clearInterval(interval);
-  }, []);
-
-  useEffect(() => {
-    const interval = window.setInterval(() => {
-      const slider = specializationsSliderRef.current;
-      if (!slider || window.innerWidth >= 640) return;
-
-      const slides = Array.from(slider.children) as HTMLElement[];
-      if (slides.length === 0) return;
-
-      setActiveSpecializationSlide((current) => {
-        const next = (current + 1) % slides.length;
-        slider.scrollTo({ left: slides[next].offsetLeft - slider.offsetLeft, behavior: "smooth" });
-        return next;
-      });
-    }, 3500);
-
-    return () => window.clearInterval(interval);
-  }, []);
 
   return (
     <main className="relative overflow-hidden">
@@ -638,7 +603,7 @@ export function LandingPage() {
         <div className="mt-6 flex items-center justify-center gap-3 sm:hidden" aria-label="Navigasi how it works">
           <button
             aria-label="Langkah sebelumnya"
-            className="flex size-10 shrink-0 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-[#63E009] hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
+            className="flex size-12 shrink-0 items-center justify-center rounded-full border border-slate-400 bg-white text-slate-700 transition hover:border-slate-500 hover:text-slate-900 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-white disabled:text-slate-500"
             disabled={activeHowItWorksPage === 0}
             onClick={() => {
               const slider = howItWorksSliderRef.current;
@@ -650,15 +615,15 @@ export function LandingPage() {
             }}
             type="button"
           >
-            <ChevronLeft className="size-5" />
+            <ChevronLeft className="size-5 stroke-[2.25]" />
           </button>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center gap-2.5">
             {Array.from({ length: howItWorksPages }).map((_, pageIndex) => (
               <button
                 aria-label={`Lihat langkah ${pageIndex + 1}`}
                 className={`h-2 rounded-full transition-all ${
-                  activeHowItWorksPage === pageIndex ? "w-6 bg-[#63E009] shadow-[0_0_0_1px_rgba(0,0,0,0.12)]" : "w-2 bg-zinc-700"
+                  activeHowItWorksPage === pageIndex ? "w-8 bg-[#63E009]" : "w-2.5 bg-slate-600"
                 }`}
                 key={`how-it-works-dot-${pageIndex}`}
                 onClick={() => {
@@ -676,7 +641,7 @@ export function LandingPage() {
 
           <button
             aria-label="Langkah berikutnya"
-            className="flex size-10 shrink-0 items-center justify-center rounded-full border border-white/15 text-black transition hover:border-[#63E009] hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
+            className="flex size-12 shrink-0 items-center justify-center rounded-full border border-slate-400 bg-white text-slate-700 transition hover:border-slate-500 hover:text-slate-900 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-white disabled:text-slate-500"
             disabled={activeHowItWorksPage >= howItWorksPages - 1}
             onClick={() => {
               const slider = howItWorksSliderRef.current;
@@ -688,7 +653,7 @@ export function LandingPage() {
             }}
             type="button"
           >
-            <ChevronRight className="size-5" />
+            <ChevronRight className="size-5 stroke-[2.25]" />
           </button>
         </div>
 
@@ -992,20 +957,20 @@ export function LandingPage() {
                 <div className="mt-6 flex items-center justify-center gap-5 md:hidden">
                   <button
                     aria-label="Pricing sebelumnya"
-                    className="flex size-12 items-center justify-center rounded-full border border-zinc-700/80 bg-transparent text-zinc-200 transition-colors hover:border-[#63E009] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
+                    className="flex size-12 shrink-0 items-center justify-center rounded-full border border-slate-400 bg-white text-slate-700 transition hover:border-slate-500 hover:text-slate-900 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-white disabled:text-slate-500"
                     disabled={activePricingSlide === 0}
                     onClick={() => movePricingSlide(activePricingSlide - 1)}
                     type="button"
                   >
-                    <ChevronLeft className="size-5" />
+                    <ChevronLeft className="size-5 stroke-[2.25]" />
                   </button>
 
-                  <div className="flex items-center gap-2">
+                  <div className="flex items-center gap-2.5">
                     {plans.map((plan, index) => (
                       <button
                         aria-label={`Buka slide harga ${index + 1}`}
                         className={`h-2.5 rounded-full transition-all ${
-                          activePricingSlide === index ? "w-8 bg-[#63E009]" : "w-2.5 bg-zinc-500"
+                          activePricingSlide === index ? "w-8 bg-[#63E009]" : "w-2.5 bg-slate-600"
                         }`}
                         key={`pricing-dot-${plan.name}`}
                         onClick={() => movePricingSlide(index)}
@@ -1016,12 +981,12 @@ export function LandingPage() {
 
                   <button
                     aria-label="Pricing berikutnya"
-                    className="flex size-12 items-center justify-center rounded-full border border-zinc-700/80 bg-transparent text-zinc-200 transition-colors hover:border-[#63E009] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
+                    className="flex size-12 shrink-0 items-center justify-center rounded-full border border-slate-400 bg-white text-slate-700 transition hover:border-slate-500 hover:text-slate-900 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-white disabled:text-slate-500"
                     disabled={activePricingSlide === plans.length - 1}
                     onClick={() => movePricingSlide(activePricingSlide + 1)}
                     type="button"
                   >
-                    <ChevronRight className="size-5" />
+                    <ChevronRight className="size-5 stroke-[2.25]" />
                   </button>
                 </div>
               ) : null}
