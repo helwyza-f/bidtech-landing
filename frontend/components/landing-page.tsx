@@ -249,13 +249,13 @@ export function LandingPage() {
           {t.services.items.map((service, index) => (
             <Card className="w-full min-w-full shrink-0 snap-start border-lime-300/20 bg-lime-300/[0.03] md:min-w-0 md:shrink" key={service.title}>
               <CardContent
-                className={`flex h-full flex-col space-y-4 sm:min-h-[320px] ${
-                  index === 2 ? "min-h-[225px]" : "min-h-[245px]"
+                className={`flex h-full flex-col space-y-4 sm:min-h-[285px] ${
+                  index === 2 ? "min-h-[205px]" : "min-h-[245px]"
                 }`}
               >
                 <div
-                  className={`grid grid-rows-[auto_1fr] gap-4 sm:min-h-[220px] ${
-                    index === 2 ? "min-h-[145px]" : "min-h-[165px]"
+                  className={`grid grid-rows-[auto_1fr] gap-4 sm:min-h-[185px] ${
+                    index === 2 ? "min-h-[125px]" : "min-h-[165px]"
                   }`}
                 >
                   <div className="flex items-center gap-4">
@@ -284,9 +284,14 @@ export function LandingPage() {
         <div className="mt-6 flex items-center justify-center gap-4 md:hidden" aria-label="Navigasi layanan">
           <button
             aria-label="Layanan sebelumnya"
-            className="flex size-11 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-lime-300 hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
-            disabled={activeServiceSlide === 0}
-            onClick={() => moveServiceSlide(activeServiceSlide - 1)}
+            aria-disabled={activeServiceSlide === 0}
+            className={`flex size-11 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-lime-300 hover:text-[#63E009] ${
+              activeServiceSlide === 0 ? "cursor-not-allowed opacity-35" : ""
+            }`}
+            onClick={() => {
+              if (activeServiceSlide === 0) return;
+              moveServiceSlide(activeServiceSlide - 1);
+            }}
             type="button"
           >
             <ChevronLeft className="size-5" />
@@ -308,9 +313,14 @@ export function LandingPage() {
 
           <button
             aria-label="Layanan berikutnya"
-            className="flex size-11 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-lime-300 hover:text-[#63E009] disabled:cursor-not-allowed disabled:opacity-35"
-            disabled={activeServiceSlide === t.services.items.length - 1}
-            onClick={() => moveServiceSlide(activeServiceSlide + 1)}
+            aria-disabled={activeServiceSlide === t.services.items.length - 1}
+            className={`flex size-11 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-lime-300 hover:text-[#63E009] ${
+              activeServiceSlide === t.services.items.length - 1 ? "cursor-not-allowed opacity-35" : ""
+            }`}
+            onClick={() => {
+              if (activeServiceSlide === t.services.items.length - 1) return;
+              moveServiceSlide(activeServiceSlide + 1);
+            }}
             type="button"
           >
             <ChevronRight className="size-5" />
