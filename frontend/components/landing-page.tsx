@@ -255,7 +255,7 @@ export function LandingPage() {
               >
                 <div
                   className={`grid grid-rows-[auto_1fr] gap-4 sm:min-h-[155px] ${
-                    index === 2 ? "min-h-[125px]" : "min-h-[165px]"
+                    index === 2 ? "min-h-[165px]" : "min-h-[165px]"
                   }`}
                 >
                   <div className="flex items-center gap-4">
