@@ -242,8 +242,8 @@ export function LandingPage() {
         >
           {t.services.items.map((service, index) => (
             <Card className="w-full min-w-full shrink-0 snap-start border-lime-300/20 bg-lime-300/[0.03] md:min-w-0 md:shrink" key={service.title}>
-              <CardContent className="flex h-full min-h-[320px] flex-col space-y-4">
-                <div className="grid min-h-[240px] grid-rows-[auto_1fr] gap-4 sm:min-h-[220px]">
+              <CardContent className="flex h-full min-h-[270px] flex-col space-y-4 sm:min-h-[320px]">
+                <div className="grid min-h-[190px] grid-rows-[auto_1fr] gap-4 sm:min-h-[220px]">
                   <div className="flex items-center gap-4">
                     <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10">
                       <Image src={serviceIcons[index]} alt="" width={22} height={22} className="size-5" />
@@ -336,8 +336,8 @@ export function LandingPage() {
           {t.specializations.items.map((item, index) => (
             <div className="w-full min-w-full shrink-0 snap-start sm:min-w-0 sm:shrink" key={item.title}>
               <div className="flex h-full min-h-[320px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0b0f12] transition hover:border-lime-300/30">
-                <div className="flex aspect-[16/10] items-center justify-center overflow-hidden bg-[#081208] p-4">
-                  <div className="relative h-[78%] w-[78%]">
+                <div className="flex aspect-[16/10] items-center justify-center overflow-hidden bg-[#081208] p-2">
+                  <div className="relative h-[96%] w-[96%]">
                     <Image
                       src={specializationImages[index]}
                       alt={item.title}
@@ -454,8 +454,8 @@ export function LandingPage() {
           {t.products.tabs[activeProductTab].items.map((product) => (
             <Card className="w-full min-w-full shrink-0 snap-start overflow-hidden border-lime-300/15 bg-[#0b0f12] p-0 md:min-w-0 md:shrink" key={product.title}>
               <div className="bg-[#0b0f12] p-3 sm:p-4">
-                <div className="flex h-[220px] items-center justify-center rounded-xl bg-[#031406] sm:h-[260px] md:h-[240px] lg:h-[260px]">
-                  <div className="flex h-[78%] w-[78%] items-center justify-center">
+                <div className="flex h-[220px] items-center justify-center rounded-xl bg-[#031406] p-2 sm:h-[260px] md:h-[240px] lg:h-[260px]">
+                  <div className="flex h-[96%] w-[96%] items-center justify-center">
                     <Image
                       src={product.image}
                       alt={product.title}
