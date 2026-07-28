@@ -242,8 +242,8 @@ export function LandingPage() {
         >
           {t.services.items.map((service, index) => (
             <Card className="w-full min-w-full shrink-0 snap-start border-lime-300/20 bg-lime-300/[0.03] md:min-w-0 md:shrink" key={service.title}>
-              <CardContent className="flex h-full min-h-[270px] flex-col space-y-4 sm:min-h-[320px]">
-                <div className="grid min-h-[190px] grid-rows-[auto_1fr] gap-4 sm:min-h-[220px]">
+              <CardContent className="flex h-full min-h-[245px] flex-col space-y-4 sm:min-h-[320px]">
+                <div className="grid min-h-[165px] grid-rows-[auto_1fr] gap-4 sm:min-h-[220px]">
                   <div className="flex items-center gap-4">
                     <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10">
                       <Image src={serviceIcons[index]} alt="" width={22} height={22} className="size-5" />
