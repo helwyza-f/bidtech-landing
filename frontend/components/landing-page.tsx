@@ -356,14 +356,19 @@ export function LandingPage() {
           {t.specializations.items.map((item, index) => (
             <div className="w-full min-w-full shrink-0 snap-start sm:min-w-0 sm:shrink" key={item.title}>
               <div className="flex h-full min-h-[320px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0b0f12] transition hover:border-lime-300/30">
-                <div className="flex aspect-[16/10] items-center justify-center bg-[#081208] p-5">
+                <div
+                  className={`relative aspect-[16/10] overflow-hidden bg-[#081208] ${
+                    specializationImages[index].includes("expertise-5") || specializationImages[index].includes("expertise-6")
+                      ? "p-7"
+                      : "p-3"
+                  }`}
+                >
                   <Image
                     src={specializationImages[index]}
                     alt={item.title}
-                    width={1200}
-                    height={680}
+                    fill
                     sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                    className="h-full w-full object-contain"
+                    className="object-contain"
                   />
                 </div>
                 <div className="flex flex-1 items-start gap-3 p-4">
@@ -746,12 +751,13 @@ export function LandingPage() {
         {(() => {
           const plans = t.pricing.tabs[activePricingTab].plans;
           const isSinglePlan = plans.length === 1;
+          const isCentered = plans.length <= 2;
 
           return (
             <div
               className={`mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:pb-0 [&::-webkit-scrollbar]:hidden ${
-                isSinglePlan
-                  ? "md:flex md:justify-center md:overflow-visible"
+                isSinglePlan || isCentered
+                  ? "md:flex md:flex-wrap md:justify-center md:overflow-visible md:gap-5"
                   : "md:grid md:grid-cols-2 md:gap-5 md:overflow-visible xl:grid-cols-3 xl:gap-6"
               }`}
               onScroll={(event) => {
@@ -779,12 +785,22 @@ export function LandingPage() {
                   <Card
                     key={plan.name}
                     className={`flex w-full min-w-full shrink-0 snap-start flex-col !shadow-none transition-all duration-300 md:min-w-0 ${
-                      isSelected
-                        ? "border-lime-300 bg-[#0b0f12] shadow-[0_0_0_2px_rgba(190,242,100,0.18)]"
-                        : plan.featured
-                          ? "border-lime-300/40 bg-[#0b0f12]"
-                          : "bg-[#0b0f12]"
-                    } ${isSinglePlan ? "md:max-w-3xl md:w-full" : "md:shrink md:w-full"}`}
+                      isSinglePlan
+                        ? isSelected
+                          ? "border-lime-300 bg-[#0b0f12] shadow-[0_0_0_2px_rgba(190,242,100,0.18)]"
+                          : plan.featured
+                            ? "border-lime-300/40 bg-[#0b0f12]"
+                            : "bg-[#0b0f12]"
+                        : isSelected
+                          ? "border-[#63E009] bg-[#0b0f12] shadow-[0_0_0_2px_rgba(99,224,9,0.18)]"
+                          : "border-transparent bg-[#0b0f12]"
+                    } ${
+                      isSinglePlan
+                        ? "md:max-w-3xl md:w-full"
+                        : isCentered
+                          ? "md:w-[340px] md:shrink"
+                          : "md:shrink md:w-full"
+                    }`}
                   >
                     <CardContent className="flex flex-1 flex-col space-y-6">
                       {isSinglePlan ? (
@@ -892,11 +908,7 @@ export function LandingPage() {
                         )
                       ) : (
                         <>
-                          <div
-                            className={`flex flex-col min-h-[140px] ${
-                              plan.price === "Custom" ? "justify-center space-y-3" : "justify-between space-y-2"
-                            }`}
-                          >
+                          <div className="flex flex-col items-center space-y-4 text-center">
                             <div>
                               <h3 className="font-[family-name:var(--font-sora)] font-bold text-xl text-zinc-100">
                                 {plan.name}
@@ -907,21 +919,12 @@ export function LandingPage() {
                                 </span>
                               ) : null}
                             </div>
-                            <div>
-                              {plan.originalPrice ? (
-                                <p className="text-xs text-zinc-500 line-through">{plan.originalPrice}</p>
-                              ) : null}
-                              <div>
-                                {!plan.badge && plan.price !== "Custom" ? <p className="text-xs text-zinc-500">Mulai</p> : null}
-                                <p
-                                  className={`font-[family-name:var(--font-sora)] font-bold text-[#63E009] ${
-                                    plan.price === "Custom" ? "text-4xl mt-1" : "text-3xl mt-0.5"
-                                  }`}
-                                >
-                                  {plan.price}
-                                </p>
-                              </div>
-                            </div>
+                            {plan.originalPrice ? (
+                              <p className="text-xs text-zinc-500 line-through">{plan.originalPrice}</p>
+                            ) : null}
+                            <p className="font-[family-name:var(--font-sora)] whitespace-nowrap rounded-full bg-[#63E009]/10 px-5 py-2 text-sm font-bold text-[#63E009] sm:text-base">
+                              {plan.price}
+                            </p>
                           </div>
 
                           <div className="flex-1 space-y-5">
@@ -936,8 +939,8 @@ export function LandingPage() {
                                       }`}
                                       key={feature.text}
                                     >
-                                      <Check
-                                        className={`mt-0.5 size-4 shrink-0 ${feature.active ? "text-[#63E009]" : "text-zinc-600"}`}
+                                      <span
+                                        className={`mt-2 size-1.5 shrink-0 rounded-full ${feature.active ? "bg-[#63E009]" : "bg-zinc-600"}`}
                                       />
                                       {feature.text}
                                     </li>
@@ -949,7 +952,7 @@ export function LandingPage() {
 
                           <Button
                             aria-pressed={isSelected}
-                            className="w-full transition-colors hover:border-[#63E009] hover:bg-[#63E009] hover:text-black"
+                            className="w-full border-zinc-700 text-zinc-100 transition-colors hover:border-[#63E009] hover:bg-[#63E009] hover:text-black"
                             onClick={() => selectPackage(plan)}
                             variant={isSelected ? "default" : "outline"}
                           >
@@ -1007,7 +1010,7 @@ export function LandingPage() {
       </section>
       </div>
 
-      <section className="bg-[#050505] py-14 sm:py-16 md:py-20">
+      <section className="bg-[#050505] py-14 sm:py-20 md:py-28">
         <div className="mx-auto max-w-7xl px-4 sm:px-5 md:px-8">
           <div className="text-center">
             <Badge className="border-green-700/20 bg-green-700/10 text-[#63E009]">Our Mitra</Badge>
@@ -1016,10 +1019,12 @@ export function LandingPage() {
             </h2>
           </div>
 
-              <div className="mt-8 overflow-hidden">
-                <div className="mitra-marquee-track flex w-max min-w-max items-center will-change-transform">
-                  {[0, 1].map((groupIndex) => (
-                    <div aria-hidden={groupIndex === 1} className="flex shrink-0 items-center gap-4" key={`mitra-group-${groupIndex}`}>
+              <div
+                className="mt-12 overflow-hidden md:mt-16 [mask-image:linear-gradient(to_right,transparent,black_2%,black_98%,transparent)]"
+              >
+                <div className="mitra-marquee-track flex w-max min-w-max items-center gap-4 will-change-transform">
+                  {[0, 1, 2].map((groupIndex) => (
+                    <div aria-hidden={groupIndex !== 0} className="flex shrink-0 items-center gap-4" key={`mitra-group-${groupIndex}`}>
                       {[
                         { src: "/images/Mitra1.png", alt: "Mitra 1" },
                         { src: "/images/Mitra2.png", alt: "Mitra 2" },
@@ -1027,10 +1032,16 @@ export function LandingPage() {
                         { src: "/images/Mitra4.png", alt: "Mitra 4" },
                       ].map((mitra) => (
                         <div
-                          className="flex h-28 w-40 shrink-0 items-center justify-center rounded-2xl border border-white/10 bg-white p-4 sm:h-32 sm:w-48"
+                          className="flex h-28 w-40 shrink-0 items-center justify-center rounded-2xl border border-zinc-700/60 bg-zinc-900/60 p-4 sm:h-32 sm:w-48"
                           key={`${mitra.alt}-${groupIndex}`}
                         >
-                          <Image alt={mitra.alt} className="h-full w-full object-contain" height={160} src={mitra.src} width={240} />
+                          <Image
+                            alt={mitra.alt}
+                            className="h-full w-full object-contain"
+                            height={160}
+                            src={mitra.src}
+                            width={240}
+                          />
                         </div>
                       ))}
                     </div>
@@ -1040,7 +1051,7 @@ export function LandingPage() {
             </div>
             <style jsx>{`
             .mitra-marquee-track {
-              animation: mitra-marquee 24s linear infinite;
+              animation: mitra-marquee 22s linear infinite;
             }
 
             .mitra-marquee-track:hover {
@@ -1052,7 +1063,7 @@ export function LandingPage() {
                 transform: translate3d(0, 0, 0);
               }
               to {
-                transform: translate3d(-50%, 0, 0);
+                transform: translate3d(-33.3333%, 0, 0);
               }
             }
           `}</style>

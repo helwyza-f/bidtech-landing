@@ -236,8 +236,8 @@ export const en = {
         label: "Website",
         plans: [
           {
-            name: "Starter",
-            price: "Rp 5 Jt-an",
+            name: "Website Landing Page",
+            price: "Rp 500,000 - Rp 1,500,000",
             featureGroups: [
               {
                 title: "BENEFITS",
@@ -257,8 +257,8 @@ export const en = {
             ],
           },
           {
-            name: "Professional",
-            price: "Rp 15 Jt-an",
+            name: "Company Profile",
+            price: "Rp 1,500,000 - Rp 4,000,000",
             featured: true,
             featureGroups: [
               {
@@ -279,9 +279,15 @@ export const en = {
               },
             ],
           },
+        ],
+      },
+      {
+        key: "app",
+        label: "App",
+        plans: [
           {
             name: "Enterprise",
-            price: "Custom",
+            price: "Custom Price",
             featureGroups: [
               {
                 title: "STANDARD & CUSTOM FEATURES",
@@ -301,40 +307,32 @@ export const en = {
                   { text: "Advanced Copy Writing", active: true },
                   { text: "Unlimited Revision", active: true },
                   { text: "SEO Optimization", active: true },
-                  { text: "Business Branding", active: false },
                 ],
               },
             ],
           },
-        ],
-      },
-      {
-        key: "app",
-        label: "App",
-        plans: [
           {
-            name: "Custom Mobile Application",
+            name: "Mobile Application",
             price: "Custom Price",
-            description: "Tailored to the complexity & feature requirements of your application.",
-            ctaText: "Contact Us",
             featured: true,
             featureGroups: [
               {
                 title: "STANDARD FEATURES",
                 items: [
-                  { text: "Android & iOS Mobile App with custom & responsive design.", active: true },
+                  { text: "Android & iOS Mobile App with custom & responsive design", active: true },
                   { text: "Custom Backend & Database", active: true },
-                  { text: "Cloud infrastructure ready to handle user spikes (auto-scaling).", active: true },
-                  { text: "Flexible connection to Payment Gateways, WhatsApp API, or Third-Party APIs.", active: true },
+                  { text: "Cloud infrastructure ready to handle user spikes (auto-scaling)", active: true },
+                  { text: "Flexible connection to Payment Gateways, WhatsApp API, or Third-Party APIs", active: true },
+                  { text: "1 Month Free Maintenance", active: true },
                 ],
               },
               {
                 title: "SERVICE & MAINTENANCE",
                 items: [
-                  { text: "1 Month Free Maintenance & Bug Fixing.", active: true },
-                  { text: "24/7 Technical Support with 99.9% Uptime Guarantee.", active: true },
-                  { text: "Official Non-Disclosure Agreement (NDA Contract).", active: true },
-                  { text: "Priority service with fast response time (< 24 hours).", active: true },
+                  { text: "1 Month Free Maintenance & Bug Fixing", active: true },
+                  { text: "24/7 Technical Support with 99.9% Uptime Guarantee", active: true },
+                  { text: "Official Non-Disclosure Agreement (NDA Contract)", active: true },
+                  { text: "Priority service with fast response time (< 24 hours)", active: true },
                 ],
               },
             ],

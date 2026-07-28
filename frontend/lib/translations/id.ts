@@ -237,8 +237,8 @@ export const id = {
         label: "Website",
         plans: [
           {
-            name: "Starter",
-            price: "Rp 5 Jt-an",
+            name: "Website Landing Page",
+            price: "Rp 500.000 - Rp 1.500.000",
             featureGroups: [
               {
                 title: "BENEFIT",
@@ -258,8 +258,8 @@ export const id = {
             ],
           },
           {
-            name: "Professional",
-            price: "Rp 15 Jt-an",
+            name: "Company Profile",
+            price: "Rp 1.500.000 - Rp 4.000.000",
             featured: true,
             featureGroups: [
               {
@@ -280,9 +280,15 @@ export const id = {
               },
             ],
           },
+        ],
+      },
+      {
+        key: "aplikasi",
+        label: "Aplikasi",
+        plans: [
           {
             name: "Enterprise",
-            price: "Custom",
+            price: "Harga Custom",
             featureGroups: [
               {
                 title: "FITUR STANDAR & CUSTOM",
@@ -302,40 +308,32 @@ export const id = {
                   { text: "Advanced Copy Writing", active: true },
                   { text: "Unlimited Revision", active: true },
                   { text: "SEO Optimization", active: true },
-                  { text: "Business Branding", active: false },
                 ],
               },
             ],
           },
-        ],
-      },
-      {
-        key: "aplikasi",
-        label: "Aplikasi",
-        plans: [
           {
-            name: "Custom Mobile Application",
+            name: "Mobile Application",
             price: "Harga Custom",
-            description: "Disesuaikan dengan tingkat kompleksitas & kebutuhan fitur aplikasi Anda.",
-            ctaText: "Hubungi Kami",
             featured: true,
             featureGroups: [
               {
                 title: "FITUR STANDAR",
                 items: [
-                  { text: "Mobile App Android & iOS dengan tampilan kustom & responsif.", active: true },
+                  { text: "Mobile App Android & iOS dengan tampilan kustom & responsif", active: true },
                   { text: "Backend & Database Custom", active: true },
-                  { text: "Infrastruktur cloud yang siap menangani lonjakan pengguna (auto-scaling).", active: true },
-                  { text: "Koneksi fleksibel ke Payment Gateway, WhatsApp API, atau API Pihak Ketiga.", active: true },
+                  { text: "Infrastruktur cloud yang siap menangani lonjakan pengguna (auto-scaling)", active: true },
+                  { text: "Koneksi fleksibel ke Payment Gateway, WhatsApp API, atau API Pihak Ketiga", active: true },
+                  { text: "1 Bulan Maintenance Gratis", active: true },
                 ],
               },
               {
                 title: "LAYANAN & PERAWATAN",
                 items: [
-                  { text: "1 Bulan Maintenance & Bug Fixing Gratis.", active: true },
-                  { text: "Support teknis 24/7 dengan garansi Uptime 99.9%.", active: true },
-                  { text: "Perjanjian Kerahasiaan Data resmi (NDA Contract).", active: true },
-                  { text: "Layanan prioritas dengan waktu respon cepat (< 24 jam).", active: true },
+                  { text: "1 Bulan Maintenance & Bug Fixing Gratis", active: true },
+                  { text: "Support teknis 24/7 dengan garansi Uptime 99.9%", active: true },
+                  { text: "Perjanjian Kerahasiaan Data resmi (NDA Contract)", active: true },
+                  { text: "Layanan prioritas dengan waktu respon cepat (< 24 jam)", active: true },
                 ],
               },
             ],
