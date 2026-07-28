@@ -44,6 +44,19 @@ export function LandingPage() {
     }, 100);
   };
 
+  const activatePricingTab = (index: number) => {
+    setActivePricingTab(index);
+    setActivePricingSlide(0);
+    setSelectedPackage(null);
+    pricingSliderRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+  };
+
+  const activateProductTab = (index: number) => {
+    setActiveProductTab(index);
+    setActiveProductSlide(0);
+    productSliderRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+  };
+
   const movePricingSlide = (nextSlide: number) => {
     const slider = pricingSliderRef.current;
     const slides = slider ? (Array.from(slider.children) as HTMLElement[]) : [];
@@ -436,16 +449,21 @@ export function LandingPage() {
           <p className="mt-4 leading-7 text-zinc-400">{t.products.subtitle}</p>
         </Reveal>
 
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
+        <div className="relative z-20 mt-8 flex flex-wrap justify-center gap-3">
           {t.products.tabs.map((tab, index) => (
             <button
-              className={`relative z-10 touch-manipulation rounded-full border px-5 py-2 text-xs font-semibold uppercase tracking-wider transition sm:px-6 sm:py-2.5 sm:text-sm sm:tracking-widest ${
+              className={`relative z-10 touch-manipulation rounded-full border px-5 py-2 text-xs font-semibold uppercase tracking-wider transition supports-[hover:hover]:hover:border-[#63E009]/50 supports-[hover:hover]:hover:text-[#63E009] sm:px-6 sm:py-2.5 sm:text-sm sm:tracking-widest ${
                 activeProductTab === index
                   ? "border-[#63E009] bg-[#63E009] text-black"
-                  : "border-white/15 text-zinc-300 hover:border-[#63E009]/50 hover:text-[#63E009]"
+                  : "border-white/15 text-zinc-300"
               }`}
               key={tab.key}
-              onClick={() => setActiveProductTab(index)}
+              onClick={() => activateProductTab(index)}
+              onPointerUp={(event) => {
+                if (event.pointerType !== "mouse") {
+                  activateProductTab(index);
+                }
+              }}
               type="button"
             >
               {tab.label}
@@ -726,20 +744,20 @@ export function LandingPage() {
           </p>
         </Reveal>
 
-        <div className="mt-8 flex flex-nowrap justify-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] sm:flex-wrap sm:gap-3 sm:overflow-visible [&::-webkit-scrollbar]:hidden">
+        <div className="relative z-20 mt-8 flex flex-nowrap justify-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] sm:flex-wrap sm:gap-3 sm:overflow-visible [&::-webkit-scrollbar]:hidden">
           {t.pricing.tabs.map((tab, index) => (
             <button
-              className={`relative z-10 min-w-0 shrink-0 touch-manipulation rounded-full border px-5 py-3 text-[11px] font-semibold uppercase tracking-wider transition-colors hover:border-[#63E009] hover:bg-[#63E009] hover:text-black sm:px-10 sm:py-3.5 sm:text-sm sm:tracking-widest ${
+              className={`relative z-10 min-w-0 shrink-0 touch-manipulation rounded-full border px-5 py-3 text-[11px] font-semibold uppercase tracking-wider transition-colors supports-[hover:hover]:hover:border-[#63E009] supports-[hover:hover]:hover:bg-[#63E009] supports-[hover:hover]:hover:text-black sm:px-10 sm:py-3.5 sm:text-sm sm:tracking-widest ${
                 activePricingTab === index
                   ? "border-[#63E009] bg-[#63E009] text-black"
                   : "border-slate-900/20 text-slate-700"
               }`}
               key={tab.key}
-              onClick={() => {
-                setActivePricingTab(index);
-                setActivePricingSlide(0);
-                setSelectedPackage(null);
-                pricingSliderRef.current?.scrollTo({ left: 0, behavior: "smooth" });
+              onClick={() => activatePricingTab(index)}
+              onPointerUp={(event) => {
+                if (event.pointerType !== "mouse") {
+                  activatePricingTab(index);
+                }
               }}
               type="button"
             >
