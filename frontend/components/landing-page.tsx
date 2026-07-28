@@ -439,7 +439,7 @@ export function LandingPage() {
         <div className="mt-8 flex flex-wrap justify-center gap-3">
           {t.products.tabs.map((tab, index) => (
             <button
-              className={`rounded-full border px-5 py-2 text-xs font-semibold uppercase tracking-wider transition sm:px-6 sm:py-2.5 sm:text-sm sm:tracking-widest ${
+              className={`relative z-10 touch-manipulation rounded-full border px-5 py-2 text-xs font-semibold uppercase tracking-wider transition sm:px-6 sm:py-2.5 sm:text-sm sm:tracking-widest ${
                 activeProductTab === index
                   ? "border-[#63E009] bg-[#63E009] text-black"
                   : "border-white/15 text-zinc-300 hover:border-[#63E009]/50 hover:text-[#63E009]"
@@ -729,7 +729,7 @@ export function LandingPage() {
         <div className="mt-8 flex flex-nowrap justify-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] sm:flex-wrap sm:gap-3 sm:overflow-visible [&::-webkit-scrollbar]:hidden">
           {t.pricing.tabs.map((tab, index) => (
             <button
-              className={`min-w-0 shrink-0 rounded-full border px-5 py-3 text-[11px] font-semibold uppercase tracking-wider transition-colors hover:border-[#63E009] hover:bg-[#63E009] hover:text-black sm:px-10 sm:py-3.5 sm:text-sm sm:tracking-widest ${
+              className={`relative z-10 min-w-0 shrink-0 touch-manipulation rounded-full border px-5 py-3 text-[11px] font-semibold uppercase tracking-wider transition-colors hover:border-[#63E009] hover:bg-[#63E009] hover:text-black sm:px-10 sm:py-3.5 sm:text-sm sm:tracking-widest ${
                 activePricingTab === index
                   ? "border-[#63E009] bg-[#63E009] text-black"
                   : "border-slate-900/20 text-slate-700"
@@ -1116,26 +1116,25 @@ export function LandingPage() {
                   </div>
                 </div>
 
-                    <div className="group relative overflow-hidden rounded-2xl border border-white/10 bg-black/30">
-                      <Image
-                        alt="Preview peta lokasi BidTech"
-                        className="h-72 w-full object-cover sm:h-80"
-                        height={1024}
-                        src="/images/location-preview.png"
-                        width={1536}
+                    <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/30">
+                      <iframe
+                        allowFullScreen
+                        className="h-72 w-full border-0 sm:h-80"
+                        loading="lazy"
+                        referrerPolicy="strict-origin-when-cross-origin"
+                        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2311.377!2d104.07543166924557!3d1.1058157731502605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sid!2sid!4v1785208829256!5m2!1sid!2sid"
+                        title="Peta Lokasi BidTech"
                       />
-                      <a
-                        aria-label="Buka lokasi BidTech di Google Maps"
-                        className="absolute inset-0 flex items-end justify-center bg-transparent p-4"
-                        href="https://www.google.com/maps/search/?api=1&query=1.1059955%2C104.075364"
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        <span className="rounded-full bg-black/70 px-4 py-2 text-xs font-semibold text-white opacity-0 shadow-lg transition group-hover:opacity-100">
-                          Klik untuk buka di Google Maps
-                        </span>
-                      </a>
                     </div>
+
+                    <a
+                      className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-[#63E009]/40 hover:bg-white/[0.06]"
+                      href="https://www.google.com/maps/search/?api=1&query=1.1058157731502605%2C104.07543166924557"
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      Buka di Google Maps
+                    </a>
                 </CardContent>
               </Card>
             </Reveal>

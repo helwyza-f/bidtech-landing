@@ -44,7 +44,7 @@ export const id = {
       {
         title: "Mobile App Development",
         description: "Aplikasi mobile yang cepat, stabil, dan mudah digunakan.",
-        features: ["Android & iOS", "API Integration", "Maintenance"],
+        features: ["Android & iOS", "UI/UX Design", "Website Company Profile", "Dashboard"],
       },
       {
         title: "Custom Business System",
@@ -218,7 +218,7 @@ export const id = {
       {
         quote:
           "Partner strategis terbaik untuk urusan IT. Mereka benar-benar mengerti kebutuhan bisnis UMKM seperti kami dan memberikan harga yang kompetitif.",
-        name: "Budi Santoso",
+        name: "Merintan ",
         role: "Manager IT, Sentosa Logistik",
       },
     ],
@@ -376,7 +376,7 @@ export const id = {
     ],
     form: {
       nameLabel: "Nama Lengkap",
-      namePlaceholder: "Contoh: Budi Santoso",
+      namePlaceholder: "Contoh: Merintan ",
       whatsappLabel: "Nomor WhatsApp",
       whatsappPlaceholder: "0812...",
       companyLabel: "Nama Perusahaan",

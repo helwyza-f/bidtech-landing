@@ -44,7 +44,7 @@ export const en = {
       {
         title: "Mobile App Development",
         description: "Fast, stable, and easy-to-use mobile applications.",
-        features: ["Android & iOS",  "API Integration", "Maintenance"],
+        features: ["Android & iOS", "UI/UX Design", "Company Profile Website", "Dashboard"],
       },
       {
         title: "Custom Business System",
