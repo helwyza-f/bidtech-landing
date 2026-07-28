@@ -52,6 +52,7 @@ jobs:
 
             docker build -t bidtech-frontend:${{ github.sha }} .
             docker rm -f BidTech-Frontend 2>/dev/null || true
+            docker rm -f BidTech-Admin-Frontend 2>/dev/null || true
             docker run -d \
               --name BidTech-Frontend \
               --restart unless-stopped \
