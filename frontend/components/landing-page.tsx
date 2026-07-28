@@ -1026,10 +1026,10 @@ export function LandingPage() {
                   {[0, 1, 2].map((groupIndex) => (
                     <div aria-hidden={groupIndex !== 0} className="flex shrink-0 items-center gap-4" key={`mitra-group-${groupIndex}`}>
                       {[
-                        { src: "/images/Mitra1.png", alt: "Mitra 1" },
-                        { src: "/images/Mitra2.png", alt: "Mitra 2" },
-                        { src: "/images/Mitra3.png", alt: "Mitra 3" },
-                        { src: "/images/Mitra4.png", alt: "Mitra 4" },
+                        { src: "/images/mitra-appeknas-20260728.png", alt: "Logo APPEKNAS" },
+                        { src: "/images/mitra-kadin-batam-20260728.png", alt: "Logo Kadin Batam" },
+                        { src: "/images/mitra-batamnow-20260728.png", alt: "Logo BatamNow" },
+                        { src: "/images/mitra-apindo-20260728.png", alt: "Logo APINDO" },
                       ].map((mitra) => (
                         <div
                           className="flex h-28 w-40 shrink-0 items-center justify-center rounded-2xl border border-zinc-700/60 bg-zinc-900/60 p-4 sm:h-32 sm:w-48"
