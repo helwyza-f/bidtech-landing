@@ -14,14 +14,14 @@ export const specializationIcons = [
 ];
 
 export const specializationImages = [
-  "/images/Expertise-1.webp",
+  "/images/expertise-1.webp",
   "/images/expertise-3.webp",
   "/images/expertise-3.webp",
-  "/images/Expertise-4.webp",
-  "/images/Expertise-5.webp",
-  "/images/Expertise-6.webp",
-  "/images/Expertise-7.webp",
-  "/images/Expertise-8.webp",
+  "/images/expertise-4.webp",
+  "/images/expertise-5.webp",
+  "/images/expertise-6.webp",
+  "/images/expertise-7.webp",
+  "/images/expertise-8.webp",
 ];
 
 export const whyIcons = [ShieldCheck, BadgeCheck, TrendingUp];

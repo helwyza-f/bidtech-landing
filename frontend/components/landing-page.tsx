@@ -15,6 +15,9 @@ import { serviceIcons, specializationIcons, specializationImages, whyIcons } fro
 
 export function LandingPage() {
   const { t } = useLanguage();
+  const heroTitleLine1Words = t.hero.titleLine1.trim().split(/\s+/);
+  const heroTitleMobileFirstLine = heroTitleLine1Words.slice(0, -1).join(" ");
+  const heroTitleMobileSecondLine = `${heroTitleLine1Words.at(-1) ?? ""} ${t.hero.titleLine2White}`.trim();
   const [activeStep, setActiveStep] = useState(0);
   const [activeServiceSlide, setActiveServiceSlide] = useState(0);
   const servicesSliderRef = useRef<HTMLDivElement>(null);
@@ -111,8 +114,11 @@ export function LandingPage() {
             <Badge className="uppercase tracking-widest">{t.hero.badge}</Badge>
           </div>
           <h1 className="mx-auto mt-5 max-w-3xl font-[Tahoma,Arial,sans-serif] text-3xl font-normal leading-tight tracking-tight text-white sm:text-4xl md:mt-6 md:text-5xl lg:text-6xl">
-            <span className="block sm:whitespace-nowrap">{t.hero.titleLine1}</span>
-            <span className="block">
+            <span className="block sm:hidden">{heroTitleMobileFirstLine}</span>
+            <span className="block sm:hidden">{heroTitleMobileSecondLine}</span>
+            <span className="block sm:hidden text-[#63E009]">{t.hero.titleLine2Green}</span>
+            <span className="hidden sm:block sm:whitespace-nowrap">{t.hero.titleLine1}</span>
+            <span className="hidden sm:block">
               {t.hero.titleLine2White} <span className="text-[#63E009]">{t.hero.titleLine2Green}</span>
             </span>
           </h1>
@@ -242,8 +248,16 @@ export function LandingPage() {
         >
           {t.services.items.map((service, index) => (
             <Card className="w-full min-w-full shrink-0 snap-start border-lime-300/20 bg-lime-300/[0.03] md:min-w-0 md:shrink" key={service.title}>
-              <CardContent className="flex h-full min-h-[245px] flex-col space-y-4 sm:min-h-[320px]">
-                <div className="grid min-h-[165px] grid-rows-[auto_1fr] gap-4 sm:min-h-[220px]">
+              <CardContent
+                className={`flex h-full flex-col space-y-4 sm:min-h-[320px] ${
+                  index === 2 ? "min-h-[225px]" : "min-h-[245px]"
+                }`}
+              >
+                <div
+                  className={`grid grid-rows-[auto_1fr] gap-4 sm:min-h-[220px] ${
+                    index === 2 ? "min-h-[145px]" : "min-h-[165px]"
+                  }`}
+                >
                   <div className="flex items-center gap-4">
                     <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10">
                       <Image src={serviceIcons[index]} alt="" width={22} height={22} className="size-5" />
