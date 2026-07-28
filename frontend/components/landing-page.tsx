@@ -278,16 +278,18 @@ export function LandingPage() {
           {t.services.items.map((service, index) => (
             <Card className="w-full min-w-full shrink-0 snap-start border-lime-300/20 bg-lime-300/[0.03] md:min-w-0 md:shrink" key={service.title}>
               <CardContent className="flex h-full min-h-[320px] flex-col space-y-4">
-                <div className="flex items-center gap-4">
-                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10">
-                    <Image src={serviceIcons[index]} alt="" width={22} height={22} className="size-5" />
+                <div className="grid min-h-[240px] grid-rows-[auto_1fr] gap-4 sm:min-h-[220px]">
+                  <div className="flex items-center gap-4">
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10">
+                      <Image src={serviceIcons[index]} alt="" width={22} height={22} className="size-5" />
+                    </div>
+                    <h3 className="font-[family-name:var(--font-sora)] text-lg font-semibold text-[#63E009]">
+                      {service.title}
+                    </h3>
                   </div>
-                  <h3 className="font-[family-name:var(--font-sora)] text-lg font-semibold text-[#63E009]">
-                    {service.title}
-                  </h3>
+                  <p className="text-sm leading-6 text-zinc-400">{service.description}</p>
                 </div>
-                <p className="text-sm leading-6 text-zinc-400">{service.description}</p>
-                <ul className="mt-auto space-y-2 border-t border-white/10 pt-4">
+                <ul className="space-y-2 border-t border-white/10 pt-4">
                   {service.features.map((feature) => (
                     <li className="flex items-center gap-2 text-sm text-zinc-300" key={feature}>
                       <span className="size-1.5 shrink-0 rounded-full bg-lime-300" />
@@ -369,20 +371,16 @@ export function LandingPage() {
           {t.specializations.items.map((item, index) => (
             <div className="w-full min-w-full shrink-0 snap-start sm:min-w-0 sm:shrink" key={item.title}>
               <div className="flex h-full min-h-[320px] flex-col overflow-hidden rounded-2xl border border-white/10 bg-[#0b0f12] transition hover:border-lime-300/30">
-                <div
-                  className={`relative aspect-[16/10] overflow-hidden bg-[#081208] ${
-                    specializationImages[index].includes("expertise-5") || specializationImages[index].includes("expertise-6")
-                      ? "p-7"
-                      : "p-3"
-                  }`}
-                >
-                  <Image
-                    src={specializationImages[index]}
-                    alt={item.title}
-                    fill
-                    sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                    className="object-contain"
-                  />
+                <div className="flex aspect-[16/10] items-center justify-center overflow-hidden bg-[#081208] p-4">
+                  <div className="relative h-[78%] w-[78%]">
+                    <Image
+                      src={specializationImages[index]}
+                      alt={item.title}
+                      fill
+                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                      className="object-contain object-center"
+                    />
+                  </div>
                 </div>
                 <div className="flex flex-1 items-start gap-3 p-4">
                   <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-lime-300/10">
@@ -491,13 +489,17 @@ export function LandingPage() {
           {t.products.tabs[activeProductTab].items.map((product) => (
             <Card className="w-full min-w-full shrink-0 snap-start overflow-hidden border-lime-300/15 bg-[#0b0f12] p-0 md:min-w-0 md:shrink" key={product.title}>
               <div className="bg-[#0b0f12] p-3 sm:p-4">
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  width={600}
-                  height={400}
-                  className="h-auto w-full rounded-xl object-contain"
-                />
+                <div className="flex h-[220px] items-center justify-center rounded-xl bg-[#031406] sm:h-[260px] md:h-[240px] lg:h-[260px]">
+                  <div className="flex h-[78%] w-[78%] items-center justify-center">
+                    <Image
+                      src={product.image}
+                      alt={product.title}
+                      width={600}
+                      height={400}
+                      className="h-full w-full rounded-xl object-contain object-center"
+                    />
+                  </div>
+                </div>
               </div>
               <CardContent className="space-y-3 px-4 pb-5 pt-1 sm:px-5 sm:pb-6">
                 <span className="text-xs font-semibold uppercase tracking-widest text-[#63E009]">{product.tag}</span>
@@ -770,103 +772,154 @@ export function LandingPage() {
           const plans = t.pricing.tabs[activePricingTab].plans;
           const isSinglePlan = plans.length === 1;
           const isCentered = plans.length <= 2;
+          const showPricingControls = plans.length > 1;
 
           return (
-            <div
-              className={`mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:pb-0 [&::-webkit-scrollbar]:hidden ${
-                isSinglePlan || isCentered
-                  ? "md:flex md:flex-wrap md:justify-center md:overflow-visible md:gap-5"
-                  : "md:grid md:grid-cols-2 md:gap-5 md:overflow-visible xl:grid-cols-3 xl:gap-6"
-              }`}
-              onScroll={(event) => {
-                if (window.innerWidth >= 768) return;
-                const slider = event.currentTarget;
-                const slides = Array.from(slider.children) as HTMLElement[];
-                const closest = slides.reduce(
-                  (best, slide, index) =>
-                    Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) < best.distance
-                      ? { index, distance: Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) }
-                      : best,
-                  { index: 0, distance: Number.POSITIVE_INFINITY },
-                );
-                setActivePricingSlide(closest.index);
-              }}
-              ref={pricingSliderRef}
-            >
-              {plans.map((rawPlan) => {
-                const plan = rawPlan as typeof rawPlan & { badge?: string; originalPrice?: string };
-                const isSelected =
-                  selectedPackage?.service === (t.contact.form.services[activePricingTab] ?? t.contact.form.services[0]) &&
-                  selectedPackage.plan === plan.name;
+            <>
+              <div
+                className={`mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:pb-0 [&::-webkit-scrollbar]:hidden ${
+                  isSinglePlan || isCentered
+                    ? "md:flex md:flex-wrap md:justify-center md:overflow-visible md:gap-5"
+                    : "md:grid md:grid-cols-2 md:gap-5 md:overflow-visible xl:grid-cols-3 xl:gap-6"
+                }`}
+                onScroll={(event) => {
+                  if (window.innerWidth >= 768) return;
+                  const slider = event.currentTarget;
+                  const slides = Array.from(slider.children) as HTMLElement[];
+                  const closest = slides.reduce(
+                    (best, slide, index) =>
+                      Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) < best.distance
+                        ? { index, distance: Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) }
+                        : best,
+                    { index: 0, distance: Number.POSITIVE_INFINITY },
+                  );
+                  setActivePricingSlide(closest.index);
+                }}
+                ref={pricingSliderRef}
+              >
+                {plans.map((rawPlan) => {
+                  const plan = rawPlan as typeof rawPlan & { badge?: string; originalPrice?: string };
+                  const isSelected =
+                    selectedPackage?.service === (t.contact.form.services[activePricingTab] ?? t.contact.form.services[0]) &&
+                    selectedPackage.plan === plan.name;
 
-                return (
-                  <Card
-                    key={plan.name}
-                    className={`flex w-full min-w-full shrink-0 snap-start flex-col !shadow-none transition-all duration-300 md:min-w-0 ${
-                      isSinglePlan
-                        ? isSelected
-                          ? "border-lime-300 bg-[#0b0f12] shadow-[0_0_0_2px_rgba(190,242,100,0.18)]"
-                          : plan.featured
-                            ? "border-lime-300/40 bg-[#0b0f12]"
-                            : "bg-[#0b0f12]"
-                        : isSelected
-                          ? "border-[#63E009] bg-[#0b0f12] shadow-[0_0_0_2px_rgba(99,224,9,0.18)]"
-                          : "border-transparent bg-[#0b0f12]"
-                    } ${
-                      isSinglePlan
-                        ? "md:max-w-3xl md:w-full"
-                        : isCentered
-                          ? "md:w-[340px] md:shrink"
-                          : "md:shrink md:w-full"
-                    }`}
-                  >
-                    <CardContent className="flex flex-1 flex-col space-y-6">
-                      {isSinglePlan ? (
-                        activePricingTab === 2 ? (
-                          <div className="flex w-full flex-col space-y-6">
-                            <div className="space-y-4 text-center">
-                              <h3 className="font-[family-name:var(--font-sora)] text-2xl font-bold text-[#63E009]">
-                                {plan.name}
-                              </h3>
-                            </div>
-
-                            <div className="space-y-8">
-                              <div className="space-y-5">
-                                <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-zinc-400">
-                                  {plan.featureGroups[0]?.title}
-                                </p>
-
-                                <div className="space-y-5 text-left">
-                                  {plan.featureGroups[0]?.items.map((feature, index) => (
-                                    <div className="flex gap-4" key={feature.text}>
-                                      <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full border border-[#63E009]/40 bg-[#63E009]/10 text-sm font-semibold text-[#63E009]">
-                                        {String(index + 1)}
-                                      </div>
-                                      <div className="space-y-1">
-                                        <p className="text-sm font-semibold text-zinc-100">{feature.text}</p>
-                                        <p className="text-sm leading-6 text-zinc-400">
-                                          {index === 0
-                                            ? 'Diskusi awal untuk memahami kebutuhan teknis & alur sistem.'
-                                            : index === 1
-                                              ? 'Kami menyusun proposal estimasi biaya & estimasi pengerjaan.'
-                                              : 'Peluncuran aplikasi ke sistem produksi yang siap pakai, dilindungi penuh oleh Perjanjian Kerahasiaan Data (NDA).'}
-                                        </p>
-                                      </div>
-                                    </div>
-                                  ))}
-                                </div>
+                  return (
+                    <Card
+                      key={plan.name}
+                      className={`flex w-full min-w-full shrink-0 snap-start flex-col !shadow-none transition-all duration-300 md:min-w-0 ${
+                        isSinglePlan
+                          ? isSelected
+                            ? "border-lime-300 bg-[#0b0f12] shadow-[0_0_0_2px_rgba(190,242,100,0.18)]"
+                            : plan.featured
+                              ? "border-lime-300/40 bg-[#0b0f12]"
+                              : "bg-[#0b0f12]"
+                          : isSelected
+                            ? "border-[#63E009] bg-[#0b0f12] shadow-[0_0_0_2px_rgba(99,224,9,0.18)]"
+                            : "border-transparent bg-[#0b0f12]"
+                      } ${
+                        isSinglePlan
+                          ? "md:max-w-3xl md:w-full"
+                          : isCentered
+                            ? "md:w-[340px] md:shrink"
+                            : "md:shrink md:w-full"
+                      }`}
+                    >
+                      <CardContent className="flex flex-1 flex-col space-y-6">
+                        {isSinglePlan ? (
+                          activePricingTab === 2 ? (
+                            <div className="flex w-full flex-col space-y-6">
+                              <div className="space-y-4 text-center">
+                                <h3 className="font-[family-name:var(--font-sora)] text-2xl font-bold text-[#63E009]">
+                                  {plan.name}
+                                </h3>
                               </div>
 
-                              <div className="rounded-2xl bg-[#1a2226] px-5 py-6 text-center sm:px-8 sm:py-8">
-                                <p className="font-[family-name:var(--font-sora)] text-2xl font-bold text-zinc-100 sm:text-3xl">
-                                  Harga Custom
+                              <div className="space-y-8">
+                                <div className="space-y-5">
+                                  <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-zinc-400">
+                                    {plan.featureGroups[0]?.title}
+                                  </p>
+
+                                  <div className="space-y-5 text-left">
+                                    {plan.featureGroups[0]?.items.map((feature, index) => (
+                                      <div className="flex gap-4" key={feature.text}>
+                                        <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full border border-[#63E009]/40 bg-[#63E009]/10 text-sm font-semibold text-[#63E009]">
+                                          {String(index + 1)}
+                                        </div>
+                                        <div className="space-y-1">
+                                          <p className="text-sm font-semibold text-zinc-100">{feature.text}</p>
+                                          <p className="text-sm leading-6 text-zinc-400">
+                                            {index === 0
+                                              ? "Diskusi awal untuk memahami kebutuhan teknis & alur sistem."
+                                              : index === 1
+                                                ? "Kami menyusun proposal estimasi biaya & estimasi pengerjaan."
+                                                : "Peluncuran aplikasi ke sistem produksi yang siap pakai, dilindungi penuh oleh Perjanjian Kerahasiaan Data (NDA)."}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    ))}
+                                  </div>
+                                </div>
+
+                                <div className="rounded-2xl bg-[#1a2226] px-5 py-6 text-center sm:px-8 sm:py-8">
+                                  <p className="font-[family-name:var(--font-sora)] text-2xl font-bold text-zinc-100 sm:text-3xl">
+                                    Harga Custom
+                                  </p>
+                                  <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-zinc-400">
+                                    Estimasi biaya disesuaikan secara presisi dengan kebutuhan fitur dan alur kerja aplikasi Anda.
+                                  </p>
+                                  <Button
+                                    aria-pressed={isSelected}
+                                    className="mt-6 w-full bg-[#63E009] py-6 text-base font-semibold text-black transition-colors hover:bg-[#52be07] hover:text-black"
+                                    onClick={() => selectPackage(plan)}
+                                    variant="default"
+                                  >
+                                    {(plan as any).ctaText || (isSelected ? t.pricing.selected : t.pricing.ctaDefault)}
+                                  </Button>
+                                </div>
+                              </div>
+                            </div>
+                          ) : (
+                            <div className="flex w-full flex-col space-y-6 text-center">
+                              <div className="border-b border-zinc-800/80 pb-4">
+                                <h3 className="font-[family-name:var(--font-sora)] text-2xl font-bold text-[#63E009]">
+                                  {plan.name}
+                                </h3>
+                              </div>
+
+                              <div className="grid grid-cols-1 gap-8 py-2 text-left md:grid-cols-2 md:gap-12">
+                                {plan.featureGroups.map((group) => (
+                                  <div key={group.title} className="space-y-4">
+                                    <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{group.title}</p>
+                                    <ul className="space-y-4">
+                                      {group.items.map((feature) => (
+                                        <li
+                                          className={`flex items-start gap-3 text-sm leading-relaxed ${
+                                            feature.active ? "text-zinc-300" : "text-zinc-600 line-through"
+                                          }`}
+                                          key={feature.text}
+                                        >
+                                          <Check
+                                            className={`mt-0.5 size-5 shrink-0 ${feature.active ? "text-[#63E009]" : "text-zinc-600"}`}
+                                          />
+                                          <span>{feature.text}</span>
+                                        </li>
+                                      ))}
+                                    </ul>
+                                  </div>
+                                ))}
+                              </div>
+
+                              <div className="flex w-full flex-col items-center space-y-4 rounded-xl border border-zinc-800/50 bg-[#040608] p-6 text-center md:p-8">
+                                <p className="font-[family-name:var(--font-sora)] text-2xl font-bold text-zinc-100">
+                                  {plan.price}
                                 </p>
-                                <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-zinc-400">
-                                  Estimasi biaya disesuaikan secara presisi dengan kebutuhan fitur dan alur kerja aplikasi Anda.
+                                <p className="max-w-md text-xs text-zinc-400">
+                                  {(plan as any).description || t.pricing.subtitle}
                                 </p>
                                 <Button
                                   aria-pressed={isSelected}
-                                  className="mt-6 w-full bg-[#63E009] py-6 text-base font-semibold text-black transition-colors hover:bg-[#52be07] hover:text-black"
+                                  className="mt-2 w-full max-w-md rounded-lg border-none bg-[#63E009] py-6 text-base font-semibold text-black transition-colors hover:bg-[#52be07] hover:text-black"
                                   onClick={() => selectPackage(plan)}
                                   variant="default"
                                 >
@@ -874,31 +927,44 @@ export function LandingPage() {
                                 </Button>
                               </div>
                             </div>
-                          </div>
+                          )
                         ) : (
-                          <div className="flex flex-col w-full text-center space-y-6">
-                            <div className="pb-4 border-b border-zinc-800/80">
-                              <h3 className="font-[family-name:var(--font-sora)] font-bold text-2xl text-[#63E009]">
-                                {plan.name}
-                              </h3>
+                          <>
+                            <div className="flex flex-col items-center space-y-4 text-center">
+                              <div>
+                                <h3 className="font-[family-name:var(--font-sora)] text-xl font-bold text-zinc-100">
+                                  {plan.name}
+                                </h3>
+                                {plan.badge ? (
+                                  <span className="mt-2 inline-block rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-400">
+                                    {plan.badge}
+                                  </span>
+                                ) : null}
+                              </div>
+                              {plan.originalPrice ? (
+                                <p className="text-xs text-zinc-500 line-through">{plan.originalPrice}</p>
+                              ) : null}
+                              <p className="font-[family-name:var(--font-sora)] whitespace-nowrap rounded-full bg-[#63E009]/10 px-5 py-2 text-sm font-bold text-[#63E009] sm:text-base">
+                                {plan.price}
+                              </p>
                             </div>
 
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 text-left py-2">
+                            <div className="flex-1 space-y-5">
                               {plan.featureGroups.map((group) => (
-                                <div key={group.title} className="space-y-4">
+                                <div key={group.title}>
                                   <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{group.title}</p>
-                                  <ul className="space-y-4">
+                                  <ul className="mt-3 space-y-3">
                                     {group.items.map((feature) => (
                                       <li
-                                        className={`flex items-start gap-3 text-sm leading-relaxed ${
-                                          feature.active ? 'text-zinc-300' : 'text-zinc-600 line-through'
+                                        className={`flex items-start gap-2 text-sm ${
+                                          feature.active ? "text-zinc-300" : "text-zinc-600 line-through"
                                         }`}
                                         key={feature.text}
                                       >
-                                        <Check
-                                          className={`mt-0.5 size-5 shrink-0 ${feature.active ? 'text-[#63E009]' : 'text-zinc-600'}`}
+                                        <span
+                                          className={`mt-2 size-1.5 shrink-0 rounded-full ${feature.active ? "bg-[#63E009]" : "bg-zinc-600"}`}
                                         />
-                                        <span>{feature.text}</span>
+                                        {feature.text}
                                       </li>
                                     ))}
                                   </ul>
@@ -906,83 +972,60 @@ export function LandingPage() {
                               ))}
                             </div>
 
-                            <div className="bg-[#040608] rounded-xl p-6 md:p-8 border border-zinc-800/50 flex flex-col items-center text-center space-y-4 w-full">
-                              <p className="font-[family-name:var(--font-sora)] font-bold text-2xl text-zinc-100">
-                                {plan.price}
-                              </p>
-                              <p className="text-xs text-zinc-400 max-w-md">
-                                {(plan as any).description || t.pricing.subtitle}
-                              </p>
-                              <Button
-                                aria-pressed={isSelected}
-                                className="w-full max-w-md mt-2 bg-[#63E009] text-black transition-colors hover:bg-[#52be07] hover:text-black border-none font-semibold py-6 text-base rounded-lg"
-                                onClick={() => selectPackage(plan)}
-                                variant="default"
-                              >
-                                {(plan as any).ctaText || (isSelected ? t.pricing.selected : t.pricing.ctaDefault)}
-                              </Button>
-                            </div>
-                          </div>
-                        )
-                      ) : (
-                        <>
-                          <div className="flex flex-col items-center space-y-4 text-center">
-                            <div>
-                              <h3 className="font-[family-name:var(--font-sora)] font-bold text-xl text-zinc-100">
-                                {plan.name}
-                              </h3>
-                              {plan.badge ? (
-                                <span className="mt-2 inline-block rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-400">
-                                  {plan.badge}
-                                </span>
-                              ) : null}
-                            </div>
-                            {plan.originalPrice ? (
-                              <p className="text-xs text-zinc-500 line-through">{plan.originalPrice}</p>
-                            ) : null}
-                            <p className="font-[family-name:var(--font-sora)] whitespace-nowrap rounded-full bg-[#63E009]/10 px-5 py-2 text-sm font-bold text-[#63E009] sm:text-base">
-                              {plan.price}
-                            </p>
-                          </div>
+                            <Button
+                              aria-pressed={isSelected}
+                              className="w-full border-zinc-700 text-zinc-100 transition-colors hover:border-[#63E009] hover:bg-[#63E009] hover:text-black"
+                              onClick={() => selectPackage(plan)}
+                              variant={isSelected ? "default" : "outline"}
+                            >
+                              {isSelected ? t.pricing.selected : t.pricing.ctaDefault}
+                            </Button>
+                          </>
+                        )}
+                      </CardContent>
+                    </Card>
+                  );
+                })}
+              </div>
 
-                          <div className="flex-1 space-y-5">
-                            {plan.featureGroups.map((group) => (
-                              <div key={group.title}>
-                                <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{group.title}</p>
-                                <ul className="mt-3 space-y-3">
-                                  {group.items.map((feature) => (
-                                    <li
-                                      className={`flex items-start gap-2 text-sm ${
-                                        feature.active ? "text-zinc-300" : "text-zinc-600 line-through"
-                                      }`}
-                                      key={feature.text}
-                                    >
-                                      <span
-                                        className={`mt-2 size-1.5 shrink-0 rounded-full ${feature.active ? "bg-[#63E009]" : "bg-zinc-600"}`}
-                                      />
-                                      {feature.text}
-                                    </li>
-                                  ))}
-                                </ul>
-                              </div>
-                            ))}
-                          </div>
+              {showPricingControls ? (
+                <div className="mt-6 flex items-center justify-center gap-5 md:hidden">
+                  <button
+                    aria-label="Pricing sebelumnya"
+                    className="flex size-12 items-center justify-center rounded-full border border-zinc-700/80 bg-transparent text-zinc-200 transition-colors hover:border-[#63E009] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
+                    disabled={activePricingSlide === 0}
+                    onClick={() => movePricingSlide(activePricingSlide - 1)}
+                    type="button"
+                  >
+                    <ChevronLeft className="size-5" />
+                  </button>
 
-                          <Button
-                            aria-pressed={isSelected}
-                            className="w-full border-zinc-700 text-zinc-100 transition-colors hover:border-[#63E009] hover:bg-[#63E009] hover:text-black"
-                            onClick={() => selectPackage(plan)}
-                            variant={isSelected ? "default" : "outline"}
-                          >
-                            {isSelected ? t.pricing.selected : t.pricing.ctaDefault}
-                          </Button>
-                        </>
-                      )}
-                    </CardContent>
-                  </Card>
-                );
-              })}
-            </div>
+                  <div className="flex items-center gap-2">
+                    {plans.map((plan, index) => (
+                      <button
+                        aria-label={`Buka slide harga ${index + 1}`}
+                        className={`h-2.5 rounded-full transition-all ${
+                          activePricingSlide === index ? "w-8 bg-[#63E009]" : "w-2.5 bg-zinc-500"
+                        }`}
+                        key={`pricing-dot-${plan.name}`}
+                        onClick={() => movePricingSlide(index)}
+                        type="button"
+                      />
+                    ))}
+                  </div>
+
+                  <button
+                    aria-label="Pricing berikutnya"
+                    className="flex size-12 items-center justify-center rounded-full border border-zinc-700/80 bg-transparent text-zinc-200 transition-colors hover:border-[#63E009] hover:text-white disabled:cursor-not-allowed disabled:opacity-35"
+                    disabled={activePricingSlide === plans.length - 1}
+                    onClick={() => movePricingSlide(activePricingSlide + 1)}
+                    type="button"
+                  >
+                    <ChevronRight className="size-5" />
+                  </button>
+                </div>
+              ) : null}
+            </>
           );
         })()}
       </section>
@@ -1090,7 +1133,7 @@ export function LandingPage() {
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="contact">
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-4xl">
-            Siap Memulai Proyek <span className="text-[#63E009]">Anda</span>?
+            Siap Memulai Proyek <span className="text-[#63E009]">Anda?</span>
           </h2>
           <p className="mt-4 leading-7 text-zinc-400">{t.contact.subtitle}</p>
         </Reveal>
