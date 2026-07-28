@@ -162,10 +162,10 @@ export function LandingPage() {
         </div>
       </section>
 
-      <section className="mx-4 mb-4 mt-8 grid max-w-7xl grid-cols-2 gap-3 sm:mx-5 sm:mb-6 sm:mt-12 sm:gap-4 md:mx-8 lg:mx-auto lg:mb-8 lg:mt-14 lg:grid-cols-4" aria-label="BidTech stats">
+      <section className="mx-4 mb-4 mt-8 grid max-w-7xl grid-cols-2 gap-2.5 sm:mx-5 sm:mb-6 sm:mt-12 sm:gap-3 md:mx-8 lg:mx-auto lg:mb-8 lg:mt-14 lg:grid-cols-4 lg:gap-4" aria-label="BidTech stats">
         {t.stats.map((stat, index) => (
           <Reveal delay={index * 80} key={stat.label}>
-            <div className="flex min-h-36 flex-col items-center justify-center rounded-[20px] border border-lime-300/15 bg-black/60 px-3 py-7 text-center shadow-[0_16px_50px_rgba(0,0,0,0.28)] sm:min-h-0 sm:rounded-[24px] sm:px-5 sm:py-8">
+            <div className="flex min-h-[122px] flex-col items-center justify-center rounded-[20px] border border-lime-300/15 bg-black/60 px-3 py-5 text-center shadow-[0_16px_50px_rgba(0,0,0,0.28)] sm:min-h-[132px] sm:rounded-[24px] sm:px-5 sm:py-6">
               <p className="font-[family-name:var(--font-sora)] text-3xl font-bold text-[#63E009] md:text-4xl">
                 <StatCounter value={stat.value} suffix={stat.suffix} />
               </p>
@@ -249,12 +249,12 @@ export function LandingPage() {
           {t.services.items.map((service, index) => (
             <Card className="w-full min-w-full shrink-0 snap-start border-lime-300/20 bg-lime-300/[0.03] md:min-w-0 md:shrink" key={service.title}>
               <CardContent
-                className={`flex h-full flex-col space-y-4 sm:min-h-[285px] ${
+                className={`flex h-full flex-col space-y-4 sm:min-h-[255px] ${
                   index === 2 ? "min-h-[205px]" : "min-h-[245px]"
                 }`}
               >
                 <div
-                  className={`grid grid-rows-[auto_1fr] gap-4 sm:min-h-[185px] ${
+                  className={`grid grid-rows-[auto_1fr] gap-4 sm:min-h-[155px] ${
                     index === 2 ? "min-h-[125px]" : "min-h-[165px]"
                   }`}
                 >
