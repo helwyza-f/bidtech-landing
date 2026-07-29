@@ -259,7 +259,7 @@ export const id = {
           },
           {
             name: "Company Profile",
-            price: "Rp 1.500.000 - Rp 4.000.000",
+            price: "Rp 2.000.000 - Rp 5.000.000",
             featured: true,
             featureGroups: [
               {
