@@ -1,0 +1,13 @@
+.next
+node_modules
+out
+dist
+coverage
+.DS_Store
+*.log
+*.tsbuildinfo
+.deploy
+.claude
+.env
+.env.local
+.gocache
