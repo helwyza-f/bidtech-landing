@@ -2,11 +2,13 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Eye, EyeOff } from "lucide-react";
 
 export default function AdminLoginPage() {
   const router = useRouter();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -40,11 +42,6 @@ export default function AdminLoginPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#050505] px-4 text-white">
-      <style>{`
-        input[type="password"]::-ms-reveal {
-          display: none;
-        }
-      `}</style>
       <form
         className="w-full max-w-sm space-y-1 rounded-[20px] border border-white/10 bg-[#0b0f12] p-8"
         onSubmit={handleSubmit}
@@ -76,15 +73,25 @@ export default function AdminLoginPage() {
         <label className="mt-3 block text-xs text-zinc-400" htmlFor="password">
           Password
         </label>
-        <input
-          className="mt-1 w-full rounded-xl border border-white/10 bg-black/40 px-3 py-2.5 text-sm text-white outline-none focus:border-lime-300/50"
-          id="password"
-          autoComplete="current-password"
-          onChange={(e) => setPassword(e.target.value)}
-          required
-          type="password"
-          value={password}
-        />
+        <div className="relative mt-1">
+          <input
+            className="w-full rounded-xl border border-white/10 bg-black/40 px-3 py-2.5 pr-10 text-sm text-white outline-none focus:border-lime-300/50"
+            id="password"
+            autoComplete="current-password"
+            onChange={(e) => setPassword(e.target.value)}
+            required
+            type={showPassword ? "text" : "password"}
+            value={password}
+          />
+          <button
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white transition"
+            onClick={() => setShowPassword(!showPassword)}
+            type="button"
+            aria-label={showPassword ? "Hide password" : "Show password"}
+          >
+            {showPassword ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+          </button>
+        </div>
 
         <button
           className="mt-5 w-full rounded-full bg-[#63e009] py-2.5 text-sm font-bold text-[#052e00] transition disabled:opacity-60"
