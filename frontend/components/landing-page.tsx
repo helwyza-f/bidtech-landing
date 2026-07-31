@@ -1131,7 +1131,6 @@ export function LandingPage() {
           <Reveal className="space-y-4" y={16}>
             {t.contact.info.map((item, index) => {
               const Icon = [MessageCircleMore, Mail, MapPin][index];
-              const isWhatsApp = index === 0;
               const content = (
                 <CardContent className="flex items-center gap-4">
                   <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
@@ -1145,11 +1144,7 @@ export function LandingPage() {
                 </CardContent>
               );
 
-              return isWhatsApp ? (
-                <a key={item.label} href="https://wa.me/628217601455" rel="noreferrer" target="_blank">
-                  <Card className="transition hover:border-[#63E009]/40 hover:bg-white/[0.03]">{content}</Card>
-                </a>
-              ) : (
+              return (
                 <Card key={item.label}>{content}</Card>
               );
             })}
