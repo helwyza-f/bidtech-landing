@@ -15,6 +15,7 @@ export function StatusSelect({ id, status }: { id: number; status: Order["status
   const router = useRouter();
   const [value, setValue] = useState(status);
   const [pending, setPending] = useState(false);
+  const isLocked = value === "dihubungi";
 
   const handleChange = async (next: Order["status"]) => {
     setValue(next);
@@ -34,7 +35,7 @@ export function StatusSelect({ id, status }: { id: number; status: Order["status
   return (
     <select
       className={`rounded-lg border bg-white px-2 py-1 text-xs disabled:opacity-60 ${statusStyles[value]}`}
-      disabled={pending}
+      disabled={pending || isLocked}
       onChange={(e) => handleChange(e.target.value as Order["status"])}
       value={value}
     >

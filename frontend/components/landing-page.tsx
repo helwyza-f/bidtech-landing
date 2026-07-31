@@ -1128,54 +1128,25 @@ export function LandingPage() {
         </Reveal>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <Reveal className="space-y-8" y={16}>
+          <Reveal className="space-y-4" y={16}>
             {t.contact.info.map((item, index) => {
               const Icon = [MessageCircleMore, Mail, MapPin][index];
               const isWhatsApp = index === 0;
-              const isEmail = index === 1;
-              const isLocation = "batam" in item;
-
-              if (isLocation) {
-                return (
-                  <Card key={item.label}>
-                    <CardContent className="flex items-start gap-4 py-9 sm:py-10">
-                      <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
-                        <MapPin className="size-5" />
-                      </div>
-                      <div className="w-full space-y-5">
-                        <div className="space-y-1.5">
-                          <p className="text-sm font-semibold text-white">{item.label} — Batam</p>
-                          <p className="text-sm leading-relaxed text-zinc-400">{(item as any).batam}</p>
-                        </div>
-                        <div className="space-y-1.5 border-t border-white/10 pt-5">
-                          <p className="text-sm font-semibold text-white">{item.label} — Jakarta</p>
-                          <p className="text-sm leading-relaxed text-zinc-400">{(item as any).jakarta}</p>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                );
-              }
-
               const content = (
-                <CardContent className="flex items-center gap-4 py-9 sm:py-10">
+                <CardContent className="flex items-center gap-4">
                   <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
                     <Icon className="size-5" />
                   </div>
-                  <div className="space-y-1.5">
+                  <div>
                     <p className="text-sm font-semibold text-white">{item.label}</p>
-                    <p className="text-sm text-zinc-400">{(item as any).value}</p>
-                    {(item as any).note && <p className="text-xs font-medium text-[#63E009]">{(item as any).note}</p>}
+                    <p className="text-sm text-zinc-400">{item.value}</p>
+                    {item.note && <p className="text-xs font-medium text-[#63E009]">{item.note}</p>}
                   </div>
                 </CardContent>
               );
 
               return isWhatsApp ? (
                 <a key={item.label} href="https://wa.me/628217601455" rel="noreferrer" target="_blank">
-                  <Card className="transition hover:border-[#63E009]/40 hover:bg-white/[0.03]">{content}</Card>
-                </a>
-              ) : isEmail ? (
-                <a key={item.label} href="mailto:cs@bidtech.co.id" rel="noreferrer" target="_blank">
                   <Card className="transition hover:border-[#63E009]/40 hover:bg-white/[0.03]">{content}</Card>
                 </a>
               ) : (
@@ -1189,7 +1160,7 @@ export function LandingPage() {
                   <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
                     <MapPin className="size-5" />
                   </div>
-                  <div className="space-y-1">
+                  <div>
                     <p className="text-sm font-semibold text-white">Peta Lokasi</p>
                     <p className="text-sm text-zinc-400">King Business Centre, Batam</p>
                   </div>

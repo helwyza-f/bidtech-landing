@@ -40,6 +40,11 @@ export default function AdminLoginPage() {
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-[#050505] px-4 text-white">
+      <style>{`
+        input[type="password"]::-ms-reveal {
+          display: none;
+        }
+      `}</style>
       <form
         className="w-full max-w-sm space-y-1 rounded-[20px] border border-white/10 bg-[#0b0f12] p-8"
         onSubmit={handleSubmit}

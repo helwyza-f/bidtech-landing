@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-import { DeleteButton, StatusSelect } from "@/components/admin/order-actions";
+import { StatusSelect } from "@/components/admin/order-actions";
 import { getOrders } from "@/core/api-client";
 
 export default async function AdminPesananPage() {
@@ -23,13 +23,12 @@ export default async function AdminPesananPage() {
               <th className="whitespace-nowrap px-4 py-3">Layanan</th>
               <th className="px-4 py-3">Deskripsi</th>
               <th className="whitespace-nowrap px-4 py-3">Status</th>
-              <th className="px-4 py-3" />
             </tr>
           </thead>
           <tbody>
             {orders.length === 0 ? (
               <tr>
-                <td className="px-4 py-10 text-center text-slate-500" colSpan={8}>
+                <td className="px-4 py-10 text-center text-slate-500" colSpan={7}>
                   Belum ada pesanan masuk.
                 </td>
               </tr>
@@ -44,9 +43,6 @@ export default async function AdminPesananPage() {
                   <td className="max-w-[280px] px-4 py-3 text-slate-500">{order.description || "-"}</td>
                   <td className="px-4 py-3">
                     <StatusSelect id={order.id} status={order.status} />
-                  </td>
-                  <td className="px-4 py-3">
-                    <DeleteButton id={order.id} />
                   </td>
                 </tr>
               ))
