@@ -1128,7 +1128,6 @@ export function LandingPage() {
         </Reveal>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-<<<<<<< HEAD
           <Reveal className="space-y-8" y={16}>
             {t.contact.info.map((item, index) => {
               const Icon = [MessageCircleMore, Mail, MapPin][index];
@@ -1167,21 +1166,6 @@ export function LandingPage() {
                     <p className="text-sm font-semibold text-white">{item.label}</p>
                     <p className="text-sm text-zinc-400">{(item as any).value}</p>
                     {(item as any).note && <p className="text-xs font-medium text-[#63E009]">{(item as any).note}</p>}
-=======
-          <Reveal className="space-y-4" y={16}>
-            {t.contact.info.map((item, index) => {
-              const Icon = [MessageCircleMore, Mail, MapPin][index];
-              const isWhatsApp = index === 0;
-              const content = (
-                <CardContent className="flex items-center gap-4">
-                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
-                    <Icon className="size-5" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">{item.label}</p>
-                    <p className="text-sm text-zinc-400">{item.value}</p>
-                    {item.note && <p className="text-xs font-medium text-[#63E009]">{item.note}</p>}
->>>>>>> 12eb8fd3ba09af1c4e31e89b2d4afc05520fe87d
                   </div>
                 </CardContent>
               );
@@ -1190,13 +1174,10 @@ export function LandingPage() {
                 <a key={item.label} href="https://wa.me/628217601455" rel="noreferrer" target="_blank">
                   <Card className="transition hover:border-[#63E009]/40 hover:bg-white/[0.03]">{content}</Card>
                 </a>
-<<<<<<< HEAD
               ) : isEmail ? (
                 <a key={item.label} href="mailto:cs@bidtech.co.id" rel="noreferrer" target="_blank">
                   <Card className="transition hover:border-[#63E009]/40 hover:bg-white/[0.03]">{content}</Card>
                 </a>
-=======
->>>>>>> 12eb8fd3ba09af1c4e31e89b2d4afc05520fe87d
               ) : (
                 <Card key={item.label}>{content}</Card>
               );
@@ -1208,11 +1189,7 @@ export function LandingPage() {
                   <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
                     <MapPin className="size-5" />
                   </div>
-<<<<<<< HEAD
                   <div className="space-y-1">
-=======
-                  <div>
->>>>>>> 12eb8fd3ba09af1c4e31e89b2d4afc05520fe87d
                     <p className="text-sm font-semibold text-white">Peta Lokasi</p>
                     <p className="text-sm text-zinc-400">King Business Centre, Batam</p>
                   </div>

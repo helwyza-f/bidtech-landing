@@ -5,12 +5,8 @@ import { getOrders } from "@/core/api-client";
 
 export default async function AdminPesananPage() {
   const cookieStore = await cookies();
-<<<<<<< HEAD
- const orders = await getOrders(cookieStore.toString());
-=======
   const orders = await getOrders(cookieStore.toString());
 
->>>>>>> 12eb8fd3ba09af1c4e31e89b2d4afc05520fe87d
   return (
     <div>
       <h1 className="text-2xl font-bold">Pesanan Masuk</h1>
