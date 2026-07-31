@@ -1128,7 +1128,7 @@ export function LandingPage() {
         </Reveal>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <Reveal className="space-y-4" y={16}>
+          <Reveal className="space-y-6" y={16}>
             {t.contact.info.map((item, index) => {
               const Icon = [MessageCircleMore, Mail, MapPin][index];
               const isLocation = "batam" in item;
