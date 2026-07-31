@@ -369,9 +369,9 @@ export const en = {
     subtitle: "Fill out the form below and our team will get back to you shortly for a free consultation.",
     whatsapp: "Consult via WhatsApp",
     info: [
-      { label: "WhatsApp", value: "0821-7601-455", note: "Chat Now" },
+      { label: "WhatsApp", value: "0821-7601-455" },
       { label: "Email", value: "cs@bidtech.co.id" },
-      { label: "Location", value: "King Business Centre, Blok A5 No.3. Kel. Belian Kec.Batam Kota, Batam, 29464" },
+      { label: "Location", batam: "King Business Centre, Blok A5 No.3. Kel. Belian Kec.Batam Kota, Batam, 29464", jakarta: "Wisma Bumiputera, Jl. Jend Sudirman Kav 75 Setiabudi No.02 Lantai 18, RT.003/RW.3, Kuningan, Setia Budi, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12910" },
     ],
     form: {
       nameLabel: "Full Name",
