@@ -24,7 +24,7 @@ jobs:
           host: ${{ secrets.DEPLOY_HOST }}
           username: ${{ secrets.DEPLOY_USER }}
           key: ${{ secrets.DEPLOY_SSH_KEY }}
-          script: mkdir -p /opt/bidtech-frontend
+          script: rm -rf /opt/bidtech-frontend && mkdir -p /opt/bidtech-frontend
 
       - name: Upload frontend source
         uses: appleboy/scp-action@v0.1.7
