@@ -1131,6 +1131,30 @@ export function LandingPage() {
           <Reveal className="space-y-4" y={16}>
             {t.contact.info.map((item, index) => {
               const Icon = [MessageCircleMore, Mail, MapPin][index];
+              const isLocation = "batam" in item;
+
+              if (isLocation) {
+                return (
+                  <Card key={item.label}>
+                    <CardContent className="flex items-start gap-4 py-9 sm:py-10">
+                      <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
+                        <MapPin className="size-5" />
+                      </div>
+                      <div className="w-full space-y-5">
+                        <div className="space-y-1.5">
+                          <p className="text-sm font-semibold text-white">{item.label} — Batam</p>
+                          <p className="text-sm leading-relaxed text-zinc-400">{(item as any).batam}</p>
+                        </div>
+                        <div className="space-y-1.5 border-t border-white/10 pt-5">
+                          <p className="text-sm font-semibold text-white">{item.label} — Jakarta</p>
+                          <p className="text-sm leading-relaxed text-zinc-400">{(item as any).jakarta}</p>
+                        </div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                );
+              }
+
               const content = (
                 <CardContent className="flex items-center gap-4">
                   <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
@@ -1138,8 +1162,8 @@ export function LandingPage() {
                   </div>
                   <div>
                     <p className="text-sm font-semibold text-white">{item.label}</p>
-                    <p className="text-sm text-zinc-400">{item.value}</p>
-                    {item.note && <p className="text-xs font-medium text-[#63E009]">{item.note}</p>}
+                    <p className="text-sm text-zinc-400">{(item as any).value}</p>
+                    {(item as any).note && <p className="text-xs font-medium text-[#63E009]">{(item as any).note}</p>}
                   </div>
                 </CardContent>
               );
