@@ -1170,7 +1170,7 @@ export function LandingPage() {
               );
 
               return isEmail ? (
-                <a key={item.label} href={`mailto:${(item as any).value}`} rel="noreferrer" target="_blank">
+                <a key={item.label} className="block" href={`mailto:${(item as any).value}`} rel="noreferrer" target="_blank">
                   <Card className="transition hover:border-[#63E009]/40 hover:bg-white/[0.03]">{content}</Card>
                 </a>
               ) : (
