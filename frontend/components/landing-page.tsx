@@ -1155,6 +1155,7 @@ export function LandingPage() {
                 );
               }
 
+              const isEmail = index === 1;
               const content = (
                 <CardContent className="flex items-center gap-4">
                   <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
@@ -1168,7 +1169,11 @@ export function LandingPage() {
                 </CardContent>
               );
 
-              return (
+              return isEmail ? (
+                <a key={item.label} href={`mailto:${(item as any).value}`} rel="noreferrer" target="_blank">
+                  <Card className="transition hover:border-[#63E009]/40 hover:bg-white/[0.03]">{content}</Card>
+                </a>
+              ) : (
                 <Card key={item.label}>{content}</Card>
               );
             })}
