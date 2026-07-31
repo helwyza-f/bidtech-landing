@@ -11,11 +11,17 @@ const statusStyles: Record<Order["status"], string> = {
   selesai: "border-lime-300 text-green-700",
 };
 
+const statusOrder: Record<Order["status"], number> = {
+  baru: 0,
+  dihubungi: 1,
+  selesai: 2,
+};
+
 export function StatusSelect({ id, status }: { id: number; status: Order["status"] }) {
   const router = useRouter();
   const [value, setValue] = useState(status);
   const [pending, setPending] = useState(false);
-  const isLocked = value === "dihubungi";
+  const currentLevel = statusOrder[value];
 
   const handleChange = async (next: Order["status"]) => {
     setValue(next);
@@ -32,16 +38,18 @@ export function StatusSelect({ id, status }: { id: number; status: Order["status
     }
   };
 
+  const isFinal = currentLevel === 2;
+
   return (
     <select
       className={`rounded-lg border bg-white px-2 py-1 text-xs disabled:opacity-60 ${statusStyles[value]}`}
-      disabled={pending || isLocked}
+      disabled={pending || isFinal}
       onChange={(e) => handleChange(e.target.value as Order["status"])}
       value={value}
     >
-      <option value="baru">Baru</option>
-      <option value="dihubungi">Dihubungi</option>
-      <option value="selesai">Selesai</option>
+      <option value="baru" disabled={currentLevel > 0}>Baru</option>
+      <option value="dihubungi" disabled={currentLevel > 1}>Dihubungi</option>
+      <option value="selesai" disabled={currentLevel > 2}>Selesai</option>
     </select>
   );
 }
