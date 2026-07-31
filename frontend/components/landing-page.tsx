@@ -1128,7 +1128,7 @@ export function LandingPage() {
         </Reveal>
 
         <div className="mt-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-          <Reveal className="flex flex-col gap-6" y={16}>
+          <Reveal className="space-y-8" y={16}>
             {t.contact.info.map((item, index) => {
               const Icon = [MessageCircleMore, Mail, MapPin][index];
               const isWhatsApp = index === 0;
@@ -1171,11 +1171,11 @@ export function LandingPage() {
               );
 
               return isWhatsApp ? (
-                <a key={item.label} className="block" href="https://wa.me/628217601455" rel="noreferrer" target="_blank">
+                <a key={item.label} href="https://wa.me/628217601455" rel="noreferrer" target="_blank">
                   <Card className="transition hover:border-[#63E009]/40 hover:bg-white/[0.03]">{content}</Card>
                 </a>
               ) : isEmail ? (
-                <a key={item.label} className="block" href="mailto:cs@bidtech.co.id" rel="noreferrer" target="_blank">
+                <a key={item.label} href="mailto:cs@bidtech.co.id" rel="noreferrer" target="_blank">
                   <Card className="transition hover:border-[#63E009]/40 hover:bg-white/[0.03]">{content}</Card>
                 </a>
               ) : (
