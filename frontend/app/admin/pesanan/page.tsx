@@ -1,7 +1,14 @@
 import { cookies } from "next/headers";
+import { MessageCircle } from "lucide-react";
 
 import { StatusSelect } from "@/components/admin/order-actions";
 import { getOrders } from "@/core/api-client";
+
+function toWhatsAppLink(whatsapp: string) {
+  const digits = whatsapp.replace(/\D/g, "");
+  const normalized = digits.startsWith("0") ? `62${digits.slice(1)}` : digits;
+  return `https://wa.me/${normalized}`;
+}
 
 export default async function AdminPesananPage() {
   const cookieStore = await cookies();
@@ -37,7 +44,17 @@ export default async function AdminPesananPage() {
                 <tr className="border-t border-slate-200 transition hover:bg-slate-50" key={order.id}>
                   <td className="whitespace-nowrap px-4 py-3 text-slate-500">{order.created_at}</td>
                   <td className="whitespace-nowrap px-4 py-3">{order.name}</td>
-                  <td className="whitespace-nowrap px-4 py-3">{order.whatsapp}</td>
+                  <td className="whitespace-nowrap px-4 py-3">
+                    <a
+                      className="inline-flex items-center gap-1.5 text-green-600 hover:underline"
+                      href={toWhatsAppLink(order.whatsapp)}
+                      rel="noreferrer"
+                      target="_blank"
+                    >
+                      <MessageCircle className="size-4" />
+                      {order.whatsapp}
+                    </a>
+                  </td>
                   <td className="whitespace-nowrap px-4 py-3">{order.company || "-"}</td>
                   <td className="whitespace-nowrap px-4 py-3">{order.service}</td>
                   <td className="max-w-[280px] px-4 py-3 text-slate-500">{order.description || "-"}</td>
