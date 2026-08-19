@@ -1179,36 +1179,70 @@ export function LandingPage() {
             })}
 
             <Card>
-              <CardContent className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
-                    <MapPin className="size-5" />
+              <CardContent className="space-y-6">
+                <div>
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
+                      <MapPin className="size-5" />
+                    </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white">Peta Lokasi — Batam</p>
+                      <p className="text-sm text-zinc-400">King Business Centre, Batam</p>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-sm font-semibold text-white">Peta Lokasi</p>
-                    <p className="text-sm text-zinc-400">King Business Centre, Batam</p>
+
+                  <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-black/30">
+                    <iframe
+                      allowFullScreen
+                      className="h-72 w-full border-0 sm:h-80"
+                      loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2311.377!2d104.07543166924557!3d1.1058157731502605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sid!2sid!4v1785208829256!5m2!1sid!2sid"
+                      title="Peta Lokasi BidTech Batam"
+                    />
                   </div>
+
+                  <a
+                    className="mt-4 flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-[#63E009]/40 hover:bg-white/[0.06]"
+                    href="https://www.google.com/maps/search/?api=1&query=1.1058157731502605%2C104.07543166924557"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Buka di Google Maps
+                  </a>
                 </div>
 
-                    <div className="overflow-hidden rounded-2xl border border-white/10 bg-black/30">
-                      <iframe
-                        allowFullScreen
-                        className="h-72 w-full border-0 sm:h-80"
-                        loading="lazy"
-                        referrerPolicy="strict-origin-when-cross-origin"
-                        src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2311.377!2d104.07543166924557!3d1.1058157731502605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sid!2sid!4v1785208829256!5m2!1sid!2sid"
-                        title="Peta Lokasi BidTech"
-                      />
+                <div className="border-t border-white/10 pt-6">
+                  <div className="flex items-center gap-3">
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-lime-300/10 text-[#63E009]">
+                      <MapPin className="size-5" />
                     </div>
+                    <div>
+                      <p className="text-sm font-semibold text-white">Peta Lokasi — Jakarta</p>
+                      <p className="text-sm text-zinc-400">Wisma Bumiputera, Jakarta Selatan</p>
+                    </div>
+                  </div>
 
-                    <a
-                      className="flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-[#63E009]/40 hover:bg-white/[0.06]"
-                      href="https://www.google.com/maps/search/?api=1&query=1.1058157731502605%2C104.07543166924557"
-                      rel="noreferrer"
-                      target="_blank"
-                    >
-                      Buka di Google Maps
-                    </a>
+                  <div className="mt-4 overflow-hidden rounded-2xl border border-white/10 bg-black/30">
+                    <iframe
+                      allowFullScreen
+                      className="h-72 w-full border-0 sm:h-80"
+                      loading="lazy"
+                      referrerPolicy="strict-origin-when-cross-origin"
+                      src="https://www.google.com/maps?q=-6.207275,106.822519&z=16&output=embed"
+                      title="Peta Lokasi BidTech Jakarta"
+                    />
+                  </div>
+
+                  <a
+                    className="mt-4 flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3 text-sm font-semibold text-white transition hover:border-[#63E009]/40 hover:bg-white/[0.06]"
+                    href="https://www.google.com/maps/search/?api=1&query=-6.207275%2C106.822519"
+                    rel="noreferrer"
+                    target="_blank"
+                  >
+                    Buka di Google Maps
+                  </a>
+                </div>
                 </CardContent>
               </Card>
             </Reveal>

@@ -33,7 +33,7 @@ function TikTokIcon(props: React.SVGProps<SVGSVGElement>) {
 
 const socials = [
   { icon: Mail, href: "mailto:cs@bidtech.co.id", label: "Email" },
-  { icon: FacebookIcon, href: "https://www.facebook.com/share/1Gs1nvfZ4H/", label: "Facebook" },
+  { icon: FacebookIcon, href: "https://www.facebook.com/share/14qxUb9oNEA/", label: "Facebook" },
   { icon: InstagramIcon, href: "https://www.instagram.com/bidtechsolutions/", label: "Instagram" },
   { icon: TikTokIcon, href: "https://www.tiktok.com/@bidtech_indonesia", label: "TikTok" },
   { icon: MessageCircleMore, href: "https://wa.me/628217601455", label: "WhatsApp" },
