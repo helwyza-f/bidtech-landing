@@ -1,0 +1,73 @@
+name: Deploy BidTech API
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: bidtech-api-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Prepare application directory
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          script: mkdir -p /opt/bidtech-api
+
+      - name: Upload backend source
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          source: ".dockerignore,Dockerfile,cmd,internal,go.mod,go.sum,main.go"
+          target: /opt/bidtech-api
+          overwrite: true
+
+      - name: Build and restart API container
+        uses: appleboy/ssh-action@v1.2.0
+        with:
+          host: ${{ secrets.DEPLOY_HOST }}
+          username: ${{ secrets.DEPLOY_USER }}
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          command_timeout: 15m
+          script: |
+            set -e
+            cd /opt/bidtech-api
+            test -f /root/bidtech-api.env
+            docker build -t bidtech-api:${{ github.sha }} .
+            docker rm -f BidTech-API 2>/dev/null || true
+            docker run -d \
+              --name BidTech-API \
+              --restart unless-stopped \
+              --network bidtech-api \
+              -p 127.0.0.1:8080:8080 \
+              --env-file /root/bidtech-api.env \
+              --health-cmd='wget -qO- http://127.0.0.1:8080/healthz || exit 1' \
+              --health-interval=10s \
+              --health-timeout=5s \
+              --health-retries=5 \
+              bidtech-api:${{ github.sha }}
+
+            for attempt in 1 2 3 4 5 6; do
+              status="$(docker inspect --format '{{.State.Health.Status}}' BidTech-API)"
+              if [ "$status" = "healthy" ]; then
+                exit 0
+              fi
+              sleep 5
+            done
+
+            docker logs --tail 100 BidTech-API
+            exit 1

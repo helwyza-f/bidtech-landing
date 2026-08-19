@@ -11,4 +11,3 @@ coverage
 .env
 .env.local
 .gocache
-backend/
