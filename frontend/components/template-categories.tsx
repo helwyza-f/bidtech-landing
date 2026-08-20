@@ -4,33 +4,91 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, X } from "lucide-react";
 
 const TEMPLATE_CATEGORIES = [
-  { name: "UMKM", description: "Laundry, Barbershop, Salon, Bengkel, Toko Bunga", icon: "🏪" },
-  { name: "Education", description: "Sekolah, Kursus, Bootcamp, Webinar", icon: "🎓" },
-  { name: "Event", description: "Seminar, Konferensi, Launching, Undangan Digital", icon: "🎉" },
-  { name: "Automotive", description: "Dealer, Rental, Showroom, Bengkel", icon: "🚗" },
-  { name: "Travel & Hospitality", description: "Hotel, Villa, Tour & Travel, Rental", icon: "✈️" },
-  { name: "Restaurant & Cafe", description: "Restoran, Kafe, Menu Digital", icon: "🍽️" },
-  { name: "Organization", description: "Komunitas, Organisasi Sosial, Perkumpulan", icon: "🤝" },
-  { name: "Nonprofit", description: "Yayasan, Donasi, Program Sosial", icon: "❤️" },
-  { name: "SaaS / Startup", description: "Produk Digital, Aplikasi, Landing Page", icon: "🚀" },
-  { name: "Property", description: "Perumahan, Kos, Apartemen, Agen", icon: "🏠" },
-  { name: "Service Professional", description: "Konsultan, Legal, Akuntan, Arsitek", icon: "💼" },
-  { name: "Portfolio", description: "Designer, Developer, Fotografer, Freelancer", icon: "🎨" },
-  { name: "Beauty & Wellness", description: "Skincare, Spa, Gym, Fitness, Salon", icon: "💆" },
-  { name: "Construction", description: "Kontraktor, Manufaktur, Supplier", icon: "🏗️" },
-  { name: "Company Profile", description: "Profil Perusahaan, Visi & Misi", icon: "🏢" },
-  { name: "Services", description: "Halaman Layanan & Produk", icon: "⚙️" },
-  { name: "Blog", description: "Website Blog, Artikel, Kategori", icon: "📝" },
-  { name: "E-Commerce", description: "Toko Online, Produk, Checkout", icon: "🛒" },
-  { name: "Landing Page", description: "Conversion-Focused Landing Page", icon: "📄" },
-  { name: "View All", description: "Lihat semua template & dokumentasi lengkap", icon: "👀" },
+  {
+    name: "UMKM",
+    description: "Laundry, Barbershop, Salon, Bengkel, Toko Bunga",
+    icon: "🏪",
+    features: [
+      { title: "Inventory", description: "Kelola stok layanan & paket" },
+      { title: "Booking", description: "Reservasi & jadwal appointment" },
+      { title: "Pricing", description: "Harga dan deskripsi layanan" },
+      { title: "Gallery", description: "Galeri foto hasil kerja" },
+      { title: "Reviews", description: "Rating & testimonial pelanggan" },
+      { title: "Lokasi", description: "Peta & alamat bisnis" },
+    ],
+  },
+  {
+    name: "Education",
+    description: "Sekolah, Kursus, Bootcamp, Webinar",
+    icon: "🎓",
+    features: [
+      { title: "Programs", description: "Daftar program & kursus" },
+      { title: "Schedule", description: "Jadwal kelas & pembelajaran" },
+      { title: "Instructors", description: "Profile guru/instruktur" },
+      { title: "Enrollment", description: "Pendaftaran siswa online" },
+      { title: "Certificates", description: "Sertifikat & achievement" },
+      { title: "Resources", description: "Materi & learning materials" },
+    ],
+  },
+  {
+    name: "Event",
+    description: "Seminar, Konferensi, Launching, Undangan Digital",
+    icon: "🎉",
+    features: [
+      { title: "Details", description: "Tanggal, waktu, lokasi acara" },
+      { title: "Speakers", description: "Profile pembicara & expert" },
+      { title: "Agenda", description: "Jadwal lengkap event" },
+      { title: "Ticketing", description: "Booking & pembayaran tiket" },
+      { title: "Venue Map", description: "Peta lokasi acara" },
+      { title: "Gallery", description: "Foto & dokumentasi" },
+    ],
+  },
+  {
+    name: "Restaurant & Cafe",
+    description: "Restoran, Kafe, Menu Digital",
+    icon: "🍽️",
+    features: [
+      { title: "Menu", description: "Digital menu dengan kategori" },
+      { title: "Pricing", description: "Harga & deskripsi makanan" },
+      { title: "Reservation", description: "Booking meja online" },
+      { title: "Delivery", description: "Integrasi order delivery" },
+      { title: "Gallery", description: "Foto menu yang menarik" },
+      { title: "Reviews", description: "Rating & review pelanggan" },
+    ],
+  },
+  {
+    name: "E-Commerce",
+    description: "Toko Online, Produk, Checkout",
+    icon: "🛒",
+    features: [
+      { title: "Products", description: "Katalog produk lengkap" },
+      { title: "Shopping Cart", description: "Keranjang belanja" },
+      { title: "Checkout", description: "Proses pembayaran aman" },
+      { title: "Filters", description: "Filter kategori & harga" },
+      { title: "Reviews", description: "Rating produk pelanggan" },
+      { title: "Orders", description: "Tracking pesanan real-time" },
+    ],
+  },
+  {
+    name: "Company Profile",
+    description: "Profil Perusahaan, Visi & Misi",
+    icon: "🏢",
+    features: [
+      { title: "About", description: "Profil & sejarah perusahaan" },
+      { title: "Mission", description: "Visi, Misi, Nilai perusahaan" },
+      { title: "Team", description: "Struktur organisasi & tim" },
+      { title: "Services", description: "Layanan unggulan" },
+      { title: "Achievements", description: "Penghargaan & sertifikasi" },
+      { title: "Contact", description: "Informasi kontak lengkap" },
+    ],
+  },
 ];
 
 export function TemplateCategories() {
-  const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<typeof TEMPLATE_CATEGORIES[0] | null>(null);
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="templates">
@@ -46,13 +104,12 @@ export function TemplateCategories() {
         </p>
       </Reveal>
 
-      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {TEMPLATE_CATEGORIES.map((category) => (
           <Reveal key={category.name} delay={Math.random() * 200}>
             <Card
               className="group relative overflow-hidden border-lime-300/15 bg-[#0b0f12]/80 backdrop-blur-sm transition-all duration-300 hover:border-lime-300/40 hover:bg-[#0b0f12] cursor-pointer"
-              onMouseEnter={() => setHoveredCategory(category.name)}
-              onMouseLeave={() => setHoveredCategory(null)}
+              onClick={() => setSelectedCategory(category)}
             >
               <CardContent className="flex h-full min-h-48 flex-col justify-between p-6">
                 <div>
@@ -67,7 +124,7 @@ export function TemplateCategories() {
                     {category.description}
                   </p>
                   <div className="flex items-center gap-2 text-sm font-semibold text-[#63E009] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span>Lihat</span>
+                    <span>Lihat Detail</span>
                     <ChevronRight className="size-4" />
                   </div>
                 </div>
@@ -79,18 +136,68 @@ export function TemplateCategories() {
         ))}
       </div>
 
-      <div className="mt-12 text-center">
-        <p className="text-sm text-zinc-400 mb-4">
-          📦 20 kategori template | 🎨 Next.js + TypeScript | ⚡ Production Ready
-        </p>
-        <a
-          href="/templates"
-          className="inline-flex items-center gap-2 rounded-lg border border-[#63E009] bg-[#63E009]/10 px-6 py-3 text-sm font-semibold text-[#63E009] transition hover:bg-[#63E009] hover:text-black"
-        >
-          Jelajahi Semua Template
-          <ChevronRight className="size-4" />
-        </a>
-      </div>
+      {/* Modal untuk category details */}
+      {selectedCategory && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
+          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto border-lime-300/20 bg-[#0b0f12]">
+            <CardContent className="p-8">
+              {/* Header */}
+              <div className="flex items-start justify-between mb-8">
+                <div>
+                  <div className="text-6xl mb-3">{selectedCategory.icon}</div>
+                  <h2 className="font-[family-name:var(--font-sora)] text-3xl font-bold text-white">
+                    {selectedCategory.name}
+                  </h2>
+                  <p className="text-sm text-zinc-400 mt-2">{selectedCategory.description}</p>
+                </div>
+                <button
+                  onClick={() => setSelectedCategory(null)}
+                  className="text-zinc-400 hover:text-white transition"
+                >
+                  <X className="size-6" />
+                </button>
+              </div>
+
+              {/* Features Grid */}
+              <div className="mb-8">
+                <h3 className="text-lg font-semibold text-[#63E009] mb-4">Fitur Template</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {selectedCategory.features.map((feature) => (
+                    <div
+                      key={feature.title}
+                      className="flex items-start gap-3 p-4 rounded-lg border border-white/10 bg-white/[0.02] hover:border-lime-300/20 hover:bg-white/[0.05] transition"
+                    >
+                      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[#63E009]/10 text-[#63E009] font-semibold">
+                        ✓
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-white">{feature.title}</p>
+                        <p className="text-xs text-zinc-400">{feature.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* CTA */}
+              <div className="flex gap-3">
+                <button
+                  onClick={() => setSelectedCategory(null)}
+                  className="flex-1 px-4 py-3 rounded-lg border border-white/15 text-white font-semibold hover:border-white/30 transition"
+                >
+                  Tutup
+                </button>
+                <a
+                  href="/templates"
+                  className="flex-1 px-4 py-3 rounded-lg bg-[#63E009] text-black font-semibold hover:bg-[#52be07] transition text-center"
+                >
+                  Lihat Template
+                </a>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      )}
     </section>
   );
 }
