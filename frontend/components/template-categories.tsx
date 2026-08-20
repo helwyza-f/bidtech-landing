@@ -4,13 +4,13 @@ import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/reveal";
-import { ChevronRight, X } from "lucide-react";
+import { ChevronRight, X, Store, Briefcase, Calendar, Car, Plane, UtensilsCrossed, Users, Heart, Rocket, Home, Hammer, Palette, Sparkles, Building2, Cog, BookOpen, ShoppingCart, Lightbulb } from "lucide-react";
 
 const TEMPLATE_CATEGORIES = [
   {
     name: "UMKM",
     description: "Laundry, Barbershop, Salon, Bengkel, Toko Bunga",
-    icon: "🏪",
+    icon: Store,
     features: [
       { title: "Inventory", description: "Kelola stok layanan & paket" },
       { title: "Booking", description: "Reservasi & jadwal appointment" },
@@ -23,7 +23,7 @@ const TEMPLATE_CATEGORIES = [
   {
     name: "Education",
     description: "Sekolah, Kursus, Bootcamp, Webinar",
-    icon: "🎓",
+    icon: Briefcase,
     features: [
       { title: "Programs", description: "Daftar program & kursus" },
       { title: "Schedule", description: "Jadwal kelas & pembelajaran" },
@@ -36,7 +36,7 @@ const TEMPLATE_CATEGORIES = [
   {
     name: "Event",
     description: "Seminar, Konferensi, Launching, Undangan Digital",
-    icon: "🎉",
+    icon: Calendar,
     features: [
       { title: "Details", description: "Tanggal, waktu, lokasi acara" },
       { title: "Speakers", description: "Profile pembicara & expert" },
@@ -47,9 +47,35 @@ const TEMPLATE_CATEGORIES = [
     ],
   },
   {
+    name: "Automotive",
+    description: "Dealer, Rental, Showroom, Bengkel",
+    icon: Car,
+    features: [
+      { title: "Inventory", description: "Katalog kendaraan lengkap" },
+      { title: "Specifications", description: "Detail spesifikasi kendaraan" },
+      { title: "Test Drive", description: "Booking test drive online" },
+      { title: "Financing", description: "Opsi pembiayaan" },
+      { title: "Service", description: "Appointment service berkala" },
+      { title: "Reviews", description: "Rating & review pelanggan" },
+    ],
+  },
+  {
+    name: "Travel & Hospitality",
+    description: "Hotel, Villa, Tour & Travel, Rental",
+    icon: Plane,
+    features: [
+      { title: "Listings", description: "Kamar & paket wisata" },
+      { title: "Booking", description: "Reservasi online mudah" },
+      { title: "Pricing", description: "Harga transparan & promo" },
+      { title: "Map", description: "Lokasi & peta interaktif" },
+      { title: "Reviews", description: "Rating tamu & testimonial" },
+      { title: "Availability", description: "Kalender ketersediaan" },
+    ],
+  },
+  {
     name: "Restaurant & Cafe",
     description: "Restoran, Kafe, Menu Digital",
-    icon: "🍽️",
+    icon: UtensilsCrossed,
     features: [
       { title: "Menu", description: "Digital menu dengan kategori" },
       { title: "Pricing", description: "Harga & deskripsi makanan" },
@@ -60,22 +86,113 @@ const TEMPLATE_CATEGORIES = [
     ],
   },
   {
-    name: "E-Commerce",
-    description: "Toko Online, Produk, Checkout",
-    icon: "🛒",
+    name: "Organization",
+    description: "Komunitas, Organisasi Sosial, Perkumpulan",
+    icon: Users,
     features: [
-      { title: "Products", description: "Katalog produk lengkap" },
-      { title: "Shopping Cart", description: "Keranjang belanja" },
-      { title: "Checkout", description: "Proses pembayaran aman" },
-      { title: "Filters", description: "Filter kategori & harga" },
-      { title: "Reviews", description: "Rating produk pelanggan" },
-      { title: "Orders", description: "Tracking pesanan real-time" },
+      { title: "About", description: "Profil organisasi & tujuan" },
+      { title: "Members", description: "Directory anggota" },
+      { title: "Events", description: "Daftar acara & aktivitas" },
+      { title: "Forum", description: "Forum diskusi online" },
+      { title: "Gallery", description: "Galeri kegiatan" },
+      { title: "Join", description: "Pendaftaran anggota baru" },
+    ],
+  },
+  {
+    name: "Nonprofit",
+    description: "Yayasan, Donasi, Program Sosial",
+    icon: Heart,
+    features: [
+      { title: "Impact", description: "Program dampak sosial" },
+      { title: "Donate", description: "Platform donasi online" },
+      { title: "Stories", description: "Cerita sukses & testimoni" },
+      { title: "Volunteer", description: "Pendaftaran relawan" },
+      { title: "Reports", description: "Laporan tahunan & transparan" },
+      { title: "Contact", description: "Hubungi tim kami" },
+    ],
+  },
+  {
+    name: "SaaS / Startup",
+    description: "Produk Digital, Aplikasi, Landing Page",
+    icon: Rocket,
+    features: [
+      { title: "Features", description: "Showcase fitur unggulan" },
+      { title: "Pricing", description: "Paket harga & billing" },
+      { title: "Demo", description: "Video demo & trial gratis" },
+      { title: "Documentation", description: "API docs & resources" },
+      { title: "Testimonials", description: "User testimonial & case study" },
+      { title: "Sign Up", description: "Onboarding & registrasi" },
+    ],
+  },
+  {
+    name: "Property",
+    description: "Perumahan, Kos, Apartemen, Agen",
+    icon: Home,
+    features: [
+      { title: "Listings", description: "Katalog properti lengkap" },
+      { title: "Details", description: "Spesifikasi & fasilitas" },
+      { title: "Virtual Tour", description: "3D tour & photo gallery" },
+      { title: "Map", description: "Lokasi & neighborhood info" },
+      { title: "Calculator", description: "Mortgage calculator tool" },
+      { title: "Inquiry", description: "Contact agen inquiry form" },
+    ],
+  },
+  {
+    name: "Service Professional",
+    description: "Konsultan, Legal, Akuntan, Arsitek",
+    icon: Hammer,
+    features: [
+      { title: "Expertise", description: "Area keahlian profesional" },
+      { title: "Services", description: "Layanan detail & pricing" },
+      { title: "Portfolio", description: "Case studies & projects" },
+      { title: "Team", description: "Profile tim professional" },
+      { title: "Blog", description: "Insights & artikel expert" },
+      { title: "Contact", description: "Appointment & konsultasi" },
+    ],
+  },
+  {
+    name: "Portfolio",
+    description: "Designer, Developer, Fotografer, Freelancer",
+    icon: Palette,
+    features: [
+      { title: "Gallery", description: "Showcase karya portfolio" },
+      { title: "Projects", description: "Detail project & client" },
+      { title: "Skills", description: "Keahlian & expertise" },
+      { title: "About", description: "Profil & pengalaman" },
+      { title: "Blog", description: "Article & insights" },
+      { title: "Contact", description: "Hubungi untuk kolaborasi" },
+    ],
+  },
+  {
+    name: "Beauty & Wellness",
+    description: "Skincare, Spa, Gym, Fitness, Salon",
+    icon: Sparkles,
+    features: [
+      { title: "Services", description: "Layanan treatment lengkap" },
+      { title: "Booking", description: "Appointment online mudah" },
+      { title: "Pricing", description: "Harga & paket membership" },
+      { title: "Products", description: "Produk retail & perawatan" },
+      { title: "Before/After", description: "Galeri transformasi" },
+      { title: "Reviews", description: "Rating & testimonial" },
+    ],
+  },
+  {
+    name: "Construction",
+    description: "Kontraktor, Manufaktur, Supplier",
+    icon: Building2,
+    features: [
+      { title: "Portfolio", description: "Showcase proyek selesai" },
+      { title: "Services", description: "Layanan konstruksi detail" },
+      { title: "Certifications", description: "Sertifikasi & penghargaan" },
+      { title: "Team", description: "Profile tim & expertise" },
+      { title: "Equipment", description: "Peralatan & kapasitas" },
+      { title: "Quote", description: "Request quotation form" },
     ],
   },
   {
     name: "Company Profile",
     description: "Profil Perusahaan, Visi & Misi",
-    icon: "🏢",
+    icon: Cog,
     features: [
       { title: "About", description: "Profil & sejarah perusahaan" },
       { title: "Mission", description: "Visi, Misi, Nilai perusahaan" },
@@ -83,6 +200,58 @@ const TEMPLATE_CATEGORIES = [
       { title: "Services", description: "Layanan unggulan" },
       { title: "Achievements", description: "Penghargaan & sertifikasi" },
       { title: "Contact", description: "Informasi kontak lengkap" },
+    ],
+  },
+  {
+    name: "Services",
+    description: "Halaman Layanan & Produk",
+    icon: Cog,
+    features: [
+      { title: "Service Cards", description: "Showcase layanan menarik" },
+      { title: "Details", description: "Detail lengkap setiap layanan" },
+      { title: "Pricing", description: "Paket & harga transparan" },
+      { title: "Benefits", description: "Manfaat & keunggulan" },
+      { title: "CTA", description: "Call-to-action yang efektif" },
+      { title: "Contact", description: "Hubungi untuk order" },
+    ],
+  },
+  {
+    name: "Blog",
+    description: "Website Blog, Artikel, Kategori",
+    icon: BookOpen,
+    features: [
+      { title: "Articles", description: "Listing artikel lengkap" },
+      { title: "Categories", description: "Filter artikel per kategori" },
+      { title: "Search", description: "Pencarian artikel mudah" },
+      { title: "Comments", description: "Komentar & diskusi reader" },
+      { title: "Author", description: "Profile & bio penulis" },
+      { title: "Newsletter", description: "Subscribe newsletter email" },
+    ],
+  },
+  {
+    name: "E-Commerce",
+    description: "Toko Online, Produk, Checkout",
+    icon: ShoppingCart,
+    features: [
+      { title: "Products", description: "Katalog produk lengkap" },
+      { title: "Cart", description: "Keranjang belanja fitur" },
+      { title: "Checkout", description: "Proses pembayaran aman" },
+      { title: "Filters", description: "Filter kategori & harga" },
+      { title: "Reviews", description: "Rating produk pelanggan" },
+      { title: "Orders", description: "Tracking pesanan real-time" },
+    ],
+  },
+  {
+    name: "Landing Page",
+    description: "Conversion-Focused Landing Page",
+    icon: Lightbulb,
+    features: [
+      { title: "Hero Section", description: "Headline & CTA menarik" },
+      { title: "Value Prop", description: "Proposisi nilai jelas" },
+      { title: "Features", description: "Showcase fitur unggulan" },
+      { title: "Social Proof", description: "Testimoni & success stories" },
+      { title: "Pricing", description: "Pricing table jelas" },
+      { title: "Form", description: "Lead capture form efektif" },
     ],
   },
 ];

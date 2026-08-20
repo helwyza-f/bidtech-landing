@@ -10,7 +10,6 @@ import { Card, CardContent } from "@/components/ui/card";
 import { StatCounter } from "@/components/stat-counter";
 import { ContactForm } from "@/components/contact-form";
 import { Reveal } from "@/components/reveal";
-import { TemplateCategories } from "@/components/template-categories";
 import { useLanguage } from "@/lib/i18n";
 import { serviceIcons, specializationIcons, specializationImages, whyIcons } from "@/lib/icons";
 
@@ -425,8 +424,6 @@ export function LandingPage() {
           </button>
         </div>
       </section>
-
-      <TemplateCategories />
 
       <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="portfolio">
         <Reveal className="mx-auto max-w-2xl text-center">
