@@ -5,29 +5,22 @@ export default function Footer() {
   return (
     <footer className="bg-white border-t border-gray-100 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Main Footer Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-14">
-          
-          {/* Kolom 1: Brand Info & Social Media */}
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
-              {/* Logo */}
               <div className="mb-5">
                 <span className="text-2xl font-extrabold tracking-tight text-blue-600">
                   Rent<span className="text-gray-900">car</span>
                 </span>
               </div>
-
-              {/* Tagline */}
               <p className="text-sm text-gray-500 leading-relaxed max-w-sm mb-6">
                 Partner terpercaya Anda untuk penyewaan mobil. Berkendara dengan
                 nyaman, percaya diri, dan tenang.
               </p>
 
-              {/* Social Media Icons */}
+
               <div className="flex items-center gap-3">
-                {/* Facebook */}
+
                 <a
                   href="#"
                   aria-label="Facebook"
@@ -38,7 +31,7 @@ export default function Footer() {
                   </svg>
                 </a>
 
-                {/* Instagram */}
+
                 <a
                   href="#"
                   aria-label="Instagram"
@@ -56,7 +49,7 @@ export default function Footer() {
                   </svg>
                 </a>
 
-                {/* Twitter / X */}
+
                 <a
                   href="#"
                   aria-label="Twitter"
@@ -67,7 +60,7 @@ export default function Footer() {
                   </svg>
                 </a>
 
-                {/* LinkedIn */}
+
                 <a
                   href="#"
                   aria-label="LinkedIn"
@@ -81,7 +74,7 @@ export default function Footer() {
             </div>
           </div>
 
-          {/* Kolom 2: Tautan Cepat */}
+
           <div className="lg:col-span-2">
             <h3 className="text-xs font-bold uppercase tracking-widest text-gray-900 mb-6">
               Tautan Cepat
@@ -122,7 +115,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Kolom 3: Kontak */}
+
           <div className="lg:col-span-3">
             <h3 className="text-xs font-bold uppercase tracking-widest text-gray-900 mb-6">
               Kontak
@@ -152,7 +145,7 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Kolom 4: Kantor Pusat */}
+
           <div className="lg:col-span-3">
             <h3 className="text-xs font-bold uppercase tracking-widest text-gray-900 mb-6">
               Kantor Pusat
@@ -167,7 +160,7 @@ export default function Footer() {
 
         </div>
 
-        {/* Bottom Legal & Copyright Bar */}
+
         <div className="border-t border-gray-100 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[11px] sm:text-xs font-semibold tracking-wider text-gray-400 uppercase text-center sm:text-left">
             © 2024 RENTCAR. HAK CIPTA DILINDUNGI.

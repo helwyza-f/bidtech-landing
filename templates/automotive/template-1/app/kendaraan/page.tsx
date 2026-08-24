@@ -21,7 +21,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-// Data Lengkap Armada Mobil
+
 const ALL_CARS = [
   {
     id: 1,
@@ -137,7 +137,7 @@ export default function KendaraanPage() {
   const [sortBy, setSortBy] = useState("popular");
   const [selectedCarForModal, setSelectedCarForModal] = useState<any>(null);
 
-  // Filter & Sort Logic
+
   const filteredAndSortedCars = useMemo(() => {
     let result = ALL_CARS.filter((car) => {
       const matchesCategory =
@@ -164,15 +164,14 @@ export default function KendaraanPage() {
       <Header />
 
       <main className="min-h-screen pt-20 bg-gray-50/50">
-        
-        {/* Page Banner Header */}
+
+
         <section className="bg-gradient-to-b from-blue-900 via-blue-800 to-blue-900 text-white py-16 md:py-20 relative overflow-hidden">
-          {/* Subtle background circles */}
           <div className="absolute top-0 right-0 w-96 h-96 bg-white/5 rounded-full blur-3xl pointer-events-none" />
           <div className="absolute bottom-0 left-0 w-80 h-80 bg-blue-500/10 rounded-full blur-2xl pointer-events-none" />
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            {/* Breadcrumb */}
+
             <div className="flex items-center gap-2 text-xs sm:text-sm text-blue-200 mb-4">
               <Link href="/" className="hover:text-white transition-colors">
                 Beranda
@@ -198,31 +197,30 @@ export default function KendaraanPage() {
           </div>
         </section>
 
-        {/* Filter & Search Bar Section */}
+
         <section className="sticky top-20 z-30 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm py-4">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-              
-              {/* Category Pills */}
+
+
               <div className="flex items-center gap-2 overflow-x-auto pb-2 md:pb-0 no-scrollbar">
                 {CATEGORIES.map((cat) => (
                   <button
                     key={cat}
                     onClick={() => setSelectedCategory(cat)}
-                    className={`px-5 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer ${
-                      selectedCategory === cat
-                        ? "bg-blue-600 text-white shadow-sm shadow-blue-600/30"
-                        : "bg-gray-100 text-gray-600 hover:bg-gray-200"
-                    }`}
+                    className={`px-5 py-2 rounded-full text-sm font-semibold whitespace-nowrap transition-all duration-200 cursor-pointer ${selectedCategory === cat
+                      ? "bg-blue-600 text-white shadow-sm shadow-blue-600/30"
+                      : "bg-gray-100 text-gray-600 hover:bg-gray-200"
+                      }`}
                   >
                     {cat}
                   </button>
                 ))}
               </div>
 
-              {/* Search & Sort Controls */}
+
               <div className="flex items-center gap-3 w-full md:w-auto">
-                {/* Search Input */}
+
                 <div className="relative flex-grow md:w-64">
                   <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input
@@ -234,7 +232,7 @@ export default function KendaraanPage() {
                   />
                 </div>
 
-                {/* Sort Dropdown */}
+
                 <div className="relative">
                   <select
                     value={sortBy}
@@ -253,18 +251,18 @@ export default function KendaraanPage() {
           </div>
         </section>
 
-        {/* Cars Catalog Grid */}
+
         <section className="py-12 md:py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            
-            {/* Counter Summary */}
+
+
             <div className="flex justify-between items-center mb-8">
               <p className="text-sm text-gray-500 font-medium">
                 Menampilkan <span className="text-gray-900 font-bold">{filteredAndSortedCars.length}</span> kendaraan
               </p>
             </div>
 
-            {/* Grid */}
+
             {filteredAndSortedCars.length === 0 ? (
               <div className="bg-white rounded-3xl p-12 text-center border border-gray-100 max-w-md mx-auto my-8">
                 <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
@@ -296,7 +294,7 @@ export default function KendaraanPage() {
                     className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-blue-100 transition-all duration-300 group flex flex-col justify-between"
                   >
                     <div>
-                      {/* Image Area */}
+
                       <div className="relative h-60 bg-gray-100 overflow-hidden">
                         <Image
                           src={car.image}
@@ -321,7 +319,7 @@ export default function KendaraanPage() {
                         </div>
                       </div>
 
-                      {/* Info Area */}
+
                       <div className="p-6">
                         <div className="flex justify-between items-start mb-4">
                           <div>
@@ -338,7 +336,7 @@ export default function KendaraanPage() {
                           </div>
                         </div>
 
-                        {/* Specs Grid */}
+
                         <div className="grid grid-cols-3 gap-2 py-4 border-y border-gray-100 mb-6 bg-gray-50/70 rounded-xl px-3">
                           <div className="flex flex-col items-center gap-1 text-center">
                             <Users className="w-4 h-4 text-blue-600" />
@@ -362,7 +360,7 @@ export default function KendaraanPage() {
                       </div>
                     </div>
 
-                    {/* Action Button */}
+
                     <div className="px-6 pb-6 pt-0">
                       <Button
                         onClick={() => setSelectedCarForModal(car)}
@@ -379,7 +377,7 @@ export default function KendaraanPage() {
           </div>
         </section>
 
-        {/* Modal Booking / Sewa Sekarang */}
+
         <AnimatePresence>
           {selectedCarForModal && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">

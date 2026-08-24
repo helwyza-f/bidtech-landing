@@ -10,7 +10,7 @@ export default function WhyChooseUs() {
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
-          {/* Kolom Kiri: Visual Card Miring & Floating Badge */}
+
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -19,7 +19,7 @@ export default function WhyChooseUs() {
             className="lg:col-span-5 flex justify-center"
           >
             <div className="relative w-full max-w-[420px]">
-              {/* Frame Card Miring */}
+
               <div className="relative bg-white p-3 sm:p-4 rounded-3xl shadow-2xl ring-1 ring-gray-100/80 -rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
                 <div className="relative aspect-[4/4.2] w-full overflow-hidden rounded-2xl bg-gray-100">
                   <Image
@@ -33,7 +33,7 @@ export default function WhyChooseUs() {
                 </div>
               </div>
 
-              {/* Floating Badge (15+ Tahun Pengalaman) */}
+
               <motion.div
                 initial={{ opacity: 0, scale: 0.8, y: 20 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
@@ -51,7 +51,7 @@ export default function WhyChooseUs() {
             </div>
           </motion.div>
 
-          {/* Kolom Kanan: Typography & 2x2 Grid Features */}
+
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
