@@ -282,7 +282,9 @@ export function TemplateCategories() {
             >
               <CardContent className="flex h-full min-h-48 flex-col justify-between p-6">
                 <div>
-                  <div className="text-5xl mb-3">{category.icon}</div>
+                  <div className="mb-3 text-[#63E009]">
+                    <category.icon className="size-10 stroke-[1.5]" />
+                  </div>
                   <h3 className="font-[family-name:var(--font-sora)] text-lg font-semibold text-white group-hover:text-[#63E009] transition-colors">
                     {category.name}
                   </h3>
@@ -313,7 +315,9 @@ export function TemplateCategories() {
               {/* Header */}
               <div className="flex items-start justify-between mb-8">
                 <div>
-                  <div className="text-6xl mb-3">{selectedCategory.icon}</div>
+                  <div className="mb-3 text-[#63E009]">
+                    <selectedCategory.icon className="size-12 stroke-[1.5]" />
+                  </div>
                   <h2 className="font-[family-name:var(--font-sora)] text-3xl font-bold text-white">
                     {selectedCategory.name}
                   </h2>
