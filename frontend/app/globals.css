@@ -23,6 +23,6 @@ button {
 }
 
 ::selection {
-  background: rgba(95, 201, 74, 0.22);
-  color: #0f172a;
+  background: rgba(190, 242, 100, 0.36);
+  color: inherit;
 }

@@ -4,6 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   BookOpen,
   Briefcase,
+  CarFront,
   ChevronRight,
   ExternalLink,
   Heart,
@@ -15,6 +16,7 @@ import {
   UtensilsCrossed,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const TEMPLATE_CATEGORIES = [
   { name: "Semua Design", count: "120+" },
@@ -26,6 +28,7 @@ const TEMPLATE_CATEGORIES = [
   { name: "Restaurant & Cafe", count: "10+" },
   { name: "Laundry", count: "8+" },
   { name: "Education", count: "7+" },
+  { name: "Automotive", count: "6+" },
   { name: "Beauty & Salon", count: "6+" },
   { name: "Travel & Tour", count: "5+" },
   { name: "Property", count: "5+" },
@@ -115,6 +118,17 @@ const SAMPLE_TEMPLATES = [
     tags: ["Landing Page", "Startup"],
     icon: Rocket,
   },
+  {
+    id: 9,
+    name: "Rentcar Premium",
+    category: "Automotive",
+    subcategory: "Rental Mobil",
+    price: "Rp649.000",
+    image: "/templates/automotive/images/hero_section.jpg",
+    previewHref: "/templates/automotive",
+    tags: ["Automotive", "Rental Mobil"],
+    icon: CarFront,
+  },
 ];
 
 const sectionBadgeClass =
@@ -182,21 +196,21 @@ export default function TemplatesPage() {
 
             return (
               <Card
-                className="group overflow-hidden rounded-[24px] border border-emerald-100 bg-white shadow-[0_18px_55px_rgba(15,23,42,0.07)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary/40 hover:shadow-[0_24px_70px_rgba(95,201,74,0.16)]"
+                className="group overflow-hidden rounded-[22px] border border-emerald-100 bg-white shadow-[0_14px_42px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary/40 hover:shadow-[0_24px_70px_rgba(95,201,74,0.16)] sm:rounded-[24px]"
                 key={template.id}
               >
-                <div className="relative overflow-hidden bg-[linear-gradient(135deg,#f3fbef_0%,#ffffff_46%,#eef7ff_100%)] p-4">
-                  <button className="absolute right-4 top-4 z-10 rounded-full border border-emerald-100 bg-white/90 p-2 shadow-sm backdrop-blur transition hover:border-brand-primary/40">
+                <div className="relative overflow-hidden bg-[linear-gradient(135deg,#f3fbef_0%,#ffffff_46%,#eef7ff_100%)] p-3 sm:p-4">
+                  <button className="absolute right-3 top-3 z-10 rounded-full border border-emerald-100 bg-white/90 p-2 shadow-sm backdrop-blur transition hover:border-brand-primary/40 sm:right-4 sm:top-4">
                     <Heart className="size-4 text-slate-500 transition-colors group-hover:text-brand-primary" />
                   </button>
-                  <div className="relative overflow-hidden rounded-[20px] border border-white bg-white shadow-[0_14px_40px_rgba(15,23,42,0.12)]">
-                    <div className="absolute left-3 top-3 z-10 flex items-center gap-2 rounded-full bg-white/90 px-3 py-1.5 text-xs font-bold text-slate-700 shadow-sm backdrop-blur">
+                  <div className="relative overflow-hidden rounded-[18px] border border-white bg-white shadow-[0_10px_30px_rgba(15,23,42,0.1)] sm:rounded-[20px]">
+                    <div className="absolute left-3 top-3 z-10 flex max-w-[72%] items-center gap-1.5 truncate rounded-full bg-white/90 px-2.5 py-1.5 text-[11px] font-bold text-slate-700 shadow-sm backdrop-blur sm:gap-2 sm:px-3 sm:text-xs">
                       <Icon className="size-3.5 text-brand-primary" />
-                      {template.category}
+                      <span className="truncate">{template.category}</span>
                     </div>
                     <Image
                       alt={`${template.name} design preview`}
-                      className="h-52 w-full object-cover object-top transition duration-500 group-hover:scale-[1.03] sm:h-56"
+                      className="h-44 w-full object-cover object-top transition duration-500 group-hover:scale-[1.03] sm:h-56"
                       draggable={false}
                       height={360}
                       src={template.image}
@@ -205,17 +219,17 @@ export default function TemplatesPage() {
                   </div>
                 </div>
 
-                <CardContent className="space-y-4 p-5">
-                  <div className="flex items-start justify-between gap-4">
+                <CardContent className="space-y-3.5 p-4 sm:space-y-4 sm:p-5">
+                  <div className="flex items-start justify-between gap-3">
                     <div>
-                      <h3 className="text-lg font-bold text-slate-950 transition-colors duration-200 group-hover:text-brand-primary">
+                      <h3 className="text-base font-bold text-slate-950 transition-colors duration-200 group-hover:text-brand-primary sm:text-lg">
                         {template.name}
                       </h3>
                       <p className="mt-1 text-xs text-slate-500">
                         Design {template.subcategory}
                       </p>
                     </div>
-                    <p className="shrink-0 rounded-full bg-emerald-50 px-3.5 py-2 text-xs font-bold text-slate-950">
+                    <p className="shrink-0 rounded-full bg-emerald-50 px-3 py-1.5 text-[11px] font-bold text-slate-950 sm:px-3.5 sm:py-2 sm:text-xs">
                       {template.price}
                     </p>
                   </div>
@@ -223,7 +237,7 @@ export default function TemplatesPage() {
                   <div className="flex flex-wrap gap-2">
                     {template.tags.map((tag) => (
                       <Badge
-                        className="border border-emerald-100 bg-white text-xs font-semibold text-slate-600 hover:bg-emerald-50"
+                        className="border border-emerald-100 bg-white px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-slate-600 hover:bg-emerald-50 sm:text-xs"
                         key={tag}
                       >
                         {tag}
@@ -231,20 +245,22 @@ export default function TemplatesPage() {
                     ))}
                   </div>
 
-                  <div className="flex flex-col gap-3 pt-2 sm:flex-row">
+                  <div className="grid grid-cols-2 gap-2 pt-1 sm:flex sm:gap-3 sm:pt-2">
+                    <Link className="flex-1" href={template.previewHref ?? "#"}>
+                      <Button
+                        className="h-10 w-full gap-1.5 rounded-full border-slate-200 bg-white px-3 text-xs text-slate-950 hover:border-brand-primary/50 hover:bg-emerald-50 sm:gap-2 sm:text-sm"
+                        size="sm"
+                        variant="outline"
+                      >
+                        <ExternalLink className="size-3.5 sm:size-4" />
+                        Lihat
+                      </Button>
+                    </Link>
                     <Button
-                      className="flex-1 gap-2 rounded-full border-slate-200 bg-white text-slate-950 hover:border-brand-primary/50 hover:bg-emerald-50"
-                      size="sm"
-                      variant="outline"
-                    >
-                      <ExternalLink className="size-4" />
-                      Lihat
-                    </Button>
-                    <Button
-                      className="flex-1 gap-2 rounded-full bg-brand-primary text-slate-950 shadow-lg shadow-brand-primary/20 hover:bg-brand-primary-hover"
+                      className="h-10 flex-1 gap-1.5 rounded-full bg-brand-primary px-3 text-xs text-slate-950 shadow-lg shadow-brand-primary/20 hover:bg-brand-primary-hover sm:gap-2 sm:text-sm"
                       size="sm"
                     >
-                      <ShoppingCart className="size-4" />
+                      <ShoppingCart className="size-3.5 sm:size-4" />
                       Beli
                     </Button>
                   </div>
@@ -255,7 +271,7 @@ export default function TemplatesPage() {
         </div>
 
         <div className="mt-12 text-center">
-          <Button className="rounded-full bg-slate-950 px-8 text-white hover:bg-slate-800" size="lg">
+          <Button className="rounded-full bg-slate-950 px-8 text-white shadow-none hover:bg-slate-800 hover:shadow-none" size="lg">
             Lihat Design Lainnya
           </Button>
         </div>

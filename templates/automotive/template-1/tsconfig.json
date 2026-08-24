@@ -32,6 +32,7 @@
     ]
   },
   "include": [
+    "../../_types/**/*.d.ts",
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"

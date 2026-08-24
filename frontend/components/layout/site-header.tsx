@@ -48,7 +48,6 @@ export function SiteHeader() {
     { label: t.nav.services, href: "#services" },
     { label: t.nav.portfolio, href: "#portfolio" },
     { label: t.nav.template, href: "/templates" },
-    { label: t.nav.pricing, href: "#pricing" },
     { label: t.nav.contact, href: "#contact" },
   ];
 

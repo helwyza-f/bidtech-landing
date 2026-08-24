@@ -12,17 +12,6 @@ import {
 
 import { useLanguage } from "@/lib/i18n";
 
-export interface SelectedPackage {
-  service: string;
-  plan: string;
-  price: string;
-}
-
-interface PlanSelection {
-  name: string;
-  price: string;
-}
-
 export const heroShowcaseSlides = [
   {
     name: "Ayocuci",
@@ -86,39 +75,19 @@ function useLandingPageState() {
   const [activeStep, setActiveStep] = useState(0);
   const [activeServiceSlide, setActiveServiceSlide] = useState(0);
   const [activeSpecializationSlide, setActiveSpecializationSlide] = useState(0);
-  const [activePricingTab, setActivePricingTab] = useState(0);
-  const [activePricingSlide, setActivePricingSlide] = useState(0);
   const [activeProductTab, setActiveProductTab] = useState(0);
   const [activeProductSlide, setActiveProductSlide] = useState(0);
   const [activeHowItWorksPage, setActiveHowItWorksPage] = useState(0);
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
-  const [selectedPackage, setSelectedPackage] = useState<SelectedPackage | null>(null);
 
   const servicesSliderRef = useRef<HTMLDivElement>(null);
   const specializationsSliderRef = useRef<HTMLDivElement>(null);
-  const pricingSliderRef = useRef<HTMLDivElement>(null);
   const productSliderRef = useRef<HTMLDivElement>(null);
   const howItWorksSliderRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLDivElement>(null);
 
   const howItWorksPages = Math.ceil(t.howItWorks.steps.length / 2);
   const heroShowcase = heroShowcaseSlides[activeHeroSlide];
-
-  const selectPackage = (plan: PlanSelection) => {
-    const service = t.contact.form.services[activePricingTab] ?? t.contact.form.services[0];
-
-    setSelectedPackage({ service, plan: plan.name, price: plan.price });
-    window.setTimeout(() => {
-      document.getElementById("contact")?.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 100);
-  };
-
-  const activatePricingTab = (index: number) => {
-    setActivePricingTab(index);
-    setActivePricingSlide(0);
-    setSelectedPackage(null);
-    pricingSliderRef.current?.scrollTo({ left: 0, behavior: "smooth" });
-  };
 
   const activateProductTab = (index: number) => {
     setActiveProductTab(index);
@@ -132,10 +101,6 @@ function useLandingPageState() {
 
   const showHeroSlide = (index: number) => {
     setActiveHeroSlide(index);
-  };
-
-  const movePricingSlide = (nextSlide: number) => {
-    setActivePricingSlide(scrollSliderToIndex(pricingSliderRef.current, nextSlide));
   };
 
   const moveServiceSlide = (nextSlide: number) => {
@@ -177,11 +142,6 @@ function useLandingPageState() {
     setActiveHowItWorksPage(Math.floor(index / 2));
   };
 
-  const handlePricingScroll = (event: UIEvent<HTMLDivElement>) => {
-    if (window.innerWidth >= 768) return;
-    setActivePricingSlide(getClosestSlideIndex(event.currentTarget));
-  };
-
   useEffect(() => {
     const interval = window.setInterval(() => {
       setActiveHeroSlide((current) => (current + 1) % heroShowcaseSlides.length);
@@ -194,8 +154,6 @@ function useLandingPageState() {
     t,
     activeHeroSlide,
     activeHowItWorksPage,
-    activePricingSlide,
-    activePricingTab,
     activeProductSlide,
     activeProductTab,
     activeServiceSlide,
@@ -206,26 +164,20 @@ function useLandingPageState() {
     heroTitleMobileSecondLine,
     howItWorksPages,
     howItWorksSliderRef,
-    pricingSliderRef,
     productSliderRef,
-    selectedPackage,
     servicesSliderRef,
     specializationsSliderRef,
     testimonialsRef,
-    activatePricingTab,
     activateProductTab,
     activateStep,
     handleHowItWorksScroll,
-    handlePricingScroll,
     handleProductScroll,
     handleServiceScroll,
     handleSpecializationScroll,
     moveHowItWorksSlide,
-    movePricingSlide,
     moveProductSlide,
     moveServiceSlide,
     moveSpecializationSlide,
-    selectPackage,
     showHeroSlide,
   };
 }

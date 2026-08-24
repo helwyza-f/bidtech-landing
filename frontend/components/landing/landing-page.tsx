@@ -1,7 +1,7 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowRight, Check, ChevronLeft, ChevronRight, Mail, MapPin, MessageCircleMore, Star } from "lucide-react";
+import { ArrowRight, ChevronLeft, ChevronRight, Mail, MapPin, MessageCircleMore, Star } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -30,8 +30,6 @@ function LandingPageView() {
     t,
     activeHeroSlide,
     activeHowItWorksPage,
-    activePricingSlide,
-    activePricingTab,
     activeProductSlide,
     activeProductTab,
     activeServiceSlide,
@@ -42,26 +40,20 @@ function LandingPageView() {
     heroTitleMobileSecondLine,
     howItWorksPages,
     howItWorksSliderRef,
-    pricingSliderRef,
     productSliderRef,
-    selectedPackage,
     servicesSliderRef,
     specializationsSliderRef,
     testimonialsRef,
-    activatePricingTab,
     activateProductTab,
     activateStep,
     handleHowItWorksScroll,
-    handlePricingScroll,
     handleProductScroll,
     handleServiceScroll,
     handleSpecializationScroll,
     moveHowItWorksSlide,
-    movePricingSlide,
     moveProductSlide,
     moveServiceSlide,
     moveSpecializationSlide,
-    selectPackage,
     showHeroSlide,
   } = useLandingPage();
 
@@ -637,291 +629,6 @@ function LandingPageView() {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="pricing">
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <div className="flex justify-center">
-            <Badge className={sectionBadgeClass}>{t.pricing.badge}</Badge>
-          </div>
-          <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
-            {t.pricing.titlePrefix} <span className="text-brand-primary">{t.pricing.titleHighlight}</span>
-          </h2>
-          <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base sm:leading-7">
-            {t.pricing.subtitle}
-          </p>
-        </Reveal>
-
-        <div className="relative z-20 mt-8 flex flex-nowrap justify-center gap-2 overflow-x-auto pb-1 [scrollbar-width:none] sm:flex-wrap sm:gap-3 sm:overflow-visible [&::-webkit-scrollbar]:hidden">
-          {t.pricing.tabs.map((tab, index) => (
-            <button
-              className={`relative z-10 min-w-0 shrink-0 touch-manipulation rounded-full border px-5 py-3 text-[11px] font-semibold uppercase tracking-wider transition-colors supports-[hover:hover]:hover:border-brand-primary supports-[hover:hover]:hover:bg-brand-primary supports-[hover:hover]:hover:text-black sm:px-10 sm:py-3.5 sm:text-sm sm:tracking-widest ${
-                activePricingTab === index
-                  ? "border-brand-primary bg-brand-primary text-black"
-                  : "border-slate-900/20 text-slate-700"
-              }`}
-              key={tab.key}
-              onClick={() => activatePricingTab(index)}
-              onPointerUp={(event) => {
-                if (event.pointerType !== "mouse") {
-                  activatePricingTab(index);
-                }
-              }}
-              type="button"
-            >
-              {tab.label}
-            </button>
-          ))}
-        </div>
-
-        {(() => {
-          const plans = t.pricing.tabs[activePricingTab].plans;
-          const isSinglePlan = plans.length === 1;
-          const isCentered = plans.length <= 2;
-          const showPricingControls = plans.length > 1;
-
-          return (
-            <>
-              <div
-                className={`mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:pb-0 [&::-webkit-scrollbar]:hidden ${
-                  isSinglePlan || isCentered
-                    ? "md:flex md:flex-wrap md:justify-center md:overflow-visible md:gap-5"
-                    : "md:grid md:grid-cols-2 md:gap-5 md:overflow-visible xl:grid-cols-3 xl:gap-6"
-                }`}
-                onScroll={handlePricingScroll}
-                ref={pricingSliderRef}
-              >
-                {plans.map((rawPlan) => {
-                  const plan = rawPlan as typeof rawPlan & { badge?: string; originalPrice?: string };
-                  const isSelected =
-                    selectedPackage?.service === (t.contact.form.services[activePricingTab] ?? t.contact.form.services[0]) &&
-                    selectedPackage.plan === plan.name;
-
-                  return (
-                    <Card
-                      key={plan.name}
-                      className={`flex w-full min-w-full shrink-0 snap-start flex-col !shadow-none transition-all duration-300 md:min-w-0 ${
-                        isSinglePlan
-                          ? isSelected
-                            ? "border-lime-300 bg-brand-surface shadow-[0_0_0_2px_rgba(190,242,100,0.18)]"
-                            : plan.featured
-                              ? "border-lime-300/40 bg-brand-surface"
-                              : "bg-brand-surface"
-                          : isSelected
-                            ? "border-brand-primary bg-brand-surface shadow-[0_0_0_2px_rgba(99,224,9,0.18)]"
-                            : "border-transparent bg-brand-surface"
-                      } ${
-                        isSinglePlan
-                          ? "md:max-w-3xl md:w-full"
-                          : isCentered
-                            ? "md:w-[340px] md:shrink"
-                            : "md:shrink md:w-full"
-                      }`}
-                    >
-                      <CardContent className="flex flex-1 flex-col space-y-6">
-                        {isSinglePlan ? (
-                          activePricingTab === 2 ? (
-                            <div className="flex w-full flex-col space-y-6">
-                              <div className="space-y-4 text-center">
-                                <h3 className="font-[family-name:var(--font-sora)] text-2xl font-bold text-brand-primary">
-                                  {plan.name}
-                                </h3>
-                              </div>
-
-                              <div className="space-y-8">
-                                <div className="space-y-5">
-                                  <p className="text-[11px] font-semibold uppercase tracking-[0.35em] text-zinc-400">
-                                    {plan.featureGroups[0]?.title}
-                                  </p>
-
-                                  <div className="space-y-5 text-left">
-                                    {plan.featureGroups[0]?.items.map((feature, index) => (
-                                      <div className="flex gap-4" key={feature.text}>
-                                        <div className="mt-0.5 flex size-8 shrink-0 items-center justify-center rounded-full border border-brand-primary/40 bg-brand-primary/10 text-sm font-semibold text-brand-primary">
-                                          {String(index + 1)}
-                                        </div>
-                                        <div className="space-y-1">
-                                          <p className="text-sm font-semibold text-zinc-100">{feature.text}</p>
-                                          <p className="text-sm leading-6 text-zinc-400">
-                                            {index === 0
-                                              ? "Diskusi awal untuk memahami kebutuhan teknis & alur sistem."
-                                              : index === 1
-                                                ? "Kami menyusun proposal estimasi biaya & estimasi pengerjaan."
-                                                : "Peluncuran aplikasi ke sistem produksi yang siap pakai, dilindungi penuh oleh Perjanjian Kerahasiaan Data (NDA)."}
-                                          </p>
-                                        </div>
-                                      </div>
-                                    ))}
-                                  </div>
-                                </div>
-
-                                <div className="rounded-2xl bg-[#1a2226] px-5 py-6 text-center sm:px-8 sm:py-8">
-                                  <p className="font-[family-name:var(--font-sora)] text-2xl font-bold text-zinc-100 sm:text-3xl">
-                                    Harga Custom
-                                  </p>
-                                  <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-zinc-400">
-                                    Estimasi biaya disesuaikan secara presisi dengan kebutuhan fitur dan alur kerja aplikasi Anda.
-                                  </p>
-                                  <Button
-                                    aria-pressed={isSelected}
-                                    className="mt-6 w-full bg-brand-primary py-6 text-base font-semibold text-black transition-colors hover:bg-brand-primary-hover hover:text-black"
-                                    onClick={() => selectPackage(plan)}
-                                    variant="default"
-                                  >
-                                    {(plan as any).ctaText || (isSelected ? t.pricing.selected : t.pricing.ctaDefault)}
-                                  </Button>
-                                </div>
-                              </div>
-                            </div>
-                          ) : (
-                            <div className="flex w-full flex-col space-y-6 text-center">
-                              <div className="border-b border-zinc-800/80 pb-4">
-                                <h3 className="font-[family-name:var(--font-sora)] text-2xl font-bold text-brand-primary">
-                                  {plan.name}
-                                </h3>
-                              </div>
-
-                              <div className="grid grid-cols-1 gap-8 py-2 text-left md:grid-cols-2 md:gap-12">
-                                {plan.featureGroups.map((group) => (
-                                  <div key={group.title} className="space-y-4">
-                                    <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{group.title}</p>
-                                    <ul className="space-y-4">
-                                      {group.items.map((feature) => (
-                                        <li
-                                          className={`flex items-start gap-3 text-sm leading-relaxed ${
-                                            feature.active ? "text-zinc-300" : "text-zinc-600 line-through"
-                                          }`}
-                                          key={feature.text}
-                                        >
-                                          <Check
-                                            className={`mt-0.5 size-5 shrink-0 ${feature.active ? "text-brand-primary" : "text-zinc-600"}`}
-                                          />
-                                          <span>{feature.text}</span>
-                                        </li>
-                                      ))}
-                                    </ul>
-                                  </div>
-                                ))}
-                              </div>
-
-                              <div className="flex w-full flex-col items-center space-y-4 rounded-xl border border-zinc-800/50 bg-[#040608] p-6 text-center md:p-8">
-                                <p className="font-[family-name:var(--font-sora)] text-2xl font-bold text-zinc-100">
-                                  {plan.price}
-                                </p>
-                                <p className="max-w-md text-xs text-zinc-400">
-                                  {(plan as any).description || t.pricing.subtitle}
-                                </p>
-                                <Button
-                                  aria-pressed={isSelected}
-                                  className="mt-2 w-full max-w-md rounded-lg border-none bg-brand-primary py-6 text-base font-semibold text-black transition-colors hover:bg-brand-primary-hover hover:text-black"
-                                  onClick={() => selectPackage(plan)}
-                                  variant="default"
-                                >
-                                  {(plan as any).ctaText || (isSelected ? t.pricing.selected : t.pricing.ctaDefault)}
-                                </Button>
-                              </div>
-                            </div>
-                          )
-                        ) : (
-                          <>
-                            <div className="flex flex-col items-center space-y-4 text-center">
-                              <div>
-                                <h3 className="font-[family-name:var(--font-sora)] text-xl font-bold text-zinc-100">
-                                  {plan.name}
-                                </h3>
-                                {plan.badge ? (
-                                  <span className="mt-2 inline-block rounded-full bg-zinc-800 px-3 py-1 text-xs text-zinc-400">
-                                    {plan.badge}
-                                  </span>
-                                ) : null}
-                              </div>
-                              {plan.originalPrice ? (
-                                <p className="text-xs text-zinc-500 line-through">{plan.originalPrice}</p>
-                              ) : null}
-                              <p className="font-[family-name:var(--font-sora)] whitespace-nowrap rounded-full bg-brand-primary/10 px-5 py-2 text-sm font-bold text-brand-primary sm:text-base">
-                                {plan.price}
-                              </p>
-                            </div>
-
-                            <div className="flex-1 space-y-5">
-                              {plan.featureGroups.map((group) => (
-                                <div key={group.title}>
-                                  <p className="text-xs font-semibold uppercase tracking-widest text-zinc-500">{group.title}</p>
-                                  <ul className="mt-3 space-y-3">
-                                    {group.items.map((feature) => (
-                                      <li
-                                        className={`flex items-start gap-2 text-sm ${
-                                          feature.active ? "text-zinc-300" : "text-zinc-600 line-through"
-                                        }`}
-                                        key={feature.text}
-                                      >
-                                        <span
-                                          className={`mt-2 size-1.5 shrink-0 rounded-full ${feature.active ? "bg-brand-primary" : "bg-zinc-600"}`}
-                                        />
-                                        {feature.text}
-                                      </li>
-                                    ))}
-                                  </ul>
-                                </div>
-                              ))}
-                            </div>
-
-                            <Button
-                              aria-pressed={isSelected}
-                              className="w-full border-zinc-700 text-zinc-100 transition-colors hover:border-brand-primary hover:bg-brand-primary hover:text-black"
-                              onClick={() => selectPackage(plan)}
-                              variant={isSelected ? "default" : "outline"}
-                            >
-                              {isSelected ? t.pricing.selected : t.pricing.ctaDefault}
-                            </Button>
-                          </>
-                        )}
-                      </CardContent>
-                    </Card>
-                  );
-                })}
-              </div>
-
-              {showPricingControls ? (
-                <div className="mt-6 flex items-center justify-center gap-5 md:hidden">
-                  <button
-                    aria-label="Pricing sebelumnya"
-                    className="flex size-12 shrink-0 items-center justify-center rounded-full border border-slate-400 bg-white text-slate-700 transition hover:border-slate-500 hover:text-slate-900 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-white disabled:text-slate-500"
-                    disabled={activePricingSlide === 0}
-                    onClick={() => movePricingSlide(activePricingSlide - 1)}
-                    type="button"
-                  >
-                    <ChevronLeft className="size-5 stroke-[2.25]" />
-                  </button>
-
-                  <div className="flex items-center gap-2.5">
-                    {plans.map((plan, index) => (
-                      <button
-                        aria-label={`Buka slide harga ${index + 1}`}
-                        className={`h-2.5 rounded-full transition-all ${
-                          activePricingSlide === index ? "w-8 bg-brand-primary" : "w-2.5 bg-slate-600"
-                        }`}
-                        key={`pricing-dot-${plan.name}`}
-                        onClick={() => movePricingSlide(index)}
-                        type="button"
-                      />
-                    ))}
-                  </div>
-
-                  <button
-                    aria-label="Pricing berikutnya"
-                    className="flex size-12 shrink-0 items-center justify-center rounded-full border border-slate-400 bg-white text-slate-700 transition hover:border-slate-500 hover:text-slate-900 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-white disabled:text-slate-500"
-                    disabled={activePricingSlide === plans.length - 1}
-                    onClick={() => movePricingSlide(activePricingSlide + 1)}
-                    type="button"
-                  >
-                    <ChevronRight className="size-5 stroke-[2.25]" />
-                  </button>
-                </div>
-              ) : null}
-            </>
-          );
-        })()}
-      </section>
-
       <section className="relative mx-auto max-w-7xl overflow-hidden px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
         <div className="pointer-events-none absolute inset-x-8 top-20 h-72 rounded-[48px] bg-[radial-gradient(circle_at_50%_0%,rgba(95,201,74,0.12),transparent_36%)]" />
         <Reveal className="mx-auto max-w-2xl text-center">
@@ -1185,10 +892,7 @@ function LandingPageView() {
           <Reveal delay={100} y={16}>
             <Card className="border border-emerald-100 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.09)]">
               <CardContent>
-                <ContactForm
-                  key={selectedPackage ? `${selectedPackage.service}-${selectedPackage.plan}-${selectedPackage.price}` : "empty"}
-                  selectedPackage={selectedPackage}
-                />
+                <ContactForm selectedPackage={null} />
               </CardContent>
             </Card>
           </Reveal>

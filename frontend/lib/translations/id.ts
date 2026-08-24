@@ -164,7 +164,7 @@ export const id = {
               "Solusi pencatatan keuangan yang membantu pengguna memantau transaksi, mengelola anggaran, dan menganalisis pola pengeluaran secara sistematis dan berbasis data.",
           },
         ],
-      },
+      },  
     ],
   },
   why: {
@@ -396,7 +396,6 @@ export const id = {
       { label: "Beranda", href: "#hero" },
       { label: "Layanan", href: "#services" },
       { label: "Portofolio", href: "#portfolio" },
-      { label: "Harga", href: "#pricing" },
       { label: "Tentang Kami", href: "#about" },
     ],
     servicesTitle: "Layanan",

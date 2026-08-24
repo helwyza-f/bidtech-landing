@@ -45,10 +45,11 @@ export function SiteFooter() {
   const { t } = useLanguage();
 
   return (
-    <footer className="border-t border-white/8 bg-black/60">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-5 sm:py-14 md:px-8 lg:py-16">
-        <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:gap-14">
-          <div className="flex flex-col items-center text-center lg:w-[30%] lg:shrink-0 lg:items-start lg:text-left">
+    <footer className="relative overflow-hidden border-t border-emerald-100 bg-[linear-gradient(180deg,#ffffff_0%,#f5fbf1_48%,#edf8e9_100%)] text-slate-950">
+      <div className="pointer-events-none absolute inset-x-0 top-0 h-72 bg-[radial-gradient(circle_at_18%_0%,rgba(95,201,74,0.14),transparent_36%),radial-gradient(circle_at_90%_28%,rgba(95,201,74,0.09),transparent_30%)]" />
+      <div className="relative mx-auto max-w-7xl px-4 py-9 sm:px-5 sm:py-14 md:px-8 lg:py-16">
+        <div className="grid gap-8 lg:grid-cols-[1.1fr_1.9fr] lg:items-start lg:gap-20">
+          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
             <div className="flex items-center gap-2">
               <Image
                 src={logoAssets.footer.src}
@@ -58,15 +59,15 @@ export function SiteFooter() {
                 className="h-12 w-auto object-contain sm:h-14"
               />
             </div>
-            <p className="mt-4 max-w-md text-sm leading-6 text-zinc-400 lg:max-w-xs">{t.footer.description}</p>
-            <div className="mt-5 flex gap-3">
+            <p className="mt-3 max-w-xs text-sm leading-6 text-slate-600 sm:mt-4 sm:max-w-md sm:leading-7 lg:max-w-xs">{t.footer.description}</p>
+            <div className="mt-5 flex gap-2.5 sm:mt-6 sm:gap-3">
               {socials.map((social) => {
                 const Icon = social.icon;
 
                 return (
                   <a
                     aria-label={social.label}
-                    className={`flex size-9 items-center justify-center rounded-full border border-white/10 text-zinc-300 transition hover:border-lime-300/40 ${brandClasses.hoverTextPrimary}`}
+                    className={`flex size-9 items-center justify-center rounded-full border border-emerald-100 bg-white/90 text-slate-500 shadow-sm transition hover:-translate-y-0.5 hover:border-brand-primary/45 hover:bg-lime-50 sm:size-10 ${brandClasses.hoverTextPrimary}`}
                     href={social.href}
                     key={social.label}
                     rel="noreferrer"
@@ -79,13 +80,13 @@ export function SiteFooter() {
             </div>
           </div>
 
-          <div className="grid w-full grid-cols-3 gap-x-3 sm:gap-x-6 lg:flex-1">
-          <div className="min-w-0 text-center lg:text-left">
-            <p className="text-xs font-semibold text-white sm:text-sm">{t.footer.navTitle}</p>
-            <ul className="mt-4 space-y-2.5 sm:space-y-3">
+          <div className="grid w-full grid-cols-2 gap-x-7 gap-y-7 sm:grid-cols-3 sm:gap-10">
+          <div className="min-w-0 text-left">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-950 sm:text-xs">{t.footer.navTitle}</p>
+            <ul className="mt-3 space-y-2 sm:mt-4 sm:space-y-3">
               {t.footer.navItems.map((item) => (
                 <li key={item.label}>
-                  <a className={`break-words text-[11px] leading-5 text-zinc-400 transition ${brandClasses.hoverTextPrimary} sm:text-sm`} href={item.href}>
+                  <a className={`break-words text-sm leading-5 text-slate-600 transition ${brandClasses.hoverTextPrimary}`} href={item.href}>
                     {item.label}
                   </a>
                 </li>
@@ -93,12 +94,12 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div className="min-w-0 text-center lg:text-left">
-            <p className="text-xs font-semibold text-white sm:text-sm">{t.footer.servicesTitle}</p>
-            <ul className="mt-4 space-y-2.5 sm:space-y-3">
+          <div className="min-w-0 text-left">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-950 sm:text-xs">{t.footer.servicesTitle}</p>
+            <ul className="mt-3 space-y-2 sm:mt-4 sm:space-y-3">
               {t.footer.servicesItems.map((item) => (
                 <li key={item}>
-                  <a className={`break-words text-[11px] leading-5 text-zinc-400 transition ${brandClasses.hoverTextPrimary} sm:text-sm`} href="#services">
+                  <a className={`break-words text-sm leading-5 text-slate-600 transition ${brandClasses.hoverTextPrimary}`} href="#services">
                     {item}
                   </a>
                 </li>
@@ -106,12 +107,12 @@ export function SiteFooter() {
             </ul>
           </div>
 
-          <div className="min-w-0 text-center lg:text-left">
-            <p className="text-xs font-semibold text-white sm:text-sm">{t.footer.helpTitle}</p>
-            <ul className="mt-4 space-y-2.5 sm:space-y-3">
+          <div className="min-w-0 text-left sm:col-auto">
+            <p className="text-[11px] font-bold uppercase tracking-[0.2em] text-slate-950 sm:text-xs">{t.footer.helpTitle}</p>
+            <ul className="mt-3 space-y-2 sm:mt-4 sm:space-y-3">
               {t.footer.helpItems.map((item) => (
                 <li key={item}>
-                  <a className={`break-words text-[11px] leading-5 text-zinc-400 transition ${brandClasses.hoverTextPrimary} sm:text-sm`} href="#">
+                  <a className={`break-words text-sm leading-5 text-slate-600 transition ${brandClasses.hoverTextPrimary}`} href="#">
                     {item}
                   </a>
                 </li>
@@ -121,7 +122,7 @@ export function SiteFooter() {
           </div>
         </div>
 
-        <div className="mt-10 border-t border-white/8 px-2 pt-6 text-center text-xs leading-5 text-zinc-500 lg:mt-12">
+        <div className="mt-8 border-t border-emerald-100 px-2 pt-5 text-center text-xs leading-5 text-slate-400 lg:mt-12 lg:pt-6">
           {t.footer.copyright}
         </div>
       </div>
