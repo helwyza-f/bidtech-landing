@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
-import { Reveal } from "@/components/reveal";
+import { Reveal } from "@/components/landing/reveal";
 import { ChevronRight, X, Store, Briefcase, Calendar, Car, Plane, UtensilsCrossed, Users, Heart, Rocket, Home, Hammer, Palette, Sparkles, Building2, Cog, BookOpen, ShoppingCart, Lightbulb } from "lucide-react";
 
 const TEMPLATE_CATEGORIES = [
@@ -258,15 +258,16 @@ const TEMPLATE_CATEGORIES = [
 
 export function TemplateCategories() {
   const [selectedCategory, setSelectedCategory] = useState<typeof TEMPLATE_CATEGORIES[0] | null>(null);
+  const SelectedCategoryIcon = selectedCategory?.icon;
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="templates">
       <Reveal className="mx-auto max-w-2xl text-center">
         <div className="flex justify-center">
-          <Badge className="border-green-700/20 bg-green-700/10 text-[#63E009]">Template Library</Badge>
+          <Badge className="border-green-700/20 bg-green-700/10 text-brand-primary">Template Library</Badge>
         </div>
         <h2 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-white md:text-4xl">
-          Template Siap Pakai <span className="text-[#63E009]">20+ Kategori</span>
+          Template Siap Pakai <span className="text-brand-primary">20+ Kategori</span>
         </h2>
         <p className="mt-4 leading-7 text-zinc-400">
           Koleksi lengkap template website untuk berbagai industri dan kebutuhan bisnis. Mulai dari UMKM hingga Enterprise.
@@ -274,50 +275,50 @@ export function TemplateCategories() {
       </Reveal>
 
       <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {TEMPLATE_CATEGORIES.map((category) => (
-          <Reveal key={category.name} delay={Math.random() * 200}>
-            <Card
-              className="group relative overflow-hidden border-lime-300/15 bg-[#0b0f12]/80 backdrop-blur-sm transition-all duration-300 hover:border-lime-300/40 hover:bg-[#0b0f12] cursor-pointer"
-              onClick={() => setSelectedCategory(category)}
-            >
-              <CardContent className="flex h-full min-h-48 flex-col justify-between p-6">
-                <div>
-                  <div className="mb-3 text-[#63E009]">
-                    <category.icon className="size-10 stroke-[1.5]" />
-                  </div>
-                  <h3 className="font-[family-name:var(--font-sora)] text-lg font-semibold text-white group-hover:text-[#63E009] transition-colors">
-                    {category.name}
-                  </h3>
-                </div>
+        {TEMPLATE_CATEGORIES.map((category, index) => {
+          const Icon = category.icon;
 
-                <div className="space-y-3">
-                  <p className="text-xs leading-5 text-zinc-400 line-clamp-2">
-                    {category.description}
-                  </p>
-                  <div className="flex items-center gap-2 text-sm font-semibold text-[#63E009] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <span>Lihat Detail</span>
-                    <ChevronRight className="size-4" />
+          return (
+            <Reveal key={category.name} delay={(index % 3) * 80}>
+              <Card
+                className="group relative overflow-hidden border-lime-300/15 bg-brand-surface/80 backdrop-blur-sm transition-all duration-300 hover:border-lime-300/40 hover:bg-brand-surface cursor-pointer"
+                onClick={() => setSelectedCategory(category)}
+              >
+                <CardContent className="flex h-full min-h-48 flex-col justify-between p-6">
+                  <div>
+                    <Icon className="mb-3 size-10 text-brand-primary" />
+                    <h3 className="font-[family-name:var(--font-sora)] text-lg font-semibold text-white group-hover:text-brand-primary transition-colors">
+                      {category.name}
+                    </h3>
                   </div>
-                </div>
-              </CardContent>
 
-              <div className="absolute inset-0 bg-gradient-to-br from-lime-300/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
-            </Card>
-          </Reveal>
-        ))}
+                  <div className="space-y-3">
+                    <p className="text-xs leading-5 text-zinc-400 line-clamp-2">
+                      {category.description}
+                    </p>
+                    <div className="flex items-center gap-2 text-sm font-semibold text-brand-primary opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                      <span>Lihat Detail</span>
+                      <ChevronRight className="size-4" />
+                    </div>
+                  </div>
+                </CardContent>
+
+                <div className="absolute inset-0 bg-gradient-to-br from-lime-300/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+              </Card>
+            </Reveal>
+          );
+        })}
       </div>
 
       {/* Modal untuk category details */}
-      {selectedCategory && (
+      {selectedCategory && SelectedCategoryIcon && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm p-4">
-          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto border-lime-300/20 bg-[#0b0f12]">
+          <Card className="w-full max-w-2xl max-h-[90vh] overflow-y-auto border-lime-300/20 bg-brand-surface">
             <CardContent className="p-8">
               {/* Header */}
               <div className="flex items-start justify-between mb-8">
                 <div>
-                  <div className="mb-3 text-[#63E009]">
-                    <selectedCategory.icon className="size-12 stroke-[1.5]" />
-                  </div>
+                  <SelectedCategoryIcon className="mb-3 size-12 text-brand-primary" />
                   <h2 className="font-[family-name:var(--font-sora)] text-3xl font-bold text-white">
                     {selectedCategory.name}
                   </h2>
@@ -333,14 +334,14 @@ export function TemplateCategories() {
 
               {/* Features Grid */}
               <div className="mb-8">
-                <h3 className="text-lg font-semibold text-[#63E009] mb-4">Fitur Template</h3>
+                <h3 className="text-lg font-semibold text-brand-primary mb-4">Fitur Template</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {selectedCategory.features.map((feature) => (
                     <div
                       key={feature.title}
                       className="flex items-start gap-3 p-4 rounded-lg border border-white/10 bg-white/[0.02] hover:border-lime-300/20 hover:bg-white/[0.05] transition"
                     >
-                      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-[#63E009]/10 text-[#63E009] font-semibold">
+                      <div className="flex size-10 shrink-0 items-center justify-center rounded-lg bg-brand-primary/10 text-brand-primary font-semibold">
                         ✓
                       </div>
                       <div>
@@ -362,7 +363,7 @@ export function TemplateCategories() {
                 </button>
                 <a
                   href="/templates"
-                  className="flex-1 px-4 py-3 rounded-lg bg-[#63E009] text-black font-semibold hover:bg-[#52be07] transition text-center"
+                  className="flex-1 px-4 py-3 rounded-lg bg-brand-primary text-black font-semibold hover:bg-brand-primary-hover transition text-center"
                 >
                   Lihat Template
                 </a>

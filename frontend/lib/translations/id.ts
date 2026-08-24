@@ -2,8 +2,9 @@ export const id = {
   nav: {
     services: "Layanan",
     portfolio: "Portofolio",
+    template: "Design",
     pricing: "Harga",
-    about: "Tentang Kami",
+    about: "Home",
     contact: "Kontak",
   },
   header: {
@@ -168,7 +169,7 @@ export const id = {
   },
   why: {
     badge: "Why BidTech",
-    title: "Mengapa Memilih BidTech?",
+    title: "Mengapa Memilih BIDTECH?",
     subtitle:
       "Kami membangun solusi digital yang cepat, berkualitas, dan dirancang untuk mendukung pertumbuhan bisnis Anda.",
     items: [

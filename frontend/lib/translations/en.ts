@@ -2,8 +2,9 @@ export const en = {
   nav: {
     services: "Services",
     portfolio: "Portfolio",
+    template: "Design",
     pricing: "Pricing",
-    about: "About Us",
+    about: "Home",
     contact: "Contact",
   },
   header: {

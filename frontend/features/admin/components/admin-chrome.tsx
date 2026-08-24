@@ -3,8 +3,8 @@
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 
-import { AdminSidebar } from "@/components/admin/sidebar";
-import { LogoutButton } from "@/components/admin/logout-button";
+import { LogoutButton } from "@/features/admin/components/logout-button";
+import { AdminSidebar } from "@/features/admin/components/sidebar";
 
 const pageTitles: Record<string, string> = {
   "/admin": "Dashboard",
@@ -63,7 +63,7 @@ export function AdminChrome({ children }: { children: React.ReactNode }) {
               <p className="text-sm font-bold text-slate-900">Administrator</p>
               <p className="text-xs text-slate-500">BidTech</p>
             </div>
-            <div className="flex size-10 items-center justify-center rounded-full bg-[#63e009]/20 text-sm font-extrabold text-green-700">
+            <div className="flex size-10 items-center justify-center rounded-full bg-brand-primary/20 text-sm font-extrabold text-green-700">
               A
             </div>
             <LogoutButton />

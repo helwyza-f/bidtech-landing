@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { MessageCircle } from "lucide-react";
 
-import { StatusSelect } from "@/components/admin/order-actions";
+import { StatusSelect } from "@/features/admin/components/order-actions";
 import { getOrders } from "@/core/api-client";
 
 function toWhatsAppLink(whatsapp: string) {

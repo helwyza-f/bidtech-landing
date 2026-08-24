@@ -1,17 +1,22 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 import { Check, ChevronDown, Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/i18n";
+import { brandClasses } from "@/utils/colors";
+import { logoAssets } from "@/utils/logos";
 
 export function SiteHeader() {
   const { lang, setLang, t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     if (!open) return;
@@ -26,40 +31,53 @@ export function SiteHeader() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
+  const getNavLink = (href: string) => {
+    if (href.startsWith("#")) {
+      // Anchor link - check if we're on home page
+      if (pathname === "/" || pathname === "") {
+        return href;
+      }
+      // If not on home, navigate to home with anchor
+      return `/${href}`;
+    }
+    return href;
+  };
+
   const navItems = [
-    { label: t.nav.about, href: "#about" },
+    { label: t.nav.about, href: "/" },
     { label: t.nav.services, href: "#services" },
     { label: t.nav.portfolio, href: "#portfolio" },
+    { label: t.nav.template, href: "/templates" },
     { label: t.nav.pricing, href: "#pricing" },
     { label: t.nav.contact, href: "#contact" },
   ];
 
   return (
-    <header className="sticky top-0 z-30 border-b border-white/8 bg-black/45 backdrop-blur-xl">
+    <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2 px-4 py-3 sm:gap-4 sm:px-5 sm:py-4 md:px-8">
-        <a className="flex items-center" href="#hero">
+        <Link className="flex items-center" href="/">
           <Image
-            src="/logo/Logo.webp"
-            alt="BidTech logo"
-            width={256}
-            height={52}
+            src={logoAssets.main.src}
+            alt={logoAssets.main.alt}
+            width={logoAssets.main.width}
+            height={logoAssets.main.height}
             priority
             className="h-8 w-auto object-contain sm:h-10 md:h-11"
           />
-        </a>
+        </Link>
 
-        <nav className="hidden items-center gap-8 text-sm text-zinc-300 md:flex">
+        <nav className="hidden items-center gap-8 text-sm text-slate-600 md:flex">
           {navItems.map((item) => (
-            <a className="transition hover:text-[#63E009]" href={item.href} key={item.label}>
+            <Link className={`transition ${brandClasses.hoverTextPrimary}`} href={getNavLink(item.href)} key={item.label}>
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
 
         <div className="flex items-center gap-2 sm:gap-3">
           <div className="relative hidden md:block" ref={menuRef}>
             <button
-              className="flex items-center gap-1 text-sm text-zinc-300 transition hover:text-[#63E009]"
+              className={`flex items-center gap-1 text-sm text-slate-600 transition ${brandClasses.hoverTextPrimary}`}
               onClick={() => setOpen((v) => !v)}
               type="button"
             >
@@ -67,7 +85,7 @@ export function SiteHeader() {
             </button>
 
             {open && (
-              <div className="absolute right-0 top-full mt-2 w-32 overflow-hidden rounded-xl border border-white/10 bg-black/95 py-1 shadow-xl backdrop-blur-xl">
+              <div className="absolute right-0 top-full mt-2 w-32 overflow-hidden rounded-xl border border-zinc-200 bg-white py-1 shadow-xl">
                 {(
                   [
                     { code: "id", label: "Indonesia" },
@@ -75,7 +93,7 @@ export function SiteHeader() {
                   ] as const
                 ).map((option) => (
                   <button
-                    className="flex w-full items-center justify-between px-3 py-2 text-left text-sm text-zinc-300 transition hover:bg-white/5 hover:text-[#63E009]"
+                    className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm text-slate-600 transition hover:bg-lime-50 ${brandClasses.hoverTextPrimary}`}
                     key={option.code}
                     onClick={() => {
                       setLang(option.code);
@@ -84,7 +102,7 @@ export function SiteHeader() {
                     type="button"
                   >
                     {option.label}
-                    {lang === option.code && <Check className="size-3.5 text-[#63E009]" />}
+                    {lang === option.code && <Check className={`size-3.5 ${brandClasses.textPrimary}`} />}
                   </button>
                 ))}
               </div>
@@ -100,7 +118,7 @@ export function SiteHeader() {
           <button
             aria-expanded={mobileOpen}
             aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
-            className="flex size-9 items-center justify-center rounded-full border border-white/10 text-white md:hidden"
+            className="flex size-9 items-center justify-center rounded-full border border-zinc-200 text-slate-900 md:hidden"
             onClick={() => setMobileOpen((value) => !value)}
             type="button"
           >
@@ -110,24 +128,24 @@ export function SiteHeader() {
       </div>
 
       {mobileOpen && (
-        <div className="border-t border-white/8 bg-black/95 px-4 py-4 md:hidden">
+        <div className="border-t border-zinc-200 bg-white px-4 py-4 md:hidden">
           <nav className="mx-auto grid max-w-7xl gap-1">
             {navItems.map((item) => (
-              <a
-                className="rounded-xl px-3 py-3 text-sm text-zinc-300 transition hover:bg-white/5 hover:text-[#63E009]"
-                href={item.href}
+              <Link
+                className={`rounded-xl px-3 py-3 text-sm text-slate-600 transition hover:bg-lime-50 ${brandClasses.hoverTextPrimary}`}
+                href={getNavLink(item.href)}
                 key={item.label}
                 onClick={() => setMobileOpen(false)}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
-          <div className="mx-auto mt-3 flex max-w-7xl gap-2 border-t border-white/8 pt-3">
+          <div className="mx-auto mt-3 flex max-w-7xl gap-2 border-t border-zinc-200 pt-3">
             {(["id", "en"] as const).map((code) => (
               <button
                 className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase ${
-                  lang === code ? "border-[#63E009] bg-[#63E009] text-black" : "border-white/15 text-zinc-300"
+                  lang === code ? `${brandClasses.borderPrimary} ${brandClasses.bgPrimary} text-black` : "border-zinc-200 text-slate-600"
                 }`}
                 key={code}
                 onClick={() => {

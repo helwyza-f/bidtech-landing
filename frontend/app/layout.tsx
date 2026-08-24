@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 
-import { WhatsAppFloatWrapper } from "@/components/whatsapp-float-wrapper";
+import { WhatsAppFloatWrapper } from "@/components/layout/whatsapp-float-wrapper";
 import { LanguageProvider } from "@/lib/i18n";
 
 import "./globals.css";
@@ -14,7 +14,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className="bg-[#050505] font-[Tahoma,Arial,sans-serif] text-white antialiased">
+      <body className="bg-white font-[Tahoma,Arial,sans-serif] text-white antialiased">
         <LanguageProvider>{children}</LanguageProvider>
         <WhatsAppFloatWrapper />
       </body>

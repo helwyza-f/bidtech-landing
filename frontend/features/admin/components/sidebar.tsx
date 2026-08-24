@@ -59,7 +59,7 @@ export function AdminSidebar({ collapsed, mobileOpen, onClose }: AdminSidebarPro
         } ${collapsed ? "lg:w-20" : "lg:w-72"}`}
       >
         <div className={`mb-10 flex items-center px-2 ${collapsed ? "lg:justify-center" : "justify-between"}`}>
-          <div className="text-xl font-extrabold text-[#63e009]">
+          <div className="text-xl font-extrabold text-brand-primary">
             <span className={collapsed ? "lg:hidden" : ""}>
               BIDTECH
             </span>
@@ -85,7 +85,7 @@ export function AdminSidebar({ collapsed, mobileOpen, onClose }: AdminSidebarPro
                   collapsed ? "lg:justify-center lg:gap-0" : "gap-3"
                 } ${
                   active
-                    ? "bg-[#63e009] text-[#173b0b] shadow-[0_10px_24px_rgba(99,224,9,0.22)]"
+                    ? "bg-brand-primary text-[#173b0b] shadow-[0_10px_24px_rgba(99,224,9,0.22)]"
                     : "text-slate-500 hover:bg-slate-100 hover:text-slate-900"
                 }`}
                 href={item.href}
@@ -94,7 +94,7 @@ export function AdminSidebar({ collapsed, mobileOpen, onClose }: AdminSidebarPro
                 title={collapsed ? item.label : undefined}
               >
                 {active ? (
-                  <span className="absolute -left-4 top-1/2 h-5 w-1 -translate-y-1/2 rounded-r-full bg-[#63e009]" />
+                  <span className="absolute -left-4 top-1/2 h-5 w-1 -translate-y-1/2 rounded-r-full bg-brand-primary" />
                 ) : null}
                 <span className="shrink-0">
                   <Icon />

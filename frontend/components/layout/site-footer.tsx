@@ -4,6 +4,8 @@ import Image from "next/image";
 import { Mail, MessageCircleMore } from "lucide-react";
 
 import { useLanguage } from "@/lib/i18n";
+import { brandClasses } from "@/utils/colors";
+import { logoAssets } from "@/utils/logos";
 
 function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
@@ -49,10 +51,10 @@ export function SiteFooter() {
           <div className="flex flex-col items-center text-center lg:w-[30%] lg:shrink-0 lg:items-start lg:text-left">
             <div className="flex items-center gap-2">
               <Image
-                src="/logo/ic_footer.webp"
-                alt="BidTech logo"
-                width={290}
-                height={79}
+                src={logoAssets.footer.src}
+                alt={logoAssets.footer.alt}
+                width={logoAssets.footer.width}
+                height={logoAssets.footer.height}
                 className="h-12 w-auto object-contain sm:h-14"
               />
             </div>
@@ -64,7 +66,7 @@ export function SiteFooter() {
                 return (
                   <a
                     aria-label={social.label}
-                    className="flex size-9 items-center justify-center rounded-full border border-white/10 text-zinc-300 transition hover:border-lime-300/40 hover:text-[#63E009]"
+                    className={`flex size-9 items-center justify-center rounded-full border border-white/10 text-zinc-300 transition hover:border-lime-300/40 ${brandClasses.hoverTextPrimary}`}
                     href={social.href}
                     key={social.label}
                     rel="noreferrer"
@@ -83,7 +85,7 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2.5 sm:space-y-3">
               {t.footer.navItems.map((item) => (
                 <li key={item.label}>
-                  <a className="break-words text-[11px] leading-5 text-zinc-400 transition hover:text-[#63E009] sm:text-sm" href={item.href}>
+                  <a className={`break-words text-[11px] leading-5 text-zinc-400 transition ${brandClasses.hoverTextPrimary} sm:text-sm`} href={item.href}>
                     {item.label}
                   </a>
                 </li>
@@ -96,7 +98,7 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2.5 sm:space-y-3">
               {t.footer.servicesItems.map((item) => (
                 <li key={item}>
-                  <a className="break-words text-[11px] leading-5 text-zinc-400 transition hover:text-[#63E009] sm:text-sm" href="#services">
+                  <a className={`break-words text-[11px] leading-5 text-zinc-400 transition ${brandClasses.hoverTextPrimary} sm:text-sm`} href="#services">
                     {item}
                   </a>
                 </li>
@@ -109,7 +111,7 @@ export function SiteFooter() {
             <ul className="mt-4 space-y-2.5 sm:space-y-3">
               {t.footer.helpItems.map((item) => (
                 <li key={item}>
-                  <a className="break-words text-[11px] leading-5 text-zinc-400 transition hover:text-[#63E009] sm:text-sm" href="#">
+                  <a className={`break-words text-[11px] leading-5 text-zinc-400 transition ${brandClasses.hoverTextPrimary} sm:text-sm`} href="#">
                     {item}
                   </a>
                 </li>
