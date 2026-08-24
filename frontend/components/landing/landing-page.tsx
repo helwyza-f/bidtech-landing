@@ -155,9 +155,13 @@ function LandingPageView() {
                   </div>
                   <p className="mt-2 px-1 text-xs font-semibold text-slate-700">{heroShowcase.mobileLabel}</p>
                 </div>
-                <div className="absolute -right-4 top-7 rounded-2xl border border-green-100 bg-white px-4 py-3 shadow-[0_16px_45px_rgba(15,23,42,0.12)]">
-                  <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">{heroShowcase.metricLabel}</p>
-                  <p className="mt-1 text-2xl font-bold text-slate-950">{heroShowcase.metricValue}</p>
+                <div className="absolute right-2 top-4 max-w-[34%] rounded-2xl border border-green-100 bg-white px-3 py-2.5 shadow-[0_16px_45px_rgba(15,23,42,0.12)] sm:-right-4 sm:top-7 sm:max-w-none sm:px-4 sm:py-3">
+                  <p className="truncate text-[10px] font-semibold uppercase tracking-wider text-slate-500 sm:text-xs">
+                    {heroShowcase.metricLabel}
+                  </p>
+                  <p className="mt-0.5 text-xl font-bold leading-none text-slate-950 sm:mt-1 sm:text-2xl">
+                    {heroShowcase.metricValue}
+                  </p>
                 </div>
               </div>
               <div className="mt-7 flex justify-center">
@@ -223,23 +227,17 @@ function LandingPageView() {
         </Reveal>
 
         <div
-          className="mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
+          className="mt-8 flex w-full snap-x snap-mandatory items-stretch gap-4 overflow-x-auto [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
           onScroll={handleServiceScroll}
           ref={servicesSliderRef}
         >
           {t.services.items.map((service, index) => (
-            <Reveal className="w-full min-w-full shrink-0 snap-start md:min-w-0 md:shrink" delay={index * 120} key={service.title} y={34}>
-              <Card className="h-full border-green-100 bg-white shadow-[0_22px_70px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_28px_80px_rgba(95,201,74,0.14)]">
+            <Reveal className="flex w-full min-w-full shrink-0 snap-start md:min-w-0 md:shrink" delay={index * 120} key={service.title} y={34}>
+              <Card className="flex min-h-[305px] w-full border-green-100 bg-white !shadow-none transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_28px_80px_rgba(95,201,74,0.14)] md:h-full md:min-h-0">
                 <CardContent
-                  className={`flex h-full flex-col space-y-5 sm:min-h-[255px] ${
-                    index === 2 ? "min-h-[205px]" : "min-h-[245px]"
-                  }`}
+                  className="flex h-full w-full flex-col space-y-5 p-5 md:min-h-[255px] md:p-6"
                 >
-                  <div
-                    className={`grid grid-rows-[auto_1fr] gap-4 sm:min-h-[155px] ${
-                      index === 2 ? "min-h-[165px]" : "min-h-[165px]"
-                    }`}
-                  >
+                  <div className="grid min-h-[150px] gap-4 md:min-h-[155px] md:grid-rows-[auto_1fr]">
                     <div className="flex items-center gap-4">
                       <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-brand-primary/10 ring-1 ring-brand-primary/10">
                         <Image src={serviceIcons[index]} alt="" width={22} height={22} className="size-5" />
@@ -325,14 +323,14 @@ function LandingPageView() {
         </Reveal>
 
         <div
-          className="mt-10 flex w-full snap-x snap-mandatory gap-5 overflow-x-auto pb-2 [scrollbar-width:none] sm:grid sm:grid-cols-2 sm:overflow-visible sm:pb-0 lg:grid-cols-4 [&::-webkit-scrollbar]:hidden"
+          className="mt-10 flex w-full snap-x snap-mandatory items-stretch gap-5 overflow-x-auto [scrollbar-width:none] sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-4 [&::-webkit-scrollbar]:hidden"
           onScroll={handleSpecializationScroll}
           ref={specializationsSliderRef}
         >
           {t.specializations.items.map((item, index) => (
-            <Reveal className="w-full min-w-full shrink-0 snap-start sm:min-w-0 sm:shrink" delay={(index % 4) * 90} key={item.title} y={30}>
-              <div className="flex h-full min-h-[292px] flex-col overflow-hidden rounded-[24px] border border-green-100 bg-white shadow-[0_16px_48px_rgba(15,23,42,0.07)] transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_24px_64px_rgba(95,201,74,0.14)]">
-                <div className="m-3 mb-0 flex aspect-[16/10.5] items-center justify-center overflow-hidden rounded-[18px] bg-[linear-gradient(135deg,#f1fbef,#e9f7ee)] p-1.5">
+            <Reveal className="flex w-full min-w-full shrink-0 snap-start sm:min-w-0 sm:shrink" delay={(index % 4) * 90} key={item.title} y={30}>
+              <div className="flex min-h-[320px] w-full flex-col overflow-hidden rounded-[24px] border border-green-100 bg-white !shadow-none transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_24px_64px_rgba(95,201,74,0.14)] sm:h-full sm:min-h-[292px] sm:shadow-[0_16px_48px_rgba(15,23,42,0.07)]">
+                <div className="m-3 mb-0 flex h-[205px] items-center justify-center overflow-hidden rounded-[18px] bg-[linear-gradient(135deg,#f1fbef,#e9f7ee)] p-1.5 sm:aspect-[16/10.5] sm:h-auto">
                   <div className="relative h-full w-full">
                     <Image
                       src={specializationImages[index]}
@@ -343,7 +341,7 @@ function LandingPageView() {
                     />
                   </div>
                 </div>
-                <div className="m-3 mt-0 flex flex-1 items-start gap-3 rounded-[18px] bg-white px-3 py-4">
+                <div className="m-3 mt-0 flex min-h-[104px] flex-1 items-start gap-3 rounded-[18px] bg-white px-3 py-4">
                   <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-brand-primary/10 ring-1 ring-brand-primary/10">
                     <Image src={specializationIcons[index]} alt="" width={18} height={18} className="size-4" />
                   </div>
@@ -432,14 +430,14 @@ function LandingPageView() {
         </div>
 
         <div
-          className="mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
+          className="mt-8 flex w-full snap-x snap-mandatory items-stretch gap-4 overflow-x-auto [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
           onScroll={handleProductScroll}
           ref={productSliderRef}
         >
           {t.products.tabs[activeProductTab].items.map((product) => (
-            <Card className="w-full min-w-full shrink-0 snap-start overflow-hidden rounded-[26px] border-green-100 bg-white p-0 shadow-[0_18px_58px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_26px_72px_rgba(95,201,74,0.14)] md:min-w-0 md:shrink" key={product.title}>
+            <Card className="flex min-h-[512px] w-full min-w-full shrink-0 snap-start flex-col overflow-hidden rounded-[26px] border-green-100 bg-white p-0 !shadow-none transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_26px_72px_rgba(95,201,74,0.14)] md:min-h-0 md:min-w-0 md:shrink md:shadow-[0_18px_58px_rgba(15,23,42,0.08)]" key={product.title}>
               <div className="bg-[linear-gradient(135deg,#f2fbef,#ffffff)] p-4">
-                <div className="flex h-[220px] items-center justify-center overflow-hidden rounded-[20px] border border-white bg-[#eef8ee] p-2 shadow-[inset_0_0_0_1px_rgba(95,201,74,0.08)] sm:h-[250px] md:h-[230px] lg:h-[250px]">
+                <div className="flex h-[210px] items-center justify-center overflow-hidden rounded-[20px] border border-white bg-[#eef8ee] p-2 shadow-[inset_0_0_0_1px_rgba(95,201,74,0.08)] sm:h-[250px] md:h-[230px] lg:h-[250px]">
                   <div className="flex h-full w-full items-center justify-center">
                     <Image
                       src={product.image}
@@ -451,7 +449,7 @@ function LandingPageView() {
                   </div>
                 </div>
               </div>
-              <CardContent className="space-y-3 px-5 pb-6 pt-1 sm:px-6">
+              <CardContent className="flex flex-1 flex-col space-y-3 px-5 pb-6 pt-1 sm:px-6">
                 <span className="text-xs font-semibold uppercase tracking-widest text-brand-primary">{product.tag}</span>
                 <h3 className="font-[family-name:var(--font-sora)] text-xl font-bold text-slate-950">{product.title}</h3>
                 <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">{product.subtitle}</p>
