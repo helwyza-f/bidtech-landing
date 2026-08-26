@@ -18,6 +18,14 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
 
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Build template demos into frontend/public/demo
+        run: ./scripts/build-template-demos.sh --copy
+
       - name: Prepare frontend directory
         uses: appleboy/ssh-action@v1.2.0
         with:
