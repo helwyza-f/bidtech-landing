@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { Star, ShieldCheck } from "lucide-react";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 
@@ -47,12 +48,21 @@ export default function Hero() {
       className="relative w-full min-h-screen flex flex-col justify-between overflow-hidden pt-24 pb-8 md:pb-12"
     >
       <motion.div
-        className="absolute inset-0 w-full h-[115%] bg-[url('/images/hero_section.jpg')] bg-cover bg-center -z-10"
+        className="absolute inset-0 w-full h-[115%] -z-10"
         style={{
           y: backgroundY,
           scale: 1.05,
         }}
-      />
+      >
+        <Image
+          src="/images/hero_section.jpg"
+          alt="Hero background"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+      </motion.div>
       <div className="absolute inset-0 bg-gradient-to-b from-black/80 via-black/40 to-black/20" />
 
       <div className="absolute bottom-0 left-0 w-full h-40 bg-gradient-to-t from-gray-50 to-transparent pointer-events-none" />

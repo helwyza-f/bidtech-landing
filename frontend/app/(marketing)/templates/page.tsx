@@ -124,8 +124,8 @@ const SAMPLE_TEMPLATES = [
     category: "Automotive",
     subcategory: "Rental Mobil",
     price: "Rp649.000",
-    image: "/templates/automotive/images/hero_section.jpg",
-    previewHref: "/showcase/automotive",
+    image: "/demo/automotive/images/hero_section.jpg",
+    previewHref: "/demo/automotive/",
     tags: ["Automotive", "Rental Mobil"],
     icon: CarFront,
   },
@@ -247,7 +247,12 @@ export default function TemplatesPage() {
                   </div>
 
                   <div className="flex gap-2 pt-2 sm:gap-3 sm:pt-3">
-                    <Link className="flex-1" href={template.previewHref ?? "#"}>
+                    <Link
+                      className="flex-1"
+                      href={template.previewHref ?? "#"}
+                      rel={template.previewHref ? "noreferrer" : undefined}
+                      target={template.previewHref ? "_blank" : undefined}
+                    >
                       <Button
                         className="h-9 w-full gap-1 rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 transition-all hover:border-brand-primary/50 hover:bg-emerald-50 hover:text-slate-900 sm:h-10 sm:gap-1.5 sm:text-sm"
                         size="sm"

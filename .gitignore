@@ -12,3 +12,4 @@ coverage
 .env.local
 .gocache
 backend/
+frontend/public/demo/

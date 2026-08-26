@@ -9,7 +9,15 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
   async rewrites() {
-    return [{ source: "/api/:path*", destination: `${backendUrl}/api/:path*` }];
+    return [
+      { source: "/api/:path*", destination: `${backendUrl}/api/:path*` },
+      { source: "/demo/:template", destination: "/demo/:template/index.html" },
+      { source: "/demo/:template/", destination: "/demo/:template/index.html" },
+      {
+        source: "/demo/:template/:path*/",
+        destination: "/demo/:template/:path*/index.html",
+      },
+    ];
   },
 };
 
