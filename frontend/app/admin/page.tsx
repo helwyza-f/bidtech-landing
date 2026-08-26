@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { CheckCircle2, Clock3, Inbox, MessageCircleMore, TrendingUp } from "lucide-react";
 
-import { getOrders } from "@/core/api-client";
+import { getOrders } from "@/lib/api";
 
 export default async function AdminDashboardPage() {
   const cookieStore = await cookies();
@@ -52,7 +52,7 @@ export default async function AdminDashboardPage() {
       <section className="flex flex-col justify-between gap-6 border-b border-slate-200 pb-8 lg:flex-row lg:items-end">
         <div>
           <p className="flex items-center gap-2 text-xs font-bold uppercase tracking-[0.14em] text-green-600">
-            <span className="size-2 rounded-full bg-[#63e009]" />
+            <span className="size-2 rounded-full bg-brand-primary" />
             Ringkasan Bisnis
           </p>
           <h1 className="mt-3 text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl">Selamat Datang</h1>
@@ -62,7 +62,7 @@ export default async function AdminDashboardPage() {
         </div>
 
         <div className="inline-flex w-fit items-center gap-3 rounded-2xl border border-green-100 bg-white px-4 py-3 shadow-sm">
-          <span className="flex size-10 items-center justify-center rounded-xl bg-[#63e009]/15 text-green-700">
+          <span className="flex size-10 items-center justify-center rounded-xl bg-brand-primary/15 text-green-700">
             <TrendingUp className="size-5" />
           </span>
           <div>
@@ -86,7 +86,7 @@ export default async function AdminDashboardPage() {
               <p className="mt-5 text-sm font-medium text-slate-500">{card.label}</p>
               <p className={`mt-1 text-4xl font-extrabold tracking-tight ${card.valueStyle}`}>{card.value}</p>
               <p className="mt-2 text-xs text-slate-400">{card.description}</p>
-              <span className="absolute -bottom-7 -right-7 size-24 rounded-full bg-[#63e009]/[0.06] transition group-hover:scale-125" />
+              <span className="absolute -bottom-7 -right-7 size-24 rounded-full bg-brand-primary/[0.06] transition group-hover:scale-125" />
             </article>
           );
         })}
@@ -110,7 +110,7 @@ export default async function AdminDashboardPage() {
             <>
               <span className="bg-amber-400" style={{ width: `${(baru / total) * 100}%` }} />
               <span className="bg-sky-400" style={{ width: `${(dihubungi / total) * 100}%` }} />
-              <span className="bg-[#63e009]" style={{ width: `${(selesai / total) * 100}%` }} />
+              <span className="bg-brand-primary" style={{ width: `${(selesai / total) * 100}%` }} />
             </>
           ) : (
             <span className="w-full bg-slate-100" />

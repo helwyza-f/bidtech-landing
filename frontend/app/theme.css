@@ -1,0 +1,9 @@
+@theme {
+  --color-brand-primary: #5fc94a;
+  --color-brand-primary-hover: #4cad3b;
+  --color-brand-primary-dark: #173b25;
+  --color-brand-cta: #263f8f;
+  --color-brand-cta-hover: #20377d;
+  --color-brand-dark: #050505;
+  --color-brand-surface: #0b0f12;
+}

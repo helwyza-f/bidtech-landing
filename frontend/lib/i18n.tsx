@@ -2,8 +2,8 @@
 
 import { createContext, useContext, useState, type ReactNode } from "react";
 
-import { id } from "@/lib/translations/id";
-import { en } from "@/lib/translations/en";
+import { id } from "@/lib/i18n/id";
+import { en } from "@/lib/i18n/en";
 
 export type Lang = "id" | "en";
 

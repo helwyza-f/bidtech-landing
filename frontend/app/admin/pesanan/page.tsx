@@ -1,8 +1,8 @@
 import { cookies } from "next/headers";
 import { MessageCircle } from "lucide-react";
 
-import { StatusSelect } from "@/components/admin/order-actions";
-import { getOrders } from "@/core/api-client";
+import { StatusSelect } from "@/features/admin/components/order-actions";
+import { getOrders } from "@/lib/api";
 
 function toWhatsAppLink(whatsapp: string) {
   const digits = whatsapp.replace(/\D/g, "");

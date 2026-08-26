@@ -1,0 +1,163 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { Check, ChevronDown, Menu, X } from "lucide-react";
+
+import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/lib/i18n";
+import { brandClasses, logoAssets } from "@/lib/data";
+
+export function SiteHeader() {
+  const { lang, setLang, t } = useLanguage();
+  const [open, setOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    if (!open) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [open]);
+
+  const getNavLink = (href: string) => {
+    if (href.startsWith("#")) {
+      // Anchor link - check if we're on home page
+      if (pathname === "/" || pathname === "") {
+        return href;
+      }
+      // If not on home, navigate to home with anchor
+      return `/${href}`;
+    }
+    return href;
+  };
+
+  const navItems = [
+    { label: t.nav.about, href: "/" },
+    { label: t.nav.services, href: "#services" },
+    { label: t.nav.portfolio, href: "#portfolio" },
+    { label: t.nav.template, href: "/templates" },
+    { label: t.nav.contact, href: "#contact" },
+  ];
+
+  return (
+    <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-xl">
+      <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2 px-4 py-3 sm:gap-4 sm:px-5 sm:py-4 md:px-8">
+        <Link className="flex items-center" href="/">
+          <Image
+            src={logoAssets.main.src}
+            alt={logoAssets.main.alt}
+            width={logoAssets.main.width}
+            height={logoAssets.main.height}
+            priority
+            className="h-8 w-auto object-contain sm:h-10 md:h-11"
+          />
+        </Link>
+
+        <nav className="hidden items-center gap-8 text-sm text-slate-600 md:flex">
+          {navItems.map((item) => (
+            <Link className={`transition ${brandClasses.hoverTextPrimary}`} href={getNavLink(item.href)} key={item.label}>
+              {item.label}
+            </Link>
+          ))}
+        </nav>
+
+        <div className="flex items-center gap-2 sm:gap-3">
+          <div className="relative hidden md:block" ref={menuRef}>
+            <button
+              className={`flex items-center gap-1 text-sm text-slate-600 transition ${brandClasses.hoverTextPrimary}`}
+              onClick={() => setOpen((v) => !v)}
+              type="button"
+            >
+              {lang.toUpperCase()} <ChevronDown className="size-3.5" />
+            </button>
+
+            {open && (
+              <div className="absolute right-0 top-full mt-2 w-32 overflow-hidden rounded-xl border border-zinc-200 bg-white py-1 shadow-xl">
+                {(
+                  [
+                    { code: "id", label: "Indonesia" },
+                    { code: "en", label: "English" },
+                  ] as const
+                ).map((option) => (
+                  <button
+                    className={`flex w-full items-center justify-between px-3 py-2 text-left text-sm text-slate-600 transition hover:bg-lime-50 ${brandClasses.hoverTextPrimary}`}
+                    key={option.code}
+                    onClick={() => {
+                      setLang(option.code);
+                      setOpen(false);
+                    }}
+                    type="button"
+                  >
+                    {option.label}
+                    {lang === option.code && <Check className={`size-3.5 ${brandClasses.textPrimary}`} />}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+
+          <a href="#contact">
+            <Button size="sm" className="h-9 rounded-full px-3 text-xs sm:h-10 sm:px-4 sm:text-sm">
+              {t.header.cta}
+            </Button>
+          </a>
+
+          <button
+            aria-expanded={mobileOpen}
+            aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
+            className="flex size-9 items-center justify-center rounded-full border border-zinc-200 text-slate-900 md:hidden"
+            onClick={() => setMobileOpen((value) => !value)}
+            type="button"
+          >
+            {mobileOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+        </div>
+      </div>
+
+      {mobileOpen && (
+        <div className="border-t border-zinc-200 bg-white px-4 py-4 md:hidden">
+          <nav className="mx-auto grid max-w-7xl gap-1">
+            {navItems.map((item) => (
+              <Link
+                className={`rounded-xl px-3 py-3 text-sm text-slate-600 transition hover:bg-lime-50 ${brandClasses.hoverTextPrimary}`}
+                href={getNavLink(item.href)}
+                key={item.label}
+                onClick={() => setMobileOpen(false)}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+          <div className="mx-auto mt-3 flex max-w-7xl gap-2 border-t border-zinc-200 pt-3">
+            {(["id", "en"] as const).map((code) => (
+              <button
+                className={`rounded-full border px-4 py-2 text-xs font-semibold uppercase ${
+                  lang === code ? `${brandClasses.borderPrimary} ${brandClasses.bgPrimary} text-black` : "border-zinc-200 text-slate-600"
+                }`}
+                key={code}
+                onClick={() => {
+                  setLang(code);
+                  setMobileOpen(false);
+                }}
+                type="button"
+              >
+                {code}
+              </button>
+            ))}
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}

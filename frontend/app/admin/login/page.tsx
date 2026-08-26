@@ -41,13 +41,13 @@ export default function AdminLoginPage() {
   };
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#050505] px-4 text-white">
+    <main className="flex min-h-screen items-center justify-center bg-brand-dark px-4 text-white">
       <form
-        className="w-full max-w-sm space-y-1 rounded-[20px] border border-white/10 bg-[#0b0f12] p-8"
+        className="w-full max-w-sm space-y-1 rounded-[20px] border border-white/10 bg-brand-surface p-8"
         onSubmit={handleSubmit}
       >
         <div className="text-2xl font-extrabold">
-          BID<span className="text-[#63e009]">TECH</span>
+          BID<span className="text-brand-primary">TECH</span>
         </div>
         <p className="mb-4 text-sm text-zinc-400">Admin Dashboard</p>
 
@@ -94,7 +94,7 @@ export default function AdminLoginPage() {
         </div>
 
         <button
-          className="mt-5 w-full rounded-full bg-[#63e009] py-2.5 text-sm font-bold text-[#052e00] transition disabled:opacity-60"
+          className="mt-5 w-full rounded-full bg-brand-primary py-2.5 text-sm font-bold text-[#052e00] transition disabled:opacity-60"
           disabled={loading}
           type="submit"
         >
