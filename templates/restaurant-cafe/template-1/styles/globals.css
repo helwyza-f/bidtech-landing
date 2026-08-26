@@ -2,43 +2,54 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  html {
+    /* Lenis yang menangani kehalusan scroll. Kalau keduanya aktif, gerakan
+       anchor jadi dobel dan terasa lengket. */
+    scroll-behavior: auto;
+  }
+
+  body {
+    @apply bg-cream text-cocoa antialiased;
+    font-family: var(--font-jakarta), system-ui, sans-serif;
+  }
+
+  ::selection {
+    @apply bg-ember text-cream;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+@layer components {
+  .shell {
+    @apply mx-auto w-full max-w-shell px-5 sm:px-8;
+  }
+
+  .section {
+    @apply py-20 md:py-28;
+  }
+
+  /* Label kecil di atas heading — pola berulang di seluruh desain. */
+  .eyebrow {
+    @apply text-xs font-semibold uppercase tracking-eyebrow text-ember;
+  }
+
+  .heading {
+    @apply font-bold leading-[1.05] tracking-tight text-ink;
+  }
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-/* Smooth transitions */
-button,
-a {
-  transition: all 0.3s ease;
-}
-
-/* Utility classes */
-.container-max {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-}
-
-.section-padding {
-  @apply py-16 md:py-20;
-}
-
-.heading-lg {
-  @apply text-3xl md:text-4xl font-bold;
-}
-
-.text-muted {
-  @apply text-gray-600;
+@layer utilities {
+  /* Menghentikan SEMUA animasi bagi user yang memilih "reduce motion" di OS.
+     Ini jaring pengaman: kalau ada satu komponen yang lupa mengeceknya,
+     aturan ini tetap menangkapnya. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
 }
