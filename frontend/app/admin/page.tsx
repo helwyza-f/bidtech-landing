@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { CheckCircle2, Clock3, Inbox, MessageCircleMore, TrendingUp } from "lucide-react";
 
-import { getOrders } from "@/core/api-client";
+import { getOrders } from "@/lib/api";
 
 export default async function AdminDashboardPage() {
   const cookieStore = await cookies();

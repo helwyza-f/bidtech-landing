@@ -9,10 +9,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ContactForm } from "@/components/landing/contact-form";
 import { Reveal } from "@/components/landing/reveal";
 import { StatCounter } from "@/components/landing/stat-counter";
-import { serviceIcons, specializationIcons, specializationImages } from "@/lib/icons";
+import { serviceIcons, specializationIcons, specializationImages } from "@/lib/data";
 import { LandingPageProvider, heroShowcaseSlides, useLandingPage } from "@/providers/landing-page-provider";
-import { brandClasses } from "@/utils/colors";
-import { clientLogos, logoAssets } from "@/utils/logos";
+import { brandClasses } from "@/lib/data";
+import { clientLogos, logoAssets } from "@/lib/data";
 
 const sectionBadgeClass =
   "rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm";

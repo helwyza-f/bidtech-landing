@@ -4,8 +4,7 @@ import Image from "next/image";
 import { Mail, MessageCircleMore } from "lucide-react";
 
 import { useLanguage } from "@/lib/i18n";
-import { brandClasses } from "@/utils/colors";
-import { logoAssets } from "@/utils/logos";
+import { brandClasses, logoAssets } from "@/lib/data";
 
 function FacebookIcon(props: React.SVGProps<SVGSVGElement>) {
   return (

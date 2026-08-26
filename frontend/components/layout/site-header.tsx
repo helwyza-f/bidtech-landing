@@ -8,8 +8,7 @@ import { Check, ChevronDown, Menu, X } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/i18n";
-import { brandClasses } from "@/utils/colors";
-import { logoAssets } from "@/utils/logos";
+import { brandClasses, logoAssets } from "@/lib/data";
 
 export function SiteHeader() {
   const { lang, setLang, t } = useLanguage();
