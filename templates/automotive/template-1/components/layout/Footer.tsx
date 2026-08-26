@@ -98,7 +98,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/#why-choose-us"
+                  href="/layanan"
                   className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
                 >
                   Layanan
@@ -106,7 +106,7 @@ export default function Footer() {
               </li>
               <li>
                 <Link
-                  href="/#faq"
+                  href="/faq"
                   className="text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors"
                 >
                   FAQ
