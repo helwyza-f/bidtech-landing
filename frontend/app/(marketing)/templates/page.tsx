@@ -125,7 +125,7 @@ const SAMPLE_TEMPLATES = [
     subcategory: "Rental Mobil",
     price: "Rp649.000",
     image: "/templates/automotive/images/hero_section.jpg",
-    previewHref: "/templates/automotive",
+    previewHref: "/showcase/automotive",
     tags: ["Automotive", "Rental Mobil"],
     icon: CarFront,
   },
