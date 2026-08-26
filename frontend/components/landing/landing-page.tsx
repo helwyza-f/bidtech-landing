@@ -80,7 +80,7 @@ function LandingPageView() {
               </h1>
             </Reveal>
             <Reveal delay={180} y={16}>
-              <p className="mt-6 max-w-2xl text-base leading-8 text-slate-600 md:text-lg lg:mx-0">{t.hero.subtitle}</p>
+              <p className="mt-6 w-full text-base leading-8 text-slate-600 md:text-lg lg:mx-0">{t.hero.subtitle}</p>
             </Reveal>
 
             <Reveal delay={270} y={16}>

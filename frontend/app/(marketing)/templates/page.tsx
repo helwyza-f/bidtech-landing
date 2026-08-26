@@ -70,6 +70,17 @@ const SAMPLE_TEMPLATES = [
   },
   {
     id: 4,
+    name: "Rentcar",
+    category: "Automotive",
+    subcategory: "Rental Mobil",
+    price: "Rp649.000",
+    image: "/images/rentcar_template.png",
+    previewHref: "/demo/automotive/",
+    tags: ["Automotive", "Rental Mobil"],
+    icon: CarFront,
+  },  
+  {
+    id: 5,
     name: "BizLand",
     category: "Company Profile",
     subcategory: "Business",
@@ -79,7 +90,7 @@ const SAMPLE_TEMPLATES = [
     icon: Briefcase,
   },
   {
-    id: 5,
+    id: 6,
     name: "Travelin",
     category: "Travel",
     subcategory: "Tourism",
@@ -89,7 +100,7 @@ const SAMPLE_TEMPLATES = [
     icon: Map,
   },
   {
-    id: 6,
+    id: 7,
     name: "EduSmart",
     category: "Education",
     subcategory: "School",
@@ -99,7 +110,7 @@ const SAMPLE_TEMPLATES = [
     icon: BookOpen,
   },
   {
-    id: 7,
+    id: 8,
     name: "Glamour",
     category: "Beauty",
     subcategory: "Salon",
@@ -109,7 +120,7 @@ const SAMPLE_TEMPLATES = [
     icon: Sparkles,
   },
   {
-    id: 8,
+    id: 9,
     name: "StartUp",
     category: "SaaS",
     subcategory: "Startup",
@@ -117,17 +128,6 @@ const SAMPLE_TEMPLATES = [
     image: "/images/expertise-8.webp",
     tags: ["Landing Page", "Startup"],
     icon: Rocket,
-  },
-  {
-    id: 9,
-    name: "Rentcar Premium",
-    category: "Automotive",
-    subcategory: "Rental Mobil",
-    price: "Rp649.000",
-    image: "/demo/automotive/images/hero_section.jpg",
-    previewHref: "/demo/automotive/",
-    tags: ["Automotive", "Rental Mobil"],
-    icon: CarFront,
   },
 ];
 
@@ -211,7 +211,7 @@ export default function TemplatesPage() {
                     <div className="relative h-48 w-full overflow-hidden bg-slate-100 sm:h-56">
                       <Image
                         alt={`${template.name} design preview`}
-                        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                        className="h-full w-full object-cover object-top aspect-video transition-transform duration-500 group-hover:scale-[1.04]"
                         draggable={false}
                         fill
                         src={template.image}
