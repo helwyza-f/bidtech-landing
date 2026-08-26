@@ -10,6 +10,8 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+  overflow-x: hidden;
 }
 
 body {
@@ -18,12 +20,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-}
-
-/* Smooth transitions */
-button,
-a {
-  transition: all 0.3s ease;
+  overflow-x: hidden;
+  width: 100%;
 }
 
 /* Utility classes */

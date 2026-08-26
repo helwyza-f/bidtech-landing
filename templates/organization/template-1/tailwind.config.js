@@ -3,29 +3,20 @@ module.exports = {
   content: [
     './app/**/*.{js,ts,jsx,tsx}',
     './components/**/*.{js,ts,jsx,tsx}',
+    './lib/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
     extend: {
       colors: {
-        primary: {
-          50: '#f0f9ff',
-          100: '#e0f2fe',
-          500: '#0ea5e9',
-          600: '#0284c7',
-          700: '#0369a1',
-        },
-      },
-      typography: {
-        DEFAULT: {
-          css: {
-            color: '#1f2937',
-            a: {
-              color: '#0ea5e9',
-              '&:hover': {
-                color: '#0284c7',
-              },
-            },
-          },
+        org: {
+          teal: '#0D4D44',
+          'teal-dark': '#072E29',
+          'teal-light': '#16685D',
+          'teal-hover': '#0B423A',
+          coral: '#E05A47',
+          'coral-hover': '#CF4D3B',
+          beige: '#F6F4EE',
+          'beige-dark': '#EBE7DD',
         },
       },
     },
