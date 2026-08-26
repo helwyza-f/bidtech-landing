@@ -190,38 +190,39 @@ export default function TemplatesPage() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
           {SAMPLE_TEMPLATES.map((template) => {
             const Icon = template.icon;
 
             return (
               <Card
-                className="group overflow-hidden rounded-[22px] border border-emerald-100 bg-white shadow-[0_14px_42px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-1 hover:border-brand-primary/40 hover:shadow-[0_24px_70px_rgba(95,201,74,0.16)] sm:rounded-[24px]"
+                className="group flex flex-col overflow-hidden rounded-[24px] border border-emerald-100 bg-white shadow-[0_12px_36px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-2 hover:border-brand-primary/50 hover:shadow-[0_20px_60px_rgba(95,201,74,0.18)]"
                 key={template.id}
               >
-                <div className="relative overflow-hidden bg-[linear-gradient(135deg,#f3fbef_0%,#ffffff_46%,#eef7ff_100%)] p-3 sm:p-4">
-                  <button className="absolute right-3 top-3 z-10 rounded-full border border-emerald-100 bg-white/90 p-2 shadow-sm backdrop-blur transition hover:border-brand-primary/40 sm:right-4 sm:top-4">
-                    <Heart className="size-4 text-slate-500 transition-colors group-hover:text-brand-primary" />
+                <div className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 p-3 sm:p-4">
+                  <button className="absolute right-3 top-3 z-10 rounded-full border border-emerald-200 bg-white/95 p-2.5 shadow-md backdrop-blur transition-all hover:border-brand-primary/60 hover:bg-white sm:right-4 sm:top-4">
+                    <Heart className="size-4 text-slate-400 transition-colors group-hover:text-brand-primary" />
                   </button>
-                  <div className="relative overflow-hidden rounded-[18px] border border-white bg-white shadow-[0_10px_30px_rgba(15,23,42,0.1)] sm:rounded-[20px]">
-                    <div className="absolute left-3 top-3 z-10 flex max-w-[72%] items-center gap-1.5 truncate rounded-full bg-white/90 px-2.5 py-1.5 text-[11px] font-bold text-slate-700 shadow-sm backdrop-blur sm:gap-2 sm:px-3 sm:text-xs">
-                      <Icon className="size-3.5 text-brand-primary" />
+                  <div className="relative overflow-hidden rounded-[20px] border border-white/80 bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
+                    <div className="absolute left-3 top-3 z-10 flex max-w-[65%] items-center gap-1.5 truncate rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-bold text-slate-700 shadow-md backdrop-blur-sm sm:gap-2 sm:px-3 sm:py-2 sm:text-xs">
+                      <Icon className="size-3.5 shrink-0 text-brand-primary" />
                       <span className="truncate">{template.category}</span>
                     </div>
-                    <Image
-                      alt={`${template.name} design preview`}
-                      className="h-44 w-full object-cover object-top transition duration-500 group-hover:scale-[1.03] sm:h-56"
-                      draggable={false}
-                      height={360}
-                      src={template.image}
-                      width={640}
-                    />
+                    <div className="relative h-48 w-full overflow-hidden bg-slate-100 sm:h-56">
+                      <Image
+                        alt={`${template.name} design preview`}
+                        className="h-full w-full object-cover object-top transition-transform duration-500 group-hover:scale-[1.04]"
+                        draggable={false}
+                        fill
+                        src={template.image}
+                      />
+                    </div>
                   </div>
                 </div>
 
-                <CardContent className="space-y-3.5 p-4 sm:space-y-4 sm:p-5">
-                  <div className="flex items-start justify-between gap-3">
-                    <div>
+                <CardContent className="flex flex-1 flex-col space-y-3 p-4 sm:space-y-3.5 sm:p-5">
+                  <div className="flex flex-1 items-start justify-between gap-2">
+                    <div className="min-w-0">
                       <h3 className="text-base font-bold text-slate-950 transition-colors duration-200 group-hover:text-brand-primary sm:text-lg">
                         {template.name}
                       </h3>
@@ -229,15 +230,15 @@ export default function TemplatesPage() {
                         Design {template.subcategory}
                       </p>
                     </div>
-                    <p className="shrink-0 rounded-full bg-emerald-50 px-3 py-1.5 text-[11px] font-bold text-slate-950 sm:px-3.5 sm:py-2 sm:text-xs">
+                    <p className="shrink-0 whitespace-nowrap rounded-lg bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-slate-950 sm:px-3 sm:py-1.5 sm:text-xs">
                       {template.price}
                     </p>
                   </div>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-1.5">
                     {template.tags.map((tag) => (
                       <Badge
-                        className="border border-emerald-100 bg-white px-2.5 py-1 text-[10px] font-semibold tracking-[0.12em] text-slate-600 hover:bg-emerald-50 sm:text-xs"
+                        className="border border-emerald-100 bg-white px-2 py-0.5 text-[9px] font-semibold tracking-[0.1em] text-slate-600 transition hover:bg-emerald-50 hover:text-slate-700 sm:px-2.5 sm:py-1 sm:text-[10px]"
                         key={tag}
                       >
                         {tag}
@@ -245,23 +246,23 @@ export default function TemplatesPage() {
                     ))}
                   </div>
 
-                  <div className="grid grid-cols-2 gap-2 pt-1 sm:flex sm:gap-3 sm:pt-2">
+                  <div className="flex gap-2 pt-2 sm:gap-3 sm:pt-3">
                     <Link className="flex-1" href={template.previewHref ?? "#"}>
                       <Button
-                        className="h-10 w-full gap-1.5 rounded-full border-slate-200 bg-white px-3 text-xs text-slate-950 hover:border-brand-primary/50 hover:bg-emerald-50 sm:gap-2 sm:text-sm"
+                        className="h-9 w-full gap-1 rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 transition-all hover:border-brand-primary/50 hover:bg-emerald-50 hover:text-slate-900 sm:h-10 sm:gap-1.5 sm:text-sm"
                         size="sm"
                         variant="outline"
                       >
-                        <ExternalLink className="size-3.5 sm:size-4" />
-                        Lihat
+                        <ExternalLink className="size-3.5" />
+                        <span>Lihat</span>
                       </Button>
                     </Link>
                     <Button
-                      className="h-10 flex-1 gap-1.5 rounded-full bg-brand-primary px-3 text-xs text-slate-950 shadow-lg shadow-brand-primary/20 hover:bg-brand-primary-hover sm:gap-2 sm:text-sm"
+                      className="h-9 flex-1 gap-1 rounded-full bg-brand-primary text-xs font-medium text-slate-950 shadow-md shadow-brand-primary/20 transition-all hover:bg-brand-primary-hover hover:shadow-lg hover:shadow-brand-primary/30 sm:h-10 sm:gap-1.5 sm:text-sm"
                       size="sm"
                     >
-                      <ShoppingCart className="size-3.5 sm:size-4" />
-                      Beli
+                      <ShoppingCart className="size-3.5" />
+                      <span>Beli</span>
                     </Button>
                   </div>
                 </CardContent>
