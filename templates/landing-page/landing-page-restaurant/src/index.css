@@ -1,0 +1,157 @@
+@import "tailwindcss";
+@plugin "daisyui" {
+  themes: custom;
+};
+
+@theme {
+  --color-dark: #141B2B;
+  --color-white: #F9F9FFE5;
+  --color-gray: #808080;
+
+  --color-accent-orange: #d97706;
+  --color-accent-red: #aa3015;
+  --font-sans: "Plus Jakarta Sans", sans-serif;
+
+  --color-primary: #AA3015;
+  --color-primary-content:  #F9F9FF;
+  
+  --color-accent: #d97706;
+  --color-accent-content: #8f4c00;
+
+  /* Krem/blush section, diambil langsung dari file Figma. */
+  --color-cream: #FFF8F7;
+
+  /* Lebar container.
+     Artboard desain 1280px dengan konten 1132px (gutter 74px kiri-kanan).
+     1196 = 1132 konten + 2x32px padding dalam (px-8), sehingga pada layar 1280
+     konten mulai tepat di x=74 seperti desain. */
+  --container-site: 1196px;
+  --container-site-wide: 1536px;
+
+  /* Skala tipografi hasil ukur dari Figma. */
+  --text-hero: 3.75rem;      /* 60px - judul hero */
+  --text-section: 2rem;      /* 32px - judul section */
+  --text-section-lg: 2.25rem;/* 36px - judul section terpusat (FAQ) */
+  --text-eyebrow: 0.875rem;  /* 14px - label kecil di atas judul */
+}
+
+@plugin "daisyui/theme" {
+  name: "custom";
+  default: true;
+  prefersdark: false;
+  color-scheme: light;  
+
+  --color-primary: #aa3015;
+  --color-primary-content: #ffffff;
+
+  --color-secondary: #d97706;
+  --color-secondary-content: #ffffff;
+
+  --color-accent: #08060d;
+  --color-accent-content: #ffffff;
+
+  --color-neutral: #08060d;
+  --color-neutral-content: #ffffff;
+
+  --color-base-100: #ffffff;
+  --color-base-200: #f5f5f5;
+  --color-base-300: #e5e4e7;
+  --color-base-400: #FFF8F7;
+  --color-base-content: #08060d;
+
+  --color-info: #3b82f6;
+  --color-info-content: #ffffff;
+
+  --color-success: #22c55e;
+  --color-success-content: #ffffff;
+
+  --color-warning: #f59e0b;
+  --color-warning-content: #08060d;
+
+  --color-error: #ef4444;
+  --color-error-content: #ffffff;  
+}
+
+html {
+  /* Anchor link (#menu) meluncur halus, bukan lompat. */
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  /* Bikin teks terlihat lebih tajam dan rapat, mendekati render Figma. */
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+/* Judul jarang perlu dipenggal — biarkan browser menyeimbangkan barisnya. */
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+/* Jaring pengaman global.
+   Motion sudah kita atur lewat useReducedMotion di tiap komponen, tapi aturan ini
+   menangkap animasi CSS murni (transition, hover) yang tidak lewat Motion. */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./assets/fonts/PlusJakartaSans-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./assets/fonts/PlusJakartaSans-Italic-VariableFont_wght.ttf") format("truetype");
+  font-weight: 100 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+.navbar-menu-button {
+  @apply text-dark rounded-none hover:bg-gray duration-100 w-screen -mx-4 p-1 px-4 transition-all;
+}
+
+.navbar-menu-button > * {
+  @apply bg-transparent;
+}
+
+.navbar-menu {
+  @apply text-dark border-b-2 hover:border-accent-orange border-transparent duration-100 transition-all rounded-none; 
+}
+
+.navbar-menu a:active {
+  background-color: transparent;
+  color: inherit;
+}
+
+.navbar-menu-active {
+  @apply text-accent-orange border-b-2 border-accent-orange rounded-none;
+}
+
+.navbar {
+  @apply px-6;
+}
+
+.menu {
+  @apply w-full p-0 gap-x-2;
+}
+
+@utility section-container {
+  @apply mx-auto w-full max-w-site px-6 sm:px-8;
+}

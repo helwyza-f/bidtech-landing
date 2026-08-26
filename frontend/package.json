@@ -9,12 +9,15 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@tailwindcss/vite": "^4.3.3",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "daisyui": "^5.7.19",
     "lucide-react": "^1.24.0",
     "next": "^16.2.10",
     "react": "^19.2.7",
     "react-dom": "^19.2.7",
+    "react-router-dom": "^7.18.2",
     "sharp": "^0.35.3",
     "tailwind-merge": "^3.6.0"
   },
@@ -27,7 +30,7 @@
     "eslint": "^9.39.5",
     "eslint-config-next": "^16.2.10",
     "postcss": "^8.5.19",
-    "tailwindcss": "^4.3.2",
+    "tailwindcss": "^4.3.3",
     "typescript": "^6.0.3"
   }
 }

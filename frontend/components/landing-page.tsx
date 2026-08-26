@@ -1080,6 +1080,7 @@ export function LandingPage() {
                         { src: "/images/mitra-kadin-batam-20260728.png", alt: "Logo Kadin Batam" },
                         { src: "/images/mitra-batamnow-20260728.png", alt: "Logo BatamNow" },
                         { src: "/images/mitra-apindo-20260728.png", alt: "Logo APINDO" },
+                        { src: "images/mitra-poltevara-20260826.png", alt: "Logo Poltevera" },
                       ].map((mitra) => (
                         <div
                           className="flex h-28 w-40 shrink-0 items-center justify-center rounded-2xl border border-zinc-700/60 bg-zinc-900/60 p-4 sm:h-32 sm:w-48"

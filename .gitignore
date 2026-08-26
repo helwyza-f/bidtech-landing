@@ -12,3 +12,5 @@ coverage
 .env.local
 .gocache
 backend/
+.claude
+.agents
