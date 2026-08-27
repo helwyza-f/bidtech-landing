@@ -8,7 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
-import { getCarById, getRelatedCars } from "@/lib/data";
+import { getCarById, getRelatedCars, getAllCars } from "@/lib/data";
 import {
   Users,
   Gauge,
@@ -30,6 +30,12 @@ import {
   Share2,
   Heart,
 } from "lucide-react";
+
+export function generateStaticParams() {
+  return getAllCars().map((car) => ({
+    id: String(car.id),
+  }));
+}
 
 export default function VehicleDetailPage() {
   const params = useParams();
