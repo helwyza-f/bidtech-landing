@@ -23,7 +23,7 @@ export default function WhyChooseUs() {
               <div className="relative bg-white p-3 sm:p-4 rounded-3xl shadow-2xl ring-1 ring-gray-100/80 -rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
                 <div className="relative aspect-[4/4.2] w-full overflow-hidden rounded-2xl bg-gray-100">
                   <Image
-                    src="/images/why-choose-us.jpg"
+                    src="/images/why-choose-us.webp"
                     alt="Interior Mobil Mewah RentCar"
                     fill
                     sizes="(max-width: 768px) 100vw, 420px"

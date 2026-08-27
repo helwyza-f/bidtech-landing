@@ -35,7 +35,7 @@ export const metadata: Metadata = {
     siteName: BRAND.name,
     title: `${BRAND.name} — ${BRAND.tagline}`,
     description: BRAND.description,
-    images: [{ url: '/assets/banner-1024.jpg', width: 1024, height: 576 }],
+    images: [{ url: '/assets/banner-1024.webp', width: 1024, height: 576 }],
   },
 };
 

@@ -10,12 +10,13 @@ export const ORGANIZATION = {
   address: 'Batam, Kepulauan Riau',
 };
 
-// Navigation Links
+const basePath = process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "";
+
 export const NAV_LINKS = [
-  { label: 'Beranda', href: '/' },
-  { label: 'Tentang Kami', href: '/tentang-kami' },
-  { label: 'Program', href: '/program' },
-  { label: 'Galeri', href: '/galeri' },
+  { label: 'Beranda', href: basePath + '/' },
+  { label: 'Tentang Kami', href: basePath + '/tentang-kami' },
+  { label: 'Program', href: basePath + '/program' },
+  { label: 'Galeri', href: basePath + '/galeri' },
 ];
 
 // About & Values Data

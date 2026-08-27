@@ -90,7 +90,7 @@ export default function Hero() {
             className="flex flex-wrap items-center gap-4"
           >
             <Magnetic>
-              <Link
+              <a
                 href={HERO.primaryCta.href}
                 className="group relative inline-flex overflow-hidden rounded-full bg-ember px-8 py-4 text-sm font-semibold text-cream"
               >
@@ -98,16 +98,16 @@ export default function Hero() {
                     scale-y + origin-bottom, lagi-lagi transform. */}
                 <span className="absolute inset-0 origin-bottom scale-y-0 bg-ember-dark transition-transform duration-500 ease-smooth group-hover:scale-y-100" />
                 <span className="relative">{HERO.primaryCta.label}</span>
-              </Link>
+              </a>
             </Magnetic>
 
-            <Link
+            <a
               href={HERO.secondaryCta.href}
               className="group inline-flex items-center gap-2 rounded-full border border-cream/30 px-8 py-4 text-sm font-semibold text-cream transition-colors duration-300 hover:border-cream/70"
             >
               {HERO.secondaryCta.label}
               <span aria-hidden className="transition-transform duration-300 ease-smooth group-hover:translate-x-1">→</span>
-            </Link>
+            </a>
           </motion.div>
         </motion.div>
       </motion.div>

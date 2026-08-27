@@ -34,7 +34,7 @@ import {
 export default function VehicleDetailClient({ id }: { id: string }) {
   const car = getCarById(id || "1");
 
-  const [selectedImage, setSelectedImage] = useState<string>(car?.image || "/images/car-1.jpg");
+  const [selectedImage, setSelectedImage] = useState<string>(car?.image || "/images/car-1.webp");
   const [activeTab, setActiveTab] = useState<"overview" | "features" | "terms">("overview");
   const [driverOption, setDriverOption] = useState<"with-driver" | "self-drive">("self-drive");
   const [rentalDays, setRentalDays] = useState<number>(1);

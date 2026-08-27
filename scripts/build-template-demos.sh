@@ -22,6 +22,10 @@ fi
 # name -> path relative to templates/
 DEMOS=(
   "automotive:automotive/template-1"
+  "beauty-wellness:beauty-wellness/template-1"
+  "restaurant-cafe:restaurant-cafe/template-1"
+  "restaurant-cafe-2:restaurant-cafe/template-2"
+  "organization:organization/template-1"
 )
 
 DEMO_ROOT="$REPO_ROOT/frontend/public/demo"

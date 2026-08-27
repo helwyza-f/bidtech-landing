@@ -55,7 +55,7 @@ export default function Hero() {
         }}
       >
         <Image
-          src="/images/hero_section.jpg"
+          src="/images/hero_section.webp"
           alt="Hero background"
           fill
           priority

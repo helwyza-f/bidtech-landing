@@ -22,7 +22,7 @@ const TESTIMONIALS: TestimonialItem[] = [
       '"Layanan pengiriman ke lokasi sangat luar biasa. BMW M4 saya diantar langsung ke terminal tepat saat saya mendarat. Sangat lancar dan premium."',
     author: "Sarah Mitchell",
     role: "EKSEKUTIF BISNIS",
-    avatar: "/images/avatar-1.jpg",
+    avatar: "/images/avatar-1.webp",
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const TESTIMONIALS: TestimonialItem[] = [
       '"Menyewa mobil sport elektrik untuk liburan akhir pekan saya adalah momen terbaik dalam perjalanan tersebut. Layanannya benar-benar kelas dunia."',
     author: "Marcus Thorne",
     role: "WIRAUSAHA TEKNOLOGI",
-    avatar: "/images/avatar-2.jpg",
+    avatar: "/images/avatar-2.webp",
   },
   {
     id: 3,
@@ -40,7 +40,7 @@ const TESTIMONIALS: TestimonialItem[] = [
       '"Proses pemesanan sangat cepat, kendaraan bersih dan mulus seperti baru. Menjadikan perjalanan dinas saya jauh lebih efisien dan menyenangkan."',
     author: "Elena Rostova",
     role: "DIREKTUR KREATIF",
-    avatar: "/images/avatar-3.jpg",
+    avatar: "/images/avatar-3.webp",
   },
 ];
 

@@ -39,7 +39,7 @@ export default function Hero() {
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/images/hero.png"
+            src={(process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "") + "/images/hero.webp"}
             alt="Bersama Membangun Masa Depan yang Berkelanjutan"
             className="w-full h-full object-cover object-center"
           />
