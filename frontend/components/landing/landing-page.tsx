@@ -58,8 +58,8 @@ function LandingPageView() {
   } = useLandingPage();
 
   return (
-    <main className="relative overflow-hidden bg-white">
-      <section className="relative overflow-hidden bg-white text-slate-950" id="hero">
+    <main className="landing-shell relative overflow-hidden bg-white">
+      <section className="landing-panel relative overflow-hidden bg-white text-slate-950" id="hero">
         <div className="pointer-events-none absolute inset-x-0 top-0 h-[520px] bg-[radial-gradient(circle_at_18%_20%,rgba(95,201,74,0.13),transparent_28%),radial-gradient(circle_at_78%_14%,rgba(38,63,143,0.08),transparent_26%)]" />
         <div className="relative mx-auto grid max-w-7xl items-center gap-10 px-4 py-14 sm:px-5 sm:py-16 md:px-8 lg:grid-cols-[0.95fr_1.05fr] lg:py-20">
           <div className="text-center lg:text-left">
@@ -215,7 +215,7 @@ function LandingPageView() {
         ))}
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="services">
+      <section className="landing-panel mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="services">
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
             <Badge className={sectionBadgeClass}>{t.services.badge}</Badge>
@@ -309,7 +309,7 @@ function LandingPageView() {
         </div>
       </section>
 
-      <section className="relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
+      <section className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
         <div className="pointer-events-none absolute inset-x-4 top-28 -z-10 h-[72%] rounded-[48px] bg-[radial-gradient(circle_at_18%_20%,rgba(95,201,74,0.10),transparent_34%),radial-gradient(circle_at_80%_42%,rgba(95,201,74,0.08),transparent_30%)]" />
         <Reveal className="mx-auto max-w-3xl text-center">
           <div className="flex justify-center">
@@ -395,7 +395,7 @@ function LandingPageView() {
         </div>
       </section>
 
-      <section className="relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="portfolio">
+      <section className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="portfolio">
         <div className="pointer-events-none absolute inset-x-4 top-20 -z-10 h-[78%] rounded-[48px] bg-[radial-gradient(circle_at_20%_18%,rgba(95,201,74,0.12),transparent_32%),radial-gradient(circle_at_86%_42%,rgba(95,201,74,0.08),transparent_34%)]" />
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
@@ -496,7 +496,7 @@ function LandingPageView() {
       </section>
 
       <div className="bg-[#edf6e8]">
-      <section className="mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
+      <section className="landing-panel mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
             <Badge className={sectionBadgeClass}>{t.howItWorks.badge}</Badge>
@@ -627,7 +627,7 @@ function LandingPageView() {
         </div>
       </section>
 
-      <section className="relative mx-auto max-w-7xl overflow-hidden px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
+      <section className="landing-panel relative mx-auto max-w-7xl overflow-hidden px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
         <div className="pointer-events-none absolute inset-x-8 top-20 h-72 rounded-[48px] bg-[radial-gradient(circle_at_50%_0%,rgba(95,201,74,0.12),transparent_36%)]" />
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
@@ -705,7 +705,7 @@ function LandingPageView() {
       </section>
       </div>
 
-      <section className="relative overflow-hidden bg-white py-14 sm:py-20 md:py-24">
+      <section className="landing-panel relative overflow-hidden bg-white py-14 sm:py-20 md:py-24">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-5 md:px-8">
           <div className="text-center">
             <Badge className={sectionBadgeClass}>Our Mitra</Badge>
@@ -769,7 +769,7 @@ function LandingPageView() {
         </section>
 
       <section
-        className="relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20"
+        className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20"
         id="contact"
       >
         <div className="pointer-events-none absolute inset-x-4 top-8 -z-10 h-80 rounded-[48px] bg-[radial-gradient(circle_at_25%_15%,rgba(95,201,74,0.13),transparent_34%),linear-gradient(135deg,rgba(245,255,242,0.9),rgba(255,255,255,0.75))]" />

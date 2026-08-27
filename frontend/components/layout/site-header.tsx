@@ -3,17 +3,18 @@
 import { useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import Image from "next/image";
-import Link from "next/link";
 import { Check, ChevronDown, Menu, X } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
+import { SmartNavLink } from "@/components/layout/smart-nav-link";
 import { useLanguage } from "@/lib/i18n";
 import { brandClasses, logoAssets } from "@/lib/data";
+import { getActiveHomeSection, isHomePath, scrollToSection } from "@/lib/section-navigation";
 
 export function SiteHeader() {
   const { lang, setLang, t } = useLanguage();
   const [open, setOpen] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("hero");
   const menuRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname();
 
@@ -30,20 +31,33 @@ export function SiteHeader() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, [open]);
 
-  const getNavLink = (href: string) => {
-    if (href.startsWith("#")) {
-      // Anchor link - check if we're on home page
-      if (pathname === "/" || pathname === "") {
-        return href;
+  useEffect(() => {
+    if (!isHomePath(pathname)) return;
+
+    const syncScrollPosition = () => {
+      const hash = window.location.hash;
+      if (hash) {
+        scrollToSection(hash, "auto");
       }
-      // If not on home, navigate to home with anchor
-      return `/${href}`;
-    }
-    return href;
-  };
+
+      setActiveSection(getActiveHomeSection());
+    };
+
+    const handleScroll = () => setActiveSection(getActiveHomeSection());
+    const handleHashChange = () => syncScrollPosition();
+
+    syncScrollPosition();
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("hashchange", handleHashChange);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("hashchange", handleHashChange);
+    };
+  }, [pathname]);
 
   const navItems = [
-    { label: t.nav.about, href: "/" },
+    { label: t.nav.about, href: "#hero", sectionId: "hero" },
     { label: t.nav.services, href: "#services" },
     { label: t.nav.portfolio, href: "#portfolio" },
     { label: t.nav.template, href: "/templates" },
@@ -53,7 +67,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-xl">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2 px-4 py-3 sm:gap-4 sm:px-5 sm:py-4 md:px-8">
-        <Link className="flex items-center" href="/">
+        <SmartNavLink className="flex items-center" href="#hero">
           <Image
             src={logoAssets.main.src}
             alt={logoAssets.main.alt}
@@ -62,13 +76,21 @@ export function SiteHeader() {
             priority
             className="h-8 w-auto object-contain sm:h-10 md:h-11"
           />
-        </Link>
+        </SmartNavLink>
 
         <nav className="hidden items-center gap-8 text-sm text-slate-600 md:flex">
           {navItems.map((item) => (
-            <Link className={`transition ${brandClasses.hoverTextPrimary}`} href={getNavLink(item.href)} key={item.label}>
+            <SmartNavLink
+              className={`relative pb-1 transition ${brandClasses.hoverTextPrimary} ${
+                item.href.startsWith("#") && isHomePath(pathname) && activeSection === (item.sectionId ?? item.href.slice(1))
+                  ? `font-semibold ${brandClasses.textPrimary}`
+                  : ""
+              }`}
+              href={item.href}
+              key={item.label}
+            >
               {item.label}
-            </Link>
+            </SmartNavLink>
           ))}
         </nav>
 
@@ -107,11 +129,12 @@ export function SiteHeader() {
             )}
           </div>
 
-          <a href="#contact">
-            <Button size="sm" className="h-9 rounded-full px-3 text-xs sm:h-10 sm:px-4 sm:text-sm">
-              {t.header.cta}
-            </Button>
-          </a>
+          <SmartNavLink
+            className={`${brandClasses.bgPrimary} inline-flex h-9 items-center justify-center rounded-full px-3 text-xs font-semibold text-zinc-950 shadow-[0_12px_36px_rgba(99,224,9,0.25)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-primary/90 sm:h-10 sm:px-4 sm:text-sm`}
+            href="#contact"
+          >
+            {t.header.cta}
+          </SmartNavLink>
 
           <button
             aria-expanded={mobileOpen}
@@ -129,14 +152,14 @@ export function SiteHeader() {
         <div className="border-t border-zinc-200 bg-white px-4 py-4 md:hidden">
           <nav className="mx-auto grid max-w-7xl gap-1">
             {navItems.map((item) => (
-              <Link
+              <SmartNavLink
                 className={`rounded-xl px-3 py-3 text-sm text-slate-600 transition hover:bg-lime-50 ${brandClasses.hoverTextPrimary}`}
-                href={getNavLink(item.href)}
+                href={item.href}
                 key={item.label}
-                onClick={() => setMobileOpen(false)}
+                onNavigate={() => setMobileOpen(false)}
               >
                 {item.label}
-              </Link>
+              </SmartNavLink>
             ))}
           </nav>
           <div className="mx-auto mt-3 flex max-w-7xl gap-2 border-t border-zinc-200 pt-3">

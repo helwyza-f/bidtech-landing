@@ -6,15 +6,33 @@
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
+}
+
+body {
+  min-height: 100vh;
 }
 
 [id] {
   scroll-margin-top: 88px;
 }
 
-body {
-  min-height: 100vh;
+@media (min-width: 1024px) {
+  body:has(.landing-shell) {
+    background:
+      radial-gradient(circle at top left, rgba(95, 201, 74, 0.08), transparent 28%),
+      linear-gradient(180deg, #ffffff 0%, #f8fcf6 52%, #ffffff 100%);
+  }
+
+  .landing-panel {
+    min-height: auto;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }
 
 a,

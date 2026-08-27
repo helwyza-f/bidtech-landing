@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { Mail, MessageCircleMore } from "lucide-react";
 
+import { SmartNavLink } from "@/components/layout/smart-nav-link";
 import { useLanguage } from "@/lib/i18n";
 import { brandClasses, logoAssets } from "@/lib/data";
 
@@ -85,9 +86,9 @@ export function SiteFooter() {
             <ul className="mt-3 space-y-2 sm:mt-4 sm:space-y-3">
               {t.footer.navItems.map((item) => (
                 <li key={item.label}>
-                  <a className={`break-words text-sm leading-5 text-slate-600 transition ${brandClasses.hoverTextPrimary}`} href={item.href}>
+                  <SmartNavLink className={`break-words text-sm leading-5 text-slate-600 transition ${brandClasses.hoverTextPrimary}`} href={item.href}>
                     {item.label}
-                  </a>
+                  </SmartNavLink>
                 </li>
               ))}
             </ul>
@@ -98,9 +99,9 @@ export function SiteFooter() {
             <ul className="mt-3 space-y-2 sm:mt-4 sm:space-y-3">
               {t.footer.servicesItems.map((item) => (
                 <li key={item}>
-                  <a className={`break-words text-sm leading-5 text-slate-600 transition ${brandClasses.hoverTextPrimary}`} href="#services">
+                  <SmartNavLink className={`break-words text-sm leading-5 text-slate-600 transition ${brandClasses.hoverTextPrimary}`} href="#services">
                     {item}
-                  </a>
+                  </SmartNavLink>
                 </li>
               ))}
             </ul>
