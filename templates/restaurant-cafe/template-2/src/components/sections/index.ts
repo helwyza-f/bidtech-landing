@@ -1,0 +1,8 @@
+export { Navbar } from './navbar'
+export { Hero } from './hero'
+export { BrandMarquee } from './brand-marquee'
+export { CategoryParallax } from './category-parallax'
+export { Features } from './features'
+export { SignatureDishes } from './signature-dishes'
+export { MenuShowcase } from './menu-showcase'
+export { Footer } from './footer'

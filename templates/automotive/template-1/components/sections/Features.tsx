@@ -2,69 +2,13 @@
 
 import { useState, useEffect } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Users, Gauge, Briefcase, ArrowLeft, ArrowRight } from "lucide-react";
+import { ALL_CARS, CATEGORIES } from "@/lib/data";
 
-// Data dummy koleksi mobil
-const CAR_COLLECTION = [
-  {
-    id: 1,
-    name: "Mercedes-Benz S-Class",
-    type: "Sedan Mewah",
-    price: "2.500.000",
-    category: "Sedan",
-    image: "/images/car-1.jpg",
-    specs: { seats: 4, Briefcase: 1, speed: "Otomatis" },
-  },
-  {
-    id: 2,
-    name: "Toyota Alphard",
-    type: "Premium MPV",
-    price: "1.800.000",
-    category: "MPV",
-    image: "/images/car-2.jpg",
-    specs: { seats: 7, Briefcase: 2, speed: "Otomatis" },
-  },
-  {
-    id: 3,
-    name: "BMW Seri 3",
-    type: "Sedan Sport",
-    price: "1.500.000",
-    category: "Sedan",
-    image: "/images/car-3.jpg",
-    specs: { seats: 5, Briefcase: 1, speed: "Otomatis" },
-  },
-  {
-    id: 4,
-    name: "Porsche 911 Carrera",
-    type: "Sport Coupe",
-    price: "3.800.000",
-    category: "Sport",
-    image: "/images/car-1.jpg",
-    specs: { seats: 2, Briefcase: 1, speed: "PDK Otomatis" },
-  },
-  {
-    id: 5,
-    name: "Range Rover Velar",
-    type: "Luxury SUV",
-    price: "3.200.000",
-    category: "SUV",
-    image: "/images/car-2.jpg",
-    specs: { seats: 5, Briefcase: 3, speed: "AWD Otomatis" },
-  },
-  {
-    id: 6,
-    name: "BMW M4 Coupe",
-    type: "High Performance",
-    price: "3.500.000",
-    category: "Sport",
-    image: "/images/car-3.jpg",
-    specs: { seats: 4, Briefcase: 2, speed: "M Steptronic" },
-  },
-];
-
-const FILTERS = ["Semua", "SUV", "MPV", "Sedan", "Sport"];
+const FILTERS = CATEGORIES;
 
 export default function Features() {
   const [activeFilter, setActiveFilter] = useState("Semua");
@@ -89,8 +33,8 @@ export default function Features() {
 
   const filteredCars =
     activeFilter === "Semua"
-      ? CAR_COLLECTION
-      : CAR_COLLECTION.filter((car) => car.category === activeFilter);
+      ? ALL_CARS
+      : ALL_CARS.filter((car) => car.category === activeFilter);
 
   const maxIndex = Math.max(0, filteredCars.length - itemsPerPage);
 
@@ -113,40 +57,45 @@ export default function Features() {
       className="w-full min-h-screen py-20 md:py-24 bg-gray-50 flex flex-col justify-center overflow-hidden"
     >
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-
-        {/* Header Section */}
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between mb-8 sm:mb-10 gap-6">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
+          {/* Header Judul */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.5 }}
+            className="max-w-2xl"
           >
-            <span className="text-blue-600 font-semibold tracking-wider uppercase text-xs sm:text-sm mb-2 block">
-              Koleksi Kami
-            </span>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 tracking-tight">
-              Performa yang Dikurasi
+            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100/80 border border-blue-200 text-blue-700 text-xs sm:text-sm font-semibold mb-4">
+              <span>🚘</span>
+              <span>Pilihan Armada Terbaik</span>
+            </div>
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight">
+              Eksplorasi Koleksi Mobil <br className="hidden sm:inline" />
+              Premium Kami
             </h2>
+            <p className="text-gray-600 mt-4 text-sm sm:text-base leading-relaxed">
+              Pilih kendaraan sesuai kebutuhan perjalanan Anda. Seluruh unit kami dirawat secara berkala dan siap pakai untuk memberikan kenyamanan maksimal.
+            </p>
           </motion.div>
 
-          {/* Tombol Navigasi Kiri & Kanan */}
+          {/* Tombol Navigasi Carousel */}
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: false, amount: 0.2 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex items-center gap-3 self-end sm:self-auto"
+            className="flex items-center gap-3 mt-6 md:mt-0"
           >
             <button
               type="button"
               onClick={handlePrev}
               disabled={currentIndex === 0}
               aria-label="Previous vehicles"
-              className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-all duration-200 ${
+              className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 ${
                 currentIndex === 0
                   ? "border-gray-200 text-gray-300 cursor-not-allowed bg-white"
-                  : "border-gray-300 text-gray-700 bg-white hover:border-blue-600 hover:text-blue-600 shadow-sm active:scale-95 cursor-pointer"
+                  : "border-blue-600 text-blue-600 bg-white hover:bg-blue-50 shadow-sm active:scale-95 cursor-pointer"
               }`}
             >
               <ArrowLeft className="w-5 h-5" />
@@ -214,7 +163,7 @@ export default function Features() {
               >
                 <div>
                   {/* Foto Mobil */}
-                  <div className="relative h-48 sm:h-56 bg-gray-200 flex items-center justify-center overflow-hidden">
+                  <Link href={`/kendaraan/${car.id}`} className="block relative h-48 sm:h-56 bg-gray-200 overflow-hidden cursor-pointer">
                     <Image
                       src={car.image}
                       alt={car.name}
@@ -227,20 +176,20 @@ export default function Features() {
                         {car.category}
                       </span>
                     </div>
-                  </div>
+                  </Link>
 
                   {/* Detail Info */}
                   <div className="p-5 sm:p-6">
                     <div className="flex justify-between items-start mb-4">
-                      <div>
+                      <Link href={`/kendaraan/${car.id}`} className="block">
                         <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
                           {car.name}
                         </h3>
                         <p className="text-gray-500 text-xs sm:text-sm">{car.type}</p>
-                      </div>
+                      </Link>
                       <div className="text-right">
                         <span className="text-base sm:text-lg font-bold text-blue-600">
-                          Rp {car.price}
+                          Rp {car.priceFormatted}
                         </span>
                         <span className="text-xs text-gray-500 block">/ hari</span>
                       </div>
@@ -257,13 +206,13 @@ export default function Features() {
                       <div className="flex flex-col items-center gap-1">
                         <Briefcase className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
                         <span className="text-[11px] sm:text-xs text-gray-600 font-medium">
-                          {car.specs.Briefcase} Tas
+                          {car.specs.luggage} Tas
                         </span>
                       </div>
                       <div className="flex flex-col items-center gap-1">
                         <Gauge className="w-4 h-4 sm:w-5 sm:h-5 text-blue-600" />
-                        <span className="text-[11px] sm:text-xs text-gray-600 font-medium">
-                          {car.specs.speed}
+                        <span className="text-[11px] sm:text-xs text-gray-600 font-medium truncate max-w-[80px]">
+                          {car.specs.transmission}
                         </span>
                       </div>
                     </div>
@@ -272,15 +221,16 @@ export default function Features() {
 
                 {/* Tombol Sewa */}
                 <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-0">
-                  <Button className="w-full bg-white hover:bg-blue-600 hover:text-white text-blue-600 border border-blue-600 transition-all duration-200 h-11 sm:h-12 shadow-sm font-semibold rounded-xl text-sm">
-                    Sewa Sekarang
-                  </Button>
+                  <Link href={`/kendaraan/${car.id}`} className="block w-full">
+                    <Button className="w-full bg-white hover:bg-blue-600 hover:text-white text-blue-600 border border-blue-600 transition-all duration-200 h-11 sm:h-12 shadow-sm font-semibold rounded-xl text-sm">
+                      Sewa Sekarang
+                    </Button>
+                  </Link>
                 </div>
               </motion.div>
             ))}
           </motion.div>
         </div>
-
       </div>
     </section>
   );

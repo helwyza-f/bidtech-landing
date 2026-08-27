@@ -54,14 +54,32 @@ export default function Testimonials() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Header */}
-        <div className="mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, margin: '-80px' }}
+          transition={{ duration: 0.5 }}
+          className="mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4"
+        >
           <div>
-            <p className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#E05A47] mb-2">
+            <motion.p
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, margin: '-80px' }}
+              transition={{ duration: 0.4 }}
+              className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#E05A47] mb-2"
+            >
               TESTIMONI
-            </p>
-            <h2 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight">
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, margin: '-80px' }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight"
+            >
               Apa yang mereka katakan
-            </h2>
+            </motion.h2>
           </div>
 
           {/* Navigation Arrows */}
@@ -81,10 +99,16 @@ export default function Testimonials() {
               <ChevronRight className="w-4 h-4" />
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Testimonials Infinite Slider Track */}
-        <div className="relative overflow-hidden py-4 -mx-4 px-4">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, margin: '-80px' }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="relative overflow-hidden py-4 -mx-4 px-4"
+        >
           <motion.div
             animate={{
               x: `calc(-${index} * (clamp(300px, 31vw, 380px) + 24px))`,
@@ -177,10 +201,16 @@ export default function Testimonials() {
               );
             })}
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Carousel Indicator Dots */}
-        <div className="flex items-center justify-center gap-2 mt-8">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, margin: '-80px' }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="flex items-center justify-center gap-2 mt-8"
+        >
           {TESTIMONIALS.map((_, idx) => (
             <button
               key={idx}
@@ -202,8 +232,9 @@ export default function Testimonials() {
               )}
             </button>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
+

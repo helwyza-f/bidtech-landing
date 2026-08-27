@@ -1,5 +1,6 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import { Mail, Phone, MapPin, Users, Navigation } from 'lucide-react';
 import { ORGANIZATION } from '@/lib/constants';
 
@@ -10,20 +11,44 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-stretch">
           
           {/* Left Column: Heading, Contact Cards, and Collaboration Banner */}
-          <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
-            {/* Section Tag (User requested: tetap merah #E05A47) */}
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, margin: '-80px' }}
+            transition={{ duration: 0.5 }}
+            className="lg:col-span-6 flex flex-col justify-between space-y-6"
+          >
+            {/* Section Tag */}
             <div>
-              <p className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#E05A47] mb-3">
+              <motion.p
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: '-80px' }}
+                transition={{ duration: 0.4 }}
+                className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#E05A47] mb-3"
+              >
                 HUBUNGI KAMI
-              </p>
-              <h2 className="text-3xl sm:text-4xl lg:text-[42px] font-black text-[#0D4D44] tracking-tight leading-[1.15] mb-4">
+              </motion.p>
+              <motion.h2
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: '-80px' }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                className="text-3xl sm:text-4xl lg:text-[42px] font-black text-[#0D4D44] tracking-tight leading-[1.15] mb-4"
+              >
                 Mari Terhubung dan <br />
                 Bersama Membuat <br />
                 Dampak Nyata
-              </h2>
-              <p className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-lg">
+              </motion.h2>
+              <motion.p
+                initial={{ opacity: 0, y: 15 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: false, margin: '-80px' }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-lg"
+              >
                 Kami siap menjawab pertanyaan, mendengar ide, dan menjalin kolaborasi untuk masa depan yang lebih baik.
-              </p>
+              </motion.p>
             </div>
 
             {/* 3 Contact Info Cards */}
@@ -94,10 +119,16 @@ export default function Contact() {
                 </p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Column: Google Maps Card (Equal Height) */}
-          <div className="lg:col-span-6 bg-white rounded-3xl p-4 sm:p-5 border border-gray-200/90 shadow-xl shadow-gray-200/50 flex flex-col justify-between h-full">
+          <motion.div
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: false, margin: '-80px' }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="lg:col-span-6 bg-white rounded-3xl p-4 sm:p-5 border border-gray-200/90 shadow-xl shadow-gray-200/50 flex flex-col justify-between h-full"
+          >
             {/* Interactive Map Frame with flex-1 */}
             <div className="flex-1 w-full min-h-[380px] sm:min-h-[420px] rounded-2xl overflow-hidden border border-gray-100 relative bg-gray-100 shadow-inner">
               <iframe
@@ -137,10 +168,11 @@ export default function Contact() {
                 </a>
               </div>
             </div>
-          </div>
+          </motion.div>
 
         </div>
       </div>
     </section>
   );
 }
+
