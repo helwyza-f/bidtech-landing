@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { NAV_ITEMS } from "@/constants/navigation";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "motion/react";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -25,33 +25,33 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <nav className="hidden md:flex gap-8 items-center">
-            {NAV_ITEMS.map((item) => {
-              const isActive = pathname === item.href;
-              return (
-                <Link
-                  key={item.label}
-                  href={item.href}
-                  className={`group relative py-1 text-sm transition-colors ${
-                    isActive
-                      ? "font-bold text-blue-600"
-                      : "font-medium text-gray-700 hover:text-blue-600"
-                  }`}
-                >
-                  {item.label}
-                  {isActive ? (
-                    <motion.div
-                      layoutId="activeHeaderNav"
-                      className="absolute -bottom-1 left-0 right-0 h-[2.5px] bg-blue-600 rounded-full"
-                      transition={{ type: "spring", stiffness: 380, damping: 30 }}
-                    />
-                  ) : (
-                    <span className="absolute -bottom-1 left-0 right-0 h-[2.5px] bg-blue-600 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out" />
-                  )}
-                </Link>
-              );
-            })}
-          </nav>
+            <nav className="hidden md:flex gap-8 items-center">
+              {NAV_ITEMS.map((item) => {
+                const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
+                return (
+                  <Link
+                    key={item.label}
+                    href={item.href}
+                    className={`group relative py-1 text-sm transition-colors ${
+                      isActive
+                        ? "font-bold text-blue-600"
+                        : "font-medium text-gray-700 hover:text-blue-600"
+                    }`}
+                  >
+                    {item.label}
+                    {isActive ? (
+                      <motion.div
+                        layoutId="activeHeaderNavAutomotive"
+                        className="absolute -bottom-1 left-0 right-0 h-[2.5px] bg-blue-600 rounded-full"
+                        transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      />
+                    ) : (
+                      <span className="absolute -bottom-1 left-0 right-0 h-[2.5px] bg-blue-600 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out" />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
 
           {/* Action CTA Button */}
           <div className="hidden md:flex items-center gap-4">
@@ -86,7 +86,7 @@ export default function Header() {
           >
             <div className="px-4 pt-3 pb-6 space-y-1.5">
               {NAV_ITEMS.map((item) => {
-                const isActive = pathname === item.href;
+                const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
                 return (
                   <Link
                     key={item.label}
