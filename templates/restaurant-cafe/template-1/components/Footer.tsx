@@ -9,11 +9,11 @@ import { BRAND, FOOTER_LINKS, SOCIAL_LINKS } from '@/lib/constants';
  */
 export default function Footer() {
   return (
-    <footer className="bg-ink text-cream/70">
+    <footer className="bg-cream text-ink">
       <div className="shell py-16 md:py-20">
         <Stagger className="grid gap-10 md:grid-cols-4" stagger={0.1}>
           <StaggerItem className="md:col-span-1">
-            <p className="mb-4 text-sm font-extrabold uppercase tracking-eyebrow text-cream">
+            <p className="mb-4 text-sm font-extrabold uppercase tracking-eyebrow text-ink">
               {BRAND.name}
             </p>
             <p className="max-w-xs text-sm leading-relaxed">{BRAND.description}</p>
@@ -21,7 +21,7 @@ export default function Footer() {
 
           {Object.entries(FOOTER_LINKS).map(([heading, links]) => (
             <StaggerItem key={heading}>
-              <p className="mb-4 text-xs font-semibold uppercase tracking-eyebrow text-cream/50">
+              <p className="mb-4 text-xs font-semibold uppercase tracking-eyebrow text-ink">
                 {heading}
               </p>
               <ul className="space-y-2.5 text-sm">
@@ -40,7 +40,7 @@ export default function Footer() {
           ))}
 
           <StaggerItem>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-eyebrow text-cream/50">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-eyebrow text-ink">
               Lokasi
             </p>
             <p className="max-w-[15rem] text-sm leading-relaxed">{BRAND.address}</p>
@@ -53,7 +53,7 @@ export default function Footer() {
           </StaggerItem>
 
           <StaggerItem>
-            <p className="mb-4 text-xs font-semibold uppercase tracking-eyebrow text-cream/50">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-eyebrow text-ink">
               Ikuti Kami
             </p>
             <ul className="flex gap-3">

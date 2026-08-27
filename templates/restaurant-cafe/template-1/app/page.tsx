@@ -1,6 +1,7 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import Features from '@/components/Features';
+import Menu from '@/components/Menu';
+import Gallery from '@/components/Gallery';
 import Footer from '@/components/Footer';
 
 export default function Home() {
@@ -9,8 +10,9 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Features />
-        {/* Berikutnya: Menu, Galeri, Testimoni, Lokasi & Jam, FAQ */}
+        <Menu />
+        <Gallery />
+        
       </main>
       <Footer />
     </>

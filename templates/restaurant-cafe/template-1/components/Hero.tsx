@@ -35,7 +35,7 @@ export default function Hero() {
   return (
     <section
       ref={sectionRef}
-      className="relative flex min-h-[92svh] items-center overflow-hidden pt-28"
+      className="relative flex min-h-screen items-center overflow-hidden pt-28"
     >
       {/* ── Lapisan background: gambar + gradien keterbacaan ─────────────── */}
       <motion.div style={{ scale: imageScale }} className="absolute inset-0 -z-10">

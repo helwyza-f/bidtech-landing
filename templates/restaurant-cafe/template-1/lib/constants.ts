@@ -55,28 +55,189 @@ export const MENU_ITEMS = [
     description: 'Daging sapi pilihan dengan bawang bombay karamel dan keju cheddar tua.',
     price: 75000,
     badge: 'Populer',
-    image: '/assets/banner.jpg',
+    image: '/assets/menu/burger-special.jpg',
   },
   {
     name: 'Taco Al Pastor',
     category: 'Taco',
     description: 'Babi panggang lambat dengan nanas panggang, ketumbar, dan salsa verde.',
     price: 60000,
-    image: '/assets/banner.jpg',
+    image: '/assets/menu/taco-al-pastor.jpg',
   },
   {
     name: 'Wrap Ayam Gurih',
     category: 'Wrap',
     description: 'Ayam herbal panggang dengan alpukat Hass, selada romaine, dan saus yogurt.',
     price: 40000,
-    image: '/assets/banner.jpg',
+    image: '/assets/menu/wrap-ayam-gurih.jpg',
   },
   {
     name: 'Soda Jeruk Khas',
     category: 'Minuman',
     description: 'Dibuat sendiri dengan bahan botani segar, grapefruit, dan sirup rosemary.',
     price: 30000,
-    image: '/assets/banner.jpg',
+    image: '/assets/menu/soda-jeruk-khas.jpg',
+  },
+  {
+    name: 'Burger Cheese',
+    category: 'Burger',
+    description: 'Daging sapi panggang premium, lelehan keju cheddar, tomat, dan selada renyah.',
+    price: 50000,
+    image: '/assets/menu/burger-cheese.jpg',
+  },
+  {
+    name: 'Burger Beef',
+    category: 'Burger',
+    description: 'Patty sapi premium dengan selada renyah, tomat, bawang merah, dan saus rumah.',
+    price: 65000,
+    image: '/assets/menu/burger-beef.jpg',
+  },
+  {
+    name: 'Veggie Taco',
+    category: 'Taco',
+    description: 'Taco vegetarian dengan kacang lembut, guacamole, sayur segar, dan crema ringan.',
+    price: 70000,
+    image: '/assets/menu/taco-veggie.jpg',
+  },
+  {
+    name: 'Mexican Taco',
+    category: 'Taco',
+    description: 'Isian daging melimpah, crema rempah, alpukat, kubis segar, dan tortilla hangat.',
+    price: 50000,
+    image: '/assets/menu/taco-mexican.jpg',
+  },
+  {
+    name: 'Italian Wrap',
+    category: 'Wrap',
+    description: 'Wrap premium dengan tomat panggang, mozzarella, basil, zaitun, dan daging asap.',
+    price: 35000,
+    image: '/assets/menu/wrap-italian.jpg',
+  },
+  {
+    name: 'Roast Beef Wrap',
+    category: 'Wrap',
+    description: 'Slice daging sapi panggang yang super juicy dengan selada, tomat, dan saus krim.',
+    price: 60000,
+    image: '/assets/menu/wrap-beef.jpg',
+  },
+  {
+    name: 'Cola',
+    category: 'Minuman',
+    description: 'Minuman soda kola legendaris dengan sensasi dingin yang segar dan ringan.',
+    price: 20000,
+    image: '/assets/menu/cola.jpg',
+  },
+  {
+    name: 'Es Teh',
+    category: 'Minuman',
+    description: 'Seduhan teh pilihan dengan rasa manis pas dan aroma yang bersih.',
+    price: 15000,
+    image: '/assets/menu/es-teh.jpg',
+  },
+];
+
+export const GALLERY_FILTERS = ['Food', 'Interior', 'Events', 'Staff'] as const;
+
+export const GALLERY_ITEMS = [
+  {
+    id: 'food-sandwich-platter',
+    title: 'Sandwich platter dengan salad segar',
+    category: 'Food',
+    image: '/assets/gallery/sandwich-platter.jpg',
+  },
+  {
+    id: 'food-wrap-board',
+    title: 'Wrap panggang di atas papan kayu',
+    category: 'Food',
+    image: '/assets/gallery/wrap-board.jpg',
+  },
+  {
+    id: 'food-burger-closeup',
+    title: 'Burger malam dengan saus rumah',
+    category: 'Food',
+    image: '/assets/gallery/burger-closeup.jpg',
+  },
+  {
+    id: 'food-taco-table',
+    title: 'Taco meja panjang untuk berbagi',
+    category: 'Food',
+    image: '/assets/gallery/taco-table.jpg',
+    moreCount: '10+',
+  },
+  {
+    id: 'interior-main-dining',
+    title: 'Ruang makan utama dengan cahaya hangat',
+    category: 'Interior',
+    image: '/assets/gallery/interior-main-dining.jpg',
+  },
+  {
+    id: 'interior-bar-counter',
+    title: 'Counter bar untuk tamu malam',
+    category: 'Interior',
+    image: '/assets/gallery/interior-bar-counter.jpg',
+  },
+  {
+    id: 'interior-open-kitchen',
+    title: 'Dapur terbuka dekat area servis',
+    category: 'Interior',
+    image: '/assets/gallery/interior-open-kitchen.jpg',
+  },
+  {
+    id: 'interior-corner-table',
+    title: 'Meja sudut untuk makan santai',
+    category: 'Interior',
+    image: '/assets/gallery/interior-corner-table.jpg',
+    moreCount: '8+',
+  },
+  {
+    id: 'events-shared-table',
+    title: 'Meja panjang untuk acara keluarga',
+    category: 'Events',
+    image: '/assets/gallery/events-shared-table.jpg',
+  },
+  {
+    id: 'events-private-dinner',
+    title: 'Private dinner dengan menu pilihan',
+    category: 'Events',
+    image: '/assets/gallery/events-private-dinner.jpg',
+  },
+  {
+    id: 'events-catering-table',
+    title: 'Catering table untuk perayaan kecil',
+    category: 'Events',
+    image: '/assets/gallery/events-catering-table.jpg',
+  },
+  {
+    id: 'events-seasonal-menu',
+    title: 'Seasonal tasting untuk tamu grup',
+    category: 'Events',
+    image: '/assets/gallery/events-seasonal-menu.jpg',
+    moreCount: '12+',
+  },
+  {
+    id: 'staff-head-chef',
+    title: 'Head chef saat plating menu malam',
+    category: 'Staff',
+    image: '/assets/gallery/staff-head-chef.jpg',
+  },
+  {
+    id: 'staff-prep-station',
+    title: 'Tim prep menjaga bahan tetap segar',
+    category: 'Staff',
+    image: '/assets/gallery/staff-prep-station.jpg',
+  },
+  {
+    id: 'staff-line-cook',
+    title: 'Line cook menyelesaikan pesanan',
+    category: 'Staff',
+    image: '/assets/gallery/staff-line-cook.jpg',
+  },
+  {
+    id: 'staff-service-team',
+    title: 'Service team sebelum ruang makan dibuka',
+    category: 'Staff',
+    image: '/assets/gallery/staff-service-team.jpg',
+    moreCount: '6+',
   },
 ];
 
@@ -143,7 +304,7 @@ export const SOCIAL_LINKS = {
   twitter: 'https://twitter.com/chefstable',
 };
 
-/** Rp 75.000 — dipakai di kartu menu. */
+/** Contoh output: Rp. 75.000. Dipakai di kartu menu. */
 export function formatPrice(value: number) {
-  return `Rp ${value.toLocaleString('id-ID')}`;
+  return `Rp. ${value.toLocaleString('id-ID')}`;
 }
