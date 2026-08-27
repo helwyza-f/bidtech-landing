@@ -1,17 +1,10 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import gsap from "gsap";
-import { useGSAP } from "@gsap/react";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, Flame, Sparkles, Utensils, Award } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DynamicTextSlider } from "@/components/ui/dynamic-text-slider";
 import { RevealText } from "@/components/ui/reveal-text";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const moodImages = [
   "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80",
@@ -147,73 +140,35 @@ function CategoryCard({ item, index }: { item: CategoryItem; index: number }) {
     const rotateX = ((y - centerY) / centerY) * -9;
     const rotateY = ((x - centerX) / centerX) * 9;
 
-    gsap.to(contentRef.current, {
-      rotateX,
-      rotateY,
-      duration: 0.35,
-      ease: "power2.out",
-      transformPerspective: 1000,
-    });
+    contentRef.current.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
 
     if (imageRef.current) {
-      gsap.to(imageRef.current, {
-        scale: 1.08,
-        x: (x - centerX) * 0.04,
-        y: (y - centerY) * 0.04,
-        duration: 0.4,
-        ease: "power2.out",
-      });
+      imageRef.current.style.transform = `scale(1.08) translate(${(x - centerX) * 0.04}px, ${(
+        y - centerY
+      ) * 0.04}px)`;
     }
 
-    gsap.to(glowRef.current, {
-      x,
-      y,
-      opacity: 1,
-      duration: 0.2,
-      ease: "power1.out",
-    });
+    glowRef.current.style.left = `${x}px`;
+    glowRef.current.style.top = `${y}px`;
+    glowRef.current.style.opacity = "1";
   };
 
   const handleMouseLeave = () => {
     if (!contentRef.current || !glowRef.current) return;
 
-    gsap.to(contentRef.current, {
-      rotateX: 0,
-      rotateY: 0,
-      duration: 0.7,
-      ease: "elastic.out(1, 0.4)",
-    });
+    contentRef.current.style.transform = "rotateX(0deg) rotateY(0deg)";
 
     if (imageRef.current) {
-      gsap.to(imageRef.current, {
-        scale: 1,
-        x: 0,
-        y: 0,
-        duration: 0.6,
-        ease: "power2.out",
-      });
+      imageRef.current.style.transform = "scale(1) translate(0px, 0px)";
     }
 
-    gsap.to(glowRef.current, {
-      opacity: 0,
-      duration: 0.4,
-      ease: "power2.out",
-    });
+    glowRef.current.style.opacity = "0";
   };
 
   const handleCardClick = () => {
-    const smoother =
-      typeof window !== "undefined" &&
-      (window as unknown as { ScrollSmoother?: { get: () => { scrollTo: (target: string, smooth: boolean) => void } } })
-        .ScrollSmoother?.get?.();
-
-    if (smoother) {
-      smoother.scrollTo("#menu", true);
-    } else {
-      const el = document.getElementById("menu");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      }
+    const el = document.getElementById("menu");
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
     }
   };
 
@@ -228,7 +183,7 @@ function CategoryCard({ item, index }: { item: CategoryItem; index: number }) {
     >
       <div
         ref={contentRef}
-        className="relative h-[420px] md:h-[460px] w-full rounded-[28px] overflow-hidden bg-surface dark:bg-card shadow-lg hover:shadow-2xl transition-shadow duration-500 will-change-transform flex flex-col justify-between"
+        className="relative flex h-[420px] w-full flex-col justify-between overflow-hidden rounded-[28px] bg-surface shadow-lg transition-[transform,box-shadow] duration-500 will-change-transform hover:shadow-2xl dark:bg-card md:h-[460px]"
         style={{ transformStyle: "preserve-3d" }}
       >
         {/* Dynamic Glow Spotlight */}
@@ -250,7 +205,7 @@ function CategoryCard({ item, index }: { item: CategoryItem; index: number }) {
             ref={imageRef}
             src={item.image}
             alt={item.title}
-            className="w-full h-full object-cover object-center transition-transform duration-700 will-change-transform brightness-90 group-hover:brightness-100"
+            className="h-full w-full object-cover object-center brightness-90 transition-transform duration-700 will-change-transform group-hover:brightness-100"
             loading="lazy"
           />
           {/* Subtle multi-layer overlay for crisp readability */}
@@ -312,9 +267,6 @@ function CategoryCard({ item, index }: { item: CategoryItem; index: number }) {
 }
 
 export function CategoryParallax() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
   const [activeFilter, setActiveFilter] = useState("all");
 
   const filterOptions = [
@@ -331,59 +283,8 @@ export function CategoryParallax() {
       ? categoriesData
       : categoriesData.filter((c) => c.id === activeFilter);
 
-  useGSAP(
-    () => {
-      // Header entrance animation with ScrollTrigger
-      if (headerRef.current) {
-        gsap.from(headerRef.current.children, {
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
-          },
-          y: 40,
-          opacity: 0,
-          duration: 0.8,
-          stagger: 0.12,
-          ease: "power3.out",
-        });
-      }
-
-      // Cards staggered reveal with 3D tilt
-      if (gridRef.current) {
-        const cards = gridRef.current.querySelectorAll(".category-card-item");
-        gsap.fromTo(
-          cards,
-          {
-            y: 70,
-            opacity: 0,
-            scale: 0.94,
-            rotateX: 8,
-          },
-          {
-            scrollTrigger: {
-              trigger: gridRef.current,
-              start: "top 82%",
-              toggleActions: "play none none reverse",
-            },
-            y: 0,
-            opacity: 1,
-            scale: 1,
-            rotateX: 0,
-            duration: 0.9,
-            stagger: 0.14,
-            ease: "power3.out",
-            clearProps: "transform",
-          }
-        );
-      }
-    },
-    { scope: sectionRef, dependencies: [activeFilter] }
-  );
-
   return (
     <section
-      ref={sectionRef}
       id="categories"
       className="relative w-full bg-background py-20 md:py-28 overflow-hidden scroll-mt-20"
     >
@@ -395,7 +296,7 @@ export function CategoryParallax() {
 
       <div className="container-app">
         {/* Section Header */}
-        <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-12 md:mb-16">
+        <div className="mx-auto mb-12 max-w-3xl text-center md:mb-16">
           <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
             <Utensils className="size-3.5" />
             Our Culinary Spectrum
@@ -443,10 +344,7 @@ export function CategoryParallax() {
         </div>
 
         {/* 3D Magnetic Cards Grid */}
-        <div
-          ref={gridRef}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 max-w-7xl mx-auto"
-        >
+        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
           {filteredCategories.map((category, index) => (
             <CategoryCard key={category.id} item={category} index={index} />
           ))}

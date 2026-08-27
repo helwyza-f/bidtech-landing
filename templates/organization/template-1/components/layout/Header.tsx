@@ -43,38 +43,37 @@ export default function Header() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between">
           {/* Brand Logo */}
-          <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+          <a href={(process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "") + "/"} className="flex items-center gap-2.5 group shrink-0">
             <div>
               <img
-                src="/images/logo.png"
+                src={(process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "") + "/images/logo.webp"}
                 alt="BIDTECH Logo"
                 className="h-12 sm:h-14 w-auto object-contain"
               />
             </div>
-          </Link>
+          </a>
 
           {/* Desktop Navigation Links with Underline Indicator */}
           <nav className="hidden md:flex items-center gap-9">
             {NAV_LINKS.map((link) => {
               const isActive = pathname === link.href;
               return (
-                <Link
-                  key={link.label}
+                <a
+                  key={link.href}
                   href={link.href}
-                  className={`relative py-1 text-sm transition-colors duration-200 ${isActive
-                    ? 'text-white font-bold'
-                    : 'text-white/80 hover:text-white font-medium'
-                    }`}
+                  className={`relative py-1 text-sm font-semibold transition-colors duration-200 ${
+                    isActive ? 'text-[#E05A47]' : 'text-gray-100 hover:text-white'
+                  }`}
                 >
                   {link.label}
                   {isActive && (
                     <motion.div
-                      layoutId="activeHeaderIndicator"
-                      className="absolute -bottom-1.5 left-0 right-0 h-[2.5px] bg-[#48B800] rounded-full"
+                      layoutId="header-active-nav-underline"
+                      className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#E05A47] rounded-full"
                       transition={{ type: 'spring', stiffness: 380, damping: 30 }}
                     />
                   )}
-                </Link>
+                </a>
               );
             })}
           </nav>
@@ -115,14 +114,14 @@ export default function Header() {
           >
             <div className="px-4 pt-3 pb-6 space-y-2">
               {NAV_LINKS.map((link) => (
-                <Link
+                <a
                   key={link.label}
                   href={link.href}
                   onClick={() => setMobileMenuOpen(false)}
                   className="block px-3 py-2.5 rounded-lg text-sm font-semibold text-gray-200 hover:bg-white/10 hover:text-white transition-colors"
                 >
                   {link.label}
-                </Link>
+                </a>
               ))}
               <div className="pt-3 border-t border-white/10">
                 <Link href="/#kontak" onClick={() => setMobileMenuOpen(false)}>

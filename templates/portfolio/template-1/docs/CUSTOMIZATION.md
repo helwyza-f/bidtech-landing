@@ -139,7 +139,7 @@ import Image from 'next/image';
 export default function Hero() {
   return (
     <Image
-      src="/images/hero/main.jpg"
+      src="/images/hero/main.webp"
       alt="Hero"
       width={1920}
       height={1080}
@@ -209,7 +209,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'Your Title',
     description: 'Your description',
-    images: ['/og-image.jpg'],
+    images: ['/og-image.webp'],
   },
 };
 ```

@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { SOCIAL_LINKS, ORGANIZATION } from '@/lib/constants';
+import { SOCIAL_LINKS, ORGANIZATION, NAV_LINKS } from '@/lib/constants';
 
 export default function Footer() {
   return (
@@ -10,16 +10,16 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 pb-12 border-b border-white/10">
           {/* Column 1: Brand Info */}
           <div className="lg:col-span-4 space-y-4">
-            <Link href="/" className="flex items-center gap-2.5 group shrink-0">
+            <a href={(process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "") + "/"} className="flex items-center gap-2.5 group shrink-0">
               <div>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
-                  src="/images/logo.png"
+                  src={(process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "") + "/images/logo.webp"}
                   alt="BIDTECH Logo"
                   className="h-12 w-auto object-contain"
                 />
               </div>
-            </Link>
+            </a>
             <p className="text-xs text-gray-300 leading-relaxed max-w-sm">
               {ORGANIZATION.description}
             </p>
@@ -78,26 +78,13 @@ export default function Footer() {
               NAVIGASI
             </h4>
             <ul className="space-y-2 text-xs">
-              <li>
-                <Link href="/" className="text-gray-300 hover:text-white transition-colors">
-                  Beranda
-                </Link>
-              </li>
-              <li>
-                <Link href="/tentang-kami" className="text-gray-300 hover:text-white transition-colors">
-                  Tentang Kami
-                </Link>
-              </li>
-              <li>
-                <Link href="/program" className="text-gray-300 hover:text-white transition-colors">
-                  Program
-                </Link>
-              </li>
-              <li>
-                <Link href="/galeri" className="text-gray-300 hover:text-white transition-colors">
-                  Galeri
-                </Link>
-              </li>
+              {NAV_LINKS.map((link) => (
+                <li key={link.href}>
+                  <a href={link.href} className="text-gray-300 hover:text-white transition-colors">
+                    {link.label}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 

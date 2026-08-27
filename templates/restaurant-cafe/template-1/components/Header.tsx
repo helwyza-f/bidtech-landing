@@ -50,12 +50,12 @@ export default function Header() {
       )}
     >
       <nav className="shell flex h-20 items-center justify-between gap-6">
-        <Link
-          href="/"
+        <a
+          href={(process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "") + "/"}
           className="text-lg font-extrabold tracking-tight text-ink"
         >
           {BRAND.name}
-        </Link>
+        </a>
 
         <ul className="hidden items-center gap-9 md:flex">
           {NAV_LINKS.map((link) => (
@@ -116,13 +116,13 @@ export default function Header() {
             <ul className="shell flex flex-col gap-1 py-4">
               {NAV_LINKS.map((link) => (
                 <li key={link.href}>
-                  <Link
+                  <a
                     href={link.href}
                     onClick={() => setMenuOpen(false)}
                     className="block py-2.5 text-sm font-medium text-cocoa"
                   >
                     {link.label}
-                  </Link>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -143,7 +143,7 @@ export default function Header() {
  */
 function NavLink({ href, children }: { href: string; children: React.ReactNode }) {
   return (
-    <Link href={href} className="group relative text-sm font-medium text-cocoa">
+    <a href={href} className="group relative text-sm font-medium text-cocoa">
       {children}
       <span
         className={cn(
@@ -152,6 +152,6 @@ function NavLink({ href, children }: { href: string; children: React.ReactNode }
           'group-hover:scale-x-100',
         )}
       />
-    </Link>
+    </a>
   );
 }

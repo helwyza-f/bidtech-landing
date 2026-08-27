@@ -156,13 +156,13 @@ export default function Programs({
                   </div>
 
                   <div>
-                    <Link
-                      href="/#kontak"
+                    <a
+                      href={(process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "") + "/#kontak"}
                       className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-bold text-gray-900 group-hover:text-[#0D4D44] transition-colors"
                     >
                       <span>Selengkapnya</span>
                       <ArrowRight className="w-4 h-4 text-gray-700 group-hover:text-[#0D4D44] transition-transform duration-300 group-hover:translate-x-1" />
-                    </Link>
+                    </a>
                   </div>
                 </div>
               </motion.div>
@@ -179,12 +179,12 @@ export default function Programs({
             transition={{ duration: 0.5, delay: 0.2 }}
             className="mt-12 text-center"
           >
-            <Link href="/program">
+            <a href={(process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "") + "/program"}>
               <Button className="bg-[#0D4D44] hover:bg-[#072C27] text-white px-8 py-3.5 rounded-full text-sm font-bold tracking-wide shadow-md hover:shadow-lg transition-all duration-300 hover:scale-105 inline-flex items-center gap-2 group">
                 <span>Lihat Semua Program</span>
                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
               </Button>
-            </Link>
+            </a>
           </motion.div>
         )}
       </div>

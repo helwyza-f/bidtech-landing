@@ -62,7 +62,7 @@ export const siteConfig = {
       href: "#membership",
     },
 
-    image: "/images/hero-gym.jpg",
+    image: "/images/hero-gym.webp",
   },
 
   stats: [

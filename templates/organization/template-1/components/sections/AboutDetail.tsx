@@ -52,13 +52,13 @@ export default function AboutDetail() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 }}
               >
-                <Link href="/#kontak">
+                <a href={(process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "") + "/#kontak"}>
                   <Button
                     className="bg-[#0D4D44] hover:bg-[#072C27] text-white px-8 py-3.5 rounded-full text-sm font-semibold tracking-wide transition-all shadow-md hover:scale-105 active:scale-95"
                   >
                     Bergabung Sekarang
                   </Button>
-                </Link>
+                </a>
               </motion.div>
             </motion.div>
 

@@ -3,28 +3,28 @@ export const facilities = [
     title: "Area Angkat Beban Olympic",
     description:
       "Dilengkapi peralatan profesional untuk latihan strength dan angkat beban.",
-    image: "/images/facilities/weight-area.jpg",
+    image: "/images/facilities/weight-area.webp",
     size: "large",
   },
   {
     title: "Area Recovery",
     description:
       "Area nyaman untuk membantu tubuh beristirahat dan pulih setelah latihan.",
-    image: "/images/facilities/area-recovery.jpg",
+    image: "/images/facilities/area-recovery.webp",
     size: "small",
   },
   {
     title: "Area Functional Training",
     description:
       "Cocok untuk HIIT, agility, conditioning, dan circuit training.",
-    image: "/images/facilities/functional.jpg",
+    image: "/images/facilities/functional.webp",
     size: "small",
   },
   {
     title: "Ruang Ganti Pakaian",
     description:
       "Bersih, nyaman, dan dilengkapi fasilitas pendukung yang lengkap.",
-    image: "/images/facilities/locker-room.jpg",
+    image: "/images/facilities/locker-room.webp",
     size: "wide",
   },
 ] as const;
@@ -34,7 +34,7 @@ export const benefits = [
     number: "01",
     title: "Equipment Premium",
     description:
-      "Peralatan strength, cardio, dan functional training yang dirancang untuk berbagai level kebugaran.",
+      "Peralatan strength, cardio, and functional training yang dirancang untuk berbagai level kebugaran.",
   },
   {
     number: "02",
@@ -61,42 +61,42 @@ export const locations = [
     city: "Jakarta",
     name: "Ironforce Kemang",
     address: "Jl. Kemang Raya No. 1, Jakarta Selatan",
-    image: "/images/locations/kemang.jpg",
+    image: "/images/locations/kemang.webp",
     slug: "kemang",
   },
   {
     city: "Jakarta",
     name: "Ironforce Cideng",
     address: "Jl. Cideng Timur No. 45, Jakarta Pusat",
-    image: "/images/locations/cideng.jpg",
+    image: "/images/locations/cideng.webp",
     slug: "cideng",
   },
   {
     city: "Jakarta",
     name: "Ironforce Sunter",
     address: "Jl. Danau Sunter Utara, Jakarta Utara",
-    image: "/images/locations/sunter.jpg",
+    image: "/images/locations/sunter.webp",
     slug: "sunter",
   },
   {
     city: "Tangerang",
     name: "Ironforce Green Lake",
     address: "Green Lake City Boulevard, Tangerang",
-    image: "/images/locations/green-lake.jpg",
+    image: "/images/locations/green-lake.webp",
     slug: "green-lake",
   },
   {
     city: "Jakarta",
     name: "Ironforce Greenville",
     address: "Komp. Greenville, Jakarta Barat",
-    image: "/images/locations/greenville.jpg",
+    image: "/images/locations/greenville.webp",
     slug: "greenville",
   },
   {
     city: "Tangerang",
     name: "Ironforce Karawaci",
     address: "Lippo Karawaci, Tangerang",
-    image: "/images/locations/karawaci.jpg",
+    image: "/images/locations/karawaci.webp",
     slug: "karawaci",
   },
 ] as const;
@@ -107,14 +107,14 @@ export const trainers = [
     specialty: "Strength & Conditioning",
     description:
       "Berpengalaman membantu member mencapai target kebugaran dengan program latihan yang tepat dan terukur.",
-    image: "/images/trainers/sarah-jenkins.jpg",
+    image: "/images/trainers/sarah-jenkins.webp",
   },
   {
     name: "Marcus Vance",
     specialty: "Functional Hypertrophy",
     description:
       "Berfokus pada peningkatan kekuatan, performa, dan perkembangan otot melalui latihan yang terstruktur.",
-    image: "/images/trainers/marcus-vance.jpg",
+    image: "/images/trainers/marcus-vance.webp",
   },
 ] as const;
 
