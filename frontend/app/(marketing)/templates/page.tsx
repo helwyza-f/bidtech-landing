@@ -32,7 +32,6 @@ const SAMPLE_TEMPLATES = [
     name: "Rentcar",
     category: "Automotive",
     subcategory: "Rental Mobil",
-    price: "Rp649.000",
     image: "/images/rentcar_template.webp",
     previewHref: "/demo/automotive/",
     tags: ["Automotive", "Rental Mobil", "Responsive"],
@@ -43,7 +42,6 @@ const SAMPLE_TEMPLATES = [
     name: "FoodFleet",
     category: "Restaurant & Cafe",
     subcategory: "Interactive Menu",
-    price: "Rp749.000",
     image: "/images/foodfleet_template.webp",
     previewHref: "/demo/restaurant-cafe-2/",
     tags: ["Restaurant", "Cafe", "Interactive Menu"],
@@ -54,7 +52,6 @@ const SAMPLE_TEMPLATES = [
     name: "BitePoint",
     category: "Restaurant & Cafe",
     subcategory: "Classic Diner",
-    price: "Rp599.000",
     image: "/images/bitepoint_template.webp",
     previewHref: "/demo/restaurant-cafe/",
     tags: ["Restaurant", "Diner", "Modern Theme"],
@@ -65,7 +62,6 @@ const SAMPLE_TEMPLATES = [
     name: "GlowGym",
     category: "Gym & Wellness",
     subcategory: "Gym & Fitness",
-    price: "Rp699.000",
     image: "/images/glowgym_template.webp",
     previewHref: "/demo/beauty-wellness/",
     tags: ["Fitness", "Gym", "Personal Trainer"],
@@ -76,7 +72,6 @@ const SAMPLE_TEMPLATES = [
     name: "OrgSpace",
     category: "Community & Org",
     subcategory: "Portal Organisasi",
-    price: "Rp549.000",
     image: "/images/orgspace_template.webp",
     previewHref: "/demo/organization/",
     tags: ["Community", "Organization", "Information Portal"],
@@ -182,17 +177,12 @@ export default function TemplatesPage() {
                 </div>
 
                 <CardContent className="flex flex-1 flex-col space-y-3 p-4 sm:space-y-3.5 sm:p-5">
-                  <div className="flex flex-1 items-start justify-between gap-2">
-                    <div className="min-w-0">
-                      <h3 className="text-base font-bold text-slate-950 transition-colors duration-200 group-hover:text-brand-primary sm:text-lg">
-                        {template.name}
-                      </h3>
-                      <p className="mt-1 text-xs text-slate-500">
-                        Design {template.subcategory}
-                      </p>
-                    </div>
-                    <p className="shrink-0 whitespace-nowrap rounded-lg bg-emerald-50 px-2.5 py-1 text-[10px] font-bold text-slate-950 sm:px-3 sm:py-1.5 sm:text-xs">
-                      {template.price}
+                  <div>
+                    <h3 className="text-base font-bold text-slate-950 transition-colors duration-200 group-hover:text-brand-primary sm:text-lg">
+                      {template.name}
+                    </h3>
+                    <p className="mt-1 text-xs text-slate-500">
+                      Design {template.subcategory}
                     </p>
                   </div>
 
