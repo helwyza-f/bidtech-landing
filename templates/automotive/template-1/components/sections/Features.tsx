@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -14,6 +14,7 @@ export default function Features() {
   const [activeFilter, setActiveFilter] = useState("Semua");
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(3);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const updateItemsPerPage = () => {
@@ -38,17 +39,55 @@ export default function Features() {
 
   const maxIndex = Math.max(0, filteredCars.length - itemsPerPage);
 
+  const scrollToIndex = (index: number) => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const firstCard = container.firstElementChild as HTMLElement;
+      if (firstCard) {
+        const cardWidth = firstCard.offsetWidth;
+        const gap = window.innerWidth < 640 ? 24 : 32;
+        container.scrollTo({
+          left: index * (cardWidth + gap),
+          behavior: "smooth",
+        });
+      }
+    }
+  };
+
+  const handleScroll = () => {
+    if (scrollContainerRef.current) {
+      const container = scrollContainerRef.current;
+      const firstCard = container.firstElementChild as HTMLElement;
+      if (firstCard) {
+        const cardWidth = firstCard.offsetWidth;
+        const gap = window.innerWidth < 640 ? 24 : 32;
+        const scrollLeft = container.scrollLeft;
+        const newIndex = Math.round(scrollLeft / (cardWidth + gap));
+        if (newIndex !== currentIndex && newIndex >= 0 && newIndex <= maxIndex) {
+          setCurrentIndex(newIndex);
+        }
+      }
+    }
+  };
+
   const handlePrev = () => {
-    setCurrentIndex((prev) => Math.max(0, prev - 1));
+    const nextIndex = Math.max(0, currentIndex - 1);
+    setCurrentIndex(nextIndex);
+    scrollToIndex(nextIndex);
   };
 
   const handleNext = () => {
-    setCurrentIndex((prev) => Math.min(maxIndex, prev + 1));
+    const nextIndex = Math.min(maxIndex, currentIndex + 1);
+    setCurrentIndex(nextIndex);
+    scrollToIndex(nextIndex);
   };
 
   const handleFilterChange = (filter: string) => {
     setActiveFilter(filter);
     setCurrentIndex(0);
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({ left: 0, behavior: "auto" });
+    }
   };
 
   return (
@@ -143,14 +182,10 @@ export default function Features() {
 
         {/* Carousel Koleksi Mobil Responsif */}
         <div className="overflow-hidden">
-          <motion.div
-            className="flex gap-6 sm:gap-8"
-            animate={{
-              x: `calc(-${currentIndex * (100 / itemsPerPage)}% - ${
-                currentIndex * ((itemsPerPage === 1 ? 0 : 24) / itemsPerPage)
-              }px)`,
-            }}
-            transition={{ type: "spring", stiffness: 280, damping: 30 }}
+          <div
+            ref={scrollContainerRef}
+            onScroll={handleScroll}
+            className="flex gap-6 sm:gap-8 overflow-x-auto snap-x snap-mandatory scroll-smooth no-scrollbar"
           >
             {filteredCars.map((car, idx) => (
               <motion.div
@@ -159,7 +194,7 @@ export default function Features() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: false, amount: 0.15 }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-21.333px)] flex-shrink-0 bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-blue-600/10 border border-gray-100 transition-all duration-300 group flex flex-col justify-between"
+                className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-21.333px)] flex-shrink-0 snap-center bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-blue-600/10 border border-gray-100 transition-all duration-300 group flex flex-col justify-between"
               >
                 <div>
                   {/* Foto Mobil */}
@@ -229,7 +264,7 @@ export default function Features() {
                 </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

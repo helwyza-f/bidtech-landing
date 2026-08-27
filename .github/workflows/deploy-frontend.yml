@@ -1,4 +1,4 @@
-name: Deploy BidTech Frontend
+name: Frontend CI
 
 on:
   push:
@@ -11,7 +11,7 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -22,59 +22,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
 
       - name: Build template demos into frontend/public/demo
         run: ./scripts/build-template-demos.sh --copy
 
-      - name: Prepare frontend directory
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          script: rm -rf /opt/bidtech-frontend && mkdir -p /opt/bidtech-frontend
+      - name: Install frontend dependencies
+        working-directory: frontend
+        run: npm ci
 
-      - name: Upload frontend source
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          source: "frontend"
-          target: /opt/bidtech-frontend
-          strip_components: 1
-          overwrite: true
-
-      - name: Build and restart frontend container
-        uses: appleboy/ssh-action@v1.2.0
-        with:
-          host: ${{ secrets.DEPLOY_HOST }}
-          username: ${{ secrets.DEPLOY_USER }}
-          key: ${{ secrets.DEPLOY_SSH_KEY }}
-          command_timeout: 15m
-          script: |
-            set -e
-            cd /opt/bidtech-frontend
-            test -f Dockerfile
-            test -f /root/bidtech-frontend.env
-
-            docker build -t bidtech-frontend:${{ github.sha }} .
-            docker rm -f BidTech-Frontend 2>/dev/null || true
-            docker rm -f BidTech-Admin-Frontend 2>/dev/null || true
-            docker run -d \
-              --name BidTech-Frontend \
-              --restart unless-stopped \
-              --network bidtech-api \
-              -p 127.0.0.1:3010:3000 \
-              --env-file /root/bidtech-frontend.env \
-              bidtech-frontend:${{ github.sha }}
-
-            for attempt in 1 2 3 4 5 6; do
-              if wget -qO- http://127.0.0.1:3010/ >/dev/null; then
-                exit 0
-              fi
-              sleep 5
-            done
-
-            docker logs --tail 100 BidTech-Frontend
-            exit 1
+      - name: Build frontend
+        working-directory: frontend
+        run: npm run build
