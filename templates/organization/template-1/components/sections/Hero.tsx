@@ -1,37 +1,62 @@
 'use client';
 
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { useRef } from 'react';
+import { motion, useScroll, useTransform, useSpring } from 'framer-motion';
 import {
-  Users,
   ArrowRight,
-  ArrowDown,
-  BookOpen,
-  Leaf,
-  ChevronRight
 } from 'lucide-react';
 
 export default function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+
+  // Track scroll progress within the hero section (start → exit viewport)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ['start start', 'end start'],
+  });
+
+  // Background: slow zoom + parallax pan upward
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1.0, 1.15]);
+  const bgY     = useTransform(scrollYProgress, [0, 1], ['0%', '12%']);
+
+  // Text: raw fade mapping from scroll progress
+  const rawOpacity  = useTransform(scrollYProgress, [0, 0.05, 0.4, 0.45], [1, 1, 0, 0]);
+  // Slow, smooth spring — low stiffness = lazy, high damping = no bounce, high mass = heavy/cinematic
+  const textOpacity = useSpring(rawOpacity, { stiffness: 30, damping: 20, mass: 1.2 });
+
   return (
-    <section id="beranda" className="relative min-h-screen flex flex-col justify-between pt-32 pb-12 overflow-hidden">
-      {/* Background Image with Dark Vignette Overlay */}
-      <div className="absolute inset-0 z-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src="/images/hero.png"
-          alt="Bersama Membangun Masa Depan yang Berkelanjutan"
-          className="w-full h-full object-cover object-center"
-        />
-        {/* Enhanced Multi-stop Vignette Gradient */}
+    <section
+      ref={sectionRef}
+      id="beranda"
+      className="relative min-h-screen flex flex-col justify-between pt-32 pb-12 overflow-hidden"
+    >
+      {/* ─── Background: Scroll-Driven Ken Burns ─── */}
+      <div className="absolute inset-0 z-0 overflow-hidden">
+        <motion.div
+          className="absolute inset-0 will-change-transform"
+          style={{ scale: bgScale, y: bgY }}
+        >
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src="/images/hero.png"
+            alt="Bersama Membangun Masa Depan yang Berkelanjutan"
+            className="w-full h-full object-cover object-center"
+          />
+        </motion.div>
+        {/* Vignette gradients */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 to-black/25" />
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-transparent to-black/40" />
       </div>
 
-      {/* Main Content Area */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto">
+      {/* ─── Main Content: Fade Out on Scroll ─── */}
+      <motion.div
+        className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full my-auto"
+        style={{ opacity: textOpacity }}
+      >
         <div className="max-w-2xl text-left">
 
-          {/* 2. Headline with Green Accent Word */}
+          {/* Headline */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -42,7 +67,7 @@ export default function Hero() {
             Masa Depan yang <br />
             <span className="text-[#48B800] relative inline-block">
               Berkelanjutan
-              {/* Garis lengkung dekoratif  */}
+              {/* Garis lengkung dekoratif */}
               <svg
                 className="absolute -bottom-2.5 right-0 w-[60%] h-3 sm:h-4 text-[#48B800] pointer-events-none overflow-visible"
                 viewBox="0 0 250 20"
@@ -59,7 +84,7 @@ export default function Hero() {
             </span>
           </motion.h1>
 
-          {/* 3. Subtitle Description */}
+          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -69,7 +94,7 @@ export default function Hero() {
             Menciptakan dampak nyata melalui pendidikan, pemberdayaan masyarakat, dan pelestarian lingkungan untuk masa depan yang lebih baik.
           </motion.p>
 
-          {/* 4. Action Buttons */}
+          {/* Buttons */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
@@ -91,9 +116,8 @@ export default function Hero() {
             </Link>
           </motion.div>
 
-
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

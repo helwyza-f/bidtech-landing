@@ -4,6 +4,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { motion } from 'framer-motion';
 import { ArrowLeft, ArrowRight } from 'lucide-react';
 import { GALLERY_IMAGES } from '@/lib/constants';
+import GalleryModal, { GalleryItem } from '@/components/ui/GalleryModal';
 
 // Triple list for continuous infinite loop
 const EXTENDED_GALLERY = [...GALLERY_IMAGES, ...GALLERY_IMAGES, ...GALLERY_IMAGES];
@@ -14,6 +15,8 @@ export default function Gallery() {
   const [index, setIndex] = useState(total);
   const [isInstant, setIsInstant] = useState(false);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [selectedImage, setSelectedImage] = useState<GalleryItem | null>(null);
+  const [direction, setDirection] = useState(0);
 
   // Active item index for dot indicator
   const activeDotIndex = ((index % total) + total) % total;
@@ -28,6 +31,23 @@ export default function Gallery() {
     setIndex((prev) => prev - 1);
   }, []);
 
+  // Modal navigation with direction tracking
+  const handleModalNext = () => {
+    if (!selectedImage) return;
+    setDirection(1);
+    const currentIndex = GALLERY_IMAGES.findIndex((img) => img.id === selectedImage.id);
+    const nextIdx = (currentIndex + 1) % GALLERY_IMAGES.length;
+    setSelectedImage(GALLERY_IMAGES[nextIdx]);
+  };
+
+  const handleModalPrev = () => {
+    if (!selectedImage) return;
+    setDirection(-1);
+    const currentIndex = GALLERY_IMAGES.findIndex((img) => img.id === selectedImage.id);
+    const prevIdx = (currentIndex - 1 + GALLERY_IMAGES.length) % GALLERY_IMAGES.length;
+    setSelectedImage(GALLERY_IMAGES[prevIdx]);
+  };
+
   // Seamless zero-duration position reset
   const handleAnimationComplete = () => {
     if (index >= total * 2) {
@@ -39,12 +59,12 @@ export default function Gallery() {
     }
   };
 
-  // Auto-play interval
+  // Auto-play interval (pauses when modal is open or hovered)
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isAutoPlaying || selectedImage !== null) return;
     const timer = setInterval(() => nextSlide(), 4000);
     return () => clearInterval(timer);
-  }, [isAutoPlaying, nextSlide]);
+  }, [isAutoPlaying, selectedImage, nextSlide]);
 
   return (
     <section
@@ -55,22 +75,52 @@ export default function Gallery() {
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         {/* Section Header */}
-        <div className="mb-10">
-          <p className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#E05A47] mb-2">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, margin: '-80px' }}
+          transition={{ duration: 0.5 }}
+          className="mb-10"
+        >
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: false, margin: '-80px' }}
+            transition={{ duration: 0.4 }}
+            className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#E05A47] mb-2"
+          >
             DOKUMENTASI
-          </p>
+          </motion.p>
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-[#0D4D44] tracking-tight">
+            <motion.h2
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, margin: '-80px' }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-3xl sm:text-4xl font-extrabold text-[#0D4D44] tracking-tight"
+            >
               Galeri
-            </h2>
-            <p className="text-xs sm:text-sm text-gray-500 max-w-md leading-relaxed font-normal">
+            </motion.h2>
+            <motion.p
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: false, margin: '-80px' }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+              className="text-xs sm:text-sm text-gray-500 max-w-md leading-relaxed font-normal"
+            >
               Potret kegiatan dan kisah inspiratif yang mencerminkan komitmen kami dalam mendukung tumbuh kembang anak dan komunitas.
-            </p>
+            </motion.p>
           </div>
-        </div>
+        </motion.div>
 
         {/* Carousel Viewport */}
-        <div className="relative w-full">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, margin: '-80px' }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="relative w-full"
+        >
           {/* Edge Vignette Fades */}
           <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
           <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
@@ -120,7 +170,11 @@ export default function Gallery() {
               {EXTENDED_GALLERY.map((item, idx) => (
                 <div
                   key={`${item.id}-${idx}`}
-                  className="relative rounded-3xl overflow-hidden shadow-sm flex-shrink-0 select-none transition-all duration-300 group"
+                  onClick={() => {
+                    setDirection(0);
+                    setSelectedImage(item);
+                  }}
+                  className="relative rounded-3xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-black/30 hover:-translate-y-2 hover:rotate-[-1deg] flex-shrink-0 select-none transition-all duration-300 group cursor-pointer border border-black/5"
                   style={{
                     width: 'clamp(260px, 31vw, 360px)',
                     aspectRatio: '3 / 4',
@@ -130,13 +184,16 @@ export default function Gallery() {
                   <img
                     src={item.image}
                     alt={item.title}
-                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-700 ease-out"
                     draggable={false}
                   />
 
-                  {/* Gradient & title on hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-5">
-                    <p className="text-sm font-bold text-white leading-snug drop-shadow-md">
+                  {/* Gradient Overlay & Title on Hover */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
+                    <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#48B800] mb-1.5 transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
+                      DOKUMENTASI
+                    </span>
+                    <p className="text-sm sm:text-base font-bold text-white leading-snug drop-shadow-md transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">
                       {item.title}
                     </p>
                   </div>
@@ -144,10 +201,16 @@ export default function Gallery() {
               ))}
             </motion.div>
           </div>
-        </div>
+        </motion.div>
 
         {/* Indicator Dots */}
-        <div className="flex items-center justify-center gap-2 mt-8">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: false, margin: '-80px' }}
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="flex items-center justify-center gap-2 mt-8"
+        >
           {GALLERY_IMAGES.map((_, idx) => (
             <button
               key={idx}
@@ -169,8 +232,19 @@ export default function Gallery() {
               )}
             </button>
           ))}
-        </div>
+        </motion.div>
       </div>
+
+      {/* Gallery Popup Lightbox Modal with Paper Stack & 3D Flip */}
+      <GalleryModal
+        isOpen={selectedImage !== null}
+        item={selectedImage}
+        direction={direction}
+        onClose={() => setSelectedImage(null)}
+        onPrev={handleModalPrev}
+        onNext={handleModalNext}
+      />
     </section>
   );
 }
+

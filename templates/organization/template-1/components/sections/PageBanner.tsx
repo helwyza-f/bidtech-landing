@@ -1,4 +1,7 @@
+'use client';
+
 import Link from 'next/link';
+import { motion } from 'framer-motion';
 import { ChevronRight } from 'lucide-react';
 
 interface BreadcrumbItem {
@@ -24,11 +27,21 @@ export default function PageBanner({ title, breadcrumbs }: PageBannerProps) {
       <div className="absolute inset-0 bg-gradient-to-b from-[#0D4D44]/50 to-[#072C27]/80" />
 
       <div className="relative z-10 max-w-4xl mx-auto px-4 w-full">
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-tight">
+        <motion.h1
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-4xl md:text-5xl lg:text-6xl font-black text-white mb-6 tracking-tight leading-tight"
+        >
           {title}
-        </h1>
+        </motion.h1>
         
-        <div className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-sm font-medium">
+        <motion.div
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.15 }}
+          className="flex flex-wrap items-center justify-center gap-2 sm:gap-3 text-sm font-medium"
+        >
           <Link href="/" className="text-gray-300 hover:text-white transition-colors duration-200">
             Beranda
           </Link>
@@ -45,8 +58,9 @@ export default function PageBanner({ title, breadcrumbs }: PageBannerProps) {
               )}
             </div>
           ))}
-        </div>
+        </motion.div>
       </div>
     </section>
   );
 }
+
