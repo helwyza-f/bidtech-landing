@@ -32,19 +32,21 @@ export default function Header() {
                 <Link
                   key={item.label}
                   href={item.href}
-                  className={`relative py-1 text-sm transition-colors ${
+                  className={`group relative py-1 text-sm transition-colors ${
                     isActive
                       ? "font-bold text-blue-600"
                       : "font-medium text-gray-700 hover:text-blue-600"
                   }`}
                 >
                   {item.label}
-                  {isActive && (
+                  {isActive ? (
                     <motion.div
                       layoutId="activeHeaderNav"
                       className="absolute -bottom-1 left-0 right-0 h-[2.5px] bg-blue-600 rounded-full"
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
                     />
+                  ) : (
+                    <span className="absolute -bottom-1 left-0 right-0 h-[2.5px] bg-blue-600 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left ease-out" />
                   )}
                 </Link>
               );

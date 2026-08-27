@@ -22,120 +22,12 @@ import {
 } from "lucide-react";
 
 
-const ALL_CARS = [
-  {
-    id: 1,
-    name: "Mercedes-Benz S-Class",
-    type: "Sedan Mewah",
-    category: "Sedan",
-    price: 2500000,
-    priceFormatted: "2.500.000",
-    image: "/images/car-1.jpg",
-    rating: 4.9,
-    reviews: 48,
-    specs: { seats: 4, luggage: 2, transmission: "Otomatis", fuel: "Bensin" },
-    featured: true,
-  },
-  {
-    id: 2,
-    name: "Toyota Alphard Executive",
-    type: "Premium MPV",
-    category: "MPV",
-    price: 1800000,
-    priceFormatted: "1.800.000",
-    image: "/images/car-2.jpg",
-    rating: 4.8,
-    reviews: 62,
-    specs: { seats: 7, luggage: 4, transmission: "Otomatis", fuel: "Hybrid" },
-    featured: true,
-  },
-  {
-    id: 3,
-    name: "BMW Seri 3 Sedan",
-    type: "Sedan Sport",
-    category: "Sedan",
-    price: 1500000,
-    priceFormatted: "1.500.000",
-    image: "/images/car-3.jpg",
-    rating: 4.7,
-    reviews: 35,
-    specs: { seats: 5, luggage: 2, transmission: "Otomatis", fuel: "Bensin" },
-    featured: false,
-  },
-  {
-    id: 4,
-    name: "Porsche 911 Carrera",
-    type: "Sport Coupe",
-    category: "Sport",
-    price: 3800000,
-    priceFormatted: "3.800.000",
-    image: "/images/car-1.jpg",
-    rating: 5.0,
-    reviews: 29,
-    specs: { seats: 2, luggage: 1, transmission: "PDK Otomatis", fuel: "Bensin" },
-    featured: true,
-  },
-  {
-    id: 5,
-    name: "Range Rover Velar",
-    type: "Luxury SUV",
-    category: "SUV",
-    price: 3200000,
-    priceFormatted: "3.200.000",
-    image: "/images/car-2.jpg",
-    rating: 4.9,
-    reviews: 41,
-    specs: { seats: 5, luggage: 3, transmission: "AWD Otomatis", fuel: "Bensin" },
-    featured: false,
-  },
-  {
-    id: 6,
-    name: "BMW M4 Coupe",
-    type: "High Performance",
-    category: "Sport",
-    price: 3500000,
-    priceFormatted: "3.500.000",
-    image: "/images/car-3.jpg",
-    rating: 4.9,
-    reviews: 38,
-    specs: { seats: 4, luggage: 2, transmission: "M Steptronic", fuel: "Bensin" },
-    featured: true,
-  },
-  {
-    id: 7,
-    name: "Hyundai Ioniq 6",
-    type: "Electric Streamliner",
-    category: "Listrik",
-    price: 1700000,
-    priceFormatted: "1.700.000",
-    image: "/images/car-1.jpg",
-    rating: 4.8,
-    reviews: 24,
-    specs: { seats: 5, luggage: 2, transmission: "Single Speed", fuel: "Listrik (EV)" },
-    featured: false,
-  },
-  {
-    id: 8,
-    name: "Toyota Land Cruiser 300",
-    type: "Flagship SUV",
-    category: "SUV",
-    price: 2900000,
-    priceFormatted: "2.900.000",
-    image: "/images/car-2.jpg",
-    rating: 4.9,
-    reviews: 55,
-    specs: { seats: 7, luggage: 4, transmission: "4WD Otomatis", fuel: "Diesel" },
-    featured: false,
-  },
-];
-
-const CATEGORIES = ["Semua", "Sedan", "SUV", "MPV", "Sport", "Listrik"];
+import { ALL_CARS, CATEGORIES, type Car } from "@/lib/data";
 
 export default function KendaraanPage() {
-  const [selectedCategory, setSelectedCategory] = useState("Semua");
+  const [selectedCategory, setSelectedCategory] = useState<string>("Semua");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("popular");
-  const [selectedCarForModal, setSelectedCarForModal] = useState<any>(null);
 
 
   const filteredAndSortedCars = useMemo(() => {
@@ -294,8 +186,7 @@ export default function KendaraanPage() {
                     className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-blue-100 transition-all duration-300 group flex flex-col justify-between"
                   >
                     <div>
-
-                      <div className="relative h-60 bg-gray-100 overflow-hidden">
+                      <Link href={`/kendaraan/${car.id}`} className="block relative h-60 bg-gray-100 overflow-hidden cursor-pointer">
                         <Image
                           src={car.image}
                           alt={car.name}
@@ -317,17 +208,16 @@ export default function KendaraanPage() {
                             ({car.reviews})
                           </span>
                         </div>
-                      </div>
-
+                      </Link>
 
                       <div className="p-6">
                         <div className="flex justify-between items-start mb-4">
-                          <div>
+                          <Link href={`/kendaraan/${car.id}`} className="block">
                             <h2 className="text-xl font-bold text-gray-900 group-hover:text-blue-600 transition-colors">
                               {car.name}
                             </h2>
                             <p className="text-gray-500 text-sm">{car.type}</p>
-                          </div>
+                          </Link>
                           <div className="text-right">
                             <span className="text-lg font-extrabold text-blue-600">
                               Rp {car.priceFormatted}
@@ -362,12 +252,13 @@ export default function KendaraanPage() {
 
 
                     <div className="px-6 pb-6 pt-0">
-                      <Button
-                        onClick={() => setSelectedCarForModal(car)}
-                        className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold h-12 rounded-xl shadow-md shadow-blue-600/20 transition-all hover:scale-[1.02] active:scale-95"
-                      >
-                        Sewa Sekarang
-                      </Button>
+                      <Link href={`/kendaraan/${car.id}`} className="block w-full">
+                        <Button
+                          className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold h-12 rounded-xl shadow-md shadow-blue-600/20 transition-all hover:scale-[1.02] active:scale-95"
+                        >
+                          Sewa Sekarang
+                        </Button>
+                      </Link>
                     </div>
                   </motion.div>
                 ))}
@@ -376,78 +267,6 @@ export default function KendaraanPage() {
 
           </div>
         </section>
-
-
-        <AnimatePresence>
-          {selectedCarForModal && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-gray-100 relative"
-              >
-                <div className="flex justify-between items-center mb-6">
-                  <h3 className="text-2xl font-bold text-gray-900">
-                    Konfirmasi Pemesanan
-                  </h3>
-                  <button
-                    onClick={() => setSelectedCarForModal(null)}
-                    aria-label="Tutup popup"
-                    className="p-1 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
-                  >
-                    ✕
-                  </button>
-                </div>
-
-                <div className="relative h-44 rounded-2xl overflow-hidden mb-6 bg-gray-100">
-                  <Image
-                    src={selectedCarForModal.image}
-                    alt={selectedCarForModal.name}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-
-                <div className="space-y-3 mb-6">
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-500">Kendaraan</span>
-                    <span className="font-bold text-gray-900">{selectedCarForModal.name}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-500">Kategori</span>
-                    <span className="font-medium text-gray-900">{selectedCarForModal.category}</span>
-                  </div>
-                  <div className="flex justify-between items-center">
-                    <span className="text-gray-500">Tarif Sewa</span>
-                    <span className="font-extrabold text-blue-600 text-lg">
-                      Rp {selectedCarForModal.priceFormatted} / hari
-                    </span>
-                  </div>
-                </div>
-
-                <div className="flex gap-3">
-                  <Button
-                    variant="outline"
-                    onClick={() => setSelectedCarForModal(null)}
-                    className="flex-1 rounded-xl h-12"
-                  >
-                    Batal
-                  </Button>
-                  <Button
-                    onClick={() => {
-                      alert(`Terima kasih! Permintaan pemesanan untuk ${selectedCarForModal.name} telah diterima. Tim kami akan segera menghubungi Anda.`);
-                      setSelectedCarForModal(null);
-                    }}
-                    className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl h-12 shadow-md shadow-blue-600/30"
-                  >
-                    Lanjutkan Booking
-                  </Button>
-                </div>
-              </motion.div>
-            </div>
-          )}
-        </AnimatePresence>
 
       </main>
 
