@@ -1,133 +1,86 @@
+"use client";
+
+import { useState } from "react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
-  BookOpen,
-  Briefcase,
   CarFront,
   ChevronRight,
   ExternalLink,
   Heart,
-  Map,
-  Rocket,
-  Shirt,
   ShoppingCart,
-  Sparkles,
   UtensilsCrossed,
+  Utensils,
+  Dumbbell,
+  Users,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const TEMPLATE_CATEGORIES = [
-  { name: "Semua Design", count: "120+" },
-  { name: "Company Profile", count: "24+" },
-  { name: "Services", count: "20+" },
-  { name: "Toko Online / E-Commerce", count: "18+" },
-  { name: "Landing Page", count: "15+" },
-  { name: "Portfolio", count: "12+" },
-  { name: "Restaurant & Cafe", count: "10+" },
-  { name: "Laundry", count: "8+" },
-  { name: "Education", count: "7+" },
-  { name: "Automotive", count: "6+" },
-  { name: "Beauty & Salon", count: "6+" },
-  { name: "Travel & Tour", count: "5+" },
-  { name: "Property", count: "5+" },
-  { name: "Event & Wedding", count: "4+" },
-  { name: "SaaS / Startup", count: "3+" },
-  { name: "Jasa Profesional", count: "3+" },
+  { name: "Semua Design", count: 5 },
+  { name: "Automotive", count: 1 },
+  { name: "Restaurant & Cafe", count: 2 },
+  { name: "Gym & Wellness", count: 1 },
+  { name: "Community & Org", count: 1 },
 ];
 
 const SAMPLE_TEMPLATES = [
   {
     id: 1,
-    name: "LaundryPro",
-    category: "Laundry",
-    subcategory: "Business",
-    price: "Rp499.000",
-    image: "/images/web_ayocuci.webp",
-    tags: ["Laundry", "Business"],
-    icon: Shirt,
-  },
-  {
-    id: 2,
-    name: "RestoSpace",
-    category: "Restaurant",
-    subcategory: "Company Profile",
-    price: "Rp699.000",
-    image: "/images/web_stokin.webp",
-    tags: ["Restaurant", "Company Profile"],
-    icon: UtensilsCrossed,
-  },
-  {
-    id: 3,
-    name: "Shopify",
-    category: "E-Commerce",
-    subcategory: "UMKM",
-    price: "Rp799.000",
-    image: "/images/web_satuRupiah.webp",
-    tags: ["E-Commerce", "UMKM"],
-    icon: ShoppingCart,
-  },
-  {
-    id: 4,
     name: "Rentcar",
     category: "Automotive",
     subcategory: "Rental Mobil",
     price: "Rp649.000",
-    image: "/images/rentcar_template.png",
+    image: "/images/rentcar_template.webp",
     previewHref: "/demo/automotive/",
-    tags: ["Automotive", "Rental Mobil"],
+    tags: ["Automotive", "Rental Mobil", "Responsive"],
     icon: CarFront,
-  },  
+  },
+  {
+    id: 2,
+    name: "FoodFleet",
+    category: "Restaurant & Cafe",
+    subcategory: "Interactive Menu",
+    price: "Rp749.000",
+    image: "/images/foodfleet_template.webp",
+    previewHref: "/demo/restaurant-cafe-2/",
+    tags: ["Restaurant", "Cafe", "Interactive Menu"],
+    icon: UtensilsCrossed,
+  },
+  {
+    id: 3,
+    name: "BitePoint",
+    category: "Restaurant & Cafe",
+    subcategory: "Classic Diner",
+    price: "Rp599.000",
+    image: "/images/bitepoint_template.webp",
+    previewHref: "/demo/restaurant-cafe/",
+    tags: ["Restaurant", "Diner", "Modern Theme"],
+    icon: Utensils,
+  },
+  {
+    id: 4,
+    name: "GlowGym",
+    category: "Gym & Wellness",
+    subcategory: "Gym & Fitness",
+    price: "Rp699.000",
+    image: "/images/glowgym_template.webp",
+    previewHref: "/demo/beauty-wellness/",
+    tags: ["Fitness", "Gym", "Personal Trainer"],
+    icon: Dumbbell,
+  },
   {
     id: 5,
-    name: "BizLand",
-    category: "Company Profile",
-    subcategory: "Business",
-    price: "Rp599.000",
-    image: "/images/expertise-2.webp",
-    tags: ["Company Profile", "Business"],
-    icon: Briefcase,
-  },
-  {
-    id: 6,
-    name: "Travelin",
-    category: "Travel",
-    subcategory: "Tourism",
-    price: "Rp599.000",
-    image: "/images/expertise-5.webp",
-    tags: ["Travel", "Tourism"],
-    icon: Map,
-  },
-  {
-    id: 7,
-    name: "EduSmart",
-    category: "Education",
-    subcategory: "School",
-    price: "Rp499.000",
-    image: "/images/expertise-6.webp",
-    tags: ["Education", "School"],
-    icon: BookOpen,
-  },
-  {
-    id: 8,
-    name: "Glamour",
-    category: "Beauty",
-    subcategory: "Salon",
+    name: "OrgSpace",
+    category: "Community & Org",
+    subcategory: "Portal Organisasi",
     price: "Rp549.000",
-    image: "/images/expertise-4.webp",
-    tags: ["Beauty", "Salon"],
-    icon: Sparkles,
-  },
-  {
-    id: 9,
-    name: "StartUp",
-    category: "SaaS",
-    subcategory: "Startup",
-    price: "Rp395.000",
-    image: "/images/expertise-8.webp",
-    tags: ["Landing Page", "Startup"],
-    icon: Rocket,
+    image: "/images/orgspace_template.webp",
+    previewHref: "/demo/organization/",
+    tags: ["Community", "Organization", "Information Portal"],
+    icon: Users,
   },
 ];
 
@@ -135,6 +88,13 @@ const sectionBadgeClass =
   "rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm";
 
 export default function TemplatesPage() {
+  const [selectedCategory, setSelectedCategory] = useState("Semua Design");
+
+  const filteredTemplates = SAMPLE_TEMPLATES.filter((template) => {
+    if (selectedCategory === "Semua Design") return true;
+    return template.category === selectedCategory;
+  });
+
   return (
     <main className="min-h-screen overflow-hidden bg-[linear-gradient(180deg,#ffffff_0%,#f7fbf6_48%,#ffffff_100%)] text-slate-950">
       <section className="relative border-b border-emerald-100/70">
@@ -156,20 +116,21 @@ export default function TemplatesPage() {
           </div>
 
           <div className="mx-auto mt-9 flex max-w-5xl flex-wrap items-center justify-center gap-3">
-            {TEMPLATE_CATEGORIES.slice(0, 9).map((category, index) => (
-              <span
-                className={`rounded-full border px-4 py-2 text-sm font-semibold shadow-sm transition ${
-                  index === 0
+            {TEMPLATE_CATEGORIES.map((category) => (
+              <button
+                onClick={() => setSelectedCategory(category.name)}
+                className={`rounded-full border px-4 py-2 text-sm font-semibold shadow-sm transition cursor-pointer ${
+                  selectedCategory === category.name
                     ? "border-brand-primary bg-slate-950 text-white"
                     : "border-emerald-100 bg-white/80 text-slate-600 hover:border-brand-primary/40 hover:text-slate-950"
                 }`}
                 key={category.name}
               >
                 {category.name}
-                <span className={index === 0 ? "ml-2 text-brand-primary" : "ml-2 text-slate-400"}>
+                <span className={selectedCategory === category.name ? "ml-2 text-brand-primary" : "ml-2 text-slate-400"}>
                   {category.count}
                 </span>
-              </span>
+              </button>
             ))}
           </div>
         </div>
@@ -191,7 +152,7 @@ export default function TemplatesPage() {
         </div>
 
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {SAMPLE_TEMPLATES.map((template) => {
+          {filteredTemplates.map((template) => {
             const Icon = template.icon;
 
             return (
@@ -274,12 +235,6 @@ export default function TemplatesPage() {
               </Card>
             );
           })}
-        </div>
-
-        <div className="mt-12 text-center">
-          <Button className="rounded-full bg-slate-950 px-8 text-white shadow-none hover:bg-slate-800 hover:shadow-none" size="lg">
-            Lihat Design Lainnya
-          </Button>
         </div>
       </div>
 
