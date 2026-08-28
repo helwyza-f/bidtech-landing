@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Program Bulanan</title>
+  <desc id="desc">Ilustrasi rapat komunitas bulanan dengan kalender dan peserta.</desc>
+  <rect width="640" height="360" fill="#eaf3f7"/>
+  <rect x="72" y="70" width="496" height="230" rx="28" fill="#ffffff"/>
+  <rect x="102" y="104" width="142" height="156" rx="18" fill="#053f5c"/>
+  <rect x="122" y="132" width="102" height="18" rx="9" fill="#8fd0e2"/>
+  <rect x="122" y="166" width="34" height="34" rx="8" fill="#ffffff"/>
+  <rect x="168" y="166" width="34" height="34" rx="8" fill="#ffffff"/>
+  <rect x="122" y="212" width="34" height="34" rx="8" fill="#ffffff"/>
+  <rect x="168" y="212" width="34" height="34" rx="8" fill="#8fd0e2"/>
+  <circle cx="330" cy="170" r="38" fill="#f2c7a5"/>
+  <path d="M266 270c10-53 35-78 64-78s54 25 64 78H266z" fill="#0b4f71"/>
+  <circle cx="456" cy="178" r="32" fill="#d9a887"/>
+  <path d="M406 270c8-46 28-68 50-68s42 22 50 68H406z" fill="#14476a"/>
+</svg>

@@ -6,6 +6,7 @@ import { Star, ShieldCheck } from "lucide-react";
 import { motion, useScroll, useTransform, type Variants } from "framer-motion";
 
 export default function Hero() {
+  const basePath = process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "";
   const ref = useRef(null);
   const { scrollYProgress } = useScroll({
     target: ref,
@@ -54,7 +55,7 @@ export default function Hero() {
       >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
-          src="/images/hero_section3.webp"
+          src={`${basePath}/images/hero_section3.webp`}
           alt=""
           aria-hidden="true"
           style={{

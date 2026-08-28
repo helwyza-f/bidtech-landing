@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "demos:build": "node ../scripts/build-template-demos.js",
+    "demos:build:skip-install": "node ../scripts/build-template-demos.js --skip-install"
   },
   "dependencies": {
     "@tailwindcss/vite": "^4.3.3",

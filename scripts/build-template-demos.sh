@@ -26,6 +26,7 @@ DEMOS=(
   "restaurant-cafe:restaurant-cafe/template-1"
   "restaurant-cafe-2:restaurant-cafe/template-2"
   "organization:organization/template-1"
+  "community-pro:organization/template-2"
 )
 
 DEMO_ROOT="$REPO_ROOT/frontend/public/demo"

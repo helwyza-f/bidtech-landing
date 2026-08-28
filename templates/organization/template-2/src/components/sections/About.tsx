@@ -50,8 +50,8 @@ const LEADERSHIP_TEAM = (t: (key: TranslationKey) => string) => ({
   ketuaUmum: {
     name: "Nama Ketua Umum",
     role: t("about.org.roleKetuaUmum"),
-    image: "/img/placeholder.svg",
-    alt: "Foto placeholder pengurus",
+    image: "/img/avatar-chair.svg",
+    alt: "Avatar contoh ketua umum",
     imagePosition: "center 18%",
     cardWidth: "w-56 md:w-64",
     imageSize: "h-28 w-28 md:h-32 md:w-32"
@@ -60,8 +60,8 @@ const LEADERSHIP_TEAM = (t: (key: TranslationKey) => string) => ({
     {
       name: "Nama Co Founder 1",
       role: t("about.org.roleCoFounder"),
-      image: "/img/placeholder.svg",
-      alt: "Foto placeholder pengurus",
+      image: "/img/avatar-founder-1.svg",
+      alt: "Avatar contoh co-founder pertama",
       imagePosition: "center 16%",
       cardWidth: "w-52 md:w-56",
       imageSize: "h-24 w-24 md:h-28 md:w-28"
@@ -69,8 +69,8 @@ const LEADERSHIP_TEAM = (t: (key: TranslationKey) => string) => ({
     {
       name: "Nama Co Founder 2",
       role: t("about.org.roleCoFounder"),
-      image: "/img/placeholder.svg",
-      alt: "Foto placeholder pengurus",
+      image: "/img/avatar-founder-2.svg",
+      alt: "Avatar contoh co-founder kedua",
       imagePosition: "center 20%",
       cardWidth: "w-52 md:w-56",
       imageSize: "h-24 w-24 md:h-28 md:w-28"
@@ -372,7 +372,7 @@ export default function AboutSection() {
             <ScrollReveal animation="scale-up" delay={100}>
               <div className="group flex items-center justify-center p-3 md:p-6 bg-slate-50/50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all duration-300 w-36 h-20 md:w-52 md:h-28 hover:bg-white hover:shadow-lg hover:shadow-slate-200/50">
                 <Image
-                  src={asset("/img/placeholder.svg")}
+                  src={asset("/img/partner-logo-1.svg")}
                   alt="Logo Mitra 1"
                   width={120}
                   height={120}
@@ -386,7 +386,7 @@ export default function AboutSection() {
             <ScrollReveal animation="scale-up" delay={250}>
               <div className="group flex items-center justify-center p-3 md:p-6 bg-slate-50/50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all duration-300 w-36 h-20 md:w-52 md:h-28 hover:bg-white hover:shadow-lg hover:shadow-slate-200/50">
                 <Image
-                  src={asset("/img/placeholder.svg")}
+                  src={asset("/img/partner-logo-2.svg")}
                   alt="Logo Mitra 2"
                   width={120}
                   height={120}

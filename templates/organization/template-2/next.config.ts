@@ -12,6 +12,9 @@ const nextConfig: NextConfig = {
   basePath: BASE_PATH,
   assetPrefix: BASE_PATH,
   trailingSlash: true,
+  turbopack: {
+    root: process.cwd(),
+  },
   images: {
     unoptimized: true,
     // Next.js 16 requires an explicit allowlist for <Image quality>.

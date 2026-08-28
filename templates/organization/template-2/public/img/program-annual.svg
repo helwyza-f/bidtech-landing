@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Program Tahunan</title>
+  <desc id="desc">Ilustrasi acara tahunan organisasi dengan panggung dan audiens.</desc>
+  <rect width="640" height="360" fill="#eef4ff"/>
+  <path d="M74 285h492v38H74z" fill="#053f5c"/>
+  <rect x="128" y="74" width="384" height="166" rx="26" fill="#ffffff"/>
+  <path d="M160 214h320v38H160z" fill="#0b4f71"/>
+  <circle cx="240" cy="151" r="36" fill="#f2c7a5"/>
+  <path d="M187 214c9-44 29-66 53-66s44 22 53 66H187z" fill="#06465f"/>
+  <path d="M338 119h112v16H338zM338 154h92v16h-92zM338 189h124v16H338z" fill="#8fd0e2"/>
+  <circle cx="170" cy="300" r="13" fill="#8fd0e2"/>
+  <circle cx="236" cy="300" r="13" fill="#8fd0e2"/>
+  <circle cx="302" cy="300" r="13" fill="#8fd0e2"/>
+  <circle cx="368" cy="300" r="13" fill="#8fd0e2"/>
+  <circle cx="434" cy="300" r="13" fill="#8fd0e2"/>
+  <circle cx="500" cy="300" r="13" fill="#8fd0e2"/>
+</svg>

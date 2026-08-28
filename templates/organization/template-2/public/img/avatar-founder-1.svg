@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" role="img" aria-labelledby="title desc">
+  <title id="title">Avatar Co-Founder 1</title>
+  <desc id="desc">Ilustrasi avatar co-founder dengan kemeja dan blazer.</desc>
+  <rect width="240" height="240" rx="120" fill="#eef4ff"/>
+  <circle cx="120" cy="91" r="39" fill="#d9a887"/>
+  <path d="M67 210c9-50 31-78 53-78s44 28 53 78H67z" fill="#14476a"/>
+  <path d="M94 145h52l-26 37-26-37z" fill="#f8fafc"/>
+  <path d="M82 88c2-29 25-51 58-43 22 5 35 24 33 51-20 0-39-9-54-26-7 12-20 20-37 24v-6z" fill="#1f2937"/>
+  <path d="M92 162l28 20 28-20 9 48H83l9-48z" fill="#0d5e82"/>
+</svg>

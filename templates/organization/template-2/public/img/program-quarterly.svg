@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Program Triwulan</title>
+  <desc id="desc">Ilustrasi workshop triwulan dengan papan presentasi dan diskusi.</desc>
+  <rect width="640" height="360" fill="#edf8f7"/>
+  <rect x="82" y="62" width="476" height="236" rx="28" fill="#ffffff"/>
+  <rect x="126" y="98" width="228" height="136" rx="16" fill="#053f5c"/>
+  <path d="M158 199l54-54 38 38 49-49 27 65H158z" fill="#8fd0e2"/>
+  <rect x="383" y="113" width="116" height="14" rx="7" fill="#0b6b7d"/>
+  <rect x="383" y="148" width="92" height="14" rx="7" fill="#94a3b8"/>
+  <rect x="383" y="181" width="132" height="14" rx="7" fill="#94a3b8"/>
+  <circle cx="210" cy="274" r="28" fill="#f2c7a5"/>
+  <circle cx="320" cy="274" r="28" fill="#e6b894"/>
+  <circle cx="430" cy="274" r="28" fill="#d9a887"/>
+</svg>

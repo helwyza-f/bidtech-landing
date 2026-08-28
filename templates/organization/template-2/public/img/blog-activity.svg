@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Berita Kegiatan</title>
+  <desc id="desc">Ilustrasi berita kegiatan organisasi.</desc>
+  <rect width="640" height="360" fill="#eaf3f7"/>
+  <rect x="92" y="72" width="456" height="236" rx="28" fill="#ffffff"/>
+  <rect x="128" y="108" width="180" height="164" rx="18" fill="#053f5c"/>
+  <circle cx="218" cy="166" r="36" fill="#8fd0e2"/>
+  <path d="M162 248c9-48 31-72 56-72s47 24 56 72H162z" fill="#ffffff"/>
+  <rect x="344" y="120" width="122" height="16" rx="8" fill="#0b4f71"/>
+  <rect x="344" y="160" width="164" height="14" rx="7" fill="#94a3b8"/>
+  <rect x="344" y="192" width="140" height="14" rx="7" fill="#94a3b8"/>
+  <rect x="344" y="224" width="96" height="14" rx="7" fill="#94a3b8"/>
+</svg>

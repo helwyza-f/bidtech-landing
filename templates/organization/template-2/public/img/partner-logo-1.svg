@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" role="img" aria-labelledby="title desc">
+  <title id="title">Logo Mitra Contoh Satu</title>
+  <desc id="desc">Logo mitra contoh berbentuk lingkaran dan teks partner.</desc>
+  <rect width="240" height="120" rx="24" fill="#f8fafc"/>
+  <circle cx="70" cy="60" r="32" fill="#053f5c"/>
+  <circle cx="70" cy="60" r="18" fill="#8fd0e2"/>
+  <path d="M122 43h70v12h-70zM122 65h52v10h-52z" fill="#053f5c"/>
+</svg>

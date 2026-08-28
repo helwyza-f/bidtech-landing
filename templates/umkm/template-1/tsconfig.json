@@ -12,7 +12,7 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
-    "ignoreDeprecations": "6.0",
+    "ignoreDeprecations": "5.0",
     "plugins": [{ "name": "next" }],
     "baseUrl": ".",
     "typeRoots": ["./node_modules/@types", "../../../frontend/node_modules/@types"],

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
+  <title id="title">Artikel Organisasi</title>
+  <desc id="desc">Ilustrasi artikel dan kabar organisasi.</desc>
+  <rect width="640" height="360" fill="#edf8f7"/>
+  <rect x="112" y="58" width="416" height="248" rx="26" fill="#ffffff"/>
+  <path d="M160 112h320v22H160z" fill="#053f5c"/>
+  <path d="M160 164h190v14H160zM160 196h270v14H160zM160 228h238v14H160z" fill="#94a3b8"/>
+  <circle cx="452" cy="229" r="44" fill="#8fd0e2"/>
+  <path d="M425 247l20-31 19 22 15-18 22 27h-76z" fill="#0b4f71"/>
+</svg>
