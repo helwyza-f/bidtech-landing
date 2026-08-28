@@ -176,6 +176,36 @@ export const PROGRAMS = [
       'https://images.unsplash.com/photo-1576091160550-2173dba999ef?q=80&w=800&auto=format&fit=crop',
     category: 'Pemberdayaan',
   },
+  {
+    id: 10,
+    tag: 'PENDIDIKAN',
+    title: 'Pelatihan Guru & Tutor Komunitas',
+    description:
+      'Peningkatan kapasitas pengajar sukarelawan melalui lokakarya pedagogik modern dan kurikulum inklusif.',
+    image:
+      'https://images.unsplash.com/photo-1524178232363-1fb2b075b655?q=80&w=800&auto=format&fit=crop',
+    category: 'Pendidikan',
+  },
+  {
+    id: 11,
+    tag: 'KESEHATAN',
+    title: 'Pos Layanan Sehat Terpadu',
+    description:
+      'Pemeriksaan kesehatan cuma-cuma, penyuluhan sanitasi dasar, dan edukasi pola hidup bersih bersama tenaga medis.',
+    image:
+      'https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?q=80&w=800&auto=format&fit=crop',
+    category: 'Kesehatan',
+  },
+  {
+    id: 12,
+    tag: 'PEMBERDAYAAN',
+    title: 'Inkubasi Wirausaha Mandiri',
+    description:
+      'Pendampingan rintisan usaha mikro, akses permodalan skala kecil, serta bimbingan pemasaran digital untuk warga.',
+    image:
+      'https://images.unsplash.com/photo-1556761175-5973dc0f32e7?q=80&w=800&auto=format&fit=crop',
+    category: 'Pemberdayaan',
+  },
 ];
 
 // Gallery Documentation

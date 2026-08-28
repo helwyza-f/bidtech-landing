@@ -14,7 +14,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, margin: '-80px' }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
             className="lg:col-span-6 flex flex-col justify-between space-y-6"
           >
@@ -23,7 +23,7 @@ export default function Contact() {
               <motion.p
                 initial={{ opacity: 0, y: 10 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: '-80px' }}
+                viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.4 }}
                 className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#E05A47] mb-3"
               >
@@ -32,7 +32,7 @@ export default function Contact() {
               <motion.h2
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: '-80px' }}
+                viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.5, delay: 0.1 }}
                 className="text-3xl sm:text-4xl lg:text-[42px] font-black text-[#0D4D44] tracking-tight leading-[1.15] mb-4"
               >
@@ -43,7 +43,7 @@ export default function Contact() {
               <motion.p
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: '-80px' }}
+                viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.5, delay: 0.2 }}
                 className="text-sm sm:text-base text-gray-600 leading-relaxed max-w-lg"
               >
@@ -125,7 +125,7 @@ export default function Contact() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, margin: '-80px' }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5, delay: 0.15 }}
             className="lg:col-span-6 bg-white rounded-3xl p-4 sm:p-5 border border-gray-200/90 shadow-xl shadow-gray-200/50 flex flex-col justify-between h-full"
           >

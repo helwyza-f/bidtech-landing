@@ -13,7 +13,7 @@ interface CountUpProps {
 
 export default function CountUp({ end, suffix = '', prefix = '', duration = 2, className = '' }: CountUpProps) {
   const ref = useRef<HTMLSpanElement>(null);
-  const isInView = useInView(ref, { once: false, margin: '-80px' });
+  const isInView = useInView(ref, { once: true, margin: '-40px' });
   
   // Create a motion value starting at 0
   const count = useMotionValue(0);
@@ -28,8 +28,6 @@ export default function CountUp({ end, suffix = '', prefix = '', duration = 2, c
   useEffect(() => {
     if (isInView) {
       count.set(end);
-    } else {
-      count.set(0); // Reset when out of view so it repeats
     }
   }, [isInView, count, end]);
 
