@@ -37,7 +37,7 @@ export default function HowToBook() {
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5 }}
             className="text-xs font-semibold tracking-[0.25em] text-zinc-400 uppercase mb-4"
           >
@@ -47,7 +47,7 @@ export default function HowToBook() {
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white"
           >
@@ -68,7 +68,7 @@ export default function HowToBook() {
                   key={step.number}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.6, delay: index * 0.15 }}
                   className="flex flex-col items-center text-center group"
                 >

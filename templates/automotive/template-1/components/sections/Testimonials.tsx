@@ -66,7 +66,7 @@ export default function Testimonials() {
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.6 }}
             className="lg:col-span-4 flex flex-col justify-between"
           >
@@ -124,7 +124,7 @@ export default function Testimonials() {
                   key={item.id}
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: false, amount: 0.2 }}
+                  viewport={{ once: true, amount: 0.2 }}
                   transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="w-full sm:w-[calc(50%-12px)] flex-shrink-0 bg-blue-600 rounded-[28px] p-8 md:p-9 text-white shadow-xl shadow-blue-600/20 flex flex-col justify-between"
                 >
