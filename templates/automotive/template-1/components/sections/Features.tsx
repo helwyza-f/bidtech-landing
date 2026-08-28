@@ -101,14 +101,10 @@ export default function Features() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5 }}
             className="max-w-2xl"
           >
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100/80 border border-blue-200 text-blue-700 text-xs sm:text-sm font-semibold mb-4">
-              <span>🚘</span>
-              <span>Pilihan Armada Terbaik</span>
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight leading-tight">
               Eksplorasi Koleksi Mobil <br className="hidden sm:inline" />
               Premium Kami
@@ -122,7 +118,7 @@ export default function Features() {
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="flex items-center gap-3 mt-6 md:mt-0"
           >
@@ -160,7 +156,7 @@ export default function Features() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.5, delay: 0.15 }}
           className="flex items-center gap-2 sm:gap-3 mb-8 sm:mb-10 overflow-x-auto pb-2 no-scrollbar"
         >
@@ -192,7 +188,7 @@ export default function Features() {
                 key={car.id}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.15 }}
+                viewport={{ once: true, amount: 0.15 }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
                 className="w-full sm:w-[calc(50%-12px)] lg:w-[calc(33.333%-21.333px)] flex-shrink-0 snap-center bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl hover:shadow-blue-600/10 border border-gray-100 transition-all duration-300 group flex flex-col justify-between"
               >

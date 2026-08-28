@@ -57,7 +57,7 @@ export default function Testimonials() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: '-80px' }}
+          viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.5 }}
           className="mb-12 flex flex-col sm:flex-row sm:items-end justify-between gap-4"
         >
@@ -65,7 +65,7 @@ export default function Testimonials() {
             <motion.p
               initial={{ opacity: 0, y: 10 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: '-80px' }}
+              viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.4 }}
               className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#E05A47] mb-2"
             >
@@ -74,7 +74,7 @@ export default function Testimonials() {
             <motion.h2
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: '-80px' }}
+              viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-gray-900 tracking-tight"
             >
@@ -105,7 +105,7 @@ export default function Testimonials() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: '-80px' }}
+          viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="relative overflow-hidden py-4 -mx-4 px-4"
         >
@@ -207,7 +207,7 @@ export default function Testimonials() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: '-80px' }}
+          viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.4, delay: 0.3 }}
           className="flex items-center justify-center gap-2 mt-8"
         >

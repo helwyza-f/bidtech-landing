@@ -24,7 +24,7 @@ export function Button({
       className={cn(
         "group inline-flex min-h-12 items-center justify-center gap-3",
         "rounded-full px-6 text-sm font-semibold",
-        "transition-all duration-300 ease-out",
+        "transition-all duration-300 ease-out active:scale-[0.98]",
 
         variant === "primary" &&
           "bg-[var(--color-primary)] text-white hover:bg-[var(--color-primary-hover)]",

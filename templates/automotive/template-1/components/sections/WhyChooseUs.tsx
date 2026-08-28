@@ -14,7 +14,7 @@ export default function WhyChooseUs() {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="lg:col-span-5 flex justify-center"
           >
@@ -37,7 +37,7 @@ export default function WhyChooseUs() {
               <motion.div
                 initial={{ opacity: 0, scale: 0.8, y: 20 }}
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.2 }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={{ delay: 0.2, duration: 0.5, type: "spring", stiffness: 200 }}
                 className="absolute -bottom-6 -right-2 sm:-right-6 bg-blue-600 text-white px-6 py-5 sm:px-7 sm:py-6 rounded-2xl shadow-xl shadow-blue-600/30 z-10"
               >
@@ -55,7 +55,7 @@ export default function WhyChooseUs() {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: false, amount: 0.2 }}
+            viewport={{ once: true, amount: 0.2 }}
             transition={{ duration: 0.7, ease: "easeOut" }}
             className="lg:col-span-7"
           >
@@ -76,7 +76,7 @@ export default function WhyChooseUs() {
                     key={feature.title}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: false, amount: 0.2 }}
+                    viewport={{ once: true, amount: 0.2 }}
                     transition={{ delay: 0.1 * idx, duration: 0.5 }}
                     className="group flex flex-col items-start"
                   >

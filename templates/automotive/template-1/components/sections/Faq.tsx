@@ -46,7 +46,7 @@ export default function Faq() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, amount: 0.2 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
           className="text-center mb-12 sm:mb-16"
         >
@@ -67,7 +67,7 @@ export default function Faq() {
                 key={item.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, amount: 0.2 }}
+                viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.4, delay: idx * 0.08 }}
                 className="bg-white rounded-2xl shadow-sm border border-gray-100/80 overflow-hidden transition-shadow duration-300 hover:shadow-md"
               >

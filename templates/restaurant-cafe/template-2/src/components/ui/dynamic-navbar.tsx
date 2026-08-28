@@ -3,7 +3,6 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, ShoppingBag, Sun, Moon } from "lucide-react";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 import { cn } from "@/lib/utils";
 
 export interface NavItem {
@@ -106,9 +105,9 @@ export function DynamicNavbar({
     const target = document.querySelector(href);
     if (!target) return;
 
-    const smoother = ScrollSmoother.get();
-    if (smoother) {
-      smoother.scrollTo(target, true, "top 80px");
+    const lenis = (window as unknown as { __lenis?: { scrollTo: (target: Element | string, opts?: { offset?: number; duration?: number }) => void } }).__lenis;
+    if (lenis) {
+      lenis.scrollTo(target, { offset: -80, duration: 1.2 });
     } else {
       const top = target.getBoundingClientRect().top + window.pageYOffset - 80;
       window.scrollTo({ top, behavior: "smooth" });
@@ -182,7 +181,7 @@ export function DynamicNavbar({
         }}
       >
         <div className="flex items-center gap-1 px-2 py-2">
-          <span className="font-display font-bold text-base px-3 py-1.5 text-foreground select-none cursor-default">
+          <span className="font-display font-bold text-sm sm:text-base px-2.5 sm:px-3 py-1.5 text-foreground select-none cursor-default whitespace-nowrap">
             {brand}
           </span>
 

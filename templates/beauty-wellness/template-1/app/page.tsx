@@ -11,9 +11,13 @@ import { Testimonials } from "@/components/sections/Testimonials";
 import { ConversionCTA } from "@/components/sections/ConversionCTA";
 import { FAQ } from "@/components/sections/FAQ";
 
+import { ScrollProgress } from "@/components/motion/ScrollProgress";
+
 export default function Home() {
   return (
     <>
+      <ScrollProgress />
+
       <Navbar />
 
       <main>

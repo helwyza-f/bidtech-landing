@@ -45,9 +45,10 @@ Template landing page modern, premium, dan berkinerja tinggi untuk bisnis **Rent
   - Header *always-fixed/sticky* dengan *backdrop blur*, indikator navigasi aktif animasi, dan *scroll-spy*.
   - Footer 4 kolom lengkap dengan logo, media sosial, tautan cepat, kontak telepon/email/jam operasional, alamat kantor pusat, dan legalitas.
 
-- ⚡ **Full Screen Layout & Repeated Scroll Animations**:
+- ⚡ **Full Screen Layout & Clean Scroll Animations**:
   - Setiap section dirancang *full viewport* (`min-h-screen`) dengan penataan vertikal yang seimbang.
-  - Animasi berulang secara dinamis setiap kali pengguna melakukan scroll (*`viewport={{ once: false }}`*).
+  - Animasi scroll berjalan halus sekali saat elemen masuk ke viewport (*`viewport={{ once: true }}`*) tanpa loop berulang.
+  - Dilengkapi integrasi **Lenis Smooth Scroll** untuk pengalaman scroll yang mulus dan premium.
 
 ---
 

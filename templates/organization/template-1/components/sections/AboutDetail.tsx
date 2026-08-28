@@ -1,12 +1,36 @@
 'use client';
 
+import { useState, useRef } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { motion } from 'framer-motion';
-import { Eye, Target, Heart, Award, Users, CheckCircle2 } from 'lucide-react';
+import { Eye, Target, Heart, Award, Users, CheckCircle2, ChevronLeft, ChevronRight } from 'lucide-react';
 import { ABOUT_DATA, ORGANIZATION } from '@/lib/constants';
 
 export default function AboutDetail() {
+  const fondasiScrollRef = useRef<HTMLDivElement>(null);
+  const [activeFondasiIndex, setActiveFondasiIndex] = useState(0);
+
+  const handleFondasiScroll = () => {
+    if (!fondasiScrollRef.current) return;
+    const { scrollLeft, clientWidth } = fondasiScrollRef.current;
+    const cardWidth = clientWidth * 0.82;
+    const newIndex = Math.round(scrollLeft / (cardWidth || 1));
+    setActiveFondasiIndex(Math.min(Math.max(0, newIndex), ABOUT_DATA.cards.length - 1));
+  };
+
+  const scrollToFondasi = (idx: number) => {
+    if (!fondasiScrollRef.current) return;
+    const cards = fondasiScrollRef.current.children;
+    if (cards[idx]) {
+      (cards[idx] as HTMLElement).scrollIntoView({
+        behavior: 'smooth',
+        block: 'nearest',
+        inline: 'center',
+      });
+      setActiveFondasiIndex(idx);
+    }
+  };
   return (
     <div className="bg-white">
       {/* 1. Top Detail Hero: Text on Left, Image on Right */}
@@ -88,7 +112,7 @@ export default function AboutDetail() {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: '-80px' }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5 }}
             className="text-center max-w-3xl mx-auto mb-12"
           >
@@ -100,77 +124,119 @@ export default function AboutDetail() {
             </h2>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {/* Card 1: Visi */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: '-80px' }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 350, damping: 25 }}
-              className="group relative overflow-hidden p-8 rounded-2xl bg-white border border-gray-200/90 shadow-sm hover:shadow-2xl hover:shadow-[#0D4D44]/25 hover:bg-[#0D4D44] hover:border-[#0D4D44] transition-all duration-300 flex flex-col justify-start cursor-pointer"
+          <div>
+            <div
+              ref={fondasiScrollRef}
+              onScroll={handleFondasiScroll}
+              className="flex md:grid md:grid-cols-3 gap-6 overflow-x-auto md:overflow-visible snap-x snap-mandatory no-scrollbar pb-3 pt-1 -mx-4 px-4 sm:mx-0 sm:px-0"
             >
-              {/* Ambient Glow on Hover */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Card 1: Visi */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                className="w-[82vw] sm:w-[320px] md:w-auto shrink-0 snap-center group relative overflow-hidden p-8 rounded-2xl bg-white border border-gray-200/90 shadow-sm hover:shadow-2xl hover:shadow-[#0D4D44]/25 hover:bg-[#0D4D44] hover:border-[#0D4D44] transition-all duration-300 flex flex-col justify-start cursor-pointer"
+              >
+                {/* Ambient Glow on Hover */}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Icon Container with Badge */}
-              <div className="w-14 h-14 rounded-2xl bg-teal-50 group-hover:bg-white/15 flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]">
-                <Eye className="w-7 h-7 text-[#0D4D44] group-hover:text-[#5EEAD4] transition-colors duration-300" strokeWidth={1.75} />
-              </div>
-              <h3 className="text-xl font-extrabold text-[#0D4D44] group-hover:text-white mb-3 transition-colors duration-300">Visi</h3>
-              <p className="text-sm text-gray-600 group-hover:text-gray-200 leading-relaxed transition-colors duration-300">
-                {ABOUT_DATA.cards[0].description}
-              </p>
-            </motion.div>
+                {/* Icon Container with Badge */}
+                <div className="w-14 h-14 rounded-2xl bg-teal-50 group-hover:bg-white/15 flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]">
+                  <Eye className="w-7 h-7 text-[#0D4D44] group-hover:text-[#5EEAD4] transition-colors duration-300" strokeWidth={1.75} />
+                </div>
+                <h3 className="text-xl font-extrabold text-[#0D4D44] group-hover:text-white mb-3 transition-colors duration-300">Visi</h3>
+                <p className="text-sm text-gray-600 group-hover:text-gray-200 leading-relaxed transition-colors duration-300">
+                  {ABOUT_DATA.cards[0].description}
+                </p>
+              </motion.div>
 
-            {/* Card 2: Misi */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: '-80px' }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 350, damping: 25, delay: 0.05 }}
-              className="group relative overflow-hidden p-8 rounded-2xl bg-white border border-gray-200/90 shadow-sm hover:shadow-2xl hover:shadow-[#0D4D44]/25 hover:bg-[#0D4D44] hover:border-[#0D4D44] transition-all duration-300 flex flex-col justify-start cursor-pointer"
-            >
-              {/* Ambient Glow on Hover */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Card 2: Misi */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 350, damping: 25, delay: 0.05 }}
+                className="w-[82vw] sm:w-[320px] md:w-auto shrink-0 snap-center group relative overflow-hidden p-8 rounded-2xl bg-white border border-gray-200/90 shadow-sm hover:shadow-2xl hover:shadow-[#0D4D44]/25 hover:bg-[#0D4D44] hover:border-[#0D4D44] transition-all duration-300 flex flex-col justify-start cursor-pointer"
+              >
+                {/* Ambient Glow on Hover */}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Icon Container with Badge */}
-              <div className="w-14 h-14 rounded-2xl bg-teal-50 group-hover:bg-white/15 flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]">
-                <Target className="w-7 h-7 text-[#0D4D44] group-hover:text-[#5EEAD4] transition-colors duration-300" strokeWidth={1.75} />
-              </div>
-              <h3 className="text-xl font-extrabold text-[#0D4D44] group-hover:text-white mb-3 transition-colors duration-300">Misi</h3>
-              <p className="text-sm text-gray-600 group-hover:text-gray-200 leading-relaxed transition-colors duration-300">
-                {ABOUT_DATA.cards[1].description}
-              </p>
-            </motion.div>
+                {/* Icon Container with Badge */}
+                <div className="w-14 h-14 rounded-2xl bg-teal-50 group-hover:bg-white/15 flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]">
+                  <Target className="w-7 h-7 text-[#0D4D44] group-hover:text-[#5EEAD4] transition-colors duration-300" strokeWidth={1.75} />
+                </div>
+                <h3 className="text-xl font-extrabold text-[#0D4D44] group-hover:text-white mb-3 transition-colors duration-300">Misi</h3>
+                <p className="text-sm text-gray-600 group-hover:text-gray-200 leading-relaxed transition-colors duration-300">
+                  {ABOUT_DATA.cards[1].description}
+                </p>
+              </motion.div>
 
-            {/* Card 3: Nilai-Nilai */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: '-80px' }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              transition={{ type: "spring", stiffness: 350, damping: 25, delay: 0.1 }}
-              className="group relative overflow-hidden p-8 rounded-2xl bg-white border border-gray-200/90 shadow-sm hover:shadow-2xl hover:shadow-[#0D4D44]/25 hover:bg-[#0D4D44] hover:border-[#0D4D44] transition-all duration-300 flex flex-col justify-start cursor-pointer"
-            >
-              {/* Ambient Glow on Hover */}
-              <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+              {/* Card 3: Nilai-Nilai */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-40px' }}
+                whileHover={{ y: -8, scale: 1.02 }}
+                transition={{ type: "spring", stiffness: 350, damping: 25, delay: 0.1 }}
+                className="w-[82vw] sm:w-[320px] md:w-auto shrink-0 snap-center group relative overflow-hidden p-8 rounded-2xl bg-white border border-gray-200/90 shadow-sm hover:shadow-2xl hover:shadow-[#0D4D44]/25 hover:bg-[#0D4D44] hover:border-[#0D4D44] transition-all duration-300 flex flex-col justify-start cursor-pointer"
+              >
+                {/* Ambient Glow on Hover */}
+                <div className="absolute -top-10 -right-10 w-32 h-32 bg-white/10 rounded-full blur-2xl pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-              {/* Icon Container with Badge */}
-              <div className="w-14 h-14 rounded-2xl bg-red-50 group-hover:bg-white/15 flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]">
-                <Heart className="w-7 h-7 text-[#E05A47] group-hover:text-[#5EEAD4] transition-colors duration-300" strokeWidth={1.75} />
-              </div>
-              <h3 className="text-xl font-extrabold text-[#0D4D44] group-hover:text-white mb-3 transition-colors duration-300">Nilai-Nilai Kami</h3>
-              <ul className="space-y-2.5 text-sm text-gray-600 group-hover:text-gray-200 transition-colors duration-300">
-                {ABOUT_DATA.cards[2].bullets?.map((bullet, i) => (
-                  <li key={i} className="flex items-center gap-2.5 group-hover:translate-x-1 transition-transform duration-300">
-                    <CheckCircle2 className="w-4 h-4 text-[#E05A47] group-hover:text-[#5EEAD4] shrink-0 transition-colors duration-300" />
-                    <span>{bullet}</span>
-                  </li>
+                {/* Icon Container with Badge */}
+                <div className="w-14 h-14 rounded-2xl bg-red-50 group-hover:bg-white/15 flex items-center justify-center mb-5 transition-all duration-300 group-hover:scale-110 group-hover:rotate-[-4deg]">
+                  <Heart className="w-7 h-7 text-[#E05A47] group-hover:text-[#5EEAD4] transition-colors duration-300" strokeWidth={1.75} />
+                </div>
+                <h3 className="text-xl font-extrabold text-[#0D4D44] group-hover:text-white mb-3 transition-colors duration-300">Nilai-Nilai Kami</h3>
+                <ul className="space-y-2.5 text-sm text-gray-600 group-hover:text-gray-200 transition-colors duration-300">
+                  {ABOUT_DATA.cards[2].bullets?.map((bullet, i) => (
+                    <li key={i} className="flex items-center gap-2.5 group-hover:translate-x-1 transition-transform duration-300">
+                      <CheckCircle2 className="w-4 h-4 text-[#E05A47] group-hover:text-[#5EEAD4] shrink-0 transition-colors duration-300" />
+                      <span>{bullet}</span>
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
+
+            {/* Mobile Pagination & Navigation Arrows */}
+            <div className="md:hidden flex items-center justify-between gap-4 mt-5 px-4">
+              <button
+                onClick={() => scrollToFondasi(Math.max(0, activeFondasiIndex - 1))}
+                disabled={activeFondasiIndex === 0}
+                className="w-9 h-9 rounded-full bg-white hover:bg-[#0D4D44] hover:text-white text-gray-700 disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center transition-all active:scale-95 shadow-sm border border-gray-200"
+                aria-label="Sebelumnya"
+              >
+                <ChevronLeft className="w-4 h-4" />
+              </button>
+
+              <div className="flex items-center gap-2">
+                {ABOUT_DATA.cards.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => scrollToFondasi(idx)}
+                    className={`transition-all duration-300 rounded-full ${
+                      activeFondasiIndex === idx
+                        ? 'w-6 h-2 bg-[#0D4D44]'
+                        : 'w-2 h-2 bg-gray-300 hover:bg-gray-400'
+                    }`}
+                    aria-label={`Lihat kartu ${idx + 1}`}
+                  />
                 ))}
-              </ul>
-            </motion.div>
+              </div>
+
+              <button
+                onClick={() => scrollToFondasi(Math.min(ABOUT_DATA.cards.length - 1, activeFondasiIndex + 1))}
+                disabled={activeFondasiIndex === ABOUT_DATA.cards.length - 1}
+                className="w-9 h-9 rounded-full bg-white hover:bg-[#0D4D44] hover:text-white text-gray-700 disabled:opacity-30 disabled:pointer-events-none flex items-center justify-center transition-all active:scale-95 shadow-sm border border-gray-200"
+                aria-label="Selanjutnya"
+              >
+                <ChevronRight className="w-4 h-4" />
+              </button>
+            </div>
           </div>
         </div>
       </section>
@@ -184,7 +250,7 @@ export default function AboutDetail() {
                 key={idx}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: '-80px' }}
+                viewport={{ once: true, margin: '-40px' }}
                 transition={{ duration: 0.5, delay: idx * 0.1 }}
                 className="p-4 rounded-xl bg-gray-50/50"
               >

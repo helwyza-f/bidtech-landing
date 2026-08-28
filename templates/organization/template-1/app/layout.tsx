@@ -3,6 +3,7 @@ import '../styles/globals.css';
 import { ORGANIZATION } from '@/lib/constants';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
+import SmoothScroll from '@/components/providers/SmoothScroll';
 
 export const metadata: Metadata = {
   title: `${ORGANIZATION.name} - ${ORGANIZATION.tagline}`,
@@ -23,11 +24,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id" className="scroll-smooth">
+    <html lang="id">
       <body className="bg-white text-gray-900 antialiased selection:bg-blue-500 selection:text-white">
-        <Header />
-        {children}
-        <Footer />
+        <SmoothScroll>
+          <Header />
+          {children}
+          <Footer />
+        </SmoothScroll>
       </body>
     </html>
   );

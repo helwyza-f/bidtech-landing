@@ -13,6 +13,7 @@ import { siteConfig } from "@/data/site";
 import { cn } from "@/lib/utils";
 
 export function Navbar() {
+  const [activeSection, setActiveSection] = useState<string | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -43,6 +44,70 @@ export function Navbar() {
       document.body.style.overflow = "";
     };
   }, [isMenuOpen]);
+
+  useEffect(() => {
+    const sectionIds = siteConfig.navigation
+      .map((item) => item.href)
+      .filter((href) => href.startsWith("#"))
+      .map((href) => href.slice(1));
+
+    const sections = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter(
+        (section): section is HTMLElement =>
+          section !== null
+      );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const activeEntry = entries.find(
+          (entry) => entry.isIntersecting
+        );
+
+        if (!activeEntry) return;
+
+        setActiveSection(
+          `#${activeEntry.target.id}`
+        );
+      },
+      {
+        rootMargin: "-30% 0px -60% 0px",
+        threshold: 0,
+      }
+    );
+
+    sections.forEach((section) => {
+      observer.observe(section);
+    });
+
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const handleKeyDown = (
+      event: KeyboardEvent
+    ) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener(
+      "keydown",
+      handleKeyDown
+    );
+
+    return () => {
+      window.removeEventListener(
+        "keydown",
+        handleKeyDown
+      );
+    };
+  }, [isMenuOpen]);  
 
   return (
     <>
@@ -86,12 +151,15 @@ export function Navbar() {
                 className={cn(
                   "relative text-[13px] font-medium",
                   "transition-colors duration-300",
+
                   "after:absolute after:-bottom-2 after:left-0",
-                  "after:h-px after:w-0",
+                  "after:h-px",
                   "after:bg-[var(--color-primary)]",
                   "after:transition-all after:duration-300",
-                  "hover:text-white",
-                  "hover:after:w-full"
+
+                  activeSection === item.href
+                    ? "text-white after:w-full"
+                    : "text-white/65 after:w-0 hover:text-white hover:after:w-full"
                 )}
               >
                 {item.label}
@@ -163,15 +231,15 @@ export function Navbar() {
                       key={item.label}
                       initial={{
                         opacity: 0,
-                        y: 30,
+                        y: 32,
                       }}
                       animate={{
                         opacity: 1,
                         y: 0,
                       }}
                       transition={{
-                        duration: 0.55,
-                        delay: 0.1 + index * 0.07,
+                        duration: 0.6,
+                        delay: 0.08 + index * 0.06,
                         ease: [0.22, 1, 0.36, 1],
                       }}
                     >
@@ -180,9 +248,18 @@ export function Navbar() {
                         onClick={() =>
                           setIsMenuOpen(false)
                         }
-                        className="block border-b border-white/10 py-4 font-heading text-[clamp(2rem,10vw,4rem)] font-semibold uppercase leading-none tracking-[-0.05em]"
+                        className="group flex items-end justify-between border-b border-white/10 py-4"
                       >
-                        {item.label}
+                        <span className="font-heading text-[clamp(2.4rem,11vw,4.5rem)] font-semibold uppercase leading-none tracking-[-0.055em]">
+                          {item.label}
+                        </span>
+
+                        <span className="mb-1 font-heading text-[10px] font-semibold tracking-[0.2em] text-[var(--color-primary)]">
+                          {String(index + 1).padStart(
+                            2,
+                            "0"
+                          )}
+                        </span>
                       </Link>
                     </motion.div>
                   )

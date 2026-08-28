@@ -7,9 +7,9 @@ import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { Reveal } from "@/components/motion/Reveal";
 
-export function Membership() {
-  const whatsappUrl = `https://wa.me/${siteConfig.contact.whatsapp}`;
+import { createWhatsAppUrl } from "@/lib/whatsapp";
 
+export function Membership() {
   return (
     <section
       id="membership"
@@ -27,11 +27,9 @@ export function Membership() {
 
         <div className="mt-14 grid gap-5 lg:grid-cols-3 lg:items-stretch">
           {membershipPlans.map((plan, index) => {
-            const whatsappMessage = encodeURIComponent(
+            const href = createWhatsAppUrl(
               `Halo ${siteConfig.brand.name}, saya tertarik dengan Membership ${plan.name}. Bisa berikan informasi lebih lanjut?`
             );
-
-            const href = `${whatsappUrl}?text=${whatsappMessage}`;
 
             return (
               <Reveal
@@ -156,7 +154,7 @@ export function Membership() {
                       "group/button mt-9 flex min-h-13 py-3",
                       "items-center justify-between rounded-full",
                       "px-6 text-sm font-semibold",
-                      "transition-all duration-300",
+                      "transition-all duration-300 active:scale-[0.98]",
                       plan.featured
                         ? [
                             "bg-[var(--color-primary)]",

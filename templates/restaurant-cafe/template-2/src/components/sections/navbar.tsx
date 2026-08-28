@@ -1,15 +1,14 @@
 "use client";
 
 import { DynamicNavbar } from "@/components/ui/dynamic-navbar";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
 
 export function Navbar() {
   const handleOrderClick = () => {
     const el = document.getElementById("menu") || document.getElementById("dishes");
     if (!el) return;
-    const smoother = ScrollSmoother.get();
-    if (smoother) {
-      smoother.scrollTo(el, true, "top 80px");
+    const lenis = (window as unknown as { __lenis?: { scrollTo: (target: Element | string, opts?: { offset?: number; duration?: number }) => void } }).__lenis;
+    if (lenis) {
+      lenis.scrollTo(el, { offset: -80, duration: 1.2 });
     } else {
       const top = el.getBoundingClientRect().top + window.pageYOffset - 80;
       window.scrollTo({ top, behavior: "smooth" });
@@ -30,4 +29,3 @@ export function Navbar() {
     />
   );
 }
-

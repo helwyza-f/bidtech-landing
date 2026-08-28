@@ -6,7 +6,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { GALLERY_IMAGES } from '@/lib/constants';
 import GalleryModal, { GalleryItem } from '@/components/ui/GalleryModal';
 
-const ITEMS_PER_PAGE = 9;
+const ITEMS_PER_PAGE = 6;
 
 export default function GalleryGrid() {
   const [currentPage, setCurrentPage] = useState(1);
@@ -20,9 +20,8 @@ export default function GalleryGrid() {
   const currentPhotos = GALLERY_IMAGES.slice(startIndex, startIndex + ITEMS_PER_PAGE);
 
   const handlePageChange = (page: number) => {
-    if (page >= 1 && page <= totalPages) {
+    if (page >= 1 && page <= totalPages && page !== currentPage) {
       setCurrentPage(page);
-      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
@@ -50,14 +49,14 @@ export default function GalleryGrid() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: '-80px' }}
+          viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.5 }}
-          className="mb-10 sm:mb-12 text-left"
+          className="mb-8 sm:mb-12 text-left"
         >
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: '-80px' }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.4 }}
             className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#E05A47] mb-2"
           >
@@ -66,7 +65,7 @@ export default function GalleryGrid() {
           <motion.h1
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: '-80px' }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5, delay: 0.1 }}
             className="text-3xl sm:text-4xl lg:text-[40px] font-extrabold text-[#0D4D44] tracking-tight mb-3"
           >
@@ -75,7 +74,7 @@ export default function GalleryGrid() {
           <motion.p
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: '-80px' }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-sm sm:text-base text-gray-600 max-w-2xl leading-relaxed font-normal"
           >
@@ -83,13 +82,13 @@ export default function GalleryGrid() {
           </motion.p>
         </motion.div>
 
-        {/* 3x3 Photo Grid with Paper Stack subtle effect */}
+        {/* 6-Photo Responsive Grid (2 columns on mobile, 3 on desktop) */}
         <motion.div
           key={currentPage}
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.35 }}
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-16"
+          className="grid grid-cols-2 md:grid-cols-3 gap-3.5 sm:gap-6 lg:gap-8 mb-12 sm:mb-16"
         >
           {currentPhotos.map((photo, idx) => (
             <motion.div
@@ -100,7 +99,7 @@ export default function GalleryGrid() {
               }}
               initial={{ opacity: 0, y: 25, scale: 0.96 }}
               whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: false, margin: '-80px' }}
+              viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.45, delay: (idx % 3) * 0.1 }}
               whileHover={{ y: -8, scale: 1.02, rotate: idx % 2 === 0 ? 0.75 : -0.75 }}
               className="relative rounded-2xl overflow-hidden shadow-sm hover:shadow-2xl hover:shadow-black/25 transition-all duration-300 group bg-gray-100 aspect-[3/4] cursor-pointer border border-black/5"
@@ -113,11 +112,11 @@ export default function GalleryGrid() {
               />
 
               {/* Hover Dark Gradient Overlay & Animated Title */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#48B800] mb-1.5 transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-3.5 sm:p-6">
+                <span className="text-[9px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#48B800] mb-1 transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
                   DOKUMENTASI
                 </span>
-                <p className="text-white font-bold text-sm sm:text-base leading-snug drop-shadow-md transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                <p className="text-white font-bold text-xs sm:text-base leading-snug drop-shadow-md transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75 line-clamp-2">
                   {photo.title}
                 </p>
               </div>
@@ -127,15 +126,15 @@ export default function GalleryGrid() {
 
         {/* Dynamic Pagination Controls */}
         {totalPages > 1 && (
-          <div className="flex items-center justify-center gap-3 select-none">
+          <div className="flex items-center justify-center gap-2 sm:gap-3 select-none">
             {/* Previous Arrow */}
             <button
               onClick={() => handlePageChange(currentPage - 1)}
               disabled={currentPage === 1}
-              className="p-2 text-gray-700 hover:text-black disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="p-2 rounded-lg bg-gray-100 hover:bg-[#0D4D44] hover:text-white text-gray-700 disabled:opacity-30 disabled:pointer-events-none transition-all"
               aria-label="Halaman Sebelumnya"
             >
-              <ChevronLeft className="w-5 h-5 stroke-[2.5]" />
+              <ChevronLeft className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
             </button>
 
             {/* Dynamic Page Numbers */}
@@ -145,10 +144,10 @@ export default function GalleryGrid() {
                 <button
                   key={pageNum}
                   onClick={() => handlePageChange(pageNum)}
-                  className={`w-8 h-8 rounded-full text-xs font-bold transition-all duration-200 flex items-center justify-center ${
+                  className={`w-9 h-9 sm:w-10 sm:h-10 rounded-xl text-xs sm:text-sm font-bold transition-all duration-200 flex items-center justify-center ${
                     isActive
-                      ? 'bg-black text-white shadow-sm'
-                      : 'text-gray-700 hover:bg-gray-100'
+                      ? 'bg-[#0D4D44] text-white shadow-md'
+                      : 'text-gray-700 bg-gray-100 hover:bg-gray-200'
                   }`}
                 >
                   {pageNum}
@@ -160,10 +159,10 @@ export default function GalleryGrid() {
             <button
               onClick={() => handlePageChange(currentPage + 1)}
               disabled={currentPage === totalPages}
-              className="p-2 text-gray-700 hover:text-black disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="p-2 rounded-lg bg-gray-100 hover:bg-[#0D4D44] hover:text-white text-gray-700 disabled:opacity-30 disabled:pointer-events-none transition-all"
               aria-label="Halaman Berikutnya"
             >
-              <ChevronRight className="w-5 h-5 stroke-[2.5]" />
+              <ChevronRight className="w-4 h-4 sm:w-5 sm:h-5 stroke-[2.5]" />
             </button>
           </div>
         )}

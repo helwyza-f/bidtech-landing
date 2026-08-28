@@ -101,21 +101,21 @@ const stackVariants = {
 
 export function SignatureDishes() {
   return (
-    <section id="dishes" className="relative w-full bg-white dark:bg-[#121215] text-foreground dark:text-white section-padding overflow-hidden scroll-mt-20">
+    <section id="dishes" className="relative w-full bg-white dark:bg-[#121215] text-foreground dark:text-white py-12 sm:py-16 md:py-24 overflow-hidden scroll-mt-20">
       <div className="container-app relative">
         <motion.div
-          className="text-center max-w-2xl mx-auto mb-12 md:mb-16"
+          className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 md:mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.3 }}
         >
-          <motion.p variants={itemVariants} className="text-eyebrow mb-4">
+          <motion.p variants={itemVariants} className="text-eyebrow mb-2 sm:mb-4">
             Signature Dishes
           </motion.p>
           <motion.h2
             variants={itemVariants}
-            className="text-4xl md:text-5xl font-display font-extrabold tracking-tight text-foreground dark:text-white text-balance mb-4"
+            className="text-3xl sm:text-4xl md:text-5xl font-display font-extrabold tracking-tight text-foreground dark:text-white text-balance mb-3 sm:mb-4 leading-tight"
           >
             Plates we're{' '}
             <DynamicTextSlider>
@@ -131,7 +131,7 @@ export function SignatureDishes() {
           </motion.h2>
           <motion.p
             variants={itemVariants}
-            className="text-lg text-muted-foreground text-pretty"
+            className="text-sm sm:text-base md:text-lg text-muted-foreground text-pretty"
           >
             Drag, swipe, or tap. Six of the dishes that built our reputation —
             crafted with the same care since day one.
