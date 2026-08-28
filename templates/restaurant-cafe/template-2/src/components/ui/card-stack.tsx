@@ -81,6 +81,34 @@ export function CardStack<T extends CardStackItem>({
   const reduceMotion = useReducedMotion()
   const len = items.length
 
+  const [windowWidth, setWindowWidth] = React.useState<number | null>(null)
+
+  React.useEffect(() => {
+    const handleResize = () => setWindowWidth(window.innerWidth)
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
+
+  const isMobile = windowWidth !== null && windowWidth < 640
+  const isTablet = windowWidth !== null && windowWidth < 1024
+
+  const effectiveCardWidth = React.useMemo(() => {
+    if (windowWidth === null) return cardWidth
+    if (isMobile) return Math.min(310, windowWidth - 48)
+    if (isTablet) return Math.min(cardWidth, windowWidth - 96)
+    return cardWidth
+  }, [windowWidth, cardWidth, isMobile, isTablet])
+
+  const effectiveCardHeight = React.useMemo(() => {
+    if (isMobile) return Math.round(effectiveCardWidth * 0.72)
+    return cardHeight
+  }, [isMobile, effectiveCardWidth, cardHeight])
+
+  const effectiveMaxVisible = isMobile ? Math.min(3, maxVisible) : (isTablet ? Math.min(5, maxVisible) : maxVisible)
+  const effectiveSpreadDeg = isMobile ? Math.min(22, spreadDeg) : spreadDeg
+  const effectiveDepthPx = isMobile ? 70 : depthPx
+
   const [active, setActive] = React.useState(() => wrapIndex(initialIndex, len))
   const [hovering, setHovering] = React.useState(false)
 
@@ -94,9 +122,9 @@ export function CardStack<T extends CardStackItem>({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [active])
 
-  const maxOffset = Math.max(0, Math.floor(maxVisible / 2))
-  const cardSpacing = Math.max(10, Math.round(cardWidth * (1 - overlap)))
-  const stepDeg = maxOffset > 0 ? spreadDeg / maxOffset : 0
+  const maxOffset = Math.max(0, Math.floor(effectiveMaxVisible / 2))
+  const cardSpacing = Math.max(10, Math.round(effectiveCardWidth * (1 - overlap)))
+  const stepDeg = maxOffset > 0 ? effectiveSpreadDeg / maxOffset : 0
 
   const canGoPrev = loop || active > 0
   const canGoNext = loop || active < len - 1
@@ -152,7 +180,7 @@ export function CardStack<T extends CardStackItem>({
     >
       <div
         className="relative w-full"
-        style={{ height: Math.max(380, cardHeight + 80) }}
+        style={{ height: Math.max(300, effectiveCardHeight + (isMobile ? 50 : 80)) }}
         tabIndex={0}
         onKeyDown={onKeyDown}
       >
@@ -178,8 +206,8 @@ export function CardStack<T extends CardStackItem>({
 
               const rotateZ = off * stepDeg
               const x = off * cardSpacing
-              const y = abs * 10
-              const z = -abs * depthPx
+              const y = abs * (isMobile ? 6 : 10)
+              const z = -abs * effectiveDepthPx
 
               const isActive = off === 0
               const scale = isActive ? activeScale : inactiveScale
@@ -202,7 +230,7 @@ export function CardStack<T extends CardStackItem>({
                       if (reduceMotion) return
                       const travel = info.offset.x
                       const v = info.velocity.x
-                      const threshold = Math.min(160, cardWidth * 0.22)
+                      const threshold = Math.min(160, effectiveCardWidth * 0.22)
 
                       if (travel > threshold || v > 650) prev()
                       else if (travel < -threshold || v < -650) next()
@@ -214,15 +242,15 @@ export function CardStack<T extends CardStackItem>({
                 <motion.div
                   key={item.id}
                   className={cn(
-                    'absolute bottom-0 rounded-2xl border-4 border-black/10 dark:border-white/10 overflow-hidden shadow-xl',
+                    'absolute bottom-0 rounded-2xl border-2 sm:border-4 border-black/10 dark:border-white/10 overflow-hidden shadow-xl',
                     'will-change-transform select-none',
                     isActive
                       ? 'cursor-grab active:cursor-grabbing'
                       : 'cursor-pointer',
                   )}
                   style={{
-                    width: cardWidth,
-                    height: cardHeight,
+                    width: effectiveCardWidth,
+                    height: effectiveCardHeight,
                     zIndex,
                     transformStyle: 'preserve-3d',
                   }}
@@ -268,7 +296,7 @@ export function CardStack<T extends CardStackItem>({
       </div>
 
       {showDots ? (
-        <div className="mt-6 flex items-center justify-center gap-3">
+        <div className="mt-4 sm:mt-6 flex items-center justify-center gap-3">
           <div className="flex items-center gap-2">
             {items.map((it, idx) => {
               const on = idx === active
@@ -277,7 +305,7 @@ export function CardStack<T extends CardStackItem>({
                   key={it.id}
                   onClick={() => setActive(idx)}
                   className={cn(
-                    'h-2 w-2 rounded-full transition',
+                    'h-1.5 w-1.5 sm:h-2 sm:w-2 rounded-full transition',
                     on
                       ? 'bg-foreground'
                       : 'bg-foreground/30 hover:bg-foreground/50',
@@ -328,19 +356,19 @@ function DefaultFanCard({
         )}
       </div>
 
-      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+      <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/75 via-black/25 to-transparent" />
 
-      <div className="relative z-10 flex h-full flex-col justify-end p-6">
+      <div className="relative z-10 flex h-full flex-col justify-end p-4 sm:p-6">
         {item.tag ? (
-          <span className="mb-2 inline-flex w-fit rounded-full bg-white/15 backdrop-blur-md px-3 py-1 text-xs font-medium uppercase tracking-wider text-white">
+          <span className="mb-1.5 sm:mb-2 inline-flex w-fit rounded-full bg-white/15 backdrop-blur-md px-2.5 sm:px-3 py-0.5 sm:py-1 text-[10px] sm:text-xs font-medium uppercase tracking-wider text-white">
             {item.tag}
           </span>
         ) : null}
-        <div className="font-display text-2xl font-semibold text-white">
+        <div className="font-display text-lg sm:text-2xl font-semibold text-white">
           {item.title}
         </div>
         {item.description ? (
-          <div className="mt-1 line-clamp-2 text-sm text-white/85">
+          <div className="mt-0.5 sm:mt-1 line-clamp-2 text-xs sm:text-sm text-white/85">
             {item.description}
           </div>
         ) : null}

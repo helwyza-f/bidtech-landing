@@ -62,12 +62,20 @@ export function InteractiveSelector({
   id = 'menu',
   eyebrow = 'Our Menu',
   heading = 'Built around what you crave',
-  subheading = 'Five core culinary categories, each crafted with obsessive technique and uncompromising ingredients. Hover or tap to expand.',
+  subheading = 'Five core culinary categories, each crafted with obsessive technique and uncompromising ingredients. Tap to expand.',
   options = defaultOptions,
   className,
 }: InteractiveSelectorProps) {
   const [activeIndex, setActiveIndex] = useState(0)
   const [animatedOptions, setAnimatedOptions] = useState<number[]>([])
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768)
+    handleResize()
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const handleOptionClick = (index: number) => {
     if (index !== activeIndex) {
@@ -94,7 +102,7 @@ export function InteractiveSelector({
     <section
       id={id}
       className={cn(
-        'relative w-full bg-white dark:bg-[#121215] text-foreground dark:text-white py-20 md:py-28 overflow-hidden scroll-mt-20',
+        'relative w-full bg-white dark:bg-[#121215] text-foreground dark:text-white py-12 sm:py-16 md:py-28 overflow-hidden scroll-mt-20',
         className,
       )}
     >
@@ -105,24 +113,24 @@ export function InteractiveSelector({
       />
 
       <div className="container-app">
-        <div className="text-center max-w-3xl mx-auto mb-14 md:mb-18">
-          <p className="text-eyebrow mb-4 tracking-widest text-brand-500">{eyebrow}</p>
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-foreground dark:text-white text-balance mb-5 leading-tight">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-18">
+          <p className="text-eyebrow mb-2 sm:mb-4 tracking-widest text-brand-500">{eyebrow}</p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-foreground dark:text-white text-balance mb-3 sm:mb-5 leading-tight">
             {heading}
           </h2>
-          <p className="text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
             {subheading}
           </p>
         </div>
 
-        {/* Grand Expansion Accordion Showcase */}
-        <div className="options flex w-full max-w-7xl mx-auto h-[520px] md:h-[620px] lg:h-[680px] items-stretch gap-2.5 md:gap-4 overflow-hidden rounded-[32px] p-2 md:p-3 bg-neutral-100 dark:bg-black/40 shadow-xl backdrop-blur-md">
+        {/* Grand Expansion Accordion Showcase - Vertical on Mobile, Horizontal on Desktop */}
+        <div className="options flex flex-col md:flex-row w-full max-w-7xl mx-auto h-[560px] sm:h-[600px] md:h-[620px] lg:h-[680px] items-stretch gap-2.5 md:gap-4 overflow-hidden rounded-[24px] sm:rounded-[32px] p-2 md:p-3 bg-neutral-100 dark:bg-black/40 shadow-xl backdrop-blur-md">
           {options.map((option, index) => {
             const isActive = activeIndex === index
             return (
               <div
                 key={index}
-                className="option relative flex flex-col justify-end overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-[24px] md:rounded-[28px]"
+                className="option relative flex flex-col justify-end overflow-hidden transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] rounded-[18px] sm:rounded-[24px] md:rounded-[28px]"
                 style={{
                   backgroundImage: `url('${option.image}')`,
                   backgroundSize: 'cover',
@@ -132,13 +140,16 @@ export function InteractiveSelector({
                   transform: animatedOptions.includes(index)
                     ? 'translateX(0)'
                     : 'translateX(-50px)',
-                  minWidth: '56px',
+                  minWidth: isMobile ? undefined : '56px',
+                  minHeight: isMobile ? '56px' : undefined,
                   cursor: 'pointer',
                   backgroundColor: '#18181b',
                   boxShadow: isActive
                     ? '0 25px 50px -12px rgba(0,0,0,0.7), 0 0 30px rgba(255,90,31,0.25)'
                     : '0 10px 25px rgba(0,0,0,0.3)',
-                  flex: isActive ? '8 1 0%' : '1.2 1 0%',
+                  flex: isActive
+                    ? (isMobile ? '4.5 1 0%' : '8 1 0%')
+                    : (isMobile ? '1 1 0%' : '1.2 1 0%'),
                   zIndex: isActive ? 10 : 1,
                   willChange: 'flex-grow, box-shadow, transform',
                 }}
@@ -150,15 +161,15 @@ export function InteractiveSelector({
                   style={{
                     background: isActive
                       ? 'linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 50%, rgba(0,0,0,0.92) 100%)'
-                      : 'linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%)',
+                      : 'linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.75) 100%)',
                   }}
                 />
 
                 {/* Bottom interactive card details */}
-                <div className="label absolute left-0 right-0 bottom-6 flex items-center justify-start z-[2] pointer-events-none px-4 md:px-7 gap-4 w-full">
+                <div className="label absolute left-0 right-0 bottom-2.5 sm:bottom-4 md:bottom-6 flex items-center justify-start z-[2] pointer-events-none px-3 sm:px-4 md:px-7 gap-3 sm:gap-4 w-full">
                   <div
                     className={cn(
-                      'icon min-w-[48px] max-w-[48px] h-[48px] md:min-w-[56px] md:max-w-[56px] md:h-[56px] flex items-center justify-center rounded-2xl md:rounded-3xl backdrop-blur-xl shadow-lg transition-all duration-300 shrink-0',
+                      'icon min-w-[38px] max-w-[38px] h-[38px] sm:min-w-[48px] sm:max-w-[48px] sm:h-[48px] md:min-w-[56px] md:max-w-[56px] md:h-[56px] flex items-center justify-center rounded-xl sm:rounded-2xl md:rounded-3xl backdrop-blur-xl shadow-lg transition-all duration-300 shrink-0',
                       isActive
                         ? 'bg-brand-500/90 text-white shadow-glow'
                         : 'bg-black/60 text-white/80',
@@ -169,19 +180,20 @@ export function InteractiveSelector({
 
                   <div className="info text-white overflow-hidden">
                     <div
-                      className="main font-display font-bold text-xl md:text-3xl text-white transition-all duration-700 ease-in-out truncate"
-                      style={{
-                        opacity: isActive ? 1 : 0,
-                        transform: isActive ? 'translateX(0)' : 'translateX(30px)',
-                      }}
+                      className={cn(
+                        'main font-display font-bold text-sm sm:text-xl md:text-3xl text-white transition-all duration-700 ease-in-out truncate',
+                        !isActive && !isMobile && 'opacity-0 translate-x-8 md:opacity-0 md:translate-x-8',
+                        !isActive && isMobile && 'opacity-90 translate-x-0',
+                      )}
                     >
                       {option.title}
                     </div>
                     <div
-                      className="sub text-xs md:text-sm text-gray-200 line-clamp-2 transition-all duration-700 ease-in-out mt-1"
+                      className="sub text-[11px] sm:text-xs md:text-sm text-gray-200 line-clamp-2 transition-all duration-700 ease-in-out mt-0.5 sm:mt-1"
                       style={{
                         opacity: isActive ? 1 : 0,
                         transform: isActive ? 'translateX(0)' : 'translateX(30px)',
+                        display: isActive ? '-webkit-box' : 'none',
                       }}
                     >
                       {option.description}
