@@ -1,5 +1,5 @@
 "use client";
-
+import { useRef } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -9,6 +9,8 @@ import {
 import {
   motion,
   useReducedMotion,
+  useScroll,
+  useTransform,
 } from "motion/react";
 
 import { siteConfig } from "@/data/site";
@@ -23,8 +25,34 @@ export function Hero() {
 
   const duration = shouldReduceMotion ? 0 : 0.9;
 
+  const heroRef = useRef<HTMLElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ["start start", "end start"],
+  });
+
+  const backgroundY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0%", "12%"]
+  );
+
+  const contentY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    [0, 80]
+  );
+
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [0, 0.65],
+    [1, 0]
+  );  
+
   return (
     <section
+      ref={heroRef}
       id="top"
       className="relative min-h-[100svh]"
     >
@@ -34,44 +62,50 @@ export function Hero() {
 
       <div className="absolute inset-0 overflow-hidden bg-black">
         <motion.div
-          initial={
+          style={
             shouldReduceMotion
-              ? false
-              : {
-                  scale: 1.08,
-                }
+              ? undefined
+              : { y: backgroundY }
           }
-          animate={{
-            scale: 1,
-          }}
-          transition={{
-            duration: shouldReduceMotion
-              ? 0
-              : 1.6,
-            ease: [0.22, 1, 0.36, 1],
-          }}
-          className="absolute inset-0"
+          className="absolute -inset-[8%] will-change-transform"
         >
-          <Image
-            src={siteConfig.hero.image}
-            alt="Interior gym modern dengan peralatan latihan profesional"
-            fill
-            priority
-            sizes="100vw"
-            className="object-cover"
-          />
+          <motion.div
+            initial={
+              shouldReduceMotion
+                ? false
+                : {
+                    scale: 1.08,
+                  }
+            }
+            animate={{
+              scale: 1,
+            }}
+            transition={{
+              duration: shouldReduceMotion
+                ? 0
+                : 1.6,
+              ease: [0.22, 1, 0.36, 1],
+            }}
+            className="absolute inset-0"
+          >
+            <Image
+              src={siteConfig.hero.image}
+              alt="Interior gym modern dengan peralatan latihan profesional"
+              fill
+              priority
+              quality={82}
+              sizes="100vw"
+              className="object-cover"
+            />
+          </motion.div>
         </motion.div>
 
-        {/* Main dark overlay */}
         <div className="absolute inset-0 bg-black/50" />
 
-        {/* Left content readability */}
         <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 to-black/15" />
 
-        {/* Top readability for navbar */}
         <div className="absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-black/60 to-transparent" />
 
-        {/* Bottom fade */}
         <div className="absolute inset-x-0 bottom-0 h-60 bg-gradient-to-t from-black/70 to-transparent" />
       </div>
 
@@ -80,7 +114,17 @@ export function Hero() {
       ====================================== */}
 
       <Container className="relative flex min-h-[100svh] items-center pb-40 pt-32 text-white md:pb-44 lg:pt-36">
-        <div className="w-full">
+        <motion.div
+          style={
+            shouldReduceMotion
+              ? undefined
+              : {
+                  y: contentY,
+                  opacity: contentOpacity,
+                }
+          }
+          className="w-full will-change-transform"
+        >
           <motion.p
             initial={
               shouldReduceMotion
@@ -236,7 +280,7 @@ export function Hero() {
               </Link>
             </div>
           </motion.div>
-        </div>
+        </motion.div>
 
         {/* Decorative vertical label */}
         <motion.div

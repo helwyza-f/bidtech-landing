@@ -29,50 +29,50 @@ const TEMPLATE_CATEGORIES = [
 const SAMPLE_TEMPLATES = [
   {
     id: 1,
-    name: "Rentcar",
+    name: "Rentcar - Penyewaan Kendaraan",
     category: "Automotive",
-    subcategory: "Rental Mobil",
-    image: "/images/rentcar_template.webp",
+    subcategory: "Showcase kendaraan dan penyewaan kendaraan untuk usaha Penyewaan Kendaraan",
+    image: "/images/design_thumbnail/rentcar.webp",
     previewHref: "/demo/automotive/",
     tags: ["Automotive", "Rental Mobil", "Responsive"],
     icon: CarFront,
   },
   {
     id: 2,
-    name: "FoodFleet",
+    name: "Deny Restaurant - Kalcer Restaurant",
     category: "Restaurant & Cafe",
-    subcategory: "Interactive Menu",
-    image: "/images/foodfleet_template.webp",
+    subcategory: "Cafe atau restaurant anak muda dengan gaya animasi kalcer, cocok untuk portofolio usaha.",
+    image: "/images/design_thumbnail/deny_restaurant.webp",
     previewHref: "/demo/restaurant-cafe-2/",
     tags: ["Restaurant", "Cafe", "Interactive Menu"],
     icon: UtensilsCrossed,
   },
   {
     id: 3,
-    name: "BitePoint",
+    name: "Chef's Table - European Signature",
     category: "Restaurant & Cafe",
-    subcategory: "Classic Diner",
-    image: "/images/bitepoint_template.webp",
+    subcategory: "Restaurant otentik, mewah dan berprestisius, dengan target korporat dan kelas internasional.",
+    image: "/images/design_thumbnail/chefs_table.webp",
     previewHref: "/demo/restaurant-cafe/",
     tags: ["Restaurant", "Diner", "Modern Theme"],
     icon: Utensils,
   },
   {
     id: 4,
-    name: "GlowGym",
+    name: "IRONFORCE - Best Gym on Jakarta",
     category: "Gym & Wellness",
-    subcategory: "Gym & Fitness",
-    image: "/images/glowgym_template.webp",
+    subcategory: "Tempat kebugaran dan latihan anak gen z, tersebar sekitar jabodetabek, dengan fasilitas lengkap dan pelatih professional.",
+    image: "/images/design_thumbnail/ironforce.webp",
     previewHref: "/demo/beauty-wellness/",
     tags: ["Fitness", "Gym", "Personal Trainer"],
     icon: Dumbbell,
   },
   {
     id: 5,
-    name: "OrgSpace",
+    name: "Harapan kita",
     category: "Community & Org",
-    subcategory: "Portal Organisasi",
-    image: "/images/orgspace_template.webp",
+    subcategory: "Organisasi non-profit mandiri dengan visi pengembangan pendidikan pada anak-anak di wilayah 3T (Tertinggal, Terdepan, dan Terluar).",
+    image: "/images/design_thumbnail/harapan_kita.webp",
     previewHref: "/demo/organization/",
     tags: ["Community", "Organization", "Information Portal"],
     icon: Users,
@@ -152,37 +152,31 @@ export default function TemplatesPage() {
 
             return (
               <Card
-                className="group flex flex-col overflow-hidden rounded-[24px] border border-emerald-100 bg-white shadow-[0_12px_36px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-2 hover:border-brand-primary/50 hover:shadow-[0_20px_60px_rgba(95,201,74,0.18)]"
+                className="group flex flex-col overflow-hidden border border-emerald-100 bg-white shadow-[0_12px_36px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-2 hover:border-brand-primary/50 hover:shadow-[0_20px_60px_rgba(95,201,74,0.18)]"
                 key={template.id}
               >
-                <div className="relative overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 p-3 sm:p-4">
-                  <button className="absolute right-3 top-3 z-10 rounded-full border border-emerald-200 bg-white/95 p-2.5 shadow-md backdrop-blur transition-all hover:border-brand-primary/60 hover:bg-white sm:right-4 sm:top-4">
-                    <Heart className="size-4 text-slate-400 transition-colors group-hover:text-brand-primary" />
-                  </button>
-                  <div className="relative overflow-hidden rounded-[20px] border border-white/80 bg-white shadow-[0_8px_24px_rgba(15,23,42,0.08)]">
-                    <div className="absolute left-3 top-3 z-10 flex max-w-[65%] items-center gap-1.5 truncate rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-bold text-slate-700 shadow-md backdrop-blur-sm sm:gap-2 sm:px-3 sm:py-2 sm:text-xs">
-                      <Icon className="size-3.5 shrink-0 text-brand-primary" />
-                      <span className="truncate">{template.category}</span>
-                    </div>
-                    <div className="relative h-48 w-full overflow-hidden bg-slate-100 sm:h-56">
-                      <Image
+                <div className="relative h-48 max-md:h-72 max-sm:h-40 overflow-hidden bg-gradient-to-br from-emerald-50 via-white to-blue-50 p-3 sm:p-4">
+                  <Image
                         alt={`${template.name} design preview`}
                         className="h-full w-full object-cover object-top aspect-video transition-transform duration-500 group-hover:scale-[1.04]"
                         draggable={false}
                         fill
                         src={template.image}
                       />
-                    </div>
-                  </div>
                 </div>
 
-                <CardContent className="flex flex-1 flex-col space-y-3 p-4 sm:space-y-3.5 sm:p-5">
+                <CardContent className="flex flex-1 flex-col space-y-3 p-4 sm:space-y-3.5 sm:p-5 h-full">
+                  <div className="flex max-w-[65%] w-fit h-fit py-2.5 items-start gap-x-1.5 truncate text-[11px] font-bold text-slate-700 sm:gap-2 sm:text-xs">
+                    <Icon className="size-3.5 shrink-0 text-brand-primary" />
+                    <span className="truncate">{template.category}</span>
+                  </div>
+
                   <div>
                     <h3 className="text-base font-bold text-slate-950 transition-colors duration-200 group-hover:text-brand-primary sm:text-lg">
                       {template.name}
                     </h3>
                     <p className="mt-1 text-xs text-slate-500">
-                      Design {template.subcategory}
+                      {template.subcategory}
                     </p>
                   </div>
 
@@ -197,7 +191,7 @@ export default function TemplatesPage() {
                     ))}
                   </div>
 
-                  <div className="flex gap-2 pt-2 sm:gap-3 sm:pt-3">
+                  <div className="flex gap-2 pt-2 sm:gap-3 sm:pt-3 h-full items-end">
                     <Link
                       className="flex-1"
                       href={template.previewHref ?? "#"}
@@ -216,6 +210,14 @@ export default function TemplatesPage() {
                     <Button
                       className="h-9 flex-1 gap-1 rounded-full bg-brand-primary text-xs font-medium text-slate-950 shadow-md shadow-brand-primary/20 transition-all hover:bg-brand-primary-hover hover:shadow-lg hover:shadow-brand-primary/30 sm:h-10 sm:gap-1.5 sm:text-sm"
                       size="sm"
+                      onClick={() => {
+                        const message = `Halo Bidtech! Saya tertarik mendigitalisasikan perusahaan/organisasi saya dengan template website ${template.name}.`
+                        const whatsappUrl = `https://wa.me/628217601455?text=${encodeURIComponent(message)}`;
+                        window.open(
+                          whatsappUrl,
+                          "_blank"
+                        )
+                      }}
                     >
                       <ShoppingCart className="size-3.5" />
                       <span>Beli</span>

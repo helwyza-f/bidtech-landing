@@ -18,9 +18,10 @@ export function Reveal({
   children,
   className,
   delay = 0,
-  y = 28,
+  y = 24,
 }: RevealProps) {
-  const shouldReduceMotion = useReducedMotion();
+  const shouldReduceMotion =
+    useReducedMotion();
 
   return (
     <motion.div
@@ -38,11 +39,15 @@ export function Reveal({
       }}
       viewport={{
         once: true,
-        amount: 0.18,
+        amount: 0.12,
       }}
       transition={{
-        duration: shouldReduceMotion ? 0 : 0.75,
-        delay: shouldReduceMotion ? 0 : delay,
+        duration: shouldReduceMotion
+          ? 0
+          : 0.72,
+        delay: shouldReduceMotion
+          ? 0
+          : delay,
         ease: [0.22, 1, 0.36, 1],
       }}
       className={cn(className)}
