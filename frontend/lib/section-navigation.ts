@@ -1,6 +1,6 @@
 "use client";
 
-export const HOME_SECTION_IDS = ["hero", "services", "portfolio", "contact"] as const;
+export const HOME_SECTION_IDS = ["hero", "services", "templates", "portfolio", "contact"] as const;
 
 const HEADER_OFFSET = 104;
 
@@ -28,6 +28,7 @@ export function scrollToSection(hash: string, behavior: ScrollBehavior = "auto")
   const nextUrl = `${window.location.pathname}${hash}`;
   if (window.location.hash !== hash) {
     window.history.pushState(null, "", nextUrl);
+    window.dispatchEvent(new HashChangeEvent("hashchange"));
   }
 
   return true;
@@ -35,6 +36,16 @@ export function scrollToSection(hash: string, behavior: ScrollBehavior = "auto")
 
 export function getActiveHomeSection() {
   if (typeof window === "undefined") return "hero";
+
+  const hashSection = window.location.hash.replace("#", "");
+  if (HOME_SECTION_IDS.includes(hashSection as (typeof HOME_SECTION_IDS)[number])) {
+    const target = document.getElementById(hashSection);
+    const rect = target?.getBoundingClientRect();
+
+    if (rect && Math.abs(rect.top - HEADER_OFFSET) < 48) {
+      return hashSection as (typeof HOME_SECTION_IDS)[number];
+    }
+  }
 
   const checkpoint = window.innerHeight * 0.28 + HEADER_OFFSET;
   let activeSection: (typeof HOME_SECTION_IDS)[number] = "hero";

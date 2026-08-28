@@ -14,16 +14,17 @@ import {
   Utensils,
   Dumbbell,
   Users,
+  Network,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
 const TEMPLATE_CATEGORIES = [
-  { name: "Semua Design", count: 5 },
+  { name: "Semua Design", count: 6 },
   { name: "Automotive", count: 1 },
   { name: "Restaurant & Cafe", count: 2 },
   { name: "Gym & Wellness", count: 1 },
-  { name: "Community & Org", count: 1 },
+  { name: "Community & Org", count: 2 },
 ];
 
 const SAMPLE_TEMPLATES = [
@@ -76,6 +77,16 @@ const SAMPLE_TEMPLATES = [
     previewHref: "/demo/organization/",
     tags: ["Community", "Organization", "Information Portal"],
     icon: Users,
+  },
+  {
+    id: 6,
+    name: "CommunityPro",
+    category: "Community & Org",
+    subcategory: "Professional Community",
+    image: "/images/community-pro_template.webp",
+    previewHref: "/demo/community-pro/",
+    tags: ["Community", "Membership", "Program"],
+    icon: Network,
   },
 ];
 

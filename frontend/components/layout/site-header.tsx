@@ -60,7 +60,7 @@ export function SiteHeader() {
     { label: t.nav.about, href: "#hero", sectionId: "hero" },
     { label: t.nav.services, href: "#services" },
     { label: t.nav.portfolio, href: "#portfolio" },
-    { label: t.nav.template, href: "/templates" },
+    { label: t.nav.template, href: "#templates" },
     { label: t.nav.contact, href: "#contact" },
   ];
 

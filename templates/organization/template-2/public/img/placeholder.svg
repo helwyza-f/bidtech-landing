@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675" role="img" aria-label="Placeholder gambar">
+  <rect width="1200" height="675" fill="#e2e8f0"/>
+  <rect x="1" y="1" width="1198" height="673" fill="none" stroke="#cbd5e1" stroke-width="2"/>
+  <g fill="#94a3b8">
+    <circle cx="470" cy="300" r="55"/>
+    <path d="M360 470l150-170 110 120 90-80 140 130z"/>
+  </g>
+  <text x="600" y="580" font-family="system-ui, -apple-system, Segoe UI, Roboto, sans-serif" font-size="42" font-weight="700" fill="#64748b" text-anchor="middle">Gambar Placeholder</text>
+</svg>

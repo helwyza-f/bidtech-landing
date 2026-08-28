@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, ChevronLeft, ChevronRight, Mail, MapPin, MessageCircleMore, Star } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
@@ -9,13 +10,58 @@ import { Card, CardContent } from "@/components/ui/card";
 import { ContactForm } from "@/components/landing/contact-form";
 import { Reveal } from "@/components/landing/reveal";
 import { StatCounter } from "@/components/landing/stat-counter";
-import { serviceIcons, specializationIcons, specializationImages } from "@/lib/data";
+import { serviceIcons } from "@/lib/data";
 import { LandingPageProvider, heroShowcaseSlides, useLandingPage } from "@/providers/landing-page-provider";
 import { brandClasses } from "@/lib/data";
 import { clientLogos, logoAssets } from "@/lib/data";
 
 const sectionBadgeClass =
   "rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm";
+
+const templateDesignCards = [
+  {
+    name: "Rentcar",
+    category: "Automotive",
+    description: "Design rental mobil dengan katalog armada, highlight layanan, dan CTA booking.",
+    image: "/images/rentcar_template.webp",
+    href: "/demo/automotive/",
+  },
+  {
+    name: "FoodFleet",
+    category: "Restaurant & Cafe",
+    description: "Template menu interaktif untuk restoran dan cafe dengan tampilan modern.",
+    image: "/images/foodfleet_template.webp",
+    href: "/demo/restaurant-cafe-2/",
+  },
+  {
+    name: "BitePoint",
+    category: "Restaurant & Cafe",
+    description: "Design klasik untuk diner, coffee shop, dan brand kuliner yang hangat.",
+    image: "/images/bitepoint_template.webp",
+    href: "/demo/restaurant-cafe/",
+  },
+  {
+    name: "GlowGym",
+    category: "Gym & Wellness",
+    description: "Landing page fitness dan wellness dengan visual kuat untuk paket membership.",
+    image: "/images/glowgym_template.webp",
+    href: "/demo/beauty-wellness/",
+  },
+  {
+    name: "OrgSpace",
+    category: "Community & Org",
+    description: "Portal organisasi untuk profil, kegiatan, komunitas, dan informasi anggota.",
+    image: "/images/orgspace_template.webp",
+    href: "/demo/organization/",
+  },
+  {
+    name: "CommunityPro",
+    category: "Community & Org",
+    description: "Template komunitas profesional dengan program, membership, FAQ, dan struktur organisasi.",
+    image: "/images/community-pro_template.webp",
+    href: "/demo/community-pro/",
+  },
+];
 
 export function LandingPage() {
   return (
@@ -33,7 +79,6 @@ function LandingPageView() {
     activeProductSlide,
     activeProductTab,
     activeServiceSlide,
-    activeSpecializationSlide,
     activeStep,
     heroShowcase,
     heroTitleMobileFirstLine,
@@ -42,18 +87,15 @@ function LandingPageView() {
     howItWorksSliderRef,
     productSliderRef,
     servicesSliderRef,
-    specializationsSliderRef,
     testimonialsRef,
     activateProductTab,
     activateStep,
     handleHowItWorksScroll,
     handleProductScroll,
     handleServiceScroll,
-    handleSpecializationScroll,
     moveHowItWorksSlide,
     moveProductSlide,
     moveServiceSlide,
-    moveSpecializationSlide,
     showHeroSlide,
   } = useLandingPage();
 
@@ -309,90 +351,69 @@ function LandingPageView() {
         </div>
       </section>
 
-      <section className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
+      <section className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="templates">
         <div className="pointer-events-none absolute inset-x-4 top-28 -z-10 h-[72%] rounded-[48px] bg-[radial-gradient(circle_at_18%_20%,rgba(95,201,74,0.10),transparent_34%),radial-gradient(circle_at_80%_42%,rgba(95,201,74,0.08),transparent_30%)]" />
         <Reveal className="mx-auto max-w-3xl text-center">
           <div className="flex justify-center">
-            <Badge className={sectionBadgeClass}>{t.specializations.badge}</Badge>
+            <Badge className={sectionBadgeClass}>Template Design</Badge>
           </div>
           <h2 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
-            {t.specializations.title.split(" ")[0]}{" "}
-              <span className="text-brand-primary">{t.specializations.title.split(" ").slice(1).join(" ")}</span>
+            Pilih <span className="text-brand-primary">Design Website</span> Siap Pakai
           </h2>
-          <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-500">{t.specializations.subtitle}</p>
+          <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-500">
+            Koleksi template profesional untuk berbagai kebutuhan bisnis, mulai dari company profile, restoran, rental, hingga portal organisasi.
+          </p>
         </Reveal>
 
-        <div
-          className="mt-10 flex w-full snap-x snap-mandatory items-stretch gap-5 overflow-x-auto [scrollbar-width:none] sm:grid sm:grid-cols-2 sm:overflow-visible lg:grid-cols-4 [&::-webkit-scrollbar]:hidden"
-          onScroll={handleSpecializationScroll}
-          ref={specializationsSliderRef}
-        >
-          {t.specializations.items.map((item, index) => (
-            <Reveal className="flex w-full min-w-full shrink-0 snap-start sm:min-w-0 sm:shrink" delay={(index % 4) * 90} key={item.title} y={30}>
-              <div className="flex min-h-[320px] w-full flex-col overflow-hidden rounded-[24px] border border-green-100 bg-white !shadow-none transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_24px_64px_rgba(95,201,74,0.14)] sm:h-full sm:min-h-[292px] sm:shadow-[0_16px_48px_rgba(15,23,42,0.07)]">
-                <div className="m-3 mb-0 flex h-[205px] items-center justify-center overflow-hidden rounded-[18px] bg-[linear-gradient(135deg,#f1fbef,#e9f7ee)] p-1.5 sm:aspect-[16/10.5] sm:h-auto">
-                  <div className="relative h-full w-full">
-                    <Image
-                      src={specializationImages[index]}
-                      alt={item.title}
-                      fill
-                      sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
-                      className="object-contain object-center p-2 drop-shadow-[0_14px_22px_rgba(15,23,42,0.18)]"
-                    />
+        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {templateDesignCards.map((template, index) => (
+            <Reveal delay={(index % 3) * 90} key={template.name} y={30}>
+              <Link
+                className="group block h-full"
+                href={template.href}
+                rel="noreferrer"
+                target="_blank"
+              >
+                <article className="flex h-full min-h-[360px] flex-col overflow-hidden rounded-[24px] border border-green-100 bg-white transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_24px_64px_rgba(95,201,74,0.14)]">
+                  <div className="m-3 mb-0 overflow-hidden rounded-[18px] border border-white bg-[linear-gradient(135deg,#f1fbef,#e9f7ee)] p-2 shadow-[inset_0_0_0_1px_rgba(95,201,74,0.08)]">
+                    <div className="relative h-[210px] w-full overflow-hidden rounded-[14px] bg-slate-100">
+                      <Image
+                        src={template.image}
+                        alt={`${template.name} design preview`}
+                        fill
+                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                        className="object-cover object-top transition duration-500 group-hover:scale-[1.04]"
+                      />
+                    </div>
                   </div>
-                </div>
-                <div className="m-3 mt-0 flex min-h-[104px] flex-1 items-start gap-3 rounded-[18px] bg-white px-3 py-4">
-                  <div className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-brand-primary/10 ring-1 ring-brand-primary/10">
-                    <Image src={specializationIcons[index]} alt="" width={18} height={18} className="size-4" />
+                  <div className="flex flex-1 flex-col px-5 py-5">
+                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-primary">
+                      {template.category}
+                    </p>
+                    <h3 className="mt-2 font-[family-name:var(--font-sora)] text-xl font-semibold text-slate-950">
+                      {template.name}
+                    </h3>
+                    <p className="mt-3 flex-1 text-sm leading-6 text-slate-500">{template.description}</p>
+                    <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-slate-950 transition group-hover:text-brand-primary">
+                      <span>Lihat Preview</span>
+                      <ArrowRight className="size-4" />
+                    </div>
                   </div>
-                  <div className="min-w-0 flex-1">
-                    <h3 className="font-[family-name:var(--font-sora)] text-[15px] font-semibold text-slate-950">{item.title}</h3>
-                    <p className="mt-1.5 text-sm leading-6 text-slate-500">{item.description}</p>
-                  </div>
-                </div>
-              </div>
+                </article>
+              </Link>
             </Reveal>
           ))}
         </div>
 
-        <div className="mt-6 flex items-center justify-center gap-3 sm:hidden" aria-label="Navigasi spesialisasi">
-          <button
-            aria-label="Spesialisasi sebelumnya"
-            className="flex size-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:border-brand-primary/40 hover:text-brand-primary disabled:cursor-not-allowed disabled:opacity-35"
-            disabled={activeSpecializationSlide === 0}
-            onClick={() => moveSpecializationSlide(activeSpecializationSlide - 1)}
-            type="button"
+        <Reveal className="mt-9 flex justify-center" delay={160} y={18}>
+          <Link
+            className="inline-flex h-13 items-center justify-center gap-3 rounded-full bg-brand-primary px-7 text-sm font-bold text-brand-primary-dark shadow-[0_18px_42px_rgba(95,201,74,0.24)] ring-1 ring-green-700/10 transition hover:-translate-y-0.5 hover:bg-brand-primary-hover sm:h-14 sm:px-8 sm:text-base"
+            href="/templates"
           >
-            <ChevronLeft className="size-5" />
-          </button>
-
-          <div
-            className="flex items-center gap-1.5"
-            aria-label={`Spesialisasi ${activeSpecializationSlide + 1} dari ${t.specializations.items.length}`}
-          >
-            {t.specializations.items.map((item, index) => (
-              <button
-                aria-label={`Lihat ${item.title}`}
-                className={`h-2 rounded-full transition-all ${
-                  activeSpecializationSlide === index ? "w-6 bg-brand-primary" : "w-2 bg-slate-300"
-                }`}
-                key={item.title}
-                onClick={() => moveSpecializationSlide(index)}
-                type="button"
-              />
-            ))}
-          </div>
-
-          <button
-            aria-label="Spesialisasi berikutnya"
-            className="flex size-10 shrink-0 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 transition hover:border-brand-primary/40 hover:text-brand-primary disabled:cursor-not-allowed disabled:opacity-35"
-            disabled={activeSpecializationSlide === t.specializations.items.length - 1}
-            onClick={() => moveSpecializationSlide(activeSpecializationSlide + 1)}
-            type="button"
-          >
-            <ChevronRight className="size-5" />
-          </button>
-        </div>
+            Lihat Lebih Banyak
+            <ArrowRight className="size-4" />
+          </Link>
+        </Reveal>
       </section>
 
       <section className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="portfolio">
@@ -729,6 +750,7 @@ function LandingPageView() {
                         { src: "/images/mitra-batamnow-20260728.png", alt: "Logo BatamNow" },
                         { src: "/images/mitra-apindo-20260728.png", alt: "Logo APINDO" },
                         { src: "/images/mitra-poltevara-20260826.png", alt: "Logo Poltevara" },
+                        { src: "/images/mitra-vis-society.webp", alt: "Logo VIS Society" },
                       ].map((mitra) => (
                         <div
                           className="flex h-24 w-40 shrink-0 items-center justify-center rounded-[22px] bg-white p-4 sm:h-28 sm:w-48"
