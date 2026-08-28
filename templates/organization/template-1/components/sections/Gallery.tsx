@@ -78,14 +78,14 @@ export default function Gallery() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: '-80px' }}
+          viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.5 }}
           className="mb-10"
         >
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: false, margin: '-80px' }}
+            viewport={{ once: true, margin: '-40px' }}
             transition={{ duration: 0.4 }}
             className="text-xs sm:text-sm font-extrabold uppercase tracking-widest text-[#E05A47] mb-2"
           >
@@ -95,7 +95,7 @@ export default function Gallery() {
             <motion.h2
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: '-80px' }}
+              viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-3xl sm:text-4xl font-extrabold text-[#0D4D44] tracking-tight"
             >
@@ -104,7 +104,7 @@ export default function Gallery() {
             <motion.p
               initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: false, margin: '-80px' }}
+              viewport={{ once: true, margin: '-40px' }}
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xs sm:text-sm text-gray-500 max-w-md leading-relaxed font-normal"
             >
@@ -117,36 +117,36 @@ export default function Gallery() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: '-80px' }}
+          viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.6, delay: 0.2 }}
           className="relative w-full"
         >
           {/* Edge Vignette Fades */}
-          <div className="absolute left-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
-          <div className="absolute right-0 top-0 bottom-0 w-16 sm:w-28 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute left-0 top-0 bottom-0 w-6 sm:w-16 md:w-24 bg-gradient-to-r from-white via-white/80 to-transparent z-10 pointer-events-none" />
+          <div className="absolute right-0 top-0 bottom-0 w-6 sm:w-16 md:w-24 bg-gradient-to-l from-white via-white/80 to-transparent z-10 pointer-events-none" />
 
           {/* Navigation Arrows */}
           <button
             onClick={prevSlide}
-            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center shadow-xl backdrop-blur-sm transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none"
+            className="absolute left-1 sm:left-3 md:left-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center shadow-xl backdrop-blur-sm transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none"
             aria-label="Previous image"
           >
-            <ArrowLeft className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+            <ArrowLeft className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
           </button>
 
           <button
             onClick={nextSlide}
-            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-20 w-10 h-10 sm:w-11 sm:h-11 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center shadow-xl backdrop-blur-sm transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none"
+            className="absolute right-1 sm:right-3 md:right-6 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/70 hover:bg-black text-white flex items-center justify-center shadow-xl backdrop-blur-sm transition-all duration-200 hover:scale-105 active:scale-95 focus:outline-none"
             aria-label="Next image"
           >
-            <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
+            <ArrowRight className="w-3.5 h-3.5 sm:w-4 sm:h-4 text-white" />
           </button>
 
-          {/* Infinite Moving Track */}
-          <div className="overflow-hidden py-4">
+          {/* Infinite Moving Track with Center-Aligned Cards */}
+          <div className="overflow-hidden py-3 w-full">
             <motion.div
               animate={{
-                x: `calc(-${index} * (clamp(260px, 31vw, 360px) + 20px))`,
+                x: `calc(50% - (clamp(230px, 64vw, 340px) / 2) - ${index} * (clamp(230px, 64vw, 340px) + 16px))`,
               }}
               transition={
                 isInstant
@@ -165,7 +165,7 @@ export default function Gallery() {
                 if (info.offset.x < -40) nextSlide();
                 else if (info.offset.x > 40) prevSlide();
               }}
-              className="flex items-center gap-5 cursor-grab active:cursor-grabbing pl-4 sm:pl-8 touch-pan-y"
+              className="flex items-center gap-4 cursor-grab active:cursor-grabbing touch-pan-y"
             >
               {EXTENDED_GALLERY.map((item, idx) => (
                 <div
@@ -174,9 +174,9 @@ export default function Gallery() {
                     setDirection(0);
                     setSelectedImage(item);
                   }}
-                  className="relative rounded-3xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-black/30 hover:-translate-y-2 hover:rotate-[-1deg] flex-shrink-0 select-none transition-all duration-300 group cursor-pointer border border-black/5"
+                  className="relative rounded-2xl sm:rounded-3xl overflow-hidden shadow-md hover:shadow-2xl hover:shadow-black/30 hover:-translate-y-2 hover:rotate-[-1deg] flex-shrink-0 select-none transition-all duration-300 group cursor-pointer border border-black/5"
                   style={{
-                    width: 'clamp(260px, 31vw, 360px)',
+                    width: 'clamp(230px, 64vw, 340px)',
                     aspectRatio: '3 / 4',
                   }}
                 >
@@ -189,11 +189,11 @@ export default function Gallery() {
                   />
 
                   {/* Gradient Overlay & Title on Hover */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-6">
-                    <span className="text-[11px] font-extrabold uppercase tracking-widest text-[#48B800] mb-1.5 transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex flex-col justify-end p-5 sm:p-6">
+                    <span className="text-[10px] sm:text-[11px] font-extrabold uppercase tracking-widest text-[#48B800] mb-1 transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300">
                       DOKUMENTASI
                     </span>
-                    <p className="text-sm sm:text-base font-bold text-white leading-snug drop-shadow-md transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75">
+                    <p className="text-xs sm:text-base font-bold text-white leading-snug drop-shadow-md transform translate-y-3 group-hover:translate-y-0 transition-transform duration-300 delay-75 line-clamp-2">
                       {item.title}
                     </p>
                   </div>
@@ -207,7 +207,7 @@ export default function Gallery() {
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: false, margin: '-80px' }}
+          viewport={{ once: true, margin: '-40px' }}
           transition={{ duration: 0.4, delay: 0.3 }}
           className="flex items-center justify-center gap-2 mt-8"
         >

@@ -1,10 +1,17 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import { ArrowRight, Flame, Sparkles, Utensils, Award } from "lucide-react";
+import gsap from "gsap";
+import { useGSAP } from "@gsap/react";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ArrowRight, Flame, Sparkles, Utensils, Award, ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { DynamicTextSlider } from "@/components/ui/dynamic-text-slider";
 import { RevealText } from "@/components/ui/reveal-text";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const moodImages = [
   "https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80",
@@ -178,12 +185,12 @@ function CategoryCard({ item, index }: { item: CategoryItem; index: number }) {
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       onClick={handleCardClick}
-      className="category-card-item relative cursor-pointer select-none group perspective-1000"
+      className="category-card-item relative cursor-pointer select-none group perspective-1000 w-[84vw] max-w-[320px] sm:w-auto shrink-0 snap-center"
       style={{ perspective: "1000px" }}
     >
       <div
         ref={contentRef}
-        className="relative flex h-[420px] w-full flex-col justify-between overflow-hidden rounded-[28px] bg-surface shadow-lg transition-[transform,box-shadow] duration-500 will-change-transform hover:shadow-2xl dark:bg-card md:h-[460px]"
+        className="relative h-[360px] sm:h-[400px] md:h-[460px] w-full rounded-[24px] sm:rounded-[28px] overflow-hidden bg-surface dark:bg-card shadow-lg hover:shadow-2xl transition-shadow duration-500 will-change-transform flex flex-col justify-between"
         style={{ transformStyle: "preserve-3d" }}
       >
         {/* Dynamic Glow Spotlight */}
@@ -214,49 +221,49 @@ function CategoryCard({ item, index }: { item: CategoryItem; index: number }) {
         </div>
 
         {/* Card Header (Badges & Item Count) */}
-        <div className="relative z-20 p-6 flex items-center justify-between">
-          <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold tracking-wide bg-black/40 backdrop-blur-md text-white shadow-sm">
-            {item.tagIcon === "flame" && <Flame className="size-3.5 text-brand-500 fill-brand-500" />}
-            {item.tagIcon === "award" && <Award className="size-3.5 text-accent-400" />}
-            {item.tagIcon === "sparkles" && <Sparkles className="size-3.5 text-brand-300" />}
+        <div className="relative z-20 p-4 sm:p-6 flex items-center justify-between">
+          <span className="inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-semibold tracking-wide bg-black/40 backdrop-blur-md text-white shadow-sm">
+            {item.tagIcon === "flame" && <Flame className="size-3 sm:size-3.5 text-brand-500 fill-brand-500" />}
+            {item.tagIcon === "award" && <Award className="size-3 sm:size-3.5 text-accent-400" />}
+            {item.tagIcon === "sparkles" && <Sparkles className="size-3 sm:size-3.5 text-brand-300" />}
             {item.tag}
           </span>
 
-          <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-brand-500/90 backdrop-blur-md text-white shadow-glow">
+          <span className="inline-flex items-center px-2.5 sm:px-3 py-1 rounded-full text-[11px] sm:text-xs font-bold bg-brand-500/90 backdrop-blur-md text-white shadow-glow">
             {item.itemsCount}
           </span>
         </div>
 
         {/* Card Body & Footer */}
-        <div className="relative z-20 p-6 pt-0 text-white">
-          <p className="text-xs uppercase tracking-widest text-brand-400 font-semibold mb-1">
+        <div className="relative z-20 p-4 sm:p-6 pt-0 text-white">
+          <p className="text-[10px] sm:text-xs uppercase tracking-widest text-brand-400 font-semibold mb-1">
             {item.subtitle}
           </p>
 
-          <h3 className="font-display text-2xl md:text-3xl font-bold tracking-tight mb-2 text-white group-hover:text-brand-300 transition-colors duration-300">
+          <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold tracking-tight mb-1.5 sm:mb-2 text-white group-hover:text-brand-300 transition-colors duration-300">
             {item.title}
           </h3>
 
-          <p className="text-xs md:text-sm text-gray-300 line-clamp-2 leading-relaxed mb-4">
+          <p className="text-xs md:text-sm text-gray-300 line-clamp-2 leading-relaxed mb-3 sm:mb-4">
             {item.description}
           </p>
 
-          <div className="pt-3 border-t border-white/15 flex items-center justify-between">
+          <div className="pt-2.5 sm:pt-3 border-t border-white/15 flex items-center justify-between">
             <div>
-              <span className="text-[11px] uppercase tracking-wider text-gray-400 block font-medium">
+              <span className="text-[10px] sm:text-[11px] uppercase tracking-wider text-gray-400 block font-medium">
                 Top Pick
               </span>
-              <span className="text-sm font-semibold text-white/95">
+              <span className="text-xs sm:text-sm font-semibold text-white/95 truncate max-w-[140px] block">
                 {item.popularDish}
               </span>
             </div>
 
             <div className="flex items-center gap-2">
-              <span className="text-sm font-bold text-brand-400">
+              <span className="text-xs sm:text-sm font-bold text-brand-400">
                 {item.priceStart}
               </span>
-              <div className="size-9 rounded-full bg-white/10 group-hover:bg-brand-500 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 group-hover:translate-x-1 shadow-sm">
-                <ArrowRight className="size-4" />
+              <div className="size-7 sm:size-9 rounded-full bg-white/10 group-hover:bg-brand-500 backdrop-blur-md flex items-center justify-center text-white transition-all duration-300 group-hover:translate-x-1 shadow-sm">
+                <ArrowRight className="size-3.5 sm:size-4" />
               </div>
             </div>
           </div>
@@ -267,6 +274,10 @@ function CategoryCard({ item, index }: { item: CategoryItem; index: number }) {
 }
 
 export function CategoryParallax() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
+
   const [activeFilter, setActiveFilter] = useState("all");
 
   const filterOptions = [
@@ -283,10 +294,114 @@ export function CategoryParallax() {
       ? categoriesData
       : categoriesData.filter((c) => c.id === activeFilter);
 
+  useGSAP(
+    () => {
+      // Header entrance animation with ScrollTrigger
+      if (headerRef.current) {
+        gsap.fromTo(
+          headerRef.current.children,
+          { y: 30, opacity: 0 },
+          {
+            scrollTrigger: {
+              trigger: headerRef.current,
+              start: "top 90%",
+              toggleActions: "play none none reverse",
+            },
+            y: 0,
+            opacity: 1,
+            duration: 0.7,
+            stagger: 0.1,
+            ease: "power3.out",
+            clearProps: "all",
+          }
+        );
+      }
+
+      // Cards staggered reveal with 3D tilt
+      if (gridRef.current) {
+        const cards = gridRef.current.querySelectorAll(".category-card-item");
+        gsap.fromTo(
+          cards,
+          {
+            y: 70,
+            opacity: 0,
+            scale: 0.94,
+            rotateX: 8,
+          },
+          {
+            scrollTrigger: {
+              trigger: gridRef.current,
+              start: "top 82%",
+              toggleActions: "play none none reverse",
+            },
+            y: 0,
+            opacity: 1,
+            scale: 1,
+            rotateX: 0,
+            duration: 0.9,
+            stagger: 0.14,
+            ease: "power3.out",
+            clearProps: "transform",
+          }
+        );
+      }
+    },
+    { scope: sectionRef, dependencies: [activeFilter] }
+  );
+
+  const [activeCardIndex, setActiveCardIndex] = useState(0);
+  const isDragging = useRef(false);
+  const startX = useRef(0);
+  const scrollLeftStart = useRef(0);
+
+  const handleScroll = () => {
+    if (!gridRef.current) return;
+    const cardWidth = 320;
+    const index = Math.round(gridRef.current.scrollLeft / cardWidth);
+    setActiveCardIndex(Math.min(index, filteredCategories.length - 1));
+  };
+
+  const scrollByAmount = (amount: number) => {
+    if (!gridRef.current) return;
+    gridRef.current.scrollBy({ left: amount, behavior: "smooth" });
+  };
+
+  const scrollToIndex = (index: number) => {
+    if (!gridRef.current) return;
+    const cards = gridRef.current.querySelectorAll(".category-card-item");
+    if (cards[index]) {
+      (cards[index] as HTMLElement).scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+        inline: "center",
+      });
+    }
+  };
+
+  const onMouseDown = (e: React.MouseEvent) => {
+    if (!gridRef.current) return;
+    isDragging.current = true;
+    startX.current = e.pageX - gridRef.current.offsetLeft;
+    scrollLeftStart.current = gridRef.current.scrollLeft;
+  };
+
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (!isDragging.current || !gridRef.current) return;
+    e.preventDefault();
+    const x = e.pageX - gridRef.current.offsetLeft;
+    const walk = (x - startX.current) * 1.5;
+    gridRef.current.scrollLeft = scrollLeftStart.current - walk;
+  };
+
+  const onMouseUp = () => {
+    isDragging.current = false;
+  };
+
   return (
     <section
+      ref={sectionRef}
       id="categories"
-      className="relative w-full bg-background py-20 md:py-28 overflow-hidden scroll-mt-20"
+      className="relative w-full bg-background py-12 sm:py-16 md:py-28 overflow-hidden scroll-mt-20"
     >
       {/* Ambient background glow */}
       <div
@@ -296,13 +411,13 @@ export function CategoryParallax() {
 
       <div className="container-app">
         {/* Section Header */}
-        <div className="mx-auto mb-12 max-w-3xl text-center md:mb-16">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-bold uppercase tracking-wider mb-4 shadow-xs">
+        <div ref={headerRef} className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 md:mb-16">
+          <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-brand-500/10 text-brand-600 dark:text-brand-400 text-xs font-bold uppercase tracking-wider mb-3 sm:mb-4 shadow-xs">
             <Utensils className="size-3.5" />
             Our Culinary Spectrum
           </div>
 
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-foreground text-balance mb-5 leading-tight">
+          <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-foreground text-balance mb-3 sm:mb-5 leading-tight">
             A craving for{" "}
             <DynamicTextSlider>
               <RevealText
@@ -316,13 +431,13 @@ export function CategoryParallax() {
             mood
           </h2>
 
-          <p className="text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
+          <p className="text-sm sm:text-base md:text-lg text-muted-foreground text-pretty leading-relaxed">
             From 48-hour cold-fermented sourdough to silky hand-rolled pasta,
             explore our specialized kitchen stations crafted with obsessive precision.
           </p>
 
           {/* Filter Pills */}
-          <div className="flex flex-wrap items-center justify-center gap-2 mt-8">
+          <div className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mt-6 sm:mt-8">
             {filterOptions.map((filter) => {
               const isActive = activeFilter === filter.id;
               return (
@@ -330,7 +445,7 @@ export function CategoryParallax() {
                   key={filter.id}
                   onClick={() => setActiveFilter(filter.id)}
                   className={cn(
-                    "px-4 py-2 rounded-full text-xs md:text-sm font-semibold transition-all duration-200 cursor-pointer",
+                    "px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs md:text-sm font-semibold transition-all duration-200 cursor-pointer",
                     isActive
                       ? "bg-foreground text-background shadow-md scale-105"
                       : "bg-surface dark:bg-muted text-muted-foreground hover:text-foreground hover:bg-muted/80 shadow-xs"
@@ -343,20 +458,64 @@ export function CategoryParallax() {
           </div>
         </div>
 
-        {/* 3D Magnetic Cards Grid */}
-        <div className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:grid-cols-2 md:gap-8 lg:grid-cols-3">
+        {/* 3D Magnetic Cards Grid - Horizontal Snap Scroll on Mobile, Grid on Desktop */}
+        <div
+          ref={gridRef}
+          onScroll={handleScroll}
+          onMouseDown={onMouseDown}
+          onMouseMove={onMouseMove}
+          onMouseUp={onMouseUp}
+          onMouseLeave={onMouseUp}
+          className="flex overflow-x-auto pb-4 pt-2 snap-x snap-mandatory -mx-4 px-4 sm:mx-0 sm:px-0 sm:grid sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 max-w-7xl mx-auto scrollbar-none [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden select-none cursor-grab active:cursor-grabbing sm:cursor-default"
+        >
           {filteredCategories.map((category, index) => (
             <CategoryCard key={category.id} item={category} index={index} />
           ))}
         </div>
 
+        {/* Mobile Navigation Controls & Indicator */}
+        <div className="flex sm:hidden items-center justify-between px-2 mt-3 mb-2">
+          <div className="flex items-center gap-1.5">
+            {filteredCategories.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => scrollToIndex(i)}
+                className={cn(
+                  "h-1.5 rounded-full transition-all duration-300",
+                  activeCardIndex === i
+                    ? "w-6 bg-brand-500"
+                    : "w-1.5 bg-foreground/20 hover:bg-foreground/40"
+                )}
+                aria-label={`Go to slide ${i + 1}`}
+              />
+            ))}
+          </div>
+
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => scrollByAmount(-280)}
+              className="size-8 rounded-full bg-surface dark:bg-muted border border-border flex items-center justify-center text-foreground hover:bg-brand-500 hover:text-white transition-colors cursor-pointer shadow-xs"
+              aria-label="Previous card"
+            >
+              <ChevronLeft className="size-4" />
+            </button>
+            <button
+              onClick={() => scrollByAmount(280)}
+              className="size-8 rounded-full bg-surface dark:bg-muted border border-border flex items-center justify-center text-foreground hover:bg-brand-500 hover:text-white transition-colors cursor-pointer shadow-xs"
+              aria-label="Next card"
+            >
+              <ChevronRight className="size-4" />
+            </button>
+          </div>
+        </div>
+
         {/* Bottom Callout Banner */}
-        <div className="mt-14 md:mt-20 p-6 md:p-8 rounded-3xl bg-gradient-to-r from-brand-500/10 via-orange-500/5 to-transparent flex flex-col md:flex-row items-center justify-between gap-6 max-w-5xl mx-auto shadow-sm">
-          <div>
-            <h4 className="font-display font-bold text-xl text-foreground mb-1">
+        <div className="mt-8 sm:mt-14 md:mt-20 p-5 sm:p-6 md:p-8 rounded-2xl sm:rounded-3xl bg-gradient-to-r from-brand-500/10 via-orange-500/5 to-transparent flex flex-col md:flex-row items-center justify-between gap-4 sm:gap-6 max-w-5xl mx-auto shadow-sm">
+          <div className="text-center md:text-left">
+            <h4 className="font-display font-bold text-lg sm:text-xl text-foreground mb-1">
               Can't decide what to savor first?
             </h4>
-            <p className="text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Explore our full interactive tasting menu or customize your dining preferences.
             </p>
           </div>
@@ -365,7 +524,7 @@ export function CategoryParallax() {
               const el = document.getElementById("menu");
               if (el) el.scrollIntoView({ behavior: "smooth" });
             }}
-            className="shrink-0 inline-flex items-center gap-2 px-6 py-3 rounded-full bg-brand-500 text-white font-semibold text-sm hover:bg-brand-600 hover:shadow-glow transition-all duration-200 cursor-pointer"
+            className="w-full sm:w-auto shrink-0 inline-flex items-center justify-center gap-2 px-6 py-3 rounded-full bg-brand-500 text-white font-semibold text-sm hover:bg-brand-600 hover:shadow-glow transition-all duration-200 cursor-pointer"
           >
             Explore Full Menu
             <ArrowRight className="size-4" />

@@ -77,10 +77,10 @@ export const TextMarquee = forwardRef<HTMLDivElement, TextMarqueeProps>(
     return (
       <div
         ref={ref}
-        className="overflow-hidden whitespace-nowrap flex flex-nowrap"
+        className="overflow-hidden whitespace-nowrap flex flex-nowrap py-1"
       >
         <motion.div
-          className="flex whitespace-nowrap gap-10 flex-nowrap"
+          className="flex whitespace-nowrap gap-8 sm:gap-12 flex-nowrap items-center"
           style={{ x }}
         >
           <span className={cn('block text-[8vw]', className)}>{children}</span>
