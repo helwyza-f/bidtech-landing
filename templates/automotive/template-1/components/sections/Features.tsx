@@ -93,7 +93,7 @@ export default function Features() {
   return (
     <section
       id="collection"
-      className="w-full min-h-screen py-20 md:py-24 bg-gray-50 flex flex-col justify-center overflow-hidden"
+      className="w-full min-h-screen pt-8 pb-16 sm:py-20 md:py-24 bg-white flex flex-col justify-center overflow-hidden"
     >
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12">
@@ -127,11 +127,10 @@ export default function Features() {
               onClick={handlePrev}
               disabled={currentIndex === 0}
               aria-label="Previous vehicles"
-              className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 ${
-                currentIndex === 0
+              className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 ${currentIndex === 0
                   ? "border-gray-200 text-gray-300 cursor-not-allowed bg-white"
                   : "border-blue-600 text-blue-600 bg-white hover:bg-blue-50 shadow-sm active:scale-95 cursor-pointer"
-              }`}
+                }`}
             >
               <ArrowLeft className="w-5 h-5" />
             </button>
@@ -141,11 +140,10 @@ export default function Features() {
               onClick={handleNext}
               disabled={currentIndex >= maxIndex}
               aria-label="Next vehicles"
-              className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 ${
-                currentIndex >= maxIndex
+              className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 ${currentIndex >= maxIndex
                   ? "border-gray-200 text-gray-300 cursor-not-allowed bg-white"
                   : "border-blue-600 text-blue-600 bg-white hover:bg-blue-50 shadow-sm active:scale-95 cursor-pointer"
-              }`}
+                }`}
             >
               <ArrowRight className="w-5 h-5" />
             </button>
@@ -165,11 +163,10 @@ export default function Features() {
               key={filter}
               onClick={() => handleFilterChange(filter)}
               variant="outline"
-              className={`rounded-full px-5 sm:px-6 text-xs sm:text-sm whitespace-nowrap transition-all ${
-                activeFilter === filter
+              className={`rounded-full px-5 sm:px-6 text-xs sm:text-sm whitespace-nowrap transition-all ${activeFilter === filter
                   ? "bg-blue-600 text-white border-blue-600 hover:bg-blue-700 shadow-sm"
                   : "bg-white text-gray-600 border-gray-200 hover:bg-gray-100"
-              }`}
+                }`}
             >
               {filter}
             </Button>

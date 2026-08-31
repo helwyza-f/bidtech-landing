@@ -61,7 +61,7 @@ export default function Testimonials() {
     <section id="testimonials" className="w-full min-h-screen py-20 md:py-24 bg-white flex items-center overflow-hidden">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
-          
+
           {/* Kolom Kiri: Header & Kontrol Navigasi */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -87,11 +87,10 @@ export default function Testimonials() {
                 onClick={handlePrev}
                 disabled={currentIndex === 0}
                 aria-label="Previous testimonials"
-                className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 ${
-                  currentIndex === 0
+                className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 ${currentIndex === 0
                     ? "border-gray-200 text-gray-300 cursor-not-allowed"
                     : "border-gray-300 text-gray-700 hover:border-blue-600 hover:text-blue-600 active:scale-95"
-                }`}
+                  }`}
               >
                 <ArrowLeft className="w-5 h-5" />
               </button>
@@ -101,11 +100,10 @@ export default function Testimonials() {
                 onClick={handleNext}
                 disabled={currentIndex >= maxIndex}
                 aria-label="Next testimonials"
-                className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 ${
-                  currentIndex >= maxIndex
+                className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 ${currentIndex >= maxIndex
                     ? "border-gray-200 text-gray-300 cursor-not-allowed"
                     : "border-blue-600 text-blue-600 hover:bg-blue-50 active:scale-95"
-                }`}
+                  }`}
               >
                 <ArrowRight className="w-5 h-5" />
               </button>

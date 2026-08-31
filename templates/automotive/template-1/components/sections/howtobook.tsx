@@ -31,7 +31,7 @@ export default function HowToBook() {
   return (
     <section className="relative w-full min-h-screen py-20 md:py-24 bg-[#121214] text-white flex flex-col justify-center overflow-hidden">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto mb-20 md:mb-24">
           <motion.p
@@ -43,7 +43,7 @@ export default function HowToBook() {
           >
             PROSES MUDAH
           </motion.p>
-          
+
           <motion.h2
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}

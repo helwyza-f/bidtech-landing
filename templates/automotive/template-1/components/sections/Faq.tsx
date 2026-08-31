@@ -41,7 +41,7 @@ export default function Faq() {
   return (
     <section id="faq" className="w-full min-h-screen py-20 md:py-24 bg-[#f8f9fc] flex flex-col justify-center">
       <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -80,9 +80,8 @@ export default function Faq() {
                     {item.question}
                   </span>
                   <div
-                    className={`flex-shrink-0 text-blue-600 transition-transform duration-300 ${
-                      isExpanded ? "rotate-180" : ""
-                    }`}
+                    className={`flex-shrink-0 text-blue-600 transition-transform duration-300 ${isExpanded ? "rotate-180" : ""
+                      }`}
                   >
                     <ChevronDown className="w-5 h-5 stroke-[2.5]" />
                   </div>

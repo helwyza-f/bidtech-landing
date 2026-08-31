@@ -46,7 +46,7 @@ export default function Hero() {
     <section
       ref={ref}
       id="home"
-      className="relative w-full min-h-[100dvh] flex flex-col justify-between overflow-hidden pt-16 sm:pt-20 md:pt-24 pb-4 sm:pb-8 md:pb-12"
+      className="relative w-full min-h-[72dvh] md:min-h-[100dvh] flex flex-col justify-between overflow-hidden pt-16 sm:pt-20 md:pt-24 pb-4 sm:pb-8 md:pb-12"
     >
       {/* Background image - simple and reliable across all mobile browsers */}
       <div
@@ -73,13 +73,14 @@ export default function Hero() {
         style={{ zIndex: 1 }}
       />
 
-      {/* Bottom smooth fade transition & blur into next section */}
+      {/* Seamless bottom fade transition into next section (Pure White) */}
       <div
-        className="absolute bottom-0 left-0 w-full h-24 sm:h-36 md:h-44 bg-gradient-to-t from-gray-50 via-gray-50/60 to-transparent backdrop-blur-[2px] pointer-events-none"
+        className="absolute -bottom-1 left-0 w-full h-40 sm:h-52 md:h-64 bg-gradient-to-t from-white via-white/85 to-transparent pointer-events-none"
         style={{ zIndex: 2 }}
       />
 
-      <div className="relative z-10 flex-grow flex items-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8 sm:pt-6 md:pt-0">
+
+      <div className="relative z-10 flex-grow flex items-center w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-4 sm:pt-6 md:pt-0">
         <motion.div
           className="w-full max-w-2xl text-white"
           variants={containerVariants}
@@ -91,7 +92,7 @@ export default function Hero() {
               hidden: { opacity: 0, x: -20 },
               visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } },
             }}
-            className="mb-2 text-xs sm:text-sm md:text-base font-bold tracking-[3px] text-blue-200 uppercase drop-shadow-sm"
+            className="mb-2 text-xs sm:text-sm md:text-base font-bold tracking-[3px] text-white uppercase drop-shadow-sm"
           >
             Layanan Armada Utama
           </motion.p>
