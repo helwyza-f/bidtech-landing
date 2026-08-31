@@ -1,19 +1,25 @@
-import Header from '@/components/Header';
-import Hero from '@/components/Hero';
-import Features from '@/components/Features';
-import CTA from '@/components/CTA';
-import Footer from '@/components/Footer';
+import Navbar from "@/components/layout/Navbar";
+import Footer from "@/components/layout/Footer";
+import Hero from "@/components/sections/Hero";
+import ProductGrid from "@/components/sections/ProductGrid";
+import WhyChooseUs from "@/components/sections/WhyChooseUs";
+import Promo from "@/components/sections/Promo";
+import About from "@/components/sections/About";
+import Testimonial from "@/components/sections/Testimonial";
+import Location from "@/components/sections/Location";
 
 export default function Home() {
   return (
-    <>
-      <Header />
-      <main>
-        <Hero />
-        <Features />
-        <CTA />
-      </main>
+    <main className="min-h-screen bg-[#FAFAF8]">
+      <Navbar />
+      <Hero />
+      <ProductGrid />
+      <WhyChooseUs />
+      <Promo />
+      <About />
+      <Testimonial />
+      <Location />
       <Footer />
-    </>
+    </main>
   );
 }

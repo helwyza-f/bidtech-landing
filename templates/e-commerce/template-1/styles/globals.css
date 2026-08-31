@@ -2,43 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  :root {
+    /* Backgrounds */
+    --background: #FCFCFA;
+    --surface: #FFFFFF;
+    --surface-soft: #F7F5F0;
+
+    /* Gold Scale */
+    --gold-50: #FFFBF3;
+    --gold-100: #FDF3DE;
+    --gold-200: #F7E3B5;
+    --gold-300: #EBCB82;
+    --gold-400: #E2B65D;
+    --gold-500: #D9A441;
+    --gold-600: #C58E2E;
+    --gold-700: #A87522;
+    --gold-800: #805819;
+
+    /* Ink / Navy Scale */
+    --ink-900: #111827;
+    --ink-800: #172033;
+    --ink-700: #374151;
+    
+    /* Text Scale */
+    --text-600: #475467;
+    --text-500: #667085;
+    --text-400: #98A2B3;
+    --text-disabled: #C5CAD3;
+
+    /* Borders */
+    --border: #EAE7DF;
+    --border-strong: #DAD5C9;
+    --dark-border: #263044;
+
+    /* Semantics */
+    --success: #2F8F5B;
+    --success-soft: #EAF6EF;
+    --whatsapp: #25D366;
+
+    /* Alias for Shadcn-like utilities if any leftover */
+    --foreground: #111827;
+    --primary: #D9A441;
+    --primary-foreground: #111827;
+    --muted: #F7F5F0;
+    --muted-foreground: #98A2B3;
+    --radius: 12px;
+  }
+}
+ 
+@layer base {
+  * {
+    border-color: var(--border);
+  }
+  body {
+    @apply bg-background text-ink-900 antialiased;
+    background-color: var(--background);
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+/* Lenis Smooth Scroll CSS */
+html.lenis, html.lenis body {
+  height: auto;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
-/* Smooth transitions */
-button,
-a {
-  transition: all 0.3s ease;
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
-/* Utility classes */
-.container-max {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
-.section-padding {
-  @apply py-16 md:py-20;
-}
-
-.heading-lg {
-  @apply text-3xl md:text-4xl font-bold;
-}
-
-.text-muted {
-  @apply text-gray-600;
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }

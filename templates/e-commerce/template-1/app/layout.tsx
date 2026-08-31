@@ -1,10 +1,17 @@
 import type { Metadata } from 'next';
+import { Manrope } from 'next/font/google';
 import '../styles/globals.css';
+import SmoothScrollProvider from '@/components/providers/SmoothScrollProvider';
+
+const manrope = Manrope({
+  subsets: ['latin'],
+  variable: '--font-manrope',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
-  title: 'Template Name',
-  description: 'Template description',
-  keywords: ['keyword1', 'keyword2'],
+  title: 'KONTERKU | Smartphone Store',
+  description: 'Toko smartphone baru, second, dan aksesoris terpercaya.',
 };
 
 export default function RootLayout({
@@ -13,9 +20,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="id">
-      <body className="bg-white text-gray-900">
-        {children}
+    <html lang="id" className={manrope.variable}>
+      <body className="bg-background text-ink-900 antialiased font-sans selection:bg-gold-200">
+        <SmoothScrollProvider>
+          {children}
+        </SmoothScrollProvider>
       </body>
     </html>
   );
