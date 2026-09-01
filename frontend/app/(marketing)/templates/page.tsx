@@ -7,90 +7,16 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
-  CarFront,
   ChevronRight,
   ExternalLink,
-  Heart,
   ShoppingCart,
-  UtensilsCrossed,
-  Utensils,
-  Dumbbell,
-  Users,
-  Network,
 } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-
-const TEMPLATE_CATEGORIES = [
-  { name: "Semua Design", count: 6 },
-  { name: "Automotive", count: 1 },
-  { name: "Restaurant & Cafe", count: 2 },
-  { name: "Gym & Wellness", count: 1 },
-  { name: "Community & Org", count: 2 },
-];
-
-const SAMPLE_TEMPLATES = [
-  {
-    id: 1,
-    name: "Rentcar - Penyewaan Kendaraan",
-    category: "Automotive",
-    subcategory: "Showcase kendaraan dan penyewaan kendaraan untuk usaha Penyewaan Kendaraan",
-    image: "/images/design_thumbnail/rentcar.webp",
-    previewHref: "/demo/automotive/",
-    tags: ["Automotive", "Rental Mobil", "Responsive"],
-    icon: CarFront,
-  },
-  {
-    id: 2,
-    name: "Deny Restaurant - Kalcer Restaurant",
-    category: "Restaurant & Cafe",
-    subcategory: "Cafe atau restaurant anak muda dengan gaya animasi kalcer, cocok untuk portofolio usaha.",
-    image: "/images/design_thumbnail/deny_restaurant.webp",
-    previewHref: "/demo/restaurant-cafe-2/",
-    tags: ["Restaurant", "Cafe", "Interactive Menu"],
-    icon: UtensilsCrossed,
-  },
-  {
-    id: 3,
-    name: "Chef's Table - European Signature",
-    category: "Restaurant & Cafe",
-    subcategory: "Restaurant otentik, mewah dan berprestisius, dengan target korporat dan kelas internasional.",
-    image: "/images/design_thumbnail/chefs_table.webp",
-    previewHref: "/demo/restaurant-cafe/",
-    tags: ["Restaurant", "Diner", "Modern Theme"],
-    icon: Utensils,
-  },
-  {
-    id: 4,
-    name: "IRONFORCE - Best Gym on Jakarta",
-    category: "Gym & Wellness",
-    subcategory: "Tempat kebugaran dan latihan anak gen z, tersebar sekitar jabodetabek, dengan fasilitas lengkap dan pelatih professional.",
-    image: "/images/design_thumbnail/ironforce.webp",
-    previewHref: "/demo/beauty-wellness/",
-    tags: ["Fitness", "Gym", "Personal Trainer"],
-    icon: Dumbbell,
-  },
-  {
-    id: 5,
-    name: "Harapan kita",
-    category: "Community & Org",
-    subcategory: "Organisasi non-profit mandiri dengan visi pengembangan pendidikan pada anak-anak di wilayah 3T (Tertinggal, Terdepan, dan Terluar).",
-    image: "/images/design_thumbnail/harapan_kita.webp",
-    previewHref: "/demo/organization/",
-    tags: ["Community", "Organization", "Information Portal"],
-    icon: Users,
-  },
-  {
-    id: 6,
-    name: "CommunityPro",
-    category: "Community & Org",
-    subcategory: "Professional Community",
-    image: "/images/community-pro_template.webp",
-    previewHref: "/demo/community-pro/",
-    tags: ["Community", "Membership", "Program"],
-    icon: Network,
-  },
-];
+import {
+  TEMPLATE_CATEGORIES,
+  TEMPLATES,
+} from "@/lib/data/template";
 
 const sectionBadgeClass =
   "rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm";
@@ -98,8 +24,9 @@ const sectionBadgeClass =
 export default function TemplatesPage() {
   const [selectedCategory, setSelectedCategory] = useState("Semua Design");
 
-  const filteredTemplates = SAMPLE_TEMPLATES.filter((template) => {
+  const filteredTemplates = TEMPLATES.filter((template) => {
     if (selectedCategory === "Semua Design") return true;
+
     return template.category === selectedCategory;
   });
 

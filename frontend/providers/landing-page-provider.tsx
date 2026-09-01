@@ -77,12 +77,14 @@ function useLandingPageState() {
   const [activeSpecializationSlide, setActiveSpecializationSlide] = useState(0);
   const [activeProductTab, setActiveProductTab] = useState(0);
   const [activeProductSlide, setActiveProductSlide] = useState(0);
+  const [activeTemplateSlide, setActiveTemplateSlide] = useState(0);
   const [activeHowItWorksPage, setActiveHowItWorksPage] = useState(0);
   const [activeHeroSlide, setActiveHeroSlide] = useState(0);
 
   const servicesSliderRef = useRef<HTMLDivElement>(null);
   const specializationsSliderRef = useRef<HTMLDivElement>(null);
   const productSliderRef = useRef<HTMLDivElement>(null);
+  const templateSliderRef = useRef<HTMLDivElement>(null);
   const howItWorksSliderRef = useRef<HTMLDivElement>(null);
   const testimonialsRef = useRef<HTMLDivElement>(null);
 
@@ -115,6 +117,10 @@ function useLandingPageState() {
     scrollSliderToIndex(productSliderRef.current, nextSlide);
   };
 
+  const moveTemplateSlide = (nextSlide: number) => {
+    setActiveTemplateSlide(scrollSliderToIndex(templateSliderRef.current, nextSlide));
+  };
+
   const moveHowItWorksSlide = (nextSlide: number) => {
     scrollSliderToIndex(howItWorksSliderRef.current, nextSlide);
   };
@@ -132,6 +138,11 @@ function useLandingPageState() {
   const handleProductScroll = (event: UIEvent<HTMLDivElement>) => {
     if (window.innerWidth >= 768) return;
     setActiveProductSlide(getClosestSlideIndex(event.currentTarget));
+  };
+
+  const handleTemplateScroll = (event: UIEvent<HTMLDivElement>) => {
+    if (window.innerWidth >= 1024) return;
+    setActiveTemplateSlide(getClosestSlideIndex(event.currentTarget));
   };
 
   const handleHowItWorksScroll = (event: UIEvent<HTMLDivElement>) => {
@@ -158,6 +169,7 @@ function useLandingPageState() {
     activeProductTab,
     activeServiceSlide,
     activeSpecializationSlide,
+    activeTemplateSlide,
     activeStep,
     heroShowcase,
     heroTitleMobileFirstLine,
@@ -167,6 +179,7 @@ function useLandingPageState() {
     productSliderRef,
     servicesSliderRef,
     specializationsSliderRef,
+    templateSliderRef,
     testimonialsRef,
     activateProductTab,
     activateStep,
@@ -174,10 +187,12 @@ function useLandingPageState() {
     handleProductScroll,
     handleServiceScroll,
     handleSpecializationScroll,
+    handleTemplateScroll,
     moveHowItWorksSlide,
     moveProductSlide,
     moveServiceSlide,
     moveSpecializationSlide,
+    moveTemplateSlide,
     showHeroSlide,
   };
 }

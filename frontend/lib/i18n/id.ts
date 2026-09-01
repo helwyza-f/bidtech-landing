@@ -2,10 +2,10 @@ export const id = {
   nav: {
     services: "Layanan",
     portfolio: "Portofolio",
-    template: "Design",
+    template: "Cari Desain",
     pricing: "Harga",
-    about: "Home",
-    contact: "Kontak",
+    about: "Beranda",
+    contact: "Hubungi Kami",
   },
   header: {
     cta: "Mulai Sekarang",
@@ -366,6 +366,26 @@ export const id = {
       },
     ],
   },
+  cto: {
+    badge: "Siap Memulai Proyek Anda?",
+    titleLine1: "Wujudkan Ide Anda",
+    titleLine2: "Bersama",
+    titleHighlight: "BidTech",
+    subtitle:
+      "Kami siap membantu mengubah ide menjadi solusi digital yang tepat, fungsional, dan berdampak untuk bisnis Anda.",
+    benefits: [
+      { title: "Konsultasi Gratis", description: "Diskusi kebutuhan tanpa komitmen" },
+      { title: "Proses Transparan", description: "Update setiap tahap pengerjaan" },
+      { title: "Tim Profesional", description: "Berpengalaman & siap membantu" },
+      { title: "Hasil Berkualitas", description: "Solusi digital yang tepat & berdampak" },
+    ],
+    ctaPrimary: "Konsultasi Sekarang",
+    ctaSecondary: "Cari Design",
+    trust: "Data dan informasi Anda aman bersama kami.",
+    deviceAlt: "Mockup website dan aplikasi mobile BidTech",
+    desktopAlt: "Preview website Stokin pada mockup desktop",
+    mobileAlt: "Preview aplikasi Stokin pada mockup mobile",
+  },
   contact: {
     title: "Siap Memulai Proyek Anda?",
     subtitle: "Isi formulir di bawah ini dan tim kami akan segera menghubungi Anda untuk konsultasi gratis.",
@@ -402,6 +422,6 @@ export const id = {
     servicesItems: ["Pengembangan Website", "Aplikasi Mobile", "Solusi ERP", "Software Kustom"],
     helpTitle: "Bantuan",
     helpItems: ["Bantuan", "Syarat & Ketentuan", "Hubungi Kami", "FAQ"],
-    copyright: "© 2026 BidTech Software House. Seluruh hak cipta dilindungi.",
+    copyright: "© 2026 PT Bisnis Jalanin Aja Dulu. Seluruh hak cipta dilindungi.",
   },
 };

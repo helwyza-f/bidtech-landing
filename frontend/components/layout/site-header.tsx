@@ -57,11 +57,11 @@ export function SiteHeader() {
   }, [pathname]);
 
   const navItems = [
-    { label: t.nav.about, href: "#hero", sectionId: "hero" },
-    { label: t.nav.services, href: "#services" },
-    { label: t.nav.portfolio, href: "#portfolio" },
-    { label: t.nav.template, href: "#templates" },
-    { label: t.nav.contact, href: "#contact" },
+    { label: t.nav.about, href: "#hero" },
+    // { label: t.nav.services, href: "#services" },
+    // { label: t.nav.portfolio, href: "#portfolio" },
+    { label: t.nav.template, href: "/templates" },
+    { label: t.nav.contact, href: "/#contact" },
   ];
 
   return (
@@ -82,7 +82,7 @@ export function SiteHeader() {
           {navItems.map((item) => (
             <SmartNavLink
               className={`relative pb-1 transition ${brandClasses.hoverTextPrimary} ${
-                item.href.startsWith("#") && isHomePath(pathname) && activeSection === (item.sectionId ?? item.href.slice(1))
+                item.href.startsWith("#") && isHomePath(pathname) && activeSection === (item.href.slice(1))
                   ? `font-semibold ${brandClasses.textPrimary}`
                   : ""
               }`}

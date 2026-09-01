@@ -365,6 +365,26 @@ export const en = {
       },
     ],
   },
+  cto: {
+    badge: "Ready to Start Your Project?",
+    titleLine1: "Bring Your Ideas to Life",
+    titleLine2: "Together With",
+    titleHighlight: "BidTech",
+    subtitle:
+      "We are ready to turn your ideas into digital solutions that are precise, functional, and valuable for your business.",
+    benefits: [
+      { title: "Free Consultation", description: "Discuss your needs with no commitment" },
+      { title: "Transparent Process", description: "Updates throughout every project stage" },
+      { title: "Professional Team", description: "Experienced and ready to help" },
+      { title: "Quality Results", description: "Digital solutions built for real impact" },
+    ],
+    ctaPrimary: "Consult Now",
+    ctaSecondary: "Browse Designs",
+    trust: "Your data and information are safe with us.",
+    deviceAlt: "BidTech website and mobile application mockups",
+    desktopAlt: "Stokin website preview in a desktop mockup",
+    mobileAlt: "Stokin application preview in a mobile mockup",
+  },
   contact: {
     title: "Ready to Start Your Project?",
     subtitle: "Fill out the form below and our team will get back to you shortly for a free consultation.",

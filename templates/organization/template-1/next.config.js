@@ -4,6 +4,7 @@ const demoBasePath = process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "";
 
 const nextConfig = {
   reactStrictMode: true,
+  transpilePackages: ["lenis"],
   images: {
     unoptimized: isStaticDemoBuild,
     formats: ['image/avif', 'image/webp'],

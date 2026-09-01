@@ -8,6 +8,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { ContactForm } from "@/components/landing/contact-form";
+import { CtoSection } from "@/components/landing/cto-section";
 import { Reveal } from "@/components/landing/reveal";
 import { StatCounter } from "@/components/landing/stat-counter";
 import { serviceIcons } from "@/lib/data";
@@ -15,53 +16,53 @@ import { LandingPageProvider, heroShowcaseSlides, useLandingPage } from "@/provi
 import { brandClasses } from "@/lib/data";
 import { clientLogos, logoAssets } from "@/lib/data";
 
-const sectionBadgeClass =
-  "rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm";
+import { TEMPLATES } from "@/lib/data/template";
 
-const templateDesignCards = [
-  {
-    name: "Rentcar",
-    category: "Automotive",
-    description: "Design rental mobil dengan katalog armada, highlight layanan, dan CTA booking.",
-    image: "/images/rentcar_template.webp",
-    href: "/demo/automotive/",
-  },
-  {
-    name: "FoodFleet",
-    category: "Restaurant & Cafe",
-    description: "Template menu interaktif untuk restoran dan cafe dengan tampilan modern.",
-    image: "/images/foodfleet_template.webp",
-    href: "/demo/restaurant-cafe-2/",
-  },
-  {
-    name: "BitePoint",
-    category: "Restaurant & Cafe",
-    description: "Design klasik untuk diner, coffee shop, dan brand kuliner yang hangat.",
-    image: "/images/bitepoint_template.webp",
-    href: "/demo/restaurant-cafe/",
-  },
-  {
-    name: "GlowGym",
-    category: "Gym & Wellness",
-    description: "Landing page fitness dan wellness dengan visual kuat untuk paket membership.",
-    image: "/images/glowgym_template.webp",
-    href: "/demo/beauty-wellness/",
-  },
-  {
-    name: "OrgSpace",
-    category: "Community & Org",
-    description: "Portal organisasi untuk profil, kegiatan, komunitas, dan informasi anggota.",
-    image: "/images/orgspace_template.webp",
-    href: "/demo/organization/",
-  },
-  {
-    name: "CommunityPro",
-    category: "Community & Org",
-    description: "Template komunitas profesional dengan program, membership, FAQ, dan struktur organisasi.",
-    image: "/images/community-pro_template.webp",
-    href: "/demo/community-pro/",
-  },
-];
+const sectionBadgeClass = "rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm";
+
+const orderedTemplates = [...TEMPLATES].sort((a, b) => b.id - a.id);
+const mobileTemplatePreview = orderedTemplates.slice(0, 4);
+const desktopTemplatePreview = orderedTemplates.slice(0, 6);
+const templateMoreLinkClass =
+  "inline-flex h-13 items-center justify-center gap-3 rounded-full bg-brand-primary px-7 text-sm font-bold text-brand-primary-dark shadow-[0_18px_42px_rgba(95,201,74,0.24)] ring-1 ring-green-700/10 transition hover:-translate-y-0.5 hover:bg-brand-primary-hover sm:h-14 sm:px-8 sm:text-base";
+
+function TemplateDesignCard({ template }: { template: (typeof TEMPLATES)[number] }) {
+  return (
+    <Link
+      className="group block h-full w-full"
+      href={template.previewHref}
+      rel="noreferrer"
+      target="_blank"
+    >
+      <article className="flex h-full min-h-[360px] flex-col overflow-hidden rounded-[24px] border border-green-100 bg-white transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_24px_64px_rgba(95,201,74,0.14)]">
+        <div className="m-3 mb-0 overflow-hidden rounded-[18px] border border-white bg-[linear-gradient(135deg,#f1fbef,#e9f7ee)] p-2 shadow-[inset_0_0_0_1px_rgba(95,201,74,0.08)]">
+          <div className="relative h-[210px] w-full overflow-hidden rounded-[14px] bg-slate-100">
+            <Image
+              src={template.image}
+              alt={`${template.name} design preview`}
+              fill
+              sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+              className="object-cover object-top transition duration-500 group-hover:scale-[1.04]"
+            />
+          </div>
+        </div>
+        <div className="flex flex-1 flex-col px-5 py-5">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-primary">
+            {template.category}
+          </p>
+          <h3 className="mt-2 font-[family-name:var(--font-sora)] text-xl font-semibold text-slate-950">
+            {template.name}
+          </h3>
+          <p className="mt-3 flex-1 text-sm leading-6 text-slate-500">{template.subcategory}</p>
+          <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-slate-950 transition group-hover:text-brand-primary">
+            <span>Lihat Preview</span>
+            <ArrowRight className="size-4" />
+          </div>
+        </div>
+      </article>
+    </Link>
+  );
+}
 
 export function LandingPage() {
   return (
@@ -79,6 +80,7 @@ function LandingPageView() {
     activeProductSlide,
     activeProductTab,
     activeServiceSlide,
+    activeTemplateSlide,
     activeStep,
     heroShowcase,
     heroTitleMobileFirstLine,
@@ -87,15 +89,18 @@ function LandingPageView() {
     howItWorksSliderRef,
     productSliderRef,
     servicesSliderRef,
+    templateSliderRef,
     testimonialsRef,
     activateProductTab,
     activateStep,
     handleHowItWorksScroll,
     handleProductScroll,
     handleServiceScroll,
+    handleTemplateScroll,
     moveHowItWorksSlide,
     moveProductSlide,
     moveServiceSlide,
+    moveTemplateSlide,
     showHeroSlide,
   } = useLandingPage();
 
@@ -145,15 +150,6 @@ function LandingPageView() {
               </a>
               </div>
             </Reveal>
-
-            <Reveal delay={340} y={14}>
-              <div className="mt-6 flex flex-wrap justify-center gap-2 text-xs font-semibold text-slate-600 lg:justify-start">
-                <span className="rounded-full border border-green-100 bg-white px-4 py-2 shadow-[0_10px_30px_rgba(15,23,42,0.05)]">Website siap jualan</span>
-                <span className="rounded-full border border-green-100 bg-white px-4 py-2 shadow-[0_10px_30px_rgba(15,23,42,0.05)]">Aplikasi custom</span>
-                <span className="rounded-full border border-green-100 bg-white px-4 py-2 shadow-[0_10px_30px_rgba(15,23,42,0.05)]">Support teknis</span>
-              </div>
-            </Reveal>
-
           </div>
 
           <Reveal delay={180} y={26}>
@@ -224,27 +220,93 @@ function LandingPageView() {
             </div>
           </Reveal>
         </div>
-
-        <Reveal className="relative mx-auto max-w-7xl px-4 pb-4 sm:px-5 md:px-8 lg:pb-6" delay={420} y={14}>
-          <div className="text-center">
-            <p className="text-xs uppercase tracking-[0.35em] text-slate-500">Our Client</p>
-            <div className="mt-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:gap-x-12">
-              {clientLogos.map((client) => (
-                <Image
-                  key={client.name}
-                  src={client.src}
-                  alt={client.name}
-                  width={client.width}
-                  height={36}
-                  className="h-6 w-auto object-contain opacity-75 brightness-0 sm:h-7"
-                />
-              ))}
-            </div>
-          </div>
-        </Reveal>
       </section>
 
-      <section className="mx-4 mb-4 mt-6 grid max-w-7xl grid-cols-2 gap-2.5 sm:mx-5 sm:mb-6 sm:mt-8 sm:gap-3 md:mx-8 lg:mx-auto lg:mb-8 lg:mt-10 lg:grid-cols-4 lg:gap-4" aria-label="BidTech stats">
+      <section className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="templates">
+        <div className="pointer-events-none absolute inset-x-4 top-28 -z-10 h-[72%] rounded-[48px] bg-[radial-gradient(circle_at_18%_20%,rgba(95,201,74,0.10),transparent_34%),radial-gradient(circle_at_80%_42%,rgba(95,201,74,0.08),transparent_30%)]" />
+
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <div className="flex justify-center">
+            <Badge className={sectionBadgeClass}>Template Design</Badge>
+          </div>
+          <h2 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
+            Pilih <span className="text-brand-primary">Design Website</span> Siap Pakai
+          </h2>
+          <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-500">
+            Koleksi template profesional untuk berbagai kebutuhan bisnis, mulai dari company profile, restoran, rental, hingga portal organisasi.
+          </p>
+        </Reveal>
+
+        <div className="lg:hidden">
+          <div
+            className="mt-10 flex w-full snap-x snap-mandatory gap-5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            onScroll={handleTemplateScroll}
+            ref={templateSliderRef}
+          >
+            {mobileTemplatePreview.map((template, index) => (
+              <Reveal
+                className="relative flex w-full min-w-full shrink-0 snap-start sm:min-w-[calc(50%-10px)]"
+                delay={(index % 3) * 90}
+                key={template.name}
+                y={30}
+              >
+                <TemplateDesignCard template={template} />
+                {index === mobileTemplatePreview.length - 1 && (
+                  <div className="absolute inset-x-0 bottom-0 z-10 flex h-full items-center justify-center rounded-[24px] bg-gradient-to-r from-white/45 via-white/75 to-white p-5">
+                    <Link className={`${templateMoreLinkClass}`} href="/templates">
+                      Lihat Lebih Lanjut
+                      <ArrowRight className="size-4" />
+                    </Link>
+                  </div>
+                )}
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="mt-6 flex items-center justify-center gap-2.5" aria-label={`Template ${activeTemplateSlide + 1} dari ${mobileTemplatePreview.length}`}>
+            {mobileTemplatePreview.map((template, index) => (
+              <button
+                aria-label={`Lihat ${template.name}`}
+                className={`h-2.5 rounded-full transition-all ${
+                  activeTemplateSlide === index ? "w-8 bg-brand-primary" : "w-2.5 bg-slate-300"
+                }`}
+                key={template.name}
+                onClick={() => moveTemplateSlide(index)}
+                type="button"
+              />
+            ))}
+          </div>
+        </div>
+
+        <div className="relative mt-10 hidden lg:block">
+          <div className="grid grid-cols-3 gap-5">
+            {desktopTemplatePreview.slice(0, 3).map((template, index) => (
+              <Reveal className="h-full" delay={(index % 3) * 90} key={template.name} y={30}>
+                <TemplateDesignCard template={template} />
+              </Reveal>
+            ))}
+          </div>
+
+          <div className="relative mt-5">
+            <div className="grid grid-cols-3 gap-5">
+              {desktopTemplatePreview.slice(3, 6).map((template, index) => (
+                <Reveal className="h-full" delay={(index % 3) * 90} key={template.name} y={30}>
+                  <TemplateDesignCard template={template} />
+                </Reveal>
+              ))}
+            </div>
+
+            <div className="absolute inset-x-0 bottom-0 z-10 flex h-full items-center justify-center rounded-b-[24px] bg-gradient-to-b from-white/45 via-white/90 to-white p-8">
+              <Link className={templateMoreLinkClass} href="/templates">
+                Lihat Lebih Lanjut
+                <ArrowRight className="size-4" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* <section className="mx-4 mb-4 mt-6 grid max-w-7xl grid-cols-2 gap-2.5 sm:mx-5 sm:mb-6 sm:mt-8 sm:gap-3 md:mx-8 lg:mx-auto lg:mb-8 lg:mt-10 lg:grid-cols-4 lg:gap-4" aria-label="BidTech stats">
         {t.stats.map((stat, index) => (
           <div className="flex min-h-[122px] flex-col items-center justify-center rounded-[20px] border border-green-100 bg-white px-3 py-5 text-center shadow-[0_18px_60px_rgba(15,23,42,0.08)] sm:min-h-[132px] sm:rounded-[24px] sm:px-5 sm:py-6" key={stat.label}>
             <p className="font-[family-name:var(--font-sora)] text-3xl font-bold text-brand-primary md:text-4xl">
@@ -255,9 +317,29 @@ function LandingPageView() {
             </p>
           </div>
         ))}
-      </section>
 
-      <section className="landing-panel mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="services">
+        <Reveal
+          className="relative col-span-2 pt-2 text-center lg:col-span-4"
+          delay={420}
+          y={14}
+        >
+          <p className="text-xs uppercase tracking-[0.35em] text-slate-500">Our Client</p>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-8 gap-y-5 sm:gap-x-12">
+            {clientLogos.map((client) => (
+              <Image
+                key={client.name}
+                src={client.src}
+                alt={client.name}
+                width={client.width}
+                height={36}
+                className="h-6 w-auto object-contain opacity-75 brightness-0 sm:h-7"
+              />
+            ))}
+          </div>
+        </Reveal>
+      </section> */}
+
+      <section className="landing-panel mx-auto max-w-7xl px-4 pb-14 lg:-mt-16 sm:px-5 sm:pb-16 md:px-8 md:py-20" id="services">
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
             <Badge className={sectionBadgeClass}>{t.services.badge}</Badge>
@@ -351,72 +433,7 @@ function LandingPageView() {
         </div>
       </section>
 
-      <section className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="templates">
-        <div className="pointer-events-none absolute inset-x-4 top-28 -z-10 h-[72%] rounded-[48px] bg-[radial-gradient(circle_at_18%_20%,rgba(95,201,74,0.10),transparent_34%),radial-gradient(circle_at_80%_42%,rgba(95,201,74,0.08),transparent_30%)]" />
-        <Reveal className="mx-auto max-w-3xl text-center">
-          <div className="flex justify-center">
-            <Badge className={sectionBadgeClass}>Template Design</Badge>
-          </div>
-          <h2 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
-            Pilih <span className="text-brand-primary">Design Website</span> Siap Pakai
-          </h2>
-          <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-500">
-            Koleksi template profesional untuk berbagai kebutuhan bisnis, mulai dari company profile, restoran, rental, hingga portal organisasi.
-          </p>
-        </Reveal>
-
-        <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {templateDesignCards.map((template, index) => (
-            <Reveal delay={(index % 3) * 90} key={template.name} y={30}>
-              <Link
-                className="group block h-full"
-                href={template.href}
-                rel="noreferrer"
-                target="_blank"
-              >
-                <article className="flex h-full min-h-[360px] flex-col overflow-hidden rounded-[24px] border border-green-100 bg-white transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_24px_64px_rgba(95,201,74,0.14)]">
-                  <div className="m-3 mb-0 overflow-hidden rounded-[18px] border border-white bg-[linear-gradient(135deg,#f1fbef,#e9f7ee)] p-2 shadow-[inset_0_0_0_1px_rgba(95,201,74,0.08)]">
-                    <div className="relative h-[210px] w-full overflow-hidden rounded-[14px] bg-slate-100">
-                      <Image
-                        src={template.image}
-                        alt={`${template.name} design preview`}
-                        fill
-                        sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
-                        className="object-cover object-top transition duration-500 group-hover:scale-[1.04]"
-                      />
-                    </div>
-                  </div>
-                  <div className="flex flex-1 flex-col px-5 py-5">
-                    <p className="text-xs font-semibold uppercase tracking-[0.18em] text-brand-primary">
-                      {template.category}
-                    </p>
-                    <h3 className="mt-2 font-[family-name:var(--font-sora)] text-xl font-semibold text-slate-950">
-                      {template.name}
-                    </h3>
-                    <p className="mt-3 flex-1 text-sm leading-6 text-slate-500">{template.description}</p>
-                    <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-slate-950 transition group-hover:text-brand-primary">
-                      <span>Lihat Preview</span>
-                      <ArrowRight className="size-4" />
-                    </div>
-                  </div>
-                </article>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
-
-        <Reveal className="mt-9 flex justify-center" delay={160} y={18}>
-          <Link
-            className="inline-flex h-13 items-center justify-center gap-3 rounded-full bg-brand-primary px-7 text-sm font-bold text-brand-primary-dark shadow-[0_18px_42px_rgba(95,201,74,0.24)] ring-1 ring-green-700/10 transition hover:-translate-y-0.5 hover:bg-brand-primary-hover sm:h-14 sm:px-8 sm:text-base"
-            href="/templates"
-          >
-            Lihat Lebih Banyak
-            <ArrowRight className="size-4" />
-          </Link>
-        </Reveal>
-      </section>
-
-      <section className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="portfolio">
+      {/* <section className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="portfolio">
         <div className="pointer-events-none absolute inset-x-4 top-20 -z-10 h-[78%] rounded-[48px] bg-[radial-gradient(circle_at_20%_18%,rgba(95,201,74,0.12),transparent_32%),radial-gradient(circle_at_86%_42%,rgba(95,201,74,0.08),transparent_34%)]" />
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
@@ -514,217 +531,217 @@ function LandingPageView() {
             <ChevronRight className="size-5" />
           </button>
         </div>
-      </section>
+      </section> */}
 
-      <div className="bg-[#edf6e8]">
-      <section className="landing-panel mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <div className="flex justify-center">
-            <Badge className={sectionBadgeClass}>{t.howItWorks.badge}</Badge>
-          </div>
-          <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
-            {t.howItWorks.titleWhite} <span className="text-brand-primary">{t.howItWorks.titleGreen}</span>
-          </h2>
-        </Reveal>
-
-        <div
-          className="relative mt-14 flex w-full snap-x snap-mandatory gap-3 overflow-x-auto px-0.5 pb-4 [scrollbar-width:none] sm:hidden [&::-webkit-scrollbar]:hidden"
-          onScroll={handleHowItWorksScroll}
-          ref={howItWorksSliderRef}
-        >
-          {t.howItWorks.steps.map((step, index) => (
-            <div
-              className="relative z-10 flex min-h-64 w-[calc(50%_-_0.375rem)] min-w-[calc(50%_-_0.375rem)] shrink-0 snap-start flex-col items-center rounded-2xl border border-green-900/10 bg-white px-3 py-6 text-center transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-brand-primary/40 sm:min-h-60 sm:w-auto sm:min-w-0 sm:shrink lg:min-h-64 lg:px-4"
-              key={step.title}
-            >
-              <div className="relative flex h-10 w-full items-center justify-center">
-                <button
-                  aria-label={`${step.title} (${index + 1})`}
-                  className={`relative z-10 flex size-10 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-300 ${
-                    activeStep === index
-                      ? "scale-110 border-brand-primary bg-brand-primary text-black shadow-[0_0_0_6px_rgba(99,224,9,0.15)]"
-                      : index < activeStep
-                        ? "border-brand-primary bg-brand-primary/20 text-brand-primary"
-                        : "border-slate-900/20 bg-white/70 text-slate-900 hover:border-green-600/50"
-                  }`}
-                  onClick={() => activateStep(index)}
-                  type="button"
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </button>
-              </div>
-              <h3
-                className={`mt-5 font-[family-name:var(--font-sora)] text-sm font-semibold transition-colors duration-300 sm:text-base ${
-                  activeStep === index ? "text-brand-primary" : "text-slate-950"
-                }`}
-              >
-                {step.title}
-              </h3>
-              <p
-                className={`mt-3 text-xs leading-5 transition-colors duration-300 sm:text-sm sm:leading-6 ${
-                  activeStep === index ? "text-slate-700" : "text-slate-600"
-                }`}
-              >
-                {step.description}
-              </p>
+      {/* <div className="bg-[#edf6e8]">
+        <section className="landing-panel mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <div className="flex justify-center">
+              <Badge className={sectionBadgeClass}>{t.howItWorks.badge}</Badge>
             </div>
-          ))}
-        </div>
+            <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
+              {t.howItWorks.titleWhite} <span className="text-brand-primary">{t.howItWorks.titleGreen}</span>
+            </h2>
+          </Reveal>
 
-        <div className="mt-6 flex items-center justify-center gap-3 sm:hidden" aria-label="Navigasi how it works">
-          <button
-            aria-label="Langkah sebelumnya"
-            className="flex size-12 shrink-0 items-center justify-center rounded-full border border-slate-400 bg-white text-slate-700 transition hover:border-slate-500 hover:text-slate-900 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-white disabled:text-slate-500"
-            disabled={activeHowItWorksPage === 0}
-            onClick={() => moveHowItWorksSlide(Math.max(0, activeHowItWorksPage * 2 - 2))}
-            type="button"
+          <div
+            className="relative mt-14 flex w-full snap-x snap-mandatory gap-3 overflow-x-auto px-0.5 pb-4 [scrollbar-width:none] sm:hidden [&::-webkit-scrollbar]:hidden"
+            onScroll={handleHowItWorksScroll}
+            ref={howItWorksSliderRef}
           >
-            <ChevronLeft className="size-5 stroke-[2.25]" />
-          </button>
-
-          <div className="flex items-center gap-2.5">
-            {Array.from({ length: howItWorksPages }).map((_, pageIndex) => (
-              <button
-                aria-label={`Lihat langkah ${pageIndex + 1}`}
-                className={`h-2 rounded-full transition-all ${
-                  activeHowItWorksPage === pageIndex ? "w-8 bg-brand-primary" : "w-2.5 bg-slate-600"
-                }`}
-                key={`how-it-works-dot-${pageIndex}`}
-                onClick={() => moveHowItWorksSlide(pageIndex * 2)}
-                type="button"
-              />
+            {t.howItWorks.steps.map((step, index) => (
+              <div
+                className="relative z-10 flex min-h-64 w-[calc(50%_-_0.375rem)] min-w-[calc(50%_-_0.375rem)] shrink-0 snap-start flex-col items-center rounded-2xl border border-green-900/10 bg-white px-3 py-6 text-center transition-[border-color,transform] duration-300 hover:-translate-y-1 hover:border-brand-primary/40 sm:min-h-60 sm:w-auto sm:min-w-0 sm:shrink lg:min-h-64 lg:px-4"
+                key={step.title}
+              >
+                <div className="relative flex h-10 w-full items-center justify-center">
+                  <button
+                    aria-label={`${step.title} (${index + 1})`}
+                    className={`relative z-10 flex size-10 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-300 ${
+                      activeStep === index
+                        ? "scale-110 border-brand-primary bg-brand-primary text-black shadow-[0_0_0_6px_rgba(99,224,9,0.15)]"
+                        : index < activeStep
+                          ? "border-brand-primary bg-brand-primary/20 text-brand-primary"
+                          : "border-slate-900/20 bg-white/70 text-slate-900 hover:border-green-600/50"
+                    }`}
+                    onClick={() => activateStep(index)}
+                    type="button"
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </button>
+                </div>
+                <h3
+                  className={`mt-5 font-[family-name:var(--font-sora)] text-sm font-semibold transition-colors duration-300 sm:text-base ${
+                    activeStep === index ? "text-brand-primary" : "text-slate-950"
+                  }`}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  className={`mt-3 text-xs leading-5 transition-colors duration-300 sm:text-sm sm:leading-6 ${
+                    activeStep === index ? "text-slate-700" : "text-slate-600"
+                  }`}
+                >
+                  {step.description}
+                </p>
+              </div>
             ))}
           </div>
 
-          <button
-            aria-label="Langkah berikutnya"
-            className="flex size-12 shrink-0 items-center justify-center rounded-full border border-slate-400 bg-white text-slate-700 transition hover:border-slate-500 hover:text-slate-900 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-white disabled:text-slate-500"
-            disabled={activeHowItWorksPage >= howItWorksPages - 1}
-            onClick={() => moveHowItWorksSlide(Math.min(t.howItWorks.steps.length - 1, activeHowItWorksPage * 2 + 2))}
-            type="button"
-          >
-            <ChevronRight className="size-5 stroke-[2.25]" />
-          </button>
-        </div>
-
-        <div className="hidden mt-14 sm:grid sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
-          {t.howItWorks.steps.map((step, index) => (
-            <div
-              className="flex min-h-64 flex-col items-center rounded-2xl border border-green-900/10 bg-white px-3 py-6 text-center shadow-[0_8px_28px_rgba(31,80,20,0.08)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-brand-primary/40 hover:shadow-[0_14px_34px_rgba(31,80,20,0.13)] lg:min-h-64 lg:px-4"
-              key={step.title}
+          <div className="mt-6 flex items-center justify-center gap-3 sm:hidden" aria-label="Navigasi how it works">
+            <button
+              aria-label="Langkah sebelumnya"
+              className="flex size-12 shrink-0 items-center justify-center rounded-full border border-slate-400 bg-white text-slate-700 transition hover:border-slate-500 hover:text-slate-900 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-white disabled:text-slate-500"
+              disabled={activeHowItWorksPage === 0}
+              onClick={() => moveHowItWorksSlide(Math.max(0, activeHowItWorksPage * 2 - 2))}
+              type="button"
             >
-              <div className="relative flex h-10 w-full items-center justify-center">
+              <ChevronLeft className="size-5 stroke-[2.25]" />
+            </button>
+
+            <div className="flex items-center gap-2.5">
+              {Array.from({ length: howItWorksPages }).map((_, pageIndex) => (
                 <button
-                  aria-label={`${step.title} (${index + 1})`}
-                  className={`relative z-10 flex size-10 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-300 ${
-                    activeStep === index
-                      ? "scale-110 border-brand-primary bg-brand-primary text-black shadow-[0_0_0_6px_rgba(99,224,9,0.15)]"
-                      : index < activeStep
-                        ? "border-brand-primary bg-brand-primary/20 text-brand-primary"
-                        : "border-slate-900/20 bg-white/70 text-slate-900 hover:border-green-600/50"
+                  aria-label={`Lihat langkah ${pageIndex + 1}`}
+                  className={`h-2 rounded-full transition-all ${
+                    activeHowItWorksPage === pageIndex ? "w-8 bg-brand-primary" : "w-2.5 bg-slate-600"
                   }`}
-                  onClick={() => activateStep(index)}
+                  key={`how-it-works-dot-${pageIndex}`}
+                  onClick={() => moveHowItWorksSlide(pageIndex * 2)}
                   type="button"
-                >
-                  {String(index + 1).padStart(2, "0")}
-                </button>
-              </div>
-              <h3
-                className={`mt-5 font-[family-name:var(--font-sora)] text-sm font-semibold transition-colors duration-300 sm:text-base ${
-                  activeStep === index ? "text-brand-primary" : "text-slate-950"
-                }`}
-              >
-                {step.title}
-              </h3>
-              <p
-                className={`mt-3 text-xs leading-5 transition-colors duration-300 sm:text-sm sm:leading-6 ${
-                  activeStep === index ? "text-slate-700" : "text-slate-600"
-                }`}
-              >
-                {step.description}
-              </p>
+                />
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
 
-      <section className="landing-panel relative mx-auto max-w-7xl overflow-hidden px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
-        <div className="pointer-events-none absolute inset-x-8 top-20 h-72 rounded-[48px] bg-[radial-gradient(circle_at_50%_0%,rgba(95,201,74,0.12),transparent_36%)]" />
-        <Reveal className="mx-auto max-w-2xl text-center">
-          <div className="flex justify-center">
-            <Badge className={sectionBadgeClass}>{t.testimonials.badge}</Badge>
+            <button
+              aria-label="Langkah berikutnya"
+              className="flex size-12 shrink-0 items-center justify-center rounded-full border border-slate-400 bg-white text-slate-700 transition hover:border-slate-500 hover:text-slate-900 disabled:cursor-not-allowed disabled:border-slate-300 disabled:bg-white disabled:text-slate-500"
+              disabled={activeHowItWorksPage >= howItWorksPages - 1}
+              onClick={() => moveHowItWorksSlide(Math.min(t.howItWorks.steps.length - 1, activeHowItWorksPage * 2 + 2))}
+              type="button"
+            >
+              <ChevronRight className="size-5 stroke-[2.25]" />
+            </button>
           </div>
-          <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
-            {t.testimonials.title}
-          </h2>
-        </Reveal>
 
-        <div
-          className="mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
-          ref={testimonialsRef}
-        >
-          {t.testimonials.items.map((item, index) => (
-            <div className="w-full min-w-full shrink-0 snap-start md:min-w-0 md:shrink" key={item.name}>
-              <Card
-                className="testimonial-card relative h-full overflow-hidden border-green-100 bg-white shadow-[0_18px_58px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_26px_74px_rgba(95,201,74,0.14)]"
-                style={{ animationDelay: `${index * 140}ms` }}
+          <div className="hidden mt-14 sm:grid sm:grid-cols-3 sm:gap-4 lg:grid-cols-6">
+            {t.howItWorks.steps.map((step, index) => (
+              <div
+                className="flex min-h-64 flex-col items-center rounded-2xl border border-green-900/10 bg-white px-3 py-6 text-center shadow-[0_8px_28px_rgba(31,80,20,0.08)] transition-[border-color,box-shadow,transform] duration-300 hover:-translate-y-1 hover:border-brand-primary/40 hover:shadow-[0_14px_34px_rgba(31,80,20,0.13)] lg:min-h-64 lg:px-4"
+                key={step.title}
               >
-                <div className="testimonial-quote pointer-events-none absolute -right-2 top-1 text-8xl font-black leading-none text-brand-primary/10">
-                  &rdquo;
+                <div className="relative flex h-10 w-full items-center justify-center">
+                  <button
+                    aria-label={`${step.title} (${index + 1})`}
+                    className={`relative z-10 flex size-10 items-center justify-center rounded-full border-2 text-sm font-bold transition-all duration-300 ${
+                      activeStep === index
+                        ? "scale-110 border-brand-primary bg-brand-primary text-black shadow-[0_0_0_6px_rgba(99,224,9,0.15)]"
+                        : index < activeStep
+                          ? "border-brand-primary bg-brand-primary/20 text-brand-primary"
+                          : "border-slate-900/20 bg-white/70 text-slate-900 hover:border-green-600/50"
+                    }`}
+                    onClick={() => activateStep(index)}
+                    type="button"
+                  >
+                    {String(index + 1).padStart(2, "0")}
+                  </button>
                 </div>
-                <CardContent className="relative flex h-full min-h-72 flex-col space-y-5 p-6 sm:min-h-80 sm:p-7">
-                  <div className="flex w-fit gap-1 rounded-full bg-brand-primary/10 px-3 py-2 text-brand-primary">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <Star className="size-4 fill-brand-primary" key={i} />
-                    ))}
-                  </div>
-                  <p className="flex-1 whitespace-normal break-words leading-7 text-slate-600">&ldquo;{item.quote}&rdquo;</p>
-                  <div className="mt-auto flex items-center gap-3 border-t border-green-100 pt-4">
-                    <div className="relative size-12 shrink-0 overflow-hidden rounded-full border border-green-100 bg-brand-primary/10">
-                      <Image alt={item.name} className="object-cover" fill src={`/icon/ic_ava${(index % 3) + 1}.png`} />
-                    </div>
-                    <div>
-                      <p className="text-sm font-semibold text-slate-950">{item.name}</p>
-                      <p className="text-xs text-slate-500">{item.role}</p>
-                    </div>
-                  </div>
-                </CardContent>
-              </Card>
+                <h3
+                  className={`mt-5 font-[family-name:var(--font-sora)] text-sm font-semibold transition-colors duration-300 sm:text-base ${
+                    activeStep === index ? "text-brand-primary" : "text-slate-950"
+                  }`}
+                >
+                  {step.title}
+                </h3>
+                <p
+                  className={`mt-3 text-xs leading-5 transition-colors duration-300 sm:text-sm sm:leading-6 ${
+                    activeStep === index ? "text-slate-700" : "text-slate-600"
+                  }`}
+                >
+                  {step.description}
+                </p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="landing-panel relative mx-auto max-w-7xl overflow-hidden px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20">
+          <div className="pointer-events-none absolute inset-x-8 top-20 h-72 rounded-[48px] bg-[radial-gradient(circle_at_50%_0%,rgba(95,201,74,0.12),transparent_36%)]" />
+          <Reveal className="mx-auto max-w-2xl text-center">
+            <div className="flex justify-center">
+              <Badge className={sectionBadgeClass}>{t.testimonials.badge}</Badge>
             </div>
-          ))}
-        </div>
-        <style jsx>{`
-          .testimonial-card {
-            animation: testimonial-float-in 680ms ease both;
-          }
+            <h2 className="mt-5 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
+              {t.testimonials.title}
+            </h2>
+          </Reveal>
 
-          .testimonial-quote {
-            animation: testimonial-quote-drift 4.8s ease-in-out infinite;
-          }
+          <div
+            className="mt-8 flex w-full snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible md:pb-0 lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
+            ref={testimonialsRef}
+          >
+            {t.testimonials.items.map((item, index) => (
+              <div className="w-full min-w-full shrink-0 snap-start md:min-w-0 md:shrink" key={item.name}>
+                <Card
+                  className="testimonial-card relative h-full overflow-hidden border-green-100 bg-white shadow-[0_18px_58px_rgba(15,23,42,0.08)] transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_26px_74px_rgba(95,201,74,0.14)]"
+                  style={{ animationDelay: `${index * 140}ms` }}
+                >
+                  <div className="testimonial-quote pointer-events-none absolute -right-2 top-1 text-8xl font-black leading-none text-brand-primary/10">
+                    &rdquo;
+                  </div>
+                  <CardContent className="relative flex h-full min-h-72 flex-col space-y-5 p-6 sm:min-h-80 sm:p-7">
+                    <div className="flex w-fit gap-1 rounded-full bg-brand-primary/10 px-3 py-2 text-brand-primary">
+                      {Array.from({ length: 5 }).map((_, i) => (
+                        <Star className="size-4 fill-brand-primary" key={i} />
+                      ))}
+                    </div>
+                    <p className="flex-1 whitespace-normal break-words leading-7 text-slate-600">&ldquo;{item.quote}&rdquo;</p>
+                    <div className="mt-auto flex items-center gap-3 border-t border-green-100 pt-4">
+                      <div className="relative size-12 shrink-0 overflow-hidden rounded-full border border-green-100 bg-brand-primary/10">
+                        <Image alt={item.name} className="object-cover" fill src={`/icon/ic_ava${(index % 3) + 1}.png`} />
+                      </div>
+                      <div>
+                        <p className="text-sm font-semibold text-slate-950">{item.name}</p>
+                        <p className="text-xs text-slate-500">{item.role}</p>
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            ))}
+          </div>
+          <style jsx>{`
+            .testimonial-card {
+              animation: testimonial-float-in 680ms ease both;
+            }
 
-          @keyframes testimonial-float-in {
-            from {
-              opacity: 0;
-              transform: translate3d(0, 22px, 0) scale(0.98);
+            .testimonial-quote {
+              animation: testimonial-quote-drift 4.8s ease-in-out infinite;
             }
-            to {
-              opacity: 1;
-              transform: translate3d(0, 0, 0) scale(1);
-            }
-          }
 
-          @keyframes testimonial-quote-drift {
-            0%,
-            100% {
-              transform: translate3d(0, 0, 0) rotate(0deg);
+            @keyframes testimonial-float-in {
+              from {
+                opacity: 0;
+                transform: translate3d(0, 22px, 0) scale(0.98);
+              }
+              to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0) scale(1);
+              }
             }
-            50% {
-              transform: translate3d(-6px, 7px, 0) rotate(-3deg);
+
+            @keyframes testimonial-quote-drift {
+              0%,
+              100% {
+                transform: translate3d(0, 0, 0) rotate(0deg);
+              }
+              50% {
+                transform: translate3d(-6px, 7px, 0) rotate(-3deg);
+              }
             }
-          }
-        `}</style>
-      </section>
-      </div>
+          `}</style>
+        </section>
+      </div> */}
 
       <section className="landing-panel relative overflow-hidden bg-white py-14 sm:py-20 md:py-24">
         <div className="relative mx-auto max-w-7xl px-4 sm:px-5 md:px-8">
@@ -788,10 +805,10 @@ function LandingPageView() {
               }
             }
           `}</style>
-        </section>
+      </section>
 
       <section
-        className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20"
+        className="landing-panel relative mx-auto max-w-7xl px-4 py-7 sm:px-5 sm:py-8 md:px-8 md:py-10"
         id="contact"
       >
         <div className="pointer-events-none absolute inset-x-4 top-8 -z-10 h-80 rounded-[48px] bg-[radial-gradient(circle_at_25%_15%,rgba(95,201,74,0.13),transparent_34%),linear-gradient(135deg,rgba(245,255,242,0.9),rgba(255,255,255,0.75))]" />
@@ -919,6 +936,8 @@ function LandingPageView() {
           </Reveal>
         </div>
       </section>
+
+      <CtoSection />
     </main>
   );
 }

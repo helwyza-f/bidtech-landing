@@ -3,6 +3,7 @@ const demoBasePath = process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "";
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  transpilePackages: ["lenis"],
   images: {
     remotePatterns: [
       {

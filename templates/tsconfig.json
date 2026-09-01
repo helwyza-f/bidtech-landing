@@ -12,7 +12,6 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "jsx": "preserve",
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./_boilerplate/*"],
       "@app-types/*": ["./organization/template-2/src/types/*"]
