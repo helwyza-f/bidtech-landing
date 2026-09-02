@@ -1,69 +1,71 @@
 import type { NavLink, Statistic, FAQItem } from "@app-types/index";
 
-export const SITE_NAME = "Nama Organisasi";
-export const SITE_DESCRIPTION = "Slogan Singkat Organisasi Anda";
+export const SITE_NAME = "Yayasan Bhakti Nusantara";
+export const SITE_DESCRIPTION = "Merajut Kepedulian, Memberdayakan Masyarakat, Membangun Negeri";
 
 /**
  * Base path this template is deployed under (keep in sync with next.config.ts).
  * `next/image` does not prefix `public/` assets on a static export, so build
  * every image URL through `asset()`.
  */
-export const BASE_PATH = "/demo/community-pro";
+export const BASE_PATH = process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "";
 export const asset = (path: string) => `${BASE_PATH}${path}`;
 
-/** Placeholder contact details — replace with your organization's real data. */
+/** Contact details for Yayasan Bhakti Nusantara */
 export const CONTACT = {
-  address: "Alamat organisasi Anda di sini",
-  phoneLabel: "+62 000-0000-0000",
-  whatsapp: "620000000000",
-  instagramHandle: "@organisasi",
-  instagramUrl: "#",
+  address: "Gedung Graha Bhakti Nusantara, Jl. Tebet Raya No. 45, Jakarta Selatan 12810",
+  phoneLabel: "+62 21 8370 5520",
+  whatsapp: "6281289001234",
+  instagramHandle: "@bhaktinusantara.id",
+  instagramUrl: "https://instagram.com/bhaktinusantara.id",
 };
 
 export const NAV_LINKS: NavLink[] = [
   { label: "Beranda", href: "/" },
   { label: "Tentang Kami", href: "#about" },
-  { label: "Program", href: "#programs" },
-  { label: "Galeri", href: "#gallery" },
+  { label: "Program", href: "#program" },
+  { label: "Partisipasi", href: "#membership" },
+  { label: "FAQ", href: "#faq" },
 ];
 
 export const STATISTICS: Statistic[] = [
-  { label: "Berdiri Sejak", value: "2020" },
-  { label: "Simpatisan", value: "0+" },
-  { label: "Anggota Terdaftar", value: "0+" },
-  { label: "Negara Cross-Border", value: "0" },
+  { label: "Berdiri Sejak", value: "2018" },
+  { label: "Penerima Manfaat", value: "45.000+" },
+  { label: "Relawan Terdaftar", value: "3.800+" },
+  { label: "Kabupaten/Kota", value: "28" },
 ];
 
 export const MISSION_POINTS = [
-  "Poin Misi Pertama",
-  "Poin Misi Kedua",
-  "Poin Misi Ketiga",
-  "Poin Misi Keempat",
+  "Penyaluran Bantuan Sosial & Pos Kesehatan Terpadu",
+  "Pemberian Beasiswa Pendidikan & Pembinaan Generasi Muda",
+  "Pelatihan Keterampilan Mandiri & Pemberdayaan UMKM Warga",
+  "Aksi Cepat Tanggap Bencana & Restorasi Lingkungan Hidup",
 ];
 
 export const FAQ_ITEMS: FAQItem[] = [
   {
-    question: "Contoh pertanyaan pertama?",
-    answer: "Contoh jawaban untuk pertanyaan pertama. Ganti teks placeholder ini dengan jawaban yang sesuai untuk organisasi Anda."
+    question: "Apa itu Yayasan Bhakti Nusantara dan bagaimana legalitasnya?",
+    answer: "Yayasan Bhakti Nusantara adalah organisasi sosial kemasyarakatan nirlaba independen yang telah terdaftar resmi di Kemenkumham RI serta diawasi oleh Dinas Sosial."
   },
   {
-    question: "Contoh pertanyaan kedua?",
-    answer: "Contoh jawaban untuk pertanyaan kedua. Ganti teks placeholder ini dengan jawaban yang sesuai untuk organisasi Anda."
+    question: "Bagaimana cara mendaftar menjadi Sahabat Relawan?",
+    answer: "Pendaftaran relawan terbuka gratis untuk seluruh masyarakat. Anda dapat mengisi formulir pendaftaran relawan melalui tombol WhatsApp atau saat pendaftaran program dibuka."
   },
   {
-    question: "Contoh pertanyaan ketiga?",
-    answer: "Contoh jawaban untuk pertanyaan ketiga. Ganti teks placeholder ini dengan jawaban yang sesuai untuk organisasi Anda."
+    question: "Apakah donasi yang disalurkan dapat dipertanggungjawabkan?",
+    answer: "Ya, kami menjunjung tinggi transparansi. Setiap laporan keuangan dan penyaluran program diaudit secara berkala oleh Akuntan Publik independen dan dipublikasikan di kanal resmi yayasan."
   },
   {
-    question: "Contoh pertanyaan keempat?",
-    answer: "Contoh jawaban untuk pertanyaan keempat. Ganti teks placeholder ini dengan jawaban yang sesuai untuk organisasi Anda."
+    question: "Bagaimana mekanisme pengajuan bantuan untuk warga yang membutuhkan?",
+    answer: "Masyarakat atau pengurus RT/RW setempat dapat mengajukan permohonan rekomendasi bantuan sosial atau beasiswa dengan menyertakan surat keterangan melalui sekretariat kami."
   },
   {
-    question: "Contoh pertanyaan kelima?",
-    answer: "Contoh jawaban untuk pertanyaan kelima. Ganti teks placeholder ini dengan jawaban yang sesuai untuk organisasi Anda."
+    question: "Apakah perusahaan kami dapat bekerja sama dalam program CSR?",
+    answer: "Tentu. Kami memiliki skema kemitraan korporasi terstruktur untuk merancang, mengeksekusi, dan menyusun laporan dampak sosial (Social Return on Investment) bagi program CSR Anda."
   },
   {
-    question: "Contoh pertanyaan keenam?",
-    answer: "Contoh jawaban untuk pertanyaan keenam. Ganti teks placeholder ini dengan jawaban yang sesuai untuk organisasi Anda."
+    question: "Di mana saja cakupan wilayah program Bhakti Nusantara?",
+    answer: "Saat ini kami memiliki 28 posko dan cabang relawan aktif yang tersebar di pulau Jawa, Sumatera, Kalimantan, Sulawesi, hingga Nusa Tenggara."
   }
 ];
+

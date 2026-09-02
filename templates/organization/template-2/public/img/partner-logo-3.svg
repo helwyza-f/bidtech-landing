@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 100" fill="none" role="img" aria-label="Bakti Sehat Foundation">
+  <rect width="240" height="100" rx="16" fill="#ffffff"/>
+  
+  <!-- Health Cross & Green Leaf -->
+  <g transform="translate(18, 24)">
+    <circle cx="26" cy="26" r="24" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-width="2"/>
+    <!-- Red/Emerald Cross -->
+    <path d="M26 15v22M15 26h22" stroke="#059669" stroke-width="3.5" stroke-linecap="round"/>
+    <circle cx="26" cy="26" r="3" fill="#ffffff"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="76" y="47" font-family="system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="800" fill="#053f5c" letter-spacing="-0.3">
+    Bakti<tspan fill="#059669">Sehat</tspan>
+  </text>
+  <text x="77" y="63" font-family="system-ui, -apple-system, sans-serif" font-size="8" font-weight="600" fill="#94a3b8" letter-spacing="1.5">
+    LAYANAN MEDIS GRATIS
+  </text>
+</svg>

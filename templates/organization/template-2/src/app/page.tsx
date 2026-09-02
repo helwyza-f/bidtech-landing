@@ -36,11 +36,12 @@ export default function Home() {
             {/* Brand */}
             <ScrollReveal animation="slide-up" delay={50} className="col-span-2 md:col-span-1">
               <Image
-                src={asset("/img/logo.svg")}
+                src={asset("/img/logo.webp")}
                 alt={SITE_NAME}
-                width={56}
-                height={56}
-                className="h-14 w-auto mb-4 brightness-0 invert"
+                width={144}
+                height={48}
+                style={{ width: "auto", height: "auto" }}
+                className="h-12 w-auto mb-4 brightness-0 invert object-contain"
               />
               <p className="text-white/70 text-sm leading-relaxed max-w-xs">
                 {t("footer.desc")}
@@ -105,11 +106,11 @@ export default function Home() {
               <ul className="space-y-3.5 text-xs text-white/70">
                 <li>
                   <strong className="text-white block text-sm font-semibold">{t("footer.skLabel")}</strong>
-                  <span className="font-mono mt-0.5 block text-white/90">—</span>
+                  <span className="font-mono mt-0.5 block text-white/90">AHU-0012984.AH.01.07.TAHUN 2021</span>
                 </li>
                 <li>
                   <strong className="text-white block text-sm font-semibold">{t("footer.npwpLabel")}</strong>
-                  <span className="font-mono mt-0.5 block text-white/90">—</span>
+                  <span className="font-mono mt-0.5 block text-white/90">94.882.102.4-013.000</span>
                 </li>
               </ul>
             </ScrollReveal>

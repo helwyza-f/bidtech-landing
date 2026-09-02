@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 100" fill="none" role="img" aria-label="Sahabat UMKM Berdaya">
+  <rect width="240" height="100" rx="16" fill="#ffffff"/>
+  
+  <!-- Shop / Growth Icon -->
+  <g transform="translate(18, 24)">
+    <circle cx="26" cy="26" r="24" fill="#f59e0b" fill-opacity="0.1" stroke="#f59e0b" stroke-width="2"/>
+    <path d="M16 20l5-6h10l5 6v16H16V20z" stroke="#053f5c" stroke-width="2" stroke-linejoin="round"/>
+    <path d="M22 26v10M30 26v10" stroke="#f59e0b" stroke-width="2"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="76" y="47" font-family="system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="800" fill="#053f5c" letter-spacing="-0.3">
+    Sahabat<tspan fill="#f59e0b">UMKM</tspan>
+  </text>
+  <text x="77" y="63" font-family="system-ui, -apple-system, sans-serif" font-size="8" font-weight="600" fill="#94a3b8" letter-spacing="1.5">
+    PEMBERDAYAAN WARGA
+  </text>
+</svg>

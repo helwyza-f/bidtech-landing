@@ -4,6 +4,7 @@ import type { CSSProperties } from "react";
 import { useEffect, useRef, useState } from "react";
 import { colors } from "@lib/color";
 import { useLanguage } from "@lib/LanguageContext";
+import { CONTACT } from "@constants/index";
 
 const PEEK = 76;
 
@@ -28,92 +29,92 @@ export default function MembershipSection() {
 
   const MEMBERSHIP_PLANS = [
     {
-      name: language === "id" ? "Membership Tipe 1" : "Membership Type 1",
-      shortName: language === "id" ? "Tipe 1" : "Type 1",
-      fee: "IDR 0",
-      validity: language === "id" ? "1 Tahun" : "1 year",
+      name: language === "id" ? "Sahabat Relawan" : "Community Volunteer",
+      shortName: language === "id" ? "Relawan" : "Volunteer",
+      fee: language === "id" ? "Gratis / Dedikasi Waktu" : "Free / Time Commitment",
+      validity: language === "id" ? "Terbuka & Fleksibel" : "Open & Flexible",
       description: language === "id"
-        ? "Deskripsi singkat paket membership pertama dan untuk siapa paket ini ditujukan."
-        : "A short description of the first membership package and who it is intended for.",
-      audience: language === "id" ? "Cocok untuk kelompok A" : "Best for group A",
-      cta: language === "id" ? "Pilih Tipe 1" : "Choose Type 1",
+        ? "Terlibat langsung dalam aksi kemanusiaan lapangan, posko sembako, mengajar adik-adik asuh, atau tim medis keliling."
+        : "Directly engage in field humanitarian responses, food pantry distribution, youth tutoring, or mobile clinic teams.",
+      audience: language === "id" ? "Mahasiswa, pemuda, & masyarakat umum" : "Students, youth, & active citizens",
+      cta: language === "id" ? "Daftar Relawan" : "Join as Volunteer",
       accent: "#a5dded",
     },
     {
-      name: language === "id" ? "Membership Tipe 2" : "Membership Type 2",
-      shortName: language === "id" ? "Tipe 2" : "Type 2",
-      fee: "IDR 0",
-      validity: language === "id" ? "1 Tahun" : "1 year",
+      name: language === "id" ? "Donatur Peduli" : "Caring Supporter",
+      shortName: language === "id" ? "Donatur" : "Supporter",
+      fee: language === "id" ? "Mulai Rp 100.000 / bln" : "From IDR 100,000 / mo",
+      validity: language === "id" ? "Rutin Bulanan" : "Monthly Recurring",
       description: language === "id"
-        ? "Deskripsi singkat paket membership kedua dan untuk siapa paket ini ditujukan."
-        : "A short description of the second membership package and who it is intended for.",
-      audience: language === "id" ? "Cocok untuk kelompok B" : "Best for group B",
-      cta: language === "id" ? "Pilih Tipe 2" : "Choose Type 2",
+        ? "Mendanai beasiswa pendidikan anak yatim dhuafa, modal usaha UMKM desa, dan operasional ambulans gratis secara berkelanjutan."
+        : "Sustain educational scholarships for vulnerable children, rural micro-grants, and free community ambulance operations.",
+      audience: language === "id" ? "Pribadi dermawan & keluarga peduli" : "Individual donors & caring families",
+      cta: language === "id" ? "Mulai Berdonasi" : "Start Donating",
       featured: true,
       accent: "#053f5c",
     },
     {
-      name: language === "id" ? "Membership Tipe 3" : "Membership Type 3",
-      shortName: language === "id" ? "Tipe 3" : "Type 3",
-      fee: language === "id" ? "Sesuai kesepakatan" : "By agreement",
-      validity: language === "id" ? "1 Tahun" : "1 year",
+      name: language === "id" ? "Mitra Korporasi & CSR" : "Corporate & CSR Partner",
+      shortName: language === "id" ? "Mitra CSR" : "CSR Partner",
+      fee: language === "id" ? "Sinergi Program Kemitraan" : "Custom Program Sponsorship",
+      validity: language === "id" ? "Per Proyek / Tahunan" : "Per Project / Annual",
       description: language === "id"
-        ? "Deskripsi singkat paket membership ketiga dan untuk siapa paket ini ditujukan."
-        : "A short description of the third membership package and who it is intended for.",
-      audience: language === "id" ? "Cocok untuk kelompok C" : "Best for group C",
-      cta: language === "id" ? "Hubungi Kami" : "Contact Us",
+        ? "Kolaborasi penyaluran dana CSR terstruktur dengan pelaporan Social Return on Investment (SROI) dan publikasi media resmi."
+        : "Structured corporate social responsibility execution complete with SROI impact audits and official public media visibility.",
+      audience: language === "id" ? "Perusahaan, BUMN, & Yayasan Filantropi" : "Corporations, SOEs, & Philanthropies",
+      cta: language === "id" ? "Konsultasi CSR" : "Inquire Partnership",
       accent: "#e6f7fb",
     },
   ];
 
   const MEMBERSHIP_BENEFITS = [
     {
-      benefit: language === "id" ? "Benefit 1" : "Benefit 1",
+      benefit: language === "id" ? "Laporan Akuntabilitas & Transparansi Rutin" : "Regular Accountability & Impact Audits",
       value: language === "id"
-        ? "Deskripsi singkat benefit pertama."
-        : "A short description of the first benefit.",
-      type: language === "id" ? "Semua Tipe Membership" : "All Membership Types",
-      note: language === "id" ? "Catatan tambahan untuk benefit pertama." : "Additional note for the first benefit.",
+        ? "Menerima laporan berkala penyaluran dana donasi dan dokumentasi foto/video penerima manfaat langsung."
+        : "Receive periodic donation disbursement statements and direct beneficiary photo/video documentation.",
+      type: language === "id" ? "Semua Donatur & Mitra" : "All Donors & Partners",
+      note: language === "id" ? "Dikirim via WhatsApp dan email resmi." : "Delivered via official WhatsApp and email.",
     },
     {
-      benefit: language === "id" ? "Benefit 2" : "Benefit 2",
+      benefit: language === "id" ? "Sertifikat Dedikasi Sosial & Piagam Apresiasi" : "Official Humanitarian Service Credential",
       value: language === "id"
-        ? "Deskripsi singkat benefit kedua."
-        : "A short description of the second benefit.",
-      type: language === "id" ? "Semua Tipe Membership" : "All Membership Types",
-      note: language === "id" ? "Catatan tambahan untuk benefit kedua." : "Additional note for the second benefit.",
+        ? "Piagam resmi penghargaan kerelawanan dan dedikasi kemanusiaan dari Yayasan Bhakti Nusantara."
+        : "Official certificate of volunteer recognition and social service issued by Yayasan Bhakti Nusantara.",
+      type: language === "id" ? "Relawan & Mitra Donatur" : "Volunteers & Partners",
+      note: language === "id" ? "Dapat digunakan untuk portofolio sosial/akademik." : "Verifiable for social & academic portfolios.",
     },
     {
-      benefit: language === "id" ? "Benefit 3" : "Benefit 3",
+      benefit: language === "id" ? "Undangan Temu Akbar & Jambore Relawan" : "Exclusive Invitation to Annual Volunteer Jamboree",
       value: language === "id"
-        ? "Deskripsi singkat benefit ketiga."
-        : "A short description of the third benefit.",
-      type: language === "id" ? "Semua Tipe Membership" : "All Membership Types",
-      note: language === "id" ? "Catatan tambahan untuk benefit ketiga." : "Additional note for the third benefit.",
+        ? "Akses ke jambore tahunan, gathering silaturahmi akbar, dan workshop pembekalan tanggap darurat."
+        : "Access to annual volunteer gatherings, community friendship galas, and emergency response briefings.",
+      type: language === "id" ? "Semua Relawan Terdaftar" : "All Registered Volunteers",
+      note: language === "id" ? "Diadakan serentak di berbagai regional." : "Hosted concurrently across multiple regions.",
     },
     {
-      benefit: language === "id" ? "Benefit 4" : "Benefit 4",
+      benefit: language === "id" ? "Hak Kunjungan Lapangan & Penyerahan Bantuan" : "Field Visit & Direct Handover Privileges",
       value: language === "id"
-        ? "Deskripsi singkat benefit keempat."
-        : "A short description of the fourth benefit.",
-      type: language === "id" ? "Semua Tipe Membership" : "All Membership Types",
-      note: language === "id" ? "Catatan tambahan untuk benefit keempat." : "Additional note for the fourth benefit.",
+        ? "Kesempatan mendampingi tim relawan langsung ke lokasi binaan untuk menyerahkan bantuan sosial."
+        : "Opportunity to accompany frontline relief teams to assisted villages and personally hand over aid.",
+      type: language === "id" ? "Donatur & Mitra Korporasi" : "Supporters & CSR Partners",
+      note: language === "id" ? "Didampingi tim koordinator lapangan." : "Escorted by certified field coordinators.",
     },
     {
-      benefit: language === "id" ? "Benefit 5" : "Benefit 5",
+      benefit: language === "id" ? "Eksklusif: Laporan Dampak Sosial CSR & Media Branding" : "Exclusive: SROI Impact Audit & CSR Co-Branding",
       value: language === "id"
-        ? "Deskripsi singkat benefit kelima (khusus tipe tertentu)."
-        : "A short description of the fifth benefit (for a specific type only).",
-      type: language === "id" ? "Membership Tipe 2" : "Membership Type 2",
-      note: language === "id" ? "Catatan tambahan untuk benefit kelima." : "Additional note for the fifth benefit.",
+        ? "Dokumentasi komprehensif, publikasi siaran pers, dan laporan audit dampak sosial untuk kepatuhan ESG korporasi."
+        : "Comprehensive CSR impact documentation, press release distribution, and ESG social compliance reporting.",
+      type: language === "id" ? "Mitra Korporasi & CSR" : "Corporate & CSR Partners",
+      note: language === "id" ? "Dikelola penuh oleh divisi Humas & Kemitraan." : "Managed end-to-end by PR & Partnership division.",
       featured: true,
     },
   ];
 
   const PLAN_HIGHLIGHTS = [
-    language === "id" ? "Poin unggulan pertama" : "First highlight point",
-    language === "id" ? "Poin unggulan kedua" : "Second highlight point",
-    language === "id" ? "Poin unggulan ketiga" : "Third highlight point",
+    language === "id" ? "Sertifikat Resmi & Lencana Sahabat Bhakti Nusantara" : "Official Credential & Humanitarian Service Badge",
+    language === "id" ? "Laporan Audit Akuntabilitas Donasi Berkala" : "Audited Financial & Program Transparency Reports",
+    language === "id" ? "Undangan Khusus Jambore & Aksi Kemanusiaan Nasional" : "Exclusive Invitation to National Outreach Jamborees",
   ];
 
   const selectedPlan = MEMBERSHIP_PLANS[activePlan];
@@ -123,13 +124,12 @@ export default function MembershipSection() {
   const nextPlan = () =>
     selectPlan((activePlan + 1) % MEMBERSHIP_PLANS.length);
 
-  const WA_NUMBER = "620000000000";
   const buildWaLink = (plan: (typeof MEMBERSHIP_PLANS)[number]) => {
     const message =
       language === "id"
-        ? `Halo, saya tertarik untuk bergabung sebagai *${plan.name}* (biaya: ${plan.fee}, masa berlaku: ${plan.validity}).\n\nMohon informasi mengenai langkah pendaftaran dan proses pembayarannya. Terima kasih.`
-        : `Hi, I'm interested in joining as *${plan.name}* (fee: ${plan.fee}, validity: ${plan.validity}).\n\nCould you share the registration steps and payment process? Thank you.`;
-    return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(message)}`;
+        ? `Halo Sekretariat Yayasan Bhakti Nusantara, saya ingin berpartisipasi dan bergabung sebagai *${plan.name}* (${plan.fee}).\n\nMohon informasi panduan dan formulir pendaftarannya. Terima kasih.`
+        : `Hello Secretariat of Yayasan Bhakti Nusantara, I would like to get involved as *${plan.name}* (${plan.fee}).\n\nCould you share the participation guidelines and registration form? Thank you.`;
+    return `https://wa.me/${CONTACT.whatsapp}?text=${encodeURIComponent(message)}`;
   };
 
   const nextBenefit = () => {

@@ -23,7 +23,7 @@ export default function HeroSection() {
             animationDelay: "0.1s"
           }}
         >
-          Slogan · Singkat · Organisasi
+          {t("hero.badge")}
         </span>
 
         {/* Title & Subtitle Group */}
@@ -81,7 +81,7 @@ export default function HeroSection() {
         >
           <Image
             src={asset("/img/hero.webp")}
-            alt="Ilustrasi kegiatan organisasi"
+            alt="Dokumentasi Aksi Kemanusiaan & Pemberdayaan Masyarakat Yayasan Bhakti Nusantara"
             fill
             quality={90}
             sizes="(max-width: 1280px) 92vw, 1216px"

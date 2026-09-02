@@ -35,7 +35,7 @@ export default function Header() {
         {/* Logo - Left */}
         <div className="relative h-14 w-36 sm:h-16 sm:w-44 md:h-20 md:w-52 flex-shrink-0">
           <Image
-            src={asset("/img/logo.svg")}
+            src={asset("/img/logo.webp")}
             alt={SITE_NAME}
             fill
             sizes="(max-width: 768px) 180px, 250px"
@@ -69,21 +69,19 @@ export default function Header() {
           <div className="flex items-center gap-0.5 border border-slate-200 bg-slate-50 rounded-lg p-0.5 text-[10px] sm:text-xs font-bold transition-all duration-300">
             <button
               onClick={() => setLanguage("id")}
-              className={`px-2 py-1 rounded-md transition-all cursor-pointer ${
-                language === "id"
+              className={`px-2 py-1 rounded-md transition-all cursor-pointer ${language === "id"
                   ? "bg-[#053f5c] text-white shadow-sm"
                   : "text-slate-600 hover:text-black"
-              }`}
+                }`}
             >
               ID
             </button>
             <button
               onClick={() => setLanguage("en")}
-              className={`px-2 py-1 rounded-md transition-all cursor-pointer ${
-                language === "en"
+              className={`px-2 py-1 rounded-md transition-all cursor-pointer ${language === "en"
                   ? "bg-[#053f5c] text-white shadow-sm"
                   : "text-slate-600 hover:text-black"
-              }`}
+                }`}
             >
               EN
             </button>
@@ -134,7 +132,7 @@ export default function Header() {
               </a>
             ))}
           </div>
-          
+
           {/* CTA Button in mobile menu */}
           <a
             href={waLink}

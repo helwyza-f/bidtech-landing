@@ -1,17 +1,9 @@
 import type { NextConfig } from "next";
 
-/**
- * Static export for the CommunityPro template.
- * It is served as a sub-app under /demo/community-pro/ inside the BIDTECH site,
- * so both routes and assets are prefixed with that base path.
- */
-const BASE_PATH = "/demo/community-pro";
+const isStaticDemoBuild = process.env.BUILD_STATIC_DEMO === "true";
+const demoBasePath = process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "";
 
 const nextConfig: NextConfig = {
-  output: "export",
-  basePath: BASE_PATH,
-  assetPrefix: BASE_PATH,
-  trailingSlash: true,
   turbopack: {
     root: process.cwd(),
   },
@@ -20,6 +12,14 @@ const nextConfig: NextConfig = {
     // Next.js 16 requires an explicit allowlist for <Image quality>.
     qualities: [75, 90],
   },
+  ...(isStaticDemoBuild
+    ? {
+        output: "export",
+        basePath: demoBasePath,
+        assetPrefix: demoBasePath,
+        trailingSlash: true,
+      }
+    : {}),
 };
 
 export default nextConfig;

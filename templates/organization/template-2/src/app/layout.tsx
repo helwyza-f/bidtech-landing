@@ -13,10 +13,15 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Nama Organisasi - Slogan Singkat Organisasi Anda",
-  description: "Nama Organisasi: deskripsi singkat mengenai organisasi Anda, siapa yang Anda layani, dan wilayah operasional Anda.",
+  title: "Yayasan Bhakti Nusantara - Merajut Kepedulian, Memberdayakan Masyarakat",
+  description: "Yayasan Bhakti Nusantara adalah organisasi sosial kemasyarakatan nirlaba yang bergerak di bidang pemberdayaan ekonomi warga, beasiswa pendidikan, pos sehat gratis, dan kemanusiaan.",
   icons: {
-    icon: "/icon.png",
+    icon: [
+      { url: "/icon.png" },
+      { url: "/favicon.png", sizes: "64x64", type: "image/png" },
+    ],
+    shortcut: "/icon.png",
+    apple: "/apple-icon.png",
   },
 };
 
