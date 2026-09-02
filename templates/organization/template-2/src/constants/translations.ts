@@ -4,195 +4,196 @@ export const translations = {
       home: "Beranda",
       about: "Tentang Kami",
       program: "Program",
-      membership: "Membership",
+      membership: "Partisipasi",
       faq: "FAQ",
-      contactBtn: "Kirim Pesan"
+      contactBtn: "Hubungi Kami"
     },
     hero: {
-      title: "Tuliskan Judul Utama Landing Page Organisasi Anda di Sini",
-      subtitle: "/ Slogan Singkat Organisasi",
-      desc: "Paragraf pembuka untuk menjelaskan siapa Anda, siapa yang Anda layani, dan nilai utama yang Anda tawarkan. Ganti teks placeholder ini sesuai kebutuhan organisasi Anda.",
-      cta: "Bergabung Sekarang"
+      badge: "Peduli · Bersatu · Berdaya Nyata",
+      title: "Merajut Kepedulian Nyata untuk Kemandirian Masyarakat Indonesia",
+      subtitle: "/ Bersama Yayasan Bhakti Nusantara",
+      desc: "Wadah gerakan sosial kemasyarakatan yang bergerak di bidang pemberdayaan ekonomi warga prasejahtera, beasiswa pendidikan generasi muda, pos kesehatan cuma-cuma, dan aksi tanggap kemanusiaan.",
+      cta: "Gabung Jadi Relawan"
     },
     about: {
       label: "Tentang Kami",
-      heading: "Ringkasan Singkat tentang Organisasi dan Nilai Utamanya.",
-      desc: "Paragraf perkenalan organisasi: latar belakang pembentukan, siapa saja anggotanya, dan tujuan utama yang ingin dicapai. Ganti teks placeholder ini dengan profil organisasi Anda.",
+      heading: "Mewujudkan Masyarakat Mandiri, Sejahtera, dan Berkeadilan Sosial Melalui Semangat Gotong Royong.",
+      desc: "Yayasan Bhakti Nusantara didirikan sebagai jembatan kepedulian masyarakat untuk saling menopang dan mengentaskan ketimpangan sosial. Bersama ribuan relawan, tokoh masyarakat, dan mitra dermawan, kami terus hadir menyentuh pelosok negeri dengan program berkelanjutan.",
       vision: {
-        title: "Visi",
-        text: "Tuliskan pernyataan visi organisasi Anda di sini — gambaran jangka panjang mengenai dampak yang ingin Anda ciptakan."
+        title: "Visi Kami",
+        text: "Menjadi organisasi kemasyarakatan terdepan dan terpercaya yang melahirkan kemandirian sosial-ekonomi bagi keluarga prasejahtera dan memajukan peradaban bangsa."
       },
       mission: {
-        title: "Misi",
+        title: "Misi Kami",
         networking: {
-          title: "Poin Misi Pertama",
-          text: "Penjelasan singkat mengenai poin misi pertama organisasi Anda."
+          title: "Jaringan Relawan & Posko Sosial",
+          text: "Membangun simpul kerelawanan dan posko tanggap kemanusiaan di berbagai kota dan pelosok daerah."
         },
         exchange: {
-          title: "Poin Misi Kedua",
-          text: "Penjelasan singkat mengenai poin misi kedua organisasi Anda."
+          title: "Edukasi & Pelatihan Keterampilan",
+          text: "Menyelenggarakan bimbingan belajar, beasiswa anak dhuafa, dan pelatihan vokasi mandiri."
         },
         collab: {
-          title: "Poin Misi Ketiga",
-          text: "Penjelasan singkat mengenai poin misi ketiga organisasi Anda."
+          title: "Pemberdayaan UMKM & Pangan Desa",
+          text: "Mendampingi kelompok usaha warga, petani lokal, dan pengembangan program ketahanan pangan."
         },
         opportunity: {
-          title: "Poin Misi Keempat",
-          text: "Penjelasan singkat mengenai poin misi keempat organisasi Anda."
+          title: "Penyaluran Bantuan & Kemitraan",
+          text: "Menyalurkan amanah donatur secara transparan, tepat sasaran, dan akuntabel kepada penerima manfaat."
         }
       },
       coreValues: {
-        title: "Nilai Inti",
-        text1: "Nama Nilai Inti Organisasi",
-        text2: " — jelaskan secara singkat prinsip utama yang memandu cara kerja organisasi Anda.",
-        text3: "Paragraf tambahan untuk menjabarkan nilai-nilai tersebut dan bagaimana penerapannya di dalam komunitas."
+        title: "Nilai Inti Organisasi",
+        text1: "Integritas, Empati, & Gotong Royong",
+        text2: " — tiga prinsip luhur yang memandu setiap langkah pengabdian dan penyaluran amanah publik di Bhakti Nusantara.",
+        text3: "Kami meyakini bahwa perubahan sosial yang sejati lahir dari ketulusan hati, keterbukaan laporan, serta tekad bersama untuk memberdayakan masyarakat agar mampu berdiri di atas kaki sendiri."
       },
       org: {
         label: "Struktur Organisasi",
-        heading: "Susunan Pengurus Organisasi",
-        desc: "Deskripsi singkat mengenai struktur kepengurusan organisasi Anda dan perannya.",
-        imageBtn: "Lihat Bagan Gambar Asli",
-        modalTitle: "Bagan Struktur Organisasi",
-        roleKetuaUmum: "Ketua Umum",
-        roleCoFounder: "Co Founder",
-        roleKetuaHarian: "Ketua Harian"
+        heading: "Dewan Pengurus & Pengawas Yayasan",
+        desc: "Dikelola oleh para tokoh masyarakat, praktisi sosial, dan pegiat kemanusiaan yang berdedikasi penuh untuk umat.",
+        imageBtn: "Lihat Bagan Struktur",
+        modalTitle: "Bagan Kepengurusan Yayasan Bhakti Nusantara",
+        roleKetuaUmum: "Ketua Umum Yayasan",
+        roleCoFounder: "Dewan Pembina & Pengawas",
+        roleKetuaHarian: "Sekretaris Jenderal & Operasional"
       },
       partners: {
         label: "Kemitraan Strategis",
-        heading: "Kolaborasi & Mitra",
-        desc: "Deskripsi singkat mengenai mitra dan kolaborasi strategis organisasi Anda."
+        heading: "Didukung Mitra & Lembaga Terpercaya",
+        desc: "Bekerja sama erat dengan institusi sosial, lembaga zakat/infaq resmi, korporasi filantropi, dan dinas sosial setempat."
       }
     },
     program: {
-      label: "Program / Kegiatan",
-      heading: "Agenda Kegiatan Organisasi",
-      desc: "Deskripsi singkat mengenai rangkaian program dan kegiatan rutin organisasi Anda.",
+      label: "Program Unggulan",
+      heading: "Inisiatif Aksi Kemanusiaan & Pemberdayaan",
+      desc: "Rangkaian program terstruktur mulai dari bantuan pangan rutin, pelatihan kemandirian usaha, hingga pekan bakti sosial akbar.",
       monthly: {
         badge: "Bulanan",
-        title: "Nama Program Pertama",
-        schedule: "Jadwal Program",
-        desc: "Deskripsi singkat program pertama: tujuan, peserta, dan bentuk kegiatannya. Ganti teks ini sesuai program Anda."
+        title: "Dapur Pangan & Pos Sehat Keliling",
+        schedule: "Minggu Ke-1 & Ke-3 Setiap Bulan",
+        desc: "Penyaluran paket sembako bergizi dan layanan pemeriksaan medis gratis (tensi, gula darah, dokter umum) untuk lansia dan dhuafa di perkampungan padat."
       },
       triwulan: {
         badge: "Triwulan",
-        title: "Nama Program Kedua",
-        schedule: "Jadwal Program",
-        desc: "Deskripsi singkat program kedua: tujuan, peserta, dan bentuk kegiatannya. Ganti teks ini sesuai program Anda."
+        title: "Pelatihan Wirausaha & Vokasi Mandiri",
+        schedule: "Setiap Akhir Kuartal (Mar, Jun, Sep, Des)",
+        desc: "Workshop keterampilan tata boga, kerajinan tangan, budidaya hidroponik rumahan, dan manajemen keuangan keluarga bagi ibu-ibu dan pemuda desa."
       },
       tahunan: {
         badge: "Tahunan",
-        title: "Nama Program Ketiga",
-        schedule: "Jadwal Program",
-        desc: "Deskripsi singkat program ketiga: tujuan, peserta, dan bentuk kegiatannya. Ganti teks ini sesuai program Anda."
+        title: "Pekan Bhakti Nusantara & Jambore Relawan",
+        schedule: "Bulan Agustus (Semarak Kemerdekaan)",
+        desc: "Aksi serentak di 28 kabupaten: renovasi musholla/fasilitas umum, khitanan massal 500 anak, penanaman 10.000 bibit pohon, dan temu akbar relawan se-Indonesia."
       },
-      detailBtn: "Detail Kegiatan"
+      detailBtn: "Detail Program & Info Partisipasi"
     },
     membership: {
-      label: "Membership",
-      heading: "Tuliskan Judul Bagian Membership Anda di Sini.",
-      desc: "Deskripsi singkat mengenai skema keanggotaan, cara memilih paket, dan manfaat utama yang didapat anggota.",
+      label: "Partisipasi & Donasi",
+      heading: "Salurkan Kepedulian Anda Bersama Bhakti Nusantara.",
+      desc: "Pilih bentuk kontribusi terbaik Anda — bergabung sebagai relawan lapangan, donatur rutin kemanusiaan, atau mitra sinergi CSR perusahaan.",
       stats: {
-        members: "Anggota",
-        countries: "Wilayah",
-        validity: "Masa Berlaku"
+        members: "Relawan Aktif",
+        countries: "Wilayah Binaan",
+        validity: "Masa Partisipasi"
       },
-      selectedLabel: "Membership Terpilih",
-      ctaBtn: "Diskusi",
-      benefitTitle: "Benefit Membership",
-      benefitDesc: "Deskripsi singkat mengenai manfaat yang membuat membership ini bernilai bagi anggota."
+      selectedLabel: "Detail Skema Partisipasi",
+      ctaBtn: "Hubungi Sekretariat via WhatsApp",
+      benefitTitle: "Manfaat Bergabung & Berkolaborasi",
+      benefitDesc: "Dapatkan transparansi laporan penyaluran, sertifikat dedikasi sosial, dan dampak nyata bagi masyarakat."
     },
     faq: {
-      label: "FAQ",
+      label: "Tanya Jawab (FAQ)",
       heading: "Pertanyaan yang Sering Diajukan",
-      desc: "Kumpulan pertanyaan umum beserta jawabannya. Ganti dengan pertanyaan yang relevan untuk organisasi Anda.",
+      desc: "Informasi lengkap mengenai legalitas yayasan, cara bergabung jadi relawan, penyaluran donasi, dan pengajuan bantuan sosial.",
       q1: {
-        q: "Contoh pertanyaan pertama?",
-        a: "Contoh jawaban untuk pertanyaan pertama. Ganti teks placeholder ini dengan jawaban yang sesuai untuk organisasi Anda."
+        q: "Apa itu Yayasan Bhakti Nusantara dan bagaimana legalitasnya?",
+        a: "Yayasan Bhakti Nusantara adalah organisasi sosial kemasyarakatan nirlaba independen yang telah terdaftar resmi di Kemenkumham RI serta diawasi oleh Dinas Sosial."
       },
       q2: {
-        q: "Contoh pertanyaan kedua?",
-        a: "Contoh jawaban untuk pertanyaan kedua. Ganti teks placeholder ini dengan jawaban yang sesuai untuk organisasi Anda."
+        q: "Bagaimana cara mendaftar menjadi Sahabat Relawan?",
+        a: "Pendaftaran relawan terbuka gratis untuk seluruh masyarakat. Anda dapat mengisi formulir pendaftaran relawan melalui tombol WhatsApp atau saat pendaftaran program dibuka."
       },
       q3: {
-        q: "Contoh pertanyaan ketiga?",
-        a: "Contoh jawaban untuk pertanyaan ketiga. Ganti teks placeholder ini dengan jawaban yang sesuai untuk organisasi Anda."
+        q: "Apakah donasi yang disalurkan dapat dipertanggungjawabkan?",
+        a: "Ya, kami menjunjung tinggi transparansi. Setiap laporan keuangan dan penyaluran program diaudit secara berkala oleh Akuntan Publik independen dan dipublikasikan di kanal resmi yayasan."
       },
       q4: {
-        q: "Contoh pertanyaan keempat?",
-        a: "Contoh jawaban untuk pertanyaan keempat. Ganti teks placeholder ini dengan jawaban yang sesuai untuk organisasi Anda."
+        q: "Bagaimana mekanisme pengajuan bantuan untuk warga yang membutuhkan?",
+        a: "Masyarakat atau pengurus RT/RW setempat dapat mengajukan permohonan rekomendasi bantuan sosial atau beasiswa dengan menyertakan surat keterangan melalui sekretariat kami."
       },
       q5: {
-        q: "Contoh pertanyaan kelima?",
-        a: "Contoh jawaban untuk pertanyaan kelima. Ganti teks placeholder ini dengan jawaban yang sesuai untuk organisasi Anda."
+        q: "Apakah perusahaan kami dapat bekerja sama dalam program CSR?",
+        a: "Tentu. Kami memiliki skema kemitraan korporasi terstruktur untuk merancang, mengeksekusi, dan menyusun laporan dampak sosial (Social Return on Investment) bagi program CSR Anda."
       },
       q6: {
-        q: "Contoh pertanyaan keenam?",
-        a: "Contoh jawaban untuk pertanyaan keenam. Ganti teks placeholder ini dengan jawaban yang sesuai untuk organisasi Anda."
+        q: "Di mana saja cakupan wilayah program Bhakti Nusantara?",
+        a: "Saat ini kami memiliki 28 posko dan cabang relawan aktif yang tersebar di pulau Jawa, Sumatera, Kalimantan, Sulawesi, hingga Nusa Tenggara."
       }
     },
     footer: {
-      desc: "Deskripsi singkat organisasi Anda untuk bagian footer — sebutkan fokus kegiatan dan wilayah operasional.",
+      desc: "Organisasi nirlaba sosial kemasyarakatan independen yang mendedikasikan diri untuk pengentasan kemiskinan, pemberdayaan ekonomi warga, dan kemanusiaan di Indonesia.",
       navTitle: "Navigasi",
-      contactTitle: "Kontak",
-      legalTitle: "Legalitas Organisasi",
-      aktaLabel: "Akta Pendirian",
+      contactTitle: "Sekretariat & Posko",
+      legalTitle: "Legalitas Yayasan",
+      aktaLabel: "Akta Notaris",
       skLabel: "SK Kemenkumham",
-      npwpLabel: "NPWP"
+      npwpLabel: "NPWP Yayasan"
     },
     testimonials: {
-      label: "Testimoni",
-      heading: "Apa Kata Anggota & Mitra",
-      desc: "Kumpulan testimoni dari anggota dan mitra organisasi Anda. Ganti dengan kutipan asli.",
+      label: "Kisah Inspiratif",
+      heading: "Apa Kata Penerima Manfaat & Relawan",
+      desc: "Cerita kebaikan nyata dari masyarakat binaan, relawan kemanusiaan, dan mitra kolaborasi kami.",
       t1: {
-        name: "Nama Narasumber 1",
-        role: "Jabatan / Organisasi",
-        text: "Kutipan testimoni pertama. Ganti teks placeholder ini dengan testimoni asli dari anggota atau mitra Anda."
+        name: "Ibu Sumarni",
+        role: "Penerima Manfaat Program Usaha Mandiri, Klaten",
+        text: "Berkat bimbingan dan bantuan modal usaha dari Bhakti Nusantara, warung makan kecil saya bisa berkembang dan membiayai sekolah kedua anak saya."
       },
       t2: {
-        name: "Nama Narasumber 2",
-        role: "Jabatan / Organisasi",
-        text: "Kutipan testimoni kedua. Ganti teks placeholder ini dengan testimoni asli dari anggota atau mitra Anda."
+        name: "dr. Firman Syahputra",
+        role: "Koordinator Relawan Medis Pos Sehat",
+        text: "Melihat senyum para lansia di pelosok yang mendapatkan obat dan periksa kesehatan gratis adalah kebahagiaan terbesar kami sebagai tenaga medis relawan."
       },
       t3: {
-        name: "Nama Narasumber 3",
-        role: "Jabatan / Organisasi",
-        text: "Kutipan testimoni ketiga. Ganti teks placeholder ini dengan testimoni asli dari anggota atau mitra Anda."
+        name: "Lestari Handayani",
+        role: "Direktur Filantropi & Kemitraan CSR",
+        text: "Yayasan Bhakti Nusantara adalah mitra CSR paling akuntabel. Laporan penyaluran bantuan disajikan sangat transparan dan berdampak langsung ke masyarakat."
       }
     },
     blog: {
-      label: "Berita & Artikel",
-      heading: "Kabar & Wawasan Terbaru",
-      desc: "Kumpulan berita, kabar kegiatan, dan artikel dari organisasi Anda. Ganti dengan konten asli.",
+      label: "Kabar & Aksi Sosial",
+      heading: "Dokumentasi Aksi & Kisah Pemberdayaan",
+      desc: "Laporan kegiatan kemanusiaan, kisah inspiratif warga binaan, dan kabar terbaru dari posko Bhakti Nusantara.",
       readMore: "Baca Selengkapnya",
       a1: {
-        title: "Judul Artikel Contoh Pertama",
-        date: "Tanggal Terbit",
-        excerpt: "Ringkasan singkat artikel contoh pertama. Ganti teks placeholder ini dengan konten asli organisasi Anda..."
+        title: "Aksi Cepat Tanggap: Penyaluran 1.500 Paket Pangan bagi Warga Terdampak Banjir",
+        date: "22 Februari 2026",
+        excerpt: "Relawan Bhakti Nusantara mendirikan dapur umum dan posko medis darurat untuk membantu warga di kawasan bantaran sungai..."
       },
       a2: {
-        title: "Judul Artikel Contoh Kedua",
-        date: "Tanggal Terbit",
-        excerpt: "Ringkasan singkat artikel contoh kedua. Ganti teks placeholder ini dengan konten asli organisasi Anda..."
+        title: "Kilas Balik Jambore Relawan Nasional 2025: 1.000 Relawan Tanam 10.000 Bibit Pohon",
+        date: "14 Januari 2026",
+        excerpt: "Rangkuman aksi sosial serentak memperingati Hari Lingkungan Hidup dengan penghijauan kawasan tangkapan air dan khitanan massal..."
       },
       a3: {
-        title: "Judul Artikel Contoh Ketiga",
-        date: "Tanggal Terbit",
-        excerpt: "Ringkasan singkat artikel contoh ketiga. Ganti teks placeholder ini dengan konten asli organisasi Anda..."
+        title: "Program Beasiswa Anak Harapan: Mengantarkan 120 Anak Pedalaman Menggapai Cita-cita",
+        date: "05 Januari 2026",
+        excerpt: "Kisah haru perjuangan adik-adik penerima beasiswa pendidikan dan bimbingan belajar intensif dari para relawan pengajar..."
       },
       a4: {
-        title: "Judul Artikel Contoh Keempat",
-        date: "Tanggal Terbit",
-        excerpt: "Ringkasan singkat artikel contoh keempat. Ganti teks placeholder ini dengan konten asli organisasi Anda..."
+        title: "Bakti Nusantara Resmikan Sentra Olahan Pangan Mandiri untuk Ibu-Ibu Rumah Tangga",
+        date: "18 Desember 2025",
+        excerpt: "Pemberdayaan kelompok usaha rumahan berbasis komoditas lokal guna meningkatkan pendapatan ekonomi keluarga prasejahtera..."
       },
       a5: {
-        title: "Judul Artikel Contoh Kelima",
-        date: "Tanggal Terbit",
-        excerpt: "Ringkasan singkat artikel contoh kelima. Ganti teks placeholder ini dengan konten asli organisasi Anda..."
+        title: "Pemeriksaan Kesehatan Gratis Jangkau 850 Lansia di 5 Desa Terpencil",
+        date: "04 Desember 2025",
+        excerpt: "Dokter dan tenaga medis relawan menghadirkan layanan pos sehat keliling lengkap dengan konsultasi dan pembagian vitamin gratis..."
       },
       a6: {
-        title: "Judul Artikel Contoh Keenam",
-        date: "Tanggal Terbit",
-        excerpt: "Ringkasan singkat artikel contoh keenam. Ganti teks placeholder ini dengan konten asli organisasi Anda..."
+        title: "Laporan Akuntabilitas dan Transparansi Penyaluran Donasi Publik Tahun 2025",
+        date: "25 November 2025",
+        excerpt: "Hasil audit independen terhadap seluruh penerimaan donasi dan alokasi dana program sosial kemasyarakatan sepanjang tahun..."
       }
     }
   },
@@ -200,196 +201,197 @@ export const translations = {
     nav: {
       home: "Home",
       about: "About Us",
-      program: "Program",
-      membership: "Membership",
+      program: "Programs",
+      membership: "Get Involved",
       faq: "FAQ",
-      contactBtn: "Send Message"
+      contactBtn: "Contact Us"
     },
     hero: {
-      title: "Write Your Organization's Main Landing Page Headline Here",
-      subtitle: "/ Short Organization Slogan",
-      desc: "An opening paragraph to explain who you are, who you serve, and the core value you offer. Replace this placeholder text to fit your organization.",
-      cta: "Join Us Now"
+      badge: "Care · Unity · Tangible Impact",
+      title: "Weaving Tangible Compassion for Community Self-Reliance in Indonesia",
+      subtitle: "/ Together with Yayasan Bhakti Nusantara",
+      desc: "A non-profit social organization dedicated to underprivileged economic empowerment, youth education scholarships, free healthcare clinics, and humanitarian disaster relief.",
+      cta: "Join as a Volunteer"
     },
     about: {
       label: "About Us",
-      heading: "A Short Summary of the Organization and Its Core Values.",
-      desc: "An introductory paragraph about the organization: its background, who its members are, and the main goals it wants to achieve. Replace this placeholder text with your organization's profile.",
+      heading: "Fostering Self-Reliant, Prosperous, and Socially Just Communities Through Mutual Aid.",
+      desc: "Yayasan Bhakti Nusantara was founded as a bridge of solidarity to lift families out of poverty and bridge social inequalities. Together with thousands of volunteers and generous partners, we serve communities across the nation with sustainable social initiatives.",
       vision: {
-        title: "Vision",
-        text: "Write your organization's vision statement here — a long-term picture of the impact you want to create."
+        title: "Our Vision",
+        text: "To be a foremost and trusted community organization driving socio-economic independence for underprivileged families and uplifting national welfare."
       },
       mission: {
-        title: "Mission",
+        title: "Our Mission",
         networking: {
-          title: "First Mission Point",
-          text: "A short explanation of your organization's first mission point."
+          title: "Volunteer & Community Outposts",
+          text: "Building humanitarian volunteer outposts across cities and rural communities throughout Indonesia."
         },
         exchange: {
-          title: "Second Mission Point",
-          text: "A short explanation of your organization's second mission point."
+          title: "Education & Vocational Mentoring",
+          text: "Conducting tutoring sessions, orphan educational scholarships, and self-reliance vocational workshops."
         },
         collab: {
-          title: "Third Mission Point",
-          text: "A short explanation of your organization's third mission point."
+          title: "Micro-Business & Food Security",
+          text: "Assisting local micro-enterprises, smallholder farmers, and regional community food reserves."
         },
         opportunity: {
-          title: "Fourth Mission Point",
-          text: "A short explanation of your organization's fourth mission point."
+          title: "Aid Distribution & Social Grants",
+          text: "Delivering donor funds with utmost transparency, precision targeting, and strict public accountability."
         }
       },
       coreValues: {
-        title: "Core Values",
-        text1: "Name of the Organization's Core Value",
-        text2: " — briefly describe the main principle that guides how your organization works.",
-        text3: "An additional paragraph to elaborate on those values and how they are applied within the community."
+        title: "Our Core Values",
+        text1: "Integrity, Empathy, & Mutual Aid (Gotong Royong)",
+        text2: " — the three guiding virtues illuminating every humanitarian response and donation stewardship at Bhakti Nusantara.",
+        text3: "We believe lasting social transformation emerges when communities are empowered to become self-reliant and support one another with dignity."
       },
       org: {
         label: "Organizational Structure",
-        heading: "Organization's Management Structure",
-        desc: "A short description of your organization's management structure and its roles.",
-        imageBtn: "View Original Diagram Image",
-        modalTitle: "Organizational Structure Diagram",
-        roleKetuaUmum: "General Chairman",
-        roleCoFounder: "Co Founder",
-        roleKetuaHarian: "Executive Chairman"
+        heading: "Executive Board & Advisory Trustees",
+        desc: "Led by respected community elders, social practitioners, and dedicated humanitarians devoted to social good.",
+        imageBtn: "View Structure Chart",
+        modalTitle: "Yayasan Bhakti Nusantara Organizational Chart",
+        roleKetuaUmum: "Executive Chairperson",
+        roleCoFounder: "Board of Trustees & Advisors",
+        roleKetuaHarian: "Secretary General & Operations"
       },
       partners: {
         label: "Strategic Partnerships",
-        heading: "Collaboration & Partners",
-        desc: "A short description of your organization's partners and strategic collaborations."
+        heading: "Supported by Trusted Institutions & Partners",
+        desc: "Partnering closely with public social agencies, verified philanthropic foundations, CSR enterprises, and local authorities."
       }
     },
     program: {
-      label: "Programs / Activities",
-      heading: "Organization Activity Agenda",
-      desc: "A short description of your organization's series of regular programs and activities.",
+      label: "Flagship Programs",
+      heading: "Humanitarian Action & Community Empowerment",
+      desc: "A structured continuum of regular nutrition aid, self-reliance vocational training, and annual mass social campaigns.",
       monthly: {
         badge: "Monthly",
-        title: "First Program Name",
-        schedule: "Program Schedule",
-        desc: "A short description of the first program: its purpose, participants, and format. Replace this text to fit your program."
+        title: "Food Pantry & Mobile Health Clinic",
+        schedule: "1st & 3rd Weekend of Every Month",
+        desc: "Delivering nutritious staple food packages and free medical checkups (blood pressure, blood glucose, doctor consultations) for elderly and vulnerable families."
       },
       triwulan: {
         badge: "Quarterly",
-        title: "Second Program Name",
-        schedule: "Program Schedule",
-        desc: "A short description of the second program: its purpose, participants, and format. Replace this text to fit your program."
+        title: "Vocational & Micro-Enterprise Workshops",
+        schedule: "End of Every Quarter (Mar, Jun, Sep, Dec)",
+        desc: "Hands-on vocational training in culinary arts, local handicrafts, urban hydroponics, and family financial literacy for homemakers and rural youth."
       },
       tahunan: {
         badge: "Annual",
-        title: "Third Program Name",
-        schedule: "Program Schedule",
-        desc: "A short description of the third program: its purpose, participants, and format. Replace this text to fit your program."
+        title: "Pekan Bhakti Nusantara & Volunteer Jamboree",
+        schedule: "Every August (Independence Month)",
+        desc: "Simultaneous national action across 28 regencies: public facility renovations, planting 10,000 tree saplings, free mass circumcision for 500 boys, and national volunteer summits."
       },
-      detailBtn: "Event Details"
+      detailBtn: "Program Details & Participation Info"
     },
     membership: {
-      label: "Membership",
-      heading: "Write Your Membership Section Headline Here.",
-      desc: "A short description of the membership scheme, how to choose a package, and the main benefits members receive.",
+      label: "Get Involved & Donate",
+      heading: "Channel Your Compassion with Bhakti Nusantara.",
+      desc: "Choose your preferred contribution pathway — join as a frontline Volunteer, become a regular monthly Supporter, or partner as a Corporate CSR sponsor.",
       stats: {
-        members: "Members",
-        countries: "Regions",
-        validity: "Validity"
+        members: "Active Volunteers",
+        countries: "Supported Districts",
+        validity: "Participation Cycle"
       },
-      selectedLabel: "Selected Membership",
-      ctaBtn: "Discuss",
-      benefitTitle: "Membership Benefits",
-      benefitDesc: "A short description of the benefits that make this membership valuable for members."
+      selectedLabel: "Selected Tier Overview",
+      ctaBtn: "Contact Secretariat via WhatsApp",
+      benefitTitle: "Benefits of Joining & Partnering",
+      benefitDesc: "Receive transparent social impact reports, verifiable humanitarian credentials, and witness direct community impact."
     },
     faq: {
       label: "FAQ",
       heading: "Frequently Asked Questions",
-      desc: "A set of common questions and answers. Replace them with questions relevant to your organization.",
+      desc: "Everything you need to know about our legal registration, volunteering, donation accountability, and social grant requests.",
       q1: {
-        q: "First example question?",
-        a: "An example answer for the first question. Replace this placeholder text with an answer that fits your organization."
+        q: "What is Yayasan Bhakti Nusantara and what is its legal standing?",
+        a: "Yayasan Bhakti Nusantara is an independent non-profit social foundation officially registered with the Ministry of Law and Human Rights (Kemenkumham RI) and supervised by the Social Agency."
       },
       q2: {
-        q: "Second example question?",
-        a: "An example answer for the second question. Replace this placeholder text with an answer that fits your organization."
+        q: "How can I register as a community volunteer?",
+        a: "Volunteer registration is 100% free and open to everyone. You can sign up via our WhatsApp hotline or when public volunteer calls open for upcoming field programs."
       },
       q3: {
-        q: "Third example question?",
-        a: "An example answer for the third question. Replace this placeholder text with an answer that fits your organization."
+        q: "How is public donation accountability managed?",
+        a: "We maintain rigorous transparency. All financial statements and program expenditures are audited annually by an independent Certified Public Accountant (CPA) and published openly."
       },
       q4: {
-        q: "Fourth example question?",
-        a: "An example answer for the fourth question. Replace this placeholder text with an answer that fits your organization."
+        q: "How can underprivileged families apply for social assistance or scholarships?",
+        a: "Local neighborhood leaders (RT/RW) or community representatives can submit a formal recommendation letter and proof of circumstance through our regional secretariat."
       },
       q5: {
-        q: "Fifth example question?",
-        a: "An example answer for the fifth question. Replace this placeholder text with an answer that fits your organization."
+        q: "Can our company collaborate on custom CSR initiatives?",
+        a: "Yes. We offer structured corporate partnership frameworks to co-design, execute, and deliver comprehensive Social Return on Investment (SROI) reports for your CSR goals."
       },
       q6: {
-        q: "Sixth example question?",
-        a: "An example answer for the sixth question. Replace this placeholder text with an answer that fits your organization."
+        q: "Which regions are currently covered by Bhakti Nusantara programs?",
+        a: "We currently operate 28 active outposts and volunteer chapters across Java, Sumatra, Kalimantan, Sulawesi, and Nusa Tenggara."
       }
     },
     footer: {
-      desc: "A short description of your organization for the footer — mention your focus areas and where you operate.",
+      desc: "An independent non-profit community foundation dedicated to poverty alleviation, grassroots economic empowerment, and humanitarian aid in Indonesia.",
       navTitle: "Navigation",
-      contactTitle: "Contact",
-      legalTitle: "Organization Legality",
-      aktaLabel: "Deed of Establishment",
-      skLabel: "Ministry Decree",
-      npwpLabel: "Tax ID (NPWP)"
+      contactTitle: "Secretariat & Outposts",
+      legalTitle: "Foundation Legality",
+      aktaLabel: "Notarial Deed",
+      skLabel: "Ministry of Law Decree",
+      npwpLabel: "Tax Identification (NPWP)"
     },
     testimonials: {
-      label: "Testimonials",
-      heading: "What Members & Partners Say",
-      desc: "A set of testimonials from your organization's members and partners. Replace them with real quotes.",
+      label: "Inspiring Stories",
+      heading: "Voices from Beneficiaries & Volunteers",
+      desc: "Real stories from assisted families, dedicated medical volunteers, and corporate partners.",
       t1: {
-        name: "Speaker Name 1",
-        role: "Title / Organization",
-        text: "First testimonial quote. Replace this placeholder text with a real testimonial from one of your members or partners."
+        name: "Mrs. Sumarni",
+        role: "Micro-Business Program Beneficiary, Klaten",
+        text: "Thanks to the mentoring and micro-grant from Bhakti Nusantara, my humble food stall expanded and now pays for both my children's high school tuition."
       },
       t2: {
-        name: "Speaker Name 2",
-        role: "Title / Organization",
-        text: "Second testimonial quote. Replace this placeholder text with a real testimonial from one of your members or partners."
+        name: "dr. Firman Syahputra",
+        role: "Mobile Health Clinic Volunteer Lead",
+        text: "Seeing the relieved smiles of village elders receiving free medical checkups and medicines is the most rewarding experience for our volunteer healthcare team."
       },
       t3: {
-        name: "Speaker Name 3",
-        role: "Title / Organization",
-        text: "Third testimonial quote. Replace this placeholder text with a real testimonial from one of your members or partners."
+        name: "Lestari Handayani",
+        role: "Director of Corporate Philanthropy & CSR",
+        text: "Yayasan Bhakti Nusantara is our most dependable CSR partner. Their program execution is transparent, measurable, and directly uplifts local communities."
       }
     },
     blog: {
-      label: "News & Articles",
-      heading: "Latest News & Insights",
-      desc: "A set of news, activity updates, and articles from your organization. Replace them with real content.",
+      label: "News & Social Actions",
+      heading: "Field Reports & Empowerment Chronicles",
+      desc: "Humanitarian dispatches, inspiring beneficiary journeys, and official announcements from Bhakti Nusantara.",
       readMore: "Read More",
       a1: {
-        title: "First Example Article Title",
-        date: "Publish Date",
-        excerpt: "A short summary of the first example article. Replace this placeholder text with your organization's real content..."
+        title: "Emergency Relief: Distributing 1,500 Food Hampers for Flood-Affected Households",
+        date: "February 22, 2026",
+        excerpt: "Bhakti Nusantara volunteers established emergency kitchens and medical outposts to aid submerged riverbank communities..."
       },
       a2: {
-        title: "Second Example Article Title",
-        date: "Publish Date",
-        excerpt: "A short summary of the second example article. Replace this placeholder text with your organization's real content..."
+        title: "National Volunteer Jamboree 2025: 1,000 Volunteers Plant 10,000 Tree Saplings",
+        date: "January 14, 2026",
+        excerpt: "A look back at our nationwide environmental restoration and mass healthcare outreach celebrating National Community Day..."
       },
       a3: {
-        title: "Third Example Article Title",
-        date: "Publish Date",
-        excerpt: "A short summary of the third example article. Replace this placeholder text with your organization's real content..."
+        title: "Hope Scholarship: Supporting 120 Remote Students to Pursue Higher Education",
+        date: "January 05, 2026",
+        excerpt: "Inspiring educational journeys of underprivileged scholarship recipients guided by dedicated volunteer tutors..."
       },
       a4: {
-        title: "Fourth Example Article Title",
-        date: "Publish Date",
-        excerpt: "A short summary of the fourth example article. Replace this placeholder text with your organization's real content..."
+        title: "Bhakti Nusantara Launches Community Food Processing Center for Rural Homemakers",
+        date: "December 18, 2025",
+        excerpt: "Empowering rural micro-enterprises with processing equipment to increase household income for vulnerable families..."
       },
       a5: {
-        title: "Fifth Example Article Title",
-        date: "Publish Date",
-        excerpt: "A short summary of the fifth example article. Replace this placeholder text with your organization's real content..."
+        title: "Free Mobile Medical Outreach Reaches 850 Elderly Residents in 5 Remote Villages",
+        date: "December 04, 2025",
+        excerpt: "Volunteer physicians and nurses delivered comprehensive health screenings, counseling, and free vitamins to isolated rural areas..."
       },
       a6: {
-        title: "Sixth Example Article Title",
-        date: "Publish Date",
-        excerpt: "A short summary of the sixth example article. Replace this placeholder text with your organization's real content..."
+        title: "Annual Public Donation Transparency and Financial Accountability Report 2025",
+        date: "November 25, 2025",
+        excerpt: "Comprehensive independent audit results regarding all public donations, program expenditures, and community outcomes..."
       }
     }
   }
@@ -397,7 +399,7 @@ export const translations = {
 
 export type TranslationKey =
   | "nav.home" | "nav.about" | "nav.program" | "nav.membership" | "nav.faq" | "nav.contactBtn"
-  | "hero.title" | "hero.subtitle" | "hero.desc" | "hero.cta"
+  | "hero.badge" | "hero.title" | "hero.subtitle" | "hero.desc" | "hero.cta"
   | "about.label" | "about.heading" | "about.desc"
   | "about.vision.title" | "about.vision.text"
   | "about.mission.title"
@@ -420,7 +422,7 @@ export type TranslationKey =
   | "faq.label" | "faq.heading" | "faq.desc"
   | "faq.q1.q" | "faq.q1.a" | "faq.q2.q" | "faq.q2.a" | "faq.q3.q" | "faq.q3.a"
   | "faq.q4.q" | "faq.q4.a" | "faq.q5.q" | "faq.q5.a" | "faq.q6.q" | "faq.q6.a"
-  | "footer.desc" | "footer.navTitle" | "footer.navTitle" | "footer.contactTitle" | "footer.legalTitle" | "footer.aktaLabel" | "footer.skLabel" | "footer.npwpLabel"
+  | "footer.desc" | "footer.navTitle" | "footer.contactTitle" | "footer.legalTitle" | "footer.aktaLabel" | "footer.skLabel" | "footer.npwpLabel"
   | "testimonials.label" | "testimonials.heading" | "testimonials.desc"
   | "testimonials.t1.name" | "testimonials.t1.role" | "testimonials.t1.text"
   | "testimonials.t2.name" | "testimonials.t2.role" | "testimonials.t2.text"

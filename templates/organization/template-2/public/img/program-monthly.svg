@@ -1,16 +1,67 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
-  <title id="title">Program Bulanan</title>
-  <desc id="desc">Ilustrasi rapat komunitas bulanan dengan kalender dan peserta.</desc>
-  <rect width="640" height="360" fill="#eaf3f7"/>
-  <rect x="72" y="70" width="496" height="230" rx="28" fill="#ffffff"/>
-  <rect x="102" y="104" width="142" height="156" rx="18" fill="#053f5c"/>
-  <rect x="122" y="132" width="102" height="18" rx="9" fill="#8fd0e2"/>
-  <rect x="122" y="166" width="34" height="34" rx="8" fill="#ffffff"/>
-  <rect x="168" y="166" width="34" height="34" rx="8" fill="#ffffff"/>
-  <rect x="122" y="212" width="34" height="34" rx="8" fill="#ffffff"/>
-  <rect x="168" y="212" width="34" height="34" rx="8" fill="#8fd0e2"/>
-  <circle cx="330" cy="170" r="38" fill="#f2c7a5"/>
-  <path d="M266 270c10-53 35-78 64-78s54 25 64 78H266z" fill="#0b4f71"/>
-  <circle cx="456" cy="178" r="32" fill="#d9a887"/>
-  <path d="M406 270c8-46 28-68 50-68s42 22 50 68H406z" fill="#14476a"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none" role="img" aria-label="Dapur Pangan &amp; Pos Sehat Keliling">
+  <defs>
+    <linearGradient id="bgSocial1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#065f46"/>
+      <stop offset="100%" stop-color="#053f5c"/>
+    </linearGradient>
+    <linearGradient id="boxGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f59e0b"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="640" height="360" rx="16" fill="url(#bgSocial1)"/>
+
+  <!-- Left: Medical Checkup Van / Health Outpost Card -->
+  <g transform="translate(60, 50)">
+    <rect width="240" height="260" rx="14" fill="#ffffff" fill-opacity="0.95"/>
+    
+    <!-- Red Cross / Health Icon Header -->
+    <rect x="20" y="20" width="200" height="40" rx="8" fill="#ecfdf5"/>
+    <circle cx="45" cy="40" r="12" fill="#10b981"/>
+    <path d="M45 34v12M39 40h12" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round"/>
+    <text x="65" y="44" font-family="sans-serif" font-size="12" font-weight="800" fill="#065f46">Pos Sehat Keliling</text>
+
+    <!-- Stethoscope / Medical Illustration -->
+    <g transform="translate(40, 80)">
+      <circle cx="80" cy="50" r="40" fill="#f0fdf4" stroke="#059669" stroke-width="2"/>
+      <path d="M60 35 C60 65 100 65 100 35 M80 65 v20" stroke="#059669" stroke-width="3" stroke-linecap="round"/>
+      <circle cx="80" cy="90" r="8" fill="#065f46"/>
+      <circle cx="58" cy="35" r="4" fill="#065f46"/>
+      <circle cx="102" cy="35" r="4" fill="#065f46"/>
+    </g>
+
+    <text x="30" y="200" font-family="sans-serif" font-size="11" font-weight="700" fill="#0f172a">Layanan Cuma-Cuma:</text>
+    <text x="30" y="220" font-family="sans-serif" font-size="10" fill="#475569">✓ Tensi &amp; Gula Darah</text>
+    <text x="30" y="238" font-family="sans-serif" font-size="10" fill="#475569">✓ Konsultasi Dokter &amp; Obat</text>
+  </g>
+
+  <!-- Right: Sembako & Food Pantry Box Card -->
+  <g transform="translate(340, 50)">
+    <rect width="240" height="260" rx="14" fill="#ffffff" fill-opacity="0.95"/>
+    
+    <!-- Food Pantry Header -->
+    <rect x="20" y="20" width="200" height="40" rx="8" fill="#fffbeb"/>
+    <circle cx="45" cy="40" r="12" fill="#f59e0b"/>
+    <path d="M40 40l4 4 8-8" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+    <text x="65" y="44" font-family="sans-serif" font-size="12" font-weight="800" fill="#b45309">Dapur Pangan Warga</text>
+
+    <!-- Food Box Graphic -->
+    <g transform="translate(50, 85)">
+      <rect x="15" y="40" width="110" height="70" rx="8" fill="url(#boxGrad)"/>
+      <path d="M15 40l20-20h70l20 20z" fill="#fbbf24"/>
+      <!-- Heart on box -->
+      <circle cx="70" cy="75" r="16" fill="#ffffff" fill-opacity="0.3"/>
+      <path d="M70 79 C65 74 60 70 60 67 C60 64 63 62 66 63 C68 64 70 66 70 66 C70 66 72 64 74 63 C77 62 80 64 80 67 C80 70 75 74 70 79 Z" fill="#ffffff"/>
+      <!-- Sembako Items protruding -->
+      <rect x="30" y="8" width="25" height="32" rx="4" fill="#34d399"/>
+      <rect x="60" y="14" width="20" height="26" rx="4" fill="#38bdf8"/>
+      <rect x="85" y="4" width="25" height="36" rx="4" fill="#f43f5e"/>
+    </g>
+
+    <text x="30" y="200" font-family="sans-serif" font-size="11" font-weight="700" fill="#0f172a">Paket Bergizi:</text>
+    <text x="30" y="220" font-family="sans-serif" font-size="10" fill="#475569">✓ Beras, Minyak, Telur</text>
+    <text x="30" y="238" font-family="sans-serif" font-size="10" fill="#475569">✓ Susu &amp; Vitamin Anak</text>
+  </g>
 </svg>

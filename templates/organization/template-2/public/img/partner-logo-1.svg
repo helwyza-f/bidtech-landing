@@ -1,8 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" role="img" aria-labelledby="title desc">
-  <title id="title">Logo Mitra Contoh Satu</title>
-  <desc id="desc">Logo mitra contoh berbentuk lingkaran dan teks partner.</desc>
-  <rect width="240" height="120" rx="24" fill="#f8fafc"/>
-  <circle cx="70" cy="60" r="32" fill="#053f5c"/>
-  <circle cx="70" cy="60" r="18" fill="#8fd0e2"/>
-  <path d="M122 43h70v12h-70zM122 65h52v10h-52z" fill="#053f5c"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 100" fill="none" role="img" aria-label="Mitra Kemitraan Sosial">
+  <rect width="240" height="100" rx="16" fill="#ffffff"/>
+  
+  <!-- Social Agency Emblem -->
+  <g transform="translate(18, 24)">
+    <circle cx="26" cy="26" r="24" fill="#053f5c" fill-opacity="0.1" stroke="#053f5c" stroke-width="2.5"/>
+    <path d="M26 12v28M12 26h28" stroke="#059669" stroke-width="3" stroke-linecap="round"/>
+    <circle cx="26" cy="26" r="6" fill="#f59e0b"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="76" y="47" font-family="system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="800" fill="#053f5c" letter-spacing="-0.3">
+    Dinas Sosial<tspan fill="#059669"> RI</tspan>
+  </text>
+  <text x="77" y="63" font-family="system-ui, -apple-system, sans-serif" font-size="8" font-weight="600" fill="#94a3b8" letter-spacing="1.5">
+    MITRA REGULASI &amp; SOSIAL
+  </text>
 </svg>

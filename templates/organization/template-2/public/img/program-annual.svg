@@ -1,17 +1,65 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-labelledby="title desc">
-  <title id="title">Program Tahunan</title>
-  <desc id="desc">Ilustrasi acara tahunan organisasi dengan panggung dan audiens.</desc>
-  <rect width="640" height="360" fill="#eef4ff"/>
-  <path d="M74 285h492v38H74z" fill="#053f5c"/>
-  <rect x="128" y="74" width="384" height="166" rx="26" fill="#ffffff"/>
-  <path d="M160 214h320v38H160z" fill="#0b4f71"/>
-  <circle cx="240" cy="151" r="36" fill="#f2c7a5"/>
-  <path d="M187 214c9-44 29-66 53-66s44 22 53 66H187z" fill="#06465f"/>
-  <path d="M338 119h112v16H338zM338 154h92v16h-92zM338 189h124v16H338z" fill="#8fd0e2"/>
-  <circle cx="170" cy="300" r="13" fill="#8fd0e2"/>
-  <circle cx="236" cy="300" r="13" fill="#8fd0e2"/>
-  <circle cx="302" cy="300" r="13" fill="#8fd0e2"/>
-  <circle cx="368" cy="300" r="13" fill="#8fd0e2"/>
-  <circle cx="434" cy="300" r="13" fill="#8fd0e2"/>
-  <circle cx="500" cy="300" r="13" fill="#8fd0e2"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" fill="none" role="img" aria-label="Pekan Bhakti Nusantara &amp; Jambore Relawan">
+  <defs>
+    <linearGradient id="bgSocial3" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#064e3b"/>
+      <stop offset="100%" stop-color="#053f5c"/>
+    </linearGradient>
+    <linearGradient id="sunGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="640" height="360" rx="16" fill="url(#bgSocial3)"/>
+
+  <!-- Sun in background -->
+  <circle cx="320" cy="110" r="55" fill="url(#sunGrad)" fill-opacity="0.9"/>
+
+  <!-- Mountain Silhouettes -->
+  <polygon points="120,240 280,100 440,240" fill="#047857" fill-opacity="0.6"/>
+  <polygon points="260,240 420,80 580,240" fill="#065f46" fill-opacity="0.8"/>
+  <polygon points="0,260 160,130 320,260" fill="#022c22" fill-opacity="0.9"/>
+
+  <!-- Green Grass Rolling Hills Ground -->
+  <path d="M0 240 Q160 210 320 240 T640 230 L640 360 L0 360 Z" fill="#059669"/>
+  <path d="M0 270 Q240 240 480 275 T640 265 L640 360 L0 360 Z" fill="#047857"/>
+
+  <!-- Tents & Tree Planting Illustration -->
+  <!-- Volunteer Camping Tents -->
+  <polygon points="110,240 145,195 180,240" fill="#f59e0b"/>
+  <polygon points="145,195 145,240 180,240" fill="#d97706"/>
+  <polygon points="135,240 145,215 155,240" fill="#0f172a"/>
+
+  <polygon points="175,250 205,210 235,250" fill="#0284c7"/>
+  <polygon points="205,210 205,250 235,250" fill="#0369a1"/>
+
+  <!-- Planted Trees across hill -->
+  <!-- Tree 1 -->
+  <rect x="420" y="240" width="8" height="20" fill="#78350f"/>
+  <circle cx="424" cy="225" r="22" fill="#10b981"/>
+  <circle cx="414" cy="220" r="14" fill="#34d399"/>
+  
+  <!-- Tree 2 -->
+  <rect x="490" y="235" width="7" height="20" fill="#78350f"/>
+  <circle cx="493.5" cy="220" r="18" fill="#10b981"/>
+  <circle cx="503" cy="215" r="12" fill="#34d399"/>
+
+  <!-- Tree 3 (Sapling) -->
+  <rect x="360" y="260" width="4" height="12" fill="#78350f"/>
+  <circle cx="362" cy="254" r="10" fill="#34d399"/>
+
+  <!-- Main Headline Card Overlay in Foreground -->
+  <g transform="translate(120, 35)">
+    <rect width="400" height="95" rx="14" fill="#ffffff" fill-opacity="0.95" stroke="#10b981" stroke-width="2"/>
+    <text x="200" y="36" text-anchor="middle" font-family="sans-serif" font-size="16" font-weight="900" fill="#064e3b">
+      PEKAN BHAKTI NUSANTARA
+    </text>
+    <text x="200" y="58" text-anchor="middle" font-family="sans-serif" font-size="11" font-weight="700" fill="#059669">
+      Jambore Relawan &amp; Aksi Kemanusiaan Serentak 28 Wilayah
+    </text>
+    <text x="200" y="80" text-anchor="middle" font-family="sans-serif" font-size="10" fill="#64748b">
+      10.000 Pohon · 500 Khitanan Massal · Renovasi 30 Fasum
+    </text>
+  </g>
 </svg>

@@ -8,76 +8,71 @@ import ScrollReveal from "@components/ui/ScrollReveal";
 import { useLanguage } from "@lib/LanguageContext";
 import { TranslationKey } from "@constants/translations";
 
-const ORG_DEPARTMENTS = (_t: (key: TranslationKey) => string) => [
+const ORG_DEPARTMENTS = (t: (key: TranslationKey) => string) => [
   {
-    title: "Divisi 1",
-    head: { name: "Nama Kepala Divisi", role: "Kepala Divisi" },
+    title: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Social Aid & Disaster Relief" : "Divisi Bantuan Sosial & Bencana",
+    head: { name: "Ahmad Zulfikar, S.Sos.", role: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Head of Social Aid" : "Kepala Divisi Bantuan Sosial" },
     staff: [
-      { name: "Nama Staf", role: "Staf" },
-      { name: "Nama Staf", role: "Staf" }
+      { name: "Rizky Ramadhan", role: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Staff Logistics & Outposts" : "Staff Logistik & Posko" },
+      { name: "Fathur Rohman", role: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Staff Field Distribution" : "Staff Distribusi Lapangan" }
     ]
   },
   {
-    title: "Divisi 2",
-    head: { name: "Nama Kepala Divisi", role: "Kepala Divisi" },
+    title: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Education & Scholarships" : "Divisi Pendidikan & Beasiswa",
+    head: { name: "Ratih Anggraini, S.Pd.", role: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Head of Education" : "Kepala Divisi Pendidikan" },
     staff: [
-      { name: "Nama Staf", role: "Staf" }
+      { name: "Nurul Hidayah", role: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Staff Student Mentorship" : "Staff Pembinaan Beasiswa" }
     ]
   },
   {
-    title: "Divisi 3",
-    head: { name: "Nama Kepala Divisi", role: "Kepala Divisi" },
+    title: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Community Empowerment & MSMEs" : "Divisi Pemberdayaan UMKM",
+    head: { name: "Hendro Wibowo, S.E.", role: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Head of MSME Empowerment" : "Kepala Divisi Pemberdayaan UMKM" },
     staff: []
   },
   {
-    title: "Divisi 4",
-    head: { name: "Nama Kepala Divisi", role: "Kepala Divisi" },
+    title: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Volunteers & Regional Chapters" : "Divisi Relawan & Cabang",
+    head: { name: "Siti Marwah, S.I.Kom.", role: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Head of Volunteers" : "Kepala Divisi Relawan" },
     staff: [
-      { name: "Nama Staf", role: "Staf" },
-      { name: "Nama Staf", role: "Staf" }
+      { name: "Galih Wicaksono", role: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Staff Volunteer Outreach" : "Staff Koordinator Relawan" },
+      { name: "Annisa Permata", role: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Staff Field Training" : "Staff Pembekalan Relawan" }
     ]
   },
   {
-    title: "Divisi 5",
-    head: { name: "Nama Kepala Divisi", role: "Kepala Divisi" },
+    title: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Public Relations & CSR Partnerships" : "Divisi Humas & Kemitraan",
+    head: { name: "Bagas Pratama, S.H.", role: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Head of PR & Partnerships" : "Kepala Divisi Kemitraan" },
     staff: [
-      { name: "Nama Staf", role: "Staf" }
+      { name: "Tri Wahyuni", role: t("about.org.roleKetuaUmum") === "Executive Chairperson" ? "Staff Media & Publications" : "Staff Publikasi & Media" }
     ]
   }
 ];
 
 const LEADERSHIP_TEAM = (t: (key: TranslationKey) => string) => ({
   ketuaUmum: {
-    name: "Nama Ketua Umum",
+    name: "H. Rahmat Hidayat, S.Sos., M.Si.",
     role: t("about.org.roleKetuaUmum"),
-    image: "/img/avatar-chair.svg",
-    alt: "Avatar contoh ketua umum",
-    imagePosition: "center 18%",
+    image: "/img/avatar-chair.webp",
+    alt: "H. Rahmat Hidayat, S.Sos., M.Si. - Ketua Umum",
     cardWidth: "w-56 md:w-64",
     imageSize: "h-28 w-28 md:h-32 md:w-32"
   },
-  coFounders: [
-    {
-      name: "Nama Co Founder 1",
-      role: t("about.org.roleCoFounder"),
-      image: "/img/avatar-founder-1.svg",
-      alt: "Avatar contoh co-founder pertama",
-      imagePosition: "center 16%",
-      cardWidth: "w-52 md:w-56",
-      imageSize: "h-24 w-24 md:h-28 md:w-28"
-    },
-    {
-      name: "Nama Co Founder 2",
-      role: t("about.org.roleCoFounder"),
-      image: "/img/avatar-founder-2.svg",
-      alt: "Avatar contoh co-founder kedua",
-      imagePosition: "center 20%",
-      cardWidth: "w-52 md:w-56",
-      imageSize: "h-24 w-24 md:h-28 md:w-28"
-    }
-  ],
+  coFounderLeft: {
+    name: "Ir. Hendra Gunawan, M.T.",
+    role: t("about.org.roleCoFounder"),
+    image: "/img/avatar-founder-1.webp",
+    alt: "Ir. Hendra Gunawan, M.T. - Dewan Pembina",
+    cardWidth: "w-52 md:w-60",
+    imageSize: "h-26 w-26 md:h-30 md:w-30"
+  },
+  coFounderRight: {
+    name: "Dr. Sarah Kusuma, M.M.",
+    role: t("about.org.roleCoFounder"),
+    image: "/img/avatar-founder-2.webp",
+    alt: "Dr. Sarah Kusuma, M.M. - Dewan Pengawas",
+    cardWidth: "w-52 md:w-60",
+    imageSize: "h-26 w-26 md:h-30 md:w-30"
+  },
   ketuaHarian: {
-    name: "Nama Ketua Harian",
+    name: "Bambang Prasetyo, S.Pd.",
     role: t("about.org.roleKetuaHarian"),
     cardWidth: "w-64 md:w-72"
   }
@@ -222,73 +217,81 @@ export default function AboutSection() {
 
           {/* Org Tree Visualization */}
           <div className="flex flex-col items-center">
-            {/* Top Leadership */}
-            <div className="flex flex-col items-center">
-              {/* Ketua Umum */}
-              <ScrollReveal animation="slide-up">
-                <div
-                  className={`${leadership.ketuaUmum.cardWidth} flex flex-col items-center text-center transition-transform hover:scale-[1.02] duration-300`}
-                >
-                  <div className={`relative ${leadership.ketuaUmum.imageSize} overflow-hidden rounded-full border-4 shadow-lg bg-slate-100`} style={{ borderColor: colors.primary }}>
+            {/* Top Leadership Row: Co-Founder (Left) - Ketua Umum (Center) - Co-Founder (Right) */}
+            <div className="w-full max-w-4xl mx-auto flex flex-col items-center">
+              <div className="relative w-full flex flex-col md:flex-row items-center justify-center gap-8 md:gap-14 lg:gap-20">
+                {/* Horizontal Connector Line on Desktop running behind the circular photos */}
+                <div 
+                  className="hidden md:block absolute top-14 left-[15%] right-[15%] h-px -z-0"
+                  style={{ backgroundColor: connectorColor }}
+                ></div>
+
+                {/* Left: Co-Founder 1 */}
+                <ScrollReveal animation="slide-up" delay={100} className="relative z-10 flex flex-col items-center text-center">
+                  <div className={`${leadership.coFounderLeft.cardWidth} flex flex-col items-center text-center transition-transform hover:scale-[1.03] duration-300`}>
+                    <div className={`relative ${leadership.coFounderLeft.imageSize} overflow-hidden rounded-full border-[3.5px] shadow-lg bg-white`} style={{ borderColor: colors.primary }}>
+                      <Image
+                        src={asset(leadership.coFounderLeft.image)}
+                        alt={leadership.coFounderLeft.alt}
+                        fill
+                        sizes="(max-width: 768px) 7rem, 8rem"
+                        className="object-cover object-center"
+                        priority
+                      />
+                    </div>
+                    <div className="pt-3">
+                      <p className="font-bold text-sm md:text-base leading-snug text-slate-900">{leadership.coFounderLeft.name}</p>
+                      <p className="text-[10px] md:text-[11px] text-slate-400 mt-1 uppercase font-semibold tracking-wider">{leadership.coFounderLeft.role}</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+
+                {/* Center: Ketua Umum */}
+                <ScrollReveal animation="slide-up" delay={150} className="relative z-10 flex flex-col items-center text-center">
+                  <div className={`${leadership.ketuaUmum.cardWidth} flex flex-col items-center text-center transition-transform hover:scale-[1.03] duration-300`}>
+                    <div className={`relative ${leadership.ketuaUmum.imageSize} overflow-hidden rounded-full border-[4px] shadow-xl bg-white`} style={{ borderColor: colors.primary }}>
                       <Image
                         src={asset(leadership.ketuaUmum.image)}
                         alt={leadership.ketuaUmum.alt}
                         fill
                         sizes="(max-width: 768px) 8rem, 9rem"
-                        className="object-cover"
-                        style={{ objectPosition: leadership.ketuaUmum.imagePosition }}
+                        className="object-cover object-center"
+                        priority
                       />
-                  </div>
-                  <div className="pt-3">
-                    <p className="font-bold text-base md:text-lg leading-snug text-slate-900">{leadership.ketuaUmum.name}</p>
-                    <p className="text-[11px] text-slate-500 mt-1 uppercase tracking-[0.18em]">{leadership.ketuaUmum.role}</p>
-                  </div>
-                </div>
-              </ScrollReveal>
-
-              {/* Connector line */}
-              <div className="w-px h-6" style={{ backgroundColor: connectorColor }}></div>
-
-              {/* Co Founders */}
-              <ScrollReveal animation="slide-up" delay={150} className="flex flex-col items-center relative">
-                <div className="hidden md:flex flex-col items-center w-full max-w-[34rem] mb-5">
-                  <div className="h-5 w-px" style={{ backgroundColor: connectorColor }}></div>
-                  <div className="h-px w-[16rem]" style={{ backgroundColor: connectorColor }}></div>
-                </div>
-                <div className="flex gap-4 md:gap-12 flex-wrap justify-center items-center flex-col md:flex-row">
-                  {leadership.coFounders.map((person) => (
-                    <div
-                      key={person.name}
-                      className={`${person.cardWidth} flex flex-col items-center text-center transition-transform hover:scale-[1.02] duration-300`}
-                    >
-                        <div className="hidden md:block h-5 w-px" style={{ backgroundColor: connectorColor }}></div>
-                        <div className={`relative ${person.imageSize} overflow-hidden rounded-full border-[3px] shadow-md bg-slate-100`} style={{ borderColor: colors.primary }}>
-                          <Image
-                            src={asset(person.image)}
-                            alt={person.alt}
-                            fill
-                            sizes="(max-width: 768px) 7rem, 8rem"
-                            className="object-cover"
-                            style={{ objectPosition: person.imagePosition }}
-                          />
-                        </div>
-                      <div className="pt-3">
-                        <p className="font-bold text-[15px] leading-snug text-slate-900">{person.name}</p>
-                        <p className="text-[10px] text-slate-500 mt-1 uppercase tracking-[0.16em]">{person.role}</p>
-                      </div>
                     </div>
-                  ))}
-                  
-                  {/* Vertical connector line between Co-Founders ONLY on mobile when they stack */}
-                  <div className="w-px h-5 md:hidden" style={{ backgroundColor: connectorColor }}></div>
-                </div>
-              </ScrollReveal>
+                    <div className="pt-3">
+                      <p className="font-bold text-base md:text-lg leading-snug text-slate-900">{leadership.ketuaUmum.name}</p>
+                      <p className="text-[11px] md:text-xs text-slate-400 mt-1 uppercase font-semibold tracking-wider">{leadership.ketuaUmum.role}</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
 
-              {/* Connector line */}
-              <div className="w-px h-7" style={{ backgroundColor: connectorColor }}></div>
+                {/* Right: Co-Founder 2 */}
+                <ScrollReveal animation="slide-up" delay={200} className="relative z-10 flex flex-col items-center text-center">
+                  <div className={`${leadership.coFounderRight.cardWidth} flex flex-col items-center text-center transition-transform hover:scale-[1.03] duration-300`}>
+                    <div className={`relative ${leadership.coFounderRight.imageSize} overflow-hidden rounded-full border-[3.5px] shadow-lg bg-white`} style={{ borderColor: colors.primary }}>
+                      <Image
+                        src={asset(leadership.coFounderRight.image)}
+                        alt={leadership.coFounderRight.alt}
+                        fill
+                        sizes="(max-width: 768px) 7rem, 8rem"
+                        className="object-cover object-center"
+                        priority
+                      />
+                    </div>
+                    <div className="pt-3">
+                      <p className="font-bold text-sm md:text-base leading-snug text-slate-900">{leadership.coFounderRight.name}</p>
+                      <p className="text-[10px] md:text-[11px] text-slate-400 mt-1 uppercase font-semibold tracking-wider">{leadership.coFounderRight.role}</p>
+                    </div>
+                  </div>
+                </ScrollReveal>
+              </div>
 
-              {/* Ketua Harian */}
-              <ScrollReveal animation="slide-up" delay={300}>
+              {/* Vertical connector line from center (Ketua Umum) down to Ketua Harian */}
+              <div className="w-px h-8 mt-4" style={{ backgroundColor: connectorColor }}></div>
+
+              {/* Ketua Harian / Sekjen */}
+              <ScrollReveal animation="slide-up" delay={250}>
                 <div
                   className={`${leadership.ketuaHarian.cardWidth} text-white p-5 rounded-2xl shadow-lg text-center transition-transform hover:scale-[1.02] duration-300`}
                   style={{ backgroundColor: colors.primary }}
@@ -298,7 +301,7 @@ export default function AboutSection() {
                 </div>
               </ScrollReveal>
 
-              {/* Connector line down to split */}
+              {/* Connector line down to departments */}
               <div className="w-px h-8" style={{ backgroundColor: connectorColor }}></div>
             </div>
 
@@ -331,8 +334,8 @@ export default function AboutSection() {
                       {/* Staff list */}
                       {dept.staff.length > 0 && (
                         <div className="flex flex-col items-center w-full">
-                          {dept.staff.map((staff) => (
-                            <div key={staff.name} className="flex flex-col items-center w-full">
+                          {dept.staff.map((staff, sIdx) => (
+                            <div key={`${dept.title}-${staff.name}-${sIdx}`} className="flex flex-col items-center w-full">
                               {/* Vertical connector line */}
                               <div className="w-px h-4" style={{ backgroundColor: connectorColor }}></div>
 
@@ -367,31 +370,59 @@ export default function AboutSection() {
             </p>
           </ScrollReveal>
 
-          <div className="flex items-center justify-center gap-4 md:gap-16 mt-8">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto mt-8">
             {/* Partner 1 */}
             <ScrollReveal animation="scale-up" delay={100}>
-              <div className="group flex items-center justify-center p-3 md:p-6 bg-slate-50/50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all duration-300 w-36 h-20 md:w-52 md:h-28 hover:bg-white hover:shadow-lg hover:shadow-slate-200/50">
+              <div className="group flex items-center justify-center p-3 md:p-6 bg-slate-50/70 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all duration-300 h-24 md:h-28 hover:bg-white hover:shadow-lg hover:shadow-slate-200/50">
                 <Image
                   src={asset("/img/partner-logo-1.svg")}
-                  alt="Logo Mitra 1"
-                  width={120}
-                  height={120}
-                  className="max-h-12 md:max-h-16 w-auto object-contain transition-all duration-300 group-hover:scale-105"
-                  priority
+                  alt="Dinas Sosial RI"
+                  width={140}
+                  height={60}
+                  style={{ width: "auto", height: "auto" }}
+                  className="max-h-12 md:max-h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105"
                 />
               </div>
             </ScrollReveal>
 
             {/* Partner 2 */}
-            <ScrollReveal animation="scale-up" delay={250}>
-              <div className="group flex items-center justify-center p-3 md:p-6 bg-slate-50/50 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all duration-300 w-36 h-20 md:w-52 md:h-28 hover:bg-white hover:shadow-lg hover:shadow-slate-200/50">
+            <ScrollReveal animation="scale-up" delay={200}>
+              <div className="group flex items-center justify-center p-3 md:p-6 bg-slate-50/70 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all duration-300 h-24 md:h-28 hover:bg-white hover:shadow-lg hover:shadow-slate-200/50">
                 <Image
                   src={asset("/img/partner-logo-2.svg")}
-                  alt="Logo Mitra 2"
-                  width={120}
-                  height={120}
-                  className="max-h-14 md:max-h-20 w-auto object-contain transition-all duration-300 group-hover:scale-105"
-                  priority
+                  alt="Dompet Peduli"
+                  width={140}
+                  height={60}
+                  style={{ width: "auto", height: "auto" }}
+                  className="max-h-12 md:max-h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105"
+                />
+              </div>
+            </ScrollReveal>
+
+            {/* Partner 3 */}
+            <ScrollReveal animation="scale-up" delay={300}>
+              <div className="group flex items-center justify-center p-3 md:p-6 bg-slate-50/70 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all duration-300 h-24 md:h-28 hover:bg-white hover:shadow-lg hover:shadow-slate-200/50">
+                <Image
+                  src={asset("/img/partner-logo-3.svg")}
+                  alt="Bakti Sehat"
+                  width={140}
+                  height={60}
+                  style={{ width: "auto", height: "auto" }}
+                  className="max-h-12 md:max-h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105"
+                />
+              </div>
+            </ScrollReveal>
+
+            {/* Partner 4 */}
+            <ScrollReveal animation="scale-up" delay={400}>
+              <div className="group flex items-center justify-center p-3 md:p-6 bg-slate-50/70 rounded-2xl border border-slate-100 hover:border-slate-200 transition-all duration-300 h-24 md:h-28 hover:bg-white hover:shadow-lg hover:shadow-slate-200/50">
+                <Image
+                  src={asset("/img/partner-logo-4.svg")}
+                  alt="Sahabat UMKM"
+                  width={140}
+                  height={60}
+                  style={{ width: "auto", height: "auto" }}
+                  className="max-h-12 md:max-h-14 w-auto object-contain transition-all duration-300 group-hover:scale-105"
                 />
               </div>
             </ScrollReveal>

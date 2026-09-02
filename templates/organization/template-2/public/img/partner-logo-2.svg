@@ -1,8 +1,19 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 120" role="img" aria-labelledby="title desc">
-  <title id="title">Logo Mitra Contoh Dua</title>
-  <desc id="desc">Logo mitra contoh berbentuk perisai dan teks network.</desc>
-  <rect width="240" height="120" rx="24" fill="#f8fafc"/>
-  <path d="M69 24l40 16v28c0 25-17 41-40 51-23-10-40-26-40-51V40l40-16z" fill="#053f5c"/>
-  <path d="M52 64l13 13 24-30" fill="none" stroke="#8fd0e2" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M130 43h66v12h-66zM130 65h45v10h-45z" fill="#053f5c"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 100" fill="none" role="img" aria-label="Dompet Kemanusiaan Peduli">
+  <rect width="240" height="100" rx="16" fill="#ffffff"/>
+  
+  <!-- Caring Hands & Heart Icon -->
+  <g transform="translate(18, 24)">
+    <circle cx="26" cy="26" r="24" fill="#0284c7" fill-opacity="0.1" stroke="#0284c7" stroke-width="2"/>
+    <path d="M26 32 C20 28 16 23 16 19 C16 16 19 14 22 15 C24 16 26 18 26 18 C26 18 28 16 30 15 C33 14 36 16 36 19 C36 23 32 28 26 32 Z" fill="#ef4444"/>
+    <!-- Supporting Hand Base -->
+    <path d="M14 36 C18 40 34 40 38 36" stroke="#053f5c" stroke-width="2.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Typography -->
+  <text x="76" y="47" font-family="system-ui, -apple-system, sans-serif" font-size="14.5" font-weight="800" fill="#053f5c" letter-spacing="-0.3">
+    Dompet<tspan fill="#0284c7">Peduli</tspan>
+  </text>
+  <text x="77" y="63" font-family="system-ui, -apple-system, sans-serif" font-size="8" font-weight="600" fill="#94a3b8" letter-spacing="1.5">
+    FILANTROPI &amp; KEMANUSIAAN
+  </text>
 </svg>
