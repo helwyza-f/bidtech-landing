@@ -6,14 +6,15 @@ import { officialStores } from "../../data/stores";
 import { ProductCard } from "../products/product-card";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
 import { CommunityGallery } from "./community-gallery";
+import { asset } from "../../lib/assets";
 
 const concerns = [
-  ["Dryness", "/images/community/bathroom-shelf.webp"],
-  ["Barrier Support", "/images/community/product-closeup.webp"],
-  ["Dullness", "/images/community/serum-texture-lifestyle.webp"],
-  ["Blemishes", "/images/community/community-campaign.webp"],
-  ["Sensitivity", "/images/community/packaging-detail.webp"],
-  ["Daily Protection", "/images/community/bathroom-shelf.webp"],
+  ["Dryness", asset("/images/community/bathroom-shelf.webp")],
+  ["Barrier Support", asset("/images/community/product-closeup.webp")],
+  ["Dullness", asset("/images/community/serum-texture-lifestyle.webp")],
+  ["Blemishes", asset("/images/community/community-campaign.webp")],
+  ["Sensitivity", asset("/images/community/packaging-detail.webp")],
+  ["Daily Protection", asset("/images/community/bathroom-shelf.webp")],
 ] as const;
 
 const principles = [
@@ -104,7 +105,7 @@ export function SignatureStorySection() {
 
           <img
             className="signatureStory__texture"
-            src="/images/textures/serum-macro.webp"
+            src={asset("/images/textures/serum-macro.webp")}
             alt=""
             loading="lazy"
           />
@@ -260,7 +261,7 @@ export function IngredientStorySection() {
           </Link>
         </div>
         <div className="ingredientStory__media">
-          <img src="/images/community/serum-texture-lifestyle.webp" alt="Serum texture and skincare ritual" loading="lazy" />
+          <img src={asset("/images/community/serum-texture-lifestyle.webp")} alt="Serum texture and skincare ritual" loading="lazy" />
           <span>Centella + Ceramides</span>
         </div>
       </div>
@@ -271,7 +272,7 @@ export function IngredientStorySection() {
 export function CampaignBreakSection() {
   return (
     <section className="campaignBreak">
-      <img src="/images/community/community-campaign.webp" alt="Chulla editorial skincare campaign" loading="lazy" />
+      <img src={asset("/images/community/community-campaign.webp")} alt="Chulla editorial skincare campaign" loading="lazy" />
       <div className="campaignBreak__shade" />
       <div className="campaignBreak__copy shell"><span className="eyebrow">Consistency / 05</span><h2>Good skin days begin with consistency.</h2>
         <Link className="button button--light" href="/#routine">

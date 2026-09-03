@@ -21,30 +21,31 @@ import {
 } from "react";
 
 import gsap from "gsap";
+import { asset } from "../../lib/assets";
 
 const images = [
   {
-    src: "/images/community/product-closeup.webp",
+    src: asset("/images/community/product-closeup.webp"),
     alt: "Barrier Reset Serum in warm morning light",
   },
   {
-    src: "/images/community/bathroom-shelf.webp",
+    src: asset("/images/community/bathroom-shelf.webp"),
     alt: "Chulla products on a warm stone bathroom shelf",
   },
   {
-    src: "/images/community/skin-lifestyle.webp",
+    src: asset("/images/community/skin-lifestyle.webp"),
     alt: "Natural skin in soft morning light",
   },
   {
-    src: "/images/community/serum-texture-lifestyle.webp",
+    src: asset("/images/community/serum-texture-lifestyle.webp"),
     alt: "Barrier Reset Serum and translucent serum texture",
   },
   {
-    src: "/images/community/community-campaign.webp",
+    src: asset("/images/community/community-campaign.webp"),
     alt: "Chulla skincare routine in a warm interior",
   },
   {
-    src: "/images/community/packaging-detail.webp",
+    src: asset("/images/community/packaging-detail.webp"),
     alt: "Close detail of Chulla Barrier Reset Serum packaging",
   },
 ] as const;

@@ -5,6 +5,7 @@ import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ArrowRight, ArrowUpRight } from "lucide-react";
+import { asset } from "../../lib/assets";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -130,18 +131,18 @@ export function HeroProductSculpture() {
 
           <div className="heroStage__products">
             <figure className="heroProduct heroProduct--cleanser">
-              <img src="/images/products/cleanser_transparent_2.webp" alt="Cloud Milk Cleanser" />
+              <img src={asset("/images/products/cleanser_transparent_2.webp")} alt="Cloud Milk Cleanser" />
             </figure>
             <figure className="heroProduct heroProduct--cream">
-              <img src="/images/products/moisturizer_transparent_2.webp" alt="Dew Barrier Cream" />
+              <img src={asset("/images/products/moisturizer_transparent_2.webp")} alt="Dew Barrier Cream" />
             </figure>
             <figure className="heroProduct heroProduct--serum">
-              <img src="/images/products/serum_transparent_2.webp" alt="Barrier Reset Serum" />
+              <img src={asset("/images/products/serum_transparent_2.webp")} alt="Barrier Reset Serum" />
             </figure>
           </div>
 
           <div className="heroStage__texture hidden" aria-hidden="true">
-            <img src="/images/hero/serum-smear_transparent.webp" alt="" />
+            <img src={asset("/images/hero/serum-smear_transparent.webp")} alt="" />
           </div>
 
           <div className="heroCallout heroCallout--one">

@@ -79,13 +79,13 @@ export const TEMPLATES: TemplateItem[] = [
   },
   {
     id: 6,
-    name: "CommunityPro",
+    name: "Yayasan Bakti Nusantara",
     category: "Komunitas",
-    subcategory: "Professional Community",
-    image: "/images/community-pro_template.webp",
+    subcategory: "Organisasi nirlaba sosial kemasyarakatan independen yang mendedikasikan diri untuk pengentasan kemiskinan, pemberdayaan ekonomi warga, dan kemanusiaan di Indonesia.",
+    image: "/images/design_thumbnail/batik_nusantara.webp",
     previewHref: "/demo/community-pro",
-    tags: ["Community", "Membership", "Program"],
-    icon: Network,
+    tags: ["Community", "Yayasan", "Donation"],
+    icon: Users,
   },
   {
     id: 7,

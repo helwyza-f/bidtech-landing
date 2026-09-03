@@ -4,6 +4,7 @@ import { backendUrl } from "./lib/config";
 
 const nextConfig: NextConfig = {
   output: "standalone",
+  skipTrailingSlashRedirect: true,
   images: {
     formats: ["image/avif", "image/webp"],
     unoptimized: true,

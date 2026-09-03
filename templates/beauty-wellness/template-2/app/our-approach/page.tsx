@@ -1,5 +1,6 @@
 import { SiteShell } from "../../components/layout/site-shell";
 import { ArrowUpRight } from "lucide-react";
+import { asset } from "../../lib/assets";
 
 export const metadata = { title: "Our Approach" };
 
@@ -21,7 +22,7 @@ export default function OurApproachPage() {
         </div>
       </section>
       <section className="approachCampaign">
-        <img src="/images/community/community-campaign.webp" alt="Chulla editorial skincare campaign" />
+        <img src={asset("/images/community/community-campaign.webp")} alt="Chulla editorial skincare campaign" />
         <div className="approachCampaign__copy">
           <span className="eyebrow">Manifesto / 01</span>
           <h2>Skincare should support your skin, not compete with it.</h2>

@@ -1,4 +1,7 @@
 import type { Product } from "../types/product";
+import { asset } from "../lib/assets";
+
+const productImage = (fileName: string) => asset(`/images/products/${fileName}.webp`);
 
 export const products: Product[] = [
   {
@@ -21,7 +24,7 @@ export const products: Product[] = [
     texture: "Creamy milk",
     finish: "Soft, clean finish",
     usage: "Massage onto damp skin, then rinse. Use AM or PM.",
-    images: ["/images/products/cleanser.webp", "/images/products/cleanser_transparent.webp"],
+    images: [productImage("cleanser"), productImage("cleanser_transparent")],
     bestseller: true,
   },
   {
@@ -44,7 +47,7 @@ export const products: Product[] = [
     texture: "Silky serum",
     finish: "Comfortable, supple feel",
     usage: "Apply 2–3 drops after cleansing, AM or PM.",
-    images: ["/images/products/serum.webp", "/images/products/serum_transparent.webp"],
+    images: [productImage("serum"), productImage("serum_transparent")],
     featured: true,
     bestseller: true,
   },
@@ -68,7 +71,7 @@ export const products: Product[] = [
     texture: "Soft cream",
     finish: "Cushiony, softly dewy",
     usage: "Apply after serum as the final moisturizing step.",
-    images: ["/images/products/moisturizer.webp", "/images/products/moisturizer_transparent.webp"],
+    images: [productImage("moisturizer"), productImage("moisturizer_transparent")],
     bestseller: true,
   },
   {
@@ -91,7 +94,7 @@ export const products: Product[] = [
     texture: "Fluid lotion",
     finish: "Skin-like finish",
     usage: "Apply generously as the final AM skincare step.",
-    images: ["/images/products/sunscreen.webp", "/images/products/sunscreen_transparent.webp"],
+    images: [productImage("sunscreen"), productImage("sunscreen_transparent")],
     featured: true,
   },
   {
@@ -110,7 +113,7 @@ export const products: Product[] = [
     texture: "Weightless water",
     finish: "Fresh, weightless",
     usage: "Pat onto clean skin before serum.",
-    images: ["/images/products/cleanser.webp", "/images/products/cleanser_transparent.webp"],
+    images: [productImage("cleanser"), productImage("cleanser_transparent")],
   },
   {
     id: "ch-006",
@@ -128,7 +131,7 @@ export const products: Product[] = [
     texture: "Water-gel serum",
     finish: "Light, clean finish",
     usage: "Apply after toner and before moisturizer.",
-    images: ["/images/products/serum.webp", "/images/products/serum_transparent.webp"],
+    images: [productImage("serum"), productImage("serum_transparent")],
     isNew: true,
   },
   {
@@ -147,7 +150,7 @@ export const products: Product[] = [
     texture: "Light serum",
     finish: "Fresh, soft glow",
     usage: "Apply in the morning before moisturizer and sunscreen.",
-    images: ["/images/products/moisturizer.webp", "/images/products/moisturizer_transparent.webp"],
+    images: [productImage("moisturizer"), productImage("moisturizer_transparent")],
   },
   {
     id: "ch-008",
@@ -165,7 +168,7 @@ export const products: Product[] = [
     texture: "Gel cream",
     finish: "Cooling, hydrated",
     usage: "Smooth over face and neck as the last PM step.",
-    images: ["/images/products/sunscreen.webp", "/images/products/sunscreen_transparent.webp"],
+    images: [productImage("sunscreen"), productImage("sunscreen_transparent")],
   },
   {
     id: "ch-009",
@@ -183,7 +186,7 @@ export const products: Product[] = [
     texture: "Cream gel",
     finish: "Fresh, smooth feel",
     usage: "Use 1–2 times weekly, then rinse thoroughly.",
-    images: ["/images/products/cleanser.webp", "/images/products/cleanser_transparent.webp"],
+    images: [productImage("cleanser"), productImage("cleanser_transparent")],
   },
   {
     id: "ch-010",
@@ -201,7 +204,7 @@ export const products: Product[] = [
     texture: "Balm to milk",
     finish: "Soft, clean rinse",
     usage: "Massage onto dry skin, emulsify with water, then rinse.",
-    images: ["/images/products/serum.webp", "/images/products/serum_transparent.webp"],
+    images: [productImage("serum"), productImage("serum_transparent")],
   },
   {
     id: "ch-011",
@@ -219,7 +222,7 @@ export const products: Product[] = [
     texture: "Fluid emulsion",
     finish: "Smooth, lightweight",
     usage: "Apply after treatment steps, AM or PM.",
-    images: ["/images/products/moisturizer.webp", "/images/products/moisturizer_transparent.webp"],
+    images: [productImage("moisturizer"), productImage("moisturizer_transparent")],
     isNew: true,
   },
   {
@@ -238,7 +241,7 @@ export const products: Product[] = [
     texture: "Serum + cream",
     finish: "Layered comfort",
     usage: "Layer serum, then cream, after cleansing.",
-    images: ["/images/products/sunscreen.webp", "/images/products/sunscreen_transparent.webp"],
+    images: [productImage("sunscreen"), productImage("sunscreen_transparent")],
     featured: true,
   },
 ];
