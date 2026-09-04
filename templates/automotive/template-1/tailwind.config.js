@@ -9,6 +9,7 @@ module.exports = {
     extend: {
       fontFamily: {
         sans: ["var(--font-sans)"],
+        bebas: ["var(--font-bebas)", "sans-serif"],
       },
       colors: {
         border: "var(--border)",

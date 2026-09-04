@@ -4,6 +4,7 @@ export const BRAND = {
   tagline: 'Building amazing web experiences',
   email: 'contact@bidtech.com',
   phone: '+62-XXX-XXXX',
+  whatsapp: '6281234567890',
   address: 'Your Company Address',
 };
 

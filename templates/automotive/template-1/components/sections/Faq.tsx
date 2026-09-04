@@ -39,7 +39,7 @@ export default function Faq() {
   };
 
   return (
-    <section id="faq" className="w-full min-h-screen py-20 md:py-24 bg-[#f8f9fc] flex flex-col justify-center">
+    <section id="faq" className="w-full py-12 sm:py-16 md:py-20 bg-[#f8f9fc] flex flex-col justify-center">
       <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
@@ -48,7 +48,7 @@ export default function Faq() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 sm:mb-16"
+          className="text-center mb-8 sm:mb-10"
         >
           <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-gray-900 tracking-tight mb-3">
             Pertanyaan Umum

@@ -6,7 +6,7 @@ import { WHY_CHOOSE_US_FEATURES } from "@/constants/features";
 
 export default function WhyChooseUs() {
   return (
-    <section id="why-choose-us" className="relative w-full min-h-screen py-20 md:py-24 bg-white flex items-center overflow-hidden">
+    <section id="why-choose-us" className="relative w-full py-12 sm:py-16 md:py-20 bg-white flex items-center overflow-hidden">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
@@ -63,7 +63,7 @@ export default function WhyChooseUs() {
               MENGAPA MEMILIH RENTCAR
             </p>
 
-            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-gray-900 tracking-tight leading-[1.18] mb-10 sm:mb-12">
+            <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-gray-900 tracking-tight leading-[1.18] mb-6 sm:mb-8">
               Standar Baru dalam <br className="hidden sm:block" />
               Mobilitas Perjalanan
             </h2>

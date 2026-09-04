@@ -2,7 +2,21 @@
 
 import React, { useState, useEffect } from 'react';
 import { useModal } from '@/lib/ModalContext';
-import { X, CheckCircle2, Sparkles, Send } from 'lucide-react';
+import { BRAND } from '@/lib/constants';
+import { X, CheckCircle2, Sparkles, MessageCircle } from 'lucide-react';
+
+const BRANCH_PHONES: Record<string, string> = {
+  'Jakarta Selatan - Tebet': '6281234567891',
+  'Jakarta Barat - Puri Indah': '6281234567892',
+  'Jakarta Timur - Rawamangun': '6281234567893',
+  'Tangerang Selatan - BSD': '6281234567894',
+  'Bekasi - Summarecon': '6281234567895',
+  'Bandung - Dago': '6281234567896',
+  'Surabaya - Gubeng': '6281234567897',
+  'Yogyakarta - Kaliurang': '6281234567898',
+  'Semarang - Candisari': '6281234567899',
+  'Online Class Seluruh Indonesia': '6281234567890',
+};
 
 export default function RegisterModal() {
   const { isRegisterOpen, closeRegister, selectedProgram } = useModal();
@@ -24,8 +38,33 @@ export default function RegisterModal() {
 
   if (!isRegisterOpen) return null;
 
+  const getWaUrl = () => {
+    const rawTarget = BRANCH_PHONES[formData.branch] || BRAND.whatsapp || '6281234567890';
+    let targetNumber = rawTarget.replace(/\D/g, '');
+    if (targetNumber.startsWith('0')) {
+      targetNumber = '62' + targetNumber.slice(1);
+    }
+
+    const message =
+      `Halo SmartBelajar, saya ingin mendaftar dan klaim 1x Free Trial Class untuk anak saya:\n\n` +
+      `📋 *Data Pendaftaran Free Trial*:\n` +
+      `• *Nama Orang Tua*: ${formData.parentName}\n` +
+      `• *Nama Anak*: ${formData.childName}\n` +
+      `• *Usia Anak*: ${formData.childAge} Tahun\n` +
+      `• *No. Handphone/WA*: ${formData.phone}\n` +
+      `• *Program Belajar*: ${formData.program}\n` +
+      `• *Cabang Pilihan*: ${formData.branch}\n\n` +
+      `Mohon informasi jadwal sesi kelas dan konfirmasi free trial-nya. Terima kasih!`;
+
+    return `https://wa.me/${targetNumber}?text=${encodeURIComponent(message)}`;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    const waUrl = getWaUrl();
+    if (typeof window !== 'undefined') {
+      window.open(waUrl, '_blank', 'noopener,noreferrer');
+    }
     setSubmitted(true);
   };
 
@@ -58,19 +97,28 @@ export default function RegisterModal() {
         </button>
 
         {submitted ? (
-          <div className="text-center py-10 space-y-4">
+          <div className="text-center py-8 space-y-4">
             <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto mb-2">
               <CheckCircle2 className="w-10 h-10" />
             </div>
-            <h3 className="text-2xl font-black text-brand-navy">Pendaftaran Berhasil Terkirim!</h3>
+            <h3 className="text-2xl font-black text-brand-navy">Pendaftaran Disiapkan!</h3>
             <p className="text-brand-muted text-sm max-w-sm mx-auto leading-relaxed">
-              Terima kasih, <strong>{formData.parentName}</strong>. Tim konsultan pendidikan SmartBelajar akan segera menghubungi Anda untuk konfirmasi jadwal Free Trial ananda <strong>{formData.childName}</strong>.
+              Terima kasih, <strong>{formData.parentName}</strong>. Data Anda telah disiapkan dan sedang dialihkan ke WhatsApp konsultan pendidikan SmartBelajar untuk konfirmasi jadwal Free Trial ananda <strong>{formData.childName}</strong>.
             </p>
-            <div className="pt-3">
+            <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+              <a
+                href={getWaUrl()}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-full sm:w-auto px-6 py-3 bg-[#25D366] hover:bg-[#20bd5a] text-white text-sm font-extrabold rounded-full transition-all shadow-md flex items-center justify-center gap-2 hover:scale-105"
+              >
+                <MessageCircle className="w-4 h-4" />
+                Buka WhatsApp Sekarang
+              </a>
               <button
                 type="button"
                 onClick={handleReset}
-                className="px-6 py-2.5 bg-brand-orange hover:bg-brand-orange-hover text-white text-sm font-extrabold rounded-full transition-colors shadow-sm"
+                className="w-full sm:w-auto px-6 py-3 bg-slate-100 hover:bg-slate-200 text-slate-700 text-sm font-bold rounded-full transition-colors"
               >
                 Selesai &amp; Tutup
               </button>
@@ -196,12 +244,12 @@ export default function RegisterModal() {
                 type="submit"
                 className="w-full mt-2 py-3.5 px-6 bg-brand-orange hover:bg-brand-orange-hover text-white font-black text-sm rounded-full shadow-orange-glow transition-all duration-300 flex items-center justify-center gap-2 hover:scale-[1.02] active:scale-[0.98]"
               >
-                <Send className="w-4 h-4" />
+                <MessageCircle className="w-4 h-4" />
                 Klaim 1x Free Trial Sekarang
               </button>
 
-              <p className="text-center text-xs text-brand-muted mt-2">
-                🔒 Data Anda aman dan hanya digunakan untuk konfirmasi jadwal trial.
+              <p className="text-center text-xs text-brand-muted mt-2 flex items-center justify-center gap-1.5">
+                <span>💬</span> Formulir akan otomatis terhubung ke WhatsApp Customer Service.
               </p>
             </form>
           </>
