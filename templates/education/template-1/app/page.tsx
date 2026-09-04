@@ -1,19 +1,31 @@
-import Header from '@/components/Header';
-import Hero from '@/components/Hero';
-import Features from '@/components/Features';
-import CTA from '@/components/CTA';
-import Footer from '@/components/Footer';
+import Header from '@/components/layout/Header';
+import Hero from '@/components/sections/Hero';
+import TrustStats from '@/components/sections/TrustStats';
+import Programs from '@/components/sections/Programs';
+import WhyUs from '@/components/sections/WhyUs';
+import Testimonials from '@/components/sections/Testimonials';
+import CTA from '@/components/sections/CTA';
+import Footer from '@/components/layout/Footer';
+import RegisterModal from '@/components/modals/RegisterModal';
+import BranchModal from '@/components/modals/BranchModal';
 
 export default function Home() {
   return (
     <>
       <Header />
-      <main>
+      <main className="min-h-screen">
         <Hero />
-        <Features />
+        <TrustStats />
+        <Programs />
+        <WhyUs />
+        <Testimonials />
         <CTA />
       </main>
       <Footer />
+      
+      {/* Global Modals */}
+      <RegisterModal />
+      <BranchModal />
     </>
   );
 }
