@@ -29,11 +29,11 @@ const STEPS = [
 
 export default function HowToBook() {
   return (
-    <section className="relative w-full min-h-screen py-20 md:py-24 bg-[#121214] text-white flex flex-col justify-center overflow-hidden">
+    <section className="relative w-full py-12 sm:py-16 md:py-20 bg-[#121214] text-white flex flex-col justify-center overflow-hidden">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Header Section */}
-        <div className="text-center max-w-3xl mx-auto mb-20 md:mb-24">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}

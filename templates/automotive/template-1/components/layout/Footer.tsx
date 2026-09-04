@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
 
 export default function Footer() {
@@ -9,9 +10,15 @@ export default function Footer() {
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
               <div className="mb-5">
-                <span className="text-2xl font-extrabold tracking-tight text-blue-600">
-                  Rent<span className="text-gray-900">car</span>
-                </span>
+                <Link href="/">
+                  <Image
+                    src="/images/logo2-dark.webp"
+                    alt="RentCar Logo"
+                    width={240}
+                    height={80}
+                    className="h-10 sm:h-11 w-auto object-contain"
+                  />
+                </Link>
               </div>
               <p className="text-sm text-gray-500 leading-relaxed max-w-sm mb-6">
                 Partner terpercaya Anda untuk penyewaan mobil. Berkendara dengan
