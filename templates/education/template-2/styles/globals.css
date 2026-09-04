@@ -2,43 +2,46 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+
+:root {
+  --primary: #345bd6;
+  --primary-dark: #2445b5;
+
+  --background: #fafbff;
+  --foreground: #151922;
+
+  --text-secondary: #687083;
+
+  --border: #e5e9f3;
+
+  --radius-card: 28px;
 }
+
 
 html {
   scroll-behavior: smooth;
 }
 
+
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  background: var(--background);
+  color: var(--foreground);
+
+  font-family:
+    var(--font-sans),
     sans-serif;
+
+  overflow-x: clip;
+
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 
-/* Smooth transitions */
-button,
-a {
-  transition: all 0.3s ease;
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
-/* Utility classes */
-.container-max {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-}
 
-.section-padding {
-  @apply py-16 md:py-20;
-}
-
-.heading-lg {
-  @apply text-3xl md:text-4xl font-bold;
-}
-
-.text-muted {
-  @apply text-gray-600;
+::selection {
+  background: rgba(52,91,214,.18);
 }

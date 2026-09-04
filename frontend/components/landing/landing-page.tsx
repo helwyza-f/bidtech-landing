@@ -36,7 +36,7 @@ function TemplateDesignCard({ template }: { template: (typeof TEMPLATES)[number]
     >
       <article className="flex h-full min-h-[360px] flex-col overflow-hidden rounded-[24px] border border-green-100 bg-white transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_24px_64px_rgba(95,201,74,0.14)]">
         <div className="m-3 mb-0 overflow-hidden rounded-[18px] border border-white bg-[linear-gradient(135deg,#f1fbef,#e9f7ee)] p-2 shadow-[inset_0_0_0_1px_rgba(95,201,74,0.08)]">
-          <div className="relative h-[210px] w-full overflow-hidden rounded-[14px] bg-slate-100">
+          <div className="relative aspect-video w-full overflow-hidden rounded-[14px] bg-slate-100">
             <Image
               src={template.image}
               alt={`${template.name} design preview`}
@@ -339,7 +339,7 @@ function LandingPageView() {
         </Reveal>
       </section> */}
 
-      <section className="landing-panel mx-auto max-w-7xl px-4 pb-14 lg:-mt-16 sm:px-5 sm:pb-16 md:px-8 md:py-20" id="services">
+      <section className="landing-panel mx-auto max-w-7xl px-4 pb-14 lg:-mt-16 sm:px-5 sm:pb-16 max-sm:py-16 md:px-8 md:py-20" id="services">
         <Reveal className="mx-auto max-w-2xl text-center">
           <div className="flex justify-center">
             <Badge className={sectionBadgeClass}>{t.services.badge}</Badge>
@@ -351,7 +351,7 @@ function LandingPageView() {
         </Reveal>
 
         <div
-          className="mt-8 flex w-full snap-x snap-mandatory items-stretch gap-4 overflow-x-auto [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
+          className="mt-8 flex h-fit w-full snap-x snap-mandatory items-stretch gap-4 overflow-x-auto [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
           onScroll={handleServiceScroll}
           ref={servicesSliderRef}
         >
