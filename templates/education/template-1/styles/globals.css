@@ -2,43 +2,250 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  html {
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    font-family: var(--font-nunito), 'Nunito', sans-serif;
+    color: #1E293B;
+    background-color: #FFFFFF;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
+/* Lenis Smooth Scroll Essential Rules */
+html.lenis,
+html.lenis body {
+  height: auto;
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
 }
 
-/* Smooth transitions */
-button,
-a {
-  transition: all 0.3s ease;
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
 
-/* Utility classes */
-.container-max {
-  @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+.lenis.lenis-stopped {
+  overflow: hidden;
 }
 
-.section-padding {
-  @apply py-16 md:py-20;
+/* 3D Flip Card Animation Styles */
+.flip-card {
+  perspective: 1000px;
 }
 
-.heading-lg {
-  @apply text-3xl md:text-4xl font-bold;
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
+  border-radius: inherit;
 }
 
-.text-muted {
-  @apply text-gray-600;
+.group:hover .flip-card-inner,
+.flip-card:hover .flip-card-inner,
+.flip-card.is-flipped .flip-card-inner {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+}
+
+.flip-card-front,
+.flip-card-back {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: inherit;
+  overflow: hidden;
+  -webkit-mask-image: -webkit-radial-gradient(white, black);
+}
+
+.flip-card-front {
+  transform: rotateY(0deg);
+  -webkit-transform: rotateY(0deg);
+  z-index: 2;
+}
+
+.flip-card-back {
+  transform: rotateY(180deg);
+  -webkit-transform: rotateY(180deg);
+  z-index: 1;
+}
+
+/* 4 Distinct Abstract Blob Shapes for Program Cards */
+.card-blob-math {
+  border-radius: 65% 35% 68% 32% / 38% 66% 34% 62%;
+}
+.blob-halo-math {
+  border-radius: 35% 65% 32% 68% / 62% 34% 66% 38%;
+}
+
+.card-blob-bahasa {
+  border-radius: 35% 65% 42% 58% / 65% 35% 65% 35%;
+}
+.blob-halo-bahasa {
+  border-radius: 60% 40% 65% 35% / 35% 65% 35% 65%;
+}
+
+.card-blob-english {
+  border-radius: 70% 30% 52% 48% / 45% 72% 28% 55%;
+}
+.blob-halo-english {
+  border-radius: 30% 70% 48% 52% / 55% 28% 72% 45%;
+}
+
+.card-blob-menulis {
+  border-radius: 40% 60% 72% 28% / 58% 40% 60% 42%;
+}
+.blob-halo-menulis {
+  border-radius: 60% 40% 28% 72% / 42% 60% 40% 58%;
+}
+
+/* Organic Blob Shapes & Native CSS Morphing Animations */
+@keyframes blobOrangeMorph {
+  0%, 100% {
+    border-radius: 65% 35% 32% 68% / 58% 30% 70% 42%;
+  }
+  34% {
+    border-radius: 54% 46% 42% 58% / 46% 64% 36% 54%;
+  }
+  67% {
+    border-radius: 42% 58% 60% 40% / 36% 40% 60% 64%;
+  }
+}
+
+@keyframes blobBlueMorph {
+  0%, 100% {
+    border-radius: 46% 54% 65% 35% / 40% 42% 58% 60%;
+  }
+  50% {
+    border-radius: 56% 44% 42% 58% / 52% 58% 42% 48%;
+  }
+}
+
+.blob-hero-blue {
+  border-radius: 46% 54% 65% 35% / 40% 42% 58% 60%;
+  animation: blobBlueMorph 9s ease-in-out infinite, gentleFloat 4.5s ease-in-out infinite;
+}
+
+.blob-hero-orange {
+  border-radius: 65% 35% 32% 68% / 58% 30% 70% 42%;
+  animation: blobOrangeMorph 8s ease-in-out infinite;
+}
+
+.blob-why-blue {
+  border-radius: 40% 60% 70% 30% / 45% 45% 55% 55%;
+}
+
+.blob-why-orange {
+  border-radius: 55% 45% 30% 70% / 60% 35% 65% 40%;
+}
+
+/* Gentle Keyframe Animations */
+@keyframes gentleFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(1deg);
+  }
+}
+
+@keyframes gentlePulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 1;
+  }
+}
+
+.animate-float-slow {
+  animation: gentleFloat 4s ease-in-out infinite;
+}
+
+.animate-float-card {
+  animation: gentleFloat 3.5s ease-in-out infinite;
+}
+
+.animate-pulse-slow {
+  animation: gentlePulse 3s ease-in-out infinite;
+}
+
+/* Playful Star Particles Animations */
+@keyframes starTwinkle {
+  0%, 100% {
+    transform: scale(0.85) rotate(0deg);
+    opacity: 0.4;
+  }
+  50% {
+    transform: scale(1.25) rotate(15deg);
+    opacity: 1;
+  }
+}
+
+@keyframes starFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-8px) rotate(-10deg);
+  }
+}
+
+.animate-star-twinkle {
+  animation: starTwinkle 2.8s ease-in-out infinite;
+}
+
+.animate-star-float {
+  animation: starFloat 3.5s ease-in-out infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FDF8EE;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 9999px;
+  border: 2px solid #FDF8EE;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Performance & Rendering Containment to eliminate first-scroll lag */
+section {
+  contain: layout style;
+}
+
+/* Hardware-accelerated compositing for animated cards */
+.about-card,
+.stat-item,
+.program-item,
+.testi-card,
+.benefit-item,
+.faq-item,
+.article-card {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
