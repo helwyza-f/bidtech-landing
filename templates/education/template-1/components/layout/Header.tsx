@@ -40,11 +40,10 @@ export default function Header() {
           {/* Logo */}
           <a href="#" className="flex items-center group flex-shrink-0">
             <Image
-              src="/logo.webp"
+              src="/images/logo.webp"
               alt="SmartBelajar"
               width={180}
               height={44}
-              style={{ width: 'auto', height: 'auto' }}
               className="h-9 sm:h-10 w-auto object-contain transition-transform duration-300 group-hover:scale-105"
               priority
             />

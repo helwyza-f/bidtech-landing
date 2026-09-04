@@ -1,11 +1,18 @@
 /** @type {import('next').NextConfig} */
+const isStaticDemoBuild = process.env.BUILD_STATIC_DEMO === "true";
+const demoBasePath = process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "";
+
 const nextConfig = {
-  reactStrictMode: false, // Prevents duplicate Lenis / GSAP initialization in dev
-  transpilePackages: ['lenis', 'lucide-react'],
+  reactStrictMode: true,
   images: {
-    unoptimized: false,
     formats: ['image/avif', 'image/webp'],
+    ...(isStaticDemoBuild
+      ? { unoptimized: true }
+      : { unoptimized: false }),
   },
+  ...(isStaticDemoBuild
+    ? { output: "export", basePath: demoBasePath, trailingSlash: true }
+    : {}),
 };
 
 module.exports = nextConfig;

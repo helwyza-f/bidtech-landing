@@ -1,49 +1,51 @@
 import type { Metadata } from "next";
-import {
-  DM_Serif_Display,
-  Manrope,
-} from "next/font/google";
-
+import { Manrope, DM_Serif_Display } from "next/font/google";
 import { SmoothScroll } from "@/components/providers/smooth-scroll";
-
+import { RouteLine } from "@/components/layout/route-line";
+import { site } from "@/lib/data/site";
 import "@/styles/globals.css";
 
 const manrope = Manrope({
   subsets: ["latin"],
-  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
   variable: "--font-sans",
+  display: "swap",
 });
 
-const dmSerif = DM_Serif_Display({
-  weight: "400",
+const dmSerifDisplay = DM_Serif_Display({
   subsets: ["latin"],
-  display: "swap",
+  weight: "400",
+  style: ["normal", "italic"],
   variable: "--font-display",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
-    default: "Nivora Academy",
-    template: "%s | Nivora Academy",
+    default: `${site.name} — ${site.tagline}`,
+    template: `%s — ${site.name}`,
   },
-
-  description:
-    "Belajar skill digital yang relevan melalui kelas praktis, mentor berpengalaman, dan pembelajaran yang dirancang untuk kebutuhan industri.",
+  description: site.description,
+  openGraph: {
+    title: `${site.name} — ${site.tagline}`,
+    description: site.description,
+    url: site.url,
+    siteName: site.name,
+    locale: "id_ID",
+    type: "website",
+  },
 };
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode;
-}>) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="id">
-      <body
-        className={`${manrope.variable} ${dmSerif.variable}`}
-      >
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+    <html lang="id" className={`${manrope.variable} ${dmSerifDisplay.variable}`}>
+      <body>
+        <a href="#konten" className="skip-link">
+          Lompat ke konten
+        </a>
+        <RouteLine />
+        <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>
   );

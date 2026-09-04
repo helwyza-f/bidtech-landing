@@ -2,46 +2,111 @@
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
+  /* ---- BRAND TOKENS (ganti blok ini saat rebrand klien) ---- */
   --primary: #345bd6;
   --primary-dark: #2445b5;
+  --primary-soft: #eef2fe;
+  --signal: #f2a93b;
+  --ink: #0f1524;
 
+  /* ---- NEUTRAL SYSTEM ---- */
   --background: #fafbff;
+  --surface: #ffffff;
   --foreground: #151922;
-
-  --text-secondary: #687083;
-
+  --muted: #687083;
+  --muted-soft: #a7afbe;
   --border: #e5e9f3;
 
-  --radius-card: 28px;
-}
+  /* ---- SHAPE ---- */
+  --radius-panel: 32px;
+  --radius-card: 24px;
+  --radius-media: 16px;
 
+  /* ---- MOTION ---- */
+  --ease-brand: cubic-bezier(0.22, 1, 0.36, 1);
+  --dur-micro: 180ms;
+  --dur-ui: 320ms;
+  --dur-enter: 700ms;
+}
 
 html {
   scroll-behavior: smooth;
 }
 
-
 body {
   background: var(--background);
   color: var(--foreground);
-
-  font-family:
-    var(--font-sans),
-    sans-serif;
-
+  font-family: var(--font-sans), system-ui, sans-serif;
   overflow-x: clip;
-
   -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
 }
 
-
+/* Lenis mengambil alih scroll — matikan smooth native agar tidak bertabrakan */
 .lenis.lenis-smooth {
   scroll-behavior: auto !important;
 }
 
-
 ::selection {
-  background: rgba(52,91,214,.18);
+  background: rgba(52, 91, 214, 0.18);
+}
+
+/* Fokus keyboard yang terlihat di semua elemen interaktif */
+:where(a, button, [role="button"], input, textarea, select, summary):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 6px;
+}
+
+/* Skip link */
+.skip-link {
+  position: fixed;
+  top: -100%;
+  left: 1rem;
+  z-index: 100;
+  background: var(--primary);
+  color: #fff;
+  padding: 0.75rem 1.25rem;
+  border-radius: 999px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  transition: top 0.2s var(--ease-brand);
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+/* Marquee edge mask — dipakai di partner & testimonial marquee */
+.marquee-mask {
+  mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent);
+}
+
+/* Sembunyikan scrollbar untuk carousel native (bootcamp mobile) */
+.no-scrollbar {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Kontrak reduced motion — wajib */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .animate-marquee,
+  .animate-marquee-slow,
+  .animate-marquee-reverse {
+    animation: none !important;
+  }
 }

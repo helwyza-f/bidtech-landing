@@ -5,6 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:demo": "BUILD_STATIC_DEMO=true NEXT_PUBLIC_DEMO_BASE_PATH=/demo/smartbelajar next build",
     "start": "next start",
     "lint": "next lint"
   },

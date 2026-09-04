@@ -14,7 +14,7 @@ export default function TrustStats() {
 
   const stats = [
     {
-      icon: '/smartbelajar_crops_png/10_icon_globe.webp',
+      icon: '/images/smartbelajar_crops_png/10_icon_globe.webp',
       target: 60,
       suffix: '+',
       isThousand: false,
@@ -22,7 +22,7 @@ export default function TrustStats() {
       fallback: '60+',
     },
     {
-      icon: '/smartbelajar_crops_png/11_icon_students.webp',
+      icon: '/images/smartbelajar_crops_png/11_icon_students.webp',
       target: 4,
       suffix: ' Juta+',
       isThousand: false,
@@ -30,7 +30,7 @@ export default function TrustStats() {
       fallback: '4 Juta+',
     },
     {
-      icon: '/smartbelajar_crops_png/12_icon_book.webp',
+      icon: '/images/smartbelajar_crops_png/12_icon_book.webp',
       target: 63,
       suffix: ' Tahun+',
       isThousand: false,
@@ -38,7 +38,7 @@ export default function TrustStats() {
       fallback: '63 Tahun+',
     },
     {
-      icon: '/smartbelajar_crops_png/13_icon_school.webp',
+      icon: '/images/smartbelajar_crops_png/13_icon_school.webp',
       target: 25000,
       suffix: '+',
       isThousand: true,

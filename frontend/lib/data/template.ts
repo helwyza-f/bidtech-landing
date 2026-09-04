@@ -7,6 +7,7 @@ import {
   ShoppingBasket,
   House,
   MirrorRound,
+  University,
   type LucideIcon,
 } from "lucide-react";
 
@@ -68,6 +69,16 @@ export const TEMPLATES: TemplateItem[] = [
   },
   {
     id: 5,
+    name: "Yayasan Bakti Nusantara",
+    category: "Komunitas",
+    subcategory: "Organisasi nirlaba sosial kemasyarakatan independen yang mendedikasikan diri untuk pengentasan kemiskinan, pemberdayaan ekonomi warga, dan kemanusiaan di Indonesia.",
+    image: "/images/design_thumbnail/batik_nusantara.webp",
+    previewHref: "/demo/community-pro",
+    tags: ["Community", "Yayasan", "Donation"],
+    icon: Users,    
+  },
+  {
+    id: 6,
     name: "Harapan kita",
     category: "Komunitas",
     subcategory:
@@ -75,16 +86,6 @@ export const TEMPLATES: TemplateItem[] = [
     image: "/images/design_thumbnail/harapan_kita.webp",
     previewHref: "/demo/organization",
     tags: ["Community", "Organization", "Information Portal"],
-    icon: Users,
-  },
-  {
-    id: 6,
-    name: "Yayasan Bakti Nusantara",
-    category: "Komunitas",
-    subcategory: "Organisasi nirlaba sosial kemasyarakatan independen yang mendedikasikan diri untuk pengentasan kemiskinan, pemberdayaan ekonomi warga, dan kemanusiaan di Indonesia.",
-    image: "/images/design_thumbnail/batik_nusantara.webp",
-    previewHref: "/demo/community-pro",
-    tags: ["Community", "Yayasan", "Donation"],
     icon: Users,
   },
   {
@@ -116,7 +117,17 @@ export const TEMPLATES: TemplateItem[] = [
     previewHref: "/demo/beauty-wellness-2",
     tags: ["Skincare", "Kecantikan", "Kosmetik"],
     icon: MirrorRound,
-  },      
+  },
+  {
+    id: 10,
+    name: "SmartBelajar",
+    category: "Pendidikan",
+    subcategory: "SmartBelajar membantu anak mengembangkan kemampuan belajar mandiri dalam Matematika dan Membaca sejak usia dini",
+    image: "/images/design_thumbnail/smart_belajar.webp",
+    previewHref: "/demo/smartbelajar",
+    tags: ["Les", "Sekolah", "Kursus"],
+    icon: University,
+  },     
 ];
 
 /**

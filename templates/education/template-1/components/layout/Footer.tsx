@@ -268,11 +268,10 @@ export default function Footer() {
           <div className="col-span-2 space-y-4">
             <a href="#" className="inline-block">
               <Image
-                src="/logo.webp"
+                src="/images/logo.webp"
                 alt="SmartBelajar"
                 width={170}
                 height={40}
-                style={{ width: 'auto', height: 'auto' }}
                 className="h-9 w-auto object-contain"
               />
             </a>

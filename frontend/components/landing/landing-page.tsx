@@ -762,12 +762,15 @@ function LandingPageView() {
                   {[0, 1, 2].map((groupIndex) => (
                     <div aria-hidden={groupIndex !== 0} className="flex shrink-0 items-center gap-4" key={`mitra-group-${groupIndex}`}>
                       {[
-                        { src: "/images/mitra-appeknas-20260728.png", alt: "Logo APPEKNAS" },
-                        { src: "/images/mitra-kadin-batam-20260728.png", alt: "Logo Kadin Batam" },
-                        { src: "/images/mitra-batamnow-20260728.png", alt: "Logo BatamNow" },
-                        { src: "/images/mitra-apindo-20260728.png", alt: "Logo APINDO" },
-                        { src: "/images/mitra-poltevara-20260826.png", alt: "Logo Poltevara" },
-                        { src: "/images/mitra-vis-society.webp", alt: "Logo VIS Society" },
+                        { src: "/images/mitra/mitra-appeknas-20260728.png", alt: "Logo APPEKNAS" },
+                        { src: "/images/mitra/mitra-kadin-batam-20260728.png", alt: "Logo Kadin Batam" },
+                        { src: "/images/mitra/mitra-batamnow-20260728.png", alt: "Logo BatamNow" },
+                        { src: "/images/mitra/mitra-apindo-20260728.png", alt: "Logo APINDO" },
+                        { src: "/images/mitra/mitra-poltevara-20260826.png", alt: "Logo Poltevara" },
+                        { src: "/images/mitra/mitra-vis-society.webp", alt: "Logo VIS Society" },
+                        { src: "/images/mitra/mitra-itebis.webp", alt: "Logo ITEBIS" },
+                        { src: "/images/mitra/mitra-hkti.webp", alt: "Logo HKTI" },
+                        { src: "/images/mitra/mitra-gempar.webp", alt: "Logo GEMPAR" },
                       ].map((mitra) => (
                         <div
                           className="flex h-24 w-40 shrink-0 items-center justify-center rounded-[22px] bg-white p-4 sm:h-28 sm:w-48"

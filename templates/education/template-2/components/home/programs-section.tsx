@@ -1,102 +1,66 @@
 "use client";
 
-import Link from "next/link";
-
-import { ArrowUpRight, BarChart3, Code2, PenTool } from "lucide-react";
-import { motion } from "motion/react";
-
-import { programs } from "@/lib/data/home";
-
-
-const icons = [Code2, PenTool, BarChart3];
-
+import { useRef } from "react";
+import { motion, useReducedMotion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
+import { Section } from "@/components/ui/section";
+import { SectionHeader } from "@/components/ui/section-header";
+import { useScrollReveal } from "@/lib/hooks/use-scroll-reveal";
+import { programs } from "@/lib/data/programs";
 
 export function ProgramsSection() {
+  const rootRef = useRef<HTMLElement>(null);
+  const reduce = useReducedMotion();
+
+  useScrollReveal(rootRef, {
+    targets: ".path-card",
+    y: 44,
+    stagger: 0.09,
+    duration: 0.7,
+    disabled: !!reduce,
+  });
+
   return (
-    <section id="program" className="bg-white py-24 md:py-32">
-      <div className="mx-auto w-[calc(100%-32px)] max-w-[1240px]">
+    <Section id="program" ref={rootRef}>
+      <SectionHeader
+        title="Pilih jalur yang sesuai tujuan kariermu"
+        description="Empat jalur spesialisasi. Setiap jalur dirancang berjenjang dari pemahaman fundamental sampai penyelesaian project akhir berstandar industri."
+      />
 
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="mb-14 grid gap-6 lg:grid-cols-[1.05fr_.7fr] lg:items-end lg:gap-20"
-        >
-          <div>
-            <span className="mb-4 block text-xs font-bold uppercase tracking-[0.08em] text-blue-600">
-              Learning Paths
-            </span>
-
-            <h2 className="max-w-[650px] text-4xl font-medium leading-[1.08] tracking-[-0.045em] text-[#151922] md:text-5xl">
-              Pilih skill yang ingin{" "}
-              <span className="text-blue-600">
-                kamu upgrade.
-              </span>
-            </h2>
-          </div>
-
-          <p className="max-w-[480px] text-sm leading-7 text-[#687083] md:text-base">
-            Program pembelajaran Nivora dirancang untuk membantu kamu berkembang dari pemahaman konsep hingga kemampuan yang bisa diterapkan dalam project nyata.
-          </p>
-        </motion.div>
-
-
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {programs.map((program, index) => {
-            const Icon = icons[index] ?? Code2;
-
-            return (
-              <motion.article
-                key={program.title}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                whileHover={{ y: -8 }}
-                className="group flex min-h-[390px] flex-col rounded-[28px] border border-[#e5e9f3] bg-gradient-to-b from-white to-[#fbfcff] p-7 transition-shadow duration-300 hover:shadow-[0_20px_60px_rgba(31,50,112,.10)]"
+      <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        {programs.map((program) => {
+          const Icon = program.icon;
+          return (
+            <motion.article
+              key={program.slug}
+              className="path-card group flex min-h-[340px] flex-col justify-between rounded-card border border-line bg-surface p-6 md:p-7"
+              whileHover={{ y: -8 }}
+              transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            >
+              <div>
+                <div className="grid h-14 w-14 place-items-center rounded-[18px] bg-brand-soft text-brand transition-transform duration-300 group-hover:scale-110">
+                  <Icon size={26} />
+                </div>
+                <div className="mt-8">
+                  <span className="text-xs font-bold text-brand">{program.classCount} kelas terpadu</span>
+                  <h3 className="mt-1 text-xl font-semibold text-foreground">{program.title}</h3>
+                  <p className="mt-2.5 text-sm leading-relaxed text-muted">{program.description}</p>
+                </div>
+              </div>
+              <a
+                href="#kursus"
+                className="mt-6 flex items-center justify-between border-t border-line pt-6 text-sm font-semibold text-foreground group-hover:text-brand"
               >
-
-                <div className="flex items-start justify-between">
-                  <span className="text-xs font-semibold text-[#a7afbe]">
-                    {program.number}
-                  </span>
-
-                  <div className="grid h-14 w-14 place-items-center rounded-[18px] bg-blue-50 text-blue-600">
-                    <Icon size={26} strokeWidth={1.8} />
-                  </div>
-                </div>
-
-
-                <div className="mt-auto">
-                  <span className="text-[11px] font-bold text-blue-600">
-                    {program.meta}
-                  </span>
-
-                  <h3 className="mt-3 max-w-[280px] text-2xl font-medium leading-tight tracking-[-0.03em] text-[#151922]">
-                    {program.title}
-                  </h3>
-
-                  <p className="mt-4 text-sm leading-6 text-[#687083]">
-                    {program.description}
-                  </p>
-                </div>
-
-
-                <Link
-                  href="#kursus"
-                  className="mt-7 flex items-center justify-between border-t border-[#e5e9f3] pt-5 text-xs font-bold text-[#151922] transition-colors group-hover:text-blue-600"
-                >
-                  Explore program
-                  <ArrowUpRight size={18} />
-                </Link>
-
-              </motion.article>
-            );
-          })}
-        </div>
-
+                <span>Lihat kurikulum jalur</span>
+                <ArrowUpRight
+                  size={16}
+                  className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
+                />
+              </a>
+            </motion.article>
+          );
+        })}
       </div>
-    </section>
+    </Section>
   );
 }
