@@ -24,6 +24,8 @@ export const nivoraAssets = {
     gradientOrb: `${NIVORA_ASSET_BASE}/hero/hero-gradient-orb.webp`,
     glassShape: `${NIVORA_ASSET_BASE}/hero/hero-glass-shape.webp`,
     uiCard: `${NIVORA_ASSET_BASE}/hero/hero-ui-card.webp`,
+    poster: `${NIVORA_ASSET_BASE}/hero/hero-poster.webp`,
+    video: `${NIVORA_ASSET_BASE}/hero/hero-video.mp4`,
   },
 
   courses: {

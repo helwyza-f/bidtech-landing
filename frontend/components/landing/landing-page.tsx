@@ -34,7 +34,7 @@ function TemplateDesignCard({ template }: { template: (typeof TEMPLATES)[number]
       rel="noreferrer"
       target="_blank"
     >
-      <article className="flex h-full min-h-[360px] flex-col overflow-hidden rounded-[24px] border border-green-100 bg-white transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_24px_64px_rgba(95,201,74,0.14)]">
+      <article className="flex min-h-[360px] flex-col overflow-hidden rounded-[24px] border border-green-100 bg-white transition duration-300 hover:-translate-y-1 hover:border-brand-primary/35 hover:shadow-[0_24px_64px_rgba(95,201,74,0.14)]">
         <div className="m-3 mb-0 overflow-hidden rounded-[18px] border border-white bg-[linear-gradient(135deg,#f1fbef,#e9f7ee)] p-2 shadow-[inset_0_0_0_1px_rgba(95,201,74,0.08)]">
           <div className="relative aspect-video w-full overflow-hidden rounded-[14px] bg-slate-100">
             <Image

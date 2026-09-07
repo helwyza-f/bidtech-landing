@@ -44,7 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <a href="#konten" className="skip-link">
           Lompat ke konten
         </a>
-        <RouteLine />
+        {/* <RouteLine /> */}
         <SmoothScroll>{children}</SmoothScroll>
       </body>
     </html>

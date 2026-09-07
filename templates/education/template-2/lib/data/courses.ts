@@ -1,3 +1,5 @@
+import { nivoraAssets } from "@/lib/data/asset-paths";
+
 export type CourseCategory = "Web" | "Design" | "Data" | "Excel";
 export type CourseLevel = "Pemula" | "Menengah" | "Mahir";
 
@@ -11,8 +13,7 @@ export type Course = {
   mentor: string;
   mentorRole: string;
   tag: string;
-  /** Kelas warna aksen untuk thumbnail placeholder — ganti dengan gambar asli saat aset tersedia. */
-  accent: string;
+  image: string;
 };
 
 export const courses: Course[] = [
@@ -26,7 +27,7 @@ export const courses: Course[] = [
     mentor: "Raka Pratama",
     mentorRole: "Sr. Frontend Eng.",
     tag: "Next.js 15, App Router, SSR, Turbopack",
-    accent: "from-blue-600/20 to-indigo-600/10",
+    image: nivoraAssets.courses.advancedReactNextjs,
   },
   {
     slug: "typescript-modern-web",
@@ -38,7 +39,19 @@ export const courses: Course[] = [
     mentor: "Kevin Aditya",
     mentorRole: "Backend Engineer",
     tag: "Generics, Utility Types, Type-safe API",
-    accent: "from-sky-600/20 to-cyan-600/10",
+    image: nivoraAssets.courses.typescriptModernWeb,
+  },
+  {
+    slug: "frontend-performance",
+    title: "Frontend Performance Engineering",
+    category: "Web",
+    level: "Mahir",
+    duration: "8 jam",
+    lessons: "20 materi",
+    mentor: "Raka Pratama",
+    mentorRole: "Sr. Frontend Eng.",
+    tag: "Core Web Vitals, Lazy Loading, Caching",
+    image: nivoraAssets.courses.frontendPerformance,
   },
   {
     slug: "design-system-figma",
@@ -50,7 +63,19 @@ export const courses: Course[] = [
     mentor: "Nadia Maharani",
     mentorRole: "Product Designer",
     tag: "Tokens, Component Props, Auto-layout",
-    accent: "from-violet-600/20 to-purple-600/10",
+    image: nivoraAssets.courses.designSystemFigma,
+  },
+  {
+    slug: "ux-research",
+    title: "UX Research untuk Produk Digital",
+    category: "Design",
+    level: "Menengah",
+    duration: "9 jam",
+    lessons: "22 materi",
+    mentor: "Maya Lestari",
+    mentorRole: "UX Researcher",
+    tag: "User Interview, Usability Testing, Insight",
+    image: nivoraAssets.courses.uxResearch,
   },
   {
     slug: "ui-design-fundamentals",
@@ -62,7 +87,7 @@ export const courses: Course[] = [
     mentor: "Maya Lestari",
     mentorRole: "UX Researcher",
     tag: "Grid, Hierarchy, Visual Balance, Prototyping",
-    accent: "from-pink-600/20 to-rose-600/10",
+    image: nivoraAssets.courses.uiDesignFundamentals,
   },
   {
     slug: "sql-data-analysis",
@@ -73,8 +98,8 @@ export const courses: Course[] = [
     lessons: "32 materi",
     mentor: "Adrian Wijaya",
     mentorRole: "Data Scientist",
-    tag: "PostgreSQL, CTE, Window Functions, Case Studies",
-    accent: "from-emerald-600/20 to-teal-600/10",
+    tag: "PostgreSQL, CTE, Window Functions, Studi Kasus",
+    image: nivoraAssets.courses.sqlDataAnalysis,
   },
   {
     slug: "power-bi-visualization",
@@ -86,7 +111,19 @@ export const courses: Course[] = [
     mentor: "Adrian Wijaya",
     mentorRole: "Data Scientist",
     tag: "DAX, Interactive Dashboards, ETL",
-    accent: "from-amber-600/20 to-orange-600/10",
+    image: nivoraAssets.courses.powerBiVisualization,
+  },
+  {
+    slug: "python-data-analysis",
+    title: "Python untuk Analisis Data",
+    category: "Data",
+    level: "Menengah",
+    duration: "13 jam",
+    lessons: "34 materi",
+    mentor: "Adrian Wijaya",
+    mentorRole: "Data Scientist",
+    tag: "Pandas, NumPy, Data Cleaning, Visualisasi",
+    image: nivoraAssets.courses.pythonDataAnalysis,
   },
   {
     slug: "excel-for-analyst",
@@ -98,7 +135,7 @@ export const courses: Course[] = [
     mentor: "Sarah Azizah",
     mentorRole: "Business Analyst",
     tag: "XLOOKUP, Power Query, Dynamic Pivot",
-    accent: "from-green-600/20 to-emerald-600/10",
+    image: nivoraAssets.courses.aiProductivity,
   },
   {
     slug: "ai-productivity",
@@ -110,7 +147,7 @@ export const courses: Course[] = [
     mentor: "Sarah Azizah",
     mentorRole: "Business Analyst",
     tag: "Prompt Workflow, Spreadsheet Copilot",
-    accent: "from-cyan-600/20 to-blue-600/10",
+    image: nivoraAssets.courses.aiProductivity,
   },
 ];
 

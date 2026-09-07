@@ -7,7 +7,6 @@ export type NavItem = {
 export const mainNav: NavItem[] = [
   { label: "Program", href: "#program" },
   { label: "Kursus", href: "#kursus" },
-  { label: "Metode", href: "#metode" },
   { label: "Bootcamp", href: "#bootcamp", highlight: true },
   { label: "Mentor", href: "#mentor" },
   { label: "Tentang", href: "#tentang" },
@@ -22,9 +21,9 @@ export const footerNav = {
   ],
   perusahaan: [
     { label: "Tentang Nivora", href: "#tentang" },
-    { label: "Metode Belajar", href: "#metode" },
     { label: "Mentor Praktisi", href: "#mentor" },
     { label: "Bootcamp 12 Minggu", href: "#bootcamp" },
+    { label: "Beasiswa", href: "/beasiswa" },
   ],
   kontak: [
     { label: "Kebijakan Privasi", href: "/kebijakan-privasi" },

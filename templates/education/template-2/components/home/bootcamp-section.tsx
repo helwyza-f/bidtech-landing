@@ -43,15 +43,23 @@ export function BootcampSection({ onOpenConsult }: BootcampSectionProps) {
         });
 
         if (!trackRef.current) return;
-        const distance = trackRef.current.scrollWidth - window.innerWidth + 64;
+
+        // PENTING: trackRef sendiri memakai `w-max` sehingga clientWidth-nya
+        // selalu sama dengan scrollWidth (ia melebar mengikuti konten, tidak
+        // dibatasi parent). Jarak scroll HARUS dihitung terhadap lebar
+        // viewport yang benar-benar terlihat (window.innerWidth), bukan
+        // clientWidth track itu sendiri — jika tidak, GSAP akan menganggap
+        // tidak ada jarak untuk di-scroll dan track terlihat "berhenti"
+        // sebelum stage terakhir tampil.
+        const getDistance = () => trackRef.current!.scrollWidth - window.innerWidth + 256;
 
         const tween = gsap.to(trackRef.current, {
-          x: -distance,
+          x: () => -getDistance(),
           ease: "none",
           scrollTrigger: {
             trigger: sectionRef.current,
             start: "top top",
-            end: () => `+=${distance}`,
+            end: () => `+=${getDistance()}`,
             pin: true,
             scrub: 1,
             anticipatePin: 1,
@@ -86,7 +94,17 @@ export function BootcampSection({ onOpenConsult }: BootcampSectionProps) {
       });
     }, sectionRef);
 
-    return () => ctx.revert();
+    // Kartu bootcamp tidak memuat gambar, tapi web font dan layout tetangga
+    // bisa saja menggeser tinggi/lebar setelah mount pertama — refresh
+    // ScrollTrigger begitu window selesai load untuk memastikan jarak pin
+    // (getDistance()) dihitung dari layout final, bukan layout sementara.
+    const onLoad = () => ScrollTrigger.refresh();
+    window.addEventListener("load", onLoad);
+
+    return () => {
+      window.removeEventListener("load", onLoad);
+      ctx.revert();
+    };
   }, [reduce]);
 
   return (
@@ -109,7 +127,7 @@ export function BootcampSection({ onOpenConsult }: BootcampSectionProps) {
       />
 
       <div className="relative z-10 mx-auto w-full max-w-shell px-4 sm:px-6">
-        <div className="mb-14 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+        <div className="mb-10 flex flex-col gap-6 md:mb-14 md:flex-row md:items-end md:justify-between">
           <div>
             <div className="bootcamp-badge mb-3 inline-flex items-center gap-2 rounded-pill bg-signal/15 px-3 py-1 text-xs font-bold text-signal">
               <span className="h-2 w-2 rounded-full bg-signal" />
@@ -117,7 +135,7 @@ export function BootcampSection({ onOpenConsult }: BootcampSectionProps) {
             </div>
             <h2
               ref={headingRef}
-              className="bootcamp-heading max-w-[20ch] text-display-lg font-semibold leading-[1.06] text-white [&_.split-word]:inline-block [&_.split-word]:overflow-hidden"
+              className="bootcamp-heading max-w-[16ch] text-2xl font-semibold leading-[1.1] text-white [&_.split-word]:inline-block [&_.split-word]:overflow-hidden sm:max-w-[20ch] sm:text-display-lg"
             >
               {bootcampMeta.heading}
             </h2>
@@ -135,19 +153,20 @@ export function BootcampSection({ onOpenConsult }: BootcampSectionProps) {
             ))}
           </div>
         </div>
+      </div>
 
-        <div
-          className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 lg:hidden"
-          data-pin="false"
-        >
+      <div className="relative ml-2 z-10 mt-2 lg:hidden">
+        <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pl-4 pr-4 pb-2 sm:pl-6 sm:pr-6">
           {bootcampStages.map((stage) => (
-            <div key={stage.period} className="w-[280px] shrink-0 snap-start">
+            <div key={stage.period} className="w-[76vw] max-w-[290px] shrink-0 snap-start">
               <BootcampCard stage={stage} variant="mobile" />
             </div>
           ))}
         </div>
+      </div>
 
-        <div className="mt-14 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-10 sm:flex-row">
+      <div className="relative z-10 mx-auto w-full max-w-shell px-4 sm:px-6">
+        <div className="mt-10 flex flex-col items-center justify-between gap-6 border-t border-white/10 pt-10 lg:mt-14 sm:flex-row">
           <div className="text-center sm:text-left">
             <p className="text-base font-bold text-white">{bootcampMeta.closingNote}</p>
             <p className="mt-0.5 text-xs text-white/60">{bootcampMeta.closingDetail}</p>
@@ -186,8 +205,8 @@ function BootcampCard({
   return (
     <article
       className={`${
-        variant === "desktop" ? "bootcamp-card" : "bootcamp-card-mobile"
-      } w-[320px] shrink-0 rounded-card border border-white/10 bg-white/[0.045] p-6 backdrop-blur-sm`}
+        variant === "desktop" ? "bootcamp-card w-[320px]" : "bootcamp-card-mobile w-full"
+      } shrink-0 rounded-card border border-white/10 bg-white/[0.045] p-5 backdrop-blur-sm sm:p-6`}
     >
       <div className="mb-3 flex items-center justify-between text-xs font-semibold">
         <span className="font-bold text-signal">{stage.period}</span>

@@ -1,9 +1,11 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import { MessageCircle } from "lucide-react";
 import { site } from "@/lib/data/site";
 import { footerNav } from "@/lib/data/navigation";
+import { nivoraAssets } from "@/lib/data/asset-paths";
 import { useScrollReveal } from "@/lib/hooks/use-scroll-reveal";
 import { useReducedMotion } from "motion/react";
 
@@ -24,13 +26,14 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-shell px-4 py-16 sm:px-6 md:py-20">
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div className="footer-col space-y-3">
-            <a href="#" className="flex items-center gap-2.5">
-              <div className="grid h-9 w-9 place-items-center rounded-xl bg-white text-lg font-bold text-ink">
-                N
-              </div>
-              <span className="text-base font-extrabold tracking-tight text-white">
-                Nivora<span className="text-signal">.</span> Academy
-              </span>
+            <a href="#" className="flex items-center">
+              <Image
+                src={nivoraAssets.brand.logoWhite}
+                alt="Nivora Academy"
+                width={132}
+                height={32}
+                className="h-7 w-auto sm:h-8"
+              />
             </a>
             <p className="max-w-[34ch] text-sm leading-relaxed text-white/70">
               Belajar skill digital yang relevan dengan kebutuhan industri sesungguhnya.

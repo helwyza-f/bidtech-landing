@@ -1,42 +1,43 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Image from "next/image";
+import Link from "next/link";
 import { useReducedMotion } from "motion/react";
 import { ArrowUpRight, Check } from "lucide-react";
-import { Section } from "@/components/ui/section";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { scholarship } from "@/lib/data/scholarship";
+import { nivoraAssets } from "@/lib/data/asset-paths";
 
-type ScholarshipSectionProps = {
-  onOpenConsult: () => void;
-};
-
-export function ScholarshipSection({ onOpenConsult }: ScholarshipSectionProps) {
+/**
+ * Dedicated section (bukan card mengambang) — gambar jadi background
+ * penuh section dengan opacity 50% dan fade dari kanan ke tengah di
+ * desktop/tablet, opacity flat 25% (tanpa fade) di mobile.
+ */
+export function ScholarshipSection() {
   const rootRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
 
-  // Reveal sederhana per blueprint 09: panel scale 0.97->1 + fade, checklist
-  // stagger 0.08. Tanpa parallax — section ini fungsinya konversi, bukan pertunjukan.
   useEffect(() => {
     if (!rootRef.current || reduce) return;
 
     const ctx = gsap.context(() => {
-      gsap.set(".scholarship-panel", { scale: 0.97, opacity: 0 });
-      gsap.set(".scholarship-check", { y: 16, opacity: 0 });
+      gsap.set(".scholarship-copy > *", { y: 16, opacity: 0 });
+      gsap.set(".scholarship-bg", { opacity: 0 });
 
       ScrollTrigger.create({
         trigger: rootRef.current,
         start: "top 80%",
         once: true,
         onEnter: () => {
-          gsap.to(".scholarship-panel", { scale: 1, opacity: 1, duration: 0.7, ease: "power3.out" });
-          gsap.to(".scholarship-check", {
+          gsap.to(".scholarship-bg", { opacity: 1, duration: 1, ease: "power2.out" });
+          gsap.to(".scholarship-copy > *", {
             y: 0,
             opacity: 1,
-            duration: 0.5,
+            duration: 0.55,
             stagger: 0.08,
             ease: "power3.out",
-            delay: 0.15,
+            delay: 0.1,
           });
         },
       });
@@ -46,76 +47,55 @@ export function ScholarshipSection({ onOpenConsult }: ScholarshipSectionProps) {
   }, [reduce]);
 
   return (
-    <Section ref={rootRef} className="bg-background">
-      <div className="scholarship-panel rounded-panel bg-brand-soft p-8 sm:p-12 md:p-16">
-        <div className="grid items-center gap-10 lg:grid-cols-12">
-          <div className="space-y-5 lg:col-span-7">
-            <div className="inline-flex items-center gap-2 rounded-pill bg-white px-3.5 py-1 text-xs font-bold text-brand">
-              <span>{scholarship.eyebrow}</span>
-            </div>
+    <section ref={rootRef} className="relative overflow-hidden bg-brand-soft py-16 sm:py-20 md:py-28 lg:py-32">
+      {/* Background gambar: opacity 50% + fade kanan->tengah di md ke atas,
+          opacity flat 25% tanpa fade di mobile. */}
+      <div className="scholarship-bg pointer-events-none absolute inset-0">
+        <Image
+          src={nivoraAssets.career.portfolioReview}
+          alt=""
+          fill
+          sizes="100vw"
+          className="object-cover opacity-25"
+        />
+        <div className="absolute inset-0 bg-gradient-to-l from-transparent via-brand-soft/70 to-brand-soft" />
+      </div>
 
-            <h2 className="text-display-lg font-semibold leading-[1.08] text-foreground">
-              {scholarship.title}
-            </h2>
+      <div className="relative z-10 mx-auto w-full max-w-shell px-4 sm:px-6">
+        <div className="scholarship-copy max-w-[640px] space-y-4 sm:space-y-5">
+          <h2 className="text-2xl font-semibold leading-[1.1] text-foreground sm:text-display-lg">
+            {scholarship.title}
+          </h2>
 
-            <p className="max-w-[54ch] text-base leading-relaxed text-muted">{scholarship.description}</p>
+          <p className="max-w-[52ch] text-sm leading-relaxed text-muted sm:text-base">
+            {scholarship.description}
+          </p>
 
-            <div className="space-y-3 pt-2">
-              {scholarship.checklist.map((item) => (
-                <div key={item} className="scholarship-check flex items-center gap-3 text-sm font-semibold text-foreground">
-                  <div className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand text-white">
-                    <Check size={12} />
-                  </div>
-                  <span>{item}</span>
+          <div className="space-y-2.5 pt-1 sm:space-y-3 sm:pt-2">
+            {scholarship.checklist.map((item) => (
+              <div key={item} className="flex items-center gap-3 text-sm font-semibold text-foreground">
+                <div className="grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand text-white">
+                  <Check size={12} />
                 </div>
-              ))}
-            </div>
-
-            <div className="flex flex-wrap items-center gap-4 pt-4">
-              <button
-                onClick={onOpenConsult}
-                className="inline-flex h-12 items-center gap-2 rounded-pill bg-brand px-7 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(52,91,214,.22)] transition hover:bg-brand-dark"
-              >
-                <span>Ajukan pendaftaran beasiswa</span>
-                <ArrowUpRight size={16} />
-              </button>
-              <span className="text-xs font-semibold text-muted">{scholarship.deadlineNote}</span>
-            </div>
+                <span>{item}</span>
+              </div>
+            ))}
           </div>
 
-          <div className="lg:col-span-5">
-            <div className="space-y-4 rounded-2xl border border-line bg-surface p-6 shadow-soft sm:p-8">
-              <div className="flex items-center justify-between border-b border-line pb-3">
-                <span className="text-xs font-bold uppercase tracking-wider text-muted">Status kuota</span>
-                <span className="rounded-pill bg-signal/10 px-2.5 py-0.5 text-xs font-bold text-signal">
-                  {scholarship.quota.remaining}
-                </span>
-              </div>
-
-              <div className="space-y-3 text-xs text-muted">
-                <div className="flex justify-between border-b border-line/50 py-1">
-                  <span>Total kuota beasiswa:</span>
-                  <strong className="text-foreground">{scholarship.quota.total}</strong>
-                </div>
-                <div className="flex justify-between border-b border-line/50 py-1">
-                  <span>Skema beasiswa:</span>
-                  <strong className="text-foreground">{scholarship.quota.scheme}</strong>
-                </div>
-                <div className="flex justify-between border-b border-line/50 py-1">
-                  <span>Tahapan seleksi:</span>
-                  <strong className="text-foreground">{scholarship.quota.selection}</strong>
-                </div>
-                <div className="flex justify-between py-1">
-                  <span>Biaya pendaftaran:</span>
-                  <strong className="text-brand">{scholarship.quota.registrationFee}</strong>
-                </div>
-              </div>
-
-              <p className="pt-2 text-[11px] leading-normal text-muted-soft">{scholarship.quota.footnote}</p>
-            </div>
+          <div className="flex flex-wrap items-center gap-3 pt-3 sm:gap-4 sm:pt-4">
+            <Link
+              href="/beasiswa"
+              className="inline-flex h-11 items-center gap-2 rounded-pill bg-brand px-6 text-sm font-semibold text-white shadow-[0_12px_30px_rgba(52,91,214,.22)] transition hover:bg-brand-dark sm:h-12 sm:px-7"
+            >
+              <span>Lihat detail & skema beasiswa</span>
+              <ArrowUpRight size={16} />
+            </Link>
+            <span className="text-xs font-semibold text-muted">
+              {scholarship.deadlineNote} · {scholarship.quota.remaining}
+            </span>
           </div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }

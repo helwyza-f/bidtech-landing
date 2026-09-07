@@ -5,15 +5,11 @@ import { SiteHeader } from "@/components/layout/site-header";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { ConsultModal, type ConsultModalType } from "@/components/ui/consult-modal";
 import { HeroSection } from "@/components/home/hero-section";
-import { StatsSection } from "@/components/home/stats-section";
-import { PartnersSection } from "@/components/home/partners-section";
 import { ProgramsSection } from "@/components/home/programs-section";
 import { CoursesSection } from "@/components/home/courses-section";
-import { MethodSection } from "@/components/home/method-section";
 import { BootcampSection } from "@/components/home/bootcamp-section";
 import { ScholarshipSection } from "@/components/home/scholarship-section";
 import { MentorsSection } from "@/components/home/mentors-section";
-import { CareerSection } from "@/components/home/career-section";
 import { AboutSection } from "@/components/home/about-section";
 import { EventsSection } from "@/components/home/events-section";
 import { TestimonialsSection } from "@/components/home/testimonials-section";
@@ -39,18 +35,14 @@ export default function HomePage() {
       <SiteHeader onOpenConsult={openConsult} />
 
       <main id="konten">
-        <HeroSection onOpenConsult={openConsult} onOpenInterestTest={openInterestTest} />
-        <StatsSection />
-        <PartnersSection />
+        <HeroSection onOpenInterestTest={openInterestTest} />
         <ProgramsSection />
         <CoursesSection onOpenConsult={openConsult} />
-        <MethodSection />
         <BootcampSection onOpenConsult={openConsult} />
-        <ScholarshipSection onOpenConsult={openConsult} />
+        <ScholarshipSection />
         <MentorsSection />
-        <CareerSection />
-        <AboutSection onOpenConsult={openConsult} />
-        <EventsSection onOpenConsult={openConsult} />
+        <AboutSection />
+        <EventsSection />
         <TestimonialsSection />
         <FaqSection />
         <CtaSection onOpenInterestTest={openInterestTest} />

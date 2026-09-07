@@ -1,17 +1,21 @@
+import Image from "next/image";
 import { Marquee } from "@/components/ui/marquee";
 import { testimonialsRowOne, testimonialsRowTwo, type Testimonial } from "@/lib/data/testimonials";
 
 function TestimonialCard({ item }: { item: Testimonial }) {
   return (
-    <div className="w-[360px] shrink-0 rounded-card border border-line bg-surface p-6 shadow-soft">
-      <p className="text-sm leading-relaxed text-foreground">&ldquo;{item.quote}&rdquo;</p>
-      <div className="mt-4 flex items-center gap-3 border-t border-line pt-4">
-        <div className="grid h-9 w-9 place-items-center rounded-full bg-brand-soft text-xs font-bold text-brand">
-          {item.initials}
-        </div>
-        <div>
-          <strong className="block text-xs font-bold text-foreground">{item.name}</strong>
-          <span className="text-[11px] text-muted">{item.role}</span>
+    <div className="flex w-[380px] shrink-0 gap-4 rounded-card border border-line bg-surface p-5 shadow-soft">
+      <div className="relative h-16 w-16 shrink-0 overflow-hidden rounded-full bg-brand-soft">
+        <Image src={item.photo} alt={item.name} fill sizes="64px" className="object-cover" />
+      </div>
+      <div>
+        <p className="text-sm leading-relaxed text-foreground">&ldquo;{item.quote}&rdquo;</p>
+        <div className="mt-3 text-xs">
+          <strong className="block font-bold text-foreground">{item.name}</strong>
+          <span className="text-muted">
+            {item.role} · {item.company}
+          </span>
+          <span className="ml-1 text-muted-soft">— {item.batch}</span>
         </div>
       </div>
     </div>

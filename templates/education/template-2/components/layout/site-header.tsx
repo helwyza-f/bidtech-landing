@@ -1,9 +1,11 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight, ChevronRight, Menu, X } from "lucide-react";
 import { mainNav } from "@/lib/data/navigation";
+import { nivoraAssets } from "@/lib/data/asset-paths";
 import { useLockScroll } from "@/lib/hooks/use-lock-scroll";
 
 type SiteHeaderProps = {
@@ -55,19 +57,16 @@ export function SiteHeader({ onOpenConsult }: SiteHeaderProps) {
         >
           <a
             href="#"
-            className="flex items-center gap-2.5 rounded-md text-left focus-visible:outline-none"
+            className="flex items-center gap-2 rounded-md text-left focus-visible:outline-none"
           >
-            <div className="grid h-9 w-9 place-items-center rounded-xl bg-brand text-lg font-bold text-white shadow-sm">
-              <span className="tracking-tight">N</span>
-            </div>
-            <div className="flex flex-col leading-none">
-              <span className="text-base font-extrabold tracking-tight text-foreground">
-                Nivora<span className="text-brand">.</span>
-              </span>
-              <span className="-mt-0.5 text-[10px] font-bold uppercase tracking-wider text-muted-soft">
-                Academy
-              </span>
-            </div>
+            <Image
+              src={nivoraAssets.brand.logoPrimary}
+              alt="Nivora Academy"
+              width={132}
+              height={32}
+              priority
+              className="h-7 w-auto sm:h-8"
+            />
           </a>
 
           <div className="hidden items-center gap-7 text-sm font-medium text-muted lg:flex">

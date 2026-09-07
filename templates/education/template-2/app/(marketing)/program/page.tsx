@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { programs } from "@/lib/data/programs";
 
 export const metadata: Metadata = {
   title: "Program & Jalur Belajar",
-  description: "Empat jalur spesialisasi Nivora Academy: Web Programming, UI/UX & Product Design, Data & Analytics, dan Excel & Office Productivity.",
+  description:
+    "Empat jalur spesialisasi Nivora Academy: Web Programming, UI/UX & Product Design, Data & Analytics, dan Excel & Office Productivity.",
 };
 
 export default function ProgramPage() {
@@ -17,20 +19,39 @@ export default function ProgramPage() {
         sampai project akhir berstandar industri.
       </p>
 
-      <div className="mt-12 grid gap-5 sm:grid-cols-2">
-        {programs.map((program) => {
-          const Icon = program.icon;
-          return (
-            <article key={program.slug} className="rounded-card border border-line bg-surface p-7">
-              <div className="grid h-14 w-14 place-items-center rounded-[18px] bg-brand-soft text-brand">
-                <Icon size={26} />
+      <div className="mt-14 divide-y divide-line border-y border-line">
+        {programs.map((program) => (
+          <div key={program.slug} className="grid items-center gap-6 py-10 md:grid-cols-12 md:gap-10">
+            <div className="relative aspect-[4/3] overflow-hidden rounded-panel bg-brand-soft md:col-span-5">
+              <Image
+                src={program.image}
+                alt={program.title}
+                fill
+                sizes="(min-width: 768px) 420px, 100vw"
+                className="object-cover"
+              />
+              <span className="absolute bottom-4 left-4 rounded-pill bg-white/90 px-3 py-1 text-xs font-bold text-foreground backdrop-blur-sm">
+                {program.classCount} kelas terpadu
+              </span>
+            </div>
+            <div className="md:col-span-7">
+              <h2 className="font-display text-3xl italic text-foreground sm:text-4xl">{program.title}</h2>
+              <p className="mt-3 max-w-[52ch] text-sm leading-relaxed text-muted sm:text-base">
+                {program.description}
+              </p>
+              <div className="mt-4 flex flex-wrap gap-2">
+                {program.skills.map((skill) => (
+                  <span
+                    key={skill}
+                    className="rounded-pill border border-line bg-surface px-3 py-1 text-xs font-semibold text-muted"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
-              <span className="mt-6 block text-xs font-bold text-brand">{program.classCount} kelas terpadu</span>
-              <h2 className="mt-1 text-xl font-semibold text-foreground">{program.title}</h2>
-              <p className="mt-2.5 text-sm leading-relaxed text-muted">{program.description}</p>
-            </article>
-          );
-        })}
+            </div>
+          </div>
+        ))}
       </div>
 
       <Link

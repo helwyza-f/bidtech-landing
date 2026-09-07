@@ -12,17 +12,20 @@ export function FaqSection() {
 
   return (
     <Section className="border-t border-line bg-surface">
-      <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:sticky lg:top-28 lg:col-span-5">
-          <h2 className="text-display-lg font-semibold leading-tight text-foreground">
+      <div className="grid items-start gap-10 lg:grid-cols-12 lg:gap-16">
+        <div className="order-1 lg:sticky lg:top-28 lg:order-1 lg:col-span-5">
+          <h2 className="text-2xl font-semibold leading-tight text-foreground sm:text-display-lg">
             Pertanyaan yang sering masuk
           </h2>
-          <p className="mt-4 text-sm leading-relaxed text-muted sm:text-base">
+          <p className="mt-3 text-sm leading-relaxed text-muted sm:mt-4 sm:text-base">
             Kami menjawab setiap keraguan secara transparan tanpa klaim berlebihan, karena
             keberhasilan belajar dimulai dari ekspektasi yang jujur.
           </p>
 
-          <div className="mt-8 space-y-3 rounded-2xl border border-line bg-background p-6">
+          {/* Kartu CTA disembunyikan dari alur mobile di sini — muncul lagi
+              di bawah daftar FAQ lewat blok terpisah, supaya urutan baca di
+              mobile adalah: heading -> daftar FAQ -> kartu kontak lanjutan. */}
+          <div className="mt-6 hidden space-y-3 rounded-2xl border border-line bg-background p-6 sm:mt-8 lg:block">
             <h3 className="text-sm font-bold text-foreground">Masih ada hal yang ingin ditanyakan?</h3>
             <p className="text-xs leading-relaxed text-muted">
               Tim konselor akademik kami siap membantu menganalisis latar belakang dan memilih
@@ -40,7 +43,7 @@ export function FaqSection() {
           </div>
         </div>
 
-        <div className="divide-y divide-line border-y border-line lg:col-span-7">
+        <div className="order-2 divide-y divide-line border-y border-line lg:order-2 lg:col-span-7">
           {faqs.map((faq, idx) => {
             const isOpen = openIndex === idx;
             return (
@@ -74,6 +77,24 @@ export function FaqSection() {
               </div>
             );
           })}
+        </div>
+
+        {/* Versi mobile-only kartu CTA, ditempatkan setelah daftar FAQ */}
+        <div className="order-3 space-y-3 rounded-2xl border border-line bg-background p-6 lg:hidden">
+          <h3 className="text-sm font-bold text-foreground">Masih ada hal yang ingin ditanyakan?</h3>
+          <p className="text-xs leading-relaxed text-muted">
+            Tim konselor akademik kami siap membantu menganalisis latar belakang dan memilih
+            program yang paling tepat.
+          </p>
+          <a
+            href={whatsappLink("Halo Nivora, saya mau konsultasi program")}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex items-center gap-2 pt-1 text-xs font-bold text-brand hover:underline"
+          >
+            <MessageCircle size={15} />
+            <span>Chat dengan tim konselor via WhatsApp</span>
+          </a>
         </div>
       </div>
     </Section>

@@ -7,9 +7,9 @@ import { useReducedMotion } from "motion/react";
 const MILESTONES = [
   { label: "Jalur", targetId: "#program" },
   { label: "Kursus", targetId: "#kursus" },
-  { label: "Metode", targetId: "#metode" },
   { label: "Bootcamp", targetId: "#bootcamp" },
-  { label: "Karier", targetId: "#tentang" },
+  { label: "Mentor", targetId: "#mentor" },
+  { label: "Tentang", targetId: "#tentang" },
 ];
 
 /**

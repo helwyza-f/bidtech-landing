@@ -22,7 +22,7 @@ export const Section = forwardRef<HTMLElement, SectionProps>(function Section(
     <section
       ref={ref}
       id={id}
-      className={cn("scroll-mt-24", padded && "py-20 md:py-28 lg:py-32", className)}
+      className={cn("scroll-mt-24", padded && "py-16 md:py-20 lg:py-24", className)}
     >
       <div className={cn("mx-auto w-full max-w-shell px-4 sm:px-6", containerClassName)}>
         {children}

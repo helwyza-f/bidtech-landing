@@ -1,122 +1,84 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { useReducedMotion } from "motion/react";
-import { ArrowRight } from "lucide-react";
-import { gsap, ScrollTrigger } from "@/lib/gsap";
-import { Section } from "@/components/ui/section";
+import { useState } from "react";
+import Image from "next/image";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { aboutTimeline } from "@/lib/data/about";
 
-type AboutSectionProps = {
-  onOpenConsult: () => void;
-};
-
-export function AboutSection({ onOpenConsult }: AboutSectionProps) {
-  const rootRef = useRef<HTMLElement>(null);
-  const parallaxRef = useRef<HTMLDivElement>(null);
+export function AboutSection() {
+  const [activeIndex, setActiveIndex] = useState(0);
   const reduce = useReducedMotion();
-
-  useEffect(() => {
-    if (!rootRef.current) return;
-
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-
-      if (!reduce) {
-        gsap.set(".about-visual, .about-copy > *", { y: 32, opacity: 0 });
-        ScrollTrigger.create({
-          trigger: rootRef.current,
-          start: "top 78%",
-          once: true,
-          onEnter: () => {
-            gsap.to(".about-visual", { y: 0, opacity: 1, duration: 0.8, ease: "power3.out" });
-            gsap.to(".about-copy > *", { y: 0, opacity: 1, duration: 0.6, stagger: 0.1, ease: "power3.out" });
-          },
-        });
-
-        // Parallax diterapkan ke wrapper DALAM .about-visual, bukan elemen yang
-        // sama dengan reveal di atas — menghindari dua tween GSAP berebut
-        // properti transform di node yang sama (aturan 7.1).
-        mm.add("(min-width: 1024px)", () => {
-          gsap.to(parallaxRef.current, {
-            yPercent: -6,
-            ease: "none",
-            scrollTrigger: { trigger: rootRef.current, start: "top bottom", end: "bottom top", scrub: 1.4 },
-          });
-        });
-      } else {
-        gsap.set(".about-visual, .about-copy > *", { opacity: 1, y: 0 });
-      }
-    }, rootRef);
-
-    return () => ctx.revert();
-  }, [reduce]);
+  const active = aboutTimeline[activeIndex];
 
   return (
-    <Section id="tentang" ref={rootRef} className="border-t border-line bg-surface">
-      <div className="grid items-center gap-12 lg:grid-cols-12 lg:gap-16">
-        <div className="lg:col-span-6">
-          <div className="about-visual relative overflow-hidden rounded-panel">
-            <div
-              ref={parallaxRef}
-              className="relative flex aspect-[4/3] flex-col justify-between border border-line bg-background p-8"
-            >
-              <div className="flex items-center justify-between">
-                <span className="rounded-pill bg-brand-soft px-3 py-1 text-xs font-bold text-brand">
-                  Sejak 2021
-                </span>
-                <span className="text-xs font-semibold text-muted-soft">Komunitas pembelajar</span>
-              </div>
+    <section id="tentang" className="scroll-mt-24 border-t border-line bg-surface pt-16 sm:pt-20 md:pt-28 lg:pt-32">
+      <div className="mx-auto">
+        <div className="mb-6 sm:mb-8 max-w-shell mx-auto px-4 sm:px-6">
+          <span className="text-sm font-semibold text-brand">Perjalanan kami</span>
+          <h2 className="mt-1 text-2xl font-semibold leading-[1.08] text-foreground sm:text-display-lg">
+            Dari kelas komunitas kecil, menjadi ribuan langkah karier baru.
+          </h2>
+        </div>
 
-              <div className="space-y-4">
-                <div className="h-1.5 w-16 rounded-pill bg-brand" />
-                <blockquote className="text-lg font-medium leading-snug text-foreground sm:text-xl">
-                  Pendidikan teknologi yang baik bukan yang paling banyak mengajarkan teori,
-                  melainkan yang paling cepat mengantar siswa ke kemampuan problem solving nyata.
-                </blockquote>
-              </div>
-
-              <div className="grid grid-cols-2 gap-4 border-t border-line pt-4">
-                <div>
-                  <strong className="text-2xl font-bold text-brand">100%</strong>
-                  <p className="mt-0.5 text-xs text-muted">Materi berbasis project nyata</p>
-                </div>
-                <div>
-                  <strong className="text-2xl font-bold text-brand">6 kota</strong>
-                  <p className="mt-0.5 text-xs text-muted">Komunitas chapter offline alumni</p>
-                </div>
-              </div>
-            </div>
+        <div className="mb-6 sm:mb-8 max-w-shell mx-auto px-4 sm:px-6">
+          <div className="no-scrollbar mb-5 flex gap-2 overflow-x-auto pb-1 sm:mb-6">
+            {aboutTimeline.map((milestone, i) => (
+              <button
+                key={milestone.year}
+                onClick={() => setActiveIndex(i)}
+                className={`shrink-0 rounded-pill px-4 py-2 text-sm font-bold transition-colors ${
+                  i === activeIndex
+                    ? "bg-brand text-white"
+                    : "border border-line bg-background text-muted hover:border-brand/30 hover:text-foreground"
+                }`}
+              >
+                {milestone.year}
+              </button>
+            ))}
           </div>
         </div>
+      
+        <div className="relative h-[60vh] min-h-[360px] w-full overflow-hidden bg-brand-soft sm:h-[65vh] lg:h-[70vh] lg:max-h-[720px]">
+          <AnimatePresence mode="sync">
+            <motion.div
+              key={active.year}
+              initial={reduce ? false : { opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
+              className="absolute inset-0"
+            >
+              <Image
+                src={active.image}
+                alt={active.title}
+                fill
+                sizes="(min-width: 1240px) 1192px, 100vw"
+                className="object-cover"
+                priority={activeIndex === 0}
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-ink/80 via-ink/10 to-transparent" />
+            </motion.div>
+          </AnimatePresence>
 
-        <div className="about-copy space-y-6 lg:col-span-6">
-          <span className="block text-sm font-semibold text-brand">Filosofi kami</span>
-
-          <h2 className="text-display-lg font-semibold leading-[1.08] text-foreground">
-            Kami percaya belajar seharusnya punya arah.
-          </h2>
-
-          <p className="text-base leading-relaxed text-muted">
-            Nivora Academy dimulai dari satu keresahan sederhana: begitu banyak orang punya
-            tekad belajar teknologi, namun tersesat di tengah tutorial acak dan berhenti di
-            tengah jalan tanpa menghasilkan karya.
-          </p>
-
-          <p className="text-base leading-relaxed text-muted">
-            Kami mendesain setiap kurikulum bukan sebagai daftar video pasif, melainkan sebagai
-            sistem navigasi yang mengarahkan setiap langkahmu — dari pemahaman logika, evaluasi
-            kode, hingga siap menghadapi standar rekrutmen kerja nyata.
-          </p>
-
-          <button
-            onClick={onOpenConsult}
-            className="inline-flex items-center gap-2 text-sm font-bold text-brand hover:underline"
-          >
-            <span>Pelajari lebih dalam tentang visi edukasi kami</span>
-            <ArrowRight size={16} />
-          </button>
+          <div className="absolute inset-x-0 bottom-0 z-10 p-5 sm:p-8">
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={active.year}
+                initial={reduce ? false : { opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+              >
+                <span className="font-display text-3xl italic text-white sm:text-4xl">{active.year}</span>
+                <h3 className="mt-1.5 text-base font-bold text-white sm:text-lg">{active.title}</h3>
+                <p className="mt-1 max-w-[50ch] text-xs leading-relaxed text-white/75 sm:text-sm">
+                  {active.description}
+                </p>
+              </motion.div>
+            </AnimatePresence>
+          </div>
         </div>
       </div>
-    </Section>
+    </section>
   );
 }

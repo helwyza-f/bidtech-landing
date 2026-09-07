@@ -88,6 +88,7 @@ body {
 .no-scrollbar {
   scrollbar-width: none;
   -ms-overflow-style: none;
+  margin-left: 4px;
 }
 .no-scrollbar::-webkit-scrollbar {
   display: none;
