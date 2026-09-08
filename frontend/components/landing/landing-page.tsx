@@ -380,7 +380,7 @@ function LandingPageView() {
         </Reveal>
 
         <div
-          className="mt-8 flex h-fit w-full snap-x snap-mandatory items-start gap-4 overflow-x-auto [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
+          className="mt-8 flex h-fit w-full snap-x snap-mandatory items-start gap-4 overflow-x-auto overflow-y-hidden [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
           onScroll={handleServiceScroll}
           ref={servicesSliderRef}
         >
