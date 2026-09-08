@@ -31,6 +31,7 @@ DEMOS=(
   "property:property/template-1"
   "smartbelajar:education/template-1"
   "nivoraacademy:education/template-2"
+  "aliansi-kepemimpinan-indonesia:organization/template-4"
 )
 
 DEMO_ROOT="$REPO_ROOT/frontend/public/demo"
@@ -56,7 +57,7 @@ const path = require("node:path");
 
 const outDir = process.env.OUT_DIR;
 const demoPrefix = `/demo/${process.env.DEMO_NAME}`;
-const extensions = new Set([".html", ".js", ".css"]);
+const extensions = new Set([".html", ".js", ".css", ".txt"]);
 const publicDirs = ["/images/", "/fonts/", "/assets/", "/img/"];
 
 function rewrite(content) {
@@ -97,6 +98,57 @@ function visit(currentDir) {
     if (updated !== original) {
       fs.writeFileSync(currentPath, updated);
     }
+  }
+}
+
+visit(outDir);
+NODE
+
+  OUT_DIR="$out_dir" node <<'NODE'
+const fs = require("node:fs");
+const path = require("node:path");
+
+const outDir = process.env.OUT_DIR;
+const createdAliases = new Set();
+
+function assertInside(parent, target) {
+  const relative = path.relative(parent, target);
+  if (relative.startsWith("..") || path.isAbsolute(relative)) {
+    throw new Error(`Refusing to write outside ${parent}: ${target}`);
+  }
+}
+
+function visit(currentDir) {
+  for (const entry of fs.readdirSync(currentDir, { withFileTypes: true })) {
+    const currentPath = path.join(currentDir, entry.name);
+
+    if (entry.isDirectory()) {
+      visit(currentPath);
+      continue;
+    }
+
+    if (path.extname(entry.name) !== ".txt") {
+      continue;
+    }
+
+    const relativePath = path.relative(outDir, currentPath);
+    const segments = relativePath.split(path.sep);
+    const nextSegmentIndex = segments.findIndex((segment) => segment.startsWith("__next."));
+
+    if (nextSegmentIndex === -1 || nextSegmentIndex === segments.length - 1) {
+      continue;
+    }
+
+    const aliasName = segments.slice(nextSegmentIndex).join(".");
+    const aliasPath = path.join(outDir, ...segments.slice(0, nextSegmentIndex), aliasName);
+
+    if (aliasPath === currentPath || createdAliases.has(aliasPath)) {
+      continue;
+    }
+
+    assertInside(outDir, aliasPath);
+    fs.copyFileSync(currentPath, aliasPath);
+    createdAliases.add(aliasPath);
   }
 }
 

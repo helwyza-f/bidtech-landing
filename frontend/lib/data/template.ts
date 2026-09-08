@@ -137,7 +137,17 @@ export const TEMPLATES: TemplateItem[] = [
     previewHref: "/demo/nivoraacademy",
     tags: ["Akademi", "Kursus", "Profesi"],
     icon: University,
-  },      
+  },
+  {
+    id: 12,
+    name: "Aliansi Kepemimpinan Indonesia",
+    category: "Komunitas",
+    subcategory: "Wadah kolaborasi kepemimpinan, transformasi sosial, dan inovasi strategis generasi muda.",
+    image: "/images/design_thumbnail/aliansi_kepemimpinan.webp",
+    previewHref: "/demo/aliansi-kepemimpinan-indonesia",
+    tags: ["Organisasi", "Company Profile", "Komunitas"],
+    icon: Users,
+  },     
 ];
 
 /**

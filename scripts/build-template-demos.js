@@ -18,9 +18,11 @@ const demos = [
   ["property", "property/template-1"],
   ["smartbelajar", "education/template-1"],
   ["nivoraacademy", "education/template-2"],
+  ["aliansi-kepemimpinan-indonesia", "organization/template-4"],
 ];
 
 const shouldInstall = !process.argv.includes("--skip-install");
+const requestedDemoNames = new Set(process.argv.slice(2).filter((arg) => !arg.startsWith("--")));
 const npmCmd = process.platform === "win32" ? "npm.cmd" : "npm";
 const npmCli = process.env.npm_execpath;
 const nextBin = process.platform === "win32"
@@ -73,7 +75,7 @@ function copyDemo(outDir, targetDir) {
 }
 
 function rewritePublicAssetPaths(outDir, demoName) {
-  const extensions = new Set([".html", ".js", ".css"]);
+  const extensions = new Set([".html", ".js", ".css", ".txt"]);
   const demoPrefix = `/demo/${demoName}`;
   const publicDirs = ["/images/", "/fonts/", "/assets/", "/img/"];
 
@@ -121,9 +123,53 @@ function rewritePublicAssetPaths(outDir, demoName) {
   visit(outDir);
 }
 
+function createNextDataAliases(outDir) {
+  const createdAliases = new Set();
+
+  function visit(currentDir) {
+    for (const entry of fs.readdirSync(currentDir, { withFileTypes: true })) {
+      const currentPath = path.join(currentDir, entry.name);
+
+      if (entry.isDirectory()) {
+        visit(currentPath);
+        continue;
+      }
+
+      if (path.extname(entry.name) !== ".txt") {
+        continue;
+      }
+
+      const relativePath = path.relative(outDir, currentPath);
+      const segments = relativePath.split(path.sep);
+      const nextSegmentIndex = segments.findIndex((segment) => segment.startsWith("__next."));
+
+      if (nextSegmentIndex === -1 || nextSegmentIndex === segments.length - 1) {
+        continue;
+      }
+
+      const aliasName = segments.slice(nextSegmentIndex).join(".");
+      const aliasPath = path.join(outDir, ...segments.slice(0, nextSegmentIndex), aliasName);
+
+      if (aliasPath === currentPath || createdAliases.has(aliasPath)) {
+        continue;
+      }
+
+      assertInside(outDir, aliasPath);
+      fs.copyFileSync(currentPath, aliasPath);
+      createdAliases.add(aliasPath);
+    }
+  }
+
+  visit(outDir);
+}
+
 fs.mkdirSync(demoRoot, { recursive: true });
 
 for (const [name, relativeTemplatePath] of demos) {
+  if (requestedDemoNames.size > 0 && !requestedDemoNames.has(name)) {
+    continue;
+  }
+
   const templateDir = path.join(templatesRoot, relativeTemplatePath);
   const outDir = path.join(templateDir, "out");
   const targetDir = path.join(demoRoot, name);
@@ -154,6 +200,7 @@ for (const [name, relativeTemplatePath] of demos) {
   }
 
   rewritePublicAssetPaths(outDir, name);
+  createNextDataAliases(outDir);
   copyDemo(outDir, targetDir);
   console.log(`==> Copied ${outDir} -> ${targetDir}`);
 }
