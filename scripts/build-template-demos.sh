@@ -30,6 +30,7 @@ DEMOS=(
   "community-pro:organization/template-2"
   "property:property/template-1"
   "smartbelajar:education/template-1"
+  "nivoraacademy:education/template-2"
 )
 
 DEMO_ROOT="$REPO_ROOT/frontend/public/demo"

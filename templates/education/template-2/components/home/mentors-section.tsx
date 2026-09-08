@@ -65,7 +65,11 @@ export function MentorsSection() {
         </Marquee>
       </div>
 
-      <div className="no-scrollbar snap-x flex snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:hidden">
+      {/* Mobile: carousel swipeable — menampilkan SEMUA mentor satu kali
+          (bukan marquee berulang), karena di layar kecil pengguna tidak
+          bisa "menunggu" konten lain lewat, mereka perlu bisa menjangkau
+          semuanya lewat swipe. */}
+      <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:hidden">
         {mentors.map((mentor) => (
           <MentorCard
             key={mentor.slug}

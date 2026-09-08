@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { usePathname } from "next/navigation";
 import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { useReducedMotion } from "motion/react";
 
@@ -14,12 +15,17 @@ const MILESTONES = [
 
 /**
  * Motif khas "Editorial Wayfinding": garis vertikal 1px yang tergambar
- * progresif mengikuti scroll seluruh halaman, dengan 5 milestone marker.
+ * progresif mengikuti scroll seluruh halaman. Dipasang global (semua
+ * halaman), tapi 5 dot milestone hanya relevan di homepage — di halaman
+ * lain (mis. /kursus) dot itu disembunyikan karena section-nya tidak ada
+ * di sana, garis progres scroll polos tetap tampil sebagai motif umum.
  * Hanya render di >=1280px (blueprint 5.5).
  */
 export function RouteLine() {
   const progressRef = useRef<SVGLineElement>(null);
   const reduce = useReducedMotion();
+  const pathname = usePathname();
+  const isHomepage = pathname === "/";
 
   useEffect(() => {
     if (reduce || !progressRef.current) return;
@@ -38,7 +44,7 @@ export function RouteLine() {
     });
 
     return () => ctx.revert();
-  }, [reduce]);
+  }, [reduce, pathname]);
 
   return (
     <aside
@@ -61,15 +67,17 @@ export function RouteLine() {
         />
       </svg>
 
-      <div className="absolute top-24 flex h-[calc(100%-12rem)] flex-col justify-between py-2">
-        {MILESTONES.map((m) => (
-          <span
-            key={m.label}
-            title={m.label}
-            className="-ml-[3px] h-2 w-2 rounded-full bg-line ring-4 ring-background"
-          />
-        ))}
-      </div>
+      {isHomepage && (
+        <div className="absolute top-24 flex h-[calc(100%-12rem)] flex-col justify-between py-2">
+          {MILESTONES.map((m) => (
+            <span
+              key={m.label}
+              title={m.label}
+              className="-ml-[3px] h-2 w-2 rounded-full bg-line ring-4 ring-background"
+            />
+          ))}
+        </div>
+      )}
     </aside>
   );
 }

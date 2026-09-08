@@ -85,8 +85,8 @@ export function HeroSection({ onOpenInterestTest }: HeroSectionProps) {
   }, [reduce]);
 
   return (
-    <section ref={sectionRef} className="relative overflow-hidden min-h-[95vh] place-content-end">
-      <div className="absolute inset-0 overflow-hidden z-0 h-full" aria-hidden="true">
+    <section id="hero" ref={sectionRef} className="relative overflow-hidden min-h-[95vh] place-content-end">
+      <div className="hero-portrait absolute inset-0 overflow-hidden z-0 h-full" aria-hidden="true">
         <video 
           autoPlay
           muted
@@ -106,7 +106,7 @@ export function HeroSection({ onOpenInterestTest }: HeroSectionProps) {
       <div className="px-4 sm:px-6 max-w-shell z-10 min-h-[80vh] place-content-center justify-center m-auto">
         <h1
           ref={headlineRef}
-          className="mt-3 text-[32px] font-semibold text-surface leading-[1.05] tracking-[-0.04em] text-foreground sm:mt-4 sm:text-[44px] lg:text-[60px] max-sm:mb-8 max-sm:text-[40px]"
+          className="mt-3 text-[32px] font-semibold text-surface leading-[1.05] tracking-[-0.04em] sm:mt-4 sm:text-[44px] lg:text-[60px] max-sm:mb-8 max-sm:text-[40px]"
         >
           Upgrade <span className="italic">skill</span>, tanpa hilang arah.
         </h1>
@@ -130,7 +130,7 @@ export function HeroSection({ onOpenInterestTest }: HeroSectionProps) {
           <div className="grid grid-cols-2 gap-x-4 gap-y-3 sm:grid-cols-4">
             {stats.map((stat) => (
               <div key={stat.label}>
-                <strong className="block text-surface text-xl font-semibold text-foreground sm:text-2xl">
+                <strong className="block text-surface text-xl font-semibold sm:text-2xl">
                   {stat.decimals
                     ? stat.value.toLocaleString("id-ID", {
                         minimumFractionDigits: stat.decimals,
@@ -139,7 +139,7 @@ export function HeroSection({ onOpenInterestTest }: HeroSectionProps) {
                     : formatID(stat.value)}
                   {stat.suffix}
                 </strong>
-                <span className="mt-0.5 block text-[11px] text-muted sm:text-xs text-muted-soft">{stat.label}</span>
+                <span className="mt-0.5 block text-[11px] text-muted-soft sm:text-xs">{stat.label}</span>
               </div>
             ))}
           </div>

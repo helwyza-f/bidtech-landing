@@ -222,82 +222,111 @@ function LandingPageView() {
         </div>
       </section>
 
-      <section className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20" id="templates">
+      <section
+        className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20"
+        id="templates"
+      >
         <div className="pointer-events-none absolute inset-x-4 top-28 -z-10 h-[72%] rounded-[48px] bg-[radial-gradient(circle_at_18%_20%,rgba(95,201,74,0.10),transparent_34%),radial-gradient(circle_at_80%_42%,rgba(95,201,74,0.08),transparent_30%)]" />
 
         <Reveal className="mx-auto max-w-3xl text-center">
           <div className="flex justify-center">
-            <Badge className={sectionBadgeClass}>Template Design</Badge>
+            <Badge className={sectionBadgeClass}>
+              Template Design
+            </Badge>
           </div>
+
           <h2 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
-            Pilih <span className="text-brand-primary">Design Website</span> Siap Pakai
+            Pilih{" "}
+            <span className="text-brand-primary">
+              Design Website
+            </span>{" "}
+            Siap Pakai
           </h2>
+
           <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-500">
-            Koleksi template profesional untuk berbagai kebutuhan bisnis, mulai dari company profile, restoran, rental, hingga portal organisasi.
+            Koleksi template profesional untuk berbagai kebutuhan bisnis,
+            mulai dari company profile, restoran, rental, hingga portal
+            organisasi.
           </p>
         </Reveal>
 
-        <div className="lg:hidden">
-          <div
-            className="mt-10 flex w-full snap-x snap-mandatory gap-5 overflow-x-auto pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            onScroll={handleTemplateScroll}
-            ref={templateSliderRef}
-          >
-            {mobileTemplatePreview.map((template, index) => (
+        {/* ========================= */}
+        {/* MOBILE / TABLET */}
+        {/* 1 kolom x 4 item */}
+        {/* ========================= */}
+
+        <div className="mt-10 grid grid-cols-1 gap-5 lg:hidden">
+          {mobileTemplatePreview.map((template, index) => {
+            const isLastItem =
+              index === mobileTemplatePreview.length - 1;
+
+            return (
               <Reveal
-                className="relative flex w-full min-w-full shrink-0 snap-start sm:min-w-[calc(50%-10px)]"
-                delay={(index % 3) * 90}
+                className="relative w-full"
+                delay={(index % 4) * 90}
                 key={template.name}
                 y={30}
               >
                 <TemplateDesignCard template={template} />
-                {index === mobileTemplatePreview.length - 1 && (
-                  <div className="absolute inset-x-0 bottom-0 z-10 flex h-full items-center justify-center rounded-[24px] bg-gradient-to-r from-white/45 via-white/75 to-white p-5">
-                    <Link className={`${templateMoreLinkClass}`} href="/templates">
+
+                {isLastItem && (
+                  <div className="absolute inset-0 z-10 flex items-center justify-center overflow-hidden rounded-[24px] bg-gradient-to-b from-white/35 via-white/80 to-white p-5">
+                    <Link
+                      className={templateMoreLinkClass}
+                      href="/templates"
+                    >
                       Lihat Lebih Lanjut
                       <ArrowRight className="size-4" />
                     </Link>
                   </div>
                 )}
               </Reveal>
-            ))}
-          </div>
-
-          <div className="mt-6 flex items-center justify-center gap-2.5" aria-label={`Template ${activeTemplateSlide + 1} dari ${mobileTemplatePreview.length}`}>
-            {mobileTemplatePreview.map((template, index) => (
-              <button
-                aria-label={`Lihat ${template.name}`}
-                className={`h-2.5 rounded-full transition-all ${
-                  activeTemplateSlide === index ? "w-8 bg-brand-primary" : "w-2.5 bg-slate-300"
-                }`}
-                key={template.name}
-                onClick={() => moveTemplateSlide(index)}
-                type="button"
-              />
-            ))}
-          </div>
+            );
+          })}
         </div>
+
+        {/* ========================= */}
+        {/* DESKTOP */}
+        {/* 3 + 3 */}
+        {/* ========================= */}
 
         <div className="relative mt-10 hidden lg:block">
           <div className="grid grid-cols-3 gap-5">
-            {desktopTemplatePreview.slice(0, 3).map((template, index) => (
-              <Reveal className="h-full" delay={(index % 3) * 90} key={template.name} y={30}>
-                <TemplateDesignCard template={template} />
-              </Reveal>
-            ))}
+            {desktopTemplatePreview
+              .slice(0, 3)
+              .map((template, index) => (
+                <Reveal
+                  className="h-full"
+                  delay={(index % 3) * 90}
+                  key={template.name}
+                  y={30}
+                >
+                  <TemplateDesignCard template={template} />
+                </Reveal>
+              ))}
           </div>
 
           <div className="relative mt-5">
             <div className="grid grid-cols-3 gap-5">
-              {desktopTemplatePreview.slice(3, 6).map((template, index) => (
-                <Reveal className="h-full" delay={(index % 3) * 90} key={template.name} y={30}>
-                  <TemplateDesignCard template={template} />
-                </Reveal>
-              ))}
+              {desktopTemplatePreview
+                .slice(3, 6)
+                .map((template, index) => (
+                  <Reveal
+                    className="h-full"
+                    delay={(index % 3) * 90}
+                    key={template.name}
+                    y={30}
+                  >
+                    <TemplateDesignCard template={template} />
+                  </Reveal>
+                ))}
             </div>
 
             <div className="absolute inset-x-0 bottom-0 z-10 flex h-full items-center justify-center rounded-b-[24px] bg-gradient-to-b from-white/45 via-white/90 to-white p-8">
-              <Link className={templateMoreLinkClass} href="/templates">
+              <Link
+                className={templateMoreLinkClass}
+                href="/templates"
+              >
                 Lihat Lebih Lanjut
                 <ArrowRight className="size-4" />
               </Link>
@@ -351,7 +380,7 @@ function LandingPageView() {
         </Reveal>
 
         <div
-          className="mt-8 flex h-fit w-full snap-x snap-mandatory items-stretch gap-4 overflow-x-auto [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
+          className="mt-8 flex h-fit w-full snap-x snap-mandatory items-start gap-4 overflow-x-auto [scrollbar-width:none] md:mt-10 md:grid md:grid-cols-2 md:gap-5 md:overflow-visible lg:grid-cols-3 lg:gap-6 [&::-webkit-scrollbar]:hidden"
           onScroll={handleServiceScroll}
           ref={servicesSliderRef}
         >

@@ -33,3 +33,30 @@ export const aboutTimeline: TimelineMilestone[] = [
     image: nivoraAssets.career.careerConsultation,
   },
 ];
+
+export type AboutValue = {
+  title: string;
+  description: string;
+};
+
+/** Nilai/prinsip inti — khusus dipakai di halaman /tentang, tidak ada di homepage. */
+export const aboutValues: AboutValue[] = [
+  {
+    title: "Portfolio, bukan sertifikat semata",
+    description:
+      "Kami mengukur keberhasilan belajar dari karya nyata yang bisa ditunjukkan ke perekrut, bukan sekadar selembar sertifikat kelulusan.",
+  },
+  {
+    title: "Mentor yang masih aktif berkarya",
+    description:
+      "Semua mentor kami adalah praktisi yang masih bekerja di industri — materi selalu relevan dengan apa yang benar-benar dipakai tim engineering dan desain saat ini.",
+  },
+  {
+    title: "Jujur soal ekspektasi",
+    description:
+      "Kami tidak menjanjikan jaminan kerja instan. Yang kami janjikan adalah persiapan sekuat mungkin — portfolio, koneksi, dan kepercayaan diri menghadapi rekrutmen nyata.",
+  },
+];
+
+export const aboutMission =
+  "Menjadi jembatan antara niat belajar dan kemampuan kerja nyata — supaya setiap orang yang serius ingin berkarier di bidang digital punya jalur yang jelas untuk diikuti, bukan tutorial acak tanpa arah.";

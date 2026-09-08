@@ -1,45 +1,23 @@
-import type { Metadata } from "next";
-import Link from "next/link";
-import { ArrowUpRight, Clock } from "lucide-react";
-import { courses } from "@/lib/data/courses";
+import { buildMetadata } from "@/lib/seo";
+import { CourseCatalog } from "@/components/course-catalog";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Katalog Kursus",
-  description: "Katalog kursus praktis Nivora Academy di jalur Web, Design, Data, dan Excel.",
-};
+  description: "Katalog kursus praktis Nivora Academy di jalur Web, Design, Data, dan Excel — cari dan filter sesuai kebutuhanmu.",
+  path: "/kursus",
+});
 
 export default function KursusPage() {
   return (
-    <main className="mx-auto w-full max-w-shell px-4 py-32 sm:px-6">
-      <h1 className="text-display-lg font-semibold text-foreground">Katalog kursus</h1>
-      <p className="mt-4 max-w-prose text-body-lg text-muted">
+    <main className="mx-auto w-full max-w-shell px-4 pb-20 pt-24 sm:px-6 sm:pb-28 sm:pt-28">
+      <h1 className="text-2xl font-semibold text-foreground sm:text-display-md">Katalog kursus</h1>
+      <p className="mt-2.5 max-w-prose text-sm text-muted sm:mt-3 sm:text-base">
         Kursus mandiri yang bisa diakses selamanya, disusun langsung oleh mentor praktisi industri.
       </p>
 
-      <div className="mt-12 grid gap-6 sm:grid-cols-2 xl:grid-cols-3">
-        {courses.map((course) => (
-          <article key={course.slug} className="rounded-card border border-line bg-surface p-5">
-            <div className="flex items-center gap-2 text-[11px] font-medium text-muted-soft">
-              <Clock size={12} />
-              <span>{course.duration}</span>
-              <span>·</span>
-              <span>{course.lessons}</span>
-            </div>
-            <h2 className="mt-2 text-base font-bold text-foreground">{course.title}</h2>
-            <p className="mt-2 text-xs text-muted">
-              {course.mentor} · {course.mentorRole}
-            </p>
-          </article>
-        ))}
+      <div className="mt-6 sm:mt-8">
+        <CourseCatalog />
       </div>
-
-      <Link
-        href="/#kursus"
-        className="mt-12 inline-flex items-center gap-2 text-sm font-semibold text-brand hover:underline"
-      >
-        <span>Lihat & filter kursus di halaman utama</span>
-        <ArrowUpRight size={16} />
-      </Link>
     </main>
   );
 }

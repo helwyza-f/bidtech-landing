@@ -2,7 +2,9 @@
 
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { ArrowUpRight } from "lucide-react";
 import { aboutTimeline } from "@/lib/data/about";
 
 export function AboutSection() {
@@ -13,11 +15,17 @@ export function AboutSection() {
   return (
     <section id="tentang" className="scroll-mt-24 border-t border-line bg-surface pt-16 sm:pt-20 md:pt-28 lg:pt-32">
       <div className="mx-auto">
-        <div className="mb-6 sm:mb-8 max-w-shell mx-auto px-4 sm:px-6">
-          <span className="text-sm font-semibold text-brand">Perjalanan kami</span>
+        <div className="mb-6 flex flex-col gap-4 max-w-shell mx-auto px-4 sm:mb-8 sm:flex-row sm:items-end sm:justify-between sm:px-6">
           <h2 className="mt-1 text-2xl font-semibold leading-[1.08] text-foreground sm:text-display-lg">
             Dari kelas komunitas kecil, menjadi ribuan langkah karier baru.
           </h2>
+          <Link
+            href="/tentang"
+            className="hidden items-center gap-1.5 text-sm font-bold text-brand hover:underline sm:inline-flex"
+          >
+            <span>Selengkapnya tentang kami</span>
+            <ArrowUpRight size={15} />
+          </Link>
         </div>
 
         <div className="mb-6 sm:mb-8 max-w-shell mx-auto px-4 sm:px-6">

@@ -127,7 +127,17 @@ export const TEMPLATES: TemplateItem[] = [
     previewHref: "/demo/smartbelajar",
     tags: ["Les", "Sekolah", "Kursus"],
     icon: University,
-  },     
+  },
+  {
+    id: 11,
+    name: "Nivora Academy - Akademi digital, kursus, bootcamp",
+    category: "Pendidikan",
+    subcategory: "Akademi keterampilan digital Indonesia — kursus praktis, bootcamp intensif, dan mentor praktisi industri nyata.",
+    image: "/images/design_thumbnail/nivora_academy.webp",
+    previewHref: "/demo/nivoraacademy",
+    tags: ["Akademi", "Kursus", "Profesi"],
+    icon: University,
+  },      
 ];
 
 /**

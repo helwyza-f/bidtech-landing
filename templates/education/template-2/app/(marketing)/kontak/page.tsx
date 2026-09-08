@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
 import { MessageCircle, Mail, MapPin } from "lucide-react";
 import { site } from "@/lib/data/site";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Kontak",
   description: "Hubungi tim Nivora Academy via WhatsApp atau email.",
-};
+  path: "/kontak",
+});
 
 export default function KontakPage() {
   return (
-    <main className="mx-auto w-full max-w-shell px-4 py-32 sm:px-6">
+    <main className="mx-auto w-full max-w-shell px-4 pb-20 pt-24 sm:px-6 sm:pb-28 sm:pt-28">
       <h1 className="text-display-lg font-semibold text-foreground">Hubungi kami</h1>
       <p className="mt-4 max-w-prose text-body-lg text-muted">
         Tim konselor akademik kami siap membantu menjawab pertanyaan seputar program, biaya,

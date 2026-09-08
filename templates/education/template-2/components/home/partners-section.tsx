@@ -12,7 +12,7 @@ function PartnerRow() {
           alt={partner.name}
           width={120}
           height={32}
-          className="h-6 w-auto shrink-0 object-contain brightness-0 opacity-100 invert transition-all hover:opacity-70 hover:grayscale-0 sm:h-7"
+          className="h-6 w-auto shrink-0 object-contain brightness-0 opacity-100 invert transition-all hover:brightness-100 hover:invert-0 sm:h-7"
         />
       ))}
     </div>

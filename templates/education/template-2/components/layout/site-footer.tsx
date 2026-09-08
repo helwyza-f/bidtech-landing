@@ -2,6 +2,7 @@
 
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { MessageCircle } from "lucide-react";
 import { site } from "@/lib/data/site";
 import { footerNav } from "@/lib/data/navigation";
@@ -26,7 +27,7 @@ export function SiteFooter() {
       <div className="mx-auto w-full max-w-shell px-4 py-16 sm:px-6 md:py-20">
         <div className="grid gap-10 md:grid-cols-[1.4fr_repeat(3,1fr)]">
           <div className="footer-col space-y-3">
-            <a href="#" className="flex items-center">
+            <Link href="/#hero" className="flex items-center">
               <Image
                 src={nivoraAssets.brand.logoWhite}
                 alt="Nivora Academy"
@@ -34,7 +35,7 @@ export function SiteFooter() {
                 height={32}
                 className="h-7 w-auto sm:h-8"
               />
-            </a>
+            </Link>
             <p className="max-w-[34ch] text-sm leading-relaxed text-white/70">
               Belajar skill digital yang relevan dengan kebutuhan industri sesungguhnya.
             </p>
@@ -59,9 +60,9 @@ export function SiteFooter() {
             <ul className="space-y-2 text-sm text-white/62">
               {footerNav.program.map((item) => (
                 <li key={item.label}>
-                  <a href={item.href} className="transition hover:text-white">
+                  <Link href={item.href} className="transition hover:text-white">
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
@@ -72,9 +73,9 @@ export function SiteFooter() {
             <ul className="space-y-2 text-sm text-white/62">
               {footerNav.perusahaan.map((item) => (
                 <li key={item.label}>
-                  <a href={item.href} className="transition hover:text-white">
+                  <Link href={item.href} className="transition hover:text-white">
                     {item.label}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

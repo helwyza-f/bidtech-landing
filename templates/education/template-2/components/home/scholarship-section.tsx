@@ -9,11 +9,6 @@ import { gsap, ScrollTrigger } from "@/lib/gsap";
 import { scholarship } from "@/lib/data/scholarship";
 import { nivoraAssets } from "@/lib/data/asset-paths";
 
-/**
- * Dedicated section (bukan card mengambang) — gambar jadi background
- * penuh section dengan opacity 50% dan fade dari kanan ke tengah di
- * desktop/tablet, opacity flat 25% (tanpa fade) di mobile.
- */
 export function ScholarshipSection() {
   const rootRef = useRef<HTMLElement>(null);
   const reduce = useReducedMotion();
@@ -48,8 +43,6 @@ export function ScholarshipSection() {
 
   return (
     <section ref={rootRef} className="relative overflow-hidden bg-brand-soft py-16 sm:py-20 md:py-28 lg:py-32">
-      {/* Background gambar: opacity 50% + fade kanan->tengah di md ke atas,
-          opacity flat 25% tanpa fade di mobile. */}
       <div className="scholarship-bg pointer-events-none absolute inset-0">
         <Image
           src={nivoraAssets.career.portfolioReview}

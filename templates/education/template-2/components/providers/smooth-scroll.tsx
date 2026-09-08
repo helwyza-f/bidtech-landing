@@ -24,12 +24,23 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     gsap.ticker.add(raf);
     gsap.ticker.lagSmoothing(0);
 
-    // Anchor link harus lewat Lenis, bukan scroll-behavior native
+    // Anchor link harus lewat Lenis, bukan scroll-behavior native.
+    // Selector mencakup dua bentuk: href="#id" (anchor murni di halaman yang
+    // sama) dan href="/#id" (dipakai navbar/footer supaya juga benar dari
+    // halaman lain) — bentuk kedua hanya di-intercept kalau pengguna
+    // memang sedang berada di "/", selain itu dibiarkan lewat Next.js
+    // Link untuk navigasi antar halaman seperti biasa.
     const onAnchorClick = (e: MouseEvent) => {
-      const target = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"]');
+      const target = (e.target as HTMLElement).closest<HTMLAnchorElement>('a[href^="#"], a[href^="/#"]');
       if (!target) return;
-      const id = target.getAttribute("href");
-      if (!id || id === "#") return;
+      const href = target.getAttribute("href");
+      if (!href || href === "#") return;
+
+      const hashIndex = href.indexOf("#");
+      const pathPart = href.slice(0, hashIndex);
+      const id = href.slice(hashIndex);
+      if (pathPart && pathPart !== "/" && pathPart !== window.location.pathname) return;
+
       const el = document.querySelector(id);
       if (!el) return;
       e.preventDefault();

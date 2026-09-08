@@ -5,24 +5,24 @@ export type NavItem = {
 };
 
 export const mainNav: NavItem[] = [
-  { label: "Program", href: "#program" },
-  { label: "Kursus", href: "#kursus" },
-  { label: "Bootcamp", href: "#bootcamp", highlight: true },
-  { label: "Mentor", href: "#mentor" },
-  { label: "Tentang", href: "#tentang" },
+  { label: "Event", href: "/event" },
+  { label: "Kursus", href: "/kursus" },
+  { label: "Bootcamp", href: "/bootcamp", highlight: true },
+  { label: "Mentor", href: "/mentor" },
+  { label: "Tentang", href: "/tentang" },
 ];
 
 export const footerNav = {
   program: [
-    { label: "Web Programming", href: "#program" },
-    { label: "UI/UX & Product Design", href: "#program" },
-    { label: "Data & Business Analytics", href: "#program" },
-    { label: "Excel & Office Automation", href: "#program" },
+    { label: "Web Programming", href: "/#program" },
+    { label: "UI/UX & Product Design", href: "/#program" },
+    { label: "Data & Business Analytics", href: "/#program" },
+    { label: "Excel & Office Automation", href: "/#program" },
   ],
   perusahaan: [
-    { label: "Tentang Nivora", href: "#tentang" },
-    { label: "Mentor Praktisi", href: "#mentor" },
-    { label: "Bootcamp 12 Minggu", href: "#bootcamp" },
+    { label: "Tentang Nivora", href: "/tentang" },
+    { label: "Mentor Praktisi", href: "/mentor" },
+    { label: "Bootcamp 12 Minggu", href: "/bootcamp" },
     { label: "Beasiswa", href: "/beasiswa" },
   ],
   kontak: [

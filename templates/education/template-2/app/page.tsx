@@ -1,9 +1,6 @@
 "use client";
 
-import { useState } from "react";
-import { SiteHeader } from "@/components/layout/site-header";
-import { SiteFooter } from "@/components/layout/site-footer";
-import { ConsultModal, type ConsultModalType } from "@/components/ui/consult-modal";
+import { useConsultModal } from "@/components/providers/consult-modal-provider";
 import { HeroSection } from "@/components/home/hero-section";
 import { ProgramsSection } from "@/components/home/programs-section";
 import { CoursesSection } from "@/components/home/courses-section";
@@ -17,40 +14,21 @@ import { FaqSection } from "@/components/home/faq-section";
 import { CtaSection } from "@/components/home/cta-section";
 
 export default function HomePage() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const [modalType, setModalType] = useState<ConsultModalType>("konsultasi");
-
-  const openConsult = () => {
-    setModalType("konsultasi");
-    setModalOpen(true);
-  };
-
-  const openInterestTest = () => {
-    setModalType("tes-minat");
-    setModalOpen(true);
-  };
+  const { openConsult, openInterestTest } = useConsultModal();
 
   return (
-    <div className="bg-background text-foreground antialiased selection:bg-brand/15 selection:text-foreground">
-      <SiteHeader onOpenConsult={openConsult} />
-
-      <main id="konten">
-        <HeroSection onOpenInterestTest={openInterestTest} />
-        <ProgramsSection />
-        <CoursesSection onOpenConsult={openConsult} />
-        <BootcampSection onOpenConsult={openConsult} />
-        <ScholarshipSection />
-        <MentorsSection />
-        <AboutSection />
-        <EventsSection />
-        <TestimonialsSection />
-        <FaqSection />
-        <CtaSection onOpenInterestTest={openInterestTest} />
-      </main>
-
-      <SiteFooter />
-
-      <ConsultModal open={modalOpen} type={modalType} onClose={() => setModalOpen(false)} />
-    </div>
+    <main id="konten">
+      <HeroSection onOpenInterestTest={openInterestTest} />
+      <ProgramsSection />
+      <CoursesSection />
+      <BootcampSection onOpenConsult={openConsult} />
+      <ScholarshipSection />
+      <MentorsSection />
+      <AboutSection />
+      <EventsSection />
+      <TestimonialsSection />
+      <FaqSection />
+      <CtaSection onOpenInterestTest={openInterestTest} />
+    </main>
   );
 }

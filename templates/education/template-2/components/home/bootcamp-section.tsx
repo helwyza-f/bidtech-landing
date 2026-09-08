@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import Link from "next/link";
 import { useReducedMotion } from "motion/react";
-import { MessageCircle } from "lucide-react";
+import { ArrowUpRight, MessageCircle } from "lucide-react";
 import { gsap, ScrollTrigger, SplitText } from "@/lib/gsap";
 import { bootcampStages, bootcampMeta } from "@/lib/data/bootcamp";
 import { whatsappLink } from "@/lib/data/site";
@@ -140,6 +141,14 @@ export function BootcampSection({ onOpenConsult }: BootcampSectionProps) {
               {bootcampMeta.heading}
             </h2>
           </div>
+
+          <Link
+            href="/bootcamp"
+            className="hidden items-center gap-1.5 text-sm font-bold text-white hover:underline md:inline-flex"
+          >
+            <span>Lihat detail lengkap</span>
+            <ArrowUpRight size={15} />
+          </Link>
         </div>
 
         <div className="hidden lg:block">
@@ -155,7 +164,10 @@ export function BootcampSection({ onOpenConsult }: BootcampSectionProps) {
         </div>
       </div>
 
-      <div className="relative ml-2 z-10 mt-2 lg:hidden">
+      {/* Mobile/tablet: carousel full-bleed (keluar dari max-w-shell) supaya
+          kartu tidak "nempel" tepi padding dan kartu berikutnya terlihat
+          sebagian (peek) sebagai penanda visual bahwa masih bisa di-swipe. */}
+      <div className="relative z-10 mt-2 lg:hidden">
         <div className="no-scrollbar flex snap-x snap-mandatory gap-4 overflow-x-auto pl-4 pr-4 pb-2 sm:pl-6 sm:pr-6">
           {bootcampStages.map((stage) => (
             <div key={stage.period} className="w-[76vw] max-w-[290px] shrink-0 snap-start">

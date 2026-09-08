@@ -7,15 +7,11 @@ import { ArrowRight, ArrowUpRight, Clock } from "lucide-react";
 import { Section } from "@/components/ui/section";
 import { courses, type Course } from "@/lib/data/courses";
 
-type CoursesSectionProps = {
-  onOpenConsult: () => void;
-};
-
 // Preview 3 kursus saja di homepage — katalog penuh + filter + search ada
 // di halaman /kursus, supaya homepage tidak membengkak seiring katalog tumbuh.
 const PREVIEW_COUNT = 3;
 
-export function CoursesSection({ onOpenConsult }: CoursesSectionProps) {
+export function CoursesSection() {
   const preview = courses.slice(0, PREVIEW_COUNT);
   const reduce = useReducedMotion();
 
@@ -83,13 +79,13 @@ export function CoursesSection({ onOpenConsult }: CoursesSectionProps) {
               </p>
             </div>
 
-            <button
-              onClick={onOpenConsult}
+            <Link
+              href={`/kursus/${course.slug}`}
               className="flex items-center gap-2 self-start justify-self-end rounded-pill border border-line px-4 py-2 text-xs font-bold text-foreground transition-colors group-hover:border-brand/40 group-hover:text-brand"
             >
               <span>Lihat detail</span>
               <ArrowRight size={14} />
-            </button>
+            </Link>
           </motion.article>
         ))}
       </div>
@@ -97,7 +93,7 @@ export function CoursesSection({ onOpenConsult }: CoursesSectionProps) {
       {/* Mobile/tablet: carousel slideable, kartu terakhir jadi CTA "lihat semua" */}
       <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:-mx-6 sm:px-6 md:hidden">
         {preview.map((course) => (
-          <CourseSlideCard key={course.slug} course={course} onOpenConsult={onOpenConsult} />
+          <CourseSlideCard key={course.slug} course={course} />
         ))}
         <ViewMoreSlide href="/kursus" label="Lihat semua kursus" />
       </div>
@@ -105,9 +101,9 @@ export function CoursesSection({ onOpenConsult }: CoursesSectionProps) {
   );
 }
 
-function CourseSlideCard({ course, onOpenConsult }: { course: Course; onOpenConsult: () => void }) {
+function CourseSlideCard({ course }: { course: Course }) {
   return (
-    <article className="w-[80vw] max-w-[300px] shrink-0 snap-start overflow-hidden rounded-card border border-line bg-surface">
+    <article className="w-[76vw] max-w-[290px] shrink-0 snap-start overflow-hidden rounded-card border border-line bg-surface">
       <div className="relative aspect-[4/3] w-full overflow-hidden">
         <Image src={course.image} alt={course.title} fill sizes="80vw" className="object-cover" />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/60 via-ink/0 to-transparent" />
@@ -125,13 +121,10 @@ function CourseSlideCard({ course, onOpenConsult }: { course: Course; onOpenCons
         <p className="mt-2 text-xs text-muted">
           <span className="font-semibold text-foreground">{course.mentor}</span>
         </p>
-        <button
-          onClick={onOpenConsult}
-          className="mt-3 flex items-center gap-1.5 text-xs font-bold text-brand"
-        >
+        <Link href={`/kursus/${course.slug}`} className="mt-3 flex items-center gap-1.5 text-xs font-bold text-brand">
           <span>Lihat detail</span>
           <ArrowRight size={13} />
-        </button>
+        </Link>
       </div>
     </article>
   );

@@ -28,7 +28,11 @@ function EventCard({ event, variant }: { event: NivoraEvent; variant: "grid" | "
           className="object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-ink/70 via-ink/0 to-transparent" />
-        <span className="absolute right-3 top-3 rounded-pill bg-emerald-50 px-2.5 py-0.5 text-[11px] font-bold text-emerald-700">
+        <span
+          className={`absolute right-3 top-3 rounded-pill px-2.5 py-0.5 text-[11px] font-bold ${
+            event.price === 0 ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"
+          }`}
+        >
           {event.status}
         </span>
         <div className="absolute bottom-3 left-3 flex items-center gap-1.5 rounded-pill bg-white/90 px-2.5 py-1 font-mono text-[11px] font-bold text-brand backdrop-blur-sm">
@@ -65,7 +69,7 @@ export function EventsSection() {
     <Section ref={rootRef} className="border-t border-line bg-background">
       <div className="mb-8 flex flex-col gap-4 sm:mb-10 sm:flex-row sm:items-end sm:justify-between">
         <h2 className="max-w-[26ch] text-2xl font-semibold leading-[1.1] text-foreground sm:text-display-lg">
-          Temukan Event & Webinar Kami
+          Webinar & workshop terdekat
         </h2>
         <Link
           href="/event"
@@ -86,7 +90,7 @@ export function EventsSection() {
       {/* Mobile: carousel slideable, penutup jadi CTA "lihat semua" */}
       <div className="no-scrollbar -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:hidden">
         {preview.map((event) => (
-          <div key={event.slug} className="w-[80vw] max-w-[300px] shrink-0 snap-start">
+          <div key={event.slug} className="w-[76vw] max-w-[290px] shrink-0 snap-start">
             <EventCard event={event} variant="slide" />
           </div>
         ))}

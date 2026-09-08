@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { motion, AnimatePresence } from "motion/react";
 import { ArrowUpRight, ChevronRight, Menu, X } from "lucide-react";
 import { mainNav } from "@/lib/data/navigation";
@@ -55,8 +56,8 @@ export function SiteHeader({ onOpenConsult }: SiteHeaderProps) {
               : "border-white/70 bg-white/80 shadow-[0_16px_45px_rgba(35,52,105,.05)]"
           }`}
         >
-          <a
-            href="#"
+          <Link
+            href="/"
             className="flex items-center gap-2 rounded-md text-left focus-visible:outline-none"
           >
             <Image
@@ -67,18 +68,18 @@ export function SiteHeader({ onOpenConsult }: SiteHeaderProps) {
               priority
               className="h-7 w-auto sm:h-8"
             />
-          </a>
+          </Link>
 
           <div className="hidden items-center gap-7 text-sm font-medium text-muted lg:flex">
             {mainNav.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className="flex items-center gap-1.5 rounded py-1 transition-colors hover:text-brand"
               >
                 {item.label}
                 {item.highlight && <span className="h-1.5 w-1.5 rounded-full bg-signal" />}
-              </a>
+              </Link>
             ))}
           </div>
 
@@ -117,7 +118,7 @@ export function SiteHeader({ onOpenConsult }: SiteHeaderProps) {
             <div className="space-y-4 rounded-card border border-line bg-surface p-6 shadow-2xl">
               <div className="flex flex-col gap-1 text-base font-semibold text-foreground">
                 {mainNav.map((item) => (
-                  <a
+                  <Link
                     key={item.href}
                     href={item.href}
                     onClick={() => setMenuOpen(false)}
@@ -134,7 +135,7 @@ export function SiteHeader({ onOpenConsult }: SiteHeaderProps) {
                       )}
                     </span>
                     <ChevronRight size={16} className="text-muted-soft" />
-                  </a>
+                  </Link>
                 ))}
               </div>
 
