@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #115E41;
+  --primary-dark: #0B3525;
+  --primary-surface: #166534;
+  --secondary: #BF8E3D;
+  --secondary-dark: #8C6424;
+  --secondary-light: #E8DFCE;
+  --background: #FFFFFF;
+  --surface: #F0FDF4;
+  --surface-alt: #F0F5FA;
+  --surface-card: #F0F7FF;
+  --text-primary: #0F172A;
+  --text-secondary: #475569;
+  --text-muted: #94A3B8;
+  --border: #E2E8F0;
+  --border-subtle: #E0EDFB;
+}
+
+/* Custom pattern overlay for hero */
+.hero-pattern {
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+  background-size: 24px 24px;
+}
+
+/* Selection Color */
+::selection {
+  background-color: #BF8E3D;
+  color: #FFFFFF;
+}
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #FAFAFA;
+  color: #0F172A;
+  font-family: var(--font-plus-jakarta), 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Keyframes */
+@keyframes pulseSoft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.03); }
+}
+
+.animate-pulse-soft {
+  animation: pulseSoft 3s ease-in-out infinite;
+}

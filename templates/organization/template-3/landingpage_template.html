@@ -1,0 +1,1091 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DPC HKTI Kota Batam — Himpunan Kerukunan Tani Indonesia (2026–2030)</title>
+  
+  <!-- Google Fonts: Plus Jakarta Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            hkti: {
+              forest: '#115E41',
+              dark: '#0C432F',
+              gold: '#BF8E3D',
+              goldDark: '#A5772C',
+              mint: '#F0FDF4',
+              mintDark: '#DCFCE7',
+              slate: '#0F172A',
+              muted: '#475569'
+            }
+          },
+          boxShadow: {
+            'card-hover': '0 12px 30px -10px rgba(17, 94, 65, 0.12)',
+            'subtle': '0 2px 8px -2px rgba(15, 23, 42, 0.06)'
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    /* Smooth Keyframes for text & image entrance */
+    @keyframes fadeInUp {
+      0% {
+        opacity: 0;
+        transform: translateY(22px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulseSoft {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.03); }
+    }
+
+    .animate-fade-in-up {
+      animation: fadeInUp 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+
+    .animate-delay-100 { animation-delay: 100ms; }
+    .animate-delay-200 { animation-delay: 200ms; }
+    .animate-delay-300 { animation-delay: 300ms; }
+    .animate-delay-400 { animation-delay: 400ms; }
+
+    /* Custom pattern overlay for hero */
+    .hero-pattern {
+      background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.5px, transparent 1.5px);
+      background-size: 24px 24px;
+    }
+
+    /* Selection Color */
+    ::selection {
+      background-color: #BF8E3D;
+      color: #FFFFFF;
+    }
+  </style>
+</head>
+<body class="bg-[#FAFAFA] text-hkti-slate font-sans antialiased selection:bg-hkti-gold selection:text-white">
+
+  <!-- Top Navigation Bar -->
+  <header class="sticky top-0 z-40 w-full bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-sm transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      
+      <!-- Brand Logo & Header Identity -->
+      <a href="#beranda" class="flex items-center gap-3.5 group focus:outline-none">
+        <div class="w-12 h-12 rounded-xl bg-hkti-forest flex items-center justify-center p-2 shadow-sm text-white transition-transform group-hover:scale-105 duration-200">
+          <!-- Agricultural Emblem Icon -->
+          <svg class="w-8 h-8 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2Z"></path>
+            <path d="M12 8v8"></path>
+            <path d="m8.5 14 3.5-3.5 3.5 3.5"></path>
+            <path d="M7 10h10"></path>
+          </svg>
+        </div>
+        <div class="flex flex-col">
+          <span class="text-sm sm:text-base font-extrabold tracking-tight text-hkti-forest uppercase leading-tight">DPC HKTI KOTA BATAM</span>
+          <span class="text-[11px] sm:text-xs font-semibold text-slate-500 tracking-normal uppercase">Himpunan Kerukunan Tani Indonesia</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation Links: default bold & line-only hover (no background box) -->
+      <nav class="hidden md:flex items-center gap-6 xl:gap-8 text-[14px] xl:text-[15px] font-bold text-slate-800">
+        <a href="#beranda" class="group relative py-2 text-slate-800 hover:text-hkti-forest transition-colors whitespace-nowrap">
+          <span>Beranda</span>
+          <span class="absolute bottom-0 left-0 h-[2.5px] w-full bg-hkti-forest rounded-full opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 transition-all duration-200 origin-left"></span>
+        </a>
+        <a href="#visi-misi" class="group relative py-2 text-slate-800 hover:text-hkti-forest transition-colors whitespace-nowrap">
+          <span>Visi & Misi</span>
+          <span class="absolute bottom-0 left-0 h-[2.5px] w-full bg-hkti-forest rounded-full opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 transition-all duration-200 origin-left"></span>
+        </a>
+        <a href="#pilar" class="group relative py-2 text-slate-800 hover:text-hkti-forest transition-colors whitespace-nowrap">
+          <span>Arah Perjuangan</span>
+          <span class="absolute bottom-0 left-0 h-[2.5px] w-full bg-hkti-forest rounded-full opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 transition-all duration-200 origin-left"></span>
+        </a>
+        <a href="/galeri" class="group relative py-2 text-slate-800 hover:text-hkti-forest transition-colors whitespace-nowrap">
+          <span>Galeri</span>
+          <span class="absolute bottom-0 left-0 h-[2.5px] w-full bg-hkti-forest rounded-full opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 transition-all duration-200 origin-left"></span>
+        </a>
+        <a href="#kontak" class="group relative py-2 text-slate-800 hover:text-hkti-forest transition-colors whitespace-nowrap">
+          <span>Kontak & Sekretariat</span>
+          <span class="absolute bottom-0 left-0 h-[2.5px] w-full bg-hkti-forest rounded-full opacity-0 scale-x-0 group-hover:opacity-100 group-hover:scale-x-100 transition-all duration-200 origin-left"></span>
+        </a>
+      </nav>
+
+      <!-- Right Action CTA -->
+      <div class="hidden sm:flex items-center gap-3">
+        <a href="#kontak" class="inline-flex items-center gap-2 bg-hkti-forest hover:bg-hkti-dark text-white text-sm font-semibold px-5 py-2.5 rounded-lg shadow-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0">
+          <i data-lucide="message-square" class="w-4 h-4"></i>
+          <span>Hubungi Kami</span>
+        </a>
+        <div class="w-10 h-10 rounded-lg border border-slate-200 bg-slate-50 flex items-center justify-center text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer" title="Portal Pengurus">
+          <i data-lucide="user" class="w-5 h-5 text-hkti-forest"></i>
+        </div>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <div class="flex items-center md:hidden">
+        <button id="mobileMenuBtn" type="button" class="p-2.5 rounded-lg text-slate-700 hover:bg-slate-100 focus:outline-none" aria-label="Buka Menu Navigasi">
+          <i data-lucide="menu" class="w-6 h-6"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Mobile Dropdown Nav Menu -->
+    <div id="mobileMenu" class="hidden md:hidden border-t border-slate-200 bg-white px-4 pt-3 pb-5 space-y-2 shadow-lg">
+      <a href="#beranda" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-bold text-hkti-forest bg-hkti-mint">Beranda</a>
+      <a href="#pilar" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-100">Arah Perjuangan</a>
+      <a href="#visi-misi" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-100">Visi & Misi</a>
+      <a href="#galeri" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-100">Galeri Dokumentasi</a>
+      <a href="#kontak" class="mobile-link block px-3 py-2.5 rounded-lg text-sm font-semibold text-slate-700 hover:bg-slate-100">Kontak & Sekretariat</a>
+      <div class="pt-2">
+        <a href="#kontak" class="mobile-link flex items-center justify-center gap-2 w-full bg-hkti-forest text-white py-2.5 rounded-lg font-semibold text-sm">
+          <i data-lucide="message-square" class="w-4 h-4"></i>
+          <span>Hubungi Kami</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section id="beranda" class="relative bg-hkti-forest text-white overflow-hidden py-16 sm:py-24">
+    <!-- Overlay Pattern & Photographic Ambience -->
+    <div class="absolute inset-0 hero-pattern opacity-40 pointer-events-none"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-hkti-dark/95 via-hkti-forest/90 to-hkti-dark/80 mix-blend-multiply pointer-events-none"></div>
+    
+    <!-- Background Agro Silhouette Subtle Overlay -->
+    <div class="absolute -right-16 -bottom-16 w-96 h-96 bg-hkti-gold/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="absolute left-10 -top-20 w-80 h-80 bg-emerald-300/10 rounded-full blur-3xl pointer-events-none"></div>
+
+    <div class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="max-w-3xl space-y-6">
+        
+        <!-- Metadata Badge Pill -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 text-xs font-semibold text-emerald-200 tracking-wide uppercase animate-fade-in-up">
+          <i data-lucide="award" class="w-3.5 h-3.5 text-hkti-gold"></i>
+          <span>DEWAN PIMPINAN CABANG • KOTA BATAM • PERIODE 2026–2030</span>
+          <span class="hidden sm:inline-block w-1.5 h-1.5 rounded-full bg-emerald-400"></span>
+          <span class="hidden sm:inline-block text-emerald-300">Kepulauan Riau</span>
+        </div>
+
+        <!-- Authoritative H1 Title -->
+        <h1 class="text-3xl sm:text-5xl lg:text-[54px] font-extrabold tracking-tight text-white leading-[1.15] animate-fade-in-up animate-delay-100">
+          DPC HIMPUNAN KERUKUNAN TANI INDONESIA (HKTI) KOTA BATAM
+        </h1>
+
+        <!-- Descriptive Subhead -->
+        <p class="text-base sm:text-lg text-emerald-100 font-normal leading-relaxed max-w-2xl animate-fade-in-up animate-delay-200">
+          Menghimpun potensi petani, memodernisasi agribisnis, dan memperjuangkan kedaulatan pangan maritim & urban farming di Kota Batam demi martabat pertanian nusantara.
+        </p>
+
+        <!-- Slogan Card Badge -->
+        <div class="w-full max-w-lg bg-[#062418]/90 backdrop-blur-md border border-emerald-500/30 rounded-2xl p-4 sm:p-5 flex items-center gap-4 animate-fade-in-up animate-delay-300 transition-all hover:bg-[#062418] shadow-sm">
+          <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-[#BF8E3D] to-[#8C6424] flex items-center justify-center flex-shrink-0 text-white shadow-md">
+            <i data-lucide="award" class="w-6 h-6"></i>
+          </div>
+          <div>
+            <span class="text-[10px] sm:text-[11px] uppercase tracking-wider text-emerald-400 font-bold block">SEMBOYAN UTAMA PERJUANGAN</span>
+            <span class="text-base sm:text-xl font-extrabold tracking-tight text-white">“HKTI JAYA – TANI MAKMUR”</span>
+          </div>
+        </div>
+
+        <!-- Action CTA Buttons: Mobile (Stacked) & Desktop (Horizontal side-by-side like reference) -->
+        <div class="w-full max-w-lg pt-1 animate-fade-in-up animate-delay-400">
+          <!-- Mobile View (< sm): Stacked full-width buttons with ChevronRight, updated to #904D00 -->
+          <div class="sm:hidden flex flex-col gap-3">
+            <a href="#visi-misi" class="w-full flex items-center justify-between bg-[#904D00] hover:bg-[#783E00] text-white font-bold text-sm px-5 py-3.5 rounded-xl shadow-md transition-all duration-200 active:scale-[0.99] group">
+              <div class="flex items-center gap-3">
+                <div class="w-7 h-7 rounded-full border border-white/40 flex items-center justify-center bg-white/10">
+                  <i data-lucide="flag" class="w-3.5 h-3.5 text-white"></i>
+                </div>
+                <span>Jelajahi Visi & Misi</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-5 h-5 text-white/90 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+            <a href="/galeri" class="w-full flex items-center justify-between bg-[#08291D]/90 hover:bg-[#0B3525] text-white font-bold text-sm px-5 py-3.5 rounded-xl border border-emerald-500/40 backdrop-blur-sm shadow-sm transition-all duration-200 active:scale-[0.99] group">
+              <div class="flex items-center gap-3">
+                <div class="w-7 h-7 rounded-lg border border-white/30 flex items-center justify-center bg-white/5">
+                  <i data-lucide="images" class="w-3.5 h-3.5 text-white"></i>
+                </div>
+                <span>Galeri Pelantikan & Musda</span>
+              </div>
+              <i data-lucide="chevron-right" class="w-5 h-5 text-white/80 group-hover:translate-x-1 transition-transform"></i>
+            </a>
+          </div>
+
+          <!-- Desktop / Website View (>= sm): Horizontal side-by-side buttons exactly as in reference -->
+          <div class="hidden sm:flex items-center gap-3.5">
+            <a href="#visi-misi" class="inline-flex items-center gap-2.5 bg-[#904D00] hover:bg-[#783E00] text-white font-semibold text-sm sm:text-base px-6 py-3.5 rounded-xl shadow-md transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0">
+              <i data-lucide="flag" class="w-4 h-4 text-white"></i>
+              <span>Jelajahi Visi & Misi</span>
+            </a>
+            <a href="/galeri" class="inline-flex items-center gap-2.5 bg-[#1b5e3f]/80 hover:bg-[#206e4a] text-white font-semibold text-sm sm:text-base px-6 py-3.5 rounded-xl border border-emerald-400/20 backdrop-blur-sm shadow-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0">
+              <i data-lucide="images" class="w-4 h-4 text-white"></i>
+              <span>Galeri Pelantikan & Musda</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Gold Ribbon Slogan Bar -->
+  <aside class="bg-hkti-gold text-white border-y border-amber-600/30 py-3.5 px-4 sm:px-6 shadow-inner">
+    <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2.5 text-xs sm:text-sm font-semibold">
+      <div class="flex items-center gap-2">
+        <i data-lucide="flag" class="w-4 h-4 text-amber-100 flex-shrink-0"></i>
+        <span>SEMBOYAN: <strong class="tracking-wide">“HKTI JAYA – TANI MAKMUR”</strong></span>
+      </div>
+      <div class="flex items-center gap-4 text-amber-100 text-xs">
+        <span class="flex items-center gap-1.5"><i data-lucide="check-circle-2" class="w-3.5 h-3.5 text-white"></i> Kemandirian Pangan</span>
+        <span>•</span>
+        <span class="flex items-center gap-1.5"><i data-lucide="users" class="w-3.5 h-3.5 text-white"></i> Solidaritas Petani Batam</span>
+      </div>
+    </div>
+  </aside>
+
+  <main>
+    <!-- 5 Pilar Arah Perjuangan Section -->
+    <section id="pilar" class="py-16 sm:py-24 bg-white border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Section Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-12">
+          <div>
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold text-hkti-forest uppercase tracking-wider mb-2">
+              <span class="w-2 h-2 rounded-full bg-hkti-gold"></span>
+              <span>HALUAN STRATEGIS 2026–2030</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-hkti-slate tracking-tight">
+              5 Pilar Arah Perjuangan HKTI
+            </h2>
+          </div>
+          <p class="text-slate-600 text-sm sm:text-base max-w-md leading-relaxed">
+            Pondasi gerakan Dewan Pimpinan Cabang HKTI Kota Batam dalam meningkatkan kesejahteraan petani dan ketahanan pangan maritim kepulauan.
+          </p>
+        </div>
+
+        <!-- 5 Pillar Cards Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-5">
+          
+          <!-- Pillar 1 -->
+          <div class="group bg-white rounded-xl p-5 border border-slate-200 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-card-hover flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">01</span>
+                <div class="w-10 h-10 rounded-lg bg-hkti-mint text-hkti-forest flex items-center justify-center group-hover:bg-hkti-forest group-hover:text-white transition-colors">
+                  <i data-lucide="sprout" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <h3 class="text-base font-bold text-hkti-slate mb-2 group-hover:text-hkti-forest transition-colors">
+                Petani Berdaya
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Penguatan kapasitas, advokasi legalitas lahan pertanian, kepastian hukum usaha tani di kawasan Batam.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-semibold text-hkti-forest group-hover:translate-x-1 transition-transform">
+              <span>Rincian Pilar</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
+            </div>
+          </div>
+
+          <!-- Pillar 2 -->
+          <div class="group bg-white rounded-xl p-5 border border-slate-200 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-card-hover flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">02</span>
+                <div class="w-10 h-10 rounded-lg bg-hkti-mint text-hkti-forest flex items-center justify-center group-hover:bg-hkti-forest group-hover:text-white transition-colors">
+                  <i data-lucide="cpu" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <h3 class="text-base font-bold text-hkti-slate mb-2 group-hover:text-hkti-forest transition-colors">
+                Pertanian Maju
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Penerapan modernisasi agritech, hidroponik urban farming, serta mekanisasi terukur di lahan terbatas.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-semibold text-hkti-forest group-hover:translate-x-1 transition-transform">
+              <span>Rincian Pilar</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
+            </div>
+          </div>
+
+          <!-- Pillar 3 -->
+          <div class="group bg-white rounded-xl p-5 border border-slate-200 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-card-hover flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">03</span>
+                <div class="w-10 h-10 rounded-lg bg-hkti-mint text-hkti-forest flex items-center justify-center group-hover:bg-hkti-forest group-hover:text-white transition-colors">
+                  <i data-lucide="trending-up" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <h3 class="text-base font-bold text-hkti-slate mb-2 group-hover:text-hkti-forest transition-colors">
+                Ekonomi Berkelanjutan
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Akses permodalan kredit usaha rakyat (KUR), koperasi tani, dan kepastian jalur rantai pasok komoditas.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-semibold text-hkti-forest group-hover:translate-x-1 transition-transform">
+              <span>Rincian Pilar</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
+            </div>
+          </div>
+
+          <!-- Pillar 4 -->
+          <div class="group bg-white rounded-xl p-5 border border-slate-200 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-card-hover flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">04</span>
+                <div class="w-10 h-10 rounded-lg bg-hkti-mint text-hkti-forest flex items-center justify-center group-hover:bg-hkti-forest group-hover:text-white transition-colors">
+                  <i data-lucide="shield" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <h3 class="text-base font-bold text-hkti-slate mb-2 group-hover:text-hkti-forest transition-colors">
+                Pangan Berdaulat
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Mereduksi defisit pasokan bahan pokok Batam melalui optimalisasi kantung produksi pulau penyangga.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-semibold text-hkti-forest group-hover:translate-x-1 transition-transform">
+              <span>Rincian Pilar</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
+            </div>
+          </div>
+
+          <!-- Pillar 5 -->
+          <div class="group bg-white rounded-xl p-5 border border-slate-200 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-300 hover:shadow-card-hover flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-4">
+                <span class="text-xs font-extrabold text-emerald-600 bg-emerald-50 px-2.5 py-1 rounded-md">05</span>
+                <div class="w-10 h-10 rounded-lg bg-hkti-mint text-hkti-forest flex items-center justify-center group-hover:bg-hkti-forest group-hover:text-white transition-colors">
+                  <i data-lucide="heart-handshake" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <h3 class="text-base font-bold text-hkti-slate mb-2 group-hover:text-hkti-forest transition-colors">
+                Tani Makmur
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                Kesejahteraan keluarga petani melalui jaminan harga panen, proteksi gagal tanam, dan regenerasi petani muda.
+              </p>
+            </div>
+            <div class="mt-4 pt-3 border-t border-slate-100 flex items-center text-xs font-semibold text-hkti-forest group-hover:translate-x-1 transition-transform">
+              <span>Rincian Pilar</span>
+              <i data-lucide="arrow-right" class="w-3.5 h-3.5 ml-1"></i>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Visi, Misi dan Tujuan Section -->
+    <section id="visi-misi" class="py-16 sm:py-24 bg-[#F8FAFC] border-b border-slate-200/80">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- 1. Main Centered Header: PEDOMAN ORGANISASI - VISI DAN MISI (Matching Screenshot 1:1) -->
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12 animate-fade-in-up">
+          <div class="inline-flex items-center px-4 py-1.5 rounded-full bg-hkti-forest text-white text-xs font-bold uppercase tracking-wider mb-3 shadow-xs">
+            PEDOMAN ORGANISASI
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight uppercase">
+            VISI DAN MISI
+          </h2>
+          <p class="text-xs sm:text-sm font-bold text-hkti-forest tracking-wider uppercase mt-2">
+            DPC HIMPUNAN KERUKUNAN TANI INDONESIA (HKTI) KOTA BATAM PERIODE 2026–2030
+          </p>
+        </div>
+
+        <!-- 2. Featured Visi Utama Card (Matching Screenshot 1:1) -->
+        <div class="bg-white border border-slate-200/80 rounded-2xl sm:rounded-3xl p-6 sm:p-8 lg:p-10 shadow-xs mb-14 sm:mb-16 flex flex-col sm:flex-row items-center gap-6 sm:gap-8 animate-fade-in-up">
+          <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-2xl bg-[#EAF2FD] border border-blue-100/60 flex items-center justify-center flex-shrink-0 shadow-2xs">
+            <svg class="w-10 h-10 sm:w-12 sm:h-12 text-[#064E3B] fill-current" viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 2.38 1.19 4.47 3 5.74V17c0 .55.45 1 1 1h6c.55 0 1-.45 1-1v-2.26c1.81-1.27 3-3.36 3-5.74 0-3.87-3.13-7-7-7zm-2 17h4v1h-4v-1zm1 2h2v1h-2v-1z"></path>
+            </svg>
+          </div>
+          <div class="text-center sm:text-left flex-1">
+            <div class="mb-2">
+              <span class="text-xs sm:text-sm font-bold text-[#904D00] tracking-wide">
+                HKTI Batam 2026–2030
+              </span>
+            </div>
+            <p class="text-base sm:text-lg lg:text-[19px] font-bold text-slate-800 leading-relaxed">
+              “Terwujudnya petani dan pelaku usaha pertanian Kota Batam yang sejahtera, mandiri, bermartabat, berdaya saing, dan adaptif terhadap perkembangan teknologi melalui penguatan kelembagaan, modernisasi pertanian, kemitraan, serta pembangunan pertanian yang berkelanjutan.”
+            </p>
+          </div>
+        </div>
+
+        <!-- 3. Subheader for 3-Column Bento Cards: Visi, Misi dan Tujuan -->
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-6 sm:mb-8 animate-fade-in-up">
+          <div class="flex items-center gap-3">
+            <div class="w-8 h-8 rounded-full border-2 border-[#0B3B24] flex items-center justify-center flex-shrink-0">
+              <svg class="w-4 h-4 text-[#0B3B24]" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                <polyline points="20 6 9 17 4 12"></polyline>
+              </svg>
+            </div>
+            <h3 class="text-2xl sm:text-3xl font-extrabold text-[#0B2518] tracking-tight">
+              Visi, Misi dan Tujuan
+            </h3>
+          </div>
+          <span class="text-xs sm:text-sm font-semibold text-slate-500 tracking-wide sm:text-right pl-11 sm:pl-0">
+            Prioritas Kerja 2026–2030
+          </span>
+        </div>
+
+        <!-- 3-Column Bento Cards Grid (Visi, Misi, Tujuan) with Prominent Hover Effects -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 sm:gap-6 items-stretch">
+          <!-- Card 1: Visi -->
+          <div class="group h-full bg-white rounded-3xl p-7 sm:p-8 border border-slate-200/90 shadow-xs hover:shadow-2xl hover:shadow-emerald-950/15 hover:border-emerald-600 hover:ring-4 hover:ring-emerald-500/10 transition-all duration-300 ease-out hover:-translate-y-3 flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="flex items-center justify-between mb-5">
+                <h3 class="text-lg sm:text-xl font-bold text-[#064E3B] tracking-tight group-hover:text-hkti-forest transition-colors">Visi</h3>
+                <div class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-800 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-115 group-hover:bg-emerald-100 group-hover:rotate-6 transition-all duration-300">
+                  <i data-lucide="graduation-cap" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <div class="space-y-4 text-slate-700 text-[13.5px] sm:text-sm leading-relaxed text-justify sm:text-left group-hover:text-slate-900 transition-colors">
+                <p>
+                  Memperkuat persatuan dan kelembagaan petani melalui pembinaan organisasi yang berkelanjutan, meningkatkan pengetahuan, keterampilan, kapasitas, dan kesejahteraan petani melalui pendidikan serta pendampingan, sekaligus mendorong penggunaan teknologi dan inovasi pertanian yang sesuai dengan kebutuhan daerah.
+                </p>
+                <p>
+                  HKTI Kota Batam juga berkomitmen memperjuangkan hak dan kepentingan petani, meningkatkan produktivitas serta nilai ekonomi hasil pertanian, memperluas kemitraan dengan pemerintah, dunia usaha, perguruan tinggi, lembaga keuangan, dan komunitas, serta mendorong keterlibatan generasi muda dalam pengembangan sektor pertanian.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Misi (Featured Solid Dark Green Card with Glowing Hover) -->
+          <div class="group h-full bg-[#054026] text-white rounded-3xl p-7 sm:p-8 border border-emerald-500/30 shadow-md hover:shadow-2xl hover:shadow-emerald-950/50 hover:border-emerald-400 hover:ring-4 hover:ring-emerald-400/20 hover:bg-[#043720] transition-all duration-300 ease-out hover:-translate-y-3 flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="flex items-center justify-between mb-5">
+                <h3 class="text-lg sm:text-xl font-bold text-white tracking-tight group-hover:text-emerald-200 transition-colors">Misi</h3>
+                <div class="w-10 h-10 rounded-full bg-white/10 border border-white/15 text-white flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-115 group-hover:bg-white/20 group-hover:rotate-6 transition-all duration-300">
+                  <i data-lucide="clipboard-check" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <div class="text-white/95 text-[13.5px] sm:text-sm leading-relaxed text-justify sm:text-left group-hover:text-white transition-colors">
+                <p>
+                  Mewujudkan HKTI Kota Batam sebagai organisasi petani yang profesional, mandiri, bersatu, berdaya saing, dan berintegritas dalam memperjuangkan kepentingan petani serta mendorong terciptanya sektor pertanian yang modern, produktif, berkelanjutan, dan mampu memberikan manfaat nyata bagi kesejahteraan masyarakat Kota Batam.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 3: Tujuan -->
+          <div class="group h-full bg-white rounded-3xl p-7 sm:p-8 border border-slate-200/90 shadow-xs hover:shadow-2xl hover:shadow-emerald-950/15 hover:border-emerald-600 hover:ring-4 hover:ring-emerald-500/10 transition-all duration-300 ease-out hover:-translate-y-3 flex flex-col justify-between cursor-pointer">
+            <div>
+              <div class="flex items-center justify-between mb-5">
+                <h3 class="text-lg sm:text-xl font-bold text-[#064E3B] tracking-tight group-hover:text-hkti-forest transition-colors">Tujuan</h3>
+                <div class="w-10 h-10 rounded-full bg-emerald-50 text-emerald-800 flex items-center justify-center flex-shrink-0 shadow-2xs group-hover:scale-115 group-hover:bg-emerald-100 group-hover:rotate-6 transition-all duration-300">
+                  <i data-lucide="users" class="w-5 h-5"></i>
+                </div>
+              </div>
+              <div class="space-y-3 text-slate-700 text-[13.5px] sm:text-sm leading-relaxed text-justify sm:text-left group-hover:text-slate-900 transition-colors">
+                <p>
+                  Membangun ekosistem pertanian Kota Batam yang kuat, inklusif, dan berkelanjutan dengan menjadikan petani sebagai pelaku utama pembangunan daerah. Melalui penguatan kelembagaan, peningkatan kualitas sumber daya manusia, pemanfaatan teknologi, dan perluasan akses pasar, HKTI Kota Batam bertujuan untuk:
+                </p>
+                <ul class="space-y-2 text-slate-700 list-disc list-outside pl-4 text-[13.5px] sm:text-sm">
+                  <li>Meningkatkan kesejahteraan dan kemandirian petani.</li>
+                  <li>Memperkuat ketahanan serta ketersediaan pangan daerah.</li>
+                  <li>Meningkatkan produktivitas dan nilai jual hasil pertanian.</li>
+                  <li>Memberikan perlindungan dan pendampingan kepada petani.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Galeri Dokumentasi Kegiatan Section -->
+    <section id="galeri" class="py-16 sm:py-24 bg-white border-b border-slate-200">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header -->
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+          <div>
+            <div class="inline-flex items-center gap-1.5 text-xs font-bold text-hkti-forest uppercase tracking-wider mb-2">
+              <span class="w-2 h-2 rounded-full bg-hkti-gold"></span>
+              <span>ARSIP & AKTIVITAS RESMI</span>
+            </div>
+            <h2 class="text-2xl sm:text-3xl lg:text-4xl font-extrabold text-hkti-slate tracking-tight">
+              Galeri Dokumentasi Kegiatan
+            </h2>
+            <p class="text-slate-600 text-sm max-w-lg mt-1.5">
+              Rekam jejak konsolidasi organisasi, pelantikan pengurus, dan aksi nyata pendampingan petani di Kota Batam.
+            </p>
+          </div>
+          <div class="self-start md:self-auto flex-shrink-0">
+            <a
+              href="/galeri"
+              class="inline-flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-lg bg-hkti-forest hover:bg-hkti-dark text-white text-xs sm:text-sm font-bold shadow-xs transition-all duration-200 group"
+            >
+              <span>Lihat Semua</span>
+              <i data-lucide="arrow-right" class="w-4 h-4 group-hover:translate-x-1 transition-transform text-white"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Gallery Grid (1 Featured Wide + 4 Responsive Cards) -->
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+          
+          <!-- Featured Large Card (Col 7) -->
+          <div class="md:col-span-7 group relative rounded-2xl overflow-hidden bg-slate-900 aspect-[16/10] shadow-sm cursor-pointer" onclick="openLightbox('Pelantikan Dewan Pimpinan DPD & DPC HKTI Kepulauan Riau Periode 2026–2030', 'https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1469&auto=format&fit=crop')">
+            <img 
+              src="https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1469&auto=format&fit=crop" 
+              alt="Pelantikan Pengurus HKTI Batam"
+              class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/800x500/115E41/FFFFFF?text=Pelantikan+Pengurus+HKTI'"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 sm:p-8 flex flex-col justify-end">
+              <span class="text-xs font-bold text-emerald-300 tracking-wider uppercase mb-1">Dokumentasi Utama</span>
+              <h4 class="text-lg sm:text-2xl font-bold text-white leading-tight mb-2">
+                Pelantikan Dewan Pimpinan DPD & DPC HKTI Kepulauan Riau Periode 2026–2030
+              </h4>
+              <p class="text-xs sm:text-sm text-slate-300 line-clamp-2">
+                Momentum konsolidasi akbar seluruh perwakilan ranting dan kader tani se-Kota Batam untuk mewujudkan ketahanan pangan maritim.
+              </p>
+            </div>
+            <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+            </div>
+          </div>
+
+          <!-- Supporting Wide Card (Col 5) -->
+          <div class="md:col-span-5 group relative rounded-2xl overflow-hidden bg-slate-900 aspect-[16/10] shadow-sm cursor-pointer" onclick="openLightbox('Kunjungan Lapangan & Edukasi Petani Sayur Batam', 'https://images.unsplash.com/photo-1589923188900-85dae523342b?q=80&w=1470&auto=format&fit=crop')">
+            <img 
+              src="https://images.unsplash.com/photo-1589923188900-85dae523342b?q=80&w=1470&auto=format&fit=crop" 
+              alt="Kunjungan Lapangan Petani Sayur Batam"
+              class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/600x400/115E41/FFFFFF?text=Kunjungan+Lapangan+Tani'"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent p-6 flex flex-col justify-end">
+              <span class="text-xs font-bold text-amber-300 tracking-wider uppercase mb-1">Aksi Lapangan</span>
+              <h4 class="text-base sm:text-lg font-bold text-white leading-snug mb-1">
+                Aspirasi Peninjauan Langsung Sentra Holtikultura Pulau Rempang & Galang
+              </h4>
+              <p class="text-xs text-slate-300 line-clamp-2">
+                Diskusi produktif bersama kelompok tani mengenai tata kelola air sumur bor dan bibit cabe unggul.
+              </p>
+            </div>
+            <div class="absolute top-4 right-4 w-9 h-9 rounded-full bg-black/40 backdrop-blur-md flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition-opacity">
+              <i data-lucide="maximize-2" class="w-4 h-4"></i>
+            </div>
+          </div>
+
+          <!-- Bottom Row 3 Cards -->
+          <!-- Card 3 -->
+          <div class="md:col-span-4 group relative rounded-2xl overflow-hidden bg-slate-900 aspect-[16/11] shadow-sm cursor-pointer" onclick="openLightbox('Penyerahan Pataka Kepengurusan DPC HKTI Kota Batam', 'https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=1470&auto=format&fit=crop')">
+            <img 
+              src="https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=1470&auto=format&fit=crop" 
+              alt="Penyerahan Pataka Kepengurusan HKTI"
+              class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/400x300/115E41/FFFFFF?text=Penyerahan+Pataka'"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end">
+              <span class="text-[11px] font-bold text-emerald-300 uppercase">Seremoni Resmi</span>
+              <h4 class="text-sm font-bold text-white leading-snug">Penyerahan Pataka Kepengurusan DPC HKTI Kota Batam</h4>
+            </div>
+          </div>
+
+          <!-- Card 4 -->
+          <div class="md:col-span-4 group relative rounded-2xl overflow-hidden bg-slate-900 aspect-[16/11] shadow-sm cursor-pointer" onclick="openLightbox('Musyawarah Cabang & Rapat Kerja Daerah HKTI', 'https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1470&auto=format&fit=crop')">
+            <img 
+              src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1470&auto=format&fit=crop" 
+              alt="Musyawarah Kerja HKTI Batam"
+              class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/400x300/115E41/FFFFFF?text=Rapat+Kerja+Cabang'"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end">
+              <span class="text-[11px] font-bold text-emerald-300 uppercase">Konsolidasi</span>
+              <h4 class="text-sm font-bold text-white leading-snug">Rapat Kerja Daerah Perumusan Program Tani Unggul</h4>
+            </div>
+          </div>
+
+          <!-- Card 5 -->
+          <div class="md:col-span-4 group relative rounded-2xl overflow-hidden bg-slate-900 aspect-[16/11] shadow-sm cursor-pointer" onclick="openLightbox('Simbolisasi Panen Raya Bersama Petani Urban Batam', 'https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=1469&auto=format&fit=crop')">
+            <img 
+              src="https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=1469&auto=format&fit=crop" 
+              alt="Panen Sayuran Urban Farming"
+              class="w-full h-full object-cover transition-transform duration-500 ease-out group-hover:scale-105 opacity-90 group-hover:opacity-100"
+              loading="lazy"
+              onerror="this.src='https://placehold.co/400x300/115E41/FFFFFF?text=Panen+Raya+Tani'"
+            >
+            <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent p-5 flex flex-col justify-end">
+              <span class="text-[11px] font-bold text-emerald-300 uppercase">Panen Raya</span>
+              <h4 class="text-sm font-bold text-white leading-snug">Simbolisasi Panen Perdana Hidroponik Komunitas Batam</h4>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- Sekretariat & Formulir Aspirasi Section -->
+    <section id="kontak" class="py-16 sm:py-24 bg-[#F8FAFC]">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Left Column: Official Secretariat Details (Col 5) -->
+          <div class="lg:col-span-5 space-y-6">
+            <div>
+              <div class="inline-flex items-center gap-1.5 text-xs font-bold text-hkti-forest uppercase tracking-wider mb-2">
+                <span class="w-2 h-2 rounded-full bg-hkti-gold"></span>
+                <span>PELAYANAN & INFORMASI</span>
+              </div>
+              <h2 class="text-2xl sm:text-3xl font-extrabold text-hkti-slate tracking-tight mb-3">
+                Sekretariat & Hubungi Kami
+              </h2>
+              <p class="text-slate-600 text-sm leading-relaxed">
+                Pintu terbuka bagi seluruh petani, kelompok tani, pelaku agribisnis, serta elemen kemitraan yang ingin bersinergi memajukan sektor pertanian Kota Batam.
+              </p>
+            </div>
+
+            <!-- Secretariat Address Card -->
+            <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-3">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-lg bg-hkti-mint text-hkti-forest flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i data-lucide="map-pin" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900">Alamat Sekretariat</h4>
+                  <p class="text-xs text-slate-500 font-medium mt-0.5">Kantor DPC HKTI Kota Batam</p>
+                  <p class="text-xs sm:text-sm text-slate-600 mt-1 leading-relaxed">
+                    Jl. Rasamala No.1, Kabil, Kecamatan Nongsa, Kota Batam, Kepulauan Riau 29433
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Hotline & Operating Hours Card -->
+            <div class="bg-white rounded-xl p-5 border border-slate-200 shadow-sm space-y-4">
+              <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-lg bg-amber-50 text-hkti-goldDark flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i data-lucide="phone-call" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900">Layanan Hotline Aspirasi Tani</h4>
+                  <p class="text-xs text-slate-500">Konsultasi, kemitraan, dan permohonan advokasi</p>
+                  <p class="text-sm font-bold text-hkti-forest mt-1">+62 812-7700-1973 / (0778) 462-890</p>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 pt-3 border-t border-slate-100">
+                <div class="w-10 h-10 rounded-lg bg-slate-100 text-slate-600 flex items-center justify-center flex-shrink-0 mt-0.5">
+                  <i data-lucide="clock" class="w-5 h-5"></i>
+                </div>
+                <div>
+                  <h4 class="text-sm font-bold text-slate-900">Jam Operasional Pelayanan</h4>
+                  <p class="text-xs text-slate-600 mt-0.5">Senin – Jumat: 08.30 – 17.00 WIB</p>
+                  <p class="text-xs text-slate-500">Sabtu – Minggu / Hari Libur Nasional: Tutup</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- Solidarity Card -->
+            <div class="bg-hkti-forest text-white rounded-xl p-5 shadow-sm">
+              <div class="flex items-center gap-2 text-amber-300 text-xs font-bold uppercase tracking-wider mb-1">
+                <i data-lucide="shield-check" class="w-4 h-4"></i>
+                <span>KOMITMEN KELOMPOK</span>
+              </div>
+              <p class="text-sm font-medium leading-relaxed text-emerald-100">
+                “HKTI Siap Mengawal Pertanian Batam: Dari Pulau ke Perkotaan Menuju Kedaulatan Nyata.”
+              </p>
+            </div>
+
+          </div>
+
+          <!-- Right Column: Interactive Aspirasi Form (Col 7) -->
+          <div class="lg:col-span-7 bg-white rounded-2xl p-6 sm:p-8 border border-slate-200 shadow-sm">
+            <div class="border-b border-slate-100 pb-4 mb-6">
+              <h3 class="text-xl font-bold text-slate-900">Formulir Aspirasi & Kemitraan Tani</h3>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">
+                Sampaikan gagasan, kebutuhan pelatihan, legalitas lahan, atau penawaran kemitraan distribusi hasil panen.
+              </p>
+            </div>
+
+            <form id="aspirasiForm" class="space-y-4" onsubmit="handleFormSubmit(event)">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Field: Nama Lengkap -->
+                <div>
+                  <label for="namaLengkap" class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">
+                    Nama Lengkap <span class="text-red-500">*</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    id="namaLengkap" 
+                    required 
+                    placeholder="Contoh: Budi Santoso"
+                    class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-hkti-forest focus:border-transparent transition-all"
+                  >
+                </div>
+
+                <!-- Field: Nomor WhatsApp -->
+                <div>
+                  <label for="nomorWhatsapp" class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">
+                    Nomor WhatsApp <span class="text-red-500">*</span>
+                  </label>
+                  <input 
+                    type="tel" 
+                    id="nomorWhatsapp" 
+                    required 
+                    placeholder="0812-XXXX-XXXX"
+                    class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-hkti-forest focus:border-transparent transition-all"
+                  >
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <!-- Field: Kategori Pengirim -->
+                <div>
+                  <label for="kategori" class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">
+                    Kategori <span class="text-red-500">*</span>
+                  </label>
+                  <select 
+                    id="kategori" 
+                    required
+                    class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-hkti-forest focus:border-transparent transition-all"
+                  >
+                    <option value="" disabled selected>Pilih Kategori Anda</option>
+                    <option value="Petani Mandiri / Urban Farmer">Petani Mandiri / Urban Farmer</option>
+                    <option value="Kelompok Tani (Poktan / Gapoktan)">Kelompok Tani (Poktan / Gapoktan)</option>
+                    <option value="Pelaku Usaha / Distributor Pangan">Pelaku Usaha / Distributor Pangan</option>
+                    <option value="Pemilik Lahan / Investor Agrikultur">Pemilik Lahan / Investor Agrikultur</option>
+                    <option value="Akademisi / Mahasiswa Agribisnis">Akademisi / Mahasiswa Agribisnis</option>
+                    <option value="Masyarakat Umum">Masyarakat Umum</option>
+                  </select>
+                </div>
+
+                <!-- Field: Wilayah Kecamatan -->
+                <div>
+                  <label for="kecamatan" class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">
+                    Kecamatan di Batam <span class="text-red-500">*</span>
+                  </label>
+                  <select 
+                    id="kecamatan" 
+                    required
+                    class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm bg-white focus:outline-none focus:ring-2 focus:ring-hkti-forest focus:border-transparent transition-all"
+                  >
+                    <option value="" disabled selected>Pilih Kecamatan</option>
+                    <option value="Batam Kota">Batam Kota</option>
+                    <option value="Nongsa">Nongsa</option>
+                    <option value="Bengkong">Bengkong</option>
+                    <option value="Batu Ampar">Batu Ampar</option>
+                    <option value="Lubuk Baja">Lubuk Baja</option>
+                    <option value="Sekupang">Sekupang</option>
+                    <option value="Batu Aji">Batu Aji</option>
+                    <option value="Sagulung">Sagulung</option>
+                    <option value="Sei Beduk">Sei Beduk</option>
+                    <option value="Galang">Galang</option>
+                    <option value="Bulang">Bulang</option>
+                    <option value="Belakang Padang">Belakang Padang</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- Field: Isi Aspirasi -->
+              <div>
+                <label for="pesanAspirasi" class="block text-xs font-bold text-slate-700 uppercase tracking-wide mb-1.5">
+                  Isi Aspirasi / Kebutuhan Kemitraan <span class="text-red-500">*</span>
+                </label>
+                <textarea 
+                  id="pesanAspirasi" 
+                  rows="4" 
+                  required
+                  placeholder="Tuliskan secara ringkas kebutuhan pupuk, bibit, pelatihan, legalitas lahan, atau rencana kemitraan agribisnis Anda..."
+                  class="w-full px-3.5 py-2.5 rounded-lg border border-slate-300 text-sm focus:outline-none focus:ring-2 focus:ring-hkti-forest focus:border-transparent transition-all"
+                ></textarea>
+              </div>
+
+              <!-- Submit Button -->
+              <div class="pt-2 flex items-center justify-between">
+                <span class="text-xs text-slate-500 flex items-center gap-1">
+                  <i data-lucide="shield" class="w-3.5 h-3.5 text-emerald-600"></i>
+                  Data Anda dijaga kerahasiaannya.
+                </span>
+                <button 
+                  type="submit" 
+                  id="btnSubmit"
+                  class="inline-flex items-center gap-2 bg-hkti-forest hover:bg-hkti-dark text-white font-semibold text-sm px-6 py-3 rounded-lg shadow-sm transition-all duration-200 hover:-translate-y-0.5 active:translate-y-0"
+                >
+                  <i data-lucide="send" class="w-4 h-4"></i>
+                  <span>Kirim Aspirasi</span>
+                </button>
+              </div>
+            </form>
+
+            <!-- Inline Success State Container (Hidden by default) -->
+            <div id="formSuccessMessage" class="hidden mt-4 p-4 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 transition-all">
+              <div class="flex items-center gap-3">
+                <div class="w-8 h-8 rounded-full bg-emerald-600 text-white flex items-center justify-center flex-shrink-0">
+                  <i data-lucide="check" class="w-4 h-4"></i>
+                </div>
+                <div>
+                  <h5 class="text-sm font-bold">Terima Kasih! Aspirasi Berhasil Dikirim.</h5>
+                  <p class="text-xs text-emerald-700 mt-0.5">Tim Sekretariat DPC HKTI Kota Batam akan meninjau dan menghubungi Anda melalui WhatsApp.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <!-- Official Institutional Footer (Matching Reference) -->
+  <footer class="bg-[#F0F5FA] text-slate-700 border-t border-slate-200/90 pt-16 pb-12 transition-colors">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Top Grid Columns -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-8 lg:gap-12 pb-12 border-b border-slate-200/80">
+        
+        <!-- Left Brand & Mission Column (Col 5) -->
+        <div class="md:col-span-5 space-y-4">
+          <div class="flex items-center gap-3">
+            <!-- Official HKTI Logo -->
+            <div class="w-12 h-12 flex-shrink-0 flex items-center justify-center">
+              <img src="images/logo1.webp" alt="Logo DPC HKTI Kota Batam" class="w-11 h-11 object-contain" loading="lazy">
+            </div>
+            
+            <div class="flex flex-col">
+              <span class="text-sm sm:text-base font-extrabold tracking-tight text-hkti-forest uppercase leading-tight">
+                DPC HKTI KOTA BATAM
+              </span>
+              <span class="text-xs font-bold text-slate-600 tracking-wider uppercase">
+                KEPULAUAN RIAU
+              </span>
+            </div>
+          </div>
+
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md">
+            Mewujudkan Petani Sejahtera & Pertanian Modern Kota Batam Periode 2026–2030 melalui inovasi agroteknologi, kelembagaan berdikari, dan ketahanan pangan maritim perkotaan.
+          </p>
+
+          <!-- Slogan Badge Pill -->
+          <div class="pt-1">
+            <span class="inline-flex items-center px-4 py-2 rounded-full bg-[#E2EEF8] text-hkti-forest text-xs font-extrabold tracking-wide border border-[#CFE1F2]">
+              “HKTI JAYA – TANI MAKMUR”
+            </span>
+          </div>
+        </div>
+
+        <!-- Center Quick Links Column (Col 3) -->
+        <div class="md:col-span-3 space-y-3">
+          <h4 class="text-base font-bold text-slate-900 tracking-tight">Tautan Cepat</h4>
+          <ul class="space-y-2.5 text-sm">
+            <li>
+              <a href="#beranda" class="text-hkti-forest font-bold hover:underline">Beranda</a>
+            </li>
+            <li>
+              <a href="#visi-misi" class="text-slate-600 hover:text-hkti-forest transition-colors">Visi & Misi</a>
+            </li>
+            <li>
+              <a href="#pilar" class="text-slate-600 hover:text-hkti-forest transition-colors">Arah Perjuangan</a>
+            </li>
+            <li>
+              <a href="#galeri" class="text-slate-600 hover:text-hkti-forest transition-colors">Galeri Dokumentasi</a>
+            </li>
+            <li>
+              <a href="#kontak" class="text-slate-600 hover:text-hkti-forest transition-colors">Kontak & Sekretariat</a>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Right Secretariat Address Column (Col 4) -->
+        <div class="md:col-span-4 space-y-3">
+          <h4 class="text-base font-bold text-slate-900 tracking-tight">Sekretariat & Alamat</h4>
+          <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+            Jl. Rasamala No.1, Kabil, Kecamatan Nongsa, Kota Batam, Kepulauan Riau 29433
+          </p>
+          <div class="pt-2 text-xs sm:text-sm text-slate-700 space-y-1">
+            <p>
+              <strong class="font-bold text-slate-900">Email:</strong> sekretariat@hktibatam.id
+            </p>
+            <p>
+              <strong class="font-bold text-slate-900">Layanan:</strong> Senin – Jumat, 08.30 – 16.30 WIB
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Bottom Bar: Copyright & Motto -->
+      <div class="pt-6 flex flex-col sm:flex-row items-center justify-between text-xs text-slate-500 gap-3">
+        <p>© 2026 DPC HKTI Kota Batam. Hak Cipta Dilindungi Undang-Undang.</p>
+        <p class="font-medium text-slate-600">
+          Semboyan Perjuangan: <strong class="text-slate-800">HKTI Jaya</strong>
+        </p>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- Lightbox Preview Modal -->
+  <div id="imageLightbox" class="fixed inset-0 z-50 bg-black/85 backdrop-blur-sm hidden items-center justify-center p-4 transition-opacity duration-300" onclick="closeLightbox(event)">
+    <div class="relative max-w-4xl w-full bg-slate-900 rounded-2xl overflow-hidden border border-slate-700 shadow-2xl" onclick="event.stopPropagation()">
+      <button onclick="closeLightbox()" class="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/60 text-white hover:bg-black flex items-center justify-center transition-colors focus:outline-none" aria-label="Tutup Pratinjau">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+      <div class="aspect-[16/10] w-full bg-black flex items-center justify-center overflow-hidden">
+        <img id="lightboxImg" src="" alt="Pratinjau Foto Dokumentasi" class="w-full h-full object-contain">
+      </div>
+      <div class="p-4 sm:p-5 bg-slate-900 border-t border-slate-800">
+        <p id="lightboxTitle" class="text-sm sm:text-base font-bold text-white"></p>
+        <p class="text-xs text-emerald-400 mt-0.5">Dokumentasi Resmi DPC HKTI Kota Batam</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Message Box Toast -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 hidden max-w-sm bg-slate-900 text-white p-4 rounded-xl shadow-2xl border border-slate-700 transition-all">
+    <div class="flex items-start gap-3">
+      <div id="toastIcon" class="w-7 h-7 rounded-full bg-emerald-600 flex items-center justify-center flex-shrink-0 text-white">
+        <i data-lucide="check" class="w-4 h-4"></i>
+      </div>
+      <div>
+        <h6 id="toastTitle" class="text-sm font-bold">Informasi</h6>
+        <p id="toastBody" class="text-xs text-slate-300 mt-0.5"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Initialize Lucide Icons
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+    });
+
+    // Mobile Navigation Menu Toggle
+    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+    const mobileMenu = document.getElementById('mobileMenu');
+    const mobileLinks = document.querySelectorAll('.mobile-link');
+
+    if (mobileMenuBtn && mobileMenu) {
+      mobileMenuBtn.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+      });
+
+      mobileLinks.forEach(link => {
+        link.addEventListener('click', () => {
+          mobileMenu.classList.add('hidden');
+        });
+      });
+    }
+
+    // Lightbox Logic
+    const imageLightbox = document.getElementById('imageLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    const lightboxTitle = document.getElementById('lightboxTitle');
+
+    function openLightbox(title, imgUrl) {
+      if (!imageLightbox || !lightboxImg || !lightboxTitle) return;
+      lightboxImg.src = imgUrl;
+      lightboxTitle.textContent = title;
+      imageLightbox.classList.remove('hidden');
+      imageLightbox.classList.add('flex');
+      document.body.style.overflow = 'hidden';
+      if (window.lucide) window.lucide.createIcons();
+    }
+
+    function closeLightbox() {
+      if (!imageLightbox) return;
+      imageLightbox.classList.add('hidden');
+      imageLightbox.classList.remove('flex');
+      document.body.style.overflow = 'auto';
+    }
+
+    // Escape key closes modal
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') closeLightbox();
+    });
+
+    // Form Handling without using alert()
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const btn = document.getElementById('btnSubmit');
+      const successBox = document.getElementById('formSuccessMessage');
+      const form = document.getElementById('aspirasiForm');
+
+      if (!btn || !form) return;
+
+      const originalText = btn.innerHTML;
+      btn.disabled = true;
+      btn.innerHTML = `
+        <svg class="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+          <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+          <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8H4z"></path>
+        </svg>
+        <span>Mengirim...</span>
+      `;
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+        if (window.lucide) window.lucide.createIcons();
+
+        if (successBox) {
+          successBox.classList.remove('hidden');
+          successBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+
+        form.reset();
+        showToast('Berhasil Terkirim', 'Aspirasi Anda telah diterima oleh DPC HKTI Kota Batam.');
+      }, 1000);
+    }
+
+    // Custom Toast Notification System
+    function showToast(title, message) {
+      const toast = document.getElementById('toastNotification');
+      const toastTitle = document.getElementById('toastTitle');
+      const toastBody = document.getElementById('toastBody');
+
+      if (!toast || !toastTitle || !toastBody) return;
+
+      toastTitle.textContent = title;
+      toastBody.textContent = message;
+      toast.classList.remove('hidden');
+
+      setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 4000);
+    }
+  </script>
+</body>
+</html>
