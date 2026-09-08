@@ -26,7 +26,7 @@ const DAY1_ITEMS: GalleryStoryItem[] = [
     id: 'day1-1',
     title: 'Pelantikan Dewan Pimpinan DPD & DPC HKTI Kepulauan Riau',
     category: 'AGENDA UTAMA',
-    imageUrl: '/images/gambar 2.webp',
+    imageUrl: '/images/gambar-2.webp',
     isWide: true,
     hasPillBadge: 'DOKUMENTASI',
   },
@@ -34,7 +34,7 @@ const DAY1_ITEMS: GalleryStoryItem[] = [
     id: 'day1-2',
     title: 'Sidang Pleno & Musyawarah Cabang Kota Batam',
     category: 'MUSCAB',
-    imageUrl: '/images/gambar 1.webp',
+    imageUrl: '/images/gambar-1.webp',
   },
 
   // Row 2: 3 Vertical Cards (1 col, 1 col, 1 col)
@@ -42,13 +42,13 @@ const DAY1_ITEMS: GalleryStoryItem[] = [
     id: 'day1-3',
     title: 'Pengibaran Panji Kehormatan HKTI',
     category: 'PROSESI PATAKA',
-    imageUrl: '/images/gambar 4.webp',
+    imageUrl: '/images/gambar-4.webp',
   },
   {
     id: 'day1-4',
     title: 'Soliditas Pengurus Terpilih Masa Bakti 2026–2030',
     category: 'KONSOLIDASI',
-    imageUrl: '/images/gambar 5.webp',
+    imageUrl: '/images/gambar-5.webp',
   },
   {
     id: 'day1-5',
@@ -62,13 +62,13 @@ const DAY1_ITEMS: GalleryStoryItem[] = [
     id: 'day1-6',
     title: 'Penyerahan Pataka Bendera Kebesaran HKTI',
     category: 'PROSESI SAKRAL',
-    imageUrl: '/images/gambar 3.webp',
+    imageUrl: '/images/gambar-3.webp',
   },
   {
     id: 'day1-7',
     title: 'Konsolidasi Akbar DPC HKTI se-Kepulauan Riau',
     category: 'KONSOLIDASI DAERAH',
-    imageUrl: '/images/gambar 6.webp',
+    imageUrl: '/images/gambar-6.webp',
     isWide: true,
     hasPillBadge: 'FOTO BERSAMA',
   },
@@ -347,12 +347,12 @@ export const GaleriClient: React.FC = () => {
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover bg-white shadow-xs"
                       />
                       <img
-                        src={getAssetPath('/images/gambar 5.webp')}
+                        src={getAssetPath('/images/gambar-5.webp')}
                         alt="Pengurus"
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover shadow-xs"
                       />
                       <img
-                        src={getAssetPath('/images/gambar 2.webp')}
+                        src={getAssetPath('/images/gambar-2.webp')}
                         alt="Kader"
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover shadow-xs"
                       />
@@ -389,7 +389,7 @@ export const GaleriClient: React.FC = () => {
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover bg-white shadow-xs"
                       />
                       <img
-                        src={getAssetPath('/images/gambar 1.webp')}
+                        src={getAssetPath('/images/gambar-1.webp')}
                         alt="Muscab"
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover shadow-xs"
                       />
@@ -427,7 +427,7 @@ export const GaleriClient: React.FC = () => {
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover bg-white shadow-xs"
                       />
                       <img
-                        src={getAssetPath('/images/gambar 4.webp')}
+                        src={getAssetPath('/images/gambar-4.webp')}
                         alt="Panji"
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover shadow-xs"
                       />
@@ -464,7 +464,7 @@ export const GaleriClient: React.FC = () => {
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover bg-white shadow-xs"
                       />
                       <img
-                        src={getAssetPath('/images/gambar 5.webp')}
+                        src={getAssetPath('/images/gambar-5.webp')}
                         alt="Pimpinan"
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover shadow-xs"
                       />
@@ -501,7 +501,7 @@ export const GaleriClient: React.FC = () => {
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover bg-white shadow-xs"
                       />
                       <img
-                        src={getAssetPath('/images/gambar 2.webp')}
+                        src={getAssetPath('/images/gambar-2.webp')}
                         alt="Kader"
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover shadow-xs"
                       />
@@ -539,7 +539,7 @@ export const GaleriClient: React.FC = () => {
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover bg-white shadow-xs"
                       />
                       <img
-                        src={getAssetPath('/images/gambar 3.webp')}
+                        src={getAssetPath('/images/gambar-3.webp')}
                         alt="Pataka"
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover shadow-xs"
                       />
@@ -581,7 +581,7 @@ export const GaleriClient: React.FC = () => {
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover bg-white shadow-xs"
                       />
                       <img
-                        src={getAssetPath('/images/gambar 6.webp')}
+                        src={getAssetPath('/images/gambar-6.webp')}
                         alt="Konsolidasi"
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover shadow-xs"
                       />
@@ -619,7 +619,7 @@ export const GaleriClient: React.FC = () => {
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover bg-white shadow-xs"
                       />
                       <img
-                        src={getAssetPath('/images/gambar 1.webp')}
+                        src={getAssetPath('/images/gambar-1.webp')}
                         alt="Raker"
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover shadow-xs"
                       />
@@ -656,7 +656,7 @@ export const GaleriClient: React.FC = () => {
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover bg-white shadow-xs"
                       />
                       <img
-                        src={getAssetPath('/images/gambar 2.webp')}
+                        src={getAssetPath('/images/gambar-2.webp')}
                         alt="Tokoh"
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover shadow-xs"
                       />
@@ -693,7 +693,7 @@ export const GaleriClient: React.FC = () => {
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover bg-white shadow-xs"
                       />
                       <img
-                        src={getAssetPath('/images/gambar 6.webp')}
+                        src={getAssetPath('/images/gambar-6.webp')}
                         alt="Kebersamaan"
                         className="w-6 h-6 rounded-full border-2 border-white/80 object-cover shadow-xs"
                       />

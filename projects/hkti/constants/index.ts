@@ -33,6 +33,15 @@ export const SITE_INFO = {
   hours: "Senin – Jumat: 08.30 – 17.00 WIB",
 };
 
+// Diisi setelah link resmi didapat dari klien; dipakai untuk sameAs schema.org
+// dan tautan sosial di footer. String kosong otomatis di-exclude oleh lib/schema.ts.
+export const SOCIAL_LINKS = {
+  instagram: "https://www.instagram.com/hkti_kota_batam/",
+  facebook: "https://www.facebook.com/dpkhktibatam/",
+  youtube: "https://www.youtube.com/channel/UCPE_mKQN1Q3WlAdFLeCwzxg",
+  hktiPusat: "https://hkti.org/",
+};
+
 export const NAV_ITEMS: NavItem[] = [
   { label: "Beranda", href: "/#beranda" },
   { label: "Visi & Misi", href: "/#visi-misi" },
@@ -186,7 +195,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     date: "24 Februari 2026",
     description:
       "Pengukuhan resmi serentak jajaran pengurus kabupaten/kota masa bakti 2026–2031.",
-    imageUrl: "/images/gambar 2.webp",
+    imageUrl: "/images/gambar-2.webp",
     fallbackUrl: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?q=80&w=1469&auto=format&fit=crop",
     isFeatured: true,
   },
@@ -197,7 +206,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     date: "24 Februari 2026",
     description:
       "Soliditas pimpinan daerah dan cabang siap menggerakkan roda organisasi.",
-    imageUrl: "/images/gambar 5.webp",
+    imageUrl: "/images/gambar-5.webp",
     fallbackUrl: "https://images.unsplash.com/photo-1589923188900-85dae523342b?q=80&w=1470&auto=format&fit=crop",
   },
   {
@@ -207,7 +216,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     date: "24 Februari 2026",
     description:
       "Prosesi sakral penyerahan panji kebesaran kepengurusan HKTI Kepri.",
-    imageUrl: "/images/gambar 3.webp",
+    imageUrl: "/images/gambar-3.webp",
     fallbackUrl: "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?q=80&w=1470&auto=format&fit=crop",
   },
   {
@@ -217,7 +226,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     date: "24 Februari 2026",
     description:
       "Kader tani dan jajaran pengurus bersatu memajukan pertanian Kepulauan Riau.",
-    imageUrl: "/images/gambar 6.webp",
+    imageUrl: "/images/gambar-6.webp",
     fallbackUrl: "https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?q=80&w=1470&auto=format&fit=crop",
   },
   {
@@ -227,7 +236,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     date: "24 Februari 2026",
     description:
       "Semarak pengibaran bendera kebanggaan HKTI menyongsong kedaulatan pangan.",
-    imageUrl: "/images/gambar 4.webp",
+    imageUrl: "/images/gambar-4.webp",
     fallbackUrl: "https://images.unsplash.com/photo-1592982537447-7440770cbfc9?q=80&w=1469&auto=format&fit=crop",
   },
   {
@@ -237,7 +246,7 @@ export const GALLERY_ITEMS: GalleryItem[] = [
     date: "15 Januari 2026",
     description:
       "Perumusan 5 pilar perjuangan dan 9 butir misi ketahanan pangan mandiri serta tata kelola organisasi.",
-    imageUrl: "/images/gambar 1.webp",
+    imageUrl: "/images/gambar-1.webp",
     fallbackUrl: "https://images.unsplash.com/photo-1511795409834-ef04bbd61622?q=80&w=1469&auto=format&fit=crop",
   },
 ];

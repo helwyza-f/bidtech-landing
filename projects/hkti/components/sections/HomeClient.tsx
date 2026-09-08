@@ -14,7 +14,7 @@ import { Toast, ToastProps } from '@/components/ui/Toast';
 import { GalleryItem } from '@/types';
 import { getAssetPath } from '@/lib/utils';
 
-export default function Home() {
+export function HomeClient() {
   // Lightbox Modal State
   const [lightboxState, setLightboxState] = useState<{
     isOpen: boolean;

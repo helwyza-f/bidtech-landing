@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:demo": "BUILD_STATIC_DEMO=true NEXT_PUBLIC_DEMO_BASE_PATH=/demo/organization-3 next build",
-    "start": "next start",
+    "build:demo": "NEXT_PUBLIC_DEMO_BASE_PATH=/demo/organization-3 next build",
+    "serve": "npx serve@latest out -l 3000",
     "lint": "next lint"
   },
   "dependencies": {
@@ -24,6 +24,7 @@
     "@types/react-dom": "^18.2.0",
     "autoprefixer": "^10.4.0",
     "postcss": "^8.4.0",
+    "sharp": "^0.35.4",
     "tailwindcss": "^3.3.0",
     "typescript": "^5.3.0"
   }
