@@ -1,76 +1,69 @@
-# Template Name
+# Teh.in — Landing Page Template UMKM (Minuman Tradisional & Modern)
 
-Deskripsi singkat tentang template ini dan use case-nya.
+Template landing page modern bernuansa *Organic, Zen-modern, Airy, Luxurious Minimalist* yang dirancang khusus untuk pelaku UMKM kuliner & minuman (food and beverage).
 
-## 🎨 Features
+---
 
-- ✨ Feature 1
-- ✨ Feature 2
-- ✨ Feature 3
-- ✨ Feature 4
-- ✨ Fully Responsive
-- ✨ Mobile Optimized
+## 🎨 Fitur Utama
 
-## 📸 Preview
+- 🍃 **Arsitektur Hero Multi-Layer**: Menampilkan kedalaman visual kanvas dengan bayangan dedaunan alami dan produk HD berembun dingin.
+- 🧊 **Frosted Glass Benefit Strip**: Baris ringkas penanda kualitas (Diseduh Segar Tiap 4 Jam, 100% Gula Tebu Asli, Es Kristal RO, Pilihan Ukuran Regular & Jumbo).
+- 🍹 **Katalog Menu Favorit Interaktif**: Dilengkapi tombol pemesanan langsung terintegrasi dengan pesan otomatis WhatsApp.
+- 🌿 **3 Pilar Keunggulan Artisanal**: Menonjolkan standar mutu dan higienitas produk lokal.
+- ⭐ **Testimonial & Social Proof**: Ulasan pelanggan nyata, rating bintang 4.9, dan metrik 15.000+ cup per bulan.
+- 📍 **Direktori Gerai Fisik & Quick Order**: Daftar cabang aktif dilengkapi tautan Google Maps.
+- 💬 **Floating Quick WhatsApp Action**: Tombol melayang untuk kemudahan konversi pengunjung di perangkat mobile & desktop.
+- 📱 **Fully Responsive**: Dioptimalkan sempurna untuk desktop, tablet, dan smartphone.
+- 🔍 **SEO & Performance Ready**: Metadata komprehensif, semantic HTML, dan pemuatan gambar Next.js Image teroptimasi.
 
-| Desktop | Mobile |
-|---------|--------|
-| ![Homepage](./screens/homepage.png) | ![Mobile](./screens/mobile.png) |
+---
 
 ## 🛠️ Tech Stack
 
-- **Framework:** Next.js 14+
-- **Styling:** Tailwind CSS / CSS Modules
+- **Framework:** Next.js 14 (App Router)
 - **Language:** TypeScript
-- **UI Components:** React
-
-## 🚀 Installation
-
-```bash
-# 1. Copy template ke project Anda
-cp -r template-name your-project/
-
-# 2. Install dependencies
-cd your-project
-npm install
-
-# 3. Run development server
-npm run dev
-
-# 4. Open browser
-# Navigate to http://localhost:3000
-```
-
-## 📝 Customization
-
-- Update colors di `lib/constants.ts`
-- Ganti images di `public/images/`
-- Modifikasi content di `app/` pages
-- Update metadata di `app/layout.tsx`
-
-## 📂 Folder Structure
-
-```
-├── app/              # Pages & routing
-├── components/       # React components
-├── lib/              # Utilities & data
-├── styles/           # Global styles
-├── public/           # Static assets
-└── screens/          # Screenshots
-```
-
-Lihat [TEMPLATE_STRUCTURE.md](../TEMPLATE_STRUCTURE.md) untuk detail lengkap.
-
-## 🎯 Best Practices
-
-- Modular components yang reusable
-- Responsive design
-- Optimized images
-- Clean code & proper naming
-
-## 📄 License
-
-Bidtech Templates - Free to use
+- **Styling:** Tailwind CSS + Vanilla CSS Tokens
+- **Icons:** Lucide React
+- **Typography:** Google Fonts (DM Serif Display, Cormorant Garamond, Allura, DM Sans, Manrope)
 
 ---
-Last Updated: 2026-08-19
+
+## 🚀 Menjalankan Project
+
+```bash
+# 1. Masuk ke direktori template
+cd templates/umkm/template-1
+
+# 2. Install dependensi
+npm install
+
+# 3. Jalankan server pengembangan lokal
+npm run dev
+
+# 4. Buka di browser
+# http://localhost:3000
+```
+
+---
+
+## 📂 Struktur Direktori
+
+```
+├── app/
+│   ├── layout.tsx         # Root layout, Google Fonts, & metadata SEO
+│   └── page.tsx           # Assembly komponen utama
+├── components/
+│   ├── Header.tsx         # Transparent sticky navigation & mobile drawer
+│   ├── Hero.tsx           # Multi-layer canvas, headline, CTA, & benefit strip
+│   ├── MenuSection.tsx    # Katalog varian menu favorit & WhatsApp CTA
+│   ├── KeunggulanSection.tsx # Tiga pilar keunggulan kualitas
+│   ├── TestimonialSection.tsx # Ulasan pelanggan & rating
+│   ├── LocationSection.tsx # Informasi gerai fisik & quick order
+│   ├── Footer.tsx         # Sitemap, legal, & social links
+│   └── FloatingWhatsApp.tsx # Floating quick order button
+├── public/
+│   └── assets/            # Aset gambar HD terpotong transparan (individual & sheets)
+├── styles/
+│   └── globals.css        # CSS variables, utility glassmorphism, & styles
+└── design.md              # Spesifikasi teknis desain sistem Teh.in
+```
