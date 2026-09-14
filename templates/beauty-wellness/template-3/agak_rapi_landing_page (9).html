@@ -1,0 +1,1054 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Agak Rapi — Precision Hair Architecture</title>
+
+  <!-- Google Fonts: Playfair Display, Inter, & JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,600;1,700&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['"Playfair Display"', 'serif'],
+            sans: ['Inter', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            brand: {
+              lime: '#D8F242',
+              black: '#0E0E10',
+              charcoal: '#18181B',
+              dark: '#27272A',
+              paper: '#F6F6F2',
+              cream: '#EDEDE8',
+              border: '#E2E2DC',
+              text: '#121214',
+              muted: '#71717A',
+              red: '#E11D48',
+              blue: '#2563EB',
+              amber: '#EAB308',
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- GSAP & Lenis Smooth Scroll CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/lenis@1.1.20/dist/lenis.css">
+  <script src="https://unpkg.com/lenis@1.1.20/dist/lenis.min.js"></script>
+
+  <style>
+    /* CSS Root Theme Variables */
+    :root {
+      --bg-base: #F6F6F2;
+      --bg-surface: #FFFFFF;
+      --bg-accent: #EBEBE6;
+      --text-main: #0E0E10;
+      --text-muted: #6B7280;
+      --border-color: #E2E2DC;
+      --accent-lime: #CCEA2B;
+      --accent-lime-fg: #121214;
+      --grid-line: rgba(0, 0, 0, 0.05);
+      --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+    }
+
+    .dark {
+      --bg-base: #0C0C0E;
+      --bg-surface: #141417;
+      --bg-accent: #1C1C20;
+      --text-main: #F4F4F5;
+      --text-muted: #9CA3AF;
+      --border-color: #26262B;
+      --accent-lime: #D8F242;
+      --accent-lime-fg: #0E0E10;
+      --grid-line: rgba(255, 255, 255, 0.05);
+      --card-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.4);
+    }
+
+    body {
+      background-color: var(--bg-base);
+      color: var(--text-main);
+      font-family: 'Inter', sans-serif;
+      transition: background-color 0.3s ease, color 0.3s ease;
+      overflow-x: hidden;
+    }
+
+    html.lenis, html.lenis body {
+      height: auto;
+    }
+
+    .lenis.lenis-smooth {
+      scroll-behavior: auto !important;
+    }
+
+    .lenis.lenis-smooth [data-lenis-prevent] {
+      overscroll-behavior: contain;
+    }
+
+    .lenis.lenis-stopped {
+      overflow: hidden;
+    }
+
+    /* Architectural Drafting Grid Pattern */
+    .bg-drafting-grid {
+      background-image: 
+        linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+        linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+      background-size: 32px 32px;
+    }
+
+    /* Navigation Link with Active Bold & Underline */
+    .nav-link {
+      position: relative;
+      transition: color 0.2s ease, font-weight 0.15s ease, text-decoration-color 0.2s ease;
+      text-decoration: underline transparent;
+      text-underline-offset: 8px;
+      text-decoration-thickness: 2px;
+      font-weight: 500;
+    }
+
+    .nav-link:hover {
+      color: var(--text-main);
+      text-decoration-color: var(--text-muted);
+    }
+
+    .nav-link.active {
+      font-weight: 800 !important;
+      color: var(--text-main) !important;
+      text-decoration-color: var(--accent-lime) !important;
+      text-decoration-thickness: 3px !important;
+    }
+
+    /* Hero Collage Card Styling */
+    .hero-card {
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, z-index 0.1s;
+      box-shadow: var(--card-shadow);
+      will-change: transform;
+    }
+
+    .hero-card:hover {
+      z-index: 40 !important;
+      transform: scale(1.05) rotate(0deg) !important;
+      box-shadow: 0 25px 35px -10px rgba(0, 0, 0, 0.2), 0 0 15px rgba(216, 242, 66, 0.25);
+    }
+
+    /* Cut tape decal effect */
+    .tape-sticker {
+      box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.15);
+      border-left: 3px dashed rgba(0, 0, 0, 0.2);
+      border-right: 3px dashed rgba(0, 0, 0, 0.2);
+    }
+
+    /* Single-line Horizontal Marquee Layout */
+    .marquee-wrapper {
+      display: flex;
+      width: 100%;
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .marquee-track-gsap {
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      width: max-content;
+      will-change: transform;
+    }
+
+    .gsap-marquee-item {
+      display: flex;
+      align-items: center;
+      flex-shrink: 0;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body class="selection:bg-brand-lime selection:text-brand-black">
+
+  <!-- Top Navigation Header -->
+  <header class="fixed top-0 left-0 right-0 z-50 backdrop-blur-md border-b transition-all duration-300" style="background-color: rgba(var(--bg-base), 0.85); border-color: var(--border-color);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      
+      <!-- Wordmark Logo -->
+      <a href="#beranda" class="flex items-baseline space-x-1 group">
+        <span class="font-display italic text-2xl font-bold tracking-tight group-hover:opacity-80 transition-opacity">Agak Rapi.</span>
+        <span class="w-2 h-2 rounded-full inline-block" style="background-color: var(--accent-lime);"></span>
+      </a>
+
+      <!-- Center Links with ScrollSpy Indicator -->
+      <nav class="hidden md:flex items-center space-x-8 text-xs font-mono tracking-wider uppercase">
+        <a href="#beranda" class="nav-link text-zinc-500 py-1">// BERANDA</a>
+        <a href="#layanan" class="nav-link text-zinc-500 py-1">// LAYANAN</a>
+        <a href="#filosofi" class="nav-link text-zinc-500 py-1">// FILOSOFI</a>
+        <a href="#reservasi" class="nav-link text-zinc-500 py-1">// RESERVASI</a>
+      </nav>
+
+      <!-- Right Action CTA & Theme Toggle -->
+      <div class="flex items-center space-x-3">
+        <!-- Theme Toggle Button -->
+        <button id="themeToggleBtn" type="button" class="px-3 py-1.5 rounded text-xs font-mono border flex items-center space-x-1.5 transition-colors" style="border-color: var(--border-color); background-color: var(--bg-surface);" aria-label="Ganti Tema">
+          <span id="themeIcon">☀</span>
+          <span id="themeText" class="font-semibold uppercase tracking-wider text-[11px]">LIGHT</span>
+        </button>
+
+        <!-- Direct Reservation CTA -->
+        <a href="#reservasi" class="px-4 py-2 text-xs font-mono uppercase tracking-widest font-semibold rounded border transition-all duration-200" style="background-color: var(--text-main); color: var(--bg-base); border-color: var(--text-main);">
+          Book Appointment
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main class="pt-16">
+    <!-- HERO SECTION (#BERANDA) -->
+    <section id="beranda" class="relative pt-10 pb-20 md:pt-16 md:pb-28 border-b overflow-hidden" style="border-color: var(--border-color);">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <!-- Header Text Row -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-12 items-start mb-10">
+          <div class="lg:col-span-8">
+            <div class="inline-flex items-center gap-2 px-2.5 py-1 rounded text-xs font-mono uppercase tracking-widest mb-4 border" style="background-color: var(--bg-accent); border-color: var(--border-color);">
+              <span class="w-2 h-2 rounded-full animate-pulse" style="background-color: var(--accent-lime);"></span>
+              <span>// PRECISION GROOMING ARCHITECTURE [EST. 2024]</span>
+            </div>
+            <h1 class="font-display text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.08] tracking-tight">
+              Pangkas presisi <br>
+              <span class="italic font-normal" style="color: var(--accent-lime); -webkit-text-stroke: 1px rgba(0,0,0,0.15);">untuk yang mau</span> agak rapi.
+            </h1>
+          </div>
+          
+          <div class="lg:col-span-4 pt-2">
+            <div class="p-5 rounded border text-sm leading-relaxed" style="background-color: var(--bg-surface); border-color: var(--border-color);">
+              <p class="text-zinc-600 dark:text-zinc-400 font-sans mb-3 text-[13px]">
+                Bukan sekadar potong rambut. Kami mengukur proporsi tengkorak kepala, pusaran rambut, dan arah tumbuh untuk memberikan konstruksi gaya rambut yang presisi dan tahan berminggu-minggu.
+              </p>
+              <div class="flex items-center justify-between text-xs font-mono border-t pt-3" style="border-color: var(--border-color);">
+                <span class="text-zinc-500">JAKARTA SELATAN</span>
+                <span class="font-bold" style="color: var(--accent-lime-fg); background-color: var(--accent-lime); padding: 1px 6px; border-radius: 2px;">SLOT TERBATAS</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Abstract Photo Collage Stage (Matching Provided Visual Ref) -->
+        <div class="relative w-full rounded border overflow-hidden bg-drafting-grid" style="background-color: var(--bg-surface); border-color: var(--border-color); min-height: 540px;">
+          
+          <!-- Framing Markers & Telemetry Lines -->
+          <div class="absolute top-3 left-4 font-mono text-[11px] text-zinc-500 tracking-wider flex items-center gap-2 select-none z-10">
+            <span>┌ CROP_01 // JKT_SOUTH</span>
+          </div>
+          <div class="absolute top-3 right-4 font-mono text-[11px] text-zinc-500 tracking-wider select-none z-10">
+            <span>FRAME_INDEX_2026 ┐</span>
+          </div>
+          <div class="absolute bottom-3 left-4 font-mono text-[11px] text-zinc-500 tracking-wider select-none z-10">
+            <span>└ TELEMETRY_GRID</span>
+          </div>
+          <div class="absolute bottom-3 right-4 font-mono text-[11px] text-zinc-500 tracking-wider select-none z-10">
+            <span>ISO_400 // SHARP ┘</span>
+          </div>
+
+          <!-- Collage Container -->
+          <div id="heroCollageStage" class="relative w-full h-[540px] md:h-[600px] p-4">
+            
+            <!-- Card 1: Amber / Yellow Frame (Top Left) -->
+            <div class="hero-card absolute top-[8%] left-[4%] sm:left-[6%] w-[160px] sm:w-[195px] bg-[#EAB308] p-2 sm:p-2.5 rounded shadow-xl -rotate-6 z-20 cursor-pointer">
+              <div class="relative w-full h-[155px] sm:h-[190px] bg-black overflow-hidden rounded-sm mb-1.5">
+                <span class="absolute top-1.5 left-1.5 z-10 bg-black/80 text-white font-mono text-[9px] px-1.5 py-0.5 rounded tracking-widest uppercase">SPEC #01</span>
+                <img src="https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=450&auto=format&fit=crop" alt="Skena Crop Cut" class="w-full h-full object-cover grayscale contrast-125" loading="lazy">
+              </div>
+              <div class="flex items-center justify-between text-black font-mono font-bold text-[10px] sm:text-[11px] uppercase tracking-wider px-0.5">
+                <span>SKENA CROP</span>
+                <span>120K</span>
+              </div>
+            </div>
+
+            <!-- Card 2: Cobalt Blue Frame (Top Center-Left) -->
+            <div class="hero-card absolute top-[4%] left-[26%] sm:left-[27%] w-[155px] sm:w-[185px] bg-[#2563EB] p-2 sm:p-2.5 rounded shadow-xl rotate-3 z-10 cursor-pointer">
+              <div class="relative w-full h-[150px] sm:h-[180px] bg-black overflow-hidden rounded-sm mb-1.5">
+                <span class="absolute bottom-2 right-2 z-10 bg-[#E11D48] text-white font-mono text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider">CUT</span>
+                <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=450&auto=format&fit=crop" alt="Comma Hair Cut" class="w-full h-full object-cover grayscale contrast-125" loading="lazy">
+              </div>
+              <div class="flex items-center justify-between text-white font-mono font-bold text-[10px] sm:text-[11px] uppercase tracking-wider px-0.5">
+                <span>COMMA HAIR</span>
+                <span class="text-blue-200 text-[9px]">CALIBRATED</span>
+              </div>
+            </div>
+
+            <!-- Card 3: Neon Lime Frame (Centerpiece Signature) -->
+            <div class="hero-card absolute top-[7%] left-[45%] sm:left-[41%] w-[190px] sm:w-[240px] bg-[#D8F242] p-2.5 sm:p-3 rounded shadow-2xl rotate-1 z-30 cursor-pointer border border-lime-400">
+              <div class="relative w-full h-[185px] sm:h-[235px] bg-black overflow-hidden rounded-sm mb-2">
+                <span class="absolute top-2 left-2 z-10 bg-black text-[#D8F242] font-mono text-[10px] font-bold px-2 py-0.5 rounded tracking-widest uppercase">SIGNATURE #02</span>
+                <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=500&auto=format&fit=crop" alt="Two-Block Natural" class="w-full h-full object-cover contrast-110" loading="lazy">
+              </div>
+              <div class="flex items-center justify-between text-black font-mono font-bold text-[11px] sm:text-[12px] uppercase tracking-wider px-1">
+                <span>TWO-BLOCK NATURAL</span>
+                <span>130K</span>
+              </div>
+            </div>
+
+            <!-- Card 4: Minimal Dark Slate Frame (Top Right) -->
+            <div class="hero-card absolute top-[6%] right-[3%] sm:right-[6%] w-[165px] sm:w-[200px] bg-zinc-900 border border-zinc-700 p-2 sm:p-2.5 rounded shadow-xl -rotate-2 z-10 cursor-pointer">
+              <div class="relative w-full h-[155px] sm:h-[185px] bg-black overflow-hidden rounded-sm mb-1.5">
+                <span class="absolute bottom-2 left-2 z-10 bg-white text-black font-mono text-[9px] font-bold px-1.5 py-0.5 rounded uppercase tracking-wider">0.0MM BLADE</span>
+                <img src="https://images.unsplash.com/photo-1517832606589-7629c3397143?q=80&w=450&auto=format&fit=crop" alt="Razor Fade" class="w-full h-full object-cover grayscale contrast-125" loading="lazy">
+              </div>
+              <div class="flex items-center justify-between text-zinc-300 font-mono font-bold text-[10px] sm:text-[11px] uppercase tracking-wider px-0.5">
+                <span>RAZOR FADE</span>
+                <span class="text-zinc-400">120K</span>
+              </div>
+            </div>
+
+            <!-- Card 5: Crimson Red Frame (Bottom Left) -->
+            <div class="hero-card absolute bottom-[6%] left-[12%] sm:left-[19%] w-[170px] sm:w-[210px] bg-[#E11D48] p-2 sm:p-2.5 rounded shadow-xl 2 -rotate-3 z-20 cursor-pointer">
+              <div class="relative w-full h-[160px] sm:h-[195px] bg-black overflow-hidden rounded-sm mb-1.5">
+                <span class="absolute top-2 right-2 z-10 bg-white text-[#E11D48] font-mono text-[9px] font-bold px-1.5 py-0.5 rounded tracking-widest uppercase">VOL. 04</span>
+                <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=450&auto=format&fit=crop" alt="Modern Mullet Cut" class="w-full h-full object-cover grayscale contrast-125" loading="lazy">
+              </div>
+              <div class="flex items-center justify-between text-white font-mono font-bold text-[10px] sm:text-[11px] uppercase tracking-wider px-0.5">
+                <span>MODERN MULLET</span>
+                <span>140K</span>
+              </div>
+            </div>
+
+            <!-- Decorative Diagonal Sticker (Center Gap) -->
+            <div class="tape-sticker absolute top-[49%] left-[50%] sm:left-[53%] -translate-x-1/2 -rotate-12 bg-white text-zinc-950 font-mono text-[10px] sm:text-xs font-black tracking-widest uppercase px-4 py-1.5 rounded-sm z-30 select-none shadow-md flex items-center gap-1.5 border border-zinc-300">
+              <span class="text-brand-amber">★</span>
+              <span>JAKARTA BEST FADE 2026</span>
+            </div>
+
+            <!-- Card 6: Warm Amber Frame (Bottom Right) -->
+            <div class="hero-card absolute bottom-[5%] right-[5%] sm:right-[11%] w-[175px] sm:w-[215px] bg-[#EAB308] p-2 sm:p-2.5 rounded shadow-xl 4 rotate-3 z-20 cursor-pointer">
+              <div class="relative w-full h-[160px] sm:h-[195px] bg-black overflow-hidden rounded-sm mb-1.5">
+                <span class="absolute top-2 right-2 z-10 bg-[#2563EB] text-white font-mono text-[9px] font-bold px-2 py-0.5 rounded uppercase tracking-wider">LAB FORMULA</span>
+                <img src="https://images.unsplash.com/photo-1503951914875-452162b0f3f1?q=80&w=450&auto=format&fit=crop" alt="Grooming & Sculpting" class="w-full h-full object-cover grayscale contrast-125" loading="lazy">
+              </div>
+              <div class="flex items-center justify-between text-black font-mono font-bold text-[10px] sm:text-[11px] uppercase tracking-wider px-0.5">
+                <span>GROOMING / SCULPT</span>
+                <span>150K</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 3 Info Telemetry Cards (Matching Ref: Primary Schedule, Lab Location, Cut Archives) -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5 mt-4">
+          
+          <!-- Card 1: Primary Schedule -->
+          <div class="p-3.5 sm:p-4 rounded border flex items-center space-x-3 transition-colors" style="background-color: var(--bg-surface); border-color: var(--border-color);">
+            <div class="w-3.5 h-3.5 rounded-sm flex-shrink-0 animate-pulse" style="background-color: var(--accent-lime);"></div>
+            <div class="min-w-0">
+              <span class="font-mono text-[10px] text-zinc-500 uppercase tracking-widest block">// PRIMARY SCHEDULE</span>
+              <span class="font-mono font-bold text-xs tracking-wider block mt-0.5">MON - SUN / 10:00 - 21:00 WIB</span>
+            </div>
+          </div>
+
+          <!-- Card 2: Lab Location -->
+          <div class="p-3.5 sm:p-4 rounded border flex items-center justify-between transition-colors" style="background-color: var(--bg-surface); border-color: var(--border-color);">
+            <div class="min-w-0 pr-2">
+              <span class="font-mono text-[10px] text-zinc-500 uppercase tracking-widest block">// LAB LOCATION</span>
+              <span class="font-mono font-bold text-xs tracking-wider truncate block mt-0.5">JL. SENOPATI NO. 82, JAKSEL</span>
+            </div>
+            <a href="https://maps.google.com/?q=Senopati+Jakarta" target="_blank" rel="noopener noreferrer" class="font-mono text-[10px] uppercase tracking-wider text-zinc-500 hover:text-brand-lime transition-colors whitespace-nowrap">
+              [MAPS]
+            </a>
+          </div>
+
+          <!-- Card 3: Explore Cut Archives -->
+          <a href="#layanan" class="group p-3.5 sm:p-4 rounded border flex items-center justify-between transition-all duration-200 hover:border-lime-400" style="background-color: var(--bg-surface); border-color: var(--border-color);">
+            <span class="font-mono font-semibold text-xs tracking-wider uppercase group-hover:underline">
+              EXPLORE CUT ARCHIVES
+            </span>
+            <span class="font-mono text-xs font-bold transition-transform group-hover:translate-y-0.5" style="color: var(--accent-lime);">
+              [ ↓ ]
+            </span>
+          </a>
+
+        </div>
+
+      </div>
+
+      <!-- Infinite Marquee Ticker Bar (GSAP Seamless 1-Line Track) -->
+      <div id="gsapMarqueeBar" class="marquee-wrapper border-t border-b py-3.5 mt-8 border-[#27272A] bg-[#0A0A0C]">
+        <div id="gsapMarqueeTrack" class="marquee-track-gsap">
+          
+          <!-- Track Loop Set 1 -->
+          <div class="gsap-marquee-item space-x-6 pr-6 font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-zinc-300">
+            <span style="color: var(--accent-lime);" class="font-bold">PRECISION CUTS</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-zinc-300">STEAM TOWEL TREATMENT</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-[#EAB308] font-bold">SCALP THERAPY</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-zinc-300">BEARD SCULPTING</span>
+            <span class="text-zinc-600">·</span>
+            <span style="color: var(--accent-lime);" class="font-bold">SIGNATURE MATTE POMADE</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-zinc-300">NO RUSH APPOINTMENTS</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-[#E11D48] font-bold">JAKARTA SOUTH EXCLUSIVE</span>
+            <span class="text-zinc-600">·</span>
+          </div>
+
+          <!-- Track Loop Set 2 (Seamless clone to ensure zero gap during scroll) -->
+          <div class="gsap-marquee-item space-x-6 pr-6 font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-zinc-300" aria-hidden="true">
+            <span style="color: var(--accent-lime);" class="font-bold">PRECISION CUTS</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-zinc-300">STEAM TOWEL TREATMENT</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-[#EAB308] font-bold">SCALP THERAPY</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-zinc-300">BEARD SCULPTING</span>
+            <span class="text-zinc-600">·</span>
+            <span style="color: var(--accent-lime);" class="font-bold">SIGNATURE MATTE POMADE</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-zinc-300">NO RUSH APPOINTMENTS</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-[#E11D48] font-bold">JAKARTA SOUTH EXCLUSIVE</span>
+            <span class="text-zinc-600">·</span>
+          </div>
+
+          <!-- Track Loop Set 3 (Ultra-wide screen buffer) -->
+          <div class="gsap-marquee-item space-x-6 pr-6 font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-widest text-zinc-300" aria-hidden="true">
+            <span style="color: var(--accent-lime);" class="font-bold">PRECISION CUTS</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-zinc-300">STEAM TOWEL TREATMENT</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-[#EAB308] font-bold">SCALP THERAPY</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-zinc-300">BEARD SCULPTING</span>
+            <span class="text-zinc-600">·</span>
+            <span style="color: var(--accent-lime);" class="font-bold">SIGNATURE MATTE POMADE</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-zinc-300">NO RUSH APPOINTMENTS</span>
+            <span class="text-zinc-600">·</span>
+            <span class="text-[#E11D48] font-bold">JAKARTA SOUTH EXCLUSIVE</span>
+            <span class="text-zinc-600">·</span>
+          </div>
+
+        </div>
+      </div>
+
+    </section>
+
+    <!-- SERVICES SECTION (#LAYANAN) -->
+    <section id="layanan" class="py-20 md:py-28 border-b" style="border-color: var(--border-color);">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
+          <div>
+            <span class="font-mono text-xs uppercase tracking-widest text-zinc-500">// CATALOGUE & ARCHITECTURE</span>
+            <h2 class="font-display text-3xl sm:text-4xl font-bold mt-2">Precision engineered hair architecture.</h2>
+          </div>
+          <p class="font-mono text-xs text-zinc-500 mt-2 md:mt-0">
+            [PILIH GAYA UNTUK INSPEKSI SPESIFIKASI TEKNIK]
+          </p>
+        </div>
+
+        <!-- Dual Column: List vs Spec Inspector -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          
+          <!-- Service Rows -->
+          <div class="lg:col-span-7 space-y-3">
+            
+            <div class="service-item p-4 sm:p-5 rounded border cursor-pointer transition-all duration-200" style="background-color: var(--bg-surface); border-color: var(--border-color);" data-cut="skena">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="font-mono text-xs text-zinc-400">01</span>
+                  <h3 class="font-mono text-sm sm:text-base font-bold tracking-wide">++ SKENA CROP</h3>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <span class="font-mono text-xs text-zinc-400">45 MIN</span>
+                  <span class="font-mono text-xs sm:text-sm font-bold">120K</span>
+                </div>
+              </div>
+              <p class="text-xs text-zinc-500 mt-2 pl-7 font-sans">Tekstur mikro atas bervolume dengan blunt fringe tegas dan taper samping rapi.</p>
+            </div>
+
+            <div class="service-item p-4 sm:p-5 rounded border cursor-pointer transition-all duration-200" style="background-color: var(--bg-surface); border-color: var(--border-color);" data-cut="twoblock">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="font-mono text-xs text-zinc-400">02</span>
+                  <h3 class="font-mono text-sm sm:text-base font-bold tracking-wide">++ TWO BLOCK NATURAL</h3>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <span class="font-mono text-xs text-zinc-400">50 MIN</span>
+                  <span class="font-mono text-xs sm:text-sm font-bold">130K</span>
+                </div>
+              </div>
+              <p class="text-xs text-zinc-500 mt-2 pl-7 font-sans">Undercut bagian dalam yang terselubung jatuh rambut alami, menciptakan siluet oval seimbang.</p>
+            </div>
+
+            <div class="service-item p-4 sm:p-5 rounded border cursor-pointer transition-all duration-200" style="background-color: var(--bg-surface); border-color: var(--border-color);" data-cut="comma">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="font-mono text-xs text-zinc-400">03</span>
+                  <h3 class="font-mono text-sm sm:text-base font-bold tracking-wide">++ COMMA HAIR CALIBRATION</h3>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <span class="font-mono text-xs text-zinc-400">50 MIN</span>
+                  <span class="font-mono text-xs sm:text-sm font-bold">135K</span>
+                </div>
+              </div>
+              <p class="text-xs text-zinc-500 mt-2 pl-7 font-sans">Lengkung poni presisi menyerupai tanda koma dengan partisi akar rambut simetris.</p>
+            </div>
+
+            <div class="service-item p-4 sm:p-5 rounded border cursor-pointer transition-all duration-200" style="background-color: var(--bg-surface); border-color: var(--border-color);" data-cut="mullet">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="font-mono text-xs text-zinc-400">04</span>
+                  <h3 class="font-mono text-sm sm:text-base font-bold tracking-wide">++ MODERN MULLET VOL.04</h3>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <span class="font-mono text-xs text-zinc-400">55 MIN</span>
+                  <span class="font-mono text-xs sm:text-sm font-bold">140K</span>
+                </div>
+              </div>
+              <p class="text-xs text-zinc-500 mt-2 pl-7 font-sans">Transisi gradasi samping yang bersih menuju ekor belakang berlayer tajam dan berkarakter.</p>
+            </div>
+
+            <div class="service-item p-4 sm:p-5 rounded border cursor-pointer transition-all duration-200" style="background-color: var(--bg-surface); border-color: var(--border-color);" data-cut="fade">
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                  <span class="font-mono text-xs text-zinc-400">05</span>
+                  <h3 class="font-mono text-sm sm:text-base font-bold tracking-wide">++ RAZOR ZERO FADE</h3>
+                </div>
+                <div class="flex items-center space-x-4">
+                  <span class="font-mono text-xs text-zinc-400">45 MIN</span>
+                  <span class="font-mono text-xs sm:text-sm font-bold">120K</span>
+                </div>
+              </div>
+              <p class="text-xs text-zinc-500 mt-2 pl-7 font-sans">Gradasi mulus dari kulit 0.0mm hingga bayangan rambut gelap dengan garis tepi rahang terdefinisi.</p>
+            </div>
+
+          </div>
+
+          <!-- Spec Preview Panel -->
+          <div class="lg:col-span-5 p-6 rounded border sticky top-24" style="background-color: var(--bg-surface); border-color: var(--border-color);">
+            <div class="flex items-center justify-between pb-3 border-b text-xs font-mono" style="border-color: var(--border-color);">
+              <span class="text-zinc-500">SPEC_TELEMETRY // LIVE</span>
+              <span class="font-bold" style="color: var(--accent-lime);">ACTIVE SPEC</span>
+            </div>
+
+            <div class="my-4 aspect-[4/3] rounded bg-black overflow-hidden relative border" style="border-color: var(--border-color);">
+              <img id="previewImg" src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop" alt="Selected Preview" class="w-full h-full object-cover contrast-110">
+              <div class="absolute bottom-2 left-2 px-2 py-1 bg-black/80 backdrop-blur font-mono text-[10px] text-white rounded">
+                <span id="previewCutTag">TWO-BLOCK NATURAL</span>
+              </div>
+            </div>
+
+            <div class="space-y-2.5 text-xs font-mono">
+              <div class="flex justify-between py-1.5 border-b" style="border-color: var(--border-color);">
+                <span class="text-zinc-500">BENTUK WAJAH</span>
+                <span id="previewFace" class="font-semibold">Oval, Lonjong, Persegi</span>
+              </div>
+              <div class="flex justify-between py-1.5 border-b" style="border-color: var(--border-color);">
+                <span class="text-zinc-500">ALAT UTAMA</span>
+                <span id="previewTool" class="font-semibold">Texturizing Shears 6.5"</span>
+              </div>
+              <div class="flex justify-between py-1.5 border-b" style="border-color: var(--border-color);">
+                <span class="text-zinc-500">KETAHANAN GAYA</span>
+                <span id="previewDur" class="font-semibold">3.5 Minggu Presisi</span>
+              </div>
+            </div>
+
+            <div class="mt-6">
+              <a href="#reservasi" class="block text-center py-2.5 rounded font-mono text-xs uppercase font-bold tracking-wider transition-opacity hover:opacity-90" style="background-color: var(--accent-lime); color: var(--accent-lime-fg);">
+                PILIH GAYA INI UNTUK BOOKING →
+              </a>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- PHILOSOPHY SECTION (#FILOSOFI) -->
+    <section id="filosofi" class="py-20 md:py-28 border-b" style="border-color: var(--border-color);">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="max-w-3xl mb-12">
+          <span class="font-mono text-xs uppercase tracking-widest text-zinc-500">// STANDAR TEKNIKAL</span>
+          <h2 class="font-display text-3xl sm:text-4xl font-bold mt-2">Tolak potong rambut sembarangan.</h2>
+          <p class="text-zinc-600 dark:text-zinc-400 text-sm mt-3 leading-relaxed">
+            Rambut pria tumbuh rata-rata 1.25 cm per bulan. Tanpa potongan berstruktur, bentuk rambut akan hancur dalam 7 hari. Kami membangun fondasi geometris agar rambut tetap terlihat terawat bahkan saat mulai memanjang.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          
+          <div class="p-6 rounded border" style="background-color: var(--bg-surface); border-color: var(--border-color);">
+            <div class="w-8 h-8 rounded flex items-center justify-center font-mono font-bold text-xs mb-4" style="background-color: var(--accent-lime); color: var(--accent-lime-fg);">
+              01
+            </div>
+            <h3 class="font-mono text-sm font-bold uppercase tracking-wider mb-2">Japanese 440C Steel</h3>
+            <p class="text-xs text-zinc-500 leading-relaxed font-sans">
+              Kami menggunakan gunting baja tempa Jepang dengan ketajaman razor mikron untuk memastikan ujung kutikula rambut tidak pecah atau bercabang setelah dipotong.
+            </p>
+          </div>
+
+          <div class="p-6 rounded border" style="background-color: var(--bg-surface); border-color: var(--border-color);">
+            <div class="w-8 h-8 rounded flex items-center justify-center font-mono font-bold text-xs mb-4 bg-blue-600 text-white">
+              02
+            </div>
+            <h3 class="font-mono text-sm font-bold uppercase tracking-wider mb-2">Medical UV Sterilization</h3>
+            <p class="text-xs text-zinc-500 leading-relaxed font-sans">
+              Setiap mata pisau, sisir karbon, dan gunting dimasukkan ke dalam bilik sterilisasi sinar UV medis sebelum menyentuh kulit kepala Anda berikutnya.
+            </p>
+          </div>
+
+          <div class="p-6 rounded border" style="background-color: var(--bg-surface); border-color: var(--border-color);">
+            <div class="w-8 h-8 rounded flex items-center justify-center font-mono font-bold text-xs mb-4 bg-amber-500 text-black">
+              03
+            </div>
+            <h3 class="font-mono text-sm font-bold uppercase tracking-wider mb-2">Cranial Bone Mapping</h3>
+            <p class="text-xs text-zinc-500 leading-relaxed font-sans">
+              Analisa 3 menit terhadap titik parietal dan occipital bone kepala Anda sebelum gunting pertama memotong, guna menentukan sudut elevasi potongan yang pas.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+    <!-- RESERVATION SECTION (#RESERVASI) -->
+    <section id="reservasi" class="py-20 md:py-28 border-b" style="border-color: var(--border-color);">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-start">
+          
+          <!-- Studio Information Left Column -->
+          <div class="lg:col-span-5 space-y-6">
+            <div>
+              <span class="font-mono text-xs uppercase tracking-widest text-zinc-500">// RESERVASI LANGSUNG</span>
+              <h2 class="font-display text-3xl sm:text-4xl font-bold mt-2">Hubungi kami // Reservasi & konsultasi.</h2>
+            </div>
+
+            <div class="p-6 rounded border space-y-4 text-xs font-mono" style="background-color: var(--bg-surface); border-color: var(--border-color);">
+              <div>
+                <span class="text-zinc-500 block mb-1">LOKASI STUDIO</span>
+                <p class="font-bold text-sm font-sans">Jl. Senopati No. 44B, Kebayoran Baru, Jakarta Selatan 12190</p>
+                <span class="text-zinc-400 text-[11px] block mt-0.5">Area Parkir Luas & Valet Tersedia</span>
+              </div>
+              
+              <div class="border-t pt-3" style="border-color: var(--border-color);">
+                <span class="text-zinc-500 block mb-1">JAM OPERASIONAL</span>
+                <div class="flex justify-between">
+                  <span>SENIN – JUMAT</span>
+                  <span class="font-semibold">10:00 – 21:00 WIB</span>
+                </div>
+                <div class="flex justify-between mt-1">
+                  <span>SABTU – MINGGU</span>
+                  <span class="font-semibold">09:00 – 21:30 WIB</span>
+                </div>
+              </div>
+
+              <div class="border-t pt-3" style="border-color: var(--border-color);">
+                <span class="text-zinc-500 block mb-1">KONTAK CEPAT WHATSAPP</span>
+                <p class="font-bold text-sm">+62 812-9900-7274</p>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Reservation Form Card Right Column -->
+          <div class="lg:col-span-7 p-6 sm:p-8 rounded border shadow-sm" style="background-color: var(--bg-surface); border-color: var(--border-color);">
+            
+            <div class="flex items-center justify-between pb-4 border-b mb-6 text-xs font-mono" style="border-color: var(--border-color);">
+              <span class="font-bold">// FORMULIR JADWAL KUNJUNGAN</span>
+              <span class="text-zinc-500">KONFIRMASI OTOMATIS</span>
+            </div>
+
+            <form id="bookingForm" class="space-y-4">
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="fullName" class="block font-mono text-xs text-zinc-500 uppercase mb-1.5">Nama Lengkap</label>
+                  <input type="text" id="fullName" required placeholder="Contoh: Arya Baskara" class="w-full px-3.5 py-2.5 rounded border text-sm focus:outline-none transition-colors" style="background-color: var(--bg-base); border-color: var(--border-color);">
+                </div>
+                <div>
+                  <label for="phoneNum" class="block font-mono text-xs text-zinc-500 uppercase mb-1.5">Nomor WhatsApp</label>
+                  <input type="tel" id="phoneNum" required placeholder="0812-xxxx-xxxx" class="w-full px-3.5 py-2.5 rounded border text-sm focus:outline-none transition-colors" style="background-color: var(--bg-base); border-color: var(--border-color);">
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div>
+                  <label for="serviceSelect" class="block font-mono text-xs text-zinc-500 uppercase mb-1.5">Pilihan Potongan</label>
+                  <select id="serviceSelect" class="w-full px-3.5 py-2.5 rounded border text-sm focus:outline-none transition-colors" style="background-color: var(--bg-base); border-color: var(--border-color);">
+                    <option value="skena">Skena Crop — 120K</option>
+                    <option value="twoblock" selected>Two-Block Natural — 130K</option>
+                    <option value="comma">Comma Hair Calibration — 135K</option>
+                    <option value="mullet">Modern Mullet Vol.04 — 140K</option>
+                    <option value="fade">Razor Zero Fade — 120K</option>
+                  </select>
+                </div>
+                <div>
+                  <label for="bookDate" class="block font-mono text-xs text-zinc-500 uppercase mb-1.5">Pilihan Tanggal</label>
+                  <input type="date" id="bookDate" required class="w-full px-3.5 py-2.5 rounded border text-sm focus:outline-none transition-colors" style="background-color: var(--bg-base); border-color: var(--border-color);">
+                </div>
+              </div>
+
+              <div>
+                <label for="clientNote" class="block font-mono text-xs text-zinc-500 uppercase mb-1.5">Catatan Khusus Rambut (Opsional)</label>
+                <textarea id="clientNote" rows="3" placeholder="Contoh: Ada pusaran rambut ganda di belakang, mohon disesuaikan." class="w-full px-3.5 py-2.5 rounded border text-sm focus:outline-none transition-colors" style="background-color: var(--bg-base); border-color: var(--border-color);"></textarea>
+              </div>
+
+              <button type="submit" class="w-full py-3 rounded font-mono text-xs uppercase font-bold tracking-widest transition-opacity hover:opacity-95" style="background-color: var(--text-main); color: var(--bg-base);">
+                KONFIRMASI JADWAL PRESISE →
+              </button>
+
+              <!-- In-Page Confirmation Toast Box (No Alerts) -->
+              <div id="bookingToast" class="hidden p-4 rounded border mt-3 text-xs font-mono" style="background-color: var(--bg-accent); border-color: var(--border-color);">
+                <div class="flex items-center gap-2 font-bold mb-1" style="color: var(--accent-lime-fg);">
+                  <span class="w-2 h-2 rounded-full" style="background-color: var(--accent-lime);"></span>
+                  <span>JADWAL BERHASIL TERCATAT</span>
+                </div>
+                <p class="text-zinc-600 dark:text-zinc-400 font-sans" id="toastMessage">
+                  Terima kasih! Kami telah mengirimkan rincian slot ke WhatsApp Anda.
+                </p>
+              </div>
+            </form>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer class="py-12 border-t text-xs font-mono" style="border-color: var(--border-color); background-color: var(--bg-surface);">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
+        <div>
+          <span class="font-display italic text-xl font-bold">Agak Rapi.</span>
+          <p class="font-sans text-zinc-500 text-xs mt-2 leading-relaxed">
+            Studio perawatan rambut pria dengan pendekatan kalkulasi struktural arsitektur.
+          </p>
+        </div>
+        <div>
+          <span class="text-zinc-500 block mb-2 uppercase">// NAVIGASI</span>
+          <ul class="space-y-1 text-zinc-600 dark:text-zinc-400">
+            <li><a href="#beranda" class="hover:underline">Beranda</a></li>
+            <li><a href="#layanan" class="hover:underline">Layanan & Harga</a></li>
+            <li><a href="#filosofi" class="hover:underline">Filosofi Teknik</a></li>
+            <li><a href="#reservasi" class="hover:underline">Reservasi Kunjungan</a></li>
+          </ul>
+        </div>
+        <div>
+          <span class="text-zinc-500 block mb-2 uppercase">// TARIF DASAR</span>
+          <ul class="space-y-1 text-zinc-600 dark:text-zinc-400">
+            <li class="flex justify-between"><span>Skena Crop</span><span>Rp 120k</span></li>
+            <li class="flex justify-between"><span>Two-Block</span><span>Rp 130k</span></li>
+            <li class="flex justify-between"><span>Modern Mullet</span><span>Rp 140k</span></li>
+          </ul>
+        </div>
+        <div>
+          <span class="text-zinc-500 block mb-2 uppercase">// LOKASI</span>
+          <p class="text-zinc-600 dark:text-zinc-400 font-sans text-xs">
+            Jl. Senopati No. 44B, Kebayoran Baru, Jakarta Selatan.
+          </p>
+          <span class="text-zinc-400 block mt-2">© 2026 Agak Rapi Studio.</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      let lenis = null;
+      try {
+        if (typeof Lenis !== 'undefined') {
+          lenis = new Lenis({
+            duration: 1.1,
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            orientation: 'vertical',
+            gestureOrientation: 'vertical',
+            smoothWheel: true,
+            wheelMultiplier: 1.0,
+            touchMultiplier: 1.5,
+            infinite: false,
+          });
+
+          // Sync Lenis with GSAP ScrollTrigger if present
+          if (typeof ScrollTrigger !== 'undefined') {
+            lenis.on('scroll', ScrollTrigger.update);
+            gsap.ticker.add((time) => {
+              lenis.raf(time * 1000);
+            });
+            gsap.ticker.lagSmoothing(0);
+          } else {
+            function raf(time) {
+              lenis.raf(time);
+              requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+          }
+        }
+      } catch (err) {
+        console.warn('Lenis could not be initialized, falling back to native smooth scrolling.', err);
+      }
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener('click', function (e) {
+          const targetHref = this.getAttribute('href');
+          if (!targetHref || targetHref === '#') return;
+
+          const targetEl = document.querySelector(targetHref);
+          if (targetEl) {
+            e.preventDefault();
+            if (lenis) {
+              // Smooth scroll via Lenis with navbar offset compensation
+              lenis.scrollTo(targetEl, {
+                offset: -60,
+                duration: 1.2,
+                immediate: false,
+              });
+            } else {
+              targetEl.scrollIntoView({ behavior: 'smooth' });
+            }
+          }
+        });
+      });
+
+      // 2. Theme Toggle (Light / Dark)
+      const themeToggleBtn = document.getElementById('themeToggleBtn');
+      const themeIcon = document.getElementById('themeIcon');
+      const themeText = document.getElementById('themeText');
+      const htmlEl = document.documentElement;
+
+      function setTheme(isDark) {
+        if (isDark) {
+          htmlEl.classList.add('dark');
+          themeIcon.textContent = '☾';
+          themeText.textContent = 'DARK';
+          localStorage.setItem('agak_rapi_theme', 'dark');
+        } else {
+          htmlEl.classList.remove('dark');
+          themeIcon.textContent = '☀';
+          themeText.textContent = 'LIGHT';
+          localStorage.setItem('agak_rapi_theme', 'light');
+        }
+      }
+
+      // Default to Light Studio as requested
+      const savedTheme = localStorage.getItem('agak_rapi_theme');
+      if (savedTheme === 'dark') {
+        setTheme(true);
+      } else {
+        setTheme(false);
+      }
+
+      themeToggleBtn.addEventListener('click', () => {
+        const isCurrentlyDark = htmlEl.classList.contains('dark');
+        setTheme(!isCurrentlyDark);
+      });
+
+      // 3. ScrollSpy: Bold & Underline active section in header
+      const sections = ['beranda', 'layanan', 'filosofi', 'reservasi'];
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      function updateActiveNav() {
+        const currentScrollY = lenis ? lenis.scroll : (window.scrollY || window.pageYOffset);
+        const scrollPosition = currentScrollY + 180; // Offset navbar height
+        let activeId = 'beranda';
+
+        sections.forEach((id) => {
+          const el = document.getElementById(id);
+          if (el) {
+            const top = el.offsetTop;
+            const height = el.offsetHeight;
+            if (scrollPosition >= top && scrollPosition < top + height) {
+              activeId = id;
+            }
+          }
+        });
+
+        // If user reached bottom of page, highlight 'reservasi'
+        const totalHeight = document.body.offsetHeight;
+        if ((window.innerHeight + currentScrollY) >= totalHeight - 60) {
+          activeId = 'reservasi';
+        }
+
+        navLinks.forEach((link) => {
+          const href = link.getAttribute('href');
+          if (href === `#${activeId}`) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+
+      window.addEventListener('scroll', updateActiveNav, { passive: true });
+      if (lenis) {
+        lenis.on('scroll', updateActiveNav);
+      }
+      updateActiveNav(); // Initial trigger
+
+      // 4. GSAP Infinite Marquee Controller
+      try {
+        const marqueeItems = gsap.utils.toArray('.gsap-marquee-item');
+        const marqueeBar = document.getElementById('gsapMarqueeBar');
+        
+        if (marqueeItems.length > 0 && typeof gsap !== 'undefined') {
+          // Continuous smooth horizontal translation loop (-100% per item)
+          const marqueeTween = gsap.to(marqueeItems, {
+            xPercent: -100,
+            repeat: -1,
+            duration: 26,
+            ease: 'none'
+          });
+
+          // Smooth decelerate on hover, return to normal speed on mouse leave
+          if (marqueeBar) {
+            marqueeBar.addEventListener('mouseenter', () => {
+              gsap.to(marqueeTween, { timeScale: 0.2, duration: 0.4, overwrite: 'auto' });
+            });
+            marqueeBar.addEventListener('mouseleave', () => {
+              gsap.to(marqueeTween, { timeScale: 1, duration: 0.6, overwrite: 'auto' });
+            });
+          }
+
+          // Scroll-Reactive Velocity: speed up smoothly when user scrolls
+          let scrollTimeout;
+          const onScrollVelocity = () => {
+            gsap.to(marqueeTween, { timeScale: 2.4, duration: 0.25, overwrite: 'auto' });
+            
+            clearTimeout(scrollTimeout);
+            scrollTimeout = setTimeout(() => {
+              gsap.to(marqueeTween, { timeScale: 1, duration: 0.7, ease: 'power2.out', overwrite: 'auto' });
+            }, 120);
+          };
+
+          if (lenis) {
+            lenis.on('scroll', (e) => {
+              if (Math.abs(e.velocity) > 0.3) {
+                onScrollVelocity();
+              }
+            });
+          } else {
+            window.addEventListener('scroll', onScrollVelocity, { passive: true });
+          }
+        }
+      } catch (err) {
+        console.warn('GSAP Marquee failed to initialize:', err);
+      }
+
+      // 5. Interactive Service Catalogue Switcher
+      const cutData = {
+        skena: {
+          tag: 'SKENA CROP',
+          img: 'https://images.unsplash.com/photo-1622286342621-4bd786c2447c?q=80&w=600&auto=format&fit=crop',
+          face: 'Bulat, Oval, Hati',
+          tool: 'Blunt Shears 5.5" + Detailer',
+          dur: '3 Minggu Presisi'
+        },
+        twoblock: {
+          tag: 'TWO-BLOCK NATURAL',
+          img: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=600&auto=format&fit=crop',
+          face: 'Oval, Lonjong, Persegi',
+          tool: 'Texturizing Shears 6.5"',
+          dur: '3.5 Minggu Presisi'
+        },
+        comma: {
+          tag: 'COMMA HAIR CALIBRATION',
+          img: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=600&auto=format&fit=crop',
+          face: 'Lonjong, Oval Simetris',
+          tool: 'Curved Razor + Point Cutting',
+          dur: '3 Minggu Presisi'
+        },
+        mullet: {
+          tag: 'MODERN MULLET VOL.04',
+          img: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop',
+          face: 'Persegi, Berlian, Oval',
+          tool: 'Feather Styling Blade',
+          dur: '4 Minggu Presisi'
+        },
+        fade: {
+          tag: 'RAZOR ZERO FADE',
+          img: 'https://images.unsplash.com/photo-1517832606589-7629c3397143?q=80&w=600&auto=format&fit=crop',
+          face: 'Semua Bentuk Wajah',
+          tool: 'Wahl Senior 0-Gap + Foil Shaver',
+          dur: '2.5 Minggu Presisi'
+        }
+      };
+
+      const serviceItems = document.querySelectorAll('.service-item');
+      const previewImg = document.getElementById('previewImg');
+      const previewCutTag = document.getElementById('previewCutTag');
+      const previewFace = document.getElementById('previewFace');
+      const previewTool = document.getElementById('previewTool');
+      const previewDur = document.getElementById('previewDur');
+      const serviceSelect = document.getElementById('serviceSelect');
+
+      serviceItems.forEach((item) => {
+        item.addEventListener('click', () => {
+          const cutKey = item.getAttribute('data-cut');
+          const data = cutData[cutKey];
+          if (!data) return;
+
+          // Update Preview Panel
+          previewCutTag.textContent = data.tag;
+          previewImg.src = data.img;
+          previewFace.textContent = data.face;
+          previewTool.textContent = data.tool;
+          previewDur.textContent = data.dur;
+
+          // Sync with dropdown form
+          if (serviceSelect) {
+            serviceSelect.value = cutKey;
+          }
+
+          // Visual focus outline on active item
+          serviceItems.forEach(i => i.style.borderColor = 'var(--border-color)');
+          item.style.borderColor = 'var(--accent-lime)';
+        });
+      });
+
+      // 5. Booking Form Submission Handling
+      const bookingForm = document.getElementById('bookingForm');
+      const bookingToast = document.getElementById('bookingToast');
+      const toastMessage = document.getElementById('toastMessage');
+
+      if (bookingForm) {
+        // Set today's date as min date
+        const bookDateInput = document.getElementById('bookDate');
+        if (bookDateInput) {
+          const today = new Date().toISOString().split('T')[0];
+          bookDateInput.min = today;
+          bookDateInput.value = today;
+        }
+
+        bookingForm.addEventListener('submit', (e) => {
+          e.preventDefault();
+          const name = document.getElementById('fullName').value.trim();
+          const phone = document.getElementById('phoneNum').value.trim();
+          const cut = serviceSelect.options[serviceSelect.selectedIndex].text;
+          const date = document.getElementById('bookDate').value;
+
+          toastMessage.textContent = `Terima kasih, ${name}! Jadwal ${cut} pada ${date} telah dicatat. Kami akan segera menghubungi nomor ${phone} via WhatsApp.`;
+          bookingToast.classList.remove('hidden');
+          bookingToast.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        });
+      }
+
+    });
+  </script>
+</body>
+</html>
