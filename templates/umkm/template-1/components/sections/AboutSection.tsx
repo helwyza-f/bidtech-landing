@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { assetPath } from '@/lib/asset-path';
 
 export default function AboutSection() {
   const sectionRef = useRef<HTMLElement>(null);
@@ -124,7 +125,7 @@ export default function AboutSection() {
             {/* Gambar berparalaks saat di-scroll */}
             <img
               ref={imgRef}
-              src="/assets/about brand.webp"
+              src={assetPath('/assets/about brand.webp')}
               alt="Perkebunan Teh Pilihan Nusantara"
               className="w-full h-full object-cover object-center will-change-transform"
             />
@@ -166,7 +167,7 @@ export default function AboutSection() {
               {/* Tagline "TENTANG KAMI" dengan Icon Daun */}
               <div className="flex items-center gap-2 mb-1.5 sm:mb-2">
                 <img
-                  src="/assets/individual/03_icon_daun_teh.webp"
+                  src={assetPath('/assets/individual/03_icon_daun_teh.webp')}
                   alt="Daun Teh"
                   className="w-4 h-4 sm:w-5 sm:h-5 object-contain"
                 />

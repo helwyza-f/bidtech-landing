@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 import { ShoppingCart, Check, X, MessageCircle, Star } from 'lucide-react';
+import { assetPath } from '@/lib/asset-path';
 
 interface SizeOption { label: string; ml: number; extra: number; }
 interface AddonOption { id: string; label: string; price: number; }
@@ -396,7 +397,7 @@ export default function MenuSection() {
         className="absolute -inset-y-12 inset-x-0 w-full h-[115%] pointer-events-none z-0 overflow-hidden select-none"
       >
         <img
-          src="/assets/background.webp"
+          src={assetPath('/assets/background.webp')}
           alt=""
           aria-hidden="true"
           className="w-full h-full object-cover object-center opacity-70"
@@ -421,7 +422,7 @@ export default function MenuSection() {
               Sekadar Teh
             </span>
             <img
-              src="/assets/individual/03_icon_daun_teh.webp"
+              src={assetPath('/assets/individual/03_icon_daun_teh.webp')}
               alt=""
               aria-hidden="true"
               className="w-5 h-5 object-contain mt-1.5 mr-2 -rotate-12 opacity-85"
@@ -434,7 +435,7 @@ export default function MenuSection() {
             <div className="inline-flex items-center justify-center gap-2.5 mb-2.5">
               <span className="w-6 sm:w-8 h-[1.5px] bg-[#1F331A]/35"></span>
               <img
-                src="/assets/individual/03_icon_daun_teh.webp"
+                src={assetPath('/assets/individual/03_icon_daun_teh.webp')}
                 alt="Daun Teh"
                 className="w-4 h-4 object-contain"
               />
@@ -477,7 +478,7 @@ export default function MenuSection() {
                 {/* Foto Bersih Minuman High-Res (Clean Studio) */}
                 <div className="relative w-full aspect-[4/5] sm:aspect-[3/4] lg:aspect-[10/17] overflow-hidden bg-gradient-to-b from-[#FAF8F3]/60 via-[#EAE6DD]/40 to-[#E4DFD3]/80">
                   <img
-                    src={item.image}
+                    src={assetPath(item.image)}
                     alt={item.name}
                     className="w-full h-full object-cover object-center transition-transform duration-700 ease-out group-hover:scale-105"
                   />
@@ -691,7 +692,7 @@ export default function MenuSection() {
               <span>Untuk Hari Baik</span>
             </div>
             <img
-              src="/assets/individual/03_icon_daun_teh.webp"
+              src={assetPath('/assets/individual/03_icon_daun_teh.webp')}
               alt=""
               aria-hidden="true"
               className="w-4 h-4 object-contain -rotate-12"
@@ -724,7 +725,7 @@ export default function MenuSection() {
             {/* ─ KIRI: FOTO ─ */}
             <div className="relative sm:w-[42%] bg-gradient-to-br from-[#2D4A27] via-[#1F331A] to-[#3A5C34] flex items-center justify-center overflow-hidden shrink-0 h-44 sm:h-auto sm:min-h-[260px]">
               <img
-                src={selectedDrink.image}
+                src={assetPath(selectedDrink.image)}
                 alt={selectedDrink.name}
                 className="w-full h-full object-cover object-center max-h-44 sm:max-h-[480px]"
               />

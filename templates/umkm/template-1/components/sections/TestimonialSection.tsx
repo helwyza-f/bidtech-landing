@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { assetPath } from '@/lib/asset-path';
 
 const testimonials = [
   {
@@ -184,42 +185,42 @@ export default function TestimonialSection() {
       {/* ── PARTIKEL DAUN MELAYANG ── */}
       <div ref={particlesRef} className="absolute inset-0 pointer-events-none overflow-hidden z-0 select-none" aria-hidden="true">
         {/* Daun besar kiri atas */}
-        <img src="/assets/individual/03_icon_daun_teh.webp" alt=""
+        <img src={assetPath('/assets/individual/03_icon_daun_teh.webp')} alt=""
           className="leaf-particle absolute w-16 sm:w-28 object-contain"
           style={{ top: '4%', left: '2%', opacity: 0.18, rotate: '-30deg' }}
         />
         {/* Daun sedang kanan atas */}
-        <img src="/assets/individual/03_icon_daun_teh.webp" alt=""
+        <img src={assetPath('/assets/individual/03_icon_daun_teh.webp')} alt=""
           className="leaf-particle absolute w-12 sm:w-20 object-contain hidden sm:block"
           style={{ top: '6%', right: '4%', opacity: 0.15, rotate: '20deg' }}
         />
         {/* Daun kecil kiri tengah */}
-        <img src="/assets/individual/03_icon_daun_teh.webp" alt=""
+        <img src={assetPath('/assets/individual/03_icon_daun_teh.webp')} alt=""
           className="leaf-particle absolute w-8 sm:w-12 object-contain hidden md:block"
           style={{ top: '40%', left: '1%', opacity: 0.12, rotate: '60deg' }}
         />
         {/* Daun kanan tengah bawah */}
-        <img src="/assets/individual/03_icon_daun_teh.webp" alt=""
+        <img src={assetPath('/assets/individual/03_icon_daun_teh.webp')} alt=""
           className="leaf-particle absolute w-14 sm:w-24 object-contain"
           style={{ bottom: '8%', right: '2%', opacity: 0.18, rotate: '-15deg' }}
         />
         {/* Daun kecil kanan atas tengah */}
-        <img src="/assets/individual/03_icon_daun_teh.webp" alt=""
+        <img src={assetPath('/assets/individual/03_icon_daun_teh.webp')} alt=""
           className="leaf-particle absolute w-10 object-contain hidden md:block"
           style={{ top: '18%', right: '14%', opacity: 0.1, rotate: '45deg' }}
         />
         {/* Daun kecil kiri bawah */}
-        <img src="/assets/individual/03_icon_daun_teh.webp" alt=""
+        <img src={assetPath('/assets/individual/03_icon_daun_teh.webp')} alt=""
           className="leaf-particle absolute w-10 sm:w-16 object-contain hidden sm:block"
           style={{ bottom: '12%', left: '6%', opacity: 0.14, rotate: '-55deg' }}
         />
         {/* Daun tengah atas */}
-        <img src="/assets/individual/03_icon_daun_teh.webp" alt=""
+        <img src={assetPath('/assets/individual/03_icon_daun_teh.webp')} alt=""
           className="leaf-particle absolute w-8 object-contain hidden lg:block"
           style={{ top: '10%', left: '45%', opacity: 0.09, rotate: '10deg' }}
         />
         {/* Daun tengah kanan */}
-        <img src="/assets/individual/03_icon_daun_teh.webp" alt=""
+        <img src={assetPath('/assets/individual/03_icon_daun_teh.webp')} alt=""
           className="leaf-particle absolute w-10 sm:w-14 object-contain hidden md:block"
           style={{ top: '55%', right: '8%', opacity: 0.13, rotate: '80deg' }}
         />
@@ -239,7 +240,7 @@ export default function TestimonialSection() {
         <div ref={headerRef} className="text-center max-w-2xl mx-auto mb-6 sm:mb-10 lg:mb-14 px-2">
           <div className="inline-flex items-center justify-center gap-2 mb-2 sm:mb-3 select-none">
             <img
-              src="/assets/individual/03_icon_daun_teh.webp"
+              src={assetPath('/assets/individual/03_icon_daun_teh.webp')}
               alt=""
               aria-hidden="true"
               className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain -rotate-6"

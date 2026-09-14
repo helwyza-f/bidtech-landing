@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import { assetPath, cssUrl } from '@/lib/asset-path';
 
 interface FeatureItem {
   id: string;
@@ -251,7 +252,7 @@ export default function KeunggulanSection() {
       ref={sectionRef}
       className="page-section pt-10 sm:pt-16 lg:pt-20 pb-10 sm:pb-16 lg:pb-20 relative w-full overflow-hidden"
       style={{
-        backgroundImage: "url('/assets/background keunggulan.webp')",
+        backgroundImage: cssUrl('/assets/background keunggulan.webp'),
         backgroundSize: 'cover',
         backgroundPosition: 'center',
         backgroundColor: '#F5F2EB',
@@ -263,7 +264,7 @@ export default function KeunggulanSection() {
         <div ref={headerRef} className="text-center max-w-2xl mx-auto mb-8 sm:mb-12 lg:mb-14">
           <div className="inline-flex items-center justify-center gap-2 mb-2">
             <img
-              src="/assets/individual/03_icon_daun_teh.webp"
+              src={assetPath('/assets/individual/03_icon_daun_teh.webp')}
               alt=""
               aria-hidden="true"
               className="w-4 h-4 object-contain -rotate-6"
@@ -371,7 +372,7 @@ export default function KeunggulanSection() {
               <div className="relative w-full aspect-[4/3] rounded-[1.6rem] sm:rounded-[2.4rem] overflow-hidden shadow-[0_16px_40px_-10px_rgba(31,51,26,0.22)] sm:shadow-[0_24px_60px_-12px_rgba(31,51,26,0.28)] border border-[#1F331A]/12 bg-[#E7E2D7]">
                 <img
                   ref={photoImgRef}
-                  src="/assets/individual/keunggulan_hands_tea.webp"
+                  src={assetPath('/assets/individual/keunggulan_hands_tea.webp')}
                   alt="Tangan memetik pucuk daun teh segar di perkebunan fajar"
                   className="w-full h-[115%] object-cover object-center will-change-transform"
                   style={{ marginTop: '-7.5%' }}

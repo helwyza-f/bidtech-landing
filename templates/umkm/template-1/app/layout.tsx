@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import type { ReactNode } from 'react';
 import './globals.css';
 import SmoothScroll from '@/components/providers/SmoothScroll';
+import { assetPath } from '@/lib/asset-path';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://tehin.id'),
@@ -25,7 +26,7 @@ export const metadata: Metadata = {
     siteName: 'Teh.in Indonesia',
     images: [
       {
-        url: '/assets/individual/01_teh_in_minuman_tatakan_buah.webp',
+        url: assetPath('/assets/individual/01_teh_in_minuman_tatakan_buah.webp'),
         width: 1200,
         height: 630,
         alt: 'Teh.in Es Teh Lemon Segar',
@@ -35,7 +36,7 @@ export const metadata: Metadata = {
     type: 'website',
   },
   icons: {
-    icon: '/assets/individual/03_icon_daun_teh.webp',
+    icon: assetPath('/assets/individual/03_icon_daun_teh.webp'),
   },
 };
 

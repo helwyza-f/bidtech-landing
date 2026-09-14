@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { assetPath } from '@/lib/asset-path';
 
 export default function Footer() {
   const footerRef = useRef<HTMLElement>(null);
@@ -62,13 +63,13 @@ export default function Footer() {
 
       {/* ── LAYER 1: Landscape Background ── */}
       <div ref={layer1Ref} className="footer-bg-layer">
-        <img src="/footer layer 1.webp" alt="Pemandangan Kebun Teh Nusantara" />
+        <img src={assetPath('/assets/footer-layer-1.webp')} alt="Pemandangan Kebun Teh Nusantara" />
         <div className="footer-bg-overlay" />
       </div>
 
       {/* ── LAYER 2: Tea Leaves Foreground ── */}
       <div ref={layer2Ref} className="footer-leaf-layer">
-        <img src="/footer layer 2.webp" alt="Daun Teh Segar" />
+        <img src={assetPath('/assets/footer-layer-2.webp')} alt="Daun Teh Segar" />
       </div>
 
       {/* ── MAIN CONTENT ── */}
@@ -80,7 +81,7 @@ export default function Footer() {
             <div className="footer-brand-col">
               <Link href="#beranda" className="footer-logo-wrap">
                 <img
-                  src="/assets/individual/02_logo_teh_in.webp"
+                  src={assetPath('/assets/individual/02_logo_teh_in.webp')}
                   alt="Teh.in"
                   className="footer-logo"
                 />

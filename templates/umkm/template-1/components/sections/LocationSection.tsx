@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react';
 import { MapPin, Phone, Mail, Clock, Send } from 'lucide-react';
+import { assetPath } from '@/lib/asset-path';
 
 const contactItems = [
   {
@@ -86,7 +87,7 @@ export default function LocationSection() {
     >
       {/* Dekorasi daun kiri bawah */}
       <img
-        src="/assets/individual/03_icon_daun_teh.webp"
+        src={assetPath('/assets/individual/03_icon_daun_teh.webp')}
         alt="" aria-hidden="true"
         className="absolute -bottom-4 -left-4 w-28 sm:w-44 opacity-15 rotate-12 pointer-events-none select-none"
       />
@@ -104,7 +105,7 @@ export default function LocationSection() {
 
             {/* Tag */}
             <div className="inline-flex items-center gap-2 select-none">
-              <img src="/assets/individual/03_icon_daun_teh.webp" alt="" aria-hidden="true" className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain -rotate-6" />
+              <img src={assetPath('/assets/individual/03_icon_daun_teh.webp')} alt="" aria-hidden="true" className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain -rotate-6" />
               <span className="font-nav text-[0.68rem] sm:text-[0.78rem] font-bold uppercase tracking-[0.22em] text-[#1F331A]">
                 Lokasi &amp; Kontak
               </span>
@@ -188,7 +189,7 @@ export default function LocationSection() {
             <div className="bg-white/90 backdrop-blur-sm border border-t-0 border-[#1F331A]/10 rounded-b-[1.5rem] sm:rounded-b-[2.2rem] p-3.5 sm:px-5 sm:py-4 flex flex-col sm:flex-row items-stretch sm:items-center justify-between gap-3 shadow-[0_12px_30px_-8px_rgba(31,51,26,0.16)]">
               <div className="flex items-center gap-2.5 sm:gap-3">
                 <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-[#1F331A] flex items-center justify-center shrink-0">
-                  <img src="/assets/individual/03_icon_daun_teh.webp" alt="" aria-hidden="true" className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain invert" />
+                  <img src={assetPath('/assets/individual/03_icon_daun_teh.webp')} alt="" aria-hidden="true" className="w-3.5 h-3.5 sm:w-4 sm:h-4 object-contain invert" />
                 </div>
                 <div>
                   <div className="font-serif text-[0.82rem] sm:text-[0.88rem] font-semibold text-[#1F331A] leading-tight">

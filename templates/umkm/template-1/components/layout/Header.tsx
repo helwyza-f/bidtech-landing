@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef, useCallback } from 'react';
 import Link from 'next/link';
 import { Menu, X, MessageCircle } from 'lucide-react';
+import { assetPath } from '@/lib/asset-path';
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -147,7 +148,7 @@ export default function Header() {
           {/* Brand Logo */}
           <Link href="#beranda" className="flex items-center shrink-0">
             <img
-              src="/assets/individual/02_logo_teh_in.webp"
+              src={assetPath('/assets/individual/02_logo_teh_in.webp')}
               alt="Teh.in"
               width={130}
               height={34}

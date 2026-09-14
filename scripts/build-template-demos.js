@@ -19,6 +19,7 @@ const demos = [
   ["smartbelajar", "education/template-1"],
   ["nivoraacademy", "education/template-2"],
   ["aliansi-kepemimpinan-indonesia", "organization/template-4"],
+  ["tehin", "umkm/template-1"],
 ];
 
 const shouldInstall = !process.argv.includes("--skip-install");

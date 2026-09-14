@@ -576,11 +576,11 @@ header.site-header.is-pill .btn-icon-circle {
   pointer-events: none;
   overflow: hidden;
   z-index: 10;
-  -webkit-mask-image: url("/assets/individual/01_teh_in_minuman_tatakan_buah.webp");
+  -webkit-mask-image: var(--drink-mask-image);
   -webkit-mask-size: contain;
   -webkit-mask-position: center;
   -webkit-mask-repeat: no-repeat;
-  mask-image: url("/assets/individual/01_teh_in_minuman_tatakan_buah.webp");
+  mask-image: var(--drink-mask-image);
   mask-size: contain;
   mask-position: center;
   mask-repeat: no-repeat;

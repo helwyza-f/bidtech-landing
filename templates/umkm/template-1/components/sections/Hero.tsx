@@ -1,7 +1,8 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { CSSProperties, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import { assetPath, cssUrl } from '@/lib/asset-path';
 
 export default function Hero() {
   const heroRef = useRef<HTMLElement | null>(null);
@@ -325,7 +326,7 @@ export default function Hero() {
       {/* LAYER 1: Background Podium & Dinding Krem */}
       <div className="hero-bg-layer">
         <img
-          src="/assets/background.webp"
+          src={assetPath('/assets/background.webp')}
           alt="Podium Background"
         />
         <div className="hero-bg-overlay" />
@@ -334,7 +335,7 @@ export default function Hero() {
       {/* LAYER 2: Bayangan Dedaunan Halus untuk Efek Paralaks */}
       <div ref={parallaxRef} className="hero-parallax-layer" id="parallax-leaves">
         <img
-          src="/assets/layer 2.webp"
+          src={assetPath('/assets/layer 2.webp')}
           alt="Bayangan Dedaunan Botani Halus"
         />
       </div>
@@ -345,7 +346,7 @@ export default function Hero() {
           {/* Brand Logo */}
           <Link href="#beranda" className="brand-logo-wrap">
             <img
-              src="/assets/individual/02_logo_teh_in.webp"
+              src={assetPath('/assets/individual/02_logo_teh_in.webp')}
               alt="Teh.in — Teh Asli, Cerita Nyata"
               width={180}
               height={48}
@@ -390,7 +391,7 @@ export default function Hero() {
             <div className="hero-text-col">
               <div className="pre-tag">
                 <img
-                  src="/assets/individual/03_icon_daun_teh.webp"
+                  src={assetPath('/assets/individual/03_icon_daun_teh.webp')}
                   alt="Daun Teh"
                   className="w-4 h-4 object-contain inline-block shrink-0"
                 />
@@ -481,7 +482,7 @@ export default function Hero() {
               {/* Badge Stempel Racikan Lemon: diatur rapi di pojok kanan atas */}
               <div className="floating-stamp">
                 <img
-                  src="/assets/individual/08_badge_racikan_asli_perasan_lemon.webp"
+                  src={assetPath('/assets/individual/08_badge_racikan_asli_perasan_lemon.webp')}
                   alt="Racikan Asli Perasan Lemon Asli"
                 />
               </div>
@@ -489,7 +490,7 @@ export default function Hero() {
               {/* Sembunyikan badge bertumpuk di mobile agar tidak menutupi gambar produk */}
               <div className="floating-pill-time !hidden md:!flex">
                 <img
-                  src="/assets/individual/15_icon_diseduh_tiap_4_jam.webp"
+                  src={assetPath('/assets/individual/15_icon_diseduh_tiap_4_jam.webp')}
                   alt="Diseduh Tiap 4 Jam"
                 />
               </div>
@@ -501,12 +502,18 @@ export default function Hero() {
               {/* Minuman Diatur Masuk ke Lapisan Kaca Fit Bar */}
               <div className="hero-drink-img-wrap">
                 <img
-                  src="/assets/individual/01_teh_in_minuman_tatakan_buah.webp"
+                  src={assetPath('/assets/individual/01_teh_in_minuman_tatakan_buah.webp')}
                   alt="Teh.in Es Teh Lemon Segar"
                   width={950}
                   height={812}
                 />
-                <div className="drink-glint-sheen" aria-hidden="true" />
+                <div
+                  className="drink-glint-sheen"
+                  aria-hidden="true"
+                  style={{
+                    '--drink-mask-image': cssUrl('/assets/individual/01_teh_in_minuman_tatakan_buah.webp'),
+                  } as CSSProperties}
+                />
               </div>
             </div>
 
@@ -520,7 +527,7 @@ export default function Hero() {
           <div className="benefit-grid">
             <div className="benefit-cell">
               <img
-                src="/assets/individual/03_icon_daun_teh.webp"
+                src={assetPath('/assets/individual/03_icon_daun_teh.webp')}
                 alt="Daun Teh"
                 className="benefit-icon-img"
               />
@@ -532,7 +539,7 @@ export default function Hero() {
 
             <div className="benefit-cell">
               <img
-                src="/assets/individual/05_icon_tebu.webp"
+                src={assetPath('/assets/individual/05_icon_tebu.webp')}
                 alt="Gula Tebu"
                 className="benefit-icon-img"
               />
@@ -544,7 +551,7 @@ export default function Hero() {
 
             <div className="benefit-cell">
               <img
-                src="/assets/individual/07_icon_es_batu.webp"
+                src={assetPath('/assets/individual/07_icon_es_batu.webp')}
                 alt="Es Batu"
                 className="benefit-icon-img"
               />
@@ -556,7 +563,7 @@ export default function Hero() {
 
             <div className="benefit-cell">
               <img
-                src="/assets/individual/11_icon_cup_daun.webp"
+                src={assetPath('/assets/individual/11_icon_cup_daun.webp')}
                 alt="Cup Daun"
                 className="benefit-icon-img"
               />
@@ -577,7 +584,7 @@ export default function Hero() {
       {/* LAYER 3: Dedaunan Botani Foreground Paling Depan */}
       <div ref={foregroundRef} className="hero-foreground-layer" id="foreground-leaves" aria-hidden="true">
         <img
-          src="/assets/layer 3.webp"
+          src={assetPath('/assets/layer 3.webp')}
           alt="Dedaunan Botani Foreground"
           width={1610}
           height={977}

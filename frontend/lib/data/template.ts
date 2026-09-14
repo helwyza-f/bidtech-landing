@@ -147,7 +147,17 @@ export const TEMPLATES: TemplateItem[] = [
     previewHref: "/demo/aliansi-kepemimpinan-indonesia",
     tags: ["Organisasi", "Company Profile", "Komunitas"],
     icon: Users,
-  },     
+  }, 
+  {
+    id: 13,
+    name: "Teh.In - Teh Asli Nusantara",
+    category: "UMKM",
+    subcategory: "Kesegaran teh asli nusantara, Diseduh segar setiap 4 jam dari pucuk daun teh hitam pegunungan tropis nusantara.",
+    image: "/images/design_thumbnail/tehin.webp",
+    previewHref: "/demo/tehin",
+    tags: ["UMKM", "Teh", "FnB"],
+    icon: ShoppingBasket,
+  },      
 ];
 
 /**

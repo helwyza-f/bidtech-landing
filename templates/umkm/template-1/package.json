@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "build:demo": "BUILD_STATIC_DEMO=true NEXT_PUBLIC_DEMO_BASE_PATH=/demo/umkm next build",
+    "build:demo": "node scripts/build-demo.js",
     "start": "next start",
     "lint": "next lint"
   },
