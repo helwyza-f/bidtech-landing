@@ -35,12 +35,23 @@ class CheckoutController extends Controller
      * dari IdCloudHost
      */
     public function mencariDomain(Request $request): JsonResponse {
+        // Validasikan bahwa nama bisnis harus diinput, dan berupa string
+        // dan minimal 4 huruf dan maksimal 100 huruf
         $request->validate([
             'namaBisnis' => ['required', 'string', 'min:4', 'max:100'],
         ]);
 
-        //sanitize nama bisnis untuk tidak spasi dan tidak kapital
+        // sanitize nama bisnis untuk tidak spasi dan tidak kapital
         $sanitizedNamaBisnis = Str::slug(strtolower(trim($request->string('namaBisnis')->toString())), '');
+        
+        // Jika nama bisnis tersanitasi lebih kecil dari 4, maka batalkan pencarian
+        if (strlen($sanitizedNamaBisnis) < 4) {
+            return response()->json([
+                'message' => 'Nama bisnis minimal 4 karakter.',
+                'domains' => [],
+            ], 422);
+        }
+
         
     }
 

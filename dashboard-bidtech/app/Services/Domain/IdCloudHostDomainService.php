@@ -27,5 +27,7 @@ class IdCloudHostDomainService
         // buat list-list domain dari nama bisnisnya dari ekstensi
         // yang disediakan oleh bidtech
         $domains = collect($this->ekstensiDomain)->map(fn (string $domain) => "{$namaBisnis}.{$domain}")->values()->all();
+
+        
     }
 }
