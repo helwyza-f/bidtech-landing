@@ -37,7 +37,7 @@ export const TEMPLATES: TemplateItem[] = [
   {
     id: 2,
     name: "Deny Restaurant - Kalcer Restaurant",
-    category: "Restaurant",
+    category: "UMKM",
     subcategory:
       "Cafe atau restaurant anak muda dengan gaya animasi kalcer, cocok untuk portofolio usaha.",
     image: "/images/design_thumbnail/deny_restaurant.webp",
@@ -48,7 +48,7 @@ export const TEMPLATES: TemplateItem[] = [
   {
     id: 3,
     name: "Chef's Table - European Signature",
-    category: "Restaurant",
+    category: "UMKM",
     subcategory:
       "Restaurant otentik, mewah dan berprestisius, dengan target korporat dan kelas internasional.",
     image: "/images/design_thumbnail/chefs_table.webp",
@@ -59,7 +59,7 @@ export const TEMPLATES: TemplateItem[] = [
   {
     id: 4,
     name: "IRONFORCE - Best Gym on Jakarta",
-    category: "Gym",
+    category: "Kecantikan",
     subcategory:
       "Tempat kebugaran dan latihan anak gen z, tersebar sekitar jabodetabek, dengan fasilitas lengkap dan pelatih professional.",
     image: "/images/design_thumbnail/ironforce.webp",
@@ -157,7 +157,17 @@ export const TEMPLATES: TemplateItem[] = [
     previewHref: "/demo/tehin",
     tags: ["UMKM", "Teh", "FnB"],
     icon: ShoppingBasket,
-  },      
+  },
+  {
+    id: 14,
+    name: "Agak Rapi",
+    category: "Kecantikan",
+    subcategory: "Barbershop ekslusif Jakarta; Pangkas presisi untuk yang mau agak rapi.",
+    image: "/images/design_thumbnail/agak_rapi.webp",
+    previewHref: "/demo/agak-rapi",
+    tags: ["Barbershop", "Skena", "Eksperimental"],
+    icon: MirrorRound,
+  },   
 ];
 
 /**
