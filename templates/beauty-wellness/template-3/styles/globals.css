@@ -1,0 +1,146 @@
+@import "lenis/dist/lenis.css";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Force auto scroll-behavior on html so native doesn't fight Lenis */
+html {
+  scroll-behavior: auto !important;
+}
+
+/* CSS Root Theme Variables (Dark Studio Default) */
+:root {
+  --bg-base: #0B0B0C;
+  --bg-surface: #141417;
+  --bg-accent: #1C1C20;
+  --text-main: #F4F4F5;
+  --text-muted: #9CA3AF;
+  --border-color: #26262B;
+  --accent-lime: #D8F242;
+  --accent-lime-fg: #0E0E10;
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --card-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.4);
+}
+
+.light {
+  --bg-base: #F6F6F2;
+  --bg-surface: #FFFFFF;
+  --bg-accent: #EBEBE6;
+  --text-main: #0E0E10;
+  --text-muted: #52525B;
+  --border-color: #E2E2DC;
+  --accent-lime: #D8F242;
+  --accent-lime-fg: #0E0E10;
+  --grid-line: rgba(0, 0, 0, 0.06);
+  --card-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.06), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+}
+
+.dark {
+  --bg-base: #0B0B0C;
+  --bg-surface: #141417;
+  --bg-accent: #1C1C20;
+  --text-main: #F4F4F5;
+  --text-muted: #9CA3AF;
+  --border-color: #26262B;
+  --accent-lime: #D8F242;
+  --accent-lime-fg: #0E0E10;
+  --grid-line: rgba(255, 255, 255, 0.05);
+  --card-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.4);
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  font-family: var(--font-inter), 'Inter', sans-serif;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* Lenis Smooth Scroll Rules */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Architectural Drafting Grid Pattern */
+.bg-drafting-grid {
+  background-image: 
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+/* Navigation Link with Active Bold & Underline */
+.nav-link {
+  position: relative;
+  transition: color 0.2s ease, font-weight 0.15s ease, text-decoration-color 0.2s ease;
+  text-decoration: underline transparent;
+  text-underline-offset: 8px;
+  text-decoration-thickness: 2px;
+  font-weight: 500;
+}
+
+.nav-link:hover {
+  color: var(--text-main);
+  text-decoration-color: var(--text-muted);
+}
+
+.nav-link.active {
+  font-weight: 800 !important;
+  color: var(--text-main) !important;
+  text-decoration-color: var(--accent-lime) !important;
+  text-decoration-thickness: 3px !important;
+}
+
+/* Hero Collage Card Styling */
+.hero-card {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, z-index 0.1s;
+  box-shadow: var(--card-shadow);
+  will-change: transform;
+}
+
+.hero-card:hover {
+  z-index: 40 !important;
+  transform: scale(1.05) rotate(0deg) !important;
+  box-shadow: 0 25px 35px -10px rgba(0, 0, 0, 0.2), 0 0 15px rgba(216, 242, 66, 0.25);
+}
+
+/* Cut tape decal effect */
+.tape-sticker {
+  box-shadow: 2px 4px 12px rgba(0, 0, 0, 0.15);
+  border-left: 3px dashed rgba(0, 0, 0, 0.2);
+  border-right: 3px dashed rgba(0, 0, 0, 0.2);
+}
+
+/* Single-line Horizontal Marquee Layout */
+.marquee-wrapper {
+  display: flex;
+  width: 100%;
+  overflow: hidden;
+  user-select: none;
+}
+
+.marquee-track-gsap {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  width: max-content;
+  will-change: transform;
+}
+
+.gsap-marquee-item {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  white-space: nowrap;
+}
