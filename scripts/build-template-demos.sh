@@ -46,7 +46,7 @@ for entry in "${DEMOS[@]}"; do
   out_dir="$template_dir/out"
   target="$DEMO_ROOT/$name"
 
-  echo "==> Building demo: $name ($rel_path)"
+  echo "Building demo: $name ($rel_path)"
   (
     cd "$template_dir"
     npm install --no-audit --no-fund
