@@ -1,12 +1,55 @@
+"use client";
+
+import { useRef } from 'react';
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+gsap.registerPlugin(ScrollTrigger);
+
 export default function CTA() {
+  const containerRef = useRef(null);
+
+  useGSAP(() => {
+    gsap.from(".cta-content", {
+      scrollTrigger: {
+        trigger: containerRef.current,
+        start: "top 75%",
+      },
+      scale: 0.9,
+      opacity: 0,
+      duration: 1,
+      ease: "back.out(1.7)"
+    });
+  }, { scope: containerRef });
+
   return (
-    <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-      <div className="bg-blue-600 text-white rounded-lg p-12 text-center">
-        <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
-        <p className="text-lg mb-8">Join us today and transform your business</p>
-        <button className="bg-white text-blue-600 px-8 py-3 rounded-lg hover:bg-gray-100 font-semibold text-lg">
-          Contact Us
-        </button>
+    <section ref={containerRef} className="relative w-full py-space-2xl bg-on-secondary-fixed overflow-hidden border-b border-outline-variant/20" id="quote">
+      <div className="absolute inset-0 z-0">
+        <img className="w-full h-full object-cover opacity-20 filter contrast-150" alt="Pandangan sudut lebar kontras tinggi yang intens dari rangka derek baja industri berat yang masif." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBmV8Nb8ADF4W-rWFc_VLB6E7OPb5DOPOk1s7draH_nYpBZbxBUrxbL_8UK5wNfW4bk1nJxoiGhrys4rueK4pKqdVQb4npnizwsOxSSJwNYTY42OylA9sd6hxtMvcx1_jlYD8ZyvO54IhevbGiFf5Gcc_76JBPaQEZe7jRVsS6sHyvOwTMOfqDLqAraDvJf98u2Kyb7_BQSdy7eZuzDQw92nfcWJh4KRgcK6QGSswcCub0mLrXRiFqIYg" />
+        <div className="absolute inset-0 bg-on-secondary-fixed/90"></div>
+      </div>
+      <div className="relative z-10 max-w-[1440px] mx-auto px-margin-mobile md:px-margin text-center cta-content">
+        <div className="max-w-4xl mx-auto">
+          <div className="inline-flex items-center gap-2 bg-primary-container text-on-secondary-fixed font-label-caps text-label-caps px-4 py-1.5 rounded-full mb-6 uppercase font-bold">
+            MULAI KONSULTASI REKAYASA ANDA
+          </div>
+          <h2 className="font-headline-lg text-headline-lg uppercase text-surface mb-6 leading-tight">
+            SIAP UNTUK MEMBANGUN <br />
+            <span className="text-primary-container">LANDMARK INDUSTRI SELANJUTNYA?</span>
+          </h2>
+          <p className="font-body-lg text-body-lg text-surface-dim mb-10 max-w-2xl mx-auto">
+            Berkonsultasilah secara langsung dengan insinyur struktural utama kami. Dapatkan laporan kelayakan rekayasa dan estimasi awal kuantitas dalam 48 jam.
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-4">
+            <button className="bg-primary-container text-on-secondary-fixed font-label-caps text-label-caps uppercase rounded-full px-8 py-4 hover:brightness-110 hover:scale-105 active:scale-95 transition-all duration-300 font-bold inline-flex items-center gap-2 shadow-lg" onClick={() => alert('Jadwal Konsultasi Terkirim!')}>
+              Jadwalkan Konsultasi Teknis <span className="material-symbols-outlined">arrow_forward</span>
+            </button>
+            <a className="border-[1.5px] border-surface text-surface font-label-caps text-label-caps uppercase rounded-full px-8 py-4 hover:bg-surface hover:text-on-secondary-fixed hover:scale-105 active:scale-95 transition-all duration-300 inline-flex items-center gap-2" href="tel:0215558742">
+              <span className="material-symbols-outlined">call</span> (021) 555-8742
+            </a>
+          </div>
+        </div>
       </div>
     </section>
   );
