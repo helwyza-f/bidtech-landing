@@ -1,6 +1,11 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
-import Features from '@/components/Features';
+import Partners from '@/components/Partners';
+import About from '@/components/About';
+import Services from '@/components/Services';
+import Projects from '@/components/Projects';
+import Workflow from '@/components/Workflow';
+import Safety from '@/components/Safety';
 import CTA from '@/components/CTA';
 import Footer from '@/components/Footer';
 
@@ -10,7 +15,12 @@ export default function Home() {
       <Header />
       <main>
         <Hero />
-        <Features />
+        <Partners />
+        <About />
+        <Services />
+        <Projects />
+        <Workflow />
+        <Safety />
         <CTA />
       </main>
       <Footer />
