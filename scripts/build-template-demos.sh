@@ -33,7 +33,10 @@ DEMOS=(
   "nivoraacademy:education/template-2"
   "aliansi-kepemimpinan-indonesia:organization/template-4"
   "tehin:umkm/template-1"
-  "agak-rapi:beauty-wellness/template-1
+  "agak-rapi:beauty-wellness/template-1"
+  "pinjammobil:automotive/template-2"
+  "forcevault:e-commerce/template-2"
+  "elevasi:construction-industrial/template-1"
 )
 
 DEMO_ROOT="$REPO_ROOT/frontend/public/demo"

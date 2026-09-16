@@ -9,6 +9,10 @@ export const metadata = {
   description: 'Arsip & Spesifikasi Struktural Resmi Nike Air Force 1 07 Triple Black.',
 };
 
+export function generateStaticParams() {
+  return [{ id: '1' }];
+}
+
 export default function ProductDetailPage({ params }: { params: { id: string } }) {
   return (
     <>

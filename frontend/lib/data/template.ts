@@ -101,7 +101,7 @@ export const TEMPLATES: TemplateItem[] = [
   {
     id: 8,
     name: "Denn House",
-    category: "Properti",
+    category: "Konstruksi & Properti",
     subcategory: "Agen Penjualan atau Penyewaan Properti Harian, Bulanan dan Tahunan.",
     image: "/images/design_thumbnail/denn_house.webp",
     previewHref: "/demo/property",
@@ -167,7 +167,37 @@ export const TEMPLATES: TemplateItem[] = [
     previewHref: "/demo/agak-rapi",
     tags: ["Barbershop", "Skena", "Eksperimental"],
     icon: MirrorRound,
-  },   
+  },
+  {
+    id: 15,
+    name: "Pinjam Mobil",
+    category: "Otomotif",
+    subcategory: "Pinjam Mobil adalah tempat sewa mobil terbaik untuk anda yang ingin jalan-jalan, atau sekedar flexing ke cewe yang anda dekati.",
+    image: "/images/design_thumbnail/pinjammobil.webp",
+    previewHref: "/demo/pinjammobil",
+    tags: ["Otomotif", "Penyewaan", "Mobil"],
+    icon: CarFront,
+  },
+  {
+    id: 16,
+    name: "FORCEVAULT - NIKE Authorize Seller at Indonesia",
+    category: "UMKM",
+    subcategory: "Sepatu Nike Air Force 1 Premium Berkualitas",
+    image: "/images/design_thumbnail/forcevault.webp",
+    previewHref: "/demo/forcevault",
+    tags: ["Toko", "Thrifting", "Sepatu"],
+    icon: ShoppingBasket,
+  },
+  {
+    id: 17,
+    name: "Elevasi",
+    category: "Konstruksi & Properti",
+    subcategory: "Sepatu Nike Air Force 1 Premium Berkualitas",
+    image: "/images/design_thumbnail/elevasi.webp",
+    previewHref: "/demo/elevasi",
+    tags: ["Jasa", "Konstruksi", "Perusahaan"],
+    icon: House,
+  },    
 ];
 
 /**
