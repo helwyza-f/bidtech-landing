@@ -76,6 +76,10 @@ jobs:
           host: ${{ secrets.SSH_HOST}}
           username: ${{ secrets.SSH_USER}}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+          timeout: 2m
+          command_timeout: 30m
+
           script: |
             set -e
             echo "1.) Akses folder bidtech di VPS"
