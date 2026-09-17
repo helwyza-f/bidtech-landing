@@ -1,3 +1,6 @@
+"use client";
+
+import { useRef, useState, type UIEvent } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -5,19 +8,47 @@ import { Badge } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { Reveal } from "@/components/animations/reveal";
 import { serviceIcons } from "@/lib/data";
-import { useHomePage } from "@/providers/home-page-provider";
+import { useLanguage } from "@/lib/i18n";
 
 const sectionBadgeClass =
   "rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm";
 
+function getClosestSlideIndex(slider: HTMLElement) {
+  const slides = Array.from(slider.children) as HTMLElement[];
+
+  return slides.reduce(
+    (best, slide, index) =>
+      Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) < best.distance
+        ? { index, distance: Math.abs(slide.offsetLeft - slider.offsetLeft - slider.scrollLeft) }
+        : best,
+    { index: 0, distance: Number.POSITIVE_INFINITY },
+  ).index;
+}
+
+function scrollSliderToIndex(slider: HTMLElement | null, nextSlide: number) {
+  const slides = slider ? (Array.from(slider.children) as HTMLElement[]) : [];
+  const target = Math.max(0, Math.min(nextSlide, slides.length - 1));
+
+  if (slider && slides[target]) {
+    slider.scrollTo({ left: slides[target].offsetLeft - slider.offsetLeft, behavior: "smooth" });
+  }
+
+  return target;
+}
+
 export function ServicesSection() {
-  const {
-    t,
-    activeServiceSlide,
-    servicesSliderRef,
-    handleServiceScroll,
-    moveServiceSlide,
-  } = useHomePage();
+  const { t } = useLanguage();
+  const [activeServiceSlide, setActiveServiceSlide] = useState(0);
+  const servicesSliderRef = useRef<HTMLDivElement>(null);
+
+  const moveServiceSlide = (nextSlide: number) => {
+    setActiveServiceSlide(scrollSliderToIndex(servicesSliderRef.current, nextSlide));
+  };
+
+  const handleServiceScroll = (event: UIEvent<HTMLDivElement>) => {
+    if (window.innerWidth >= 768) return;
+    setActiveServiceSlide(getClosestSlideIndex(event.currentTarget));
+  };
 
   return (
     <section className="landing-panel mx-auto max-w-7xl px-4 pb-14 lg:-mt-16 sm:px-5 sm:pb-16 max-sm:py-16 md:px-8 md:py-20" id="services">

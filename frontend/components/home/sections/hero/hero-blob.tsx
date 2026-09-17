@@ -118,7 +118,7 @@ export function HeroBlob({ className }: { className?: string }) {
       className={className}
       style={{
         position: "absolute",
-        filter: "blur(20px)",
+        filter: "blur(19px)",
         willChange: "opacity",
       }}
       initial={{ opacity: 0 }}

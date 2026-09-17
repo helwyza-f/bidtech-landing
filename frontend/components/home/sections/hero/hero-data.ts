@@ -214,12 +214,12 @@ export const CUSTOM_ICON_OVERRIDES: Partial<Record<CustomIconKey, string>> = {};
 
 // anggaran timing (ms) sebagai satu sumber untuk hook orkestrasi
 export const HERO_TIMINGS = {
-  cycleDuration: 60_000,
+  cycleDuration: 10_000,
 
   blobFadeIn: 900,
 
-  typeMsPerChar: 35,
-  untypeMsPerChar: 18,
+  typeMsPerChar: 20,
+  untypeMsPerChar: 10,
   cursorBlinkVisibleAfterType: 2000,
 
   subtitleFade: 350,
