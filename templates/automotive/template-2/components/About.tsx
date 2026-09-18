@@ -36,7 +36,7 @@ export default function About() {
   }, { scope: container });
 
   return (
-    <section ref={container} className="py-20 bg-white">
+    <section ref={container} className="py-20 bg-white overflow-hidden w-full max-w-[100vw]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
           
@@ -55,7 +55,7 @@ export default function About() {
               Kami pastikan setiap armada perawatan rutin, kebersihan maksimal, serta layanan driver profesional, memberikan perjalanan standar tinggi yang aman, tenang, dan dapat diandalkan oleh siapa saja di kota-kota besar.
             </p>
             
-            <div className="flex gap-10 border-t border-border pt-8">
+            <div className="flex flex-wrap gap-6 sm:gap-10 border-t border-border pt-8">
               <div>
                 <h4 className="text-3xl font-extrabold text-primary mb-1">20K+</h4>
                 <p className="text-sm font-semibold text-gray-500 uppercase tracking-wide">Pelanggan Puas</p>

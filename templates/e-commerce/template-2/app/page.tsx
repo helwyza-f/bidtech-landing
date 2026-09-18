@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import ProductCollection from '@/components/ProductCollection';
-import SilhouetteArchive from '@/components/SilhouetteArchive';
 import EditorialShowcase from '@/components/EditorialShowcase';
 import CollectorReviews from '@/components/CollectorReviews';
 import BrandStory from '@/components/BrandStory';
@@ -17,7 +16,6 @@ export default function Home() {
       <main className="flex-grow">
         <Hero />
         <ProductCollection />
-        <SilhouetteArchive />
         <EditorialShowcase />
         <CollectorReviews />
         <BrandStory />

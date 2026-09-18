@@ -1,5 +1,5 @@
 export const NAV_LINKS = [
-  { label: 'Beranda', href: '/' },
+  { label: 'Beranda', href: '#beranda' },
   { label: 'Layanan', href: '#layanan' },
   { label: 'Pilihan Mobil', href: '#armada' },
   { label: 'FAQ', href: '#faq' },

@@ -67,14 +67,14 @@ export default function CollectorReviews() {
   );
 
   return (
-    <section ref={containerRef} className="py-24 bg-surface-container-lowest border-b border-surface-container-highest" id="reviews">
+    <section ref={containerRef} className="py-16 md:py-24 bg-surface-container-lowest border-b border-surface-container-highest" id="reviews">
       <div className="max-w-[1600px] mx-auto px-margin-mobile md:px-margin-desktop">
-        <div className="anim-item flex flex-col md:flex-row md:items-end justify-between mb-12 pb-6 border-b border-surface-container-highest">
+        <div className="anim-item flex flex-col md:flex-row md:items-end justify-between mb-10 md:mb-12 pb-6 border-b border-surface-container-highest">
           <div>
             <span className="font-mono-label text-mono-label text-secondary uppercase tracking-widest block mb-1">
               BUKU BESAR AUTENTIKASI
             </span>
-            <h2 className="text-headline-lg font-headline-lg tracking-tight text-primary uppercase">
+            <h2 className="text-[30px] sm:text-headline-lg font-headline-lg tracking-tight text-primary uppercase">
               Ulasan Terverifikasi Kolektor
             </h2>
             <p className="text-body-md font-body-md text-secondary mt-1">
@@ -88,11 +88,11 @@ export default function CollectorReviews() {
         </div>
 
         {/* 3-Column Review Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-gutter-desktop">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-gutter-desktop">
           {reviews.map((r, idx) => (
             <div
               key={idx}
-              className="anim-item border border-surface-container-highest p-8 flex flex-col justify-between hover:border-primary transition-colors"
+              className="anim-item border border-surface-container-highest p-6 md:p-8 flex flex-col justify-between hover:border-primary transition-colors"
             >
               <div>
                 <div className="flex items-center justify-between mb-4">
@@ -103,7 +103,7 @@ export default function CollectorReviews() {
                     {r.orderId}
                   </span>
                 </div>
-                <p className="text-body-lg font-body-lg text-primary italic mb-6">
+                <p className="text-[15px] sm:text-body-lg text-primary italic mb-6 leading-relaxed">
                   {r.quote}
                 </p>
               </div>

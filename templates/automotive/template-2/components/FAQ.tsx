@@ -15,7 +15,7 @@ export default function FAQ() {
   };
 
   return (
-    <section id="faq" className="py-20 bg-surface">
+    <section id="faq" className="py-20 bg-surface overflow-hidden w-full max-w-[100vw]">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center mb-12">
