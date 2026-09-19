@@ -2,12 +2,14 @@
 
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import { ArrowRight, MessageCircle } from "lucide-react";
+import Link from "next/link";
+import { Globe, LayoutTemplate } from "lucide-react";
 
 import { useHeroOrchestrator } from "./use-hero-orchestrator";
 import { useFitTextToLines } from "./use-fit-text-to-lines";
 import { HeroBlob } from "./hero-blob";
 import { HeroDecorativeCard } from "./hero-decorative-card";
+import { HeroDomainSearch } from "./hero-domain-search";
 import { heroSlides, HERO_RIGHT_BLOB_SRC } from "./hero-data";
 
 // judul terpanjang jadi acuan auto-fit agar ukuran font stabil di semua slide
@@ -66,7 +68,7 @@ export function HeroShowcase() {
     <div className="relative grid items-stretch gap-8 md:gap-12 lg:grid-cols-[0.95fr_1.05fr]">
       {/* BARIS 1 (Mobile/Tablet) & KOLOM KIRI (Desktop): Teks & CTA */}
       <div className="relative flex flex-col justify-center text-center lg:text-left z-10">
-        <HeroBlob className="left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 sm:h-[680px] sm:w-[680px] lg:left-[40%] lg:h-[820px] lg:w-[820px]" />
+        <HeroBlob className="pointer-events-none left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 sm:h-[680px] sm:w-[680px] lg:left-[40%] lg:h-[820px] lg:w-[820px]" />
 
         <div
           className="relative mt-3 mx-auto max-w-4xl overflow-hidden sm:mt-5 lg:mx-0"
@@ -109,26 +111,33 @@ export function HeroShowcase() {
           </p>
         </div>
 
+        {/* CTA Buttons */}
         <div
-          className="hero-fade-in mt-6 sm:mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start"
+          className="hero-fade-in mt-6 sm:mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3"
           style={{ animationDelay: "180ms" }}
         >
           <button
             type="button"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-primary px-5 py-2.5 sm:px-6 sm:py-3 text-sm font-semibold text-white shadow-[0_16px_40px_rgba(95,201,74,0.35)] transition-transform hover:-translate-y-0.5"
+            onClick={() => {
+              const input = document.querySelector<HTMLInputElement>("input[placeholder*='domain']");
+              if (input) { input.focus(); input.scrollIntoView({ behavior: "smooth", block: "center" }); }
+            }}
+            className="inline-flex items-center gap-2 rounded-full bg-brand-primary hover:bg-brand-primary-hover px-6 py-3 text-sm font-bold text-white shadow-md hover:shadow-lg transition-all hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
           >
-            Cari Design
-            <ArrowRight className="size-4" />
+            <Globe className="size-4" />
+            <span>Cek Domain Gratis</span>
           </button>
-          <button
-            type="button"
-            className="inline-flex items-center gap-2 rounded-full border border-green-200 px-5 py-2.5 sm:px-6 sm:py-3 text-sm font-semibold text-brand-primary transition-colors hover:bg-green-50"
+          <Link
+            href="/template-website"
+            className="inline-flex items-center gap-2 rounded-full border-2 border-slate-200 bg-white hover:border-brand-primary hover:text-brand-primary px-6 py-3 text-sm font-bold text-slate-700 transition-all hover:scale-[1.03] active:scale-[0.98]"
           >
-            <MessageCircle className="size-4" />
-            Hubungi Kami
-          </button>
+            <LayoutTemplate className="size-4" />
+            <span>Jelajahi Template</span>
+          </Link>
         </div>
       </div>
+
+
 
       {/* BARIS 2 (Mobile/Tablet) & KOLOM KANAN (Desktop): Visual & Model Showcase */}
       <div className="relative mx-auto flex w-full max-w-[640px] items-stretch mt-2 lg:mt-0">
@@ -161,6 +170,14 @@ export function HeroShowcase() {
               <HeroDecorativeCard card={card} key={card.id} registerRef={registerDecorative} />
             ))}
         </div>
+      </div>
+
+      {/* Domain Search Bar — di bawah grid, full width */}
+      <div
+        className="hero-fade-in mt-6 lg:col-span-2 relative z-20"
+        style={{ animationDelay: "220ms" }}
+      >
+        <HeroDomainSearch />
       </div>
 
       <style jsx>{`
