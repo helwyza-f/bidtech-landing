@@ -1,14 +1,22 @@
 import Image from "next/image";
 import Link from "next/link";
-import { ExternalLink, ShoppingCart } from "lucide-react";
+import { ExternalLink, ShoppingCart, Eye } from "lucide-react";
 
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import type { TEMPLATES } from "@/lib/data/template";
+import { recordTemplateView, type ExtendedTemplateItem } from "@/lib/api/template-api";
 
-export function TemplateCard({ template }: { template: (typeof TEMPLATES)[number] }) {
+const LARAVEL_URL =
+  process.env.NEXT_PUBLIC_LARAVEL_URL ||
+  process.env.NEXT_PUBLIC_API_URL ||
+  (typeof window !== "undefined"
+    ? `${window.location.protocol}//${window.location.hostname}:8000`
+    : "http://localhost:8000");
+
+export function TemplateCard({ template }: { template: ExtendedTemplateItem }) {
   const Icon = template.icon;
+  const checkoutUrl = template.checkout_url || `${LARAVEL_URL}/checkout/${template.id}/domain`;
 
   return (
     <Card className="group flex flex-col overflow-hidden border border-emerald-100 bg-white shadow-[0_12px_36px_rgba(15,23,42,0.06)] transition-all duration-300 hover:-translate-y-2 hover:border-brand-primary/50 hover:shadow-[0_20px_60px_rgba(95,201,74,0.18)]">
@@ -54,6 +62,7 @@ export function TemplateCard({ template }: { template: (typeof TEMPLATES)[number
             href={template.previewHref ?? "#"}
             rel={template.previewHref ? "noreferrer" : undefined}
             target={template.previewHref ? "_blank" : undefined}
+            onClick={() => recordTemplateView(template.id)}
           >
             <Button
               className="h-9 w-full gap-1 rounded-full border border-slate-200 bg-white text-xs font-medium text-slate-700 transition-all hover:border-brand-primary/50 hover:bg-emerald-50 hover:text-slate-900 sm:h-10 sm:gap-1.5 sm:text-sm"
@@ -64,21 +73,18 @@ export function TemplateCard({ template }: { template: (typeof TEMPLATES)[number
               <span>Lihat</span>
             </Button>
           </Link>
-          <Button
-            className="h-9 flex-1 gap-1 rounded-full bg-brand-primary text-xs font-medium text-slate-950 shadow-md shadow-brand-primary/20 transition-all hover:bg-brand-primary-hover hover:shadow-lg hover:shadow-brand-primary/30 sm:h-10 sm:gap-1.5 sm:text-sm"
-            size="sm"
-            onClick={() => {
-              const message = `Halo Bidtech! Saya tertarik mendigitalisasikan perusahaan/organisasi saya dengan template website ${template.name}.`
-              const whatsappUrl = `https://wa.me/628217601455?text=${encodeURIComponent(message)}`;
-              window.open(
-                whatsappUrl,
-                "_blank"
-              )
-            }}
+          <a
+            className="flex-1"
+            href={checkoutUrl}
           >
-            <ShoppingCart className="size-3.5" />
-            <span>Beli</span>
-          </Button>
+            <Button
+              className="h-9 w-full gap-1 rounded-full bg-brand-primary text-xs font-medium text-slate-950 shadow-md shadow-brand-primary/20 transition-all hover:bg-brand-primary-hover hover:shadow-lg hover:shadow-brand-primary/30 sm:h-10 sm:gap-1.5 sm:text-sm"
+              size="sm"
+            >
+              <ShoppingCart className="size-3.5" />
+              <span>Beli</span>
+            </Button>
+          </a>
         </div>
       </CardContent>
     </Card>
