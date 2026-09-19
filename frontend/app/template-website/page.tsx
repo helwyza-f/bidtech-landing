@@ -2,7 +2,7 @@
 
 export const dynamic = "force-dynamic";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Badge } from "@/components/ui/badge";
 import { TemplateFilter } from "@/components/template-website/components/template-filter";
 import { TemplateCard } from "@/components/template-website/components/template-card";
@@ -11,14 +11,32 @@ import {
   TEMPLATE_CATEGORIES,
   TEMPLATES,
 } from "@/lib/data/template";
+import { fetchTemplates, type ExtendedTemplateItem } from "@/lib/api/template-api";
 
 const sectionBadgeClass =
   "rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm";
 
 export default function TemplateWebsitePage() {
   const [selectedCategory, setSelectedCategory] = useState("Semua Design");
+  const [templates, setTemplates] = useState<ExtendedTemplateItem[]>(TEMPLATES);
+  const [categories, setCategories] = useState(TEMPLATE_CATEGORIES);
 
-  const filteredTemplates = TEMPLATES.filter((template) => {
+  useEffect(() => {
+    let isMounted = true;
+    fetchTemplates().then((res) => {
+      if (isMounted) {
+        setTemplates(res.templates);
+        if (res.categories && res.categories.length > 0) {
+          setCategories(res.categories);
+        }
+      }
+    });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
+  const filteredTemplates = templates.filter((template) => {
     if (selectedCategory === "Semua Design") return true;
 
     return template.category === selectedCategory;
@@ -45,7 +63,7 @@ export default function TemplateWebsitePage() {
           </div>
 
           <TemplateFilter
-            categories={TEMPLATE_CATEGORIES}
+            categories={categories}
             selectedCategory={selectedCategory}
             onSelect={setSelectedCategory}
           />
