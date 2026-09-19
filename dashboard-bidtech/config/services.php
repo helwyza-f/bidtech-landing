@@ -35,4 +35,20 @@ return [
         ],
     ],
 
+    'idcloudhost' => [
+        'url' => env('IDCLOUDHOST_API_URL', 'https://api.srs.idch.co.id/v1'),
+        'key' => env('IDCLOUDHOST_API_KEY'),
+        'secret' => env('IDCLOUDHOST_API_SECRET'),
+        'webhook_secret' => env('IDCLOUDHOST_WEBHOOK_SECRET'),
+    ],
+
+    'xendit' => [
+        'key'           => env('XENDIT_SECRET_KEY'),
+        'webhook_token' => env('XENDIT_WEBHOOK_TOKEN'),
+    ],
+
+    'fonnte' => [
+        'token' => env('FONNTE_TOKEN'),
+    ],
+
 ];
