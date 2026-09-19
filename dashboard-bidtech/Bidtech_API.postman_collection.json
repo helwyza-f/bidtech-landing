@@ -1,0 +1,199 @@
+{
+  "info": {
+    "_postman_id": "b1d73ch-api-collection-2026",
+    "name": "Bidtech API Collection",
+    "description": "Koleksi Request Postman Resmi untuk Pengujian RESTful API Bidtech (Katalog Template, Tracking Views, Domain Search, dan Promo Checkout).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "base_url",
+      "value": "http://127.0.0.1:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "1. Katalog Template (Semua)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/templates",
+          "host": ["{{base_url}}"],
+          "path": ["api", "templates"]
+        },
+        "description": "Mengambil seluruh katalog template aktif, kategori, dan rincian harga 3 komponen."
+      }
+    },
+    {
+      "name": "2. Filter Template berdasarkan Kategori",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/templates?category=Otomotif",
+          "host": ["{{base_url}}"],
+          "path": ["api", "templates"],
+          "query": [
+            {
+              "key": "category",
+              "value": "Otomotif"
+            }
+          ]
+        },
+        "description": "Mengambil template yang hanya berkategori Otomotif."
+      }
+    },
+    {
+      "name": "3. Detail Satu Template (ID: 1)",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/templates/1",
+          "host": ["{{base_url}}"],
+          "path": ["api", "templates", "1"]
+        },
+        "description": "Mengambil rincian lengkap template ID #1."
+      }
+    },
+    {
+      "name": "4. Tracking View Counter (+1 Views)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/templates/view/1",
+          "host": ["{{base_url}}"],
+          "path": ["templates", "view", "1"]
+        },
+        "description": "Menambah counter penayangan template ID #1 secara realtime (bebas CSRF)."
+      }
+    },
+    {
+      "name": "5. Pencarian Domain Realtime",
+      "request": {
+        "method": "GET",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/api/domain/search?domain=bisnisbaru.com",
+          "host": ["{{base_url}}"],
+          "path": ["api", "domain", "search"],
+          "query": [
+            {
+              "key": "domain",
+              "value": "bisnisbaru.com"
+            }
+          ]
+        },
+        "description": "Pengecekan ketersediaan domain dan estimasi harga dari server IDCloudHost."
+      }
+    },
+    {
+      "name": "6. Terapkan Kode Promo Mitra (MITRABATAM)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"promo_code\": \"MITRABATAM\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/checkout/1/promo/apply",
+          "host": ["{{base_url}}"],
+          "path": ["checkout", "1", "promo", "apply"]
+        },
+        "description": "Validasi dan penerapan kode promo khusus mitra pada template ID 1."
+      }
+    },
+    {
+      "name": "7. Terapkan Kode Promo Umum (BIDTECHHEMAT)",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          },
+          {
+            "key": "Content-Type",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"promo_code\": \"BIDTECHHEMAT\"\n}"
+        },
+        "url": {
+          "raw": "{{base_url}}/checkout/1/promo/apply",
+          "host": ["{{base_url}}"],
+          "path": ["checkout", "1", "promo", "apply"]
+        },
+        "description": "Validasi dan penerapan kode promo umum diskon tetap Rp 200.000."
+      }
+    },
+    {
+      "name": "8. Hapus Kode Promo Aktif",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Accept",
+            "value": "application/json",
+            "type": "text"
+          }
+        ],
+        "url": {
+          "raw": "{{base_url}}/checkout/1/promo/remove",
+          "host": ["{{base_url}}"],
+          "path": ["checkout", "1", "promo", "remove"]
+        },
+        "description": "Menghapus promo aktif dan merestorasi total pembayaran normal."
+      }
+    }
+  ]
+}
