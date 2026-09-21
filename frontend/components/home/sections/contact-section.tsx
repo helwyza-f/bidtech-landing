@@ -16,10 +16,10 @@ export function ContactSection() {
       <div className="pointer-events-none absolute inset-x-4 top-8 -z-10 h-80 rounded-[48px] bg-[radial-gradient(circle_at_25%_15%,rgba(95,201,74,0.13),transparent_34%),linear-gradient(135deg,rgba(245,255,242,0.9),rgba(255,255,255,0.75))]" />
       <Reveal className="mx-auto max-w-2xl text-center">
         <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-brand-primary">
-          Hubungi Kami
+          {t.contact.badge}
         </p>
         <h2 className="font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
-          Siap Memulai Proyek <span className="text-brand-primary">Anda?</span>
+          {t.contact.titlePrefix} <span className="text-brand-primary">{t.contact.titleHighlight}</span>
         </h2>
         <p className="mt-4 leading-7 text-slate-500">{t.contact.subtitle}</p>
       </Reveal>
@@ -52,7 +52,7 @@ export function ContactSection() {
                           loading="lazy"
                           referrerPolicy="strict-origin-when-cross-origin"
                           src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2311.377!2d104.07543166924557!3d1.1058157731502605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sid!2sid!4v1785208829256!5m2!1sid!2sid"
-                          title="Peta Lokasi BidTech Batam"
+                          title={`${t.contact.mapTitlePrefix} Batam`}
                         />
                       </div>
 
@@ -62,7 +62,7 @@ export function ContactSection() {
                         rel="noreferrer"
                         target="_blank"
                       >
-                        Buka Lokasi Batam
+                        {t.contact.openLocation} Batam
                       </a>
                     </CardContent>
                   </Card>
@@ -86,7 +86,7 @@ export function ContactSection() {
                           loading="lazy"
                           referrerPolicy="strict-origin-when-cross-origin"
                           src="https://www.google.com/maps?q=-6.207275,106.822519&z=16&output=embed"
-                          title="Peta Lokasi BidTech Jakarta"
+                          title={`${t.contact.mapTitlePrefix} Jakarta`}
                         />
                       </div>
 
@@ -96,7 +96,7 @@ export function ContactSection() {
                         rel="noreferrer"
                         target="_blank"
                       >
-                        Buka Lokasi Jakarta
+                        {t.contact.openLocation} Jakarta
                       </a>
                     </CardContent>
                   </Card>

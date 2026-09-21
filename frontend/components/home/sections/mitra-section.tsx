@@ -1,6 +1,9 @@
+"use client";
+
 import Image from "next/image";
 
 import { Badge } from "@/components/ui/badge";
+import { useLanguage } from "@/lib/i18n";
 
 const mitraLogos = [
   { src: "/images/mitra/mitra-appeknas-20260728.png", alt: "Logo APPEKNAS" },
@@ -15,16 +18,18 @@ const mitraLogos = [
 ];
 
 export function MitraSection() {
+  const { t } = useLanguage();
+
   return (
     <section className="landing-panel relative overflow-hidden bg-white py-14 sm:py-20 md:py-24">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-5 md:px-8">
         <div className="text-center">
-          <Badge className="rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm">Our Mitra</Badge>
+          <Badge className="rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm">{t.mitra.badge}</Badge>
           <h2 className="mt-4 font-[family-name:var(--font-sora)] text-2xl font-semibold text-slate-950 md:text-3xl">
-            Mitra <span className="text-brand-primary">Kami</span>
+            {t.mitra.titlePrefix} <span className="text-brand-primary">{t.mitra.titleHighlight}</span>
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm leading-6 text-slate-500 sm:text-base">
-            Partner dan komunitas yang ikut mendukung ekosistem digital BIDTECH.
+            {t.mitra.subtitle}
           </p>
         </div>
 

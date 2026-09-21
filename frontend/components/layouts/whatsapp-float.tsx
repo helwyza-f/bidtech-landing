@@ -2,10 +2,14 @@
 
 import { Phone } from "lucide-react";
 
+import { useLanguage } from "@/lib/i18n";
+
 export function WhatsAppFloat() {
+  const { t } = useLanguage();
+
   return (
     <a
-      aria-label="Chat via WhatsApp"
+      aria-label={t.whatsappFloat.ariaLabel}
       className="fixed bottom-[calc(1rem+env(safe-area-inset-bottom))] right-[calc(1rem+env(safe-area-inset-right))] z-[999] flex size-14 items-center justify-center transition hover:-translate-y-0.5 sm:bottom-6 sm:right-6 sm:size-16"
       href="https://wa.me/628217601455"
       rel="noreferrer"

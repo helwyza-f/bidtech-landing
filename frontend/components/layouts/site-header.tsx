@@ -8,7 +8,7 @@ import { Check, ChevronDown, Menu, X } from "lucide-react";
 import { SmartNavLink } from "@/components/layouts/smart-nav-link";
 import { useLanguage } from "@/lib/i18n";
 import { brandClasses, logoAssets } from "@/lib/data";
-import { getActiveHomeSection, isHomePath, scrollToSection } from "@/lib/section-navigation";
+import { getActiveHomeSection, isHomePath, isNavItemActive, scrollToSection } from "@/lib/section-navigation";
 
 export function SiteHeader() {
   const { lang, setLang, t } = useLanguage();
@@ -61,7 +61,7 @@ export function SiteHeader() {
     // { label: t.nav.services, href: "#services" },
     // { label: t.nav.portfolio, href: "#portfolio" },
     { label: t.nav.template, href: "/template-website" },
-    { label: t.nav.contact, href: "/#contact" },
+    { label: t.nav.contact, href: "#contact" },
   ];
 
   return (
@@ -82,9 +82,7 @@ export function SiteHeader() {
           {navItems.map((item) => (
             <SmartNavLink
               className={`relative pb-1 transition ${brandClasses.hoverTextPrimary} ${
-                item.href.startsWith("#") && isHomePath(pathname) && activeSection === (item.href.slice(1))
-                  ? `font-semibold ${brandClasses.textPrimary}`
-                  : ""
+                isNavItemActive(item.href, pathname, activeSection) ? `font-semibold ${brandClasses.textPrimary}` : ""
               }`}
               href={item.href}
               key={item.label}
@@ -138,7 +136,7 @@ export function SiteHeader() {
 
           <button
             aria-expanded={mobileOpen}
-            aria-label={mobileOpen ? "Tutup menu" : "Buka menu"}
+            aria-label={mobileOpen ? t.accessibility.closeMenu : t.accessibility.openMenu}
             className="flex size-9 items-center justify-center rounded-full border border-zinc-200 text-slate-900 md:hidden"
             onClick={() => setMobileOpen((value) => !value)}
             type="button"

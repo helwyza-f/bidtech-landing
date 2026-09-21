@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Sora } from "next/font/google";
 
+import { AnnouncementBar } from "@/components/layouts/announcement-bar";
 import { SiteHeader } from "@/components/layouts/site-header";
 import { SiteFooter } from "@/components/layouts/site-footer";
 import { WhatsAppFloat } from "@/components/layouts/whatsapp-float";
@@ -19,16 +20,17 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${sora.variable} ${inter.variable}`}>
+    <html lang="id" className={`${sora.variable} ${inter.variable}`}>
       <body className="bg-white font-[family-name:var(--font-inter)] text-white antialiased">
         <LanguageProvider>
           <div className="min-h-screen bg-white">
+            <AnnouncementBar />
             <SiteHeader />
             {children}
             <SiteFooter />
           </div>
+          <WhatsAppFloat />
         </LanguageProvider>
-        <WhatsAppFloat />
       </body>
     </html>
   );

@@ -11,15 +11,18 @@ import {
   TEMPLATE_CATEGORIES,
   TEMPLATES,
 } from "@/lib/data/template";
+import { useLanguage } from "@/lib/i18n";
 
 const sectionBadgeClass =
   "rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm";
 
 export default function TemplateWebsitePage() {
-  const [selectedCategory, setSelectedCategory] = useState("Semua Design");
+  const { t } = useLanguage();
+  const allCategoryName = TEMPLATE_CATEGORIES[0]?.name ?? "";
+  const [selectedCategory, setSelectedCategory] = useState(allCategoryName);
 
   const filteredTemplates = TEMPLATES.filter((template) => {
-    if (selectedCategory === "Semua Design") return true;
+    if (selectedCategory === allCategoryName) return true;
 
     return template.category === selectedCategory;
   });
@@ -31,16 +34,16 @@ export default function TemplateWebsitePage() {
         <div className="relative mx-auto max-w-7xl px-4 py-14 text-center sm:px-5 md:px-8 lg:py-20">
           <div className="mx-auto max-w-3xl">
             <Badge className={sectionBadgeClass}>
-              BIDTECH Design Library
+              {t.templateWebsite.badge}
             </Badge>
             <h1 className="mt-6 text-4xl font-extrabold tracking-tight text-slate-950 sm:text-5xl lg:text-6xl">
-              Design Website Profesional
+              {t.templateWebsite.title}
             </h1>
             <p className="mt-3 text-xl font-semibold text-brand-primary">
-              Tampilan siap jual untuk bisnis Anda
+              {t.templateWebsite.subtitle}
             </p>
             <p className="mx-auto mt-4 max-w-2xl text-base leading-7 text-slate-600">
-              Pilih design berkualitas dengan tampilan modern, responsive, dan mudah dikustomisasi sesuai kebutuhan bisnis Anda.
+              {t.templateWebsite.description}
             </p>
           </div>
 
@@ -56,14 +59,14 @@ export default function TemplateWebsitePage() {
         <div className="mb-8 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div>
             <p className="text-sm font-semibold uppercase tracking-[0.28em] text-brand-primary">
-              Pilihan Design
+              {t.templateWebsite.eyebrow}
             </p>
             <h2 className="mt-2 text-3xl font-bold tracking-tight text-slate-950">
-              Siap dipakai, tetap bisa custom
+              {t.templateWebsite.sectionTitle}
             </h2>
           </div>
           <p className="max-w-md text-sm leading-6 text-slate-500">
-            Cocok untuk company profile, landing page, e-commerce, dan sistem bisnis yang butuh tampilan rapi sejak awal.
+            {t.templateWebsite.sectionDescription}
           </p>
         </div>
 

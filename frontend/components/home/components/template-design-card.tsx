@@ -1,10 +1,15 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
 import type { TEMPLATES } from "@/lib/data/template";
+import { useLanguage } from "@/lib/i18n";
 
 export function TemplateDesignCard({ template }: { template: (typeof TEMPLATES)[number] }) {
+  const { t } = useLanguage();
+
   return (
     <Link
       className="group block h-full w-full"
@@ -17,7 +22,7 @@ export function TemplateDesignCard({ template }: { template: (typeof TEMPLATES)[
           <div className="relative aspect-video w-full overflow-hidden rounded-[14px] bg-slate-100">
             <Image
               src={template.image}
-              alt={`${template.name} design preview`}
+              alt={`${template.name} ${t.templateCard.imageAltSuffix}`}
               fill
               sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
               className="object-cover object-top transition duration-500 group-hover:scale-[1.04]"
@@ -33,7 +38,7 @@ export function TemplateDesignCard({ template }: { template: (typeof TEMPLATES)[
           </h3>
           <p className="mt-3 flex-1 text-sm leading-6 text-slate-500">{template.subcategory}</p>
           <div className="mt-5 flex items-center gap-2 text-sm font-semibold text-slate-950 transition group-hover:text-brand-primary">
-            <span>Lihat Preview</span>
+            <span>{t.templatePreview.preview}</span>
             <ArrowRight className="size-4" />
           </div>
         </div>

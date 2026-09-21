@@ -18,17 +18,17 @@ function useContactFormState(selectedPackage: SelectedPackage | null) {
   const [company, setCompany] = useState("");
   const [service, setService] = useState(selectedPackage?.service ?? t.contact.form.services[0]);
   const [description, setDescription] = useState(
-    selectedPackage ? `Saya tertarik dengan paket ${selectedPackage.plan} (${selectedPackage.price}).` : "",
+    selectedPackage ? `${t.contact.message.packageInterestPrefix} ${selectedPackage.plan} (${selectedPackage.price}).` : "",
   );
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     const message = [
-      `Halo BidTech, saya ${name || "-"} dari ${company || "-"}.`,
-      `Nomor WhatsApp: ${whatsapp || "-"}`,
-      `Jenis Layanan: ${service}`,
-      `Deskripsi Proyek: ${description || "-"}`,
+      `${t.contact.message.greetingPrefix} ${name || "-"} ${t.contact.message.from} ${company || "-"}.`,
+      `${t.contact.message.whatsapp}: ${whatsapp || "-"}`,
+      `${t.contact.message.service}: ${service}`,
+      `${t.contact.message.description}: ${description || "-"}`,
     ].join("\n");
 
     window.open(`https://wa.me/628217601455?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");

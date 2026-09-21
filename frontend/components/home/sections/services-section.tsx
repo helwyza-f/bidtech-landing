@@ -40,6 +40,9 @@ export function ServicesSection() {
   const { t } = useLanguage();
   const [activeServiceSlide, setActiveServiceSlide] = useState(0);
   const servicesSliderRef = useRef<HTMLDivElement>(null);
+  const serviceTitleWords = t.services.title.split(" ");
+  const serviceTitleHighlight = serviceTitleWords.pop() ?? "";
+  const serviceTitlePrefix = serviceTitleWords.join(" ");
 
   const moveServiceSlide = (nextSlide: number) => {
     setActiveServiceSlide(scrollSliderToIndex(servicesSliderRef.current, nextSlide));
@@ -57,7 +60,7 @@ export function ServicesSection() {
           <Badge className={sectionBadgeClass}>{t.services.badge}</Badge>
         </div>
         <h2 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
-          <span>Layanan Unggulan</span> <span className="text-brand-primary">Kami</span>
+          <span>{serviceTitlePrefix}</span> <span className="text-brand-primary">{serviceTitleHighlight}</span>
         </h2>
         <p className="mt-4 leading-7 text-slate-500">{t.services.subtitle}</p>
       </Reveal>
@@ -98,9 +101,9 @@ export function ServicesSection() {
         ))}
       </div>
 
-      <div className="mt-6 flex items-center justify-center gap-4 md:hidden" aria-label="Navigasi layanan">
+      <div className="mt-6 flex items-center justify-center gap-4 md:hidden" aria-label={t.services.ariaGroupLabel}>
         <button
-          aria-label="Layanan sebelumnya"
+          aria-label={t.services.ariaPrevious}
           aria-disabled={activeServiceSlide === 0}
           className={`flex size-11 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-lime-300 hover:text-brand-primary ${
             activeServiceSlide === 0 ? "cursor-not-allowed opacity-35" : ""
@@ -114,10 +117,10 @@ export function ServicesSection() {
           <ChevronLeft className="size-5" />
         </button>
 
-        <div className="flex items-center gap-2" aria-label={`Layanan ${activeServiceSlide + 1} dari ${t.services.items.length}`}>
+        <div className="flex items-center gap-2" aria-label={`${t.services.ariaGroupLabel} ${activeServiceSlide + 1} ${t.services.ariaGroupFrom} ${t.services.items.length}`}>
           {t.services.items.map((service, index) => (
             <button
-              aria-label={`Lihat ${service.title}`}
+              aria-label={`${t.services.ariaViewPrefix} ${service.title}`}
               className={`h-2.5 rounded-full transition-all ${
                 activeServiceSlide === index ? "w-8 bg-brand-primary" : "w-2.5 bg-zinc-600"
               }`}
@@ -129,7 +132,7 @@ export function ServicesSection() {
         </div>
 
         <button
-          aria-label="Layanan berikutnya"
+          aria-label={t.services.ariaNext}
           aria-disabled={activeServiceSlide === t.services.items.length - 1}
           className={`flex size-11 items-center justify-center rounded-full border border-white/15 text-white transition hover:border-lime-300 hover:text-brand-primary ${
             activeServiceSlide === t.services.items.length - 1 ? "cursor-not-allowed opacity-35" : ""

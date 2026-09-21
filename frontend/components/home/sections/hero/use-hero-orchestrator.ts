@@ -3,7 +3,7 @@
 import { useCallback, useLayoutEffect, useRef, useState } from "react";
 import gsap from "gsap";
 
-import { HERO_TIMINGS, heroSlides } from "./hero-data";
+import { HERO_TIMINGS, type HeroSlide } from "./hero-data";
 import { useTypewriter } from "./use-typewriter";
 
 export type HeroPhase = "boot" | "intro" | "idle" | "outro" | "enter";
@@ -11,7 +11,7 @@ export type HeroPhase = "boot" | "intro" | "idle" | "outro" | "enter";
 type DecorativeAnimRequest = { slideId: string; direction: "in" | "out" } | null;
 
 // mengatur siklus hero penuh; animasi kartu dipicu useLayoutEffect agar ref DOM pasti siap
-export function useHeroOrchestrator() {
+export function useHeroOrchestrator(slides: HeroSlide[]) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [phase, setPhase] = useState<HeroPhase>("boot");
   const [decorativesVisible, setDecorativesVisible] = useState(false);
@@ -36,7 +36,7 @@ export function useHeroOrchestrator() {
     cursorHoldMs: HERO_TIMINGS.cursorBlinkVisibleAfterType,
   });
 
-  const currentSlide = heroSlides[slideIndex];
+  const currentSlide = slides[slideIndex];
 
   // primitive animasi
 
@@ -96,7 +96,7 @@ export function useHeroOrchestrator() {
   useLayoutEffect(() => {
     if (!decorativeAnimRequest) return;
     const { slideId, direction } = decorativeAnimRequest;
-    const slide = heroSlides.find((s) => s.id === slideId);
+    const slide = slides.find((s) => s.id === slideId);
     if (!slide) {
       decorativeAnimResolveRef.current?.();
       decorativeAnimResolveRef.current = null;
@@ -174,7 +174,7 @@ export function useHeroOrchestrator() {
         },
       });
     }
-  }, [decorativeAnimRequest]);
+  }, [decorativeAnimRequest, slides]);
 
   // urutan animasi
 
@@ -230,9 +230,9 @@ export function useHeroOrchestrator() {
       fadeSubtitle("out"),
     ]);
 
-    const nextIndex = (slideIndex + 1) % heroSlides.length;
+    const nextIndex = (slideIndex + 1) % slides.length;
     setSlideIndex(nextIndex);
-    const nextSlide = heroSlides[nextIndex];
+    const nextSlide = slides[nextIndex];
 
     // entrance slide berikutnya meniru intro pertama agar ritmenya konsisten
     setPhase("enter");
@@ -254,6 +254,7 @@ export function useHeroOrchestrator() {
     fadeSubtitle,
     type,
     riseModelThenPopDecoratives,
+    slides,
   ]);
 
   useLayoutEffect(() => {

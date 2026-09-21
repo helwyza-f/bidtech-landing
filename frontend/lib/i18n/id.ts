@@ -10,6 +10,14 @@ export const id = {
   header: {
     cta: "Mulai Sekarang",
   },
+  announcement: {
+    badge: "KONSULTASI SEKARANG",
+    items: [
+      "Diskon 1 jt, Untuk Mitra APEKNAS",
+      "Konsultasi Gratis & Garansi Maintenance 100%",
+      "Hubungi Tim Kami Sekarang: 0821-7601-455",
+    ],
+  },
   hero: {
     badge: "Solusi Digital untuk Bisnis",
     titleLine1: "Solusi Aplikasi & Website untuk",
@@ -19,6 +27,49 @@ export const id = {
       "Dari website hingga aplikasi custom, BIDTECH membangun solusi digital untuk membuat operasional lebih efektif dan terukur.",
     ctaPrimary: "Konsultasi Gratis",
     ctaSecondary: "Lihat Portfolio",
+  },
+  heroShowcase: {
+    ctaPrimary: "Cari Design",
+    ctaSecondary: "Hubungi Kami",
+    appStorePrefix: "Download on the",
+    googlePlayPrefix: "GET IT ON",
+    slides: [
+      {
+        title: "Bisnis Maju Tanpa Website? Kehilangan Peluang!",
+        subtitle:
+          "8 dari 10 bisnis penyewaan mobil yang memiliki website, punya pelanggan lebih banyak 80% daripada yang belum punya website bisnis.",
+        modelAlt: "Pengusaha memegang laptop dengan gestur semangat, varian kedua",
+        decoratives: [
+          "Pelanggan Baru",
+          "Menjangkau Lebih Banyak Pelanggan",
+          "Mudah Ditemukan di Google",
+          "Puluhan Design Siap Pakai",
+        ],
+      },
+      {
+        title: "Efisensikan Kerja Tim Kantormu Dengan Aplikasi.",
+        subtitle:
+          "Aplikasi CRM, ERP dan Company Profile meningkatkan peluang usaha ke 200% calon customer baru dan meningkatkan efisiensi bisnis hingga 4x lipat.",
+        modelAlt: "Pengguna tersenyum sambil memegang ponsel",
+        decoratives: [
+          "Aplikasi Mobile dapat Tersedia di:",
+          "Semua Tim Bekerja Dalam Satu Sistem",
+          "Transaksi Sejauh Satu Sentuhan",
+          "Notifikasi Langsung, Repeat Order Naik",
+        ],
+      },
+      {
+        title: "Peluang Lebih Besar, Dengan Website Lebih Professional!",
+        subtitle:
+          "Bisnis tanpa aplikasi dan website dapat kehilangan profit hingga 20% setiap tahunnya.",
+        modelAlt: "Pengusaha memegang laptop dengan gestur semangat",
+        decoratives: [
+          "Proses Lebih Cepat",
+          "Jangkauan Bisnis Luas",
+          "Pantau dan Catat Omset Usaha",
+        ],
+      },
+    ],
   },
   stats: [
     { value: 100, suffix: "+", label: "Project Selesai" },
@@ -36,6 +87,11 @@ export const id = {
     badge: "Our Service",
     title: "Layanan Unggulan Kami",
     subtitle: "Kami memberikan solusi teknologi komprehensif yang dirancang untuk mempercepat pertumbuhan bisnis digital Anda.",
+    ariaPrevious: "Layanan sebelumnya",
+    ariaNext: "Layanan berikutnya",
+    ariaGroupLabel: "Layanan",
+    ariaGroupFrom: "dari",
+    ariaViewPrefix: "Lihat",
     items: [
       {
         title: "Website Development",
@@ -386,10 +442,56 @@ export const id = {
     desktopAlt: "Preview website Stokin pada mockup desktop",
     mobileAlt: "Preview aplikasi Stokin pada mockup mobile",
   },
+  templatePreview: {
+    badge: "Template Design",
+    titlePrefix: "Pilih",
+    titleHighlight: "Design Website",
+    titleSuffix: "Siap Pakai",
+    subtitle:
+      "Koleksi template profesional untuk berbagai kebutuhan bisnis, mulai dari company profile, restoran, rental, hingga portal organisasi.",
+    more: "Lihat Lebih Lanjut",
+    preview: "Lihat Preview",
+  },
+  templateWebsite: {
+    badge: "BIDTECH Design Library",
+    title: "Design Website Profesional",
+    subtitle: "Tampilan siap jual untuk bisnis Anda",
+    description:
+      "Pilih design berkualitas dengan tampilan modern, responsive, dan mudah dikustomisasi sesuai kebutuhan bisnis Anda.",
+    eyebrow: "Pilihan Design",
+    sectionTitle: "Siap dipakai, tetap bisa custom",
+    sectionDescription:
+      "Cocok untuk company profile, landing page, e-commerce, dan sistem bisnis yang butuh tampilan rapi sejak awal.",
+  },
+  templateCard: {
+    preview: "Lihat",
+    buy: "Beli",
+    whatsappMessage:
+      "Halo Bidtech! Saya tertarik mendigitalisasikan perusahaan/organisasi saya dengan template website",
+    imageAltSuffix: "design preview",
+  },
+  templateCta: {
+    badge: "Custom Design",
+    title: "Tidak menemukan design yang sesuai?",
+    subtitle:
+      "Kami siap membuat tampilan custom yang lebih pas dengan brand dan kebutuhan bisnis Anda.",
+    cta: "Konsultasi Gratis",
+  },
+  mitra: {
+    badge: "Our Mitra",
+    titlePrefix: "Mitra",
+    titleHighlight: "Kami",
+    subtitle: "Partner dan komunitas yang ikut mendukung ekosistem digital BIDTECH.",
+  },
   contact: {
+    badge: "Hubungi Kami",
     title: "Siap Memulai Proyek Anda?",
+    titlePrefix: "Siap Memulai Proyek",
+    titleHighlight: "Anda?",
     subtitle: "Isi formulir di bawah ini dan tim kami akan segera menghubungi Anda untuk konsultasi gratis.",
     whatsapp: "Konsultasi via WhatsApp",
+    mapTitlePrefix: "Peta Lokasi BidTech",
+    openLocation: "Buka Lokasi",
     info: [
       { label: "WhatsApp", value: "0821-7601-455", note: "Chat Sekarang" },
       { label: "Email", value: "cs@bidtech.co.id", note: "Chat Sekarang" },
@@ -408,6 +510,21 @@ export const id = {
       descriptionPlaceholder: "Ceritakan sedikit tentang kebutuhan digital Anda...",
       submit: "Kirim Pesan",
     },
+    message: {
+      packageInterestPrefix: "Saya tertarik dengan paket",
+      greetingPrefix: "Halo BidTech, saya",
+      from: "dari",
+      whatsapp: "Nomor WhatsApp",
+      service: "Jenis Layanan",
+      description: "Deskripsi Proyek",
+    },
+  },
+  whatsappFloat: {
+    ariaLabel: "Chat via WhatsApp",
+  },
+  accessibility: {
+    openMenu: "Buka menu",
+    closeMenu: "Tutup menu",
   },
   footer: {
     description: "Membantu bisnis berkembang lewat solusi digital inovatif dan pengerjaan yang profesional.",

@@ -10,6 +10,14 @@ export const en = {
   header: {
     cta: "Get Started",
   },
+  announcement: {
+    badge: "Limited Promo",
+    items: [
+      "25% Off Website & App Development This Month Only!",
+      "Free Consultation & 100% Maintenance Guarantee",
+      "Contact Our Team Now: 0821-7601-455",
+    ],
+  },
   hero: {
     badge: "Digital Solutions for Business",
     titleLine1: "App & Website Solutions for",
@@ -19,6 +27,49 @@ export const en = {
       "From websites to custom applications, BIDTECH builds digital solutions to make your operations more effective and measurable.",
     ctaPrimary: "Free Consultation",
     ctaSecondary: "View Portfolio",
+  },
+  heroShowcase: {
+    ctaPrimary: "Browse Designs",
+    ctaSecondary: "Contact Us",
+    appStorePrefix: "Download on the",
+    googlePlayPrefix: "GET IT ON",
+    slides: [
+      {
+        title: "Growing Without a Website? You're Missing Opportunities!",
+        subtitle:
+          "8 out of 10 car rental businesses with a website get 80% more customers than businesses that do not have one yet.",
+        modelAlt: "Business owner holding a laptop with an energetic gesture, second variant",
+        decoratives: [
+          "New Customers",
+          "Reach More Customers",
+          "Easy to Find on Google",
+          "Dozens of Ready-Made Designs",
+        ],
+      },
+      {
+        title: "Make Your Office Team More Efficient With an App.",
+        subtitle:
+          "CRM, ERP, and company profile applications can increase opportunities by up to 200% new prospects and improve business efficiency up to 4x.",
+        modelAlt: "User smiling while holding a phone",
+        decoratives: [
+          "Mobile Apps Can Be Available On:",
+          "The Whole Team Works in One System",
+          "Transactions Within One Tap",
+          "Instant Notifications, More Repeat Orders",
+        ],
+      },
+      {
+        title: "Bigger Opportunities With a More Professional Website!",
+        subtitle:
+          "Businesses without apps and websites can lose up to 20% profit every year.",
+        modelAlt: "Business owner holding a laptop with an energetic gesture",
+        decoratives: [
+          "Faster Process",
+          "Wider Business Reach",
+          "Track and Record Business Revenue",
+        ],
+      },
+    ],
   },
   stats: [
     { value: 100, suffix: "+", label: "Projects Completed" },
@@ -36,6 +87,11 @@ export const en = {
     badge: "Main Services",
     title: "Our Featured Services",
     subtitle: "We provide comprehensive technology solutions designed to accelerate your digital business growth.",
+    ariaPrevious: "Previous service",
+    ariaNext: "Next service",
+    ariaGroupLabel: "Service",
+    ariaGroupFrom: "of",
+    ariaViewPrefix: "View",
     items: [
       {
         title: "Website Development",
@@ -385,10 +441,56 @@ export const en = {
     desktopAlt: "Stokin website preview in a desktop mockup",
     mobileAlt: "Stokin application preview in a mobile mockup",
   },
+  templatePreview: {
+    badge: "Template Design",
+    titlePrefix: "Choose",
+    titleHighlight: "Website Designs",
+    titleSuffix: "Ready to Use",
+    subtitle:
+      "A collection of professional templates for many business needs, from company profiles, restaurants, rentals, to organization portals.",
+    more: "See More",
+    preview: "View Preview",
+  },
+  templateWebsite: {
+    badge: "BIDTECH Design Library",
+    title: "Professional Website Designs",
+    subtitle: "Ready-to-sell looks for your business",
+    description:
+      "Choose quality designs with a modern, responsive look that is easy to customize for your business needs.",
+    eyebrow: "Design Selection",
+    sectionTitle: "Ready to use, still customizable",
+    sectionDescription:
+      "Suitable for company profiles, landing pages, e-commerce, and business systems that need a polished look from the start.",
+  },
+  templateCard: {
+    preview: "View",
+    buy: "Buy",
+    whatsappMessage:
+      "Hello Bidtech! I am interested in digitizing my company/organization with the website template",
+    imageAltSuffix: "design preview",
+  },
+  templateCta: {
+    badge: "Custom Design",
+    title: "Can't find the right design?",
+    subtitle:
+      "We are ready to create a custom look that fits your brand and business needs better.",
+    cta: "Free Consultation",
+  },
+  mitra: {
+    badge: "Our Partners",
+    titlePrefix: "Our",
+    titleHighlight: "Partners",
+    subtitle: "Partners and communities that support the BIDTECH digital ecosystem.",
+  },
   contact: {
+    badge: "Contact Us",
     title: "Ready to Start Your Project?",
+    titlePrefix: "Ready to Start Your",
+    titleHighlight: "Project?",
     subtitle: "Fill out the form below and our team will get back to you shortly for a free consultation.",
     whatsapp: "Consult via WhatsApp",
+    mapTitlePrefix: "BidTech Location Map",
+    openLocation: "Open Location",
     info: [
       { label: "WhatsApp", value: "0821-7601-455", note: "Chat Now" },
       { label: "Email", value: "cs@bidtech.co.id", note: "Chat Now" },
@@ -407,6 +509,21 @@ export const en = {
       descriptionPlaceholder: "Tell us a bit about your digital needs...",
       submit: "Send Message",
     },
+    message: {
+      packageInterestPrefix: "I am interested in the package",
+      greetingPrefix: "Hello BidTech, I am",
+      from: "from",
+      whatsapp: "WhatsApp Number",
+      service: "Service Type",
+      description: "Project Description",
+    },
+  },
+  whatsappFloat: {
+    ariaLabel: "Chat via WhatsApp",
+  },
+  accessibility: {
+    openMenu: "Open menu",
+    closeMenu: "Close menu",
   },
   footer: {
     description: "Helping businesses grow through innovative digital solutions and professional execution.",

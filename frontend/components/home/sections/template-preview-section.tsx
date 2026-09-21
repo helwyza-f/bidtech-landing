@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 
@@ -5,6 +7,7 @@ import { Badge } from "@/components/ui/badge";
 import { Reveal } from "@/components/animations/reveal";
 import { TemplateDesignCard } from "@/components/home/components/template-design-card";
 import { TEMPLATES } from "@/lib/data/template";
+import { useLanguage } from "@/lib/i18n";
 
 const sectionBadgeClass =
   "rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm";
@@ -16,6 +19,8 @@ const templateMoreLinkClass =
   "inline-flex h-13 items-center justify-center gap-3 rounded-full bg-brand-primary px-7 text-sm font-bold text-brand-primary-dark shadow-[0_18px_42px_rgba(95,201,74,0.24)] ring-1 ring-green-700/10 transition hover:-translate-y-0.5 hover:bg-brand-primary-hover sm:h-14 sm:px-8 sm:text-base";
 
 export function TemplatePreviewSection() {
+  const { t } = useLanguage();
+
   return (
     <section
       className="landing-panel relative mx-auto max-w-7xl px-4 py-14 sm:px-5 sm:py-16 md:px-8 md:py-20"
@@ -26,22 +31,20 @@ export function TemplatePreviewSection() {
       <Reveal className="mx-auto max-w-3xl text-center">
         <div className="flex justify-center">
           <Badge className={sectionBadgeClass}>
-            Template Design
+            {t.templatePreview.badge}
           </Badge>
         </div>
 
         <h2 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
-          Pilih{" "}
+          {t.templatePreview.titlePrefix}{" "}
           <span className="text-brand-primary">
-            Design Website
+            {t.templatePreview.titleHighlight}
           </span>{" "}
-          Siap Pakai
+          {t.templatePreview.titleSuffix}
         </h2>
 
         <p className="mx-auto mt-4 max-w-2xl leading-7 text-slate-500">
-          Koleksi template profesional untuk berbagai kebutuhan bisnis,
-          mulai dari company profile, restoran, rental, hingga portal
-          organisasi.
+          {t.templatePreview.subtitle}
         </p>
       </Reveal>
 
@@ -70,7 +73,7 @@ export function TemplatePreviewSection() {
                     className={templateMoreLinkClass}
                     href="/template-website"
                   >
-                    Lihat Lebih Lanjut
+                    {t.templatePreview.more}
                     <ArrowRight className="size-4" />
                   </Link>
                 </div>
@@ -122,7 +125,7 @@ export function TemplatePreviewSection() {
               className={templateMoreLinkClass}
               href="/template-website"
             >
-              Lihat Lebih Lanjut
+              {t.templatePreview.more}
               <ArrowRight className="size-4" />
             </Link>
           </div>

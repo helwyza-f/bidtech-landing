@@ -1,8 +1,10 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Image from "next/image";
 import { ArrowRight, MessageCircle } from "lucide-react";
+
+import { useLanguage } from "@/lib/i18n";
 
 import { useHeroOrchestrator } from "./use-hero-orchestrator";
 import { useFitTextToLines } from "./use-fit-text-to-lines";
@@ -10,14 +12,40 @@ import { HeroBlob } from "./hero-blob";
 import { HeroDecorativeCard } from "./hero-decorative-card";
 import { heroSlides, HERO_RIGHT_BLOB_SRC } from "./hero-data";
 
-// judul terpanjang jadi acuan auto-fit agar ukuran font stabil di semua slide
-const LONGEST_TITLE = heroSlides.reduce((a, b) => (b.title.length > a.title.length ? b : a));
-const LONGEST_SUBTITLE = heroSlides.reduce((a, b) => (b.subtitle.length > a.subtitle.length ? b : a));
-
 const TITLE_MAX_LINES = 3;
 const TITLE_LINE_HEIGHT = 1.25;
 
 export function HeroShowcase() {
+  const { t } = useLanguage();
+  const localizedSlides = useMemo(
+    () =>
+      heroSlides.map((slide, slideIndex) => {
+        const copy = t.heroShowcase.slides[slideIndex];
+
+        return {
+          ...slide,
+          title: copy?.title ?? slide.title,
+          subtitle: copy?.subtitle ?? slide.subtitle,
+          modelAlt: copy?.modelAlt ?? slide.modelAlt,
+          decoratives: slide.decoratives.map((card, cardIndex) => ({
+            ...card,
+            label: copy?.decoratives[cardIndex] ?? card.label,
+          })),
+        };
+      }),
+    [t],
+  );
+
+  // judul terpanjang jadi acuan auto-fit agar ukuran font stabil di semua slide
+  const longestTitle = useMemo(
+    () => localizedSlides.reduce((a, b) => (b.title.length > a.title.length ? b : a)),
+    [localizedSlides],
+  );
+  const longestSubtitle = useMemo(
+    () => localizedSlides.reduce((a, b) => (b.subtitle.length > a.subtitle.length ? b : a)),
+    [localizedSlides],
+  );
+
   const {
     currentSlide,
     titleText,
@@ -26,7 +54,7 @@ export function HeroShowcase() {
     modelRef,
     subtitleRef,
     registerDecorative,
-  } = useHeroOrchestrator();
+  } = useHeroOrchestrator(localizedSlides);
 
   // Batas ukuran font menyesuaikan ukuran layar (HP, Tablet, Desktop)
   const [fontBounds, setFontBounds] = useState({ min: 26, max: 38 });
@@ -52,7 +80,7 @@ export function HeroShowcase() {
   const behindCards = currentSlide.decoratives.filter((c) => c.zLayer === "behind");
 
   const { measureRef, fontSizePx } = useFitTextToLines({
-    text: LONGEST_TITLE.title,
+    text: longestTitle.title,
     maxLines: TITLE_MAX_LINES,
     minFontSizePx: fontBounds.min,
     maxFontSizePx: fontBounds.max,
@@ -78,7 +106,7 @@ export function HeroShowcase() {
             className="font-[family-name:var(--font-sora)] pointer-events-none absolute inset-x-0 top-0 font-bold tracking-tight"
             style={{ visibility: "hidden", lineHeight: TITLE_LINE_HEIGHT }}
           >
-            {LONGEST_TITLE.title}
+            {longestTitle.title}
           </h1>
 
           <h1
@@ -99,7 +127,7 @@ export function HeroShowcase() {
 
         <div className="relative mt-4 sm:mt-6 w-full">
           <p aria-hidden className="invisible text-sm leading-6 sm:text-base sm:leading-8 md:text-lg">
-            {LONGEST_SUBTITLE.subtitle}
+            {longestSubtitle.subtitle}
           </p>
           <p
             ref={subtitleRef}
@@ -117,7 +145,7 @@ export function HeroShowcase() {
             type="button"
             className="inline-flex items-center gap-2 rounded-full bg-brand-primary px-5 py-2.5 sm:px-6 sm:py-3 text-sm font-semibold text-white shadow-[0_16px_40px_rgba(95,201,74,0.35)] transition-transform hover:-translate-y-0.5"
           >
-            Cari Design
+            {t.heroShowcase.ctaPrimary}
             <ArrowRight className="size-4" />
           </button>
           <button
@@ -125,7 +153,7 @@ export function HeroShowcase() {
             className="inline-flex items-center gap-2 rounded-full border border-green-200 px-5 py-2.5 sm:px-6 sm:py-3 text-sm font-semibold text-brand-primary transition-colors hover:bg-green-50"
           >
             <MessageCircle className="size-4" />
-            Hubungi Kami
+            {t.heroShowcase.ctaSecondary}
           </button>
         </div>
       </div>
