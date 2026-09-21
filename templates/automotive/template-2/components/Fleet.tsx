@@ -39,7 +39,7 @@ export default function Fleet() {
   }, { scope: container });
 
   return (
-    <section ref={container} id="armada" className="py-20 bg-surface">
+    <section ref={container} id="armada" className="py-20 bg-surface overflow-hidden w-full max-w-[100vw]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="fleet-header text-center mb-16 max-w-3xl mx-auto">

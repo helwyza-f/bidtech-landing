@@ -72,25 +72,25 @@ export default function EditorialShowcase() {
   );
 
   return (
-    <section ref={containerRef} className="bg-primary text-on-primary py-24 md:py-32 border-b border-surface-container-highest">
+    <section ref={containerRef} className="bg-primary text-on-primary py-16 md:py-32 border-b border-surface-container-highest">
       <div className="max-w-[1600px] mx-auto px-margin-mobile md:px-margin-desktop">
         {/* Headline & Subtext */}
-        <div className="anim-item grid grid-cols-1 lg:grid-cols-12 gap-gutter-desktop items-end mb-16 pb-8 border-b border-neutral-800">
+        <div className="anim-item grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-gutter-desktop items-end mb-10 md:mb-16 pb-6 md:pb-8 border-b border-neutral-800">
           <div className="lg:col-span-8">
-            <span className="font-mono-label text-mono-label text-neutral-400 uppercase tracking-widest block mb-3">
+            <span className="font-mono-label text-mono-label text-neutral-400 uppercase tracking-widest block mb-2 sm:mb-3">
               BEDAH TEKNIS // SAINS MATERIAL
             </span>
-            <h2 className="text-headline-lg md:text-[56px] md:leading-[60px] font-headline-lg font-bold tracking-tight text-on-primary uppercase">
+            <h2 className="text-[30px] sm:text-[42px] md:text-[56px] leading-[1.1] md:leading-[60px] font-bold tracking-tight text-on-primary uppercase">
               KEMURNIAN REKAYASA<br />DI SETIAP JAHITAN.
             </h2>
           </div>
-          <div className="lg:col-span-4 text-neutral-400 font-body-md text-body-md">
+          <div className="lg:col-span-4 text-neutral-400 font-body-md text-[14px] sm:text-body-md">
             Setiap komponen Air Force 1 dirancang untuk bertahan melewati benturan fisik keras pemain basket era 1980-an sebelum bertransformasi menjadi ikon streetwear global.
           </div>
         </div>
 
         {/* Macro Editorial 4-Block Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-gutter-desktop">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-gutter-desktop">
           {specs.map((s, idx) => (
             <Link
               key={idx}

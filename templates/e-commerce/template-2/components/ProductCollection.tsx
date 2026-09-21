@@ -171,13 +171,13 @@ export default function ProductCollection() {
               Inventaris dikurasi secara presisi. 100% edisi Air Force 1 asli terverifikasi.
             </p>
           </div>
-          {/* Filter Tabs */}
-          <div className="anim-item flex flex-wrap gap-2 mt-6 md:mt-0">
+          {/* Filter Tabs (Horizontal scroll on mobile, wrap on desktop) */}
+          <div className="anim-item flex overflow-x-auto hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap gap-2 mt-6 md:mt-0 pb-1 md:pb-0">
             {filterButtons.map((btn) => (
               <button
                 key={btn.value}
                 onClick={() => handleFilterChange(btn.value)}
-                className={`h-9 px-4 font-mono text-[11px] font-bold uppercase tracking-wider border transition-all duration-200 ${
+                className={`h-9 px-4 font-mono text-[11px] font-bold uppercase tracking-wider border transition-all duration-200 shrink-0 whitespace-nowrap ${
                   activeFilter === btn.value
                     ? 'bg-[#1a1c1c] text-white border-[#1a1c1c] shadow-sm'
                     : 'bg-white text-[#1a1c1c] border-[#e2e2e2] hover:border-[#1a1c1c]'
@@ -254,7 +254,7 @@ export default function ProductCollection() {
         </div>
 
         {/* Bottom Micro Banner */}
-        <div className="mt-10 p-4 border border-[#e2e2e2] bg-white flex flex-col sm:flex-row items-center justify-between gap-4 font-mono text-[11px]">
+        <div className="mt-10 p-3.5 sm:p-4 border border-[#e2e2e2] bg-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 sm:gap-4 font-mono text-[10px] sm:text-[11px]">
           <div className="flex items-center space-x-2 text-[#1a1c1c] font-bold">
             <span className="material-symbols-outlined text-[18px]">verified</span>
             <span>JAMINAN VAULT: SETIAP PASANG TERVERIFIKASI SERIAL RFID SEBELUM DIRILIS DARI BRANKAS.</span>
