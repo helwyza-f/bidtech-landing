@@ -192,7 +192,7 @@ export const TEMPLATES: TemplateItem[] = [
     id: 17,
     name: "Elevasi",
     category: "Konstruksi & Properti",
-    subcategory: "Sepatu Nike Air Force 1 Premium Berkualitas",
+    subcategory: "Elevasi menyediakan solusi sipil dan pendirian struktur untuk pusat komersial dan industri di Asia Tenggara.",
     image: "/images/design_thumbnail/elevasi.webp",
     previewHref: "/demo/elevasi",
     tags: ["Jasa", "Konstruksi", "Perusahaan"],
