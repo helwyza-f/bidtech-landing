@@ -25,7 +25,7 @@ export default function Hero() {
   }, { scope: container });
 
   return (
-    <section ref={container} className="relative bg-surface pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden">
+    <section ref={container} id="beranda" className="relative bg-surface pt-32 pb-20 md:pt-48 md:pb-32 overflow-hidden w-full max-w-[100vw]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           
@@ -55,7 +55,7 @@ export default function Hero() {
               </Link>
             </div>
             
-            <div className="hero-features flex items-center gap-6 text-sm font-medium text-gray-600">
+            <div className="hero-features flex flex-wrap items-center gap-4 sm:gap-6 text-xs sm:text-sm font-medium text-gray-600">
               <div className="flex items-center gap-2">
                 <span className="material-symbols-outlined text-primary text-xl">verified</span>
                 Asuransi All-Risk
@@ -83,7 +83,7 @@ export default function Hero() {
         </div>
 
         {/* Search Widget Container */}
-        <div className="hero-widget mt-20 md:mt-28 md:-mb-40 relative z-20">
+        <div id="pesan" className="hero-widget mt-20 md:mt-28 md:-mb-40 relative z-20 scroll-mt-32">
           <div className="bg-white rounded-2xl shadow-xl border border-border p-6 md:p-8">
             <h3 className="text-xl font-bold mb-6">Cari Mobil yang Pas untuk Perjalananmu</h3>
             

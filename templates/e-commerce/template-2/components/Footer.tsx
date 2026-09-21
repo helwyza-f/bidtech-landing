@@ -62,7 +62,7 @@ export default function Footer() {
                   ✓ Akses terdaftar. Selamat datang di jaringan Vault Ledger.
                 </div>
               ) : (
-                <form className="flex flex-col sm:flex-row gap-0" onSubmit={handleSubscribe}>
+                <form className="flex flex-col sm:flex-row gap-2 sm:gap-0" onSubmit={handleSubscribe}>
                   <input
                     className="flex-1 h-12 bg-white border border-[#e2e2e2] px-4 font-sans text-[14px] text-[#1a1c1c] placeholder:text-[#7e7576] focus:border-[#1a1c1c] focus:outline-none rounded-none"
                     placeholder="kolektor@domain.com"
@@ -83,8 +83,8 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* 4-Column Directory */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-14">
+        {/* 4-Column Directory (2-cols on mobile for clean scannability, 4-cols on desktop) */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-x-4 sm:gap-x-8 gap-y-8 mb-14">
           {/* Col 1: Catalog Silhouettes */}
           <div className="anim-item space-y-4">
             <p className="font-mono text-[11px] uppercase text-[#7e7576] tracking-wider font-semibold">
@@ -117,7 +117,7 @@ export default function Footer() {
             </p>
             <ul className="space-y-2.5">
               {[
-                { name: "Arsip Siluet", href: "#silhouette-archive" },
+                { name: "Koleksi Lengkap", href: "#catalog" },
                 { name: "Cetak Biru Bruce Kilgore (1982)", href: "#story" },
                 { name: "Enam Atlet Orisinal (\"Original Six\")", href: "#story" },
                 { name: "Klub Warna Bulanan (Color of the Month)", href: "#story" },
