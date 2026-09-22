@@ -109,11 +109,7 @@ export function ServicesSection() {
               y={30}
             >
               <div
-                className={`relative flex w-full flex-col justify-between rounded-[28px] sm:rounded-[32px] bg-white p-5 sm:p-6 transition-all duration-300 ${
-                  isPopular
-                    ? "border-2 border-[#45a02e] shadow-[0_12px_36px_rgba(69,160,46,0.12)] hover:shadow-[0_22px_48px_rgba(69,160,46,0.2)] hover:-translate-y-1.5"
-                    : "border border-slate-200/80 shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_16px_40px_rgba(0,0,0,0.08)] hover:-translate-y-1.5"
-                }`}
+                className="group relative flex w-full flex-col justify-between rounded-[28px] sm:rounded-[32px] bg-white p-5 sm:p-6 border-2 border-slate-200/80 hover:border-[#45a02e] shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_48px_rgba(69,160,46,0.18)] hover:-translate-y-1.5 transition-all duration-300"
               >
                 <div>
                   {/* Top Card Visual Image */}
@@ -123,7 +119,7 @@ export function ServicesSection() {
                       alt={service.title}
                       fill
                       sizes="(min-width: 1024px) 380px, 90vw"
-                      className="object-cover transition-transform duration-500 hover:scale-105"
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
                       priority={index === 0}
                     />
                     {isPopular && (
@@ -135,8 +131,8 @@ export function ServicesSection() {
 
                   {/* Icon & Title Row */}
                   <div className="mt-5 flex items-center gap-3.5">
-                    <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[#edf8ea] text-[#45a02e]">
-                      <Icon className="size-5 text-[#45a02e]" />
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-2xl bg-[#edf8ea] text-[#45a02e] transition-colors duration-300 group-hover:bg-[#45a02e] group-hover:text-white">
+                      <Icon className="size-5 transition-colors duration-300" />
                     </div>
                     <h3 className="font-[family-name:var(--font-sora)] text-lg sm:text-xl font-bold tracking-tight text-slate-900">
                       {service.title}
@@ -166,11 +162,7 @@ export function ServicesSection() {
                 <div className="mt-7 pt-2">
                   <a
                     href="#contact"
-                    className={`block w-full rounded-full py-3 text-center text-sm font-semibold transition-all duration-200 cursor-pointer ${
-                      isPopular
-                        ? "bg-[#45a02e] text-white hover:bg-[#3b8e26] shadow-[0_6px_20px_rgba(69,160,46,0.25)] hover:shadow-[0_8px_24px_rgba(69,160,46,0.35)] hover:-translate-y-0.5 active:scale-95"
-                        : "border border-[#45a02e] text-[#45a02e] hover:bg-[#45a02e] hover:text-white hover:-translate-y-0.5 active:scale-95"
-                    }`}
+                    className="block w-full rounded-full py-3 text-center text-sm font-semibold transition-all duration-300 cursor-pointer border border-[#45a02e] text-[#45a02e] bg-white group-hover:bg-[#45a02e] group-hover:text-white group-hover:shadow-[0_6px_20px_rgba(69,160,46,0.25)] hover:-translate-y-0.5 active:scale-95"
                   >
                     {t.services.viewDetail ?? "Lihat Detail"}
                   </a>
