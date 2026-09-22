@@ -20,10 +20,15 @@ FROM php:8.3-fpm-alpine AS runtime
 RUN apk add --no-cache \
         nginx \
         supervisor \
-        oniguruma-dev \
+        libxml2 \
+        oniguruma \
         curl \
+    && apk add --no-cache --virtual .build-deps \
+        $PHPIZE_DEPS \
+        libxml2-dev \
+        oniguruma-dev \
     && docker-php-ext-install pdo_mysql mbstring bcmath xml dom fileinfo \
-    && apk del --no-cache oniguruma-dev
+    && apk del --no-cache .build-deps
 
 WORKDIR /var/www/html
 
