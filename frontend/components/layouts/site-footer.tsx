@@ -189,7 +189,7 @@ export function SiteFooter() {
 
         {/* Giant Watermark "BIDTECH" */}
         <div className="relative mt-8 sm:mt-12 -mb-10 sm:-mb-16 w-full overflow-hidden select-none pointer-events-none text-center">
-          <span className="font-[family-name:var(--font-sora)] font-black tracking-wider text-[90px] sm:text-[160px] md:text-[210px] lg:text-[260px] leading-none text-[#e8f8e4] uppercase block">
+          <span className="font-[family-name:var(--font-playfair)] font-bold tracking-wider text-[90px] sm:text-[160px] md:text-[210px] lg:text-[260px] leading-none text-[#e8f8e4] uppercase block">
             BIDTECH
           </span>
         </div>
