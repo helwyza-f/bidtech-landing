@@ -66,10 +66,13 @@ export function getCategoryIcon(category: string): LucideIcon {
   return CATEGORY_ICONS[category] || Layout;
 }
 
+// Fallback ini hanya untuk dev lokal jika NEXT_PUBLIC_API_URL lupa di-set.
+// Di production JANGAN andalkan fallback ini - selalu set NEXT_PUBLIC_API_URL
+// (lihat .env.example) agar tidak salah menebak host/port backend.
 const API_BASE_URL =
   process.env.NEXT_PUBLIC_API_URL ||
-  (typeof window !== "undefined"
-    ? `${window.location.protocol}//${window.location.hostname}:8000`
+  (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1"
+    ? `${window.location.protocol}//dashboard.${window.location.hostname}`
     : "http://127.0.0.1:8000");
 
 /**

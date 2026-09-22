@@ -95,6 +95,7 @@ jobs:
           from pathlib import Path
 
           overrides = {
+              "FRONTEND_URL": "https://bidtech.co.id",
               "WHATSAPP_API_KEY": os.environ.get("WHATSAPP_API_KEY", ""),
               "IDCLOUDHOST_API_KEY": os.environ.get("IDCLOUDHOST_API_KEY", ""),
               "XENDIT_WEBHOOK_TOKEN": os.environ.get("XENDIT_WEBHOOK_TOKEN", ""),
@@ -189,12 +190,14 @@ jobs:
             set -e
             echo "1.) Akses folder bidtech di VPS"
             cd /opt/bidtech-new
-            git reset --hard
+            git fetch origin main
+            git reset --hard origin/main
             git clean -fd
             git pull origin main || git pull
 
             echo "2.) Deploy frontend"
             cd /opt/bidtech-new/frontend
+            cp .env.example .env
             npm run demos:build
             TAG=$(date +%Y%m%d%H%M)
             IMAGE_NAME="bidtech-frontend:$TAG"
@@ -207,7 +210,7 @@ jobs:
               --name BidTech-Frontend \
               --restart unless-stopped \
               --network bidtech-api \
-              --env-file /root/bidtech-frontend.env \
+              --env-file /opt/bidtech-new/frontend/.env \
               -p 127.0.0.1:3010:3000 \
               "$IMAGE_NAME"
 
@@ -219,6 +222,7 @@ jobs:
             from pathlib import Path
 
             overrides = {
+                "FRONTEND_URL": "https://bidtech.co.id",
                 "WHATSAPP_API_KEY": os.environ.get("WHATSAPP_API_KEY", ""),
                 "IDCLOUDHOST_API_KEY": os.environ.get("IDCLOUDHOST_API_KEY", ""),
                 "XENDIT_WEBHOOK_TOKEN": os.environ.get("XENDIT_WEBHOOK_TOKEN", ""),

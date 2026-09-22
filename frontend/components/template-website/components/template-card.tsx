@@ -10,7 +10,9 @@ import { Card, CardContent } from "@/components/ui/card";
 import { recordTemplateView, type ExtendedTemplateItem } from "@/lib/api/template-api";
 import { useLanguage } from "@/lib/i18n";
 
-const LARAVEL_URL = process.env.NEXT_PUBLIC_LARAVEL_URL || process.env.NEXT_PUBLIC_API_URL || (typeof window !== "undefined" ? `${window.location.protocol}//${window.location.hostname}:8000` : "http://localhost:8000");
+// Fallback ini hanya untuk dev lokal. checkout_url normalnya selalu datang dari
+// API (template.checkout_url) - lihat TemplateApiController::index()/show().
+const LARAVEL_URL = process.env.NEXT_PUBLIC_API_URL || (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1" ? `${window.location.protocol}//dashboard.${window.location.hostname}` : "http://localhost:8000");
 
 export function TemplateCard({ template }: { template: ExtendedTemplateItem }) {
   const { t } = useLanguage();

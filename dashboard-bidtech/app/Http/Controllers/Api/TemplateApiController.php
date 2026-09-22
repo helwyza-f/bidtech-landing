@@ -78,7 +78,7 @@ class TemplateApiController extends Controller
                 'description' => $item->description,
                 'image' => $item->preview_url,
                 'previewHref' => $item->landing_url,
-                'demo_url' => $item->demo_url,
+                'demo_url' => $item->landing_url,
                 'tags' => !empty($item->tags_list) ? $item->tags_list : [$item->category, 'Responsive'],
                 'views' => (int) $item->views,
                 'pricing' => [
@@ -129,7 +129,7 @@ class TemplateApiController extends Controller
                 'description' => $item->description,
                 'image' => $item->preview_url,
                 'previewHref' => $item->landing_url,
-                'demo_url' => $item->demo_url,
+                'demo_url' => $item->landing_url,
                 'tags' => $item->tags_list,
                 'views' => (int) $item->views,
                 'pricing' => [
