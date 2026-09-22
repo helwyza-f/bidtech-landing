@@ -1,11 +1,15 @@
 export const en = {
   nav: {
-    services: "Services",
+    home: "Home",
+    findDesign: "Find Design",
+    tutorial: "Tutorial",
+    custom: "Custom",
     portfolio: "Portfolio",
-    template: "Design",
+    contact: "Contact Us",
+    services: "Custom",
+    template: "Find Design",
     pricing: "Pricing",
     about: "Home",
-    contact: "Contact",
   },
   header: {
     cta: "Get Started",

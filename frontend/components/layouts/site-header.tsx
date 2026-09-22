@@ -57,11 +57,12 @@ export function SiteHeader() {
   }, [pathname]);
 
   const navItems = [
-    { label: t.nav.about, href: "#hero" },
-    // { label: t.nav.services, href: "#services" },
-    // { label: t.nav.portfolio, href: "#portfolio" },
-    { label: t.nav.template, href: "/template-website" },
-    { label: t.nav.contact, href: "#contact" },
+    { label: t.nav.home ?? "Beranda", href: "#hero" },
+    { label: t.nav.findDesign ?? "Cari Design", href: "/template-website" },
+    { label: t.nav.tutorial ?? "Tutorial", href: "#tutorial" },
+    { label: t.nav.custom ?? "Custom", href: "#services" },
+    { label: t.nav.portfolio ?? "Portofolio", href: "#portfolio" },
+    { label: t.nav.contact ?? "Hubungi Kami", href: "#contact" },
   ];
 
   return (

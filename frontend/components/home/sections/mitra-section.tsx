@@ -21,7 +21,7 @@ export function MitraSection() {
   const { t } = useLanguage();
 
   return (
-    <section className="landing-panel relative overflow-hidden bg-white py-14 sm:py-20 md:py-24">
+    <section className="landing-panel relative overflow-hidden bg-white py-14 sm:py-20 md:py-24" id="portfolio">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-5 md:px-8">
         <div className="text-center">
           <Badge className="rounded-full border border-lime-300 bg-lime-50/90 px-5 py-2 text-xs font-semibold uppercase tracking-[0.32em] text-green-700 shadow-sm">{t.mitra.badge}</Badge>

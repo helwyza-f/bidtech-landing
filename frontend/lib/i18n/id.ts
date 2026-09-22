@@ -1,11 +1,15 @@
 export const id = {
   nav: {
-    services: "Layanan",
+    home: "Beranda",
+    findDesign: "Cari Design",
+    tutorial: "Tutorial",
+    custom: "Custom",
     portfolio: "Portofolio",
-    template: "Cari Desain",
+    contact: "Hubungi Kami",
+    services: "Custom",
+    template: "Cari Design",
     pricing: "Harga",
     about: "Beranda",
-    contact: "Hubungi Kami",
   },
   header: {
     cta: "Mulai Sekarang",
