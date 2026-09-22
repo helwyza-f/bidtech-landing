@@ -97,6 +97,7 @@ jobs:
           overrides = {
               "FRONTEND_URL": "https://bidtech.co.id",
               "WHATSAPP_API_KEY": os.environ.get("WHATSAPP_API_KEY", ""),
+              "FONNTE_TOKEN": os.environ.get("WHATSAPP_API_KEY", ""),
               "IDCLOUDHOST_API_KEY": os.environ.get("IDCLOUDHOST_API_KEY", ""),
               "XENDIT_WEBHOOK_TOKEN": os.environ.get("XENDIT_WEBHOOK_TOKEN", ""),
               "XENDIT_SECRET_KEY": os.environ.get("XENDIT_SECRET_KEY", ""),
@@ -226,6 +227,7 @@ jobs:
             overrides = {
                 "FRONTEND_URL": "https://bidtech.co.id",
                 "WHATSAPP_API_KEY": os.environ.get("WHATSAPP_API_KEY", ""),
+                "FONNTE_TOKEN": os.environ.get("WHATSAPP_API_KEY", ""),
                 "IDCLOUDHOST_API_KEY": os.environ.get("IDCLOUDHOST_API_KEY", ""),
                 "XENDIT_WEBHOOK_TOKEN": os.environ.get("XENDIT_WEBHOOK_TOKEN", ""),
                 "XENDIT_SECRET_KEY": os.environ.get("XENDIT_SECRET_KEY", ""),
