@@ -99,7 +99,7 @@ export function UniversalCta({ className = "" }: UniversalCtaProps) {
                 {/* Main Laptop Mockup Image */}
                 <div className="relative aspect-[4/3] w-full filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]">
                   <Image
-                    src="/images/laptop-analytics-cta.png"
+                    src="/images/hero/image 239.webp"
                     alt="Laptop Analytics Dashboard BidTech"
                     fill
                     sizes="(min-width: 1024px) 500px, 90vw"
