@@ -90,24 +90,50 @@ jobs:
       - name: Generate .env from .env.example with secret overrides
         run: |
           cp .env.example .env
-          declare -A OVERRIDES=(
-            [WHATSAPP_API_KEY]="$WHATSAPP_API_KEY"
-            [IDCLOUDHOST_API_KEY]="$IDCLOUDHOST_API_KEY"
-            [XENDIT_WEBHOOK_TOKEN]="$XENDIT_WEBHOOK_TOKEN"
-            [XENDIT_SECRET_KEY]="$XENDIT_SECRET_KEY"
-            [MAIL_PASSWORD]="$MAIL_PASSWORD"
-            [DB_PASSWORD]="$DB_PASSWORD"
-            [APP_KEY]="$APP_KEY"
-            [DB_HOST]="mysql"
-          )
-          for key in "${!OVERRIDES[@]}"; do
-            value="${OVERRIDES[$key]}"
-            if grep -q "^${key}=" .env; then
-              sed -i "s|^${key}=.*|${key}=${value}|" .env
-            else
-              echo "${key}=${value}" >> .env
-            fi
-          done
+          python3 <<'PY'
+          import os
+          from pathlib import Path
+
+          overrides = {
+              "WHATSAPP_API_KEY": os.environ.get("WHATSAPP_API_KEY", ""),
+              "IDCLOUDHOST_API_KEY": os.environ.get("IDCLOUDHOST_API_KEY", ""),
+              "XENDIT_WEBHOOK_TOKEN": os.environ.get("XENDIT_WEBHOOK_TOKEN", ""),
+              "XENDIT_SECRET_KEY": os.environ.get("XENDIT_SECRET_KEY", ""),
+              "MAIL_PASSWORD": os.environ.get("MAIL_PASSWORD", ""),
+              "DB_PASSWORD": os.environ.get("DB_PASSWORD", ""),
+              "APP_KEY": os.environ.get("APP_KEY", ""),
+              "DB_HOST": "mysql",
+          }
+
+          def dotenv_value(value):
+              # Docker Compose-compatible double-quoted value.
+              return '"' + (
+                  value.replace("\\", "\\\\")
+                      .replace('"', '\\"')
+                      .replace("$", "$$")
+                      .replace("\r", "\\r")
+                      .replace("\n", "\\n")
+              ) + '"'
+
+          path = Path(".env")
+          lines = path.read_text().splitlines()
+          found = set()
+          output = []
+
+          for line in lines:
+              key = line.split("=", 1)[0] if "=" in line else None
+              if key in overrides:
+                  output.append(f"{key}={dotenv_value(overrides[key])}")
+                  found.add(key)
+              else:
+                  output.append(line)
+
+          for key, value in overrides.items():
+              if key not in found:
+                  output.append(f"{key}={dotenv_value(value)}")
+
+          path.write_text("\n".join(output) + "\n")
+          PY
 
       - name: Build images
         run: docker compose build
@@ -186,27 +212,56 @@ jobs:
             echo "3.) Deploy dashboard-bidtech"
             cd /opt/bidtech-new/dashboard-bidtech
             cp .env.example .env
-            declare -A OVERRIDES=(
-              [WHATSAPP_API_KEY]="$WHATSAPP_API_KEY"
-              [IDCLOUDHOST_API_KEY]="$IDCLOUDHOST_API_KEY"
-              [XENDIT_WEBHOOK_TOKEN]="$XENDIT_WEBHOOK_TOKEN"
-              [XENDIT_SECRET_KEY]="$XENDIT_SECRET_KEY"
-              [MAIL_PASSWORD]="$MAIL_PASSWORD"
-              [DB_PASSWORD]="$DB_PASSWORD"
-              [APP_KEY]="$APP_KEY"
-              [DB_HOST]="mysql"
-              [APP_ENV]="production"
-              [APP_DEBUG]="false"
-              [APP_URL]="https://dashboard.bidtech.co.id"
-            )
-            for key in "${!OVERRIDES[@]}"; do
-              value="${OVERRIDES[$key]}"
-              if grep -q "^${key}=" .env; then
-                sed -i "s|^${key}=.*|${key}=${value}|" .env
-              else
-                echo "${key}=${value}" >> .env
-              fi
-            done
+            python3 <<'PY'
+            import os
+            from pathlib import Path
+
+            overrides = {
+                "WHATSAPP_API_KEY": os.environ.get("WHATSAPP_API_KEY", ""),
+                "IDCLOUDHOST_API_KEY": os.environ.get("IDCLOUDHOST_API_KEY", ""),
+                "XENDIT_WEBHOOK_TOKEN": os.environ.get("XENDIT_WEBHOOK_TOKEN", ""),
+                "XENDIT_SECRET_KEY": os.environ.get("XENDIT_SECRET_KEY", ""),
+                "MAIL_PASSWORD": os.environ.get("MAIL_PASSWORD", ""),
+                "DB_PASSWORD": os.environ.get("DB_PASSWORD", ""),
+                "APP_KEY": os.environ.get("APP_KEY", ""),
+                "DB_HOST": "mysql",
+            }
+
+            overrides.update({
+                "APP_ENV": "production",
+                "APP_DEBUG": "false",
+                "APP_URL": "https://dashboard.bidtech.co.id",
+            })            
+
+            def dotenv_value(value):
+                # Docker Compose-compatible double-quoted value.
+                return '"' + (
+                    value.replace("\\", "\\\\")
+                        .replace('"', '\\"')
+                        .replace("$", "$$")
+                        .replace("\r", "\\r")
+                        .replace("\n", "\\n")
+                ) + '"'
+
+            path = Path(".env")
+            lines = path.read_text().splitlines()
+            found = set()
+            output = []
+
+            for line in lines:
+                key = line.split("=", 1)[0] if "=" in line else None
+                if key in overrides:
+                    output.append(f"{key}={dotenv_value(overrides[key])}")
+                    found.add(key)
+                else:
+                    output.append(line)
+
+            for key, value in overrides.items():
+                if key not in found:
+                    output.append(f"{key}={dotenv_value(value)}")
+
+            path.write_text("\n".join(output) + "\n")
+            PY
 
             docker compose -f compose.yml -f compose.prod.yml build
             docker compose -f compose.yml -f compose.prod.yml up -d --wait mysql
