@@ -189,6 +189,8 @@ jobs:
             set -e
             echo "1.) Akses folder bidtech di VPS"
             cd /opt/bidtech-new
+            git reset --hard
+            git clean -fd
             git pull origin main || git pull
 
             echo "2.) Deploy frontend"
