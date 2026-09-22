@@ -1,0 +1,3 @@
+[submodule "projects/vis-society"]
+	path = projects/vis-society
+	url = https://github.com/RikardoAnju/Vis-Society.git
