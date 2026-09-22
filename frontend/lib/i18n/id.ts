@@ -88,14 +88,16 @@ export const id = {
     p2: "Melalui halaman ini, BidTech ditampilkan sebagai mitra yang siap membantu perusahaan membangun citra, layanan, dan kehadiran digital yang lebih kuat di mata pelanggan maupun mitra bisnis.",
   },
   services: {
-    badge: "Our Service",
-    title: "Layanan Unggulan Kami",
+    badge: "LAYANAN KUSTOM",
+    title: "Layanan Unggulan",
     subtitle: "Kami memberikan solusi teknologi komprehensif yang dirancang untuk mempercepat pertumbuhan bisnis digital Anda.",
     ariaPrevious: "Layanan sebelumnya",
     ariaNext: "Layanan berikutnya",
     ariaGroupLabel: "Layanan",
     ariaGroupFrom: "dari",
     ariaViewPrefix: "Lihat",
+    viewDetail: "Lihat Detail",
+    popularBadge: "POPULER",
     items: [
       {
         title: "Website Development",

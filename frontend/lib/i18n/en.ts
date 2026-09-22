@@ -88,14 +88,16 @@ export const en = {
     p2: "Through this page, BidTech is presented as a partner ready to help companies build a stronger brand, service, and digital presence for customers and business partners alike.",
   },
   services: {
-    badge: "Main Services",
-    title: "Our Featured Services",
+    badge: "CUSTOM SERVICES",
+    title: "Featured Services",
     subtitle: "We provide comprehensive technology solutions designed to accelerate your digital business growth.",
     ariaPrevious: "Previous service",
     ariaNext: "Next service",
     ariaGroupLabel: "Service",
     ariaGroupFrom: "of",
     ariaViewPrefix: "View",
+    viewDetail: "View Details",
+    popularBadge: "POPULAR",
     items: [
       {
         title: "Website Development",
