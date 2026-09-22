@@ -171,13 +171,13 @@ export default function ProductCollection() {
               Inventaris dikurasi secara presisi. 100% edisi Air Force 1 asli terverifikasi.
             </p>
           </div>
-          {/* Filter Tabs (Horizontal scroll on mobile, wrap on desktop) */}
-          <div className="anim-item flex overflow-x-auto hide-scrollbar -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap gap-2 mt-6 md:mt-0 pb-1 md:pb-0">
+          {/* Filter Tabs (Horizontal scroll on mobile with touch support, wrap on desktop) */}
+          <div className="anim-item flex overflow-x-auto hide-scrollbar overscroll-x-contain touch-pan-x scroll-smooth -mx-4 px-4 md:mx-0 md:px-0 md:flex-wrap gap-2 mt-6 md:mt-0 pb-2 md:pb-0">
             {filterButtons.map((btn) => (
               <button
                 key={btn.value}
                 onClick={() => handleFilterChange(btn.value)}
-                className={`h-9 px-4 font-mono text-[11px] font-bold uppercase tracking-wider border transition-all duration-200 shrink-0 whitespace-nowrap ${
+                className={`h-10 sm:h-9 px-4 font-mono text-[11px] font-bold uppercase tracking-wider border transition-all duration-200 shrink-0 whitespace-nowrap active:scale-95 ${
                   activeFilter === btn.value
                     ? 'bg-[#1a1c1c] text-white border-[#1a1c1c] shadow-sm'
                     : 'bg-white text-[#1a1c1c] border-[#e2e2e2] hover:border-[#1a1c1c]'
@@ -191,7 +191,7 @@ export default function ProductCollection() {
         </div>
 
         {/* 8-Product Grid */}
-        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div ref={gridRef} className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
           {filteredProducts.map((p) => {
             const isFav = !!favorites[p.sku];
             return (
@@ -200,7 +200,7 @@ export default function ProductCollection() {
                 className="product-card group bg-white border border-[#e2e2e2] hover:border-[#1a1c1c] transition-all duration-300 flex flex-col justify-between hover:-translate-y-1"
               >
                 {/* Card Top SKU & Badge */}
-                <div className="p-3.5 flex items-center justify-between border-b border-[#e2e2e2]">
+                <div className="p-3 sm:p-3.5 flex items-center justify-between border-b border-[#e2e2e2]">
                   <span className="font-mono text-[11px] text-[#7e7576] uppercase tracking-wider">
                     SKU: {p.sku}
                   </span>
@@ -210,10 +210,10 @@ export default function ProductCollection() {
                 </div>
 
                 {/* Card Image Area */}
-                <div className="p-6 bg-[#F5F5F5] flex items-center justify-center relative overflow-hidden h-52 border-b border-[#e2e2e2]">
-                  <Link href="/product/1" className="w-full h-full flex items-center justify-center">
+                <div className="p-4 sm:p-6 bg-[#F5F5F5] flex items-center justify-center relative overflow-hidden h-48 sm:h-52 border-b border-[#e2e2e2]">
+                  <Link href="/detail" className="w-full h-full flex items-center justify-center">
                     <img
-                      className="w-full h-40 object-contain group-hover:scale-110 transition-transform duration-300 ease-out"
+                      className="w-full h-36 sm:h-40 object-contain group-hover:scale-110 transition-transform duration-300 ease-out"
                       alt={p.name}
                       src={p.img}
                     />
@@ -221,7 +221,7 @@ export default function ProductCollection() {
                   <button
                     aria-label="Simpan ke favorit"
                     onClick={() => toggleFavorite(p.sku)}
-                    className="absolute top-3 right-3 text-[#7e7576] hover:text-[#1a1c1c] transition-colors p-1 z-10"
+                    className="absolute top-2.5 right-2.5 sm:top-3 sm:right-3 text-[#7e7576] hover:text-[#1a1c1c] transition-colors p-1.5 z-10"
                     type="button"
                   >
                     <span
@@ -233,18 +233,18 @@ export default function ProductCollection() {
                 </div>
 
                 {/* Card Content & Price */}
-                <div className="p-4 bg-white flex flex-col justify-between flex-1">
-                  <Link href="/product/1" className="block">
-                    <h3 className="text-[15px] font-bold text-[#1a1c1c] leading-snug hover:underline">{p.name}</h3>
+                <div className="p-3.5 sm:p-4 bg-white flex flex-col justify-between flex-1">
+                  <Link href="/detail" className="block">
+                    <h3 className="text-[14px] sm:text-[15px] font-bold text-[#1a1c1c] leading-snug hover:underline">{p.name}</h3>
                     <p className="font-mono text-[11px] text-[#7e7576] mt-1">{p.desc}</p>
                   </Link>
                   <div className="mt-4 pt-3 border-t border-[#e2e2e2] flex items-center justify-between">
                     <span className="font-mono text-[13px] font-bold text-[#1a1c1c]">{p.price}</span>
                     <Link
-                      href="/product/1"
-                      className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1a1c1c] hover:underline underline-offset-4 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                      href="/detail"
+                      className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#1a1c1c] hover:underline underline-offset-4 flex items-center gap-1 group-hover:translate-x-0.5 transition-transform py-1"
                     >
-                      TAMBAH KE KANTONG →
+                      LIHAT DETAIL →
                     </Link>
                   </div>
                 </div>
