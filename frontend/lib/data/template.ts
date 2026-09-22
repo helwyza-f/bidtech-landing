@@ -197,7 +197,27 @@ export const TEMPLATES: TemplateItem[] = [
     previewHref: "/demo/elevasi",
     tags: ["Jasa", "Konstruksi", "Perusahaan"],
     icon: House,
-  },    
+  },   
+  {
+    id: 18,
+    name: "Jaya Wijaya Group",
+    category: "Konstruksi & Properti",
+    subcategory: "Penyedia armada alat berat terkemuka di Indonesia untuk mega-proyek pertambangan, jalan tol, dan rekayasa sipil berstandar keselamatan tertinggi.",
+    image: "/images/design_thumbnail/jayawijaya.webp",
+    previewHref: "/demo/jayawijaya",
+    tags: ["Alat Berat", "Konstruksi", "Penyediaan"],
+    icon: House,
+  },
+  {
+    id: 19,
+    name: "PT Afindo Construction",
+    category: "Konstruksi & Properti",
+    subcategory: "PT Afindo Construction memadukan perhitungan matematis tanah canggih dengan armada hidraulik generasi terbaru.",
+    image: "/images/design_thumbnail/afindo.webp",
+    previewHref: "/demo/afindo",
+    tags: ["Jasa", "Konstruksi", "PT"],
+    icon: House,
+  }, 
 ];
 
 /**

@@ -37,6 +37,8 @@ DEMOS=(
   "pinjammobil:automotive/template-2"
   "forcevault:e-commerce/template-2"
   "elevasi:construction-industrial/template-1"
+  "jayawijaya:construction-industrial/template-2"
+  "afindo:construction-industrial/template-3"
 )
 
 DEMO_ROOT="$REPO_ROOT/frontend/public/demo"
@@ -49,7 +51,7 @@ for entry in "${DEMOS[@]}"; do
   out_dir="$template_dir/out"
   target="$DEMO_ROOT/$name"
 
-  echo "==> Building demo: $name ($rel_path)"
+  echo "Building demo: $name ($rel_path)"
   (
     cd "$template_dir"
     npm install --no-audit --no-fund

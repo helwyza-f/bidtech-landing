@@ -23,7 +23,9 @@ const demos = [
   ["agak-rapi", "beauty-wellness/template-3"],
   ["pinjammobil", "automotive/template-2"],
   ["forcevault", "e-commerce/template-2"],
-  ["elevasi", "construction-industrial/template-1"]
+  ["elevasi", "construction-industrial/template-1"],
+  ["jayawijaya", "construction-industrial/template-2"],
+  ["afindo", "construction-industrial/template-3"]
 ];
 
 const shouldInstall = !process.argv.includes("--skip-install");

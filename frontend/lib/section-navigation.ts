@@ -1,6 +1,6 @@
 "use client";
 
-export const HOME_SECTION_IDS = ["hero", "services", "templates", "portfolio", "contact"] as const;
+export const HOME_SECTION_IDS = ["hero", "templates", "services", "contact"] as const;
 
 const HEADER_OFFSET = 104;
 
@@ -32,6 +32,17 @@ export function scrollToSection(hash: string, behavior: ScrollBehavior = "auto")
   }
 
   return true;
+}
+
+export function isNavItemActive(href: string, pathname: string | null, activeSection: string) {
+  const hashIndex = href.indexOf("#");
+
+  if (hashIndex !== -1) {
+    const hash = href.slice(hashIndex + 1);
+    return isHomePath(pathname) && activeSection === hash;
+  }
+
+  return pathname === href;
 }
 
 export function getActiveHomeSection() {

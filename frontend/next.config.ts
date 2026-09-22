@@ -1,7 +1,5 @@
 import type { NextConfig } from "next";
 
-import { backendUrl } from "./lib/config";
-
 const nextConfig: NextConfig = {
   output: "standalone",
   skipTrailingSlashRedirect: true,
@@ -9,9 +7,13 @@ const nextConfig: NextConfig = {
     formats: ["image/avif", "image/webp"],
     unoptimized: true,
   },
+  async redirects() {
+    return [
+      { source: "/templates", destination: "/template-website", permanent: true },
+    ];
+  },
   async rewrites() {
     return [
-      { source: "/api/:path*", destination: `${backendUrl}/api/:path*` },
       {
         source: "/demo/:template",
         has: [{ type: "header", key: "RSC" }],
