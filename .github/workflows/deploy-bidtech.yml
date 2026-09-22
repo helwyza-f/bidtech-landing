@@ -197,6 +197,7 @@ jobs:
 
             echo "2.) Deploy frontend"
             cd /opt/bidtech-new/frontend
+            rm .env
             cp .env.example .env
             npm run demos:build
             TAG=$(date +%Y%m%d%H%M)
@@ -216,6 +217,7 @@ jobs:
 
             echo "3.) Deploy dashboard-bidtech"
             cd /opt/bidtech-new/dashboard-bidtech
+            rm .env
             cp .env.example .env
             python3 <<'PY'
             import os
