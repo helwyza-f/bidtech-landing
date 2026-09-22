@@ -10,11 +10,27 @@ export type HeroPhase = "boot" | "intro" | "idle" | "outro" | "enter";
 
 type DecorativeAnimRequest = { slideId: string; direction: "in" | "out" } | null;
 
+function completeOnce(resolve: () => void, fallbackMs: number) {
+  let done = false;
+  const timer = window.setTimeout(() => {
+    if (done) return;
+    done = true;
+    resolve();
+  }, fallbackMs);
+
+  return () => {
+    if (done) return;
+    done = true;
+    window.clearTimeout(timer);
+    resolve();
+  };
+}
+
 // mengatur siklus hero penuh; animasi kartu dipicu useLayoutEffect agar ref DOM pasti siap
 export function useHeroOrchestrator(slides: HeroSlide[]) {
   const [slideIndex, setSlideIndex] = useState(0);
   const [phase, setPhase] = useState<HeroPhase>("boot");
-  const [decorativesVisible, setDecorativesVisible] = useState(false);
+  const [decorativesVisible, setDecorativesVisible] = useState(true);
   const [decorativeAnimRequest, setDecorativeAnimRequest] = useState<DecorativeAnimRequest>(null);
 
   const modelRef = useRef<HTMLDivElement | null>(null);
@@ -43,43 +59,78 @@ export function useHeroOrchestrator(slides: HeroSlide[]) {
   const riseModelUp = useCallback(() => {
     if (!modelRef.current) return Promise.resolve();
     return new Promise<void>((resolve) => {
-      gsap.fromTo(
-        modelRef.current,
-        { yPercent: 30, opacity: 0 },
-        {
-          yPercent: 0,
-          opacity: 1,
-          duration: HERO_TIMINGS.modelRiseDuration / 1000,
-          ease: "power3.out",
-          onComplete: resolve,
-        }
-      );
+      const el = modelRef.current;
+      if (!el) {
+        resolve();
+        return;
+      }
+      const complete = completeOnce(resolve, HERO_TIMINGS.modelRiseDuration + 300);
+      try {
+        gsap.fromTo(
+          el,
+          { yPercent: 30, opacity: 0 },
+          {
+            yPercent: 0,
+            opacity: 1,
+            duration: HERO_TIMINGS.modelRiseDuration / 1000,
+            ease: "power3.out",
+            onComplete: complete,
+          }
+        );
+      } catch {
+        el.style.opacity = "1";
+        el.style.transform = "translateY(0)";
+        complete();
+      }
     });
   }, []);
 
   const sinkModelDown = useCallback(() => {
     if (!modelRef.current) return Promise.resolve();
     return new Promise<void>((resolve) => {
-      gsap.to(modelRef.current, {
-        yPercent: 30,
-        opacity: 0,
-        duration: HERO_TIMINGS.modelSinkDuration / 1000,
-        ease: "power2.in",
-        onComplete: resolve,
-      });
+      const el = modelRef.current;
+      if (!el) {
+        resolve();
+        return;
+      }
+      const complete = completeOnce(resolve, HERO_TIMINGS.modelSinkDuration + 300);
+      try {
+        gsap.to(el, {
+          yPercent: 30,
+          opacity: 0,
+          duration: HERO_TIMINGS.modelSinkDuration / 1000,
+          ease: "power2.in",
+          onComplete: complete,
+        });
+      } catch {
+        el.style.opacity = "0";
+        complete();
+      }
     });
   }, []);
 
   const fadeSubtitle = useCallback((direction: "in" | "out") => {
     if (!subtitleRef.current) return Promise.resolve();
     return new Promise<void>((resolve) => {
-      gsap.to(subtitleRef.current, {
-        opacity: direction === "in" ? 1 : 0,
-        y: direction === "in" ? 0 : 8,
-        duration: HERO_TIMINGS.subtitleFade / 1000,
-        ease: "power1.out",
-        onComplete: resolve,
-      });
+      const el = subtitleRef.current;
+      if (!el) {
+        resolve();
+        return;
+      }
+      const complete = completeOnce(resolve, HERO_TIMINGS.subtitleFade + 300);
+      try {
+        gsap.to(el, {
+          opacity: direction === "in" ? 1 : 0,
+          y: direction === "in" ? 0 : 8,
+          duration: HERO_TIMINGS.subtitleFade / 1000,
+          ease: "power1.out",
+          onComplete: complete,
+        });
+      } catch {
+        el.style.opacity = direction === "in" ? "1" : "0";
+        el.style.transform = direction === "in" ? "translateY(0)" : "translateY(8px)";
+        complete();
+      }
     });
   }, []);
 
@@ -123,6 +174,11 @@ export function useHeroOrchestrator(slides: HeroSlide[]) {
       return;
     }
 
+    const complete = completeOnce(
+      resolveAndClear,
+      HERO_TIMINGS.decorativePopDuration + targets.length * HERO_TIMINGS.decorativesStagger + 500
+    );
+
     if (direction === "in") {
       // penghitung angka berjalan terpisah; pilah per kind agar tipe metric tetap tepat
       slide.decoratives.forEach((d) => {
@@ -137,42 +193,61 @@ export function useHeroOrchestrator(slides: HeroSlide[]) {
         if (!numEl) return;
 
         const proxy = { val: 0 };
-        gsap.to(proxy, {
-          val: metric.value,
-          duration: (HERO_TIMINGS.decorativePopDuration / 1000) * HERO_TIMINGS.countUpMultiplier,
-          ease: "power1.out",
-          onUpdate: () => {
-            const prefix = "prefix" in metric ? metric.prefix ?? "" : "";
-            const suffix = metric.suffix ?? "";
-            numEl.textContent = `${prefix}${Math.round(proxy.val)}${suffix}`;
-          },
-        });
+        try {
+          gsap.to(proxy, {
+            val: metric.value,
+            duration: (HERO_TIMINGS.decorativePopDuration / 1000) * HERO_TIMINGS.countUpMultiplier,
+            ease: "power1.out",
+            onUpdate: () => {
+              const prefix = "prefix" in metric ? metric.prefix ?? "" : "";
+              const suffix = metric.suffix ?? "";
+              numEl.textContent = `${prefix}${Math.round(proxy.val)}${suffix}`;
+            },
+          });
+        } catch {
+          const prefix = "prefix" in metric ? metric.prefix ?? "" : "";
+          const suffix = metric.suffix ?? "";
+          numEl.textContent = `${prefix}${metric.value}${suffix}`;
+        }
       });
 
-      gsap.fromTo(
-        targets,
-        { scale: 0.4, opacity: 0 },
-        {
-          scale: 1,
-          opacity: 1,
-          duration: HERO_TIMINGS.decorativePopDuration / 1000,
-          ease: "back.out(1.7)",
-          stagger: HERO_TIMINGS.decorativesStagger / 1000,
-          onComplete: resolveAndClear,
-        }
-      );
+      try {
+        gsap.fromTo(
+          targets,
+          { scale: 0.4, opacity: 0 },
+          {
+            scale: 1,
+            opacity: 1,
+            duration: HERO_TIMINGS.decorativePopDuration / 1000,
+            ease: "back.out(1.7)",
+            stagger: HERO_TIMINGS.decorativesStagger / 1000,
+            onComplete: complete,
+          }
+        );
+      } catch {
+        targets.forEach((target) => {
+          target.style.opacity = "1";
+          target.style.transform = "scale(1)";
+        });
+        complete();
+      }
     } else {
-      gsap.to(targets, {
-        scale: 0.4,
-        opacity: 0,
-        duration: HERO_TIMINGS.decorativePopDuration / 1000,
-        ease: "power2.in",
-        stagger: HERO_TIMINGS.decorativesStagger / 1000,
-        onComplete: () => {
-          setDecorativesVisible(false);
-          resolveAndClear();
-        },
-      });
+      try {
+        gsap.to(targets, {
+          scale: 0.4,
+          opacity: 0,
+          duration: HERO_TIMINGS.decorativePopDuration / 1000,
+          ease: "power2.in",
+          stagger: HERO_TIMINGS.decorativesStagger / 1000,
+          onComplete: () => {
+            setDecorativesVisible(false);
+            complete();
+          },
+        });
+      } catch {
+        queueMicrotask(() => setDecorativesVisible(false));
+        complete();
+      }
     }
   }, [decorativeAnimRequest, slides]);
 

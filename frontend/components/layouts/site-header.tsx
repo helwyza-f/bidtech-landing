@@ -65,7 +65,7 @@ export function SiteHeader() {
   ];
 
   return (
-    <header className="sticky top-0 z-30 bg-white/90 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 bg-white border-b border-slate-100 shadow-[0_1px_3px_rgba(0,0,0,0.05)] transition-all">
       <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-2 px-4 py-3 sm:gap-4 sm:px-5 sm:py-4 md:px-8">
         <SmartNavLink className="flex items-center" href="#hero">
           <Image

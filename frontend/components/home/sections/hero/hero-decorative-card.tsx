@@ -21,8 +21,8 @@ export function HeroDecorativeCard({ card, registerRef }: Props) {
   return (
     <motion.div
       ref={(el) => registerRef(card.id, el)}
-      className={`absolute ${card.position} ${card.zLayer === "front" ? "z-30" : "z-0"}`}
-      style={{ opacity: 0, transform: "scale(0.4)" }} // animasi muncul/hilang dikendalikan orkestrator GSAP
+      className={`absolute ${card.position} ${card.zLayer === "front" ? "z-20" : "z-0"}`}
+      style={{ opacity: 1, transform: "scale(1)" }} // fallback statis jika Motion/GSAP gagal di browser lama
       animate={{ y: [0, -HERO_TIMINGS.floatAmplitude, 0] }}
       transition={{
         duration: HERO_TIMINGS.floatDuration,

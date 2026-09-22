@@ -29,8 +29,8 @@ export const id = {
     ctaSecondary: "Lihat Portfolio",
   },
   heroShowcase: {
-    ctaPrimary: "Cari Design",
-    ctaSecondary: "Hubungi Kami",
+    ctaPrimary: "Cek Domain Gratis",
+    ctaSecondary: "Jelajahi Template",
     appStorePrefix: "Download on the",
     googlePlayPrefix: "GET IT ON",
     slides: [

@@ -24,6 +24,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             TemplateSeeder::class,
+            PromoSeeder::class,
+            UserSeeder::class,
         ]);
     }
 }

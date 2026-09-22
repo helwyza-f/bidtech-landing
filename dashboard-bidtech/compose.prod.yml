@@ -1,0 +1,15 @@
+services:
+  app:
+    container_name: BidTech-Dashboard
+    restart: unless-stopped
+    networks:
+      - default
+      - bidtech-api
+
+  mysql:
+    container_name: BidTech-Dashboard-MySQL
+    restart: unless-stopped
+
+networks:
+  bidtech-api:
+    external: true

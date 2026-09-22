@@ -26,6 +26,7 @@ class User extends Authenticatable
         'domain_status',
         'domain_final',
         'website_status',
+        'is_admin',
     ];
 
     protected $hidden = [
@@ -44,11 +45,20 @@ class User extends Authenticatable
             'password'          => 'hashed',
             'domain_status'     => DomainStatus::class,
             'website_status'    => WebsiteStatus::class,
+            'is_admin'          => 'boolean',
         ];
     }
 
     public function order(): BelongsTo
     {
         return $this->belongsTo(Order::class);
+    }
+
+    /**
+     * Cek apakah user adalah admin
+     */
+    public function isAdmin(): bool
+    {
+        return (bool) $this->is_admin;
     }
 }
