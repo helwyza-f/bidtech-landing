@@ -534,6 +534,7 @@ export const id = {
   },
   footer: {
     description: "Membantu bisnis berkembang lewat solusi digital inovatif dan pengerjaan yang profesional.",
+    backToTop: "KEMBALI KE ATAS",
     navTitle: "Navigasi",
     navItems: [
       { label: "Beranda", href: "#hero" },
@@ -545,6 +546,9 @@ export const id = {
     servicesItems: ["Pengembangan Website", "Aplikasi Mobile", "Solusi ERP", "Software Kustom"],
     helpTitle: "Bantuan",
     helpItems: ["Bantuan", "Syarat & Ketentuan", "Hubungi Kami", "FAQ"],
+    followUsTitle: "IKUTI KAMI",
+    followUsSub: "Konsultasi digital dan penjadwalan arsitek solusi tersedia setiap hari kerja.",
     copyright: "© 2026 PT Bisnis Jalanin Aja Dulu. Seluruh hak cipta dilindungi.",
+    operationalStatus: "System Operational & Ready for New Projects",
   },
 };

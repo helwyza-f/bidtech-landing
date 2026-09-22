@@ -533,6 +533,7 @@ export const en = {
   },
   footer: {
     description: "Helping businesses grow through innovative digital solutions and professional execution.",
+    backToTop: "BACK TO TOP",
     navTitle: "Navigation",
     navItems: [
       { label: "Home", href: "#hero" },
@@ -544,6 +545,9 @@ export const en = {
     servicesItems: ["Website Development", "Mobile Apps", "ERP Solutions", "Custom Software"],
     helpTitle: "Help",
     helpItems: ["Help", "Terms & Conditions", "Contact Us", "FAQ"],
+    followUsTitle: "FOLLOW US",
+    followUsSub: "Digital consultation and solution architect scheduling available every business day.",
     copyright: "© 2026 BidTech Software House. All rights reserved.",
+    operationalStatus: "System Operational & Ready for New Projects",
   },
 };
