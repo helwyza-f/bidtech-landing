@@ -5,6 +5,8 @@ FROM composer:2 AS vendor
 WORKDIR /app
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-interaction --no-progress --prefer-dist --no-scripts
+COPY . .
+RUN composer dump-autoload --no-dev --optimize --no-interaction
 
 # ---- Stage 2: frontend assets (Vite) -------------------------------------
 FROM node:22-alpine AS assets
@@ -34,10 +36,8 @@ WORKDIR /var/www/html
 
 COPY . .
 COPY --from=vendor /app/vendor ./vendor
+COPY --from=vendor /app/bootstrap/cache ./bootstrap/cache
 COPY --from=assets /app/public/build ./public/build
-
-RUN composer install --no-dev --optimize-autoloader --no-interaction --no-progress \
-    && composer clear-cache
 
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
 COPY docker/supervisord.conf /etc/supervisor/supervisord.conf
