@@ -17,7 +17,8 @@ interface DomainItem {
 }
 
 const POPULAR_TLDS = [".com", ".id", ".co.id", ".my.id", ".online", ".net", ".org"];
-const LARAVEL_CHECKOUT_URL = process.env.NEXT_PUBLIC_LARAVEL_URL || "http://localhost:8000";
+const LARAVEL_CHECKOUT_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
+const DOMAIN_SEARCH_URL = `${LARAVEL_CHECKOUT_URL.replace(/\/$/, "")}/api/domain/search`;
 
 export function HeroDomainSearch() {
   const [keyword, setKeyword] = useState("");
@@ -46,9 +47,15 @@ export function HeroDomainSearch() {
     setResults([]);
 
     try {
-      const res = await fetch(`/api/domain/search?q=${encodeURIComponent(q)}`, {
+      const res = await fetch(`${DOMAIN_SEARCH_URL}?q=${encodeURIComponent(q)}`, {
         signal: abortRef.current.signal,
+        headers: {
+          Accept: "application/json",
+        },
       });
+      if (!res.ok) {
+        throw new Error(`Domain search failed with status ${res.status}`);
+      }
       const data = await res.json();
       if (data.status === "success" && Array.isArray(data.domains)) {
         setResults(data.domains);
