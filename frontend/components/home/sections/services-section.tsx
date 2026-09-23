@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type UIEvent } from "react";
+import { useCallback, useEffect, useRef, useState, type UIEvent } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight, Globe, Settings2, Smartphone } from "lucide-react";
 
@@ -51,15 +51,47 @@ function scrollSliderToIndex(slider: HTMLElement | null, nextSlide: number) {
 export function ServicesSection() {
   const { t, lang } = useLanguage();
   const [activeServiceSlide, setActiveServiceSlide] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
   const servicesSliderRef = useRef<HTMLDivElement>(null);
+  const itemCount = t.services.items.length;
 
-  const moveServiceSlide = (nextSlide: number) => {
+  const moveServiceSlide = useCallback((nextSlide: number) => {
     setActiveServiceSlide(scrollSliderToIndex(servicesSliderRef.current, nextSlide));
-  };
+  }, []);
+
+  const handleNext = useCallback(() => {
+    setActiveServiceSlide((prev) => {
+      const next = (prev + 1) % itemCount;
+      scrollSliderToIndex(servicesSliderRef.current, next);
+      return next;
+    });
+  }, [itemCount]);
+
+  const handlePrev = useCallback(() => {
+    setActiveServiceSlide((prev) => {
+      const next = prev === 0 ? itemCount - 1 : prev - 1;
+      scrollSliderToIndex(servicesSliderRef.current, next);
+      return next;
+    });
+  }, [itemCount]);
+
+  // Autoplay countdown timer (4s) for mobile slider
+  useEffect(() => {
+    if (isPaused) return;
+
+    const timer = setInterval(() => {
+      handleNext();
+    }, 4000);
+
+    return () => clearInterval(timer);
+  }, [isPaused, handleNext]);
 
   const handleServiceScroll = (event: UIEvent<HTMLDivElement>) => {
     if (window.innerWidth >= 1024) return;
-    setActiveServiceSlide(getClosestSlideIndex(event.currentTarget));
+    const closest = getClosestSlideIndex(event.currentTarget);
+    if (closest !== activeServiceSlide) {
+      setActiveServiceSlide(closest);
+    }
   };
 
   return (
@@ -104,6 +136,10 @@ export function ServicesSection() {
         {/* 3-Card Grid / Mobile Responsive Slider */}
         <div
           className="mt-8 sm:mt-10 flex h-fit w-full snap-x snap-mandatory items-stretch gap-4 sm:gap-5 overflow-x-auto overflow-y-hidden py-2 px-0.5 [scrollbar-width:none] md:mt-12 lg:grid lg:grid-cols-3 lg:gap-7 lg:overflow-visible lg:py-0 lg:px-0 [&::-webkit-scrollbar]:hidden"
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+          onTouchEnd={() => setIsPaused(false)}
+          onTouchStart={() => setIsPaused(true)}
           onScroll={handleServiceScroll}
           ref={servicesSliderRef}
         >
@@ -191,14 +227,8 @@ export function ServicesSection() {
       >
         <button
           aria-label={t.services.ariaPrevious}
-          aria-disabled={activeServiceSlide === 0}
-          className={`flex size-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-[#45a02e] hover:text-[#45a02e] ${
-            activeServiceSlide === 0 ? "cursor-not-allowed opacity-35" : ""
-          }`}
-          onClick={() => {
-            if (activeServiceSlide === 0) return;
-            moveServiceSlide(activeServiceSlide - 1);
-          }}
+          className="flex size-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer"
+          onClick={handlePrev}
           type="button"
         >
           <ChevronLeft className="size-5" />
@@ -208,29 +238,43 @@ export function ServicesSection() {
           className="flex items-center gap-2"
           aria-label={`${t.services.ariaGroupLabel} ${activeServiceSlide + 1} ${t.services.ariaGroupFrom} ${t.services.items.length}`}
         >
-          {t.services.items.map((service, index) => (
-            <button
-              aria-label={`${t.services.ariaViewPrefix} ${service.title}`}
-              className={`h-2.5 rounded-full transition-all ${
-                activeServiceSlide === index ? "w-8 bg-[#45a02e]" : "w-2.5 bg-slate-300"
-              }`}
-              key={service.title}
-              onClick={() => moveServiceSlide(index)}
-              type="button"
-            />
-          ))}
+          {t.services.items.map((service, index) => {
+            const isActive = activeServiceSlide === index;
+
+            return (
+              <button
+                aria-label={`${t.services.ariaViewPrefix} ${service.title}`}
+                className={`relative cursor-pointer transition-all duration-300 ${
+                  isActive
+                    ? "h-2.5 w-8 rounded-full bg-[#d6f2c9] overflow-hidden"
+                    : "h-2.5 w-2.5 rounded-full bg-slate-300 hover:bg-slate-400"
+                }`}
+                key={service.title}
+                onClick={() => moveServiceSlide(index)}
+                type="button"
+              >
+                {isActive && (
+                  <span
+                    key={`service-progress-${activeServiceSlide}-${isPaused}`}
+                    className="absolute inset-y-0 left-0 rounded-full bg-[#45a02e]"
+                    style={{
+                      animationName: "slideProgress",
+                      animationDuration: "4000ms",
+                      animationTimingFunction: "linear",
+                      animationFillMode: "forwards",
+                      animationPlayState: isPaused ? "paused" : "running",
+                    }}
+                  />
+                )}
+              </button>
+            );
+          })}
         </div>
 
         <button
           aria-label={t.services.ariaNext}
-          aria-disabled={activeServiceSlide === t.services.items.length - 1}
-          className={`flex size-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-[#45a02e] hover:text-[#45a02e] ${
-            activeServiceSlide === t.services.items.length - 1 ? "cursor-not-allowed opacity-35" : ""
-          }`}
-          onClick={() => {
-            if (activeServiceSlide === t.services.items.length - 1) return;
-            moveServiceSlide(activeServiceSlide + 1);
-          }}
+          className="flex size-10 items-center justify-center rounded-full border border-slate-200 bg-white text-slate-700 shadow-sm transition hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer"
+          onClick={handleNext}
           type="button"
         >
           <ChevronRight className="size-5" />
