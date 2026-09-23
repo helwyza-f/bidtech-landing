@@ -64,53 +64,64 @@ export function ServicesSection() {
 
   return (
     <section
-      className="landing-panel mx-auto max-w-7xl px-4 py-12 sm:px-6 sm:py-16 md:px-8 md:py-20"
+      className="landing-panel relative overflow-hidden py-12 sm:py-16 md:py-20"
       id="services"
     >
-      {/* Section Header */}
-      <Reveal className="mx-auto max-w-3xl text-center">
-        <div className="flex justify-center">
-          <span className="rounded-full bg-[#f0f9ea] border border-[#d6f2c9] px-5 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#45a02e]">
-            {t.services.badge ?? "LAYANAN KUSTOM"}
-          </span>
-        </div>
-        <h2 className="mt-4 font-[family-name:var(--font-sora)] text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl lg:text-[42px] leading-tight">
-          {lang === "id" ? (
-            <>
-              Layanan <span className="text-[#45a02e]">Unggulan</span>
-            </>
-          ) : (
-            <>
-              Featured <span className="text-[#45a02e]">Services</span>
-            </>
-          )}
-        </h2>
-        <p className="mt-3.5 max-w-2xl mx-auto text-sm sm:text-base leading-relaxed text-slate-600">
-          {t.services.subtitle}
-        </p>
-      </Reveal>
-
-      {/* 3-Card Grid / Mobile Responsive Slider */}
+      {/* Sapuan ambient hijau (green glow effect) */}
       <div
-        className="mt-10 flex h-fit w-full snap-x snap-mandatory items-stretch gap-5 overflow-x-auto overflow-y-hidden [scrollbar-width:none] md:mt-12 lg:grid lg:grid-cols-3 lg:gap-7 lg:overflow-visible [&::-webkit-scrollbar]:hidden"
-        onScroll={handleServiceScroll}
-        ref={servicesSliderRef}
-      >
-        {t.services.items.map((service, index) => {
-          const meta = serviceMeta[index] ?? serviceMeta[0];
-          const Icon = meta.icon;
-          const isPopular = meta.isPopular;
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[580px] bg-[radial-gradient(ellipse_80%_60%_at_50%_0%,rgba(95,201,74,0.16),transparent_70%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-4 -translate-x-1/2 -z-10 h-72 w-full max-w-3xl rounded-full bg-[#5fc94a]/[0.09] blur-3xl"
+      />
 
-          return (
-            <Reveal
-              className="flex w-full min-w-full shrink-0 snap-start sm:min-w-[420px] lg:min-w-0 lg:shrink"
-              delay={index * 120}
-              key={service.title}
-              y={30}
-            >
-              <div
-                className="group relative flex w-full flex-col justify-between rounded-[28px] sm:rounded-[32px] bg-white p-5 sm:p-6 border-2 border-slate-200/80 hover:border-[#45a02e] shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_48px_rgba(69,160,46,0.18)] hover:-translate-y-1.5 transition-all duration-300"
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+        {/* Section Header */}
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <div className="flex justify-center">
+            <span className="rounded-full bg-[#f0f9ea] border border-[#d6f2c9] px-5 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#45a02e]">
+              {t.services.badge ?? "LAYANAN KUSTOM"}
+            </span>
+          </div>
+          <h2 className="mt-4 font-[family-name:var(--font-sora)] text-2xl min-[400px]:text-3xl font-extrabold tracking-tight text-slate-950 sm:text-4xl lg:text-[42px] leading-tight">
+            {lang === "id" ? (
+              <>
+                Layanan <span className="text-[#45a02e]">Unggulan</span>
+              </>
+            ) : (
+              <>
+                Featured <span className="text-[#45a02e]">Services</span>
+              </>
+            )}
+          </h2>
+          <p className="mt-3 max-w-2xl mx-auto text-xs sm:text-sm sm:text-base leading-relaxed text-slate-600">
+            {t.services.subtitle}
+          </p>
+        </Reveal>
+
+        {/* 3-Card Grid / Mobile Responsive Slider */}
+        <div
+          className="mt-8 sm:mt-10 flex h-fit w-full snap-x snap-mandatory items-stretch gap-4 sm:gap-5 overflow-x-auto overflow-y-hidden py-2 px-0.5 [scrollbar-width:none] md:mt-12 lg:grid lg:grid-cols-3 lg:gap-7 lg:overflow-visible lg:py-0 lg:px-0 [&::-webkit-scrollbar]:hidden"
+          onScroll={handleServiceScroll}
+          ref={servicesSliderRef}
+        >
+          {t.services.items.map((service, index) => {
+            const meta = serviceMeta[index] ?? serviceMeta[0];
+            const Icon = meta.icon;
+            const isPopular = meta.isPopular;
+
+            return (
+              <Reveal
+                className="flex w-full min-w-full shrink-0 snap-start sm:min-w-[420px] lg:min-w-0 lg:shrink"
+                delay={index * 120}
+                key={service.title}
+                y={30}
               >
+                <div
+                  className="group relative flex w-full flex-col justify-between rounded-[24px] sm:rounded-[32px] bg-white p-4.5 sm:p-6 border-2 border-slate-200/80 hover:border-[#45a02e] shadow-[0_4px_24px_rgba(0,0,0,0.03)] hover:shadow-[0_20px_48px_rgba(69,160,46,0.18)] hover:-translate-y-1.5 transition-all duration-300"
+                >
                 <div>
                   {/* Top Card Visual Image */}
                   <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[20px] bg-slate-100">
@@ -225,6 +236,7 @@ export function ServicesSection() {
           <ChevronRight className="size-5" />
         </button>
       </div>
-    </section>
+    </div>
+  </section>
   );
 }

@@ -138,33 +138,33 @@ export function HeroShowcase() {
         </div>
 
         <div
-          className="hero-fade-in mt-6 sm:mt-8 flex flex-col items-center gap-3 sm:flex-row sm:justify-center lg:justify-start"
+          className="hero-fade-in mt-6 sm:mt-8 flex flex-col xs:flex-row items-stretch xs:items-center justify-center lg:justify-start gap-3 w-full max-w-sm mx-auto lg:mx-0 sm:max-w-none"
           style={{ animationDelay: "180ms" }}
         >
-          <button
-            type="button"
-            className="inline-flex items-center gap-2 rounded-full bg-brand-primary px-5 py-2.5 sm:px-6 sm:py-3 text-sm font-semibold text-white shadow-[0_16px_40px_rgba(95,201,74,0.35)] transition-transform hover:-translate-y-0.5"
+          <a
+            href="/template-website"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-primary px-5 py-3 sm:px-6 sm:py-3.5 text-sm font-semibold text-white shadow-[0_16px_40px_rgba(95,201,74,0.35)] transition-all duration-200 hover:-translate-y-0.5 hover:bg-brand-primary/90 active:scale-95 text-center cursor-pointer"
           >
-            {t.heroShowcase.ctaPrimary}
+            <span>{t.heroShowcase.ctaPrimary}</span>
             <ArrowRight className="size-4" />
-          </button>
-          <button
-            type="button"
-            className="inline-flex items-center gap-2 rounded-full border border-green-200 px-5 py-2.5 sm:px-6 sm:py-3 text-sm font-semibold text-brand-primary transition-colors hover:bg-green-50"
+          </a>
+          <a
+            href="#contact"
+            className="inline-flex items-center justify-center gap-2 rounded-full border border-green-200 bg-white/80 backdrop-blur-sm px-5 py-3 sm:px-6 sm:py-3.5 text-sm font-semibold text-brand-primary transition-all duration-200 hover:bg-green-50 hover:-translate-y-0.5 active:scale-95 text-center cursor-pointer"
           >
             <MessageCircle className="size-4" />
-            {t.heroShowcase.ctaSecondary}
-          </button>
+            <span>{t.heroShowcase.ctaSecondary}</span>
+          </a>
         </div>
       </div>
 
       {/* BARIS 2 (Mobile/Tablet) & KOLOM KANAN (Desktop): Visual & Model Showcase */}
-      <div className="relative mx-auto flex w-full max-w-[640px] items-stretch mt-2 lg:mt-0">
+      <div className="relative mx-auto flex w-full max-w-[640px] items-stretch mt-4 lg:mt-0">
         <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
           <Image src={HERO_RIGHT_BLOB_SRC} alt="" fill className="object-contain opacity-90" priority />
         </div>
 
-        <div className="relative h-full min-h-[360px] xs:min-h-[400px] sm:min-h-[460px] lg:min-h-[480px] w-full overflow-y-clip">
+        <div className="relative h-full min-h-[320px] xs:min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] w-full overflow-hidden">
           {decorativesVisible &&
             behindCards.map((card) => (
               <HeroDecorativeCard card={card} key={card.id} registerRef={registerDecorative} />

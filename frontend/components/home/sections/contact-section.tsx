@@ -10,21 +10,21 @@ export function ContactSection() {
 
   return (
     <section
-      className="landing-panel relative mx-auto max-w-7xl px-4 py-7 sm:px-5 sm:py-8 md:px-8 md:py-10"
+      className="landing-panel relative mx-auto max-w-7xl px-4 py-8 sm:px-5 sm:py-12 md:px-8 md:py-16"
       id="contact"
     >
       <div className="pointer-events-none absolute inset-x-4 top-8 -z-10 h-80 rounded-[48px] bg-[radial-gradient(circle_at_25%_15%,rgba(95,201,74,0.13),transparent_34%),linear-gradient(135deg,rgba(245,255,242,0.9),rgba(255,255,255,0.75))]" />
       <Reveal className="mx-auto max-w-2xl text-center">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.32em] text-brand-primary">
+        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] sm:tracking-[0.32em] text-brand-primary">
           {t.contact.badge}
         </p>
-        <h2 className="font-[family-name:var(--font-sora)] text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
+        <h2 className="font-[family-name:var(--font-sora)] text-2xl min-[400px]:text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
           {t.contact.titlePrefix} <span className="text-brand-primary">{t.contact.titleHighlight}</span>
         </h2>
-        <p className="mt-4 leading-7 text-slate-500">{t.contact.subtitle}</p>
+        <p className="mt-3 text-xs sm:text-sm md:text-base leading-relaxed text-slate-500">{t.contact.subtitle}</p>
       </Reveal>
 
-      <div className="mt-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
+      <div className="mt-8 sm:mt-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
         <Reveal className="space-y-6" y={16}>
           {t.contact.info.map((item, index) => {
             const Icon = [MessageCircleMore, Mail, MapPin][index];

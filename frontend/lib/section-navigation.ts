@@ -1,6 +1,6 @@
 "use client";
 
-export const HOME_SECTION_IDS = ["hero", "templates", "tutorial", "services", "portfolio", "contact"] as const;
+export const HOME_SECTION_IDS = ["hero", "templates", "portfolio", "services", "mitra", "testimonials", "contact"] as const;
 
 const HEADER_OFFSET = 104;
 

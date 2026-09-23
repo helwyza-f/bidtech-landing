@@ -2,11 +2,12 @@ export const id = {
   nav: {
     home: "Beranda",
     findDesign: "Cari Design",
-    tutorial: "Tutorial",
-    custom: "Custom",
     portfolio: "Portofolio",
+    services: "Layanan",
+    testimonials: "Ulasan",
     contact: "Hubungi Kami",
-    services: "Custom",
+    custom: "Layanan",
+    tutorial: "Portofolio",
     template: "Cari Design",
     pricing: "Harga",
     about: "Beranda",
@@ -249,6 +250,56 @@ export const id = {
       },
     ],
   },
+  portfolioSection: {
+    badge: "PORTOFOLIO",
+    titlePrefix: "Portofolio",
+    titleHighlight: "Kami",
+    subtitle:
+      "Jelajahi portofolio website unggulan yang telah membantu mitra kami meningkatkan konversi hingga 300%. Geser atau gunakan navigasi panah.",
+    cta: "Lihat Portofolio",
+    items: [
+      {
+        id: "stokin",
+        title: "Stokin",
+        tag: "MOBILE",
+        tagType: "slate",
+        image: "/images/web_stokin.webp",
+        description:
+          "Solusi kelola stok terpadu yang membantu pemilik bisnis memantau ketersediaan barang, mengelola kategori dan harga produk, serta menganalisis nilai persediaan secara efisien dari satu aplikasi.",
+        href: "#contact",
+      },
+      {
+        id: "ayocuci",
+        title: "Ayo Cuci",
+        tag: "• WEB & MOBILE",
+        tagType: "amber",
+        image: "/images/web_ayocuci.webp",
+        description:
+          "AyoCuci adalah aplikasi kasir laundry modern berbasis koin tanpa biaya langganan bulanan. Solusi praktis dan hemat untuk kelola transaksi, cetak nota, serta pantau laporan bisnis langsung dari HP.",
+        href: "#contact",
+      },
+      {
+        id: "saturupiah",
+        title: "Satu Rupiah",
+        tag: "FINANCE",
+        tagType: "slate",
+        image: "/images/web_satuRupiah.webp",
+        description:
+          "Solusi keuangan pribadi atau bisnis yang membantu pengguna mencatat pemasukan dan pengeluaran secara teratur dan memantau kesehatan finansial secara menyeluruh dari satu aplikasi.",
+        href: "#contact",
+      },
+      {
+        id: "rentcar",
+        title: "Rentcar",
+        tag: "• WEB & MOBILE",
+        tagType: "amber",
+        image: "/images/design_thumbnail/rentcar.webp",
+        description:
+          "Platform booking dan manajemen rental mobil digital dengan fitur cek armada real-time, kalkulasi tarif sewa otomatis, dan invoice transaksi terintegrasi.",
+        href: "/demo/automotive",
+      },
+    ],
+  },
   howItWorks: {
     badge: "How It Works",
     titleWhite: "Bagaimana",
@@ -263,26 +314,32 @@ export const id = {
     ],
   },
   testimonials: {
-    badge: "Feedbacks",
-    title: "Dipercaya oleh Bisnis Terbaik",
+    badge: "ULASAN KLIEN RESMI",
+    titlePrefix: "Apa Kata Mereka Tentang",
+    titleHighlight: "BIDTECH",
+    titleSuffix: "?",
+    subtitle: "Kepuasan mitra adalah tolok ukur kesuksesan setiap baris kode yang kami rilis",
     items: [
       {
+        initials: "RH",
+        name: "Rendra Hutama",
+        role: "Managing Director, Batam Now Media",
         quote:
-          "BidTech memberikan solusi yang melampaui ekspektasi kami. Sistem ERP yang mereka bangun sangat membantu operasional harian kami menjadi jauh lebih efisien.",
-        name: "Andi Pratama",
-        role: "CEO, Retail Jaya",
+          "“Website baru dari BIDTECH / TechForge langsung menaikkan konversi reservasi kami lebih dari 200%. Tampilan di ponsel sangat lancar dan tim sangat responsif.”",
       },
       {
+        initials: "SN",
+        name: "Silvia Novita",
+        role: "VP of Operations, Global Cargo Hub",
         quote:
-          "Aplikasi mobile buatan BidTech sangat smooth dan user friendly. Support mereka juga sangat cepat tanggap kapanpun kami ada kendala teknis.",
-        name: "Siska Dewi",
-        role: "Founder, Beauty Go",
+          "“Arsitektur custom API yang dibangun BIDTECH sangat rapi. Dashboard admin memudahkan staf kami yang non-teknis mengelola ribuan katalog produk.”",
       },
       {
+        initials: "AK",
+        name: "Arman Kusuma",
+        role: "Founder, NusaPay FinTech",
         quote:
-          "Partner strategis terbaik untuk urusan IT. Mereka benar-benar mengerti kebutuhan bisnis UMKM seperti kami dan memberikan harga yang kompetitif.",
-        name: "Merintan ",
-        role: "Manager IT, Sentosa Logistik",
+          "“Skor Lighthouse 100/100 bukan sekadar klaim. Kecepatan web ini membuat biaya iklan CPC kami turun signifikan karena relevansi skor Google Ads melesat tinggi.”",
       },
     ],
   },
@@ -449,14 +506,17 @@ export const id = {
     mobileAlt: "Preview aplikasi Stokin pada mockup mobile",
   },
   templatePreview: {
-    badge: "Template Design",
+    badge: "TEMPLATE DESIGN",
     titlePrefix: "Pilih",
-    titleHighlight: "Design Website",
+    titleHighlight: "Design Web",
     titleSuffix: "Siap Pakai",
     subtitle:
-      "Koleksi template profesional untuk berbagai kebutuhan bisnis, mulai dari company profile, restoran, rental, hingga portal organisasi.",
-    more: "Lihat Lebih Lanjut",
-    preview: "Lihat Preview",
+      "Pilih design berkualitas dengan tampilan modern, responsive, dan mudah dikustomisasi sesuai kebutuhan bisnis Anda.",
+    more: "Lihat Lebih banyak Template",
+    preview: "Lihat",
+    buy: "Beli",
+    viewCountSuffix: "Kali",
+    viewCountPrefix: "Dilihat",
   },
   templateWebsite: {
     badge: "BIDTECH Design Library",

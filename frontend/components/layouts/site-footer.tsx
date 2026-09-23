@@ -54,19 +54,19 @@ export function SiteFooter() {
   };
 
   return (
-    <footer className="relative overflow-hidden bg-white text-slate-900 border-t border-slate-200/80 pt-16 pb-4 sm:pt-20 sm:pb-6">
-      <div className="relative mx-auto max-w-7xl px-5 sm:px-8 z-10">
+    <footer className="relative overflow-hidden bg-white text-slate-900 border-t border-slate-200/80 pt-10 pb-3 sm:pt-20 sm:pb-6">
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-8 z-10">
         {/* Top Header Row: Logo, Tagline & Back to Top Button */}
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-8 pb-12 sm:pb-14 border-b border-slate-100">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8 pb-8 sm:pb-14 border-b border-slate-100">
           <div className="max-w-2xl">
             <Image
               src={logoAssets.footer.src}
               alt={logoAssets.footer.alt}
               width={logoAssets.footer.width}
               height={logoAssets.footer.height}
-              className="h-10 sm:h-12 w-auto object-contain"
+              className="h-8 sm:h-12 w-auto object-contain"
             />
-            <h3 className="mt-5 font-[family-name:var(--font-sora)] text-xl sm:text-2xl lg:text-[28px] font-bold tracking-tight text-slate-900 leading-snug">
+            <h3 className="mt-3.5 sm:mt-5 font-[family-name:var(--font-sora)] text-lg sm:text-2xl lg:text-[28px] font-bold tracking-tight text-slate-950 leading-snug">
               {t.footer.description}
             </h3>
           </div>
@@ -75,23 +75,23 @@ export function SiteFooter() {
           <button
             onClick={scrollToTop}
             type="button"
-            className="inline-flex items-center gap-3 rounded-2xl border border-slate-200/90 bg-white px-5 py-3 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50 active:scale-95 cursor-pointer self-start md:self-center shrink-0"
+            className="inline-flex items-center gap-2.5 sm:gap-3 rounded-2xl border border-slate-200/90 bg-white px-4 py-2.5 sm:px-5 sm:py-3 text-xs font-bold uppercase tracking-wider text-slate-700 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:border-slate-300 hover:bg-slate-50 active:scale-95 cursor-pointer self-start md:self-center shrink-0"
           >
             <span>{t.footer.backToTop ?? "KEMBALI KE ATAS"}</span>
-            <div className="flex size-6 items-center justify-center rounded-full bg-slate-100 text-slate-600">
-              <ArrowUp className="size-3.5" />
+            <div className="flex size-5 sm:size-6 items-center justify-center rounded-full bg-slate-100 text-slate-600">
+              <ArrowUp className="size-3 sm:size-3.5" />
             </div>
           </button>
         </div>
 
         {/* Middle Section: 4-Column Navigation */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8 sm:gap-10 lg:gap-12 py-12 sm:py-14">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-10 lg:gap-12 py-8 sm:py-14">
           {/* Column 1: Navigasi */}
           <div className="text-left">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-5">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-4 sm:mb-5">
               {t.footer.navTitle}
             </p>
-            <ul className="space-y-3.5 text-sm font-medium text-slate-700">
+            <ul className="space-y-3 sm:space-y-3.5 text-xs sm:text-sm font-medium text-slate-700">
               {t.footer.navItems.map((item) => (
                 <li key={item.label}>
                   <SmartNavLink
@@ -107,10 +107,10 @@ export function SiteFooter() {
 
           {/* Column 2: Layanan */}
           <div className="text-left">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-5">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-4 sm:mb-5">
               {t.footer.servicesTitle}
             </p>
-            <ul className="space-y-3.5 text-sm font-medium text-slate-700">
+            <ul className="space-y-3 sm:space-y-3.5 text-xs sm:text-sm font-medium text-slate-700">
               {t.footer.servicesItems.map((item) => (
                 <li key={item}>
                   <SmartNavLink
@@ -126,10 +126,10 @@ export function SiteFooter() {
 
           {/* Column 3: Bantuan */}
           <div className="text-left">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-5">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-4 sm:mb-5">
               {t.footer.helpTitle}
             </p>
-            <ul className="space-y-3.5 text-sm font-medium text-slate-700">
+            <ul className="space-y-3 sm:space-y-3.5 text-xs sm:text-sm font-medium text-slate-700">
               {t.footer.helpItems.map((item) => (
                 <li key={item}>
                   <a
@@ -144,19 +144,19 @@ export function SiteFooter() {
           </div>
 
           {/* Column 4: Ikuti Kami */}
-          <div className="text-left">
-            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-5">
+          <div className="text-left col-span-2 sm:col-span-1">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-slate-400 mb-4 sm:mb-5">
               {t.footer.followUsTitle ?? "IKUTI KAMI"}
             </p>
             {/* Social Icons Row */}
-            <div className="flex flex-wrap items-center gap-2.5">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-2.5">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
 
                 return (
                   <a
                     aria-label={social.label}
-                    className="flex size-10 items-center justify-center rounded-2xl bg-slate-100/90 text-slate-600 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#e8f7e2] hover:text-[#45a02e]"
+                    className="flex size-9 sm:size-10 items-center justify-center rounded-2xl bg-slate-100/90 text-slate-600 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#e8f7e2] hover:text-[#45a02e]"
                     href={social.href}
                     key={social.label}
                     rel="noreferrer"
@@ -168,22 +168,26 @@ export function SiteFooter() {
               })}
             </div>
             {/* Subtext description */}
-            <p className="mt-5 text-xs text-slate-500 leading-relaxed max-w-xs">
+            <p className="mt-3.5 sm:mt-5 text-xs text-slate-500 leading-relaxed max-w-xs">
               {t.footer.followUsSub ?? "Konsultasi digital dan penjadwalan arsitek solusi tersedia setiap hari kerja."}
             </p>
           </div>
         </div>
 
-        {/* Bottom Row: Copyright */}
-        <div className="border-t border-slate-200/80 pt-8 sm:pt-10 flex items-center justify-center relative z-10">
-          <p className="text-xs sm:text-sm text-slate-500 font-medium text-center">
+        {/* Bottom Row: Copyright & Status Badge */}
+        <div className="border-t border-slate-200/80 pt-6 sm:pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 relative z-10">
+          <p className="text-xs sm:text-sm text-slate-500 font-medium text-center sm:text-left">
             {t.footer.copyright}
           </p>
+          <div className="inline-flex items-center gap-2 rounded-full border border-slate-200/90 bg-slate-50/80 px-3.5 py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
+            <span className="size-2 rounded-full bg-[#22c55e] animate-pulse" />
+            <span>{t.footer.operationalStatus ?? "System Operational & Ready for New Projects"}</span>
+          </div>
         </div>
 
         {/* Giant Watermark "BIDTECH" */}
-        <div className="relative mt-8 sm:mt-12 -mb-8 sm:-mb-14 w-full overflow-hidden select-none pointer-events-none flex items-center justify-center">
-          <span className="font-[family-name:var(--font-playfair)] font-bold tracking-wider text-[clamp(2.6rem,13.5vw,13.5rem)] leading-none text-[#bce8b2] uppercase block whitespace-nowrap text-center">
+        <div className="@container relative mt-8 sm:mt-12 -mb-3 sm:-mb-6 -mx-4 sm:mx-0 w-[calc(100%+2rem)] sm:w-full overflow-hidden select-none pointer-events-none flex items-center justify-center">
+          <span className="font-[family-name:var(--font-playfair)] font-bold tracking-[0.02em] sm:tracking-[0.04em] text-[clamp(4.2rem,21.8vw,16.8rem)] text-[21.6cqw] leading-[0.78] text-[#c5e7b7] uppercase block whitespace-nowrap text-center">
             BIDTECH
           </span>
         </div>

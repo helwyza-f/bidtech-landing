@@ -2,11 +2,12 @@ export const en = {
   nav: {
     home: "Home",
     findDesign: "Find Design",
-    tutorial: "Tutorial",
-    custom: "Custom",
     portfolio: "Portfolio",
+    services: "Services",
+    testimonials: "Testimonials",
     contact: "Contact Us",
-    services: "Custom",
+    custom: "Services",
+    tutorial: "Portfolio",
     template: "Find Design",
     pricing: "Pricing",
     about: "Home",
@@ -248,6 +249,56 @@ export const en = {
       },
     ],
   },
+  portfolioSection: {
+    badge: "PORTFOLIO",
+    titlePrefix: "Our",
+    titleHighlight: "Portfolio",
+    subtitle:
+      "Explore featured website portfolios that have helped our partners increase conversions by up to 300%. Swipe or use arrow navigation.",
+    cta: "View Portfolio",
+    items: [
+      {
+        id: "stokin",
+        title: "Stokin",
+        tag: "MOBILE",
+        tagType: "slate",
+        image: "/images/web_stokin.webp",
+        description:
+          "An integrated inventory management solution helping business owners monitor item availability, manage categories and pricing, and analyze stock valuation efficiently from one app.",
+        href: "#contact",
+      },
+      {
+        id: "ayocuci",
+        title: "Ayo Cuci",
+        tag: "• WEB & MOBILE",
+        tagType: "amber",
+        image: "/images/web_ayocuci.webp",
+        description:
+          "AyoCuci is a modern coin-based laundry POS app with no monthly subscription fees. A practical and cost-effective solution to manage transactions, print receipts, and monitor business reports from mobile.",
+        href: "#contact",
+      },
+      {
+        id: "saturupiah",
+        title: "Satu Rupiah",
+        tag: "FINANCE",
+        tagType: "slate",
+        image: "/images/web_satuRupiah.webp",
+        description:
+          "A personal and business finance solution helping users record income and expenses systematically and monitor overall financial health from a single app.",
+        href: "#contact",
+      },
+      {
+        id: "rentcar",
+        title: "Rentcar",
+        tag: "• WEB & MOBILE",
+        tagType: "amber",
+        image: "/images/design_thumbnail/rentcar.webp",
+        description:
+          "Digital car rental booking and management platform with real-time fleet availability, automatic rate calculation, and integrated invoicing.",
+        href: "/demo/automotive",
+      },
+    ],
+  },
   howItWorks: {
     badge: "How It Works",
     titleWhite: "How We",
@@ -262,26 +313,32 @@ export const en = {
     ],
   },
   testimonials: {
-    badge: "Feedbacks",
-    title: "Trusted by the Best Businesses",
+    badge: "OFFICIAL CLIENT REVIEWS",
+    titlePrefix: "What They Say About",
+    titleHighlight: "BIDTECH",
+    titleSuffix: "?",
+    subtitle: "Partner satisfaction is the benchmark for the success of every line of code we release",
     items: [
       {
+        initials: "RH",
+        name: "Rendra Hutama",
+        role: "Managing Director, Batam Now Media",
         quote:
-          "BidTech delivered a solution that exceeded our expectations. The ERP system they built has made our daily operations far more efficient.",
-        name: "Andi Pratama",
-        role: "CEO, Retail Jaya",
+          "“The new website from BIDTECH / TechForge immediately increased our reservation conversion by over 200%. Mobile view is super smooth and the team is very responsive.”",
       },
       {
+        initials: "SN",
+        name: "Silvia Novita",
+        role: "VP of Operations, Global Cargo Hub",
         quote:
-          "The mobile app BidTech built for us is smooth and user friendly. Their support team is also very responsive whenever we run into technical issues.",
-        name: "Siska Dewi",
-        role: "Founder, Beauty Go",
+          "“The custom API architecture built by BIDTECH is very clean. The admin dashboard makes it easy for our non-technical staff to manage thousands of product catalogs.”",
       },
       {
+        initials: "AK",
+        name: "Arman Kusuma",
+        role: "Founder, NusaPay FinTech",
         quote:
-          "The best strategic partner for our IT needs. They truly understand what an SME business like ours needs and offer competitive pricing.",
-        name: "Budi Santoso",
-        role: "IT Manager, Sentosa Logistik",
+          "“A 100/100 Lighthouse score is not just a claim. The speed of this web app significantly reduced our CPC ad costs because our Google Ads relevance score soared.”",
       },
     ],
   },
@@ -448,14 +505,17 @@ export const en = {
     mobileAlt: "Stokin application preview in a mobile mockup",
   },
   templatePreview: {
-    badge: "Template Design",
+    badge: "TEMPLATE DESIGN",
     titlePrefix: "Choose",
-    titleHighlight: "Website Designs",
-    titleSuffix: "Ready to Use",
+    titleHighlight: "Ready-to-Use",
+    titleSuffix: "Web Designs",
     subtitle:
-      "A collection of professional templates for many business needs, from company profiles, restaurants, rentals, to organization portals.",
-    more: "See More",
-    preview: "View Preview",
+      "Choose quality designs with modern, responsive layouts that are easy to customize for your business needs.",
+    more: "View More Templates",
+    preview: "View",
+    buy: "Buy",
+    viewCountSuffix: "Views",
+    viewCountPrefix: "Viewed",
   },
   templateWebsite: {
     badge: "BIDTECH Design Library",
