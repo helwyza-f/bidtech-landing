@@ -1,142 +1,207 @@
-import { Mail, MapPin, MessageCircleMore } from "lucide-react";
+"use client";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
+import Image from "next/image";
+import { ArrowRight, Check, Copy, Mail, MapPin } from "lucide-react";
+
 import { Reveal } from "@/components/animations/reveal";
 import { ContactForm } from "@/components/home/components/contact-form";
 import { useLanguage } from "@/lib/i18n";
 
 export function ContactSection() {
   const { t } = useLanguage();
+  const [copied, setCopied] = useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(t.contact.cards.emailAddress);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
     <section
-      className="landing-panel relative mx-auto max-w-7xl px-4 py-8 sm:px-5 sm:py-12 md:px-8 md:py-16"
+      className="landing-panel relative py-12 sm:py-16 md:py-24"
       id="contact"
     >
-      <div className="pointer-events-none absolute inset-x-4 top-8 -z-10 h-80 rounded-[48px] bg-[radial-gradient(circle_at_25%_15%,rgba(95,201,74,0.13),transparent_34%),linear-gradient(135deg,rgba(245,255,242,0.9),rgba(255,255,255,0.75))]" />
-      <Reveal className="mx-auto max-w-2xl text-center">
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.25em] sm:tracking-[0.32em] text-brand-primary">
-          {t.contact.badge}
-        </p>
-        <h2 className="font-[family-name:var(--font-sora)] text-2xl min-[400px]:text-3xl font-semibold leading-tight text-slate-950 md:text-4xl">
-          {t.contact.titlePrefix} <span className="text-brand-primary">{t.contact.titleHighlight}</span>
-        </h2>
-        <p className="mt-3 text-xs sm:text-sm md:text-base leading-relaxed text-slate-500">{t.contact.subtitle}</p>
-      </Reveal>
+      {/* Ambient background glow */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[500px] bg-[radial-gradient(ellipse_75%_55%_at_50%_0%,rgba(95,201,74,0.14),transparent_70%)]"
+      />
+      <div
+        aria-hidden
+        className="pointer-events-none absolute left-1/2 top-8 -translate-x-1/2 -z-10 h-64 w-full max-w-3xl rounded-full bg-[#5fc94a]/[0.08] blur-3xl"
+      />
 
-      <div className="mt-8 sm:mt-12 grid gap-6 lg:grid-cols-[0.85fr_1.15fr]">
-        <Reveal className="space-y-6" y={16}>
-          {t.contact.info.map((item, index) => {
-            const Icon = [MessageCircleMore, Mail, MapPin][index];
-            const isLocation = "batam" in item;
+      <div className="relative mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
+        {/* Section Header */}
+        <Reveal className="mx-auto max-w-3xl text-center">
+          <div className="flex justify-center">
+            <span className="rounded-full bg-[#f0f9ea] border border-[#d6f2c9] px-5 py-1.5 text-xs font-bold uppercase tracking-[0.2em] text-[#45a02e]">
+              {t.contact.badge}
+            </span>
+          </div>
+          <h2 className="mt-4 font-[family-name:var(--font-sora)] text-2xl font-extrabold tracking-tight text-slate-950 sm:text-3xl lg:text-[40px] leading-tight">
+            {t.contact.titlePrefix}{" "}
+            <span className="text-[#45a02e]">{t.contact.titleHighlight}</span>
+          </h2>
+          <p className="mt-3 max-w-2xl mx-auto text-xs sm:text-sm leading-relaxed text-slate-600">
+            {t.contact.subtitle}
+          </p>
+        </Reveal>
 
-            if (isLocation) {
-              return (
-                <div className="grid gap-5" key={item.label}>
-                  <Card className="overflow-hidden border border-emerald-100 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
-                    <CardContent className="space-y-4">
-                      <div className="flex items-start gap-4">
-                        <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-brand-primary/10 text-brand-primary">
-                          <MapPin className="size-5" />
-                        </div>
-                        <div>
-                          <p className="text-base font-bold text-slate-950">{item.label} Batam</p>
-                          <p className="mt-1 text-sm leading-relaxed text-slate-500">{(item as any).batam}</p>
-                        </div>
-                      </div>
-
-                      <div className="overflow-hidden rounded-2xl border border-emerald-100 bg-emerald-50/40">
-                        <iframe
-                          allowFullScreen
-                          className="h-52 w-full border-0"
-                          loading="lazy"
-                          referrerPolicy="strict-origin-when-cross-origin"
-                          src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d2311.377!2d104.07543166924557!3d1.1058157731502605!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e1!3m2!1sid!2sid!4v1785208829256!5m2!1sid!2sid"
-                          title={`${t.contact.mapTitlePrefix} Batam`}
-                        />
-                      </div>
-
-                      <a
-                        className="flex items-center justify-center rounded-full border border-emerald-100 bg-white px-4 py-3 text-sm font-semibold text-slate-950 transition hover:border-brand-primary/40 hover:bg-emerald-50"
-                        href="https://www.google.com/maps/search/?api=1&query=1.1058157731502605%2C104.07543166924557"
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        {t.contact.openLocation} Batam
-                      </a>
-                    </CardContent>
-                  </Card>
-
-                  <Card className="overflow-hidden border border-emerald-100 bg-white shadow-[0_20px_60px_rgba(15,23,42,0.08)]">
-                    <CardContent className="space-y-4">
-                      <div className="flex items-start gap-4">
-                        <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-brand-primary/10 text-brand-primary">
-                          <MapPin className="size-5" />
-                        </div>
-                        <div>
-                          <p className="text-base font-bold text-slate-950">{item.label} Jakarta</p>
-                          <p className="mt-1 text-sm leading-relaxed text-slate-500">{(item as any).jakarta}</p>
-                        </div>
-                      </div>
-
-                      <div className="overflow-hidden rounded-2xl border border-emerald-100 bg-emerald-50/40">
-                        <iframe
-                          allowFullScreen
-                          className="h-52 w-full border-0"
-                          loading="lazy"
-                          referrerPolicy="strict-origin-when-cross-origin"
-                          src="https://www.google.com/maps?q=-6.207275,106.822519&z=16&output=embed"
-                          title={`${t.contact.mapTitlePrefix} Jakarta`}
-                        />
-                      </div>
-
-                      <a
-                        className="flex items-center justify-center rounded-full border border-emerald-100 bg-white px-4 py-3 text-sm font-semibold text-slate-950 transition hover:border-brand-primary/40 hover:bg-emerald-50"
-                        href="https://www.google.com/maps/search/?api=1&query=-6.207275%2C106.822519"
-                        rel="noreferrer"
-                        target="_blank"
-                      >
-                        {t.contact.openLocation} Jakarta
-                      </a>
-                    </CardContent>
-                  </Card>
+        {/* 2-Column Content Grid: Left Cards & Right Form */}
+        <div className="mt-10 sm:mt-14 grid gap-6 lg:gap-8 lg:grid-cols-[410px_1fr] xl:grid-cols-[430px_1fr] items-start">
+          {/* Left Column: 4 Distinct Contact Info Cards */}
+          <Reveal className="space-y-4 sm:space-y-5" y={16}>
+            {/* Card 1: WhatsApp Consultation */}
+            <div className="group rounded-[20px] sm:rounded-[22px] border border-slate-200/80 bg-white p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:border-slate-300 transition-all duration-300">
+              <div className="flex items-start gap-4">
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#f0f9ea] border border-[#d6f2c9] text-[#45a02e]">
+                  <Mail className="size-5" />
                 </div>
-              );
-            }
-
-            const isEmail = index === 1;
-            const content = (
-              <CardContent className="flex items-center gap-4 rounded-[28px] border border-emerald-100 bg-white shadow-[0_18px_55px_rgba(15,23,42,0.07)]">
-                <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-brand-primary/10 text-brand-primary">
-                  <Icon className="size-5" />
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-[family-name:var(--font-sora)] text-base font-bold text-slate-900 leading-snug">
+                    {t.contact.cards.whatsappTitle}
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-500">
+                    {t.contact.cards.whatsappNumber}
+                  </p>
+                  <a
+                    className="mt-2 inline-flex items-center gap-1.5 text-xs font-bold text-[#45a02e] hover:text-[#3b8e26] transition-colors group/link"
+                    href="https://wa.me/628217601455"
+                    rel="noopener noreferrer"
+                    target="_blank"
+                  >
+                    <span>{t.contact.cards.whatsappCta}</span>
+                    <ArrowRight className="size-3.5 transition-transform group-hover/link:translate-x-1" />
+                  </a>
                 </div>
-                <div>
-                  <p className="text-sm font-semibold text-slate-950">{item.label}</p>
-                  <p className="text-sm text-slate-500">{(item as any).value}</p>
-                  {(item as any).note && <p className="text-xs font-medium text-brand-primary">{(item as any).note}</p>}
+              </div>
+            </div>
+
+            {/* Card 2: Official Email */}
+            <div className="group rounded-[20px] sm:rounded-[22px] border border-slate-200/80 bg-white p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:border-slate-300 transition-all duration-300">
+              <div className="flex items-start gap-4">
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#f0f9ea] border border-[#d6f2c9] text-[#45a02e]">
+                  <Mail className="size-5" />
                 </div>
-              </CardContent>
-            );
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-[family-name:var(--font-sora)] text-base font-bold text-slate-900 leading-snug">
+                    {t.contact.cards.emailTitle}
+                  </h3>
+                  <p className="mt-1 text-xs text-slate-500 leading-relaxed">
+                    {t.contact.cards.emailSubtitle}
+                  </p>
+                  <div className="mt-2 flex items-center gap-2">
+                    <a
+                      className="text-xs font-bold text-[#45a02e] hover:underline"
+                      href={`mailto:${t.contact.cards.emailAddress}`}
+                    >
+                      {t.contact.cards.emailAddress}
+                    </a>
+                    <button
+                      aria-label="Salin email"
+                      className="inline-flex items-center justify-center p-1 text-slate-400 hover:text-[#45a02e] transition-colors cursor-pointer"
+                      onClick={handleCopyEmail}
+                      type="button"
+                    >
+                      {copied ? (
+                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#45a02e]">
+                          <Check className="size-3.5" />
+                          <span className="text-[10px]">{t.contact.cards.copiedTooltip}</span>
+                        </span>
+                      ) : (
+                        <Copy className="size-3.5" />
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
 
-            return isEmail ? (
-              <a key={item.label} className="block" href={`mailto:${(item as any).value}`} rel="noreferrer" target="_blank">
-                <Card className="border-0 bg-transparent !shadow-none transition hover:-translate-y-0.5">{content}</Card>
-              </a>
-            ) : (
-              <Card className="border-0 bg-transparent !shadow-none" key={item.label}>{content}</Card>
-            );
-          })}
+            {/* Card 3: Jakarta Office with Satellite Map Preview */}
+            <div className="group rounded-[20px] sm:rounded-[22px] border border-slate-200/80 bg-white p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:border-slate-300 transition-all duration-300">
+              <div className="flex items-start gap-4">
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#f0f9ea] border border-[#d6f2c9] text-[#45a02e]">
+                  <MapPin className="size-5" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-[family-name:var(--font-sora)] text-base font-bold text-slate-900 leading-snug">
+                    {t.contact.cards.jakartaTitle}
+                  </h3>
+                  <p className="mt-1 text-[11px] sm:text-xs font-medium text-[#45a02e] leading-relaxed">
+                    {t.contact.cards.jakartaAddress}
+                  </p>
+                </div>
+              </div>
 
+              {/* Satellite Map Preview with Red Pin & Floating Button */}
+              <div className="relative mt-4 h-36 sm:h-40 w-full overflow-hidden rounded-[14px] border border-slate-100 bg-slate-100">
+                <Image
+                  alt={t.contact.cards.jakartaTitle}
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  fill
+                  sizes="(min-width: 1024px) 430px, 90vw"
+                  src="/images/map-jakarta.jpg"
+                />
+                <a
+                  className="absolute right-2.5 bottom-2.5 z-10 inline-flex items-center gap-1.5 rounded-lg bg-white/95 backdrop-blur-sm border border-slate-200/90 px-3 py-1.5 text-[11px] font-semibold text-slate-800 shadow-md hover:bg-white hover:border-[#45a02e] hover:text-[#45a02e] transition-all cursor-pointer"
+                  href="https://www.google.com/maps/search/?api=1&query=-6.207275%2C106.822519"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <span>{t.contact.cards.openGoogleMaps}</span>
+                </a>
+              </div>
+            </div>
+
+            {/* Card 4: Batam Office with Satellite Map Preview */}
+            <div className="group rounded-[20px] sm:rounded-[22px] border border-slate-200/80 bg-white p-5 shadow-[0_4px_20px_rgba(0,0,0,0.03)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.06)] hover:border-slate-300 transition-all duration-300">
+              <div className="flex items-start gap-4">
+                <div className="flex size-12 shrink-0 items-center justify-center rounded-2xl bg-[#f0f9ea] border border-[#d6f2c9] text-[#45a02e]">
+                  <MapPin className="size-5" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-[family-name:var(--font-sora)] text-base font-bold text-slate-900 leading-snug">
+                    {t.contact.cards.batamTitle}
+                  </h3>
+                  <p className="mt-1 text-[11px] sm:text-xs font-medium text-[#45a02e] leading-relaxed">
+                    {t.contact.cards.batamAddress}
+                  </p>
+                </div>
+              </div>
+
+              {/* Satellite Map Preview with Red Pin & Floating Button */}
+              <div className="relative mt-4 h-36 sm:h-40 w-full overflow-hidden rounded-[14px] border border-slate-100 bg-slate-100">
+                <Image
+                  alt={t.contact.cards.batamTitle}
+                  className="object-cover transition-transform duration-500 group-hover:scale-105"
+                  fill
+                  sizes="(min-width: 1024px) 430px, 90vw"
+                  src="/images/map-batam.jpg"
+                />
+                <a
+                  className="absolute right-2.5 bottom-2.5 z-10 inline-flex items-center gap-1.5 rounded-lg bg-white/95 backdrop-blur-sm border border-slate-200/90 px-3 py-1.5 text-[11px] font-semibold text-slate-800 shadow-md hover:bg-white hover:border-[#45a02e] hover:text-[#45a02e] transition-all cursor-pointer"
+                  href="https://www.google.com/maps/search/?api=1&query=1.1058157731502605%2C104.07543166924557"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  <span>{t.contact.cards.openGoogleMaps}</span>
+                </a>
+              </div>
+            </div>
           </Reveal>
 
-        <Reveal delay={100} y={16}>
-          <Card className="border border-emerald-100 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.09)]">
-            <CardContent>
+          {/* Right Column: Contact Consultation Form Card */}
+          <Reveal delay={100} y={16}>
+            <div className="rounded-[24px] sm:rounded-[32px] border border-slate-200/90 bg-white p-6 sm:p-8 lg:p-10 shadow-[0_12px_40px_rgba(0,0,0,0.04)]">
               <ContactForm selectedPackage={null} />
-            </CardContent>
-          </Card>
-        </Reveal>
+            </div>
+          </Reveal>
+        </div>
       </div>
     </section>
   );
 }
+

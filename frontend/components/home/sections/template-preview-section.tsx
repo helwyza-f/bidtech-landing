@@ -216,13 +216,13 @@ export function TemplatePreviewSection() {
         </div>
 
         {/* Bottom CTA: Lihat Lebih banyak Template */}
-        <div className="mt-10 sm:mt-12 flex justify-center px-4">
+        <div className="mt-10 sm:mt-12 flex justify-center">
           <Link
-            className="inline-flex w-full xs:w-auto items-center justify-center gap-2.5 rounded-full border-2 border-[#45a02e] bg-white px-7 sm:px-8 py-3.5 text-sm sm:text-base font-bold text-[#45a02e] shadow-sm hover:bg-[#45a02e] hover:text-white transition-all hover:scale-105 active:scale-95 text-center"
+            className="inline-flex items-center justify-center gap-2.5 rounded-full border-2 border-[#45a02e] bg-white px-7 sm:px-9 py-3 sm:py-3.5 text-sm sm:text-base font-bold text-[#3b8e26] shadow-[0_6px_20px_rgba(69,160,46,0.16)] hover:bg-[#f0f9ea] hover:shadow-[0_8px_24px_rgba(69,160,46,0.24)] hover:-translate-y-0.5 active:scale-95 transition-all duration-200 text-center"
             href="/template-website"
           >
             <span>{t.templatePreview.more}</span>
-            <ArrowRight className="size-4" />
+            <ArrowRight className="size-4 sm:size-4.5" />
           </Link>
         </div>
       </div>
