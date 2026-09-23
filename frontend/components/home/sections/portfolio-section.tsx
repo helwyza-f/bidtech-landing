@@ -31,17 +31,35 @@ export function PortfolioSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  const [dimensions, setDimensions] = useState({
-    containerWidth: 1000,
-    cardWidth: 320,
-    gap: 16,
-    leftMargin: 0,
-    isThreeCardView: true,
+  const [dimensions, setDimensions] = useState(() => {
+    if (typeof window !== "undefined") {
+      const w = window.innerWidth;
+      const isThree = w >= 680;
+      const gapW = isThree ? (w < 900 ? 12 : w < 1200 ? 16 : 20) : (w < 380 ? 12 : 16);
+      const cardW = isThree
+        ? Math.min(370, Math.floor((w - 2 * gapW) / 3))
+        : Math.min(Math.round(w - 24), 400);
+      return {
+        containerWidth: w,
+        cardWidth: cardW,
+        gap: gapW,
+        leftMargin: 0,
+        isThreeCardView: isThree,
+      };
+    }
+    return {
+      containerWidth: 1000,
+      cardWidth: 320,
+      gap: 16,
+      leftMargin: 0,
+      isThreeCardView: true,
+    };
   });
 
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
+  const touchEndY = useRef<number | null>(null);
   const dragStartX = useRef<number | null>(null);
   const isDragging = useRef(false);
 
@@ -53,17 +71,9 @@ export function PortfolioSection() {
     let margin = 0;
 
     if (!isThree) {
-      // Mobile (<680px): 1 card visible in center
-      if (width < 340) {
-        gapW = 8;
-        cardW = Math.round(width * 0.85);
-      } else if (width < 480) {
-        gapW = 12;
-        cardW = Math.round(width * 0.84);
-      } else {
-        gapW = 14;
-        cardW = Math.round(width * 0.8);
-      }
+      // Mobile (<680px): exactly 1 full card visible cleanly in center without being clipped
+      gapW = width < 380 ? 12 : 16;
+      cardW = Math.min(Math.round(width - 24), 400);
     } else {
       // Desktop / Tablet (>=680px): exactly 3 cards fit in width without any clipping
       if (width < 900) {
@@ -208,10 +218,13 @@ export function PortfolioSection() {
     setIsPaused(true);
     touchStartX.current = e.targetTouches[0].clientX;
     touchStartY.current = e.targetTouches[0].clientY;
+    touchEndX.current = null;
+    touchEndY.current = null;
   };
 
   const onTouchMove = (e: TouchEvent) => {
     touchEndX.current = e.targetTouches[0].clientX;
+    touchEndY.current = e.targetTouches[0].clientY;
   };
 
   const onTouchEnd = () => {
@@ -220,21 +233,33 @@ export function PortfolioSection() {
       touchStartX.current = null;
       touchEndX.current = null;
       touchStartY.current = null;
+      touchEndY.current = null;
       return;
     }
 
     const distanceX = touchStartX.current - touchEndX.current;
-    const minSwipeDistance = 35; // Responsive sensitivity for mobile
+    const distanceY =
+      touchStartY.current !== null && touchEndY.current !== null
+        ? touchStartY.current - touchEndY.current
+        : 0;
+    const minSwipeDistance = 30; // Responsive sensitivity for mobile
 
-    if (distanceX > minSwipeDistance) {
-      handleNext();
-    } else if (distanceX < -minSwipeDistance) {
-      handlePrev();
+    // Disambiguate: only trigger slide transition if horizontal movement exceeds vertical
+    if (
+      Math.abs(distanceX) > minSwipeDistance &&
+      Math.abs(distanceX) > Math.abs(distanceY) * 1.1
+    ) {
+      if (distanceX > 0) {
+        handleNext();
+      } else {
+        handlePrev();
+      }
     }
 
     touchStartX.current = null;
     touchEndX.current = null;
     touchStartY.current = null;
+    touchEndY.current = null;
   };
 
   // Desktop Mouse Drag Handlers
@@ -450,7 +475,7 @@ export function PortfolioSection() {
       <div className="mt-5 flex sm:hidden items-center justify-center gap-3">
         <button
           aria-label="Portofolio sebelumnya"
-          className="flex size-8 xs:size-9 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-sm active:scale-90 transition-transform cursor-pointer"
+          className="flex size-9 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-sm active:scale-90 transition-transform cursor-pointer"
           onClick={handlePrev}
           type="button"
         >
@@ -493,7 +518,7 @@ export function PortfolioSection() {
 
         <button
           aria-label="Portofolio berikutnya"
-          className="flex size-8 xs:size-9 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-sm active:scale-90 transition-transform cursor-pointer"
+          className="flex size-9 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-sm active:scale-90 transition-transform cursor-pointer"
           onClick={handleNext}
           type="button"
         >
