@@ -33,12 +33,14 @@ export function MitraSection() {
           </p>
         </div>
 
-        <div
-          className="mt-8 overflow-hidden md:mt-12 [mask-image:linear-gradient(to_right,transparent,black_4%,black_96%,transparent)]"
-        >
+        <div className="mitra-marquee-window mt-8 overflow-hidden md:mt-12">
           <div className="mitra-marquee-track flex w-max min-w-max items-center gap-3 sm:gap-4 will-change-transform">
             {[0, 1, 2].map((groupIndex) => (
-              <div aria-hidden={groupIndex !== 0} className="flex shrink-0 items-center gap-3 sm:gap-4" key={`mitra-group-${groupIndex}`}>
+              <div
+                aria-hidden={groupIndex !== 0}
+                className="flex shrink-0 items-center gap-3 sm:gap-4"
+                key={`mitra-group-${groupIndex}`}
+              >
                 {mitraLogos.map((mitra) => (
                   <div
                     className="flex h-20 w-36 shrink-0 items-center justify-center rounded-[18px] sm:rounded-[22px] bg-white p-3 sm:h-28 sm:w-48 sm:p-4 border border-slate-100 shadow-sm"
@@ -58,24 +60,6 @@ export function MitraSection() {
           </div>
         </div>
       </div>
-          <style jsx>{`
-          .mitra-marquee-track {
-            animation: mitra-marquee 22s linear infinite;
-          }
-
-          .mitra-marquee-track:hover {
-            animation-play-state: paused;
-          }
-
-          @keyframes mitra-marquee {
-            from {
-              transform: translate3d(0, 0, 0);
-            }
-            to {
-              transform: translate3d(-33.3333%, 0, 0);
-            }
-          }
-        `}</style>
     </section>
   );
 }

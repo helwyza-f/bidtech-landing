@@ -71,6 +71,29 @@ button {
   }
 }
 
+.mitra-marquee-window {
+  -webkit-mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 3%, black 97%, transparent);
+}
+
+.mitra-marquee-track {
+  animation: mitra-marquee 22s linear infinite;
+  transform: translate3d(0, 0, 0);
+}
+
+.mitra-marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes mitra-marquee {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-33.3333%, 0, 0);
+  }
+}
+
 ::selection {
   background: rgba(190, 242, 100, 0.36);
   color: inherit;

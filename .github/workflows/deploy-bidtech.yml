@@ -1,0 +1,287 @@
+name: BidTech CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+concurrency:
+  group: bidtech-production
+  cancel-in-progress: false
+
+jobs:
+  build-frontend:
+    name: Build & Test Frontend
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      - name: Build template demos into frontend/public/demo
+        working-directory: frontend
+        run: npm run demos:build
+
+      - name: Build frontend Docker image
+        working-directory: frontend
+        run: docker build -t bidtech-frontend:ci .
+
+      - name: Run frontend container with npm start
+        run: docker run -d --name frontend-ci -p 3000:3000 bidtech-frontend:ci npm run start
+
+      - name: Wait for frontend to be ready
+        run: |
+          for i in $(seq 1 30); do
+            if curl -sf http://localhost:3000 > /dev/null; then
+              echo "Frontend is up"
+              exit 0
+            fi
+            sleep 2
+          done
+          echo "Frontend did not become ready in time"
+          docker logs frontend-ci
+          exit 1
+
+      - name: Smoke test homepage
+        run: curl -sf http://localhost:3000 > /dev/null
+
+      - name: Smoke test all template demos
+        run: node scripts/test-demos.js --server=http://localhost:3000
+
+      - name: Dump frontend logs on failure
+        if: failure()
+        run: docker logs frontend-ci || true
+
+      - name: Cleanup frontend container
+        if: always()
+        run: docker rm -f frontend-ci || true
+
+  build-dashboard:
+    name: Build & Test Dashboard
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: dashboard-bidtech
+        shell: bash
+    env:
+      WHATSAPP_API_KEY: ${{ secrets.WHATSAPP_API_KEY }}
+      IDCLOUDHOST_API_KEY: ${{ secrets.IDCLOUDHOST_API_KEY }}
+      XENDIT_WEBHOOK_TOKEN: ${{ secrets.XENDIT_WEBHOOK_TOKEN }}
+      XENDIT_SECRET_KEY: ${{ secrets.XENDIT_SECRET_KEY }}
+      MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      APP_KEY: ${{ secrets.APP_KEY }}
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Generate .env from .env.example with secret overrides
+        run: |
+          cp .env.example .env
+          python3 <<'PY'
+          import os
+          from pathlib import Path
+
+          overrides = {
+              "FRONTEND_URL": "https://bidtech.co.id",
+              "WHATSAPP_API_KEY": os.environ.get("WHATSAPP_API_KEY", ""),
+              "FONNTE_TOKEN": os.environ.get("WHATSAPP_API_KEY", ""),
+              "IDCLOUDHOST_API_KEY": os.environ.get("IDCLOUDHOST_API_KEY", ""),
+              "XENDIT_WEBHOOK_TOKEN": os.environ.get("XENDIT_WEBHOOK_TOKEN", ""),
+              "XENDIT_SECRET_KEY": os.environ.get("XENDIT_SECRET_KEY", ""),
+              "MAIL_PASSWORD": os.environ.get("MAIL_PASSWORD", ""),
+              "DB_PASSWORD": os.environ.get("DB_PASSWORD", ""),
+              "APP_KEY": os.environ.get("APP_KEY", ""),
+              "DB_HOST": "mysql",
+          }
+
+          def dotenv_value(value):
+              # Docker Compose-compatible double-quoted value.
+              return '"' + (
+                  value.replace("\\", "\\\\")
+                      .replace('"', '\\"')
+                      .replace("$", "$$")
+                      .replace("\r", "\\r")
+                      .replace("\n", "\\n")
+              ) + '"'
+
+          path = Path(".env")
+          lines = path.read_text().splitlines()
+          found = set()
+          output = []
+
+          for line in lines:
+              key = line.split("=", 1)[0] if "=" in line else None
+              if key in overrides:
+                  output.append(f"{key}={dotenv_value(overrides[key])}")
+                  found.add(key)
+              else:
+                  output.append(line)
+
+          for key, value in overrides.items():
+              if key not in found:
+                  output.append(f"{key}={dotenv_value(value)}")
+
+          path.write_text("\n".join(output) + "\n")
+          PY
+
+      - name: Build images
+        run: docker compose build
+
+      - name: Start MySQL
+        run: docker compose up -d --wait mysql
+
+      - name: Run migrations
+        run: docker compose run --rm app php artisan migrate --force --seed
+
+      - name: Start app
+        run: docker compose up -d --wait app
+
+      - name: Health check
+        run: curl -sf http://127.0.0.1:8000/up > /dev/null
+
+      - name: Dump logs on failure
+        if: failure()
+        run: docker compose logs
+
+      - name: Cleanup
+        if: always()
+        run: docker compose down -v
+
+  deploy:
+    name: Deploy to VPS
+    needs: [build-frontend, build-dashboard]
+    if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Execute Remote SSH Deploy on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        env:
+          WHATSAPP_API_KEY: ${{ secrets.WHATSAPP_API_KEY }}
+          IDCLOUDHOST_API_KEY: ${{ secrets.IDCLOUDHOST_API_KEY }}
+          XENDIT_WEBHOOK_TOKEN: ${{ secrets.XENDIT_WEBHOOK_TOKEN }}
+          XENDIT_SECRET_KEY: ${{ secrets.XENDIT_SECRET_KEY }}
+          MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+          DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+          APP_KEY: ${{ secrets.APP_KEY }}
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+          timeout: 2m
+          command_timeout: 30m
+
+          envs: WHATSAPP_API_KEY,IDCLOUDHOST_API_KEY,XENDIT_WEBHOOK_TOKEN,XENDIT_SECRET_KEY,MAIL_PASSWORD,DB_PASSWORD,APP_KEY
+
+          script: |
+            set -e
+            echo "1.) Akses folder bidtech di VPS"
+            cd /opt/bidtech-new
+            git fetch origin main
+            git reset --hard origin/main
+            git clean -fd
+            git pull origin main || git pull
+
+            echo "2.) Deploy frontend"
+            cd /opt/bidtech-new/frontend
+            rm .env
+            cp .env.example .env
+            npm run demos:build
+            TAG=$(date +%Y%m%d%H%M)
+            IMAGE_NAME="bidtech-frontend:$TAG"
+            docker build -t "$IMAGE_NAME" .
+
+            docker stop BidTech-Frontend 2>/dev/null || true
+            docker rm BidTech-Frontend 2>/dev/null || true
+
+            docker run -d \
+              --name BidTech-Frontend \
+              --restart unless-stopped \
+              --network bidtech-api \
+              --env-file /opt/bidtech-new/frontend/.env \
+              -p 127.0.0.1:3010:3000 \
+              "$IMAGE_NAME"
+
+            echo "3.) Deploy dashboard-bidtech"
+            cd /opt/bidtech-new/dashboard-bidtech
+            rm .env
+            cp .env.example .env
+            python3 <<'PY'
+            import os
+            from pathlib import Path
+
+            overrides = {
+                "FRONTEND_URL": "https://bidtech.co.id",
+                "WHATSAPP_API_KEY": os.environ.get("WHATSAPP_API_KEY", ""),
+                "FONNTE_TOKEN": os.environ.get("WHATSAPP_API_KEY", ""),
+                "IDCLOUDHOST_API_KEY": os.environ.get("IDCLOUDHOST_API_KEY", ""),
+                "XENDIT_WEBHOOK_TOKEN": os.environ.get("XENDIT_WEBHOOK_TOKEN", ""),
+                "XENDIT_SECRET_KEY": os.environ.get("XENDIT_SECRET_KEY", ""),
+                "MAIL_PASSWORD": os.environ.get("MAIL_PASSWORD", ""),
+                "DB_PASSWORD": os.environ.get("DB_PASSWORD", ""),
+                "APP_KEY": os.environ.get("APP_KEY", ""),
+                "DB_HOST": "mysql",
+            }
+
+            overrides.update({
+                "APP_ENV": "production",
+                "APP_DEBUG": "false",
+                "APP_URL": "https://dashboard.bidtech.co.id",
+            })            
+
+            def dotenv_value(value):
+                # Docker Compose-compatible double-quoted value.
+                return '"' + (
+                    value.replace("\\", "\\\\")
+                        .replace('"', '\\"')
+                        .replace("$", "$$")
+                        .replace("\r", "\\r")
+                        .replace("\n", "\\n")
+                ) + '"'
+
+            path = Path(".env")
+            lines = path.read_text().splitlines()
+            found = set()
+            output = []
+
+            for line in lines:
+                key = line.split("=", 1)[0] if "=" in line else None
+                if key in overrides:
+                    output.append(f"{key}={dotenv_value(overrides[key])}")
+                    found.add(key)
+                else:
+                    output.append(line)
+
+            for key, value in overrides.items():
+                if key not in found:
+                    output.append(f"{key}={dotenv_value(value)}")
+
+            path.write_text("\n".join(output) + "\n")
+            PY
+
+            docker compose -f compose.yml -f compose.prod.yml build
+            docker compose -f compose.yml -f compose.prod.yml up -d --wait mysql
+            docker compose -f compose.yml -f compose.prod.yml run --rm app php artisan migrate --force --seed
+            docker compose -f compose.yml -f compose.prod.yml up -d --wait app
+
+            echo "==> Status"
+            docker ps | grep BidTech-Frontend || true
+            docker compose -f compose.yml -f compose.prod.yml ps
+
+            echo "==> Logs"
+            docker logs --tail 100 BidTech-Frontend
+            docker compose -f compose.yml -f compose.prod.yml logs --tail 100 app

@@ -80,7 +80,7 @@ function BlobLayer({
     <motion.svg
       aria-hidden
       viewBox="-220 -220 440 440"
-      className="absolute inset-0 h-full w-full overflow-visible"
+      className="pointer-events-none absolute inset-0 h-full w-full overflow-visible"
       style={{
         left: `${layer.offsetX}%`,
         top: `${layer.offsetY}%`,
@@ -101,6 +101,7 @@ function BlobLayer({
         </radialGradient>
       </defs>
       <motion.path
+        d={layer.paths[0]}
         fill={`url(#${gradientId})`}
         opacity={layer.opacity}
         animate={{ d: layer.paths }}
@@ -115,13 +116,14 @@ export function HeroBlob({ className }: { className?: string }) {
   return (
     <motion.div
       aria-hidden
-      className={className}
+      className={`pointer-events-none ${className ?? ""}`}
       style={{
         position: "absolute",
         filter: "blur(19px)",
+        opacity: 1,
         willChange: "opacity",
       }}
-      initial={{ opacity: 0 }}
+      initial={false}
       animate={{ opacity: 1 }}
       transition={{ duration: HERO_TIMINGS.blobFadeIn / 1000, ease: "easeOut" }}
     >

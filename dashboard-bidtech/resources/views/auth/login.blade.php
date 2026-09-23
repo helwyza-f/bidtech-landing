@@ -93,17 +93,31 @@
                             Password
                         </label>
 
-                        <input id="password" type="password" name="password" placeholder="Password" autocomplete="current-password" required
-                            class="
-                                h-12 w-full rounded-xl border border-border
-                                bg-white px-4 text-sm text-ink outline-none
-                                transition
-                                placeholder:text-slate-400
-                                focus:border-primary
-                                focus:ring-4
-                                focus:ring-primary/10
-                            "
-                        >
+                        <div class="relative">
+                            <input id="password" type="password" name="password" placeholder="Password" autocomplete="current-password" required
+                                class="
+                                    h-12 w-full rounded-xl border border-border
+                                    bg-white pl-4 pr-11 text-sm text-ink outline-none
+                                    transition
+                                    placeholder:text-slate-400
+                                    focus:border-primary
+                                    focus:ring-4
+                                    focus:ring-primary/10
+                                "
+                            >
+                            <button type="button" onclick="toggleLoginPassword()" id="btn-toggle-login-pass" class="absolute inset-y-0 right-0 flex items-center pr-3.5 text-slate-400 hover:text-ink transition cursor-pointer" aria-label="Lihat password">
+                                <svg id="icon-eye-login" class="size-4.5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 .696 10.75 10.75 0 0 1-19.876 0"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                                <svg id="icon-eye-off-login" class="size-4.5 hidden" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <path d="M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49"/>
+                                    <path d="M14.084 14.158a3 3 0 0 1-4.242-4.242"/>
+                                    <path d="M17.479 17.499A10.75 10.75 0 0 1 2.062 12.35a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.125-5.323"/>
+                                    <line x1="2" x2="22" y1="2" y2="22"/>
+                                </svg>
+                            </button>
+                        </div>
                     </div>
 
                     <div class="mt-4 flex items-center justify-between gap-4">
@@ -142,4 +156,26 @@
         </div>
     </section>
 </div>
+
+<script>
+function toggleLoginPassword() {
+    const input = document.getElementById('password');
+    const eyeIcon = document.getElementById('icon-eye-login');
+    const eyeOffIcon = document.getElementById('icon-eye-off-login');
+    const btn = document.getElementById('btn-toggle-login-pass');
+    if (!input) return;
+
+    if (input.type === 'password') {
+        input.type = 'text';
+        if (eyeIcon) eyeIcon.classList.add('hidden');
+        if (eyeOffIcon) eyeOffIcon.classList.remove('hidden');
+        if (btn) btn.setAttribute('aria-label', 'Sembunyikan password');
+    } else {
+        input.type = 'password';
+        if (eyeIcon) eyeIcon.classList.remove('hidden');
+        if (eyeOffIcon) eyeOffIcon.classList.add('hidden');
+        if (btn) btn.setAttribute('aria-label', 'Lihat password');
+    }
+}
+</script>
 @endsection

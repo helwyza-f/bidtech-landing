@@ -34,8 +34,8 @@ export const en = {
     ctaSecondary: "View Portfolio",
   },
   heroShowcase: {
-    ctaPrimary: "Browse Designs",
-    ctaSecondary: "Contact Us",
+    ctaPrimary: "Checking Domain Free!",
+    ctaSecondary: "Explore a Templates",
     appStorePrefix: "Download on the",
     googlePlayPrefix: "GET IT ON",
     slides: [

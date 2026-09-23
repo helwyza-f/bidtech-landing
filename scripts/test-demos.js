@@ -21,6 +21,11 @@ const expectedDemos = [
   "aliansi-kepemimpinan-indonesia",
   "tehin",
   "agak-rapi",
+  "pinjammobil",
+  "forcevault",
+  "elevasi",
+  "jayawijaya",
+  "afindo",
 ];
 
 // CLI options

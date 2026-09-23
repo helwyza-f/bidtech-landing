@@ -32,7 +32,7 @@ class LoginController extends Controller
         // Reset session
         $request->session()->regenerate();
 
-        // Teruskan user ke halaman dashboard
+        // Teruskan user (klien maupun admin) ke halaman dashboard utama
         return redirect()->intended(route('dashboard'));
     }
 

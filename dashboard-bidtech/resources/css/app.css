@@ -6,28 +6,161 @@
 @source "../**/*.js";
 
 @theme {
-    --font-sans: "Plus Jakarta Sans", "Inter", ui-sans-serif, system-ui, sans-serif;
+    --font-sans: "Inter", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
 
-    --color-forest: #0B3D2E;
-    --color-primary: #1E7A4C;
-    --color-primary-hover: #166139;
+    /* Palet Warna Dashboard Bidtech (Ubah di sini untuk merubah warna tema dashboard) */
+    /* Primary Base (#63E009) & Skala Turunan (50 - 950) */
+    --color-primary-50: #F2FDE8;
+    --color-primary-100: #E3FACB;
+    --color-primary-200: #C7F59B;
+    --color-primary-300: #A3ED60;
+    --color-primary-400: #7EE625;
+    --color-primary-500: #63E009;
+    --color-primary-600: #4EB307;
+    --color-primary-700: #3B8705;
+    --color-primary-800: #2E6806;
+    --color-primary-900: #245207;
+    --color-primary-950: #0E2502;
 
-    --color-sage: #5FAE7F;
-    --color-mint: #C6E6D3;
-    --color-mint-soft: #EAF6EF;
+    /* Semantic Primary Tokens */
+    --color-primary: #63E009;
+    --color-primary-hover: #4EB307;
+    --color-primary-active: #3B8705;
+    --color-primary-light: #F2FDE8;
+    --color-primary-subtle: #E3FACB;
+    --color-primary-border: #C7F59B;
+    --color-primary-dark: #2E6806;
+    --color-primary-darker: #0E2502;
+    --color-primary-text: #0E2502;
+    --color-primary-foreground: #0B1B17;
 
-    --color-ink: #0F172A;
-    --color-ink-muted: #64748B;
+    --color-forest: #0E2502;
+    --color-sage: #5FB826;
+    --color-mint: #C7F59B;
+    --color-mint-soft: #F2FDE8;
 
-    --color-canvas: #F7F8F7;
+    --color-ink: #0B1B17;
+    --color-ink-muted: #6B7B75;
+
+    --color-canvas: #F4F6F5;
     --color-surface: #FFFFFF;
-    --color-border: #E5E9E6;
+    --color-border: #E4E9E6;
+    --color-border-light: #F0F3F1;
 
-    --color-danger: #DC4C4C;
+    --color-success: #2E6806;
+    --color-success-surface: #EBFBD9;
+
+    --color-danger: #E53E3E;
     --color-danger-bg: #FBE7E7;
     --color-danger-text: #791F1F;
 
-    --color-warning: #E8A23D;
-    --color-warning-bg: #FBF0DD;
+    --color-warning: #B25E09;
+    --color-warning-surface: #FDF3E7;
     --color-warning-text: #854F0B;
+
+    --color-whatsapp: #25D366;
+}
+
+.page-view {
+    display: none;
+}
+.page-view.active {
+    display: block;
+}
+
+/* Sidebar Collapsible Behavior */
+aside#sidebar {
+    transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+aside#sidebar.collapsed {
+    width: 4.5rem !important; /* 72px */
+    padding-left: 0.625rem !important;
+    padding-right: 0.625rem !important;
+}
+
+aside#sidebar.collapsed .sidebar-text {
+    display: none !important;
+}
+
+aside#sidebar.collapsed .sidebar-header-section {
+    display: none !important;
+}
+
+aside#sidebar.collapsed .sidebar-logo-full {
+    display: none !important;
+}
+
+aside#sidebar.collapsed .sidebar-logo-mini {
+    display: flex !important;
+}
+
+aside#sidebar.collapsed .sidebar-nav-btn {
+    justify-content: center !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    gap: 0 !important;
+}
+
+aside#sidebar.collapsed .sidebar-top-wrapper {
+    flex-direction: column !important;
+    gap: 0.75rem !important;
+    justify-content: center !important;
+    align-items: center !important;
+    padding: 0 !important;
+}
+
+/* ================= PAGE SKELETON SCREEN & SHIMMER ================= */
+@keyframes shimmer-sweep {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+
+.animate-shimmer {
+    position: relative;
+    overflow: hidden;
+}
+
+.animate-shimmer::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0.45) 20%,
+        rgba(255, 255, 255, 0.75) 60%,
+        rgba(255, 255, 255, 0)
+    );
+    animation: shimmer-sweep 1.5s infinite;
+    content: '';
+}
+
+.page-skeleton-overlay {
+    transition: opacity 0.35s cubic-bezier(0.4, 0, 0.2, 1), visibility 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-skeleton-overlay.fade-out {
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+}
+
+.page-content-wrapper {
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.page-content-wrapper.loading {
+    opacity: 0;
+}
+
+.page-content-wrapper.loaded {
+    opacity: 1;
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useState, type ReactNode } from "react";
 
 import { id } from "./id";
 import { en } from "./en";
@@ -21,17 +21,22 @@ interface LanguageContextValue {
 const LanguageContext = createContext<LanguageContextValue | null>(null);
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>(() => {
-    if (typeof window === "undefined") return "id";
-
-    const savedLang = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
-    return savedLang === "en" || savedLang === "id" ? savedLang : "id";
-  });
+  // Render pertama harus sama dengan server ("id"); preferensi tersimpan dibaca setelah hydration.
+  const [lang, setLangState] = useState<Lang>("id");
 
   useEffect(() => {
-    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, lang);
+    const savedLang = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    if (savedLang === "en" || savedLang === "id") setLangState(savedLang);
+  }, []);
+
+  useEffect(() => {
     document.documentElement.lang = lang;
   }, [lang]);
+
+  const setLang = useCallback((next: Lang) => {
+    setLangState(next);
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, next);
+  }, []);
 
   return (
     <LanguageContext.Provider value={{ lang, setLang, t: translations[lang] }}>
