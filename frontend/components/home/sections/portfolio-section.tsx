@@ -32,9 +32,10 @@ export function PortfolioSection() {
   const trackRef = useRef<HTMLDivElement>(null);
 
   const [dimensions, setDimensions] = useState({
-    containerWidth: 1200,
-    cardWidth: 360,
-    gap: 20,
+    containerWidth: 1000,
+    cardWidth: 320,
+    gap: 16,
+    leftMargin: 0,
     isThreeCardView: true,
   });
 
@@ -44,57 +45,73 @@ export function PortfolioSection() {
   const dragStartX = useRef<number | null>(null);
   const isDragging = useRef(false);
 
-  // Responsive dimensions: exactly 3 cards in the viewport on desktop/tablet, centered 1 card on mobile
-  useEffect(() => {
-    const updateDimensions = () => {
-      const windowWidth = typeof window !== "undefined" ? window.innerWidth : 1200;
-      const isThree = windowWidth >= 768;
+  const updateFromWidth = useCallback((width: number) => {
+    if (width <= 0) return;
+    const isThree = width >= 680;
+    let gapW = 16;
+    let cardW = 320;
+    let margin = 0;
 
-      let cardW = 360;
-      let gapW = 20;
-
-      if (windowWidth < 340) {
-        // Ultra-compact mobile (Fold 280px, SE 320px)
-        cardW = Math.round(windowWidth * 0.8);
+    if (!isThree) {
+      // Mobile (<680px): 1 card visible in center
+      if (width < 340) {
         gapW = 8;
-      } else if (windowWidth < 480) {
-        // Standard mobile (360px - 430px)
-        cardW = Math.round(windowWidth * 0.82);
+        cardW = Math.round(width * 0.85);
+      } else if (width < 480) {
         gapW = 12;
-      } else if (windowWidth < 768) {
-        // Phablet (480px - 767px)
-        cardW = 340;
-        gapW = 16;
-      } else if (windowWidth < 1024) {
-        // Tablet (768px - 1023px) - exactly 3 cards in slide
-        const available = Math.min(windowWidth - 110, 880);
-        gapW = 14;
-        cardW = Math.floor((available - 2 * gapW) / 3);
-      } else if (windowWidth < 1280) {
-        // Small Laptop (1024px - 1279px) - exactly 3 cards in slide
-        const available = Math.min(windowWidth - 120, 1060);
-        gapW = 18;
-        cardW = Math.floor((available - 2 * gapW) / 3);
+        cardW = Math.round(width * 0.84);
       } else {
-        // Standard Desktop / Large screen (>= 1280px) - exactly 3 cards in slide
+        gapW = 14;
+        cardW = Math.round(width * 0.8);
+      }
+    } else {
+      // Desktop / Tablet (>=680px): exactly 3 cards fit in width without any clipping
+      if (width < 900) {
+        gapW = 12;
+      } else if (width < 1200) {
+        gapW = 16;
+      } else {
         gapW = 20;
-        cardW = 360;
       }
 
-      const containerW = containerRef.current ? containerRef.current.offsetWidth : windowWidth;
+      // Calculate card width dynamically from the exact container width
+      const totalAvailable = width - 2 * gapW;
+      const rawCardW = Math.floor(totalAvailable / 3);
+      cardW = Math.min(370, rawCardW);
+      margin = Math.max(0, Math.floor((width - (3 * cardW + 2 * gapW)) / 2));
+    }
 
-      setDimensions({
-        containerWidth: containerW,
-        cardWidth: cardW,
-        gap: gapW,
-        isThreeCardView: isThree,
-      });
-    };
-
-    updateDimensions();
-    window.addEventListener("resize", updateDimensions);
-    return () => window.removeEventListener("resize", updateDimensions);
+    setDimensions({
+      containerWidth: width,
+      cardWidth: cardW,
+      gap: gapW,
+      leftMargin: margin,
+      isThreeCardView: isThree,
+    });
   }, []);
+
+  // ResizeObserver dynamically measures containerRef client width in real-time
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const initialW = el.clientWidth;
+    if (initialW > 0) {
+      updateFromWidth(initialW);
+    }
+
+    const observer = new ResizeObserver((entries) => {
+      for (const entry of entries) {
+        const width = entry.contentRect.width;
+        if (width > 0) {
+          updateFromWidth(width);
+        }
+      }
+    });
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [updateFromWidth]);
 
   // Multi-copy infinite items list
   const extendedItems = useMemo(() => {
@@ -259,11 +276,11 @@ export function PortfolioSection() {
   };
 
   // Center offset calculation:
-  // On desktop/tablet (isThreeCardView): exactly 3 cards fit in the viewport, center card at index 1
-  // On mobile (<768px): single card centered with peek
-  const { containerWidth, cardWidth, gap, isThreeCardView } = dimensions;
+  // On desktop/tablet (isThreeCardView): exactly 3 cards fit in the viewport without any clipping
+  // On mobile (<680px): single card centered with peek
+  const { containerWidth, cardWidth, gap, leftMargin, isThreeCardView } = dimensions;
   const translateX = isThreeCardView
-    ? (cardWidth + gap) * (1 - currentIndex)
+    ? leftMargin + (cardWidth + gap) * (1 - currentIndex)
     : containerWidth / 2 - (currentIndex * (cardWidth + gap) + cardWidth / 2);
   const realActiveIndex = ((currentIndex % itemCount) + itemCount) % itemCount;
 
@@ -301,11 +318,11 @@ export function PortfolioSection() {
       </div>
 
       {/* Centered Infinite Carousel Slider Track Container */}
-      <div className="relative mx-auto mt-6 sm:mt-10 flex w-full max-w-7xl items-center justify-center gap-2 sm:gap-3 lg:gap-5 px-2 sm:px-4">
-        {/* Desktop / Tablet Floating Side Navigation Buttons */}
+      <div className="relative mx-auto mt-6 sm:mt-10 flex w-full max-w-7xl items-center justify-center px-2 sm:px-4 lg:px-6">
+        {/* Desktop / Tablet Left Arrow Button */}
         <button
           aria-label="Portofolio sebelumnya"
-          className="hidden sm:flex size-10 lg:size-12 shrink-0 items-center justify-center rounded-full bg-white border border-slate-200/90 text-slate-700 shadow-md transition-all hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer z-20"
+          className="hidden sm:flex size-10 lg:size-12 shrink-0 items-center justify-center rounded-full bg-white border border-slate-200/90 text-slate-700 shadow-md transition-all hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer z-20 mr-2 sm:mr-3 lg:mr-4"
           onClick={handlePrev}
           type="button"
         >
@@ -314,7 +331,7 @@ export function PortfolioSection() {
 
         {/* 3-Card Viewport on Desktop / 1-Card Centered on Mobile */}
         <div
-          className="relative overflow-hidden touch-pan-y focus:outline-none py-3 sm:py-5"
+          className="relative flex-1 min-w-0 overflow-hidden touch-pan-y focus:outline-none py-6 sm:py-8"
           onKeyDown={handleKeyDown}
           onMouseDown={handleMouseDown}
           onMouseEnter={() => setIsPaused(true)}
@@ -324,17 +341,11 @@ export function PortfolioSection() {
           onTouchMove={onTouchMove}
           onTouchStart={onTouchStart}
           ref={containerRef}
-          style={{
-            width: isThreeCardView
-              ? `${cardWidth * 3 + gap * 2}px`
-              : "100%",
-            maxWidth: "100%",
-          }}
           tabIndex={0}
         >
           {/* Sliding Flex Track with Continuous Looping */}
           <div
-            className="flex items-stretch select-none will-change-transform"
+            className="flex items-stretch select-none will-change-transform py-2"
             onTransitionEnd={handleTransitionEnd}
             ref={trackRef}
             style={{
@@ -427,7 +438,7 @@ export function PortfolioSection() {
         {/* Desktop / Tablet Right Arrow Button */}
         <button
           aria-label="Portofolio berikutnya"
-          className="hidden sm:flex size-10 lg:size-12 shrink-0 items-center justify-center rounded-full bg-white border border-slate-200/90 text-slate-700 shadow-md transition-all hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer z-20"
+          className="hidden sm:flex size-10 lg:size-12 shrink-0 items-center justify-center rounded-full bg-white border border-slate-200/90 text-slate-700 shadow-md transition-all hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer z-20 ml-2 sm:ml-3 lg:ml-4"
           onClick={handleNext}
           type="button"
         >
