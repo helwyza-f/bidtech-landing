@@ -50,7 +50,7 @@ export function DomainResultsSection({
     targetUrl.searchParams.set("price", String(domain.price));
     if (domain.price_base) targetUrl.searchParams.set("price_base", String(domain.price_base));
     if (domain.tax_amount) targetUrl.searchParams.set("tax_amount", String(domain.tax_amount));
-    window.location.href = targetUrl.toString();
+    window.location.assign(targetUrl.toString());
   };
 
   const filteredResults = results.filter((item) => {

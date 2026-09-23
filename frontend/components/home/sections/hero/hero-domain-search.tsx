@@ -75,17 +75,18 @@ export function HeroDomainSearch() {
   useEffect(() => {
     const base = keyword.trim().replace(/\..+$/, "");
     if (base.length < 4) {
-      if (hasSearched) {
-        setHasSearched(false);
-        setResults([]);
-        setErrorMessage("");
-      }
-      return;
+      const timer = setTimeout(() => {
+        if (hasSearched) {
+          setHasSearched(false);
+          setResults([]);
+          setErrorMessage("");
+        }
+      }, 0);
+      return () => clearTimeout(timer);
     }
     const timer = setTimeout(() => handleSearch(keyword.trim()), 500);
     return () => clearTimeout(timer);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [keyword]);
+  }, [keyword, hasSearched]);
 
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
@@ -103,7 +104,7 @@ export function HeroDomainSearch() {
     url.searchParams.set("price", String(item.price));
     if (item.price_base) url.searchParams.set("price_base", String(item.price_base));
     if (item.tax_amount) url.searchParams.set("tax_amount", String(item.tax_amount));
-    window.location.href = url.toString();
+    window.location.assign(url.toString());
   };
 
   const filteredResults = results.filter((item) => {
