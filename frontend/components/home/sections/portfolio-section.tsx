@@ -31,29 +31,12 @@ export function PortfolioSection() {
   const containerRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
 
-  const [dimensions, setDimensions] = useState(() => {
-    if (typeof window !== "undefined") {
-      const w = window.innerWidth;
-      const isThree = w >= 680;
-      const gapW = isThree ? (w < 900 ? 12 : w < 1200 ? 16 : 20) : (w < 380 ? 12 : 16);
-      const cardW = isThree
-        ? Math.min(370, Math.floor((w - 2 * gapW) / 3))
-        : Math.min(Math.round(w - 24), 400);
-      return {
-        containerWidth: w,
-        cardWidth: cardW,
-        gap: gapW,
-        leftMargin: 0,
-        isThreeCardView: isThree,
-      };
-    }
-    return {
-      containerWidth: 1000,
-      cardWidth: 320,
-      gap: 16,
-      leftMargin: 0,
-      isThreeCardView: true,
-    };
+  const [dimensions, setDimensions] = useState({
+    containerWidth: 1000,
+    cardWidth: 320,
+    gap: 16,
+    leftMargin: 0,
+    isThreeCardView: true,
   });
 
   const touchStartX = useRef<number | null>(null);
