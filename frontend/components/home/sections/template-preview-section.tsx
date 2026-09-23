@@ -140,7 +140,7 @@ export function TemplatePreviewSection() {
 
             return (
               <Reveal
-                className="flex h-full w-full"
+                className={`h-full w-full ${index >= 3 ? "hidden sm:flex" : "flex"}`}
                 delay={(index % 3) * 80}
                 key={template.id}
                 y={24}
