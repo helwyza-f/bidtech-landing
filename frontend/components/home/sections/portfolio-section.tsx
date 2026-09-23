@@ -33,8 +33,9 @@ export function PortfolioSection() {
 
   const [dimensions, setDimensions] = useState({
     containerWidth: 1200,
-    cardWidth: 380,
-    gap: 24,
+    cardWidth: 360,
+    gap: 20,
+    isThreeCardView: true,
   });
 
   const touchStartX = useRef<number | null>(null);
@@ -43,45 +44,51 @@ export function PortfolioSection() {
   const dragStartX = useRef<number | null>(null);
   const isDragging = useRef(false);
 
-  // Responsive dimensions for centered multi-card carousel across all devices
+  // Responsive dimensions: exactly 3 cards in the viewport on desktop/tablet, centered 1 card on mobile
   useEffect(() => {
     const updateDimensions = () => {
-      if (!containerRef.current) return;
-      const width = containerRef.current.offsetWidth;
-      let cardW = 380;
-      let gapW = 24;
+      const windowWidth = typeof window !== "undefined" ? window.innerWidth : 1200;
+      const isThree = windowWidth >= 768;
 
-      if (width < 340) {
-        // Ultra-compact mobile (Galaxy Fold closed 280px, iPhone 5/SE1 320px)
-        cardW = Math.round(width * 0.78);
+      let cardW = 360;
+      let gapW = 20;
+
+      if (windowWidth < 340) {
+        // Ultra-compact mobile (Fold 280px, SE 320px)
+        cardW = Math.round(windowWidth * 0.8);
         gapW = 8;
-      } else if (width < 400) {
-        // Standard compact mobile (Android 360px, iPhone SE/Mini 375px)
-        cardW = Math.round(width * 0.8);
-        gapW = 10;
-      } else if (width < 480) {
-        // Mainstream mobile (iPhone 12/13/14/15/16 390-393px, Pixel 412px, Pro Max 430px)
-        cardW = Math.round(width * 0.8);
+      } else if (windowWidth < 480) {
+        // Standard mobile (360px - 430px)
+        cardW = Math.round(windowWidth * 0.82);
         gapW = 12;
-      } else if (width < 640) {
-        // Phablet / Landscape mobile
-        cardW = 330;
+      } else if (windowWidth < 768) {
+        // Phablet (480px - 767px)
+        cardW = 340;
         gapW = 16;
-      } else if (width < 1024) {
-        // Tablet
-        cardW = 350;
-        gapW = 20;
-      } else if (width < 1440) {
-        // Laptop / Desktop
-        cardW = 380;
-        gapW = 24;
+      } else if (windowWidth < 1024) {
+        // Tablet (768px - 1023px) - exactly 3 cards in slide
+        const available = Math.min(windowWidth - 110, 880);
+        gapW = 14;
+        cardW = Math.floor((available - 2 * gapW) / 3);
+      } else if (windowWidth < 1280) {
+        // Small Laptop (1024px - 1279px) - exactly 3 cards in slide
+        const available = Math.min(windowWidth - 120, 1060);
+        gapW = 18;
+        cardW = Math.floor((available - 2 * gapW) / 3);
       } else {
-        // Large screen
-        cardW = 410;
-        gapW = 28;
+        // Standard Desktop / Large screen (>= 1280px) - exactly 3 cards in slide
+        gapW = 20;
+        cardW = 360;
       }
 
-      setDimensions({ containerWidth: width, cardWidth: cardW, gap: gapW });
+      const containerW = containerRef.current ? containerRef.current.offsetWidth : windowWidth;
+
+      setDimensions({
+        containerWidth: containerW,
+        cardWidth: cardW,
+        gap: gapW,
+        isThreeCardView: isThree,
+      });
     };
 
     updateDimensions();
@@ -251,10 +258,13 @@ export function PortfolioSection() {
     }
   };
 
-  // Center offset calculation for active card
-  const { containerWidth, cardWidth, gap } = dimensions;
-  const activeCenterPos = currentIndex * (cardWidth + gap) + cardWidth / 2;
-  const translateX = containerWidth / 2 - activeCenterPos;
+  // Center offset calculation:
+  // On desktop/tablet (isThreeCardView): exactly 3 cards fit in the viewport, center card at index 1
+  // On mobile (<768px): single card centered with peek
+  const { containerWidth, cardWidth, gap, isThreeCardView } = dimensions;
+  const translateX = isThreeCardView
+    ? (cardWidth + gap) * (1 - currentIndex)
+    : containerWidth / 2 - (currentIndex * (cardWidth + gap) + cardWidth / 2);
   const realActiveIndex = ((currentIndex % itemCount) + itemCount) % itemCount;
 
   return (
@@ -291,57 +301,50 @@ export function PortfolioSection() {
       </div>
 
       {/* Centered Infinite Carousel Slider Track Container */}
-      <div
-        className="relative mt-6 sm:mt-10 w-full overflow-hidden touch-pan-y focus:outline-none"
-        onKeyDown={handleKeyDown}
-        onMouseDown={handleMouseDown}
-        onMouseEnter={() => setIsPaused(true)}
-        onMouseLeave={handleMouseLeave}
-        onMouseUp={handleMouseUp}
-        onTouchEnd={onTouchEnd}
-        onTouchMove={onTouchMove}
-        onTouchStart={onTouchStart}
-        ref={containerRef}
-        tabIndex={0}
-      >
-        {/* Desktop / Tablet Floating Side Navigation Buttons (Hidden on mobile to avoid overlapping cards) */}
+      <div className="relative mx-auto mt-6 sm:mt-10 flex w-full max-w-7xl items-center justify-center gap-2 sm:gap-3 lg:gap-5 px-2 sm:px-4">
+        {/* Desktop / Tablet Floating Side Navigation Buttons */}
         <button
           aria-label="Portofolio sebelumnya"
-          className="hidden sm:flex absolute left-3 lg:left-8 top-1/2 -translate-y-1/2 z-20 size-10 lg:size-11 items-center justify-center rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-md transition-all hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer"
-          onClick={(e) => {
-            e.stopPropagation();
-            handlePrev();
-          }}
+          className="hidden sm:flex size-10 lg:size-12 shrink-0 items-center justify-center rounded-full bg-white border border-slate-200/90 text-slate-700 shadow-md transition-all hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer z-20"
+          onClick={handlePrev}
           type="button"
         >
           <ChevronLeft className="size-5" />
         </button>
 
-        <button
-          aria-label="Portofolio berikutnya"
-          className="hidden sm:flex absolute right-3 lg:right-8 top-1/2 -translate-y-1/2 z-20 size-10 lg:size-11 items-center justify-center rounded-full bg-white/95 backdrop-blur-md border border-slate-200/90 text-slate-700 shadow-md transition-all hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer"
-          onClick={(e) => {
-            e.stopPropagation();
-            handleNext();
-          }}
-          type="button"
-        >
-          <ChevronRight className="size-5" />
-        </button>
-
-        {/* Sliding Flex Track with Continuous Looping */}
+        {/* 3-Card Viewport on Desktop / 1-Card Centered on Mobile */}
         <div
-          className="flex items-stretch py-3 sm:py-4 select-none will-change-transform"
-          onTransitionEnd={handleTransitionEnd}
-          ref={trackRef}
+          className="relative overflow-hidden touch-pan-y focus:outline-none py-3 sm:py-5"
+          onKeyDown={handleKeyDown}
+          onMouseDown={handleMouseDown}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={handleMouseLeave}
+          onMouseUp={handleMouseUp}
+          onTouchEnd={onTouchEnd}
+          onTouchMove={onTouchMove}
+          onTouchStart={onTouchStart}
+          ref={containerRef}
           style={{
-            gap: `${gap}px`,
-            transform: `translateX(${translateX}px)`,
-            transition: enableTransition
-              ? "transform 500ms cubic-bezier(0.25, 1, 0.5, 1)"
-              : "none",
+            width: isThreeCardView
+              ? `${cardWidth * 3 + gap * 2}px`
+              : "100%",
+            maxWidth: "100%",
           }}
+          tabIndex={0}
         >
+          {/* Sliding Flex Track with Continuous Looping */}
+          <div
+            className="flex items-stretch select-none will-change-transform"
+            onTransitionEnd={handleTransitionEnd}
+            ref={trackRef}
+            style={{
+              gap: `${gap}px`,
+              transform: `translateX(${translateX}px)`,
+              transition: enableTransition
+                ? "transform 500ms cubic-bezier(0.25, 1, 0.5, 1)"
+                : "none",
+            }}
+          >
           {extendedItems.map((item) => {
             const isActive = item.virtualIndex === currentIndex;
 
@@ -418,7 +421,18 @@ export function PortfolioSection() {
               </div>
             );
           })}
+          </div>
         </div>
+
+        {/* Desktop / Tablet Right Arrow Button */}
+        <button
+          aria-label="Portofolio berikutnya"
+          className="hidden sm:flex size-10 lg:size-12 shrink-0 items-center justify-center rounded-full bg-white border border-slate-200/90 text-slate-700 shadow-md transition-all hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer z-20"
+          onClick={handleNext}
+          type="button"
+        >
+          <ChevronRight className="size-5" />
+        </button>
       </div>
 
       {/* Mobile Navigation Controls: Ergonomic Bottom Controls with [<] [ • • • • ] [>] */}
