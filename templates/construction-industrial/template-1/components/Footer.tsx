@@ -90,9 +90,9 @@ export default function Footer() {
           </div>
           <div className="footer-column lg:col-span-3">
             <h4 className="font-label-caps text-xs sm:text-label-caps uppercase font-bold text-surface mb-4 sm:mb-6 tracking-wider">
-              Sosial & Wawasan
+              Media Sosial
             </h4>
-            <div className="flex items-center gap-2.5 sm:gap-3 mb-6 sm:mb-8">
+            <div className="flex items-center gap-2.5 sm:gap-3">
               <a aria-label="Instagram" className="w-9 h-9 sm:w-11 sm:h-11 rounded-full border border-secondary text-surface-dim hover:border-primary-container hover:text-primary-container hover:scale-110 flex items-center justify-center transition-all duration-300" href="#">
                 <span className="material-symbols-outlined text-base sm:text-lg">public</span>
               </a>
@@ -106,15 +106,6 @@ export default function Footer() {
                 <span className="material-symbols-outlined text-base sm:text-lg">play_circle</span>
               </a>
             </div>
-            <div className="font-label-technical text-[10px] sm:text-label-technical uppercase text-surface mb-2 font-bold tracking-wider">
-              BULETIN KECERDASAN STRUKTURAL
-            </div>
-            <form className="flex flex-col sm:flex-row items-stretch gap-2 sm:gap-0" onSubmit={(e) => { e.preventDefault(); alert('Berlangganan Jurnal Teknis Elevasi berhasil.'); }}>
-              <input className="w-full bg-surface/10 border border-secondary text-surface text-xs sm:text-body-sm px-3 py-2.5 rounded-none focus:outline-none focus:border-primary-container placeholder:text-surface-dim/60" placeholder="Masukkan email korporat" required type="email" />
-              <button className="bg-primary-container text-on-secondary-fixed font-label-caps text-xs sm:text-label-caps px-5 py-2.5 rounded-full sm:ml-2 uppercase font-bold hover:brightness-110 hover:scale-105 active:scale-95 transition-all duration-300 flex-shrink-0" type="submit">
-                Gabung
-              </button>
-            </form>
           </div>
         </div>
         <div className="w-full h-[1px] bg-secondary/40 my-8 sm:my-10"></div>
