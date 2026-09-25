@@ -17,9 +17,9 @@ export const metadata: Metadata = {
   description: 'Rasakan puncak rekayasa otomotif dengan pilihan kendaraan mewah kami yang dikurasi, siap sedia setiap saat bersama Nadim Trans RentCar.',
   keywords: ['sewa mobil', 'rental mobil mewah', 'nadim trans', 'nadim trans rentcar', 'sewa alphard'],
   icons: {
-    icon: '/icons/icon-2.webp',
-    shortcut: '/icons/icon-2.webp',
-    apple: '/icons/icon-2.webp',
+    icon: '/icon.png',
+    shortcut: '/icon.png',
+    apple: '/icon.png',
   },
 };
 
