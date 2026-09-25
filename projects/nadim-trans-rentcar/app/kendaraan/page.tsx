@@ -52,13 +52,27 @@ export default function KendaraanPage() {
       <Header />
 
       <main className="min-h-screen pt-20 bg-gray-50/50">
-        {/* Hero Banner Header */}
-        <section className="bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white py-16 md:py-20 relative overflow-hidden border-b border-amber-500/20">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
-          <div className="absolute bottom-0 left-0 w-80 h-80 bg-yellow-500/5 rounded-full blur-2xl pointer-events-none" />
+        {/* Hero Banner Header with Brightened Real Batam Airport Backdrop */}
+        <section className="relative text-white py-16 md:py-24 overflow-hidden border-b border-amber-500/20 bg-slate-950">
+          {/* Background Image Layer */}
+          <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
+            <Image
+              src="/images/background.webp"
+              alt="Bandara Internasional Hang Nadim Batam - Nadim Trans RentCar"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-[center_35%] md:object-[center_30%] brightness-[1.05] contrast-[1.02]"
+            />
+            {/* Softened cinematic gradient for clear text readability while allowing the airport and daylight to shine brightly */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 md:via-black/40 to-transparent z-[1]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-black/30 z-[1]" />
+            {/* Subtle warm amber ambient glow */}
+            <div className="absolute -top-12 -right-12 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl z-[2] pointer-events-none" />
+          </div>
 
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-amber-200/80 mb-4">
+            <div className="flex items-center gap-2 text-xs sm:text-sm text-amber-200/90 mb-4">
               <Link href="/" className="hover:text-amber-400 transition-colors">
                 Beranda
               </Link>
@@ -72,13 +86,13 @@ export default function KendaraanPage() {
               transition={{ duration: 0.5 }}
               className="max-w-3xl"
             >
-              <div className="inline-block px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-xs font-bold text-amber-300 uppercase tracking-wider mb-3">
+              <div className="inline-block px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-xs font-bold text-amber-300 uppercase tracking-wider mb-3 backdrop-blur-sm">
                 Armada PT. Nadim Auto Transindo
               </div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white">
+              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white drop-shadow-md">
                 Pilihan Armada <span className="text-amber-400">Terbaik di Batam</span>
               </h1>
-              <p className="text-gray-300 text-base sm:text-lg leading-relaxed">
+              <p className="text-gray-200 text-base sm:text-lg leading-relaxed drop-shadow-sm">
                 Temukan kendaraan sempurna untuk perjalanan bisnis, liburan keluarga, maupun antar-jemput VVIP Bandara Hang Nadim dengan standar kenyamanan dan kebersihan tertinggi.
               </p>
             </motion.div>

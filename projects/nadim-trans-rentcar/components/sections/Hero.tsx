@@ -24,7 +24,7 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       className="relative w-full min-h-[100dvh] flex flex-col justify-between overflow-hidden pt-16 sm:pt-20 md:pt-32 pb-3 sm:pb-6 md:pb-8 text-white bg-slate-950"
     >
-      {/* 1. Sleek Modern Ambient Backdrop (VVIP Hang Nadim International Airport Backdrop) */}
+      {/* 1. Sleek Modern Ambient Backdrop (VVIP Hang Nadim International Airport Backdrop - Brightened) */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden bg-slate-950">
         <Image
           src="/images/background.webp"
@@ -32,15 +32,15 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[65%_bottom] md:object-[60%_bottom] lg:object-[55%_bottom] brightness-[0.88] contrast-[1.05]"
+          className="object-cover object-[65%_bottom] md:object-[60%_bottom] lg:object-[55%_bottom] brightness-[1.05] contrast-[1.03]"
         />
 
-        {/* Cinematic dark gradients for text readability on the left while keeping the airport terminal clear on the right */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/95 via-black/70 md:via-black/50 to-transparent z-[1]" />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-black/60 z-[1]" />
+        {/* Softened cinematic gradient for clear text readability while allowing the airport and daylight to shine brightly */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 md:via-black/25 to-transparent z-[1]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-black/30 z-[1]" />
         
         {/* Subtle gold ambient warmth */}
-        <div className="absolute top-[25%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-amber-500/10 blur-[130px] pointer-events-none z-[2]" />
+        <div className="absolute top-[25%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-amber-400/15 blur-[120px] pointer-events-none z-[2]" />
       </div>
 
       {/* 2. Interactive High-Res Foreground Car Layer - Cutout Toyota Alphard VIP */}
