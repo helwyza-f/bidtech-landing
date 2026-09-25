@@ -117,11 +117,10 @@ export default function VehicleDetailClient({ id }: { id: string }) {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsLiked(!isLiked)}
-                className={`p-2.5 rounded-full border transition-all ${
-                  isLiked
-                    ? "bg-red-50 border-red-200 text-red-500"
-                    : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
-                }`}
+                className={`p-2.5 rounded-full border transition-all ${isLiked
+                  ? "bg-red-50 border-red-200 text-red-500"
+                  : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
+                  }`}
                 aria-label="Simpan favorit"
               >
                 <Heart className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`} />
@@ -150,10 +149,10 @@ export default function VehicleDetailClient({ id }: { id: string }) {
         {/* Main Content Layout */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
-            
+
             {/* Left Column: Photos, Specs, Description, Features (8 Cols) */}
             <div className="lg:col-span-7 xl:col-span-8 space-y-8">
-              
+
               {/* Photo Showcase & Thumbnails */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -201,11 +200,10 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                       <button
                         key={idx}
                         onClick={() => setSelectedImage(img)}
-                        className={`relative h-20 sm:h-24 rounded-xl overflow-hidden border-2 transition-all ${
-                          selectedImage === img
-                            ? "border-amber-500 ring-2 ring-amber-500/30 scale-[1.02]"
-                            : "border-gray-200 opacity-70 hover:opacity-100 hover:border-gray-300"
-                        }`}
+                        className={`relative h-20 sm:h-24 rounded-xl overflow-hidden border-2 transition-all ${selectedImage === img
+                          ? "border-amber-500 ring-2 ring-amber-500/30 scale-[1.02]"
+                          : "border-gray-200 opacity-70 hover:opacity-100 hover:border-gray-300"
+                          }`}
                       >
                         <Image src={img} alt={`${car.name} - ${idx + 1}`} fill className="object-cover" />
                       </button>
@@ -302,9 +300,8 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                 <div className="flex border-b border-gray-200 gap-6">
                   <button
                     onClick={() => setActiveTab("overview")}
-                    className={`pb-4 text-sm font-bold transition-all relative ${
-                      activeTab === "overview" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
-                    }`}
+                    className={`pb-4 text-sm font-bold transition-all relative ${activeTab === "overview" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
+                      }`}
                   >
                     Deskripsi & Kenyamanan
                     {activeTab === "overview" && (
@@ -317,9 +314,8 @@ export default function VehicleDetailClient({ id }: { id: string }) {
 
                   <button
                     onClick={() => setActiveTab("features")}
-                    className={`pb-4 text-sm font-bold transition-all relative ${
-                      activeTab === "features" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
-                    }`}
+                    className={`pb-4 text-sm font-bold transition-all relative ${activeTab === "features" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
+                      }`}
                   >
                     Fitur & Fasilitas
                     {activeTab === "features" && (
@@ -332,9 +328,8 @@ export default function VehicleDetailClient({ id }: { id: string }) {
 
                   <button
                     onClick={() => setActiveTab("terms")}
-                    className={`pb-4 text-sm font-bold transition-all relative ${
-                      activeTab === "terms" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
-                    }`}
+                    className={`pb-4 text-sm font-bold transition-all relative ${activeTab === "terms" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
+                      }`}
                   >
                     Syarat & Ketentuan
                     {activeTab === "terms" && (
@@ -453,22 +448,20 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                         <button
                           type="button"
                           onClick={() => setDriverOption("self-drive")}
-                          className={`py-2.5 px-3 rounded-xl text-xs font-bold border transition-all ${
-                            driverOption === "self-drive"
-                              ? "bg-amber-50 border-amber-500 text-amber-800 shadow-sm"
-                              : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
-                          }`}
+                          className={`py-2.5 px-3 rounded-xl text-xs font-bold border transition-all ${driverOption === "self-drive"
+                            ? "bg-amber-50 border-amber-500 text-amber-800 shadow-sm"
+                            : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
+                            }`}
                         >
                           Lepas Kunci
                         </button>
                         <button
                           type="button"
                           onClick={() => setDriverOption("with-driver")}
-                          className={`py-2.5 px-3 rounded-xl text-xs font-bold border transition-all ${
-                            driverOption === "with-driver"
-                              ? "bg-amber-50 border-amber-500 text-amber-800 shadow-sm"
-                              : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
-                          }`}
+                          className={`py-2.5 px-3 rounded-xl text-xs font-bold border transition-all ${driverOption === "with-driver"
+                            ? "bg-amber-50 border-amber-500 text-amber-800 shadow-sm"
+                            : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
+                            }`}
                         >
                           + Supir (+250rb/hr)
                         </button>
@@ -526,17 +519,12 @@ export default function VehicleDetailClient({ id }: { id: string }) {
 
                   {/* Actions */}
                   <div className="pt-5 space-y-3">
-                    <Button
-                      onClick={() => setIsBookingModalOpen(true)}
-                      className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold h-12 rounded-2xl shadow-lg shadow-amber-500/20 transition-all hover:scale-[1.02] active:scale-95"
-                    >
-                      Pesan Sekarang (Formulir)
-                    </Button>
+                    {/*   */}
 
                     <Button
                       variant="outline"
                       onClick={handleWhatsAppBooking}
-                      className="w-full border-emerald-500 text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 font-bold h-12 rounded-2xl transition-all inline-flex items-center justify-center gap-2"
+                      className="w-full border-emerald-500 text-emerald-900 hover:bg-emerald-500 bg-emerald-300 hover:text-emerald-800 font-bold h-12 rounded-2xl transition-all inline-flex items-center justify-center gap-2"
                     >
                       <PhoneCall className="w-4 h-4 text-emerald-600" />
                       <span>Chat WhatsApp Cepat</span>
