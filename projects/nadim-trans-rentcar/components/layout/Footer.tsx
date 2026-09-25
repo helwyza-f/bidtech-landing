@@ -20,14 +20,13 @@ export default function Footer() {
                       className="object-contain drop-shadow-[0_2px_10px_rgba(212,175,55,0.45)]"
                     />
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-base sm:text-lg font-black tracking-tight leading-none uppercase text-white group-hover:text-amber-400 transition-colors">
-                      Nadim <span className="text-amber-400">Trans</span>
-                    </span>
-                    <span className="text-[10px] font-bold tracking-widest uppercase text-amber-200/80">
-                      PT. Nadim Auto Transindo
-                    </span>
-                  </div>
+                  <Image
+                    src="/icons/icon-3.webp"
+                    alt="Nadim Trans Rentcar"
+                    width={180}
+                    height={60}
+                    className="h-8 sm:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                  />
                 </Link>
               </div>
               <p className="text-sm text-gray-400 leading-relaxed max-w-sm mb-6">
