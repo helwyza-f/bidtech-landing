@@ -23,9 +23,9 @@ export default function Footer() {
                   <Image
                     src="/icons/icon-3.webp"
                     alt="Nadim Trans Rentcar"
-                    width={180}
-                    height={60}
-                    className="h-8 sm:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+                    width={240}
+                    height={80}
+                    className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
                   />
                 </Link>
               </div>
