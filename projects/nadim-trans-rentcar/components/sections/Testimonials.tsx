@@ -92,8 +92,10 @@ export default function Testimonials() {
                 aria-label="Previous testimonials"
                 className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 cursor-pointer ${
                   currentIndex === 0
-                    ? "border-gray-200 text-gray-300 cursor-not-allowed"
-                    : "border-gray-300 text-gray-700 hover:border-amber-500 hover:text-amber-600 active:scale-95"
+                    ? "border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50/50"
+                    : currentIndex >= maxIndex
+                    ? "border-amber-500 text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-md shadow-amber-500/25 active:scale-95"
+                    : "border-gray-300 text-gray-700 bg-white hover:bg-gradient-to-r hover:from-amber-400 hover:to-amber-500 hover:border-amber-500 hover:text-slate-950 hover:shadow-md hover:shadow-amber-500/20 shadow-sm active:scale-95"
                 }`}
               >
                 <ArrowLeft className="w-5 h-5" />
@@ -106,8 +108,10 @@ export default function Testimonials() {
                 aria-label="Next testimonials"
                 className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 cursor-pointer ${
                   currentIndex >= maxIndex
-                    ? "border-gray-200 text-gray-300 cursor-not-allowed"
-                    : "border-amber-500 text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-md shadow-amber-500/20 active:scale-95"
+                    ? "border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50/50"
+                    : currentIndex === 0
+                    ? "border-amber-500 text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-md shadow-amber-500/25 active:scale-95"
+                    : "border-gray-300 text-gray-700 bg-white hover:bg-gradient-to-r hover:from-amber-400 hover:to-amber-500 hover:border-amber-500 hover:text-slate-950 hover:shadow-md hover:shadow-amber-500/20 shadow-sm active:scale-95"
                 }`}
               >
                 <ArrowRight className="w-5 h-5" />

@@ -111,7 +111,9 @@ export default function Features() {
               className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-all duration-200 cursor-pointer ${
                 currentPage === 0
                   ? "border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50/50"
-                  : "border-gray-300 hover:border-amber-500 text-gray-700 hover:text-amber-600 bg-white hover:bg-amber-50 shadow-sm active:scale-95"
+                  : currentPage === totalPages - 1
+                  ? "border-amber-500 text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-md shadow-amber-500/25 active:scale-95"
+                  : "border-gray-300 text-gray-700 bg-white hover:bg-gradient-to-r hover:from-amber-400 hover:to-amber-500 hover:border-amber-500 hover:text-slate-950 hover:shadow-md hover:shadow-amber-500/20 shadow-sm active:scale-95"
               }`}
             >
               <ArrowLeft className="w-5 h-5" />
@@ -126,7 +128,9 @@ export default function Features() {
               className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-all duration-200 cursor-pointer ${
                 currentPage >= totalPages - 1
                   ? "border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50/50"
-                  : "border-amber-500 text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-md shadow-amber-500/25 active:scale-95"
+                  : currentPage === 0
+                  ? "border-amber-500 text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-md shadow-amber-500/25 active:scale-95"
+                  : "border-gray-300 text-gray-700 bg-white hover:bg-gradient-to-r hover:from-amber-400 hover:to-amber-500 hover:border-amber-500 hover:text-slate-950 hover:shadow-md hover:shadow-amber-500/20 shadow-sm active:scale-95"
               }`}
             >
               <ArrowRight className="w-5 h-5" />
@@ -154,37 +158,35 @@ export default function Features() {
                     {/* Foto Mobil */}
                     <Link
                       href={`/kendaraan/${car.id}`}
-                      className="block relative h-52 sm:h-56 bg-slate-900 overflow-hidden cursor-pointer"
+                      className="block relative h-52 sm:h-56 bg-white overflow-hidden cursor-pointer border-b border-gray-100"
                     >
                       {car.image ? (
                         <Image
                           src={car.image}
                           alt={car.name}
                           fill
+                          priority={currentPage === 0}
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          className="object-contain p-3 sm:p-4 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_12px_20px_rgba(0,0,0,0.12)]"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-slate-100 via-slate-50 to-amber-50/30 flex flex-col items-center justify-center p-4 text-center">
-                          <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mb-2 text-slate-400 group-hover:text-amber-500 transition-colors">
+                        <div className="w-full h-full bg-gradient-to-br from-slate-50 via-gray-50 to-amber-50/30 flex flex-col items-center justify-center p-4 text-center">
+                          <div className="w-12 h-12 rounded-xl bg-white shadow-sm border border-gray-100 flex items-center justify-center mb-2 text-slate-400 group-hover:text-amber-500 transition-colors">
                             <Car className="w-6 h-6" />
                           </div>
                           <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Area Foto Unit</span>
                         </div>
                       )}
 
-                      {/* Dark gradient vignette */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
-
                       {/* Category Badge (Top Left) */}
                       <div className="absolute top-3.5 left-3.5 z-10">
-                        <span className="inline-flex items-center rounded-md bg-black/75 backdrop-blur-md px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-300 shadow-sm border border-amber-500/30">
+                        <span className="inline-flex items-center rounded-md bg-slate-900/90 backdrop-blur-md px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-amber-300 shadow-sm border border-amber-500/30">
                           {car.category}
                         </span>
                       </div>
 
                       {/* Rating Badge (Top Right) */}
-                      <div className="absolute top-3.5 right-3.5 z-10 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-md flex items-center gap-1 shadow-sm">
+                      <div className="absolute top-3.5 right-3.5 z-10 bg-white/95 backdrop-blur-md px-2.5 py-1 rounded-md flex items-center gap-1 shadow-sm border border-gray-100">
                         <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                         <span className="text-xs font-bold text-gray-900">{car.rating}</span>
                         <span className="text-[10px] text-gray-500">({car.reviews})</span>
@@ -192,7 +194,7 @@ export default function Features() {
 
                       {/* Fuel Tag (Bottom Left) */}
                       <div className="absolute bottom-3 left-3 z-10">
-                        <span className="inline-flex items-center gap-1 rounded bg-black/70 backdrop-blur-sm px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-200 border border-amber-500/30">
+                        <span className="inline-flex items-center gap-1 rounded bg-slate-900/85 backdrop-blur-sm px-2 py-0.5 text-[10px] font-bold uppercase tracking-wider text-amber-200 border border-amber-500/30">
                           <Fuel className="w-3 h-3 text-amber-400" />
                           {car.specs.fuel.split(" ")[0]}
                         </span>

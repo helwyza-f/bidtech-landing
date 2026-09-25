@@ -117,11 +117,10 @@ export default function VehicleDetailClient({ id }: { id: string }) {
             <div className="flex items-center gap-2">
               <button
                 onClick={() => setIsLiked(!isLiked)}
-                className={`p-2.5 rounded-full border transition-all ${
-                  isLiked
-                    ? "bg-red-50 border-red-200 text-red-500"
-                    : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
-                }`}
+                className={`p-2.5 rounded-full border transition-all ${isLiked
+                  ? "bg-red-50 border-red-200 text-red-500"
+                  : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
+                  }`}
                 aria-label="Simpan favorit"
               >
                 <Heart className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`} />
@@ -150,10 +149,10 @@ export default function VehicleDetailClient({ id }: { id: string }) {
         {/* Main Content Layout */}
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-10">
-            
+
             {/* Left Column: Photos, Specs, Description, Features (8 Cols) */}
             <div className="lg:col-span-7 xl:col-span-8 space-y-8">
-              
+
               {/* Photo Showcase & Thumbnails */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -162,17 +161,17 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                 className="bg-white rounded-3xl p-4 sm:p-6 border border-gray-200/80 shadow-sm"
               >
                 {/* Main Large Display Image */}
-                <div className="relative h-64 sm:h-96 md:h-[420px] w-full rounded-2xl overflow-hidden bg-gray-100 mb-4 flex items-center justify-center">
+                <div className="relative h-64 sm:h-96 md:h-[420px] w-full rounded-2xl overflow-hidden bg-white mb-4 flex items-center justify-center border border-gray-200/80 shadow-sm">
                   {(selectedImage || car.image) ? (
                     <Image
                       src={selectedImage || car.image}
                       alt={car.name}
                       fill
                       priority
-                      className="object-cover transition-transform duration-500 hover:scale-105"
+                      className="object-contain p-6 sm:p-10 transition-transform duration-500 hover:scale-105 drop-shadow-[0_16px_30px_rgba(0,0,0,0.15)]"
                     />
                   ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-100 via-slate-50 to-amber-50/40 p-8 text-center">
+                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-50 via-gray-50 to-amber-50/30 p-8 text-center">
                       <div className="w-16 h-16 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center mb-3 text-slate-400">
                         <CarIcon className="w-8 h-8" />
                       </div>
@@ -201,11 +200,10 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                       <button
                         key={idx}
                         onClick={() => setSelectedImage(img)}
-                        className={`relative h-20 sm:h-24 rounded-xl overflow-hidden border-2 transition-all ${
-                          selectedImage === img
-                            ? "border-amber-500 ring-2 ring-amber-500/30 scale-[1.02]"
-                            : "border-gray-200 opacity-70 hover:opacity-100 hover:border-gray-300"
-                        }`}
+                        className={`relative h-20 sm:h-24 rounded-xl overflow-hidden border-2 transition-all ${selectedImage === img
+                          ? "border-amber-500 ring-2 ring-amber-500/30 scale-[1.02]"
+                          : "border-gray-200 opacity-70 hover:opacity-100 hover:border-gray-300"
+                          }`}
                       >
                         <Image src={img} alt={`${car.name} - ${idx + 1}`} fill className="object-cover" />
                       </button>
@@ -302,9 +300,8 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                 <div className="flex border-b border-gray-200 gap-6">
                   <button
                     onClick={() => setActiveTab("overview")}
-                    className={`pb-4 text-sm font-bold transition-all relative ${
-                      activeTab === "overview" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
-                    }`}
+                    className={`pb-4 text-sm font-bold transition-all relative ${activeTab === "overview" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
+                      }`}
                   >
                     Deskripsi & Kenyamanan
                     {activeTab === "overview" && (
@@ -317,9 +314,8 @@ export default function VehicleDetailClient({ id }: { id: string }) {
 
                   <button
                     onClick={() => setActiveTab("features")}
-                    className={`pb-4 text-sm font-bold transition-all relative ${
-                      activeTab === "features" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
-                    }`}
+                    className={`pb-4 text-sm font-bold transition-all relative ${activeTab === "features" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
+                      }`}
                   >
                     Fitur & Fasilitas
                     {activeTab === "features" && (
@@ -332,9 +328,8 @@ export default function VehicleDetailClient({ id }: { id: string }) {
 
                   <button
                     onClick={() => setActiveTab("terms")}
-                    className={`pb-4 text-sm font-bold transition-all relative ${
-                      activeTab === "terms" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
-                    }`}
+                    className={`pb-4 text-sm font-bold transition-all relative ${activeTab === "terms" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
+                      }`}
                   >
                     Syarat & Ketentuan
                     {activeTab === "terms" && (
@@ -453,22 +448,20 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                         <button
                           type="button"
                           onClick={() => setDriverOption("self-drive")}
-                          className={`py-2.5 px-3 rounded-xl text-xs font-bold border transition-all ${
-                            driverOption === "self-drive"
-                              ? "bg-amber-50 border-amber-500 text-amber-800 shadow-sm"
-                              : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
-                          }`}
+                          className={`py-2.5 px-3 rounded-xl text-xs font-bold border transition-all ${driverOption === "self-drive"
+                            ? "bg-amber-50 border-amber-500 text-amber-800 shadow-sm"
+                            : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
+                            }`}
                         >
                           Lepas Kunci
                         </button>
                         <button
                           type="button"
                           onClick={() => setDriverOption("with-driver")}
-                          className={`py-2.5 px-3 rounded-xl text-xs font-bold border transition-all ${
-                            driverOption === "with-driver"
-                              ? "bg-amber-50 border-amber-500 text-amber-800 shadow-sm"
-                              : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
-                          }`}
+                          className={`py-2.5 px-3 rounded-xl text-xs font-bold border transition-all ${driverOption === "with-driver"
+                            ? "bg-amber-50 border-amber-500 text-amber-800 shadow-sm"
+                            : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
+                            }`}
                         >
                           + Supir (+250rb/hr)
                         </button>
@@ -526,17 +519,12 @@ export default function VehicleDetailClient({ id }: { id: string }) {
 
                   {/* Actions */}
                   <div className="pt-5 space-y-3">
-                    <Button
-                      onClick={() => setIsBookingModalOpen(true)}
-                      className="w-full bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold h-12 rounded-2xl shadow-lg shadow-amber-500/20 transition-all hover:scale-[1.02] active:scale-95"
-                    >
-                      Pesan Sekarang (Formulir)
-                    </Button>
+                    {/*   */}
 
                     <Button
                       variant="outline"
                       onClick={handleWhatsAppBooking}
-                      className="w-full border-emerald-500 text-emerald-700 hover:bg-emerald-50 hover:text-emerald-800 font-bold h-12 rounded-2xl transition-all inline-flex items-center justify-center gap-2"
+                      className="w-full border-emerald-500 text-emerald-900 hover:bg-emerald-500 bg-emerald-300 hover:text-emerald-800 font-bold h-12 rounded-2xl transition-all inline-flex items-center justify-center gap-2"
                     >
                       <PhoneCall className="w-4 h-4 text-emerald-600" />
                       <span>Chat WhatsApp Cepat</span>
@@ -603,16 +591,16 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     className="bg-white rounded-2xl overflow-hidden border border-gray-200/80 shadow-sm hover:shadow-xl hover:shadow-amber-500/10 hover:border-amber-400/50 transition-all duration-300 flex flex-col justify-between group"
                   >
                     <div>
-                      <div className="relative h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
+                      <div className="relative h-48 bg-white overflow-hidden flex items-center justify-center border-b border-gray-100">
                         {relCar.image ? (
                           <Image
                             src={relCar.image}
                             alt={relCar.name}
                             fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            className="object-contain p-3 group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_10px_16px_rgba(0,0,0,0.12)]"
                           />
                         ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex flex-col items-center justify-center text-slate-400 group-hover:text-amber-500 transition-colors">
+                          <div className="w-full h-full bg-gradient-to-br from-slate-50 via-gray-50 to-amber-50/30 flex flex-col items-center justify-center text-slate-400 group-hover:text-amber-500 transition-colors">
                             <CarIcon className="w-7 h-7 mb-1" />
                             <span className="text-[11px] font-semibold uppercase tracking-wider">Foto Unit</span>
                           </div>
@@ -697,9 +685,9 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     </div>
 
                     <div className="flex items-center gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 mb-6">
-                      <div className="relative w-20 h-14 rounded-xl overflow-hidden bg-gray-200 flex-shrink-0 flex items-center justify-center">
+                      <div className="relative w-20 h-14 rounded-xl overflow-hidden bg-slate-900 flex-shrink-0 flex items-center justify-center">
                         {car.image ? (
-                          <Image src={car.image} alt={car.name} fill className="object-cover" />
+                          <Image src={car.image} alt={car.name} fill className="object-contain p-1 drop-shadow-md" />
                         ) : (
                           <CarIcon className="w-6 h-6 text-gray-400" />
                         )}

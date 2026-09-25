@@ -21,24 +21,15 @@ export default function WhyChooseUs() {
             <div className="relative w-full max-w-[420px]">
               {/* Photo Frame */}
               <div className="relative bg-white p-3 sm:p-4 rounded-3xl shadow-2xl ring-1 ring-amber-500/20 -rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
-                <div className="relative aspect-[4/4.8] w-full overflow-hidden rounded-2xl bg-slate-900">
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-slate-900">
                   <Image
-                    src="/images/mobil-16.webp"
-                    alt="Kantor & Armada PT. Nadim Auto Transindo Batam"
+                    src="/images/background-1.webp"
+                    alt="Kantor Fisik & Armada PT. Nadim Auto Transindo Batam"
                     fill
                     sizes="(max-width: 768px) 100vw, 420px"
-                    className="object-cover"
+                    className="object-cover transition-transform duration-700 hover:scale-105"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute bottom-4 left-4 right-4 pointer-events-none">
-                    <span className="inline-block px-2.5 py-1 rounded-md bg-amber-500 text-slate-950 text-[10px] font-black uppercase tracking-wider mb-1">
-                      Pool & Kantor Resmi
-                    </span>
-                    <p className="text-white text-xs font-bold leading-snug">
-                      Perumahan KDA Batam Kota
-                    </p>
-                  </div>
                 </div>
               </div>
 

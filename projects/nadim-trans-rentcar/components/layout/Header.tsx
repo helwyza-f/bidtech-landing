@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, User } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { NAV_ITEMS } from "@/constants/navigation";
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from "framer-motion";
@@ -22,15 +22,20 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isHomepage = pathname === "/";
-  const isSolid = isScrolled || !isHomepage || isMobileMenuOpen;
+  const hasHeroBanner =
+    pathname === "/" ||
+    pathname === "/kendaraan" ||
+    pathname === "/layanan" ||
+    pathname === "/faq";
+
+  const isSolid = isScrolled || !hasHeroBanner || isMobileMenuOpen;
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full transition-all duration-300 border-none ${
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         isSolid
           ? "bg-slate-950/95 backdrop-blur-md shadow-lg border-b border-amber-500/20 text-white"
-          : "bg-gradient-to-b from-black/90 via-black/40 to-transparent text-white"
+          : "bg-gradient-to-b from-black/80 via-black/30 to-transparent border-b border-transparent text-white"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -50,10 +55,10 @@ export default function Header() {
             <Image
               src="/icons/icon-3.webp"
               alt="Nadim Trans Rentcar"
-              width={180}
-              height={60}
+              width={240}
+              height={80}
               priority
-              className="h-8 sm:h-9 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </Link>
 
@@ -79,13 +84,6 @@ export default function Header() {
 
           {/* Desktop Right CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <button
-              className="p-2 rounded-full text-white/80 hover:text-amber-300 hover:bg-white/10 transition-colors focus:outline-none"
-              aria-label="User Profile"
-            >
-              <User className="w-5 h-5" />
-            </button>
-
             <Link href="/#faq">
               <Button size="lg" className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-400 hover:to-yellow-400 text-slate-950 rounded-xl font-bold px-6 shadow-md shadow-amber-500/25 transition-all hover:scale-[1.02] active:scale-95">
                 Hubungi Kami
@@ -95,13 +93,6 @@ export default function Header() {
 
           {/* Mobile Right Icons */}
           <div className="md:hidden flex items-center gap-3 sm:gap-4">
-            <button
-              className="p-1.5 rounded-full text-white hover:bg-white/10 transition-colors focus:outline-none"
-              aria-label="User Profile"
-            >
-              <User className="w-6 h-6" />
-            </button>
-
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-1.5 rounded-xl text-white hover:bg-white/10 transition-colors focus:outline-none"
