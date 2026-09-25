@@ -26,13 +26,18 @@ export default function Hero() {
     >
       {/* 1. Sleek Modern Ambient Backdrop (NTR Luxury Showroom Backdrop) */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden bg-slate-950">
+        {/* =========================================================================
+            PANDUAN PENGATURAN SKALA & POSISI BACKGROUND:
+            - Besarkan / Kecilkan: Ubah `scale-[1.0]` (misal: `scale-[0.9]` untuk zoom out / lebih kecil, `scale-[1.1]` untuk zoom in / lebih besar)
+            - Geser Posisi: Ubah `object-[X%_Y%]` (misal: 84% adalah posisi horizontal, 12% adalah posisi vertikal / naik-turun)
+           ========================================================================= */}
         <Image
           src="/images/background-3.webp"
           alt="Showroom PT. Nadim Auto Transindo - Nadim Trans RentCar Batam"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[75%_18%] md:object-[82%_18%] brightness-[0.95] contrast-[1.05]"
+          className="object-cover object-[78%_12%] md:object-[84%_12%] scale-100 md:scale-[1.0] origin-top-right brightness-[0.95] contrast-[1.05] transition-transform duration-300"
         />
 
         {/* Softened cinematic gradient for clear text readability while allowing the showroom and NTR logo to shine */}
@@ -40,19 +45,24 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-black/30 z-[1]" />
         
         {/* Subtle gold ambient warmth */}
-        <div className="absolute top-[20%] right-[12%] w-[38vw] h-[38vw] rounded-full bg-amber-400/15 blur-[120px] pointer-events-none z-[2]" />
+        <div className="absolute top-[18%] right-[10%] w-[38vw] h-[38vw] rounded-full bg-amber-400/15 blur-[120px] pointer-events-none z-[2]" />
       </div>
 
       {/* 2. Interactive High-Res Foreground Car Layer - Cutout Toyota Alphard VIP (Alphard-2) */}
+      {/* =========================================================================
+          PANDUAN UKURAN & POSISI MOBIL ALPHARD:
+          - Ukuran: `w-[56%] lg:w-[52%] xl:w-[50%] max-w-[850px]` (Kembali ke size normal yang gagah)
+          - Posisi: `bottom-[2%] lg:bottom-[3%] xl:bottom-[4%]` (Berpijak di lantai bawah logo NTR)
+         ========================================================================= */}
       <motion.div
-        initial={{ opacity: 0, x: 200 }}
+        initial={{ opacity: 0, x: 250 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{
           duration: 1.1,
           delay: 0.15,
           ease: [0.16, 1, 0.3, 1],
         }}
-        className="hidden md:block absolute right-[2%] lg:right-[3%] xl:right-[5%] bottom-[3%] lg:bottom-[4%] xl:bottom-[5%] w-[46%] lg:w-[42%] xl:w-[38%] max-w-[620px] lg:max-w-[650px] pointer-events-none z-10 select-none"
+        className="hidden md:block absolute right-[0%] lg:right-[1%] xl:right-[2%] bottom-[2%] lg:bottom-[3%] xl:bottom-[4%] w-[56%] lg:w-[52%] xl:w-[50%] max-w-[850px] pointer-events-none z-10 select-none"
       >
         <motion.div
           animate={{
@@ -77,11 +87,11 @@ export default function Hero() {
               width={1805}
               height={871}
               priority
-              sizes="(max-width: 1024px) 45vw, 40vw"
-              className="w-full h-auto object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.85)]"
+              sizes="(max-width: 1024px) 55vw, 50vw"
+              className="w-full h-auto object-contain drop-shadow-[0_28px_40px_rgba(0,0,0,0.9)]"
             />
             {/* Realistic floor contact shadow */}
-            <div className="absolute -bottom-2 left-[5%] right-[5%] h-6 bg-black/95 blur-xl rounded-[100%] pointer-events-none" />
+            <div className="absolute -bottom-2 left-[5%] right-[5%] h-7 bg-black/95 blur-xl rounded-[100%] pointer-events-none" />
           </div>
         </motion.div>
       </motion.div>
@@ -194,7 +204,7 @@ export default function Hero() {
             transition={{ duration: 0.9, delay: 0.65 }}
             className="block md:hidden relative w-full pt-2 pb-2 my-1"
           >
-            <div className="relative w-full max-w-[310px] mx-auto">
+            <div className="relative w-full max-w-[360px] mx-auto">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[60%] bg-amber-500/15 blur-2xl rounded-full" />
               <Image
                 src="/images/Alphard-2.webp"
