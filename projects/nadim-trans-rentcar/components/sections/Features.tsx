@@ -158,8 +158,20 @@ export default function Features() {
                     {/* Foto Mobil */}
                     <Link
                       href={`/kendaraan/${car.id}`}
-                      className="block relative h-52 sm:h-56 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-950 overflow-hidden cursor-pointer"
+                      className="block relative h-52 sm:h-56 bg-slate-950 overflow-hidden cursor-pointer"
                     >
+                      {/* Showroom Background Stage */}
+                      <Image
+                        src="/images/background-4.webp"
+                        alt="Showroom Nadim Trans"
+                        fill
+                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                        className="object-cover object-bottom transition-transform duration-700 group-hover:scale-105"
+                      />
+
+                      {/* Ambient Showroom Lighting & Floor Vignette */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+
                       {car.image ? (
                         <Image
                           src={car.image}
@@ -167,19 +179,16 @@ export default function Features() {
                           fill
                           priority={currentPage === 0}
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-contain p-3 sm:p-4 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_15px_20px_rgba(0,0,0,0.7)]"
+                          className="object-contain p-3 sm:p-4 transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_16px_25px_rgba(0,0,0,0.85)] z-[1]"
                         />
                       ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-slate-100 via-slate-50 to-amber-50/30 flex flex-col items-center justify-center p-4 text-center">
-                          <div className="w-12 h-12 rounded-xl bg-white shadow-sm flex items-center justify-center mb-2 text-slate-400 group-hover:text-amber-500 transition-colors">
+                        <div className="w-full h-full relative z-[1] bg-slate-900/60 backdrop-blur-xs flex flex-col items-center justify-center p-4 text-center">
+                          <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm shadow-sm flex items-center justify-center mb-2 text-amber-400 group-hover:text-amber-300 transition-colors">
                             <Car className="w-6 h-6" />
                           </div>
-                          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Area Foto Unit</span>
+                          <span className="text-xs font-semibold text-slate-200 uppercase tracking-wider">Area Foto Unit</span>
                         </div>
                       )}
-
-                      {/* Subtle Vignette */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
                       {/* Category Badge (Top Left) */}
                       <div className="absolute top-3.5 left-3.5 z-10">

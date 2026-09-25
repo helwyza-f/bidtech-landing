@@ -162,18 +162,30 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                 className="bg-white rounded-3xl p-4 sm:p-6 border border-gray-200/80 shadow-sm"
               >
                 {/* Main Large Display Image */}
-                <div className="relative h-64 sm:h-96 md:h-[420px] w-full rounded-2xl overflow-hidden bg-gradient-to-b from-slate-900 via-slate-850 to-slate-950 mb-4 flex items-center justify-center border border-slate-800">
+                <div className="relative h-64 sm:h-96 md:h-[420px] w-full rounded-2xl overflow-hidden bg-slate-950 mb-4 flex items-center justify-center border border-slate-800">
+                  {/* Showroom Background Stage */}
+                  <Image
+                    src="/images/background-4.webp"
+                    alt="Showroom Nadim Trans"
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 66vw"
+                    className="object-cover object-bottom"
+                  />
+                  {/* Ambient Showroom Lighting & Floor Vignette */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+
                   {(selectedImage || car.image) ? (
                     <Image
                       src={selectedImage || car.image}
                       alt={car.name}
                       fill
                       priority
-                      className="object-contain p-6 sm:p-10 transition-transform duration-500 hover:scale-105 drop-shadow-[0_25px_35px_rgba(0,0,0,0.85)]"
+                      className="object-contain p-6 sm:p-10 transition-transform duration-500 hover:scale-105 drop-shadow-[0_25px_35px_rgba(0,0,0,0.85)] z-[1]"
                     />
                   ) : (
-                    <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-100 via-slate-50 to-amber-50/40 p-8 text-center">
-                      <div className="w-16 h-16 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center mb-3 text-slate-400">
+                    <div className="w-full h-full relative z-[1] flex flex-col items-center justify-center bg-slate-900/60 backdrop-blur-xs p-8 text-center">
+                      <div className="w-16 h-16 rounded-2xl bg-white/10 backdrop-blur-sm shadow-sm border border-white/10 flex items-center justify-center mb-3 text-amber-400">
                         <CarIcon className="w-8 h-8" />
                       </div>
                       <p className="text-base font-bold text-slate-800 uppercase tracking-wider">Area Foto Unit Kendaraan</p>
@@ -603,16 +615,26 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     className="bg-white rounded-2xl overflow-hidden border border-gray-200/80 shadow-sm hover:shadow-xl hover:shadow-amber-500/10 hover:border-amber-400/50 transition-all duration-300 flex flex-col justify-between group"
                   >
                     <div>
-                      <div className="relative h-48 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-950 overflow-hidden flex items-center justify-center">
+                      <div className="relative h-48 bg-slate-950 overflow-hidden flex items-center justify-center">
+                        {/* Showroom Background */}
+                        <Image
+                          src="/images/background-4.webp"
+                          alt="Showroom Nadim Trans"
+                          fill
+                          sizes="(max-width: 768px) 100vw, 33vw"
+                          className="object-cover object-bottom"
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+
                         {relCar.image ? (
                           <Image
                             src={relCar.image}
                             alt={relCar.name}
                             fill
-                            className="object-contain p-3 group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_10px_15px_rgba(0,0,0,0.7)]"
+                            className="object-contain p-3 group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_12px_18px_rgba(0,0,0,0.8)] z-[1]"
                           />
                         ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex flex-col items-center justify-center text-slate-400 group-hover:text-amber-500 transition-colors">
+                          <div className="w-full h-full relative z-[1] bg-slate-900/60 backdrop-blur-xs flex flex-col items-center justify-center text-slate-300 group-hover:text-amber-400 transition-colors">
                             <CarIcon className="w-7 h-7 mb-1" />
                             <span className="text-[11px] font-semibold uppercase tracking-wider">Foto Unit</span>
                           </div>
