@@ -27,7 +27,7 @@ class UserSeeder extends Seeder
                 'order_id'       => null,
                 'name'           => 'Administrator',
                 'whatsapp'       => '08000000000',
-                'password'       => Hash::make('admin123'),
+                'password'       => Hash::make('adminBidtechOFFICIAL321!'),
                 'is_admin'       => true,
                 'domain_status'  => DomainStatus::Registered,
                 'domain_final'   => null,
