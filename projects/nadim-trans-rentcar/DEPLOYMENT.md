@@ -15,7 +15,7 @@ Panduan ini menjelaskan langkah demi langkah untuk melakukan deploy aplikasi Nex
    ├── Kompresi Gzip
    ├── Caching Aset Statis (/_next/static & /images)
    ├── Security Headers (HSTS, CSP, X-Frame, dll.)
-   └── Proxy Pass ke: 127.0.0.1:3000
+   └── Proxy Pass ke: 127.0.0.1:3040
           │
           ▼
 [ Docker Container: nadimtrans-web ]
@@ -64,12 +64,12 @@ newgrp docker
 3. Periksa status container:
    ```bash
    docker ps
-   # Container 'nadimtrans-web' akan berstatus Up dan port 127.0.0.1:3000->3000/tcp
+   # Container 'nadimtrans-web' akan berstatus Up dan port 127.0.0.1:3040->3040/tcp
    ```
 
 4. Uji koneksi lokal Next.js di dalam VPS:
    ```bash
-   curl -I http://127.0.0.1:3000
+   curl -I http://127.0.0.1:3040
    # Respon harus berupa HTTP/1.1 200 OK
    ```
 
@@ -92,7 +92,7 @@ server {
     server_name nadimstrans.com www.nadimstrans.com;
 
     location / {
-        proxy_pass http://127.0.0.1:3000;
+        proxy_pass http://127.0.0.1:3040;
         proxy_http_version 1.1;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;

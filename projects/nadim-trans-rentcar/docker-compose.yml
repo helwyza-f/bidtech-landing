@@ -8,16 +8,16 @@ services:
     container_name: nadimtrans-web
     restart: unless-stopped
     ports:
-      # Terikat hanya pada localhost (127.0.0.1) agar port 3000 tidak terbuka langsung ke internet publik.
-      # Semua traffic publik harus melewati Reverse Proxy Nginx pada host.
-      - "127.0.0.1:3000:3000"
+      # Terikat hanya pada localhost (127.0.0.1) port 3040
+      # Semua traffic publik wajib melewati Reverse Proxy Nginx pada host.
+      - "127.0.0.1:3040:3040"
     environment:
       - NODE_ENV=production
-      - PORT=3000
+      - PORT=3040
       - HOSTNAME=0.0.0.0
       - NEXT_TELEMETRY_DISABLED=1
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:3000/ || exit 1"]
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:3040/ || exit 1"]
       interval: 30s
       timeout: 5s
       retries: 3
