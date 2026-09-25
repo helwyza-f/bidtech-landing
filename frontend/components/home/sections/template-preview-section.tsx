@@ -48,6 +48,10 @@ const categoryIcons: Record<string, LucideIcon> = {
   Pendidikan: GraduationCap,
 };
 
+// checkout_url normalnya berasal dari API. Fallback ini mengikuti alur checkout
+// halaman Template Design dan menggunakan dashboard sesuai environment.
+const DASHBOARD_URL = process.env.NEXT_PUBLIC_API_URL || (typeof window !== "undefined" && window.location.hostname !== "localhost" && window.location.hostname !== "127.0.0.1" ? `${window.location.protocol}//dashboard.${window.location.hostname}` : "http://localhost:8000");
+
 export function TemplatePreviewSection() {
   const { t } = useLanguage();
   const [activeCategory, setActiveCategory] = useState("all");
@@ -149,6 +153,9 @@ export function TemplatePreviewSection() {
                 : template.category === "Konstruksi & Properti"
                   ? "Properti"
                   : template.category;
+            const checkoutUrl =
+              template.checkout_url ||
+              `${DASHBOARD_URL}/checkout/${template.id}/domain`;
 
             return (
               <Reveal
@@ -209,18 +216,13 @@ export function TemplatePreviewSection() {
                       <span>{t.templatePreview.preview}</span>
                     </Link>
 
-                    <button
+                    <a
                       className="flex-1 inline-flex items-center justify-center gap-1.5 rounded-full bg-[#45a02e] py-2.5 text-xs sm:text-sm font-semibold text-white hover:bg-[#3b8e26] shadow-sm transition-all cursor-pointer text-center"
-                      onClick={() => {
-                        const message = `Halo BIDTECH, saya tertarik untuk membeli template ${template.name}.`;
-                        const whatsappUrl = `https://wa.me/628217601455?text=${encodeURIComponent(message)}`;
-                        window.open(whatsappUrl, "_blank");
-                      }}
-                      type="button"
+                      href={checkoutUrl}
                     >
                       <ShoppingCart className="size-3.5" />
                       <span>{t.templatePreview.buy}</span>
-                    </button>
+                    </a>
                   </div>
                 </div>
               </Reveal>
