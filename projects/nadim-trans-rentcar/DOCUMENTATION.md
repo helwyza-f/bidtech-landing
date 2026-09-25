@@ -139,9 +139,9 @@ Seluruh armada diatur terpusat di file [`lib/data.ts`](file:///c:/Users/User/Doc
 
 ## 5. Implementasi Khusus Section Hero
 
-- **Latar Belakang (`background-3.webp`)**: Foto showroom & lobby kantor megah **PT. Nadim Auto Transindo** dengan logo 3D NTR emas & perak pada dinding. Dilapisi gradasi sinematik gelap halus (`from-black/85 via-black/55 to-transparent`) untuk menjamin keterbacaan teks dan menyatu sempurna dengan cutout Toyota Alphard di sisi kanan.
-- **Unit Mobil Utama (`mobil-22.webp`)**: Cutout resolusi tinggi unit Toyota Alphard hitam (plat BP 1510 VJ) dengan kontak bayangan ban di aspal jalan dan efek interaktif *mouse-parallax*.
-- **Tanpa Elemen Mengganggu**: Badge teks VVIP yang sebelumnya menumpuk telah dihilangkan sehingga tampilan hero terlihat bersih dan fokus.
+- **Latar Belakang (`background-3.webp`)**: Foto showroom & lobby kantor megah **PT. Nadim Auto Transindo** dengan logo 3D NTR emas & perak pada dinding. Posisi background diatur naik (`object-[75%_18%] md:object-[82%_18%]`) agar logo megah 3D NTR tampak jelas di atas atap kendaraan.
+- **Unit Mobil Utama (`Alphard-2.webp`)**: Cutout resolusi tinggi unit Toyota Alphard putih VIP dengan ukuran proporsional sedang (*medium*), kontak bayangan lantai yang realistis, dan efek interaktif *mouse-parallax*.
+- **Tanpa Elemen Mengganggu**: Tampilan hero bersih, proporsional, dan logo NTR tetap terlihat megah tanpa tertutup badan mobil.
 
 ---
 

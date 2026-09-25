@@ -32,7 +32,7 @@ export default function Hero() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center brightness-[0.92] contrast-[1.05]"
+          className="object-cover object-[75%_18%] md:object-[82%_18%] brightness-[0.95] contrast-[1.05]"
         />
 
         {/* Softened cinematic gradient for clear text readability while allowing the showroom and NTR logo to shine */}
@@ -40,19 +40,19 @@ export default function Hero() {
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-black/30 z-[1]" />
         
         {/* Subtle gold ambient warmth */}
-        <div className="absolute top-[25%] right-[10%] w-[40vw] h-[40vw] rounded-full bg-amber-400/15 blur-[120px] pointer-events-none z-[2]" />
+        <div className="absolute top-[20%] right-[12%] w-[38vw] h-[38vw] rounded-full bg-amber-400/15 blur-[120px] pointer-events-none z-[2]" />
       </div>
 
-      {/* 2. Interactive High-Res Foreground Car Layer - Cutout Toyota Alphard VIP */}
+      {/* 2. Interactive High-Res Foreground Car Layer - Cutout Toyota Alphard VIP (Alphard-2) */}
       <motion.div
-        initial={{ opacity: 0, x: 300 }}
+        initial={{ opacity: 0, x: 200 }}
         animate={{ opacity: 1, x: 0 }}
         transition={{
-          duration: 1.2,
+          duration: 1.1,
           delay: 0.15,
           ease: [0.16, 1, 0.3, 1],
         }}
-        className="hidden md:block absolute right-[0%] lg:right-[1%] xl:right-[3%] bottom-[6%] lg:bottom-[8%] xl:bottom-[10%] w-[58%] lg:w-[53%] xl:w-[50%] max-w-[880px] pointer-events-none z-10 select-none"
+        className="hidden md:block absolute right-[2%] lg:right-[3%] xl:right-[5%] bottom-[3%] lg:bottom-[4%] xl:bottom-[5%] w-[46%] lg:w-[42%] xl:w-[38%] max-w-[620px] lg:max-w-[650px] pointer-events-none z-10 select-none"
       >
         <motion.div
           animate={{
@@ -67,21 +67,21 @@ export default function Hero() {
           className="relative"
         >
           {/* Golden glow aura behind the car */}
-          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[75%] bg-gradient-to-tr from-amber-500/25 via-yellow-500/15 to-transparent blur-3xl rounded-full pointer-events-none" />
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[75%] bg-gradient-to-tr from-amber-500/20 via-yellow-500/10 to-transparent blur-3xl rounded-full pointer-events-none" />
 
           {/* Standalone Cutout Vehicle */}
           <div className="relative">
             <Image
-              src="/images/mobil-22.webp"
+              src="/images/Alphard-2.webp"
               alt="Armada Toyota Alphard VIP Nadim Trans RentCar Batam"
-              width={1536}
-              height={1024}
+              width={1805}
+              height={871}
               priority
-              sizes="50vw"
-              className="w-full h-auto object-contain drop-shadow-[0_30px_45px_rgba(0,0,0,0.95)]"
+              sizes="(max-width: 1024px) 45vw, 40vw"
+              className="w-full h-auto object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.85)]"
             />
             {/* Realistic floor contact shadow */}
-            <div className="absolute -bottom-3 left-[8%] right-[8%] h-7 bg-black/95 blur-xl rounded-[100%] pointer-events-none" />
+            <div className="absolute -bottom-2 left-[5%] right-[5%] h-6 bg-black/95 blur-xl rounded-[100%] pointer-events-none" />
           </div>
         </motion.div>
       </motion.div>
@@ -194,18 +194,18 @@ export default function Hero() {
             transition={{ duration: 0.9, delay: 0.65 }}
             className="block md:hidden relative w-full pt-2 pb-2 my-1"
           >
-            <div className="relative w-full max-w-[360px] mx-auto">
+            <div className="relative w-full max-w-[310px] mx-auto">
               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[85%] h-[60%] bg-amber-500/15 blur-2xl rounded-full" />
               <Image
-                src="/images/mobil-22.webp"
+                src="/images/Alphard-2.webp"
                 alt="Armada Toyota Alphard VIP Nadim Trans RentCar"
-                width={1536}
-                height={1024}
+                width={1805}
+                height={871}
                 priority
-                sizes="95vw"
-                className="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.95)] relative z-10"
+                sizes="90vw"
+                className="w-full h-auto object-contain drop-shadow-[0_20px_30px_rgba(0,0,0,0.85)] relative z-10"
               />
-              <div className="absolute -bottom-1 left-[10%] right-[10%] h-4 bg-black/90 blur-md rounded-[100%]" />
+              <div className="absolute -bottom-1 left-[8%] right-[8%] h-4 bg-black/90 blur-md rounded-[100%]" />
             </div>
           </motion.div>
 
