@@ -6,10 +6,7 @@ const nextConfig = {
   reactStrictMode: true,
   transpilePackages: ["lenis"],
   images: {
-    formats: ['image/avif', 'image/webp'],
-    ...(isStaticDemoBuild
-      ? { loader: "custom", loaderFile: "./lib/demo-image-loader.js" }
-      : { unoptimized: false }),
+    unoptimized: true,
   },
   ...(isStaticDemoBuild
     ? { output: "export", basePath: demoBasePath, trailingSlash: true }

@@ -165,6 +165,7 @@ export default function Features() {
                           src={car.image}
                           alt={car.name}
                           fill
+                          priority={currentPage === 0}
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           className="object-contain p-3 sm:p-4 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_15px_20px_rgba(0,0,0,0.7)]"
                         />

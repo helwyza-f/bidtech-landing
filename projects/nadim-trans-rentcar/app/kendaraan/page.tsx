@@ -196,6 +196,7 @@ export default function KendaraanPage() {
                             src={car.image}
                             alt={car.name}
                             fill
+                            priority={index < 6}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="object-contain p-4 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_15px_20px_rgba(0,0,0,0.7)]"
                           />
