@@ -111,7 +111,9 @@ export default function Features() {
               className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-all duration-200 cursor-pointer ${
                 currentPage === 0
                   ? "border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50/50"
-                  : "border-gray-300 hover:border-amber-500 text-gray-700 hover:text-amber-600 bg-white hover:bg-amber-50 shadow-sm active:scale-95"
+                  : currentPage === totalPages - 1
+                  ? "border-amber-500 text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-md shadow-amber-500/25 active:scale-95"
+                  : "border-gray-300 text-gray-700 bg-white hover:bg-gradient-to-r hover:from-amber-400 hover:to-amber-500 hover:border-amber-500 hover:text-slate-950 hover:shadow-md hover:shadow-amber-500/20 shadow-sm active:scale-95"
               }`}
             >
               <ArrowLeft className="w-5 h-5" />
@@ -126,7 +128,9 @@ export default function Features() {
               className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-all duration-200 cursor-pointer ${
                 currentPage >= totalPages - 1
                   ? "border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50/50"
-                  : "border-amber-500 text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-md shadow-amber-500/25 active:scale-95"
+                  : currentPage === 0
+                  ? "border-amber-500 text-slate-950 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-300 hover:to-amber-400 shadow-md shadow-amber-500/25 active:scale-95"
+                  : "border-gray-300 text-gray-700 bg-white hover:bg-gradient-to-r hover:from-amber-400 hover:to-amber-500 hover:border-amber-500 hover:text-slate-950 hover:shadow-md hover:shadow-amber-500/20 shadow-sm active:scale-95"
               }`}
             >
               <ArrowRight className="w-5 h-5" />

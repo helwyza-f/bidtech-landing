@@ -30,15 +30,6 @@ export default function WhyChooseUs() {
                     className="object-cover"
                     priority
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent pointer-events-none" />
-                  <div className="absolute bottom-4 left-4 right-4 pointer-events-none">
-                    <span className="inline-block px-2.5 py-1 rounded-md bg-amber-500 text-slate-950 text-[10px] font-black uppercase tracking-wider mb-1">
-                      Pool & Kantor Resmi
-                    </span>
-                    <p className="text-white text-xs font-bold leading-snug">
-                      Perumahan KDA Batam Kota
-                    </p>
-                  </div>
                 </div>
               </div>
 
