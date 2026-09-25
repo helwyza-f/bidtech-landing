@@ -177,9 +177,6 @@ export default function FaqPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <div className="inline-block px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-xs font-bold text-amber-300 uppercase tracking-wider mb-3 backdrop-blur-sm">
-                Bantuan & Informasi
-              </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white drop-shadow-md">
                 Pusat Bantuan & <span className="text-amber-400">FAQ Batam</span>
               </h1>

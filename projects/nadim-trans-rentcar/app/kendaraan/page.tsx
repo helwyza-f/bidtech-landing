@@ -77,9 +77,6 @@ export default function KendaraanPage() {
               transition={{ duration: 0.5 }}
               className="max-w-3xl mx-auto"
             >
-              <div className="inline-block px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-xs font-bold text-amber-300 uppercase tracking-wider mb-3 backdrop-blur-sm">
-                Armada PT. Nadim Auto Transindo
-              </div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white drop-shadow-md">
                 Pilihan Armada <span className="text-amber-400">Terbaik di Batam</span>
               </h1>
@@ -181,19 +178,7 @@ export default function KendaraanPage() {
                     className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-amber-300/80 transition-all duration-300 group flex flex-col justify-between"
                   >
                     <div>
-                      <Link href={`/kendaraan/${car.id}`} className="block relative h-60 bg-slate-950 overflow-hidden cursor-pointer">
-                        {/* Showroom Background Stage */}
-                        <Image
-                          src="/images/background-4.webp"
-                          alt="Showroom Nadim Trans"
-                          fill
-                          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          className="object-cover object-bottom transition-transform duration-700 group-hover:scale-105"
-                        />
-
-                        {/* Ambient Showroom Lighting & Floor Vignette */}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
-
+                      <Link href={`/kendaraan/${car.id}`} className="block relative h-60 bg-white overflow-hidden cursor-pointer border-b border-gray-100">
                         {car.image ? (
                           <Image
                             src={car.image}
@@ -201,22 +186,22 @@ export default function KendaraanPage() {
                             fill
                             priority={index < 6}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-contain p-4 transition-transform duration-500 group-hover:scale-110 drop-shadow-[0_16px_25px_rgba(0,0,0,0.85)] z-[1]"
+                            className="object-contain p-4 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_12px_20px_rgba(0,0,0,0.12)]"
                           />
                         ) : (
-                          <div className="w-full h-full relative z-[1] bg-slate-900/60 backdrop-blur-xs flex flex-col items-center justify-center p-4 text-center">
-                            <div className="w-12 h-12 rounded-xl bg-white/10 backdrop-blur-sm shadow-sm flex items-center justify-center mb-2 text-amber-400 group-hover:text-amber-300 transition-colors">
+                          <div className="w-full h-full bg-gradient-to-br from-slate-50 via-gray-50 to-amber-50/30 flex flex-col items-center justify-center p-4 text-center">
+                            <div className="w-12 h-12 rounded-xl bg-white shadow-sm border border-gray-100 flex items-center justify-center mb-2 text-slate-400 group-hover:text-amber-500 transition-colors">
                               <CarIcon className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-semibold text-slate-200 uppercase tracking-wider">Area Foto Unit</span>
+                            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Area Foto Unit</span>
                           </div>
                         )}
                         <div className="absolute top-4 left-4 z-10 flex gap-2">
-                          <span className="inline-flex items-center rounded-lg bg-black/75 backdrop-blur-sm px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-300 border border-amber-500/30 shadow-sm">
+                          <span className="inline-flex items-center rounded-lg bg-slate-900/90 backdrop-blur-sm px-3 py-1 text-xs font-bold uppercase tracking-wider text-amber-300 border border-amber-500/30 shadow-sm">
                             {car.category}
                           </span>
                         </div>
-                        <div className="absolute top-4 right-4 z-10 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-lg flex items-center gap-1 shadow-sm">
+                        <div className="absolute top-4 right-4 z-10 bg-white/95 backdrop-blur-sm px-2.5 py-1 rounded-lg flex items-center gap-1 shadow-sm border border-gray-100">
                           <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                           <span className="text-xs font-bold text-gray-800">
                             {car.rating}
