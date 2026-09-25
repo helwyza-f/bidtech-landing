@@ -1,8 +1,8 @@
 "use client";
 
 import { useState, type ChangeEvent, type FormEvent } from "react";
+import { ChevronDown } from "lucide-react";
 
-import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/lib/i18n";
 
 interface SelectedPackage {
@@ -11,141 +11,194 @@ interface SelectedPackage {
   price: string;
 }
 
-function useContactFormState(selectedPackage: SelectedPackage | null) {
+export function ContactForm({
+  selectedPackage,
+}: {
+  selectedPackage?: SelectedPackage | null;
+}) {
   const { t } = useLanguage();
+
   const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
   const [whatsapp, setWhatsapp] = useState("");
   const [company, setCompany] = useState("");
-  const [service, setService] = useState(selectedPackage?.service ?? t.contact.form.services[0]);
+  const [service, setService] = useState(selectedPackage?.service ?? "");
   const [description, setDescription] = useState(
-    selectedPackage ? `${t.contact.message.packageInterestPrefix} ${selectedPackage.plan} (${selectedPackage.price}).` : "",
+    selectedPackage
+      ? `${t.contact.message.packageInterestPrefix} ${selectedPackage.plan} (${selectedPackage.price}).`
+      : "",
   );
 
   const handleSubmit = (event: FormEvent) => {
     event.preventDefault();
 
     const message = [
-      `${t.contact.message.greetingPrefix} ${name || "-"} ${t.contact.message.from} ${company || "-"}.`,
-      `${t.contact.message.whatsapp}: ${whatsapp || "-"}`,
-      `${t.contact.message.service}: ${service}`,
-      `${t.contact.message.description}: ${description || "-"}`,
+      `${t.contact.message.greetingPrefix} *${name.trim() || "-"}* ${company.trim() ? `${t.contact.message.from} *${company.trim()}*` : ""}.`,
+      `• *${t.contact.form.emailLabel}:* ${email.trim() || "-"}`,
+      `• *${t.contact.message.whatsapp}:* ${whatsapp.trim() || "-"}`,
+      `• *${t.contact.message.service}:* ${service || "-"}`,
+      `• *${t.contact.message.description}:*`,
+      `${description.trim() || "-"}`,
     ].join("\n");
 
-    window.open(`https://wa.me/628217601455?text=${encodeURIComponent(message)}`, "_blank", "noopener,noreferrer");
+    window.open(
+      `https://wa.me/628217601455?text=${encodeURIComponent(message)}`,
+      "_blank",
+      "noopener,noreferrer",
+    );
   };
-
-  return {
-    company,
-    description,
-    name,
-    service,
-    services: t.contact.form.services,
-    t,
-    whatsapp,
-    handleCompanyChange: (event: ChangeEvent<HTMLInputElement>) => setCompany(event.target.value),
-    handleDescriptionChange: (event: ChangeEvent<HTMLTextAreaElement>) => setDescription(event.target.value),
-    handleNameChange: (event: ChangeEvent<HTMLInputElement>) => setName(event.target.value),
-    handleServiceChange: (event: ChangeEvent<HTMLSelectElement>) => setService(event.target.value),
-    handleSubmit,
-    handleWhatsappChange: (event: ChangeEvent<HTMLInputElement>) => setWhatsapp(event.target.value),
-  };
-}
-
-export function ContactForm({ selectedPackage }: { selectedPackage: SelectedPackage | null }) {
-  const {
-    company,
-    description,
-    name,
-    service,
-    services,
-    t,
-    whatsapp,
-    handleCompanyChange,
-    handleDescriptionChange,
-    handleNameChange,
-    handleServiceChange,
-    handleSubmit,
-    handleWhatsappChange,
-  } = useContactFormState(selectedPackage);
 
   return (
-    <form className="space-y-5" onSubmit={handleSubmit}>
-      <div className="grid gap-5 sm:grid-cols-2">
-        <div>
-          <label className="text-xs font-semibold text-slate-600" htmlFor="contact-name">
-            {t.contact.form.nameLabel}
-          </label>
-          <input
-            className="mt-2 w-full rounded-2xl border border-emerald-100 bg-white px-4 py-3 text-sm text-slate-950 shadow-sm placeholder:text-slate-400 focus:border-brand-primary/60 focus:outline-none focus:ring-4 focus:ring-brand-primary/10"
-            id="contact-name"
-            onChange={handleNameChange}
-            placeholder={t.contact.form.namePlaceholder}
-            value={name}
-          />
+    <div>
+      {/* Form Header */}
+      <div>
+        <h3 className="font-[family-name:var(--font-sora)] text-2xl sm:text-[28px] font-extrabold text-slate-900 tracking-tight leading-snug">
+          {t.contact.form.title}
+        </h3>
+        <p className="mt-2 text-xs sm:text-sm text-slate-500 leading-relaxed">
+          {t.contact.form.subtitle}
+        </p>
+      </div>
+
+      <form className="mt-7 sm:mt-8 space-y-4 sm:space-y-5" onSubmit={handleSubmit}>
+        {/* Row 1: Nama Lengkap & Email */}
+        <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
+          <div>
+            <label
+              className="block text-xs font-bold text-slate-800 mb-1.5"
+              htmlFor="contact-name"
+            >
+              {t.contact.form.nameLabel}
+            </label>
+            <input
+              className="w-full rounded-[14px] border border-slate-200/90 bg-[#fbfcfd] px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#45a02e] focus:outline-none focus:ring-4 focus:ring-[#45a02e]/10 transition-all shadow-xs"
+              id="contact-name"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+              placeholder={t.contact.form.namePlaceholder}
+              required
+              type="text"
+              value={name}
+            />
+          </div>
+
+          <div>
+            <label
+              className="block text-xs font-bold text-slate-800 mb-1.5"
+              htmlFor="contact-email"
+            >
+              {t.contact.form.emailLabel}
+            </label>
+            <input
+              className="w-full rounded-[14px] border border-slate-200/90 bg-[#fbfcfd] px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#45a02e] focus:outline-none focus:ring-4 focus:ring-[#45a02e]/10 transition-all shadow-xs"
+              id="contact-email"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setEmail(e.target.value)}
+              placeholder={t.contact.form.emailPlaceholder}
+              type="email"
+              value={email}
+            />
+          </div>
         </div>
 
-        <div>
-          <label className="text-xs font-semibold text-slate-600" htmlFor="contact-whatsapp">
-            {t.contact.form.whatsappLabel}
-          </label>
-          <input
-            className="mt-2 w-full rounded-2xl border border-emerald-100 bg-white px-4 py-3 text-sm text-slate-950 shadow-sm placeholder:text-slate-400 focus:border-brand-primary/60 focus:outline-none focus:ring-4 focus:ring-brand-primary/10"
-            id="contact-whatsapp"
-            onChange={handleWhatsappChange}
-            placeholder={t.contact.form.whatsappPlaceholder}
-            value={whatsapp}
-          />
+        {/* Row 2: Nomor Whatsapp & Nama Perusahaan */}
+        <div className="grid gap-4 sm:gap-5 sm:grid-cols-2">
+          <div>
+            <label
+              className="block text-xs font-bold text-slate-800 mb-1.5"
+              htmlFor="contact-whatsapp"
+            >
+              {t.contact.form.whatsappLabel}
+            </label>
+            <input
+              className="w-full rounded-[14px] border border-slate-200/90 bg-[#fbfcfd] px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#45a02e] focus:outline-none focus:ring-4 focus:ring-[#45a02e]/10 transition-all shadow-xs"
+              id="contact-whatsapp"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setWhatsapp(e.target.value)}
+              placeholder={t.contact.form.whatsappPlaceholder}
+              required
+              type="tel"
+              value={whatsapp}
+            />
+          </div>
+
+          <div>
+            <label
+              className="block text-xs font-bold text-slate-800 mb-1.5"
+              htmlFor="contact-company"
+            >
+              {t.contact.form.companyLabel}
+            </label>
+            <input
+              className="w-full rounded-[14px] border border-slate-200/90 bg-[#fbfcfd] px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#45a02e] focus:outline-none focus:ring-4 focus:ring-[#45a02e]/10 transition-all shadow-xs"
+              id="contact-company"
+              onChange={(e: ChangeEvent<HTMLInputElement>) => setCompany(e.target.value)}
+              placeholder={t.contact.form.companyPlaceholder}
+              type="text"
+              value={company}
+            />
+          </div>
         </div>
 
+        {/* Row 3: Pilih Layanan */}
         <div>
-          <label className="text-xs font-semibold text-slate-600" htmlFor="contact-company">
-            {t.contact.form.companyLabel}
-          </label>
-          <input
-            className="mt-2 w-full rounded-2xl border border-emerald-100 bg-white px-4 py-3 text-sm text-slate-950 shadow-sm placeholder:text-slate-400 focus:border-brand-primary/60 focus:outline-none focus:ring-4 focus:ring-brand-primary/10"
-            id="contact-company"
-            onChange={handleCompanyChange}
-            placeholder={t.contact.form.companyPlaceholder}
-            value={company}
-          />
-        </div>
-
-        <div>
-          <label className="text-xs font-semibold text-slate-600" htmlFor="contact-service">
+          <label
+            className="block text-xs font-bold text-slate-800 mb-1.5"
+            htmlFor="contact-service"
+          >
             {t.contact.form.serviceLabel}
           </label>
-          <select
-            className="mt-2 w-full rounded-2xl border border-emerald-100 bg-white px-4 py-3 text-sm text-slate-950 shadow-sm focus:border-brand-primary/60 focus:outline-none focus:ring-4 focus:ring-brand-primary/10"
-            id="contact-service"
-            onChange={handleServiceChange}
-            value={service}
-          >
-            {services.map((option) => (
-              <option key={option} value={option}>
-                {option}
+          <div className="relative">
+            <select
+              className="w-full appearance-none rounded-[14px] border border-slate-200/90 bg-[#fbfcfd] px-4 py-3 pr-10 text-sm text-slate-900 focus:bg-white focus:border-[#45a02e] focus:outline-none focus:ring-4 focus:ring-[#45a02e]/10 transition-all shadow-xs cursor-pointer"
+              id="contact-service"
+              onChange={(e: ChangeEvent<HTMLSelectElement>) => setService(e.target.value)}
+              value={service}
+            >
+              <option disabled value="">
+                {t.contact.form.servicePlaceholder}
               </option>
-            ))}
-          </select>
+              {t.contact.form.services.map((option) => (
+                <option key={option} value={option}>
+                  {option}
+                </option>
+              ))}
+            </select>
+            <ChevronDown className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 size-4 text-slate-400" />
+          </div>
         </div>
-      </div>
 
-      <div>
-        <label className="text-xs font-semibold text-slate-600" htmlFor="contact-description">
-          {t.contact.form.descriptionLabel}
-        </label>
-        <textarea
-          className="mt-2 w-full resize-none rounded-2xl border border-emerald-100 bg-white px-4 py-3 text-sm text-slate-950 shadow-sm placeholder:text-slate-400 focus:border-brand-primary/60 focus:outline-none focus:ring-4 focus:ring-brand-primary/10"
-          id="contact-description"
-          onChange={handleDescriptionChange}
-          placeholder={t.contact.form.descriptionPlaceholder}
-          rows={4}
-          value={description}
-        />
-      </div>
+        {/* Row 4: Deskripsi Proyek */}
+        <div>
+          <label
+            className="block text-xs font-bold text-slate-800 mb-1.5"
+            htmlFor="contact-description"
+          >
+            {t.contact.form.descriptionLabel}
+          </label>
+          <textarea
+            className="w-full resize-none rounded-[14px] border border-slate-200/90 bg-[#fbfcfd] px-4 py-3 text-sm text-slate-900 placeholder:text-slate-400 focus:bg-white focus:border-[#45a02e] focus:outline-none focus:ring-4 focus:ring-[#45a02e]/10 transition-all shadow-xs leading-relaxed"
+            id="contact-description"
+            onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setDescription(e.target.value)}
+            placeholder={t.contact.form.descriptionPlaceholder}
+            rows={4}
+            value={description}
+          />
+        </div>
 
-      <Button className="w-full text-slate-950" size="lg" type="submit">
-        {t.contact.form.submit}
-      </Button>
-    </form>
+        {/* Submit Button */}
+        <div className="pt-2">
+          <button
+            className="w-full rounded-[14px] bg-[#45a02e] hover:bg-[#3b8e26] py-3.5 sm:py-4 text-center text-sm sm:text-base font-bold text-white shadow-[0_8px_24px_rgba(69,160,46,0.25)] transition-all duration-200 hover:-translate-y-0.5 active:scale-[0.99] cursor-pointer"
+            type="submit"
+          >
+            {t.contact.form.submit}
+          </button>
+        </div>
+
+        {/* Privacy Note */}
+        <p className="pt-1 text-center text-xs text-slate-400 leading-normal">
+          {t.contact.form.privacyNote}
+        </p>
+      </form>
+    </div>
   );
 }
+

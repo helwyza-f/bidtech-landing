@@ -141,7 +141,7 @@ export function HeroShowcase() {
 
         {/* CTA Buttons */}
         <div
-          className="hero-fade-in mt-6 sm:mt-8 flex flex-wrap items-center justify-center lg:justify-start gap-3"
+          className="hero-fade-in mt-6 sm:mt-8 flex flex-col xs:flex-row items-stretch xs:items-center justify-center lg:justify-start gap-3 w-full max-w-sm mx-auto lg:mx-0 sm:max-w-none"
           style={{ animationDelay: "180ms" }}
         >
           <button
@@ -150,14 +150,14 @@ export function HeroShowcase() {
               const input = document.querySelector<HTMLInputElement>("input[placeholder*='domain']");
               if (input) { input.focus(); input.scrollIntoView({ behavior: "smooth", block: "center" }); }
             }}
-            className="inline-flex items-center gap-2 rounded-full bg-brand-primary hover:bg-brand-primary-hover px-6 py-3 text-sm font-bold text-white shadow-md hover:shadow-lg transition-all hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
+            className="inline-flex items-center justify-center gap-2 rounded-full bg-brand-primary hover:bg-brand-primary-hover px-6 py-3.5 text-sm font-bold text-white shadow-md hover:shadow-lg transition-all hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
           >
             <Globe className="size-4" />
             <span>{t.heroShowcase.ctaPrimary}</span>
           </button>
           <Link
             href="/template-website"
-            className="inline-flex items-center gap-2 rounded-full border-2 border-slate-200 bg-white hover:border-brand-primary hover:text-brand-primary px-6 py-3 text-sm font-bold text-slate-700 transition-all hover:scale-[1.03] active:scale-[0.98]"
+            className="inline-flex items-center justify-center gap-2 rounded-full border-2 border-slate-200 bg-white hover:border-brand-primary hover:text-brand-primary px-6 py-3.5 text-sm font-bold text-slate-700 transition-all hover:scale-[1.02] active:scale-[0.98]"
           >
             <LayoutTemplate className="size-4" />
             <span>{t.heroShowcase.ctaSecondary}</span>
@@ -168,12 +168,12 @@ export function HeroShowcase() {
 
 
       {/* BARIS 2 (Mobile/Tablet) & KOLOM KANAN (Desktop): Visual & Model Showcase */}
-      <div className="relative mx-auto flex w-full max-w-[640px] items-stretch mt-2 lg:mt-0">
+      <div className="relative mx-auto flex w-full max-w-[640px] items-stretch mt-4 lg:mt-0">
         <div aria-hidden className="pointer-events-none absolute inset-0 z-0">
           <Image src={HERO_RIGHT_BLOB_SRC} alt="" fill className="object-contain opacity-90" priority />
         </div>
 
-        <div className="relative h-full min-h-[360px] xs:min-h-[400px] sm:min-h-[460px] lg:min-h-[480px] w-full overflow-y-clip">
+        <div className="relative h-full min-h-[320px] xs:min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] w-full overflow-hidden">
           {decorativesVisible &&
             behindCards.map((card) => (
               <HeroDecorativeCard card={card} key={card.id} registerRef={registerDecorative} />

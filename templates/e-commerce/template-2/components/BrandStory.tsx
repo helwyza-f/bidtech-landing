@@ -9,6 +9,9 @@ gsap.registerPlugin(ScrollTrigger);
 
 export default function BrandStory() {
   const containerRef = useRef<HTMLElement>(null);
+  const countRef1 = useRef<HTMLSpanElement>(null);
+  const countRef2 = useRef<HTMLSpanElement>(null);
+  const countRef3 = useRef<HTMLSpanElement>(null);
 
   useGSAP(
     () => {
@@ -27,6 +30,42 @@ export default function BrandStory() {
           ease: 'power3.out',
         }
       );
+
+      // Number Counting Animations
+      const counterData = {
+        val1: 0,
+        val2: 0,
+        val3: 0,
+      };
+
+      gsap.to(counterData, {
+        val1: 4812,
+        val2: 100,
+        val3: 2024,
+        duration: 2.2,
+        ease: 'power2.out',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top 80%',
+          once: true,
+        },
+        onUpdate: () => {
+          if (countRef1.current) {
+            countRef1.current.textContent = Math.floor(counterData.val1).toLocaleString('id-ID');
+          }
+          if (countRef2.current) {
+            countRef2.current.textContent = counterData.val2.toFixed(1).replace('.', ',') + '%';
+          }
+          if (countRef3.current) {
+            countRef3.current.textContent = Math.floor(counterData.val3).toString();
+          }
+        },
+        onComplete: () => {
+          if (countRef1.current) countRef1.current.textContent = '4.812';
+          if (countRef2.current) countRef2.current.textContent = '100,0%';
+          if (countRef3.current) countRef3.current.textContent = '2024';
+        },
+      });
     },
     { scope: containerRef }
   );
@@ -51,24 +90,33 @@ export default function BrandStory() {
               <span className="font-mono-label text-[9px] sm:text-mono-label text-secondary uppercase block">
                 TOTAL PASANG TERCATAT
               </span>
-              <span className="font-mono-spec text-[22px] sm:text-headline-sm font-bold text-primary block mt-1">
-                4.812
+              <span
+                ref={countRef1}
+                className="font-mono-spec text-[22px] sm:text-headline-sm font-bold text-primary block mt-1 tabular-nums"
+              >
+                0
               </span>
             </div>
             <div className="anim-item border border-surface-container-highest p-3.5 sm:p-4 bg-surface-container-lowest">
               <span className="font-mono-label text-[9px] sm:text-mono-label text-secondary uppercase block">
                 TINGKAT KEASLIAN
               </span>
-              <span className="font-mono-spec text-[22px] sm:text-headline-sm font-bold text-primary block mt-1">
-                100,0%
+              <span
+                ref={countRef2}
+                className="font-mono-spec text-[22px] sm:text-headline-sm font-bold text-primary block mt-1 tabular-nums"
+              >
+                0,0%
               </span>
             </div>
             <div className="anim-item border border-surface-container-highest p-3.5 sm:p-4 bg-surface-container-lowest col-span-2 sm:col-span-1">
               <span className="font-mono-label text-[9px] sm:text-mono-label text-secondary uppercase block">
                 DIDIRIKAN
               </span>
-              <span className="font-mono-spec text-[22px] sm:text-headline-sm font-bold text-primary block mt-1">
-                2024
+              <span
+                ref={countRef3}
+                className="font-mono-spec text-[22px] sm:text-headline-sm font-bold text-primary block mt-1 tabular-nums"
+              >
+                0
               </span>
             </div>
           </div>

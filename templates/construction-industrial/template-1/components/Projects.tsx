@@ -102,23 +102,23 @@ export default function Projects() {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="w-full py-space-2xl bg-surface border-b border-outline-variant overflow-hidden" id="projects">
-      <div className="max-w-[1440px] mx-auto px-margin-mobile md:px-margin">
-        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-6 mb-12">
+    <section ref={containerRef} className="w-full py-12 sm:py-space-2xl bg-surface border-b border-outline-variant overflow-hidden" id="projects">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-6 md:px-margin">
+        <div className="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 sm:gap-6 mb-8 sm:mb-12">
           <div>
-            <div className="inline-flex items-center gap-2 bg-primary-container text-on-secondary-fixed font-label-caps text-label-caps px-4 py-1.5 rounded-full mb-3 uppercase">
+            <div className="inline-flex items-center gap-2 bg-primary-container text-on-secondary-fixed font-label-caps text-[11px] sm:text-label-caps px-3 sm:px-4 py-1 sm:py-1.5 rounded-full mb-2.5 sm:mb-3 uppercase font-bold tracking-wider">
               SOROTAN PORTOFOLIO
             </div>
-            <h2 className="font-headline-lg text-headline-lg uppercase text-on-surface">
+            <h2 className="font-headline-lg text-2xl sm:text-3xl lg:text-headline-lg uppercase text-on-surface leading-snug lg:leading-tight">
               PROYEK REKAYASA UNGGULAN
             </h2>
           </div>
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="flex flex-wrap items-center gap-1.5 sm:gap-2 w-full lg:w-auto">
             {categories.map(cat => (
               <button 
                 key={cat}
                 onClick={() => handleCategoryChange(cat)}
-                className={`font-label-caps text-label-caps px-5 py-2 rounded-full uppercase transition-all hover:scale-105 active:scale-95 shadow-sm border ${
+                className={`font-label-caps text-[11px] sm:text-label-caps px-3.5 sm:px-5 py-1.5 sm:py-2 rounded-full uppercase transition-all active:scale-95 shadow-sm border font-semibold ${
                   activeCategory === cat 
                     ? 'bg-primary-container text-on-secondary-fixed border-primary-container font-bold' 
                     : 'border-outline-variant text-secondary hover:border-on-surface hover:text-on-surface hover:bg-surface-container'
@@ -130,44 +130,44 @@ export default function Projects() {
           </div>
         </div>
 
-        {/* Project Layout (like screenshot) */}
+        {/* Project Layout */}
         <div className="project-layout" ref={projectDisplayRef}>
-          <div className="mb-6 max-w-3xl">
-            <h3 className="font-title-lg text-title-lg text-on-surface mb-2 font-bold uppercase">{activeProject.title}</h3>
-            <p className="font-body-md text-body-md text-secondary">
+          <div className="mb-4 sm:mb-6 max-w-3xl">
+            <h3 className="font-title-lg text-lg sm:text-xl md:text-title-lg text-on-surface mb-1.5 sm:mb-2 font-bold uppercase">{activeProject.title}</h3>
+            <p className="font-body-md text-sm sm:text-body-md text-secondary leading-relaxed">
               {activeProject.description}
             </p>
           </div>
 
-          <div className="bg-surface-container-low p-2 md:p-4 border border-outline-variant/30 rounded-sm">
+          <div className="bg-surface-container-low p-2.5 sm:p-4 border border-outline-variant/30 rounded-sm">
             {/* Main Hero Image */}
-            <div className="relative w-full aspect-[2/1] md:aspect-[2.5/1] overflow-hidden bg-surface-container mb-4">
+            <div className="relative w-full aspect-[16/10] sm:aspect-[2/1] md:aspect-[2.5/1] overflow-hidden bg-surface-container mb-3 sm:mb-4">
               <img className="w-full h-full object-cover" src={activeProject.mainImage} alt={activeProject.title} />
               
               {/* Top Left Badge */}
-              <div className="absolute top-4 left-4 bg-on-secondary-fixed text-surface px-4 py-2 flex items-center gap-2 shadow-md">
-                <span className="w-2.5 h-2.5 rounded-full bg-primary-container animate-pulse"></span>
-                <span className="font-label-technical text-label-technical uppercase font-bold tracking-widest">{activeProject.mainBadge}</span>
+              <div className="absolute top-2.5 left-2.5 sm:top-4 sm:left-4 bg-on-secondary-fixed/90 backdrop-blur-sm text-surface px-2.5 sm:px-4 py-1.5 sm:py-2 flex items-center gap-1.5 sm:gap-2 shadow-md">
+                <span className="w-2 h-2 sm:w-2.5 sm:h-2.5 rounded-full bg-primary-container animate-pulse flex-shrink-0"></span>
+                <span className="font-label-technical text-[10px] sm:text-label-technical uppercase font-bold tracking-wider">{activeProject.mainBadge}</span>
               </div>
 
               {/* Bottom Right Coordinates */}
-              <div className="absolute bottom-4 right-4 bg-surface text-on-surface px-4 py-2 shadow-md hidden md:block">
-                <span className="font-label-technical text-label-technical font-bold">{activeProject.coordinates}</span>
+              <div className="absolute bottom-2.5 right-2.5 sm:bottom-4 sm:right-4 bg-surface/95 backdrop-blur-sm text-on-surface px-3 py-1.5 shadow-md hidden sm:block">
+                <span className="font-label-technical text-[11px] font-bold">{activeProject.coordinates}</span>
               </div>
             </div>
 
             {/* 3 Phases */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
               {activeProject.phases.map((phase, index) => (
-                <div key={index} className="relative aspect-[4/3] overflow-hidden group bg-surface-container">
+                <div key={index} className="relative aspect-[16/10] sm:aspect-[4/3] overflow-hidden group bg-surface-container">
                   <img className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" src={phase.image} alt={phase.label} />
                   
                   {/* Bottom Bar overlay */}
-                  <div className="absolute bottom-0 left-0 right-0 bg-on-secondary-fixed/90 text-surface p-3 flex justify-between items-center transform translate-y-1 group-hover:translate-y-0 transition-transform">
-                    <span className="font-label-technical text-label-technical uppercase truncate pr-4" title={phase.label}>
+                  <div className="absolute bottom-0 left-0 right-0 bg-on-secondary-fixed/90 text-surface p-2.5 sm:p-3 flex justify-between items-center transition-transform">
+                    <span className="font-label-technical text-[10px] sm:text-label-technical uppercase truncate pr-2" title={phase.label}>
                       {phase.label}
                     </span>
-                    <span className="material-symbols-outlined text-primary-container text-sm flex-shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
+                    <span className="material-symbols-outlined text-primary-container text-sm sm:text-base flex-shrink-0" style={{ fontVariationSettings: "'FILL' 1" }}>
                       {phase.icon}
                     </span>
                   </div>

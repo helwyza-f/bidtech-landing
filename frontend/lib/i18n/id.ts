@@ -1,14 +1,19 @@
 export const id = {
   nav: {
-    services: "Layanan",
+    home: "Beranda",
+    findDesign: "Cari Design",
     portfolio: "Portofolio",
-    template: "Cari Desain",
+    services: "Layanan",
+    testimonials: "Ulasan",
+    contact: "Hubungi Kami",
+    custom: "Layanan",
+    tutorial: "Portofolio",
+    template: "Cari Design",
     pricing: "Harga",
     about: "Beranda",
-    contact: "Hubungi Kami",
   },
   header: {
-    cta: "Mulai Sekarang",
+    cta: "Dashboard",
   },
   announcement: {
     badge: "PENGUSAHAHEBAT",
@@ -85,14 +90,16 @@ export const id = {
     p2: "Melalui halaman ini, BidTech ditampilkan sebagai mitra yang siap membantu perusahaan membangun citra, layanan, dan kehadiran digital yang lebih kuat di mata pelanggan maupun mitra bisnis.",
   },
   services: {
-    badge: "Our Service",
-    title: "Layanan Unggulan Kami",
+    badge: "LAYANAN KUSTOM",
+    title: "Layanan Unggulan",
     subtitle: "Kami memberikan solusi teknologi komprehensif yang dirancang untuk mempercepat pertumbuhan bisnis digital Anda.",
     ariaPrevious: "Layanan sebelumnya",
     ariaNext: "Layanan berikutnya",
     ariaGroupLabel: "Layanan",
     ariaGroupFrom: "dari",
     ariaViewPrefix: "Lihat",
+    viewDetail: "Lihat Detail",
+    popularBadge: "POPULER",
     items: [
       {
         title: "Website Development",
@@ -244,6 +251,56 @@ export const id = {
       },
     ],
   },
+  portfolioSection: {
+    badge: "PORTOFOLIO",
+    titlePrefix: "Portofolio",
+    titleHighlight: "Kami",
+    subtitle:
+      "Jelajahi portofolio website unggulan yang telah membantu mitra kami meningkatkan konversi hingga 300%. Geser atau gunakan navigasi panah.",
+    cta: "Lihat Portofolio",
+    items: [
+      {
+        id: "stokin",
+        title: "Stokin",
+        tag: "MOBILE",
+        tagType: "slate",
+        image: "/images/web_stokin.webp",
+        description:
+          "Solusi kelola stok terpadu yang membantu pemilik bisnis memantau ketersediaan barang, mengelola kategori dan harga produk, serta menganalisis nilai persediaan secara efisien dari satu aplikasi.",
+        href: "#contact",
+      },
+      {
+        id: "ayocuci",
+        title: "Ayo Cuci",
+        tag: "• WEB & MOBILE",
+        tagType: "amber",
+        image: "/images/web_ayocuci.webp",
+        description:
+          "AyoCuci adalah aplikasi kasir laundry modern berbasis koin tanpa biaya langganan bulanan. Solusi praktis dan hemat untuk kelola transaksi, cetak nota, serta pantau laporan bisnis langsung dari HP.",
+        href: "#contact",
+      },
+      {
+        id: "saturupiah",
+        title: "Satu Rupiah",
+        tag: "FINANCE",
+        tagType: "slate",
+        image: "/images/web_satuRupiah.webp",
+        description:
+          "Solusi keuangan pribadi atau bisnis yang membantu pengguna mencatat pemasukan dan pengeluaran secara teratur dan memantau kesehatan finansial secara menyeluruh dari satu aplikasi.",
+        href: "#contact",
+      },
+      {
+        id: "rentcar",
+        title: "Rentcar",
+        tag: "• WEB & MOBILE",
+        tagType: "amber",
+        image: "/images/design_thumbnail/rentcar.webp",
+        description:
+          "Platform booking dan manajemen rental mobil digital dengan fitur cek armada real-time, kalkulasi tarif sewa otomatis, dan invoice transaksi terintegrasi.",
+        href: "/demo/automotive",
+      },
+    ],
+  },
   howItWorks: {
     badge: "How It Works",
     titleWhite: "Bagaimana",
@@ -258,26 +315,32 @@ export const id = {
     ],
   },
   testimonials: {
-    badge: "Feedbacks",
-    title: "Dipercaya oleh Bisnis Terbaik",
+    badge: "ULASAN KLIEN RESMI",
+    titlePrefix: "Apa Kata Mereka Tentang",
+    titleHighlight: "BIDTECH",
+    titleSuffix: "?",
+    subtitle: "Kepuasan mitra adalah tolok ukur kesuksesan setiap baris kode yang kami rilis",
     items: [
       {
+        initials: "RH",
+        name: "Rendra Hutama",
+        role: "Managing Director, Batam Now Media",
         quote:
-          "BidTech memberikan solusi yang melampaui ekspektasi kami. Sistem ERP yang mereka bangun sangat membantu operasional harian kami menjadi jauh lebih efisien.",
-        name: "Andi Pratama",
-        role: "CEO, Retail Jaya",
+          "“Website baru dari BIDTECH / TechForge langsung menaikkan konversi reservasi kami lebih dari 200%. Tampilan di ponsel sangat lancar dan tim sangat responsif.”",
       },
       {
+        initials: "SN",
+        name: "Silvia Novita",
+        role: "VP of Operations, Global Cargo Hub",
         quote:
-          "Aplikasi mobile buatan BidTech sangat smooth dan user friendly. Support mereka juga sangat cepat tanggap kapanpun kami ada kendala teknis.",
-        name: "Siska Dewi",
-        role: "Founder, Beauty Go",
+          "“Arsitektur custom API yang dibangun BIDTECH sangat rapi. Dashboard admin memudahkan staf kami yang non-teknis mengelola ribuan katalog produk.”",
       },
       {
+        initials: "AK",
+        name: "Arman Kusuma",
+        role: "Founder, NusaPay FinTech",
         quote:
-          "Partner strategis terbaik untuk urusan IT. Mereka benar-benar mengerti kebutuhan bisnis UMKM seperti kami dan memberikan harga yang kompetitif.",
-        name: "Merintan ",
-        role: "Manager IT, Sentosa Logistik",
+          "“Skor Lighthouse 100/100 bukan sekadar klaim. Kecepatan web ini membuat biaya iklan CPC kami turun signifikan karena relevansi skor Google Ads melesat tinggi.”",
       },
     ],
   },
@@ -444,14 +507,17 @@ export const id = {
     mobileAlt: "Preview aplikasi Stokin pada mockup mobile",
   },
   templatePreview: {
-    badge: "Template Design",
+    badge: "TEMPLATE DESIGN",
     titlePrefix: "Pilih",
-    titleHighlight: "Design Website",
+    titleHighlight: "Design Web",
     titleSuffix: "Siap Pakai",
     subtitle:
-      "Koleksi template profesional untuk berbagai kebutuhan bisnis, mulai dari company profile, restoran, rental, hingga portal organisasi.",
-    more: "Lihat Lebih Lanjut",
-    preview: "Lihat Preview",
+      "Pilih design berkualitas dengan tampilan modern, responsive, dan mudah dikustomisasi sesuai kebutuhan bisnis Anda.",
+    more: "Lihat Lebih banyak Template",
+    preview: "Lihat",
+    buy: "Beli",
+    viewCountSuffix: "Kali",
+    viewCountPrefix: "Dilihat",
   },
   templateWebsite: {
     badge: "BIDTECH Design Library",
@@ -485,31 +551,56 @@ export const id = {
     subtitle: "Partner dan komunitas yang ikut mendukung ekosistem digital BIDTECH.",
   },
   contact: {
-    badge: "Hubungi Kami",
-    title: "Siap Memulai Proyek Anda?",
+    badge: "HUBUNGI KAMI",
+    title: "Siap Memulai Proyek Anda",
     titlePrefix: "Siap Memulai Proyek",
-    titleHighlight: "Anda?",
-    subtitle: "Isi formulir di bawah ini dan tim kami akan segera menghubungi Anda untuk konsultasi gratis.",
-    whatsapp: "Konsultasi via WhatsApp",
-    mapTitlePrefix: "Peta Lokasi BidTech",
-    openLocation: "Buka Lokasi",
-    info: [
-      { label: "WhatsApp", value: "0821-7601-455", note: "Chat Sekarang" },
-      { label: "Email", value: "cs@bidtech.co.id", note: "Chat Sekarang" },
-      { label: "Lokasi", batam: "King Business Centre, Blok A5 No.3. Kel. Belian Kec.Batam Kota, Batam, 29464", jakarta: "Wisma Bumiputera, Jl. Jend Sudirman Kav 75 Setiabudi No.02 Lantai 18, RT.003/RW.3, Kuningan, Setia Budi, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12910" },
-    ],
+    titleHighlight: "Anda",
+    subtitle:
+      "Isi formulir di bawah ini dan tim kami akan segera menghubungi Anda untuk konsultasi gratis dan mendiskusikan kebutuhan sistem atau website bisnis Anda.",
+    cards: {
+      whatsappTitle: "Konsultasi Cepat WhatsApp",
+      whatsappNumber: "0821-7601-455",
+      whatsappCta: "Chat WhatsApp Sekarang",
+      emailTitle: "Email Resmi",
+      emailSubtitle: "Kirimkan dokumen TOR / RFP atau pertanyaan teknis",
+      emailAddress: "bidtech@gmail.com",
+      copiedTooltip: "Tersalin!",
+      jakartaTitle: "Kantor Jakarta",
+      jakartaAddress:
+        "Wisma Bumiputera, Jl. Jend Sudirman Kav 75 Setiabudi No.02 Lantai 18, RT.003/RW.3, Kuningan, Jakarta Selatan 12910",
+      batamTitle: "Kantor Batam",
+      batamAddress:
+        "King Business Centre, Blok A5 No.3, Kel. Belian, Kec. Batam Kota, Batam, 29464",
+      openGoogleMaps: "Buka Google Maps",
+    },
     form: {
+      title: "Mulai Konsultasi Gratis",
+      subtitle:
+        "Isi formulir berikut dan kami akan langsung menyambungkan Anda ke WhatsApp representative resmi kami untuk pembahasan mendalam.",
       nameLabel: "Nama Lengkap",
-      namePlaceholder: "Contoh: Merintan ",
-      whatsappLabel: "Nomor WhatsApp",
-      whatsappPlaceholder: "0812...",
+      namePlaceholder: "Contoh: Budi Pratama",
+      emailLabel: "Email",
+      emailPlaceholder: "budi@perusahaan.com",
+      whatsappLabel: "Nomor Whatsapp",
+      whatsappPlaceholder: "0812 - xxxx - xxxx",
       companyLabel: "Nama Perusahaan",
-      companyPlaceholder: "Nama Bisnis Anda",
-      serviceLabel: "Jenis Layanan",
-      services: ["Website Development", "Mobile App Development", "Custom Business System", "Konsultasi Lainnya"],
+      companyPlaceholder: "Nama Bisnis anda",
+      serviceLabel: "Pilih Layanan",
+      servicePlaceholder: "Pilih jenis layanan yang dibutuhkan",
+      services: [
+        "Website Development / Company Profile",
+        "Aplikasi Web & Dashboard Sistem",
+        "Aplikasi Mobile (Android / iOS)",
+        "Aplikasi Kasir / POS & Inventori",
+        "Custom Business Software",
+        "Konsultasi IT & Solusi Khusus",
+      ],
       descriptionLabel: "Deskripsi Proyek",
-      descriptionPlaceholder: "Ceritakan sedikit tentang kebutuhan digital Anda...",
+      descriptionPlaceholder:
+        "Jelaskan jenis bisnis, target pengguna, referensi website/sistem yang disukai, atau estimasi deadline yang diinginkan...",
       submit: "Kirim Pesan",
+      privacyNote:
+        "Data Anda terlindungi privasinya. Kami tidak pernah membagikan kontak Anda kepada pihak ketiga.",
     },
     message: {
       packageInterestPrefix: "Saya tertarik dengan paket",
@@ -529,6 +620,7 @@ export const id = {
   },
   footer: {
     description: "Membantu bisnis berkembang lewat solusi digital inovatif dan pengerjaan yang profesional.",
+    backToTop: "KEMBALI KE ATAS",
     navTitle: "Navigasi",
     navItems: [
       { label: "Beranda", href: "#hero" },
@@ -540,6 +632,9 @@ export const id = {
     servicesItems: ["Pengembangan Website", "Aplikasi Mobile", "Solusi ERP", "Software Kustom"],
     helpTitle: "Bantuan",
     helpItems: ["Bantuan", "Syarat & Ketentuan", "Hubungi Kami", "FAQ"],
+    followUsTitle: "IKUTI KAMI",
+    followUsSub: "Konsultasi digital dan penjadwalan arsitek solusi tersedia setiap hari kerja.",
     copyright: "© 2026 PT Bisnis Jalanin Aja Dulu. Seluruh hak cipta dilindungi.",
+    operationalStatus: "System Operational & Ready for New Projects",
   },
 };

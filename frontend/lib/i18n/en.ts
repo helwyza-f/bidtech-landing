@@ -1,14 +1,19 @@
 export const en = {
   nav: {
-    services: "Services",
+    home: "Home",
+    findDesign: "Find Design",
     portfolio: "Portfolio",
-    template: "Design",
+    services: "Services",
+    testimonials: "Testimonials",
+    contact: "Contact Us",
+    custom: "Services",
+    tutorial: "Portfolio",
+    template: "Find Design",
     pricing: "Pricing",
     about: "Home",
-    contact: "Contact",
   },
   header: {
-    cta: "Get Started",
+    cta: "Dashboard",
   },
   announcement: {
     badge: "PENGUSAHAHEBAT",
@@ -85,14 +90,16 @@ export const en = {
     p2: "Through this page, BidTech is presented as a partner ready to help companies build a stronger brand, service, and digital presence for customers and business partners alike.",
   },
   services: {
-    badge: "Main Services",
-    title: "Our Featured Services",
+    badge: "CUSTOM SERVICES",
+    title: "Featured Services",
     subtitle: "We provide comprehensive technology solutions designed to accelerate your digital business growth.",
     ariaPrevious: "Previous service",
     ariaNext: "Next service",
     ariaGroupLabel: "Service",
     ariaGroupFrom: "of",
     ariaViewPrefix: "View",
+    viewDetail: "View Details",
+    popularBadge: "POPULAR",
     items: [
       {
         title: "Website Development",
@@ -243,6 +250,56 @@ export const en = {
       },
     ],
   },
+  portfolioSection: {
+    badge: "PORTFOLIO",
+    titlePrefix: "Our",
+    titleHighlight: "Portfolio",
+    subtitle:
+      "Explore featured website portfolios that have helped our partners increase conversions by up to 300%. Swipe or use arrow navigation.",
+    cta: "View Portfolio",
+    items: [
+      {
+        id: "stokin",
+        title: "Stokin",
+        tag: "MOBILE",
+        tagType: "slate",
+        image: "/images/web_stokin.webp",
+        description:
+          "An integrated inventory management solution helping business owners monitor item availability, manage categories and pricing, and analyze stock valuation efficiently from one app.",
+        href: "#contact",
+      },
+      {
+        id: "ayocuci",
+        title: "Ayo Cuci",
+        tag: "• WEB & MOBILE",
+        tagType: "amber",
+        image: "/images/web_ayocuci.webp",
+        description:
+          "AyoCuci is a modern coin-based laundry POS app with no monthly subscription fees. A practical and cost-effective solution to manage transactions, print receipts, and monitor business reports from mobile.",
+        href: "#contact",
+      },
+      {
+        id: "saturupiah",
+        title: "Satu Rupiah",
+        tag: "FINANCE",
+        tagType: "slate",
+        image: "/images/web_satuRupiah.webp",
+        description:
+          "A personal and business finance solution helping users record income and expenses systematically and monitor overall financial health from a single app.",
+        href: "#contact",
+      },
+      {
+        id: "rentcar",
+        title: "Rentcar",
+        tag: "• WEB & MOBILE",
+        tagType: "amber",
+        image: "/images/design_thumbnail/rentcar.webp",
+        description:
+          "Digital car rental booking and management platform with real-time fleet availability, automatic rate calculation, and integrated invoicing.",
+        href: "/demo/automotive",
+      },
+    ],
+  },
   howItWorks: {
     badge: "How It Works",
     titleWhite: "How We",
@@ -257,26 +314,32 @@ export const en = {
     ],
   },
   testimonials: {
-    badge: "Feedbacks",
-    title: "Trusted by the Best Businesses",
+    badge: "OFFICIAL CLIENT REVIEWS",
+    titlePrefix: "What They Say About",
+    titleHighlight: "BIDTECH",
+    titleSuffix: "?",
+    subtitle: "Partner satisfaction is the benchmark for the success of every line of code we release",
     items: [
       {
+        initials: "RH",
+        name: "Rendra Hutama",
+        role: "Managing Director, Batam Now Media",
         quote:
-          "BidTech delivered a solution that exceeded our expectations. The ERP system they built has made our daily operations far more efficient.",
-        name: "Andi Pratama",
-        role: "CEO, Retail Jaya",
+          "“The new website from BIDTECH / TechForge immediately increased our reservation conversion by over 200%. Mobile view is super smooth and the team is very responsive.”",
       },
       {
+        initials: "SN",
+        name: "Silvia Novita",
+        role: "VP of Operations, Global Cargo Hub",
         quote:
-          "The mobile app BidTech built for us is smooth and user friendly. Their support team is also very responsive whenever we run into technical issues.",
-        name: "Siska Dewi",
-        role: "Founder, Beauty Go",
+          "“The custom API architecture built by BIDTECH is very clean. The admin dashboard makes it easy for our non-technical staff to manage thousands of product catalogs.”",
       },
       {
+        initials: "AK",
+        name: "Arman Kusuma",
+        role: "Founder, NusaPay FinTech",
         quote:
-          "The best strategic partner for our IT needs. They truly understand what an SME business like ours needs and offer competitive pricing.",
-        name: "Budi Santoso",
-        role: "IT Manager, Sentosa Logistik",
+          "“A 100/100 Lighthouse score is not just a claim. The speed of this web app significantly reduced our CPC ad costs because our Google Ads relevance score soared.”",
       },
     ],
   },
@@ -443,14 +506,17 @@ export const en = {
     mobileAlt: "Stokin application preview in a mobile mockup",
   },
   templatePreview: {
-    badge: "Template Design",
+    badge: "TEMPLATE DESIGN",
     titlePrefix: "Choose",
-    titleHighlight: "Website Designs",
-    titleSuffix: "Ready to Use",
+    titleHighlight: "Ready-to-Use",
+    titleSuffix: "Web Designs",
     subtitle:
-      "A collection of professional templates for many business needs, from company profiles, restaurants, rentals, to organization portals.",
-    more: "See More",
-    preview: "View Preview",
+      "Choose quality designs with modern, responsive layouts that are easy to customize for your business needs.",
+    more: "View More Templates",
+    preview: "View",
+    buy: "Buy",
+    viewCountSuffix: "Views",
+    viewCountPrefix: "Viewed",
   },
   templateWebsite: {
     badge: "BIDTECH Design Library",
@@ -484,38 +550,63 @@ export const en = {
     subtitle: "Partners and communities that support the BIDTECH digital ecosystem.",
   },
   contact: {
-    badge: "Contact Us",
+    badge: "CONTACT US",
     title: "Ready to Start Your Project?",
     titlePrefix: "Ready to Start Your",
-    titleHighlight: "Project?",
-    subtitle: "Fill out the form below and our team will get back to you shortly for a free consultation.",
-    whatsapp: "Consult via WhatsApp",
-    mapTitlePrefix: "BidTech Location Map",
-    openLocation: "Open Location",
-    info: [
-      { label: "WhatsApp", value: "0821-7601-455", note: "Chat Now" },
-      { label: "Email", value: "cs@bidtech.co.id", note: "Chat Now" },
-      { label: "Location", batam: "King Business Centre, Blok A5 No.3. Kel. Belian Kec.Batam Kota, Batam, 29464", jakarta: "Wisma Bumiputera, Jl. Jend Sudirman Kav 75 Setiabudi No.02 Lantai 18, RT.003/RW.3, Kuningan, Setia Budi, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12910" },
-    ],
+    titleHighlight: "Project",
+    subtitle:
+      "Fill out the form below and our team will get back to you shortly for a free consultation and discuss your business system or website needs.",
+    cards: {
+      whatsappTitle: "Quick WhatsApp Consultation",
+      whatsappNumber: "0821-7601-455",
+      whatsappCta: "Chat WhatsApp Now",
+      emailTitle: "Official Email",
+      emailSubtitle: "Send TOR / RFP documents or technical questions",
+      emailAddress: "bidtech@gmail.com",
+      copiedTooltip: "Copied!",
+      jakartaTitle: "Jakarta Office",
+      jakartaAddress:
+        "Wisma Bumiputera, Jl. Jend Sudirman Kav 75 Setiabudi No.02 Lantai 18, RT.003/RW.3, Kuningan, Jakarta Selatan 12910",
+      batamTitle: "Batam Office",
+      batamAddress:
+        "King Business Centre, Blok A5 No.3, Kel. Belian, Kec. Batam Kota, Batam, 29464",
+      openGoogleMaps: "Open Google Maps",
+    },
     form: {
+      title: "Start Free Consultation",
+      subtitle:
+        "Fill out the form below and we will connect you directly to our official WhatsApp representative for an in-depth discussion.",
       nameLabel: "Full Name",
-      namePlaceholder: "e.g. Budi Santoso",
+      namePlaceholder: "e.g., Budi Pratama",
+      emailLabel: "Email",
+      emailPlaceholder: "budi@company.com",
       whatsappLabel: "WhatsApp Number",
-      whatsappPlaceholder: "0812...",
+      whatsappPlaceholder: "0812 - xxxx - xxxx",
       companyLabel: "Company Name",
       companyPlaceholder: "Your Business Name",
-      serviceLabel: "Service Type",
-      services: ["Website Development", "Mobile App Development", "Custom Business System", "Other Consultation"],
+      serviceLabel: "Select Service",
+      servicePlaceholder: "Select required service",
+      services: [
+        "Website Development / Company Profile",
+        "Web Application & Dashboard System",
+        "Mobile Application (Android / iOS)",
+        "POS & Inventory Cashier System",
+        "Custom Business Software",
+        "IT Consulting & Special Solutions",
+      ],
       descriptionLabel: "Project Description",
-      descriptionPlaceholder: "Tell us a bit about your digital needs...",
+      descriptionPlaceholder:
+        "Describe your business type, target users, preferred website/system references, or estimated deadline...",
       submit: "Send Message",
+      privacyNote:
+        "Your data privacy is protected. We never share your contact details with third parties.",
     },
     message: {
       packageInterestPrefix: "I am interested in the package",
-      greetingPrefix: "Hello BidTech, I am",
+      greetingPrefix: "Hello BidTech Team, I am",
       from: "from",
       whatsapp: "WhatsApp Number",
-      service: "Service Type",
+      service: "Selected Service",
       description: "Project Description",
     },
   },
@@ -528,6 +619,7 @@ export const en = {
   },
   footer: {
     description: "Helping businesses grow through innovative digital solutions and professional execution.",
+    backToTop: "BACK TO TOP",
     navTitle: "Navigation",
     navItems: [
       { label: "Home", href: "#hero" },
@@ -539,6 +631,9 @@ export const en = {
     servicesItems: ["Website Development", "Mobile Apps", "ERP Solutions", "Custom Software"],
     helpTitle: "Help",
     helpItems: ["Help", "Terms & Conditions", "Contact Us", "FAQ"],
+    followUsTitle: "FOLLOW US",
+    followUsSub: "Digital consultation and solution architect scheduling available every business day.",
     copyright: "© 2026 BidTech Software House. All rights reserved.",
+    operationalStatus: "System Operational & Ready for New Projects",
   },
 };
