@@ -22,15 +22,20 @@ export default function Header() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const isHomepage = pathname === "/";
-  const isSolid = isScrolled || !isHomepage || isMobileMenuOpen;
+  const hasHeroBanner =
+    pathname === "/" ||
+    pathname === "/kendaraan" ||
+    pathname === "/layanan" ||
+    pathname === "/faq";
+
+  const isSolid = isScrolled || !hasHeroBanner || isMobileMenuOpen;
 
   return (
     <header
-      className={`fixed top-0 z-50 w-full transition-all duration-300 border-none ${
+      className={`fixed top-0 z-50 w-full transition-all duration-300 ${
         isSolid
           ? "bg-slate-950/95 backdrop-blur-md shadow-lg border-b border-amber-500/20 text-white"
-          : "bg-gradient-to-b from-black/90 via-black/40 to-transparent text-white"
+          : "bg-gradient-to-b from-black/80 via-black/30 to-transparent border-b border-transparent text-white"
       }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

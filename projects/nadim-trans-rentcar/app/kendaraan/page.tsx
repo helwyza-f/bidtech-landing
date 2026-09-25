@@ -50,9 +50,9 @@ export default function KendaraanPage() {
     <>
       <Header />
 
-      <main className="min-h-screen pt-20 bg-gray-50/50">
+      <main className="min-h-screen bg-gray-50/50">
         {/* Hero Banner Header with NTR Luxury Showroom Backdrop */}
-        <section className="relative text-white py-16 sm:py-20 md:py-24 overflow-hidden border-b border-amber-500/20 bg-slate-950 text-center">
+        <section className="relative text-white pt-28 sm:pt-32 md:pt-36 pb-16 sm:pb-20 md:pb-24 overflow-hidden border-b border-amber-500/20 bg-slate-950 text-center">
           {/* Background Image Layer */}
           <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
             <Image

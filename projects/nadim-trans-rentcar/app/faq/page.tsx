@@ -154,9 +154,9 @@ export default function FaqPage() {
     <>
       <Header />
 
-      <main className="min-h-screen pt-16 sm:pt-20 bg-white">
-        {/* 1. Dark & Gold Hero Banner with Brightened Real Batam Backdrop */}
-        <section className="relative text-white py-16 sm:py-20 md:py-24 overflow-hidden text-center border-b border-amber-500/20 bg-slate-950">
+      <main className="min-h-screen bg-white">
+        {/* 1. Dark & Gold Hero Banner with NTR Luxury Showroom Backdrop */}
+        <section className="relative text-white pt-28 sm:pt-32 md:pt-36 pb-16 sm:pb-20 md:pb-24 overflow-hidden text-center border-b border-amber-500/20 bg-slate-950">
           <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
             <Image
               src="/images/background-3.webp"
