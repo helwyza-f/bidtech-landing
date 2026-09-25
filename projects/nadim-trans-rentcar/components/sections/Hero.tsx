@@ -24,19 +24,19 @@ export default function Hero() {
       onMouseMove={handleMouseMove}
       className="relative w-full min-h-[100dvh] flex flex-col justify-between overflow-hidden pt-16 sm:pt-20 md:pt-32 pb-3 sm:pb-6 md:pb-8 text-white bg-slate-950"
     >
-      {/* 1. Sleek Modern Ambient Backdrop (VVIP Hang Nadim International Airport Backdrop - Brightened) */}
+      {/* 1. Sleek Modern Ambient Backdrop (NTR Luxury Showroom Backdrop) */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0 overflow-hidden bg-slate-950">
         <Image
-          src="/images/background.webp"
-          alt="Bandara Internasional Hang Nadim VVIP - Nadim Trans RentCar Batam"
+          src="/images/background-3.webp"
+          alt="Showroom PT. Nadim Auto Transindo - Nadim Trans RentCar Batam"
           fill
           priority
           sizes="100vw"
-          className="object-cover object-[65%_bottom] md:object-[60%_bottom] lg:object-[55%_bottom] brightness-[1.05] contrast-[1.03]"
+          className="object-cover object-center brightness-[0.92] contrast-[1.05]"
         />
 
-        {/* Softened cinematic gradient for clear text readability while allowing the airport and daylight to shine brightly */}
-        <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/45 md:via-black/25 to-transparent z-[1]" />
+        {/* Softened cinematic gradient for clear text readability while allowing the showroom and NTR logo to shine */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 md:via-black/35 to-transparent z-[1]" />
         <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-black/30 z-[1]" />
         
         {/* Subtle gold ambient warmth */}

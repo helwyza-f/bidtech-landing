@@ -16,7 +16,6 @@ import {
   Star,
   Fuel,
   Check,
-  ChevronRight,
   Car as CarIcon,
 } from "lucide-react";
 import { ALL_CARS, CATEGORIES, type Car } from "@/lib/data";
@@ -52,39 +51,31 @@ export default function KendaraanPage() {
       <Header />
 
       <main className="min-h-screen pt-20 bg-gray-50/50">
-        {/* Hero Banner Header with Brightened Real Batam Airport Backdrop */}
-        <section className="relative text-white py-16 md:py-24 overflow-hidden border-b border-amber-500/20 bg-slate-950">
+        {/* Hero Banner Header with NTR Luxury Showroom Backdrop */}
+        <section className="relative text-white py-16 sm:py-20 md:py-24 overflow-hidden border-b border-amber-500/20 bg-slate-950 text-center">
           {/* Background Image Layer */}
           <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
             <Image
-              src="/images/background.webp"
-              alt="Bandara Internasional Hang Nadim Batam - Nadim Trans RentCar"
+              src="/images/background-3.webp"
+              alt="Showroom PT. Nadim Auto Transindo - Nadim Trans RentCar Batam"
               fill
               priority
               sizes="100vw"
-              className="object-cover object-[center_35%] md:object-[center_30%] brightness-[1.05] contrast-[1.02]"
+              className="object-cover object-center brightness-[0.9] contrast-[1.05]"
             />
-            {/* Softened cinematic gradient for clear text readability while allowing the airport and daylight to shine brightly */}
-            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/55 md:via-black/40 to-transparent z-[1]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-black/30 z-[1]" />
+            {/* Cinematic gradient overlays for crystal-clear centered text readability */}
+            <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/85 z-[1]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-black/50 z-[1]" />
             {/* Subtle warm amber ambient glow */}
-            <div className="absolute -top-12 -right-12 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl z-[2] pointer-events-none" />
+            <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl z-[2] pointer-events-none" />
           </div>
 
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <div className="flex items-center gap-2 text-xs sm:text-sm text-amber-200/90 mb-4">
-              <Link href="/" className="hover:text-amber-400 transition-colors">
-                Beranda
-              </Link>
-              <ChevronRight className="w-3.5 h-3.5" />
-              <span className="text-white font-medium">Katalog Kendaraan</span>
-            </div>
-
+          <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
-              className="max-w-3xl"
+              className="max-w-3xl mx-auto"
             >
               <div className="inline-block px-3 py-1 rounded-full bg-amber-500/20 border border-amber-500/40 text-xs font-bold text-amber-300 uppercase tracking-wider mb-3 backdrop-blur-sm">
                 Armada PT. Nadim Auto Transindo
@@ -92,7 +83,7 @@ export default function KendaraanPage() {
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white drop-shadow-md">
                 Pilihan Armada <span className="text-amber-400">Terbaik di Batam</span>
               </h1>
-              <p className="text-gray-200 text-base sm:text-lg leading-relaxed drop-shadow-sm">
+              <p className="text-gray-200 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
                 Temukan kendaraan sempurna untuk perjalanan bisnis, liburan keluarga, maupun antar-jemput VVIP Bandara Hang Nadim dengan standar kenyamanan dan kebersihan tertinggi.
               </p>
             </motion.div>

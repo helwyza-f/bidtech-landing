@@ -51,15 +51,15 @@ export default function LayananPage() {
         <section className="relative text-white py-16 sm:py-20 md:py-24 overflow-hidden text-center border-b border-amber-500/20 bg-slate-950">
           <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
             <Image
-              src="/images/background.webp"
+              src="/images/background-3.webp"
               alt="Layanan Transportasi Batam - Nadim Trans RentCar"
               fill
               priority
               sizes="100vw"
-              className="object-cover object-[center_35%] brightness-[1.05] contrast-[1.02]"
+              className="object-cover object-center brightness-[0.9] contrast-[1.05]"
             />
             <div className="absolute inset-0 bg-gradient-to-r from-black/85 via-black/60 to-black/85 z-[1]" />
-            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-black/30 z-[1]" />
+            <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/30 to-black/50 z-[1]" />
             <div className="absolute top-0 right-1/4 w-96 h-96 bg-amber-400/15 rounded-full blur-3xl z-[2] pointer-events-none" />
           </div>
 

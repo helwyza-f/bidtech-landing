@@ -35,7 +35,7 @@ Dokumen ini memuat perencanaan strategis (*Plan*), hierarki antarmuka (*UI/UX Ar
 
 #### 2. Hero Section (`components/sections/Hero.tsx`)
 - **Elemen Visual**:
-  - Foto terminal kedatangan VVIP **Bandara Internasional Hang Nadim Batam** (`background.webp`) dilapisi gradasi halus.
+  - Foto megah showroom & lobby eksekutif **PT. Nadim Auto Transindo** dengan logo dinding 3D NTR (`background-3.webp`) dilapisi gradasi sinematik gelap.
   - Cutout unit **Toyota Alphard VIP** (`mobil-22.webp`) dengan kontak bayangan ban di aspal dan efek parallax interaktif kursor mouse (*mouse-parallax*).
   - Teks headline besar font `Bebas Neue` dipadukan dengan aksen emas `text-amber-400`.
   - Dua tombol aksi: *"Pesan Sekarang"* (langsung WhatsApp) dan *"Lihat Armada"* (scroll halus ke `#collection`).

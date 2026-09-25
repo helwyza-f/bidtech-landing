@@ -83,6 +83,8 @@ projects/nadim-trans-rentcar/
 │   │   ├── icon-3.webp                  # Emblem horizontal teks besar PT. Nadim Auto Transindo
 │   │   └── logo.webp                    # Badge logo square
 │   └── images/                          # Foto armada transparan & background asli Batam
+│       ├── background-3.webp            # Foto latar belakang luxury showroom NTR & emblem dinding
+│       ├── background-1.webp            # Foto nyata kantor fisik & armada Batam
 │       ├── background.webp              # Foto latar belakang VVIP Hang Nadim Airport
 │       ├── hero_background.webp         # Foto latar belakang hero
 │       ├── harga-list-2.webp            # Brosur daftar harga resmi PT. Nadim Auto Transindo
@@ -137,7 +139,7 @@ Seluruh armada diatur terpusat di file [`lib/data.ts`](file:///c:/Users/User/Doc
 
 ## 5. Implementasi Khusus Section Hero
 
-- **Latar Belakang (`background.webp`)**: Foto nyata terminal kedatangan **VVIP Hang Nadim International Airport**. Dilapisi gradasi gelap halus di sisi kiri (`from-black/95 via-black/70 to-transparent`) untuk menjamin keterbacaan teks tanpa menutupi tulisan nama gedung bandara di sisi kanan.
+- **Latar Belakang (`background-3.webp`)**: Foto showroom & lobby kantor megah **PT. Nadim Auto Transindo** dengan logo 3D NTR emas & perak pada dinding. Dilapisi gradasi sinematik gelap halus (`from-black/85 via-black/55 to-transparent`) untuk menjamin keterbacaan teks dan menyatu sempurna dengan cutout Toyota Alphard di sisi kanan.
 - **Unit Mobil Utama (`mobil-22.webp`)**: Cutout resolusi tinggi unit Toyota Alphard hitam (plat BP 1510 VJ) dengan kontak bayangan ban di aspal jalan dan efek interaktif *mouse-parallax*.
 - **Tanpa Elemen Mengganggu**: Badge teks VVIP yang sebelumnya menumpuk telah dihilangkan sehingga tampilan hero terlihat bersih dan fokus.
 
