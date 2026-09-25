@@ -11,10 +11,11 @@ export const id = {
     cta: "Mulai Sekarang",
   },
   announcement: {
-    badge: "KONSULTASI SEKARANG",
+    badge: "PENGUSAHAHEBAT",
     items: [
-      "Diskon 1 jt, Untuk Mitra APEKNAS",
-      "Konsultasi Gratis & Garansi Maintenance 100%",
+      "Diskon 50% hingga bulan Oktober! Berlaku untuk semua template. Gunakan Kode Promo : PENGUSAHAHEBAT",
+      "Potongan harga 500k, Lebih murah dari yang lain! Kode promo : PENGUSAHAHEBAT",
+      "Gratis Konsultasi Offline (Kunjungan langsung) dan Online (Call & Chat)",
       "Hubungi Tim Kami Sekarang: 0821-7601-455",
     ],
   },

@@ -11,11 +11,12 @@ export const en = {
     cta: "Get Started",
   },
   announcement: {
-    badge: "Limited Promo",
+    badge: "PENGUSAHAHEBAT",
     items: [
-      "25% Off Website & App Development This Month Only!",
-      "Free Consultation & 100% Maintenance Guarantee",
-      "Contact Our Team Now: 0821-7601-455",
+      "50% discount until October! Valid for all templates. Use Promo Code: PENGUSAHAHEBAT",
+      "500k price reduction—cheaper than the rest! Promo code: PENGUSAHAHEBAT",
+      "Free consultation: in-person (on-site visit) and online (call & chat)",
+      "Contact our team now: 0821-7601-455",
     ],
   },
   hero: {
