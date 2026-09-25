@@ -190,14 +190,14 @@ export default function KendaraanPage() {
                     className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-amber-300/80 transition-all duration-300 group flex flex-col justify-between"
                   >
                     <div>
-                      <Link href={`/kendaraan/${car.id}`} className="block relative h-60 bg-slate-900 overflow-hidden cursor-pointer">
+                      <Link href={`/kendaraan/${car.id}`} className="block relative h-60 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-950 overflow-hidden cursor-pointer">
                         {car.image ? (
                           <Image
                             src={car.image}
                             alt={car.name}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                            className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            className="object-contain p-4 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_15px_20px_rgba(0,0,0,0.7)]"
                           />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-slate-100 via-slate-50 to-amber-50/30 flex flex-col items-center justify-center p-4 text-center">

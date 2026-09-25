@@ -21,15 +21,29 @@ export default function WhyChooseUs() {
             <div className="relative w-full max-w-[420px]">
               {/* Photo Frame */}
               <div className="relative bg-white p-3 sm:p-4 rounded-3xl shadow-2xl ring-1 ring-amber-500/20 -rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
-                <div className="relative aspect-[4/4.8] w-full overflow-hidden rounded-2xl bg-slate-900">
-                  <Image
-                    src="/images/mobil-16.webp"
-                    alt="Kantor & Armada PT. Nadim Auto Transindo Batam"
-                    fill
-                    sizes="(max-width: 768px) 100vw, 420px"
-                    className="object-cover"
-                    priority
-                  />
+                <div className="relative aspect-[4/4.8] w-full overflow-hidden rounded-2xl bg-gradient-to-b from-slate-900 via-slate-850 to-slate-950 p-6 flex flex-col justify-between border border-slate-800">
+                  <div className="flex items-center justify-between z-10">
+                    <span className="px-3 py-1 bg-amber-500/20 text-amber-300 text-xs font-bold rounded-full border border-amber-500/30">
+                      Armada Resmi Batam
+                    </span>
+                    <span className="text-xs text-slate-400 font-medium">15+ Pilihan Unit</span>
+                  </div>
+
+                  <div className="relative w-full h-52 my-auto flex items-center justify-center">
+                    <Image
+                      src="/images/Fortuner.webp"
+                      alt="Armada PT. Nadim Auto Transindo Batam"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 420px"
+                      className="object-contain drop-shadow-[0_20px_25px_rgba(0,0,0,0.85)] hover:scale-105 transition-transform duration-500"
+                      priority
+                    />
+                  </div>
+
+                  <div className="pt-3 border-t border-slate-800/80 z-10">
+                    <p className="text-sm font-bold text-white">Toyota Fortuner GR Sport & All Fleet</p>
+                    <p className="text-xs text-slate-400">Siap Melayani Perjalanan Bisnis & Liburan di Batam</p>
+                  </div>
                 </div>
               </div>
 

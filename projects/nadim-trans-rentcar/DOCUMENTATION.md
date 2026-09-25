@@ -80,11 +80,27 @@ projects/nadim-trans-rentcar/
 ├── public/                              # Aset Statis
 │   ├── icons/                           
 │   │   ├── icon-2.webp                  # Emblem & icon resmi transparan PT. Nadim Auto Transindo
+│   │   ├── icon-3.webp                  # Emblem horizontal teks besar PT. Nadim Auto Transindo
 │   │   └── logo.webp                    # Badge logo square
-│   └── images/                          # Foto armada & background asli Batam
+│   └── images/                          # Foto armada transparan & background asli Batam
 │       ├── background.webp              # Foto latar belakang VVIP Hang Nadim Airport
-│       ├── mobil-22.webp                # Cutout transparan Toyota Alphard VIP (Hero display)
-│       └── mobil-1.webp s/d mobil-21.webp # Foto asli armada mobil dan kantor fisik Batam
+│       ├── hero_background.webp         # Foto latar belakang hero
+│       ├── harga-list-2.webp            # Brosur daftar harga resmi PT. Nadim Auto Transindo
+│       ├── Alphard.webp                 # Cutout unit Toyota Alphard VIP
+│       ├── Hiace-Commuter.webp          # Cutout unit Toyota Hiace Commuter
+│       ├── Hiace-Premio.webp            # Cutout unit Toyota Hiace Premio
+│       ├── Fortuner.webp                # Cutout unit Toyota Fortuner GR Sport
+│       ├── Innova-Zenix.webp            # Cutout unit Toyota Innova Zenix
+│       ├── Innova-Reborn.webp           # Cutout unit Toyota Innova Reborn
+│       ├── Hyundai-Stargazer.webp       # Cutout unit Hyundai Stargazer
+│       ├── New-Avanza.webp              # Cutout unit Toyota New Avanza
+│       ├── New-Xenia.webp               # Cutout unit Daihatsu New Xenia
+│       ├── Raize.webp                   # Cutout unit Toyota Raize
+│       ├── Rocky.webp                   # Cutout unit Daihatsu Rocky
+│       ├── New-Brio.webp                # Cutout unit Honda New Brio
+│       ├── New-Agya.webp                # Cutout unit Toyota New Agya
+│       ├── New-Calya.webp               # Cutout unit Toyota New Calya
+│       └── New-Ayla.webp                # Cutout unit Daihatsu New Ayla
 │
 ├── styles/                              
 │   └── globals.css                      # Global Tailwind directives & styling
@@ -97,18 +113,25 @@ projects/nadim-trans-rentcar/
 
 ## 4. Daftar Armada & Sinkronisasi Data Nyata Batam
 
-Seluruh armada diatur terpusat di file [`lib/data.ts`](file:///c:/Users/User/Documents/Bidtech/bidtech-landing/projects/nadim-trans-rentcar/lib/data.ts). Informasi daftar harga asli diekstrak langsung ke sistem:
+Seluruh armada diatur terpusat di file [`lib/data.ts`](file:///c:/Users/User/Documents/Bidtech/bidtech-landing/projects/nadim-trans-rentcar/lib/data.ts). Informasi daftar harga asli diekstrak langsung dari brosur resmi (`harga-list-2.webp`):
 
-| ID | Nama Unit | Kategori | Tarif Sewa Harian | Foto Utama | Galeri Unit Nyata |
+| ID | Nama Unit | Kategori | Tarif Sewa Harian | Keterangan Paket | Aset Gambar |
 | :---: | :--- | :---: | :--- | :--- | :--- |
-| **1** | **Toyota Alphard VIP** | MPV | **Rp 3.000.000** *(12 Jam Inc. Supir + BBM)* | `mobil-22.webp` | `mobil-4`, `mobil-9`, `mobil-18`, `mobil-1`, `mobil-6`, `mobil-19` |
-| **2** | **Toyota Fortuner GR Sport** | SUV | **Rp 1.300.000** / Hari | `mobil-21.webp` | `mobil-16` *(Foto kantor fisik Batam)* |
-| **3** | **Toyota Innova Zenix** | MPV | **Rp 600.000** / Hari | `mobil-14.webp` | `mobil-14` |
-| **4** | **Hyundai Stargazer** | MPV | **Rp 400.000** / Hari | `mobil-8.webp` | `mobil-2` |
-| **5** | **Toyota Avanza Facelift** | MPV | **Rp 350.000** / Hari | `mobil-17.webp` | `mobil-11` |
-| **6** | **Toyota Raize Turbo** | SUV | **Rp 350.000** / Hari | `mobil-12.webp` | `mobil-7` |
-| **7** | **Honda Brio** | City Car | **Rp 300.000** / Hari | `mobil-20.webp` | `mobil-20` |
-| **8** | **Toyota Calya** | MPV | **Rp 300.000** / Hari | `mobil-15.webp` | `mobil-13` |
+| **1** | **Toyota Alphard VIP** | MPV | **Rp 3.000.000** | per 12 Jam *(Include Driver & BBM)* | `Alphard.webp` |
+| **2** | **Toyota Hiace Commuter** | Minibus | **Rp 1.300.000** | per Day *(Include BBM & Driver)* | `Hiace-Commuter.webp` |
+| **3** | **Toyota Hiace Premio** | Minibus | **Rp 2.000.000** | per Day *(Include BBM & Driver)* | `Hiace-Premio.webp` |
+| **4** | **Toyota Fortuner GR Sport** | SUV | **Rp 1.300.000** | per Day *(Mobil Only)* \| Rp 2.000.000 *(+Driver 12 Jam)* | `Fortuner.webp` |
+| **5** | **Toyota Innova Zenix** | MPV | **Rp 600.000** | per Day *(Mobil Only)* \| Rp 1.200.000 *(+Driver 12 Jam)* | `Innova-Zenix.webp` |
+| **6** | **Toyota Innova Reborn** | MPV | **Rp 550.000** | per Day *(Mobil Only)* \| Rp 1.000.000 *(+Driver 12 Jam)* | `Innova-Reborn.webp` |
+| **7** | **Hyundai Stargazer** | MPV | **Rp 400.000** | per Day *(Mobil Only)* | `Hyundai-Stargazer.webp` |
+| **8** | **Toyota New Avanza** | MPV | **Rp 350.000** | per Day *(Mobil Only)* | `New-Avanza.webp` |
+| **9** | **Daihatsu New Xenia** | MPV | **Rp 350.000** | per Day *(Mobil Only)* | `New-Xenia.webp` |
+| **10** | **Toyota Raize** | SUV | **Rp 350.000** | per Day *(Mobil Only)* | `Raize.webp` |
+| **11** | **Daihatsu Rocky** | SUV | **Rp 350.000** | per Day *(Mobil Only)* | `Rocky.webp` |
+| **12** | **Honda New Brio** | City Car | **Rp 300.000** | per Day *(Mobil Only)* | `New-Brio.webp` |
+| **13** | **Toyota New Agya** | City Car | **Rp 300.000** | per Day *(Mobil Only)* | `New-Agya.webp` |
+| **14** | **Toyota New Calya** | MPV | **Rp 300.000** | per Day *(Mobil Only)* | `New-Calya.webp` |
+| **15** | **Daihatsu New Ayla** | City Car | **Rp 250.000** | per Day *(Mobil Only)* | `New-Ayla.webp` |
 
 ---
 

@@ -162,14 +162,14 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                 className="bg-white rounded-3xl p-4 sm:p-6 border border-gray-200/80 shadow-sm"
               >
                 {/* Main Large Display Image */}
-                <div className="relative h-64 sm:h-96 md:h-[420px] w-full rounded-2xl overflow-hidden bg-gray-100 mb-4 flex items-center justify-center">
+                <div className="relative h-64 sm:h-96 md:h-[420px] w-full rounded-2xl overflow-hidden bg-gradient-to-b from-slate-900 via-slate-850 to-slate-950 mb-4 flex items-center justify-center border border-slate-800">
                   {(selectedImage || car.image) ? (
                     <Image
                       src={selectedImage || car.image}
                       alt={car.name}
                       fill
                       priority
-                      className="object-cover transition-transform duration-500 hover:scale-105"
+                      className="object-contain p-6 sm:p-10 transition-transform duration-500 hover:scale-105 drop-shadow-[0_25px_35px_rgba(0,0,0,0.85)]"
                     />
                   ) : (
                     <div className="w-full h-full flex flex-col items-center justify-center bg-gradient-to-br from-slate-100 via-slate-50 to-amber-50/40 p-8 text-center">
@@ -603,13 +603,13 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     className="bg-white rounded-2xl overflow-hidden border border-gray-200/80 shadow-sm hover:shadow-xl hover:shadow-amber-500/10 hover:border-amber-400/50 transition-all duration-300 flex flex-col justify-between group"
                   >
                     <div>
-                      <div className="relative h-48 bg-gray-100 overflow-hidden flex items-center justify-center">
+                      <div className="relative h-48 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-950 overflow-hidden flex items-center justify-center">
                         {relCar.image ? (
                           <Image
                             src={relCar.image}
                             alt={relCar.name}
                             fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                            className="object-contain p-3 group-hover:scale-105 transition-transform duration-500 drop-shadow-[0_10px_15px_rgba(0,0,0,0.7)]"
                           />
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex flex-col items-center justify-center text-slate-400 group-hover:text-amber-500 transition-colors">
@@ -697,9 +697,9 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     </div>
 
                     <div className="flex items-center gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 mb-6">
-                      <div className="relative w-20 h-14 rounded-xl overflow-hidden bg-gray-200 flex-shrink-0 flex items-center justify-center">
+                      <div className="relative w-20 h-14 rounded-xl overflow-hidden bg-slate-900 flex-shrink-0 flex items-center justify-center">
                         {car.image ? (
-                          <Image src={car.image} alt={car.name} fill className="object-cover" />
+                          <Image src={car.image} alt={car.name} fill className="object-contain p-1 drop-shadow-md" />
                         ) : (
                           <CarIcon className="w-6 h-6 text-gray-400" />
                         )}

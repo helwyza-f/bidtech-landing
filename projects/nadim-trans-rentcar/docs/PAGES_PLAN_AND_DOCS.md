@@ -52,7 +52,7 @@ Dokumen ini memuat perencanaan strategis (*Plan*), hierarki antarmuka (*UI/UX Ar
 
 #### 4. Why Choose Us (`components/sections/WhyChooseUs.tsx`)
 - **Elemen**:
-  - Foto nyata kantor fisik & armada operasional PT. Nadim Auto Transindo di Batam (`mobil-16.webp`) dalam bingkai elegan yang bersih tanpa overlay teks.
+  - Showcase kartu armada resmi PT. Nadim Auto Transindo di Batam (`Fortuner.webp`) dalam bingkai elegan dengan efek hover 3D dan pencahayaan studio.
   - Floating badge garansi *100% Unit Terawat & Legal*.
   - 4 pilar kepercayaan: Legalitas PT resmi Batam, armada steril & prima, supir berpengalaman ramah, dan antar-jemput tepat waktu.
 

@@ -158,7 +158,7 @@ export default function Features() {
                     {/* Foto Mobil */}
                     <Link
                       href={`/kendaraan/${car.id}`}
-                      className="block relative h-52 sm:h-56 bg-slate-900 overflow-hidden cursor-pointer"
+                      className="block relative h-52 sm:h-56 bg-gradient-to-b from-slate-900 via-slate-850 to-slate-950 overflow-hidden cursor-pointer"
                     >
                       {car.image ? (
                         <Image
@@ -166,7 +166,7 @@ export default function Features() {
                           alt={car.name}
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                          className="object-cover transition-transform duration-700 group-hover:scale-105"
+                          className="object-contain p-3 sm:p-4 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_15px_20px_rgba(0,0,0,0.7)]"
                         />
                       ) : (
                         <div className="w-full h-full bg-gradient-to-br from-slate-100 via-slate-50 to-amber-50/30 flex flex-col items-center justify-center p-4 text-center">
@@ -177,8 +177,8 @@ export default function Features() {
                         </div>
                       )}
 
-                      {/* Dark gradient vignette */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-black/20 pointer-events-none" />
+                      {/* Subtle Vignette */}
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent pointer-events-none" />
 
                       {/* Category Badge (Top Left) */}
                       <div className="absolute top-3.5 left-3.5 z-10">
