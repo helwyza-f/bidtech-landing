@@ -562,11 +562,11 @@ export const en = {
       whatsappCta: "Chat WhatsApp Now",
       emailTitle: "Official Email",
       emailSubtitle: "Send TOR / RFP documents or technical questions",
-      emailAddress: "bidtech@gmail.com",
+      emailAddress: "cs@bidtech.co.id",
       copiedTooltip: "Copied!",
       jakartaTitle: "Jakarta Office",
       jakartaAddress:
-        "Wisma Bumiputera, Jl. Jend Sudirman Kav 75 Setiabudi No.02 Lantai 18, RT.003/RW.3, Kuningan, Jakarta Selatan 12910",
+        "Wisma Bumiputera, Jl. Jend Sudirman Kav 75 Setiabudi No.02 Lantai 18, RT.003/RW.3, Kuningan, Setia Budi, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12910",
       batamTitle: "Batam Office",
       batamAddress:
         "King Business Centre, Blok A5 No.3, Kel. Belian, Kec. Batam Kota, Batam, 29464",
@@ -617,6 +617,48 @@ export const en = {
     openMenu: "Open menu",
     closeMenu: "Close menu",
   },
+  faq: {
+    badge: "Frequently Asked Questions (FAQ)",
+    titlePrefix: "Frequently",
+    titleHighlight: "Asked Questions",
+    subtitle:
+      "Learn more about our web development, mobile applications, custom software solutions, and collaboration workflow at BidTech.",
+    contactCtaTitle: "Still have questions?",
+    contactCtaSubtitle: "Discuss your project requirements directly with our technology consulting team.",
+    contactCtaButton: "Consult via WhatsApp",
+    items: [
+      {
+        question: "What is BidTech and what solutions do you provide?",
+        answer:
+          "BidTech is a premier Indonesian software house delivering end-to-end digital solutions. Our core services include modern web development (company profiles, e-commerce, landing pages), mobile app development (iOS & Android), custom enterprise systems (ERP, CRM, POS, analytics dashboards), and ready-to-use website templates for various industries.",
+      },
+      {
+        question: "How long does it take to develop a website or application at BidTech?",
+        answer:
+          "Timeline depends on the scope and complexity. Ready-to-use website templates can be deployed within 1–3 business days. Custom website development usually takes 2–4 weeks. Mobile applications and complex custom enterprise systems (like ERP/CRM) take 4–12 weeks with structured milestones: discovery, UI/UX design, development, and QA testing.",
+      },
+      {
+        question: "Are your websites and systems mobile-responsive and SEO-ready?",
+        answer:
+          "Yes, all digital products built by BidTech are developed with a Mobile-First approach, high-speed performance, enterprise security, and optimized on-page SEO structures ready for Google search indexing and AI generative search engines (AEO & GEO).",
+      },
+      {
+        question: "Does BidTech offer custom software systems tailored to specific business needs?",
+        answer:
+          "Absolutely. We specialize in custom software engineering from scratch, including workflow automation, POS cashier systems, inventory control, medical clinic management, school platforms, and payment gateway/WhatsApp integrations.",
+      },
+      {
+        question: "How do I consult or kick off a project with the BidTech team?",
+        answer:
+          "You can reach out directly via WhatsApp at +62 821-7601-455 or email cs@bidtech.co.id. We provide free consultations online (Call & Chat) as well as offline meetings in Jakarta and Batam to analyze your requirements and provide transparent estimates.",
+      },
+      {
+        question: "Do you provide maintenance and technical support after launch?",
+        answer:
+          "Yes. We offer post-launch maintenance guarantees, proactive bug monitoring, security updates, and 24/7 technical support to ensure your business operations run smoothly.",
+      },
+    ],
+  },
   footer: {
     description: "Helping businesses grow through innovative digital solutions and professional execution.",
     backToTop: "BACK TO TOP",
@@ -633,7 +675,8 @@ export const en = {
     helpItems: ["Help", "Terms & Conditions", "Contact Us", "FAQ"],
     followUsTitle: "FOLLOW US",
     followUsSub: "Digital consultation and solution architect scheduling available every business day.",
-    copyright: "© 2026 BidTech Software House. All rights reserved.",
+    copyright: "© 2026 PT Solusi Bisnis Jalanin Aja Dulu (BidTech). All rights reserved.",
     operationalStatus: "System Operational & Ready for New Projects",
   },
 };
+

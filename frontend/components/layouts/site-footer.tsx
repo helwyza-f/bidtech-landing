@@ -1,46 +1,37 @@
 "use client";
 
 import Image from "next/image";
-import { ArrowUp, AtSign, Camera, MessageSquare, Share2 } from "lucide-react";
+import { FaInstagram, FaWhatsapp, FaYoutube, FaEnvelope, FaGlobe } from "react-icons/fa6";
 
 import { SmartNavLink } from "@/components/layouts/smart-nav-link";
 import { useLanguage } from "@/lib/i18n";
 import { logoAssets } from "@/lib/data";
 
-function VideoPlayIcon(props: React.SVGProps<SVGSVGElement>) {
-  return (
-    <svg fill="none" stroke="currentColor" strokeWidth={1.8} viewBox="0 0 24 24" {...props}>
-      <rect x="2.5" y="4" width="19" height="16" rx="4.5" />
-      <polygon points="10,8.5 16,12 10,15.5" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
 const socialLinks = [
   {
-    icon: AtSign,
-    href: "https://www.threads.net",
-    label: "Threads",
-  },
-  {
-    icon: MessageSquare,
-    href: "https://wa.me/628217601455",
-    label: "WhatsApp / Chat",
-  },
-  {
-    icon: Camera,
+    icon: FaInstagram,
     href: "https://www.instagram.com/bidtechsolutions/",
-    label: "Instagram / Media",
+    label: "Instagram",
   },
   {
-    icon: Share2,
-    href: "https://bidtech.co.id",
-    label: "Share",
+    icon: FaWhatsapp,
+    href: "https://wa.me/628217601455",
+    label: "WhatsApp",
   },
   {
-    icon: VideoPlayIcon,
+    icon: FaEnvelope,
+    href: "mailto:cs@bidtech.co.id",
+    label: "Email Resmi",
+  },
+  {
+    icon: FaYoutube,
     href: "https://youtube.com",
-    label: "YouTube / Video",
+    label: "YouTube",
+  },
+  {
+    icon: FaGlobe,
+    href: "https://bidtech.co.id",
+    label: "Website",
   },
 ];
 
@@ -148,8 +139,8 @@ export function SiteFooter() {
                     className="flex size-9 sm:size-10 items-center justify-center rounded-2xl bg-slate-100/90 text-slate-600 transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#e8f7e2] hover:text-[#45a02e]"
                     href={social.href}
                     key={social.label}
-                    rel="noreferrer"
-                    target="_blank"
+                    rel={social.href.startsWith("mailto:") ? undefined : "noreferrer"}
+                    target={social.href.startsWith("mailto:") ? undefined : "_blank"}
                   >
                     <Icon className="size-4" />
                   </a>

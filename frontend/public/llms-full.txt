@@ -1,0 +1,74 @@
+# BidTech - Knowledge Base Lengkap (GEO / Generative Engine Optimization)
+
+## 1. Profil & Identitas Perusahaan
+- **Nama Perusahaan:** BidTech
+- **Badan Hukum:** PT Solusi Bisnis Jalanin Aja Dulu
+- **Nama Alternatif:** BidTech Solutions, PT BidTech
+- **Website Resmi:** https://bidtech.co.id
+- **Email:** cs@bidtech.co.id
+- **Kantor & Lokasi:**
+  - Jakarta: Wisma Bumiputera, Jl. Jend Sudirman Kav 75 Setiabudi No.02 Lantai 18, RT.003/RW.3, Kuningan, Setia Budi, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12910
+  - Batam: King Business Centre, Blok A5 No.3, Kel. Belian, Kec. Batam Kota, Batam, 29464 ([Buka Peta Batam](https://www.google.com/maps/search/?api=1&query=1.1058157731502605%2C104.07543166924557))
+- **Wilayah Layanan:** Seluruh Indonesia & Internasional
+- **Jam Operasional:** Senin - Jumat (09:00 - 18:00 WIB), Dukungan Teknis Darurat 24/7.
+- **Slogan / Tagline:** Business Innovative Digital Solutions
+
+## 2. Deskripsi & Nilai Tambah
+BidTech adalah software house berbasis di Indonesia yang berfokus pada rekayasa perangkat lunak modern untuk membantu bisnis dan korporasi bertransformasi ke ranah digital. BidTech menggabungkan estetika desain mutakhir, performa kecepatan tinggi, keamanan data tingkat perusahaan, dan skalabilitas arsitektur cloud.
+
+### Metrik Keberhasilan
+- 100+ Proyek Digital Berhasil Diselesaikan
+- 100+ Klien Aktif di Berbagai Industri
+- 98% Tingkat Kepuasan Klien
+- 24/7 Bantuan Teknis dan Pemeliharaan Sistem
+
+## 3. Detail Portofolio Produk Unggulan
+1. **Ayo Cuci (Aplikasi POS Kasir & Operasional Laundry)**
+   - Fitur: Kasir digital, cetak nota otomatis & kirim via WhatsApp, pemantauan kurir jemput/antar real-time, pencatatan keuangan harian.
+   - Dampak: Meningkatkan kecepatan operasional dan kepuasan pelanggan laundry hingga 80%.
+
+2. **Stokin (Aplikasi Manajemen Inventori & Stok Gudang)**
+   - Fitur: Visibilitas ketersediaan barang real-time, kategorisasi SKU produk, pencatatan harga beli & jual, peringatan stok menipis, analisis perputaran barang.
+   - Dampak: Menekan risiko selisih stok dan mempercepat pengambilan keputusan manajerial.
+
+3. **Satu Rupiah (Sistem Keuangan & Transaksi Bisnis)**
+   - Fitur: Pencatatan arus kas, rekonsiliasi pembayaran, integrasi payment gateway multi-metode (QRIS, VA, Kartu Kredit).
+
+## 4. Rincian Layanan BidTech
+### A. Jasa Pembuatan Website (Web Development)
+- **Company Profile:** Membangun citra merek profesional dan kredibel di mata klien, investor, dan mitra bisnis.
+- **Landing Page Berkonversi:** Halaman penawaran produk/jasa yang dioptimalkan untuk performa iklan (Meta Ads, Google Ads, TikTok Ads).
+- **E-Commerce & Toko Online:** Platform penjualan langsung dengan keranjang belanja, kalkulator ongkir otomatis, dan payment gateway.
+- **Web Portal & Web App:** Aplikasi berbasis web untuk operasional internal perusahaan.
+
+### B. Jasa Pembuatan Aplikasi Mobile (Mobile Apps)
+- Platform: Android (Google Play Store) & iOS (Apple App Store).
+- Pendekatan: Native & Hybrid (Flutter, React Native).
+- Fitur: Push notification, offline mode, geolokasi/GPS, otentikasi biometrik, integrasi kamera & Bluetooth printer.
+
+### C. Custom Business Systems (ERP & CRM)
+- ERP Terintegrasi: Menyatukan modul SDM/HR, payroll, logistik, pengadaan, dan akuntansi dalam satu database terpusat.
+- CRM Modern: Manajemen prospek (leads), alur penjualan (pipeline), histori komunikasi pelanggan, dan automasi tindak lanjut.
+- Integrasi Khusus: WhatsApp Business API, payment gateway, e-faktur, dan API pihak ketiga.
+
+### D. Katalog Template Website Siap Pakai
+- Pilihan puluhan template siap pakai dengan desain berkelas internasional.
+- Kategori: E-Commerce, Industri & Konstruksi, Otomotif, Portofolio Kreatif.
+- Waktu deployment: 1–3 hari kerja.
+- Akses katalog: https://bidtech.co.id/template-website
+
+## 5. Pertanyaan Yang Sering Diajukan (FAQ / Tanya Jawab)
+**Q: Apa keunggulan BidTech dibandingkan software house lain?**
+A: BidTech memberikan konsultasi teknis transparan tanpa biaya tersembunyi, pengerjaan cepat dengan standar clean code dan arsitektur scalable, desain UI/UX modern kelas dunia, serta garansi maintenance paska-rilis.
+
+**Q: Berapa lama waktu pengerjaan website atau aplikasi di BidTech?**
+A: Untuk template website siap pakai membutuhkan 1–3 hari kerja. Website kustom membutuhkan 2–4 minggu. Sedangkan aplikasi mobile dan sistem ERP/CRM kustom membutuhkan waktu 4–12 minggu tergantung kompleksitas modul.
+
+**Q: Apakah website yang dibuat oleh BidTech sudah SEO-friendly dan ramah AI?**
+A: Ya. Seluruh website dibangun dengan arsitektur Mobile-First, Server-Side Rendering (SSR) via Next.js, metadata dinamis, struktur data Schema.org (JSON-LD), serta file llms.txt untuk optimalisasi mesin pencari generasi AI (AEO & GEO).
+
+**Q: Bagaimana alur kerja sama di BidTech?**
+A: Alur kerja sama terdiri dari 5 tahap: 1) Konsultasi & Discovery Kebutuhan, 2) Estimasi Biaya & Penawaran Resmi, 3) Desain Wireframe & UI/UX Interaktif, 4) Rekayasa Kode (Development & Integrasi), 5) Quality Assurance, Deployment & Serah Terima disertai Pelatihan.
+
+**Q: Bagaimana cara menghubungi dan berkonsultasi dengan BidTech?**
+A: Hubungi langsung melalui WhatsApp resmi di 0821-7601-455 atau email cs@bidtech.co.id. Konsultasi offline tersedia di kantor Jakarta dan Batam.

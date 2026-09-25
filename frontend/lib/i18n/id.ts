@@ -563,11 +563,11 @@ export const id = {
       whatsappCta: "Chat WhatsApp Sekarang",
       emailTitle: "Email Resmi",
       emailSubtitle: "Kirimkan dokumen TOR / RFP atau pertanyaan teknis",
-      emailAddress: "bidtech@gmail.com",
+      emailAddress: "cs@bidtech.co.id",
       copiedTooltip: "Tersalin!",
       jakartaTitle: "Kantor Jakarta",
       jakartaAddress:
-        "Wisma Bumiputera, Jl. Jend Sudirman Kav 75 Setiabudi No.02 Lantai 18, RT.003/RW.3, Kuningan, Jakarta Selatan 12910",
+        "Wisma Bumiputera, Jl. Jend Sudirman Kav 75 Setiabudi No.02 Lantai 18, RT.003/RW.3, Kuningan, Setia Budi, Kecamatan Setiabudi, Kota Jakarta Selatan, Daerah Khusus Ibukota Jakarta 12910",
       batamTitle: "Kantor Batam",
       batamAddress:
         "King Business Centre, Blok A5 No.3, Kel. Belian, Kec. Batam Kota, Batam, 29464",
@@ -618,6 +618,48 @@ export const id = {
     openMenu: "Buka menu",
     closeMenu: "Tutup menu",
   },
+  faq: {
+    badge: "Pertanyaan Umum (FAQ)",
+    titlePrefix: "Pertanyaan Yang",
+    titleHighlight: "Sering Diajukan",
+    subtitle:
+      "Pelajari lebih lanjut mengenai layanan pengembangan website, aplikasi mobile, software custom, dan alur pengerjaan di BidTech.",
+    contactCtaTitle: "Masih punya pertanyaan lain?",
+    contactCtaSubtitle: "Diskusikan kebutuhan proyek Anda langsung bersama tim arsitek teknologi kami.",
+    contactCtaButton: "Konsultasi via WhatsApp",
+    items: [
+      {
+        question: "Apa itu BidTech dan solusi apa saja yang disediakan?",
+        answer:
+          "BidTech adalah software house profesional di Indonesia yang berfokus pada penyediaan solusi digital terintegrasi. Layanan kami meliputi pembuatan website modern (company profile, e-commerce, landing page), pengembangan aplikasi mobile (Android & iOS), sistem kustom bisnis (ERP, CRM, POS, dashboard analytics), serta penyediaan template website siap pakai untuk berbagai industri.",
+      },
+      {
+        question: "Berapa lama estimasi waktu pembuatan website atau aplikasi di BidTech?",
+        answer:
+          "Estimasi waktu tergantung pada skala dan kompleksitas proyek. Untuk template website siap pakai, proses deployment dan kustomisasi dapat selesai dalam 1–3 hari kerja. Pembuatan website kustom berkisar antara 2–4 minggu. Sedangkan untuk aplikasi mobile dan sistem enterprise kustom (seperti ERP/CRM), estimasi pengerjaan berkisar antara 4–12 minggu dengan tahapan terstruktur mulai dari requirement, desain UI/UX, development, hingga testing.",
+      },
+      {
+        question: "Apakah website dan sistem yang dibuat oleh BidTech sudah Mobile-Friendly dan SEO-Ready?",
+        answer:
+          "Ya, semua website dan aplikasi yang kami kembangkan dirancang dengan standar Mobile-First, performa kecepatan loading tinggi, struktur keamanan teruji, dan optimasi SEO on-page lengkap agar mudah terindeks di Google dan mesin pencari generasi AI (AEO & GEO).",
+      },
+      {
+        question: "Apakah BidTech melayani pembuatan sistem software custom sesuai kebutuhan bisnis?",
+        answer:
+          "Tentu. Kami memiliki spesialisasi dalam merancang dan mengembangkan sistem software kustom dari nol, termasuk automasi alur kerja, sistem kasir (POS), inventori stok barang, manajemen klinik kesehatan, sistem sekolah, hingga integrasi payment gateway dan WhatsApp automation.",
+      },
+      {
+        question: "Bagaimana alur kerja sama dan konsultasi dengan tim BidTech?",
+        answer:
+          "Anda dapat langsung menghubungi tim kami via WhatsApp di 0821-7601-455 atau melalui email cs@bidtech.co.id. Kami menyediakan sesi konsultasi gratis secara online maupun offline (kunjungan langsung di Jakarta dan Batam) untuk menganalisis kebutuhan bisnis dan memberikan estimasi transparan.",
+      },
+      {
+        question: "Apakah ada garansi dan dukungan teknis setelah website atau aplikasi selesai?",
+        answer:
+          "Pasti. Kami memberikan garansi pemeliharaan teknis, monitoring bug, update keamanan rutin, serta dukungan teknis 24/7 paska-peluncuran agar sistem operasional bisnis Anda selalu berjalan stabil dan lancar.",
+      },
+    ],
+  },
   footer: {
     description: "Membantu bisnis berkembang lewat solusi digital inovatif dan pengerjaan yang profesional.",
     backToTop: "KEMBALI KE ATAS",
@@ -634,7 +676,8 @@ export const id = {
     helpItems: ["Bantuan", "Syarat & Ketentuan", "Hubungi Kami", "FAQ"],
     followUsTitle: "IKUTI KAMI",
     followUsSub: "Konsultasi digital dan penjadwalan arsitek solusi tersedia setiap hari kerja.",
-    copyright: "© 2026 PT Bisnis Jalanin Aja Dulu. Seluruh hak cipta dilindungi.",
+    copyright: "© 2026 PT Solusi Bisnis Jalanin Aja Dulu. Seluruh hak cipta dilindungi.",
     operationalStatus: "System Operational & Ready for New Projects",
   },
 };
+

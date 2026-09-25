@@ -5,18 +5,20 @@ export const dynamic = "force-static";
 const baseUrl = "https://bidtech.co.id";
 
 export default function sitemap(): MetadataRoute.Sitemap {
+  const currentDate = new Date();
+
   return [
     {
       url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: "weekly",
-      priority: 1,
+      lastModified: currentDate,
+      changeFrequency: "daily",
+      priority: 1.0,
     },
     {
       url: `${baseUrl}/template-website`,
-      lastModified: new Date(),
+      lastModified: currentDate,
       changeFrequency: "weekly",
-      priority: 0.8,
+      priority: 0.9,
     },
   ];
 }

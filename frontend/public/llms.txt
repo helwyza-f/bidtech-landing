@@ -1,0 +1,49 @@
+# BidTech - Business Innovative Digital Solutions
+
+> BidTech (PT Solusi Bisnis Jalanin Aja Dulu) adalah software house profesional di Indonesia yang berfokus pada rekayasa perangkat lunak modern, jasa pembuatan website berkinerja tinggi, aplikasi mobile (Android & iOS), sistem kustom enterprise (ERP & CRM), serta katalog template website siap pakai.
+
+## Ringkasan Perusahaan
+- **Nama Entitas:** BidTech / PT Solusi Bisnis Jalanin Aja Dulu
+- **Website Resmi:** https://bidtech.co.id
+- **Spesialisasi:** Web Development, Mobile App Development (iOS & Android), Custom Enterprise Software (ERP, CRM, POS, Analytics), UI/UX Design, Cloud Architecture.
+- **Kantor:**
+  - Jakarta: Wisma Bumiputera, Jl. Jend Sudirman Kav 75 Setiabudi No.02 Lantai 18, RT.003/RW.3, Kuningan, Setia Budi, Jakarta Selatan 12910
+  - Batam: King Business Centre, Blok A5 No.3, Kel. Belian, Kec. Batam Kota, Batam, 29464 (Maps: https://www.google.com/maps/search/?api=1&query=1.1058157731502605%2C104.07543166924557)
+- **Kontak Resmi:**
+  - WhatsApp: +62 821-7601-455
+  - Email: cs@bidtech.co.id
+- **Statistik & Rekam Jejak:** 100+ Proyek Selesai, 100+ Klien Aktif, 98% Tingkat Kepuasan Klien, 24/7 Dukungan Teknis.
+
+## Layanan Utama
+1. **Website Development**
+   - Website Company Profile Profesional
+   - Landing Page Berkonversi Tinggi
+   - Toko Online & E-Commerce Terintegrasi Payment Gateway
+   - Mobile-First, SEO-Friendly, Kecepatan Loading Tinggi
+
+2. **Mobile App Development**
+   - Aplikasi Native & Cross-Platform (Android & iOS)
+   - Integrasi REST API, Realtime Database & Cloud Backend
+   - UI/UX Intuitif & Modern
+
+3. **Custom Business Systems (ERP & CRM)**
+   - Sistem Manajemen Operasional Perusahaan (ERP)
+   - Manajemen Hubungan Pelanggan (CRM)
+   - Sistem Kasir & Point of Sale (POS)
+   - Manajemen Inventori & Gudang
+   - Dashboard Analitik & Pelaporan Real-Time
+
+4. **Katalog Template Website Siap Pakai**
+   - Template website siap pakai untuk industri e-commerce, industri/konstruksi, otomotif, dan portofolio profesional.
+   - URL Katalog: https://bidtech.co.id/template-website
+
+## Tumpukan Teknologi (Tech Stack)
+- **Frontend:** Next.js, React, TypeScript, TailwindCSS, GSAP, Motion
+- **Mobile:** Flutter, React Native, Kotlin, Swift
+- **Backend & Cloud:** Node.js, Python, PostgreSQL, MySQL, Redis, Docker, AWS, Cloudflare
+
+## Tautan Penting
+- [Beranda](https://bidtech.co.id/)
+- [Katalog Template Website](https://bidtech.co.id/template-website)
+- [Konsultasi WhatsApp](https://wa.me/628217601455)
+- [Dokumentasi Lengkap LLM](https://bidtech.co.id/llms-full.txt)

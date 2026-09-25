@@ -102,14 +102,14 @@ export function HeroShowcase() {
           className="relative mt-3 mx-auto max-w-4xl overflow-hidden sm:mt-5 lg:mx-0"
           style={{ height: `${titleBoxHeightPx}px` }}
         >
-          <h1
+          <div
             ref={measureRef}
-            aria-hidden
+            aria-hidden="true"
             className="font-[family-name:var(--font-sora)] pointer-events-none absolute inset-x-0 top-0 font-bold tracking-tight"
             style={{ visibility: "hidden", lineHeight: TITLE_LINE_HEIGHT }}
           >
             {longestTitle.title}
-          </h1>
+          </div>
 
           <h1
             className="font-[family-name:var(--font-sora)] relative font-bold tracking-tight text-slate-950"
