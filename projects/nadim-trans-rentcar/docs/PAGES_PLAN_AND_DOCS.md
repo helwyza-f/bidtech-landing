@@ -51,8 +51,7 @@ Dokumen ini memuat perencanaan strategis (*Plan*), hierarki antarmuka (*UI/UX Ar
   - Setiap kartu mobil menampilkan foto unit asli, badge kategori bodi, spesifikasi singkat, tarif sewa harian terformat Rupiah, tombol detail, dan tombol booking cepat.
 
 #### 4. Why Choose Us (`components/sections/WhyChooseUs.tsx`)
-- **Elemen**:
-  - Showcase kartu armada resmi PT. Nadim Auto Transindo di Batam (`Fortuner.webp`) dalam bingkai elegan dengan efek hover 3D dan pencahayaan studio.
+  - Foto nyata kantor fisik & armada operasional PT. Nadim Auto Transindo di Batam (`background-1.webp`) dalam bingkai elegan yang bersih tanpa overlay teks.
   - Floating badge garansi *100% Unit Terawat & Legal*.
   - 4 pilar kepercayaan: Legalitas PT resmi Batam, armada steril & prima, supir berpengalaman ramah, dan antar-jemput tepat waktu.
 

@@ -62,7 +62,7 @@ projects/nadim-trans-rentcar/
 │   ├── sections/                        # Komponen per-section di halaman utama
 │   │   ├── Hero.tsx                     # Hero banner (Background Bandara Hang Nadim + Alphard Cutout)
 │   │   ├── Features.tsx                 # Carousel armada mobil unggulan
-│   │   ├── WhyChooseUs.tsx              # Keunggulan perusahaan & foto kantor fisik Batam (mobil-16.webp)
+│   │   ├── WhyChooseUs.tsx              # Keunggulan perusahaan & foto nyata kantor fisik Batam (background-1.webp)
 │   │   ├── howtobook.tsx                # 3 Langkah mudah alur penyewaan mobil
 │   │   ├── Testimonials.tsx             # Testimoni asli pelanggan & tamu VIP Bandara
 │   │   └── Faq.tsx                      # Accordion pertanyaan umum di beranda
