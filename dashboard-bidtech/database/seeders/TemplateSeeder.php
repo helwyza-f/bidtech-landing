@@ -13,7 +13,7 @@ class TemplateSeeder extends Seeder
     public function run(): void
     {
         $defaultTemplateDesc = 'Lisensi dan Hak Guna Template Website, serta kode sumbernya.';
-        $defaultServerDesc   = 'Menggunakan Server Bidtech x Hostinger, yang ditenagai AMD EPYC dan NVMe SSD storage.';
+        $defaultServerDesc   = 'Menggunakan Server Bidtech, yang ditenagai AMD EPYC dan NVMe SSD storage.';
         $defaultServiceDesc  = 'Layanan Tim Bisnis Bidtech yang tanggap dengan kecepatan respon < 10 menit, dan kecepatan pengerjaan website 7-14 hari kerja.';
 
         $templates = [
