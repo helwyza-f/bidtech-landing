@@ -4,7 +4,6 @@ import { useState, useMemo } from "react";
 import Image from "next/image";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
-import { motion, AnimatePresence } from "framer-motion";
 import {
   Search,
   Car,
@@ -66,11 +65,7 @@ export default function FaqClient() {
           </div>
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white drop-shadow-md">
                 Pusat Bantuan & <span className="text-amber-400">FAQ Batam</span>
               </h1>
@@ -89,7 +84,7 @@ export default function FaqClient() {
                   className="w-full pl-12 pr-6 py-3.5 bg-white text-gray-900 placeholder-gray-400 rounded-full text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-amber-500/30 shadow-lg shadow-black/20 transition-all border border-amber-500/30"
                 />
               </div>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -191,20 +186,13 @@ export default function FaqClient() {
                               </span>
                             </button>
 
-                            <AnimatePresence initial={false}>
-                              {isExpanded && (
-                                <motion.div
-                                  initial={{ height: 0, opacity: 0 }}
-                                  animate={{ height: "auto", opacity: 1 }}
-                                  exit={{ height: 0, opacity: 0 }}
-                                  transition={{ duration: 0.25, ease: "easeInOut" }}
-                                >
+                            {isExpanded && (
+                                <div className="animate-in fade-in slide-in-from-top-1 duration-200">
                                   <div className="px-6 pb-5 pt-0 text-xs sm:text-sm text-gray-600 leading-relaxed border-t border-gray-50/80 mt-1 pt-3">
                                     {faq.answer}
                                   </div>
-                                </motion.div>
-                              )}
-                            </AnimatePresence>
+                                </div>
+                            )}
                           </div>
                         </div>
                       );
@@ -216,13 +204,7 @@ export default function FaqClient() {
             </div>
 
             {/* 3. Masih Memiliki Pertanyaan? Bottom Card */}
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-              className="mt-20 bg-slate-950 rounded-3xl p-8 sm:p-12 md:p-14 text-white text-center shadow-2xl border-2 border-amber-500/30"
-            >
+            <div className="mt-20 bg-slate-950 rounded-3xl p-8 sm:p-12 md:p-14 text-white text-center shadow-2xl border-2 border-amber-500/30">
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-3 tracking-tight text-white">
                 Masih memiliki pertanyaan?
               </h3>
@@ -239,7 +221,7 @@ export default function FaqClient() {
                 <Headphones className="w-4 h-4" />
                 <span>Chat WhatsApp CS Batam</span>
               </a>
-            </motion.div>
+            </div>
 
           </div>
         </section>

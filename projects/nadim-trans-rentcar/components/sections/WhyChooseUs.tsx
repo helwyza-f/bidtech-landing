@@ -1,7 +1,4 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { WHY_CHOOSE_US_FEATURES } from "@/constants/features";
 
 export default function WhyChooseUs() {
@@ -11,13 +8,7 @@ export default function WhyChooseUs() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
 
           {/* Left Column: Real Office & Fleet Photo */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="lg:col-span-5 flex justify-center"
-          >
+          <div className="lg:col-span-5 flex justify-center">
             <div className="relative w-full max-w-[420px]">
               {/* Photo Frame */}
               <div className="relative bg-white p-3 sm:p-4 rounded-3xl shadow-2xl ring-1 ring-amber-500/20 -rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
@@ -28,37 +19,24 @@ export default function WhyChooseUs() {
                     fill
                     sizes="(max-width: 768px) 100vw, 420px"
                     className="object-cover transition-transform duration-700 hover:scale-105"
-                    priority
                   />
                 </div>
               </div>
 
               {/* Floating Experience Badge */}
-              <motion.div
-                initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ delay: 0.2, duration: 0.5, type: "spring", stiffness: 200 }}
-                className="absolute -bottom-6 -right-2 sm:-right-6 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 text-slate-950 px-6 py-5 sm:px-7 sm:py-6 rounded-2xl shadow-xl shadow-amber-500/30 z-10 border border-amber-300/40"
-              >
+              <div className="absolute -bottom-6 -right-2 sm:-right-6 bg-gradient-to-br from-amber-400 via-yellow-500 to-amber-600 text-slate-950 px-6 py-5 sm:px-7 sm:py-6 rounded-2xl shadow-xl shadow-amber-500/30 z-10 border border-amber-300/40">
                 <div className="text-3xl sm:text-4xl font-black tracking-tight leading-none">
                   100%
                 </div>
                 <div className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-slate-900 mt-1 whitespace-nowrap">
                   Unit Terawat & Legal
                 </div>
-              </motion.div>
+              </div>
             </div>
-          </motion.div>
+          </div>
 
           {/* Right Column: Features */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.7, ease: "easeOut" }}
-            className="lg:col-span-7"
-          >
+          <div className="lg:col-span-7">
             <p className="text-xs font-bold tracking-widest uppercase text-amber-600 mb-3">
               MENGAPA MEMILIH NADIM TRANS RENTCAR
             </p>
@@ -72,12 +50,8 @@ export default function WhyChooseUs() {
               {WHY_CHOOSE_US_FEATURES.map((feature, idx) => {
                 const Icon = feature.icon;
                 return (
-                  <motion.div
+                  <div
                     key={feature.title}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ delay: 0.1 * idx, duration: 0.5 }}
                     className="group flex flex-col items-start"
                   >
                     <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-amber-400 group-hover:to-amber-600 group-hover:text-slate-950 shadow-sm">
@@ -91,11 +65,11 @@ export default function WhyChooseUs() {
                     <p className="text-sm text-gray-600 leading-relaxed">
                       {feature.description}
                     </p>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>
-          </motion.div>
+          </div>
 
         </div>
       </div>

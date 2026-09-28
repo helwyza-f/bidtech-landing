@@ -4,7 +4,6 @@ import Image from "next/image";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Key, UserCheck, Plane, ShieldCheck } from "lucide-react";
-import { motion } from "framer-motion";
 
 const SERVICES = [
   {
@@ -64,18 +63,14 @@ export default function LayananClient() {
           </div>
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6 }}
-            >
+            <div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white drop-shadow-md">
                 Layanan & Solusi <span className="text-amber-400">Transportasi Batam</span>
               </h1>
               <p className="text-gray-200 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
                 Pilihan layanan mobilitas terlengkap yang dirancang untuk kenyamanan, keamanan, dan ketepatan waktu Anda selama berada di Batam.
               </p>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -83,32 +78,22 @@ export default function LayananClient() {
         <section className="py-20 md:py-28 bg-[#fafafc]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Section Heading */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5 }}
-              className="text-center mb-14 sm:mb-20"
-            >
+            <div className="text-center mb-14 sm:mb-20">
               <p className="text-xs font-bold tracking-widest uppercase text-amber-600 mb-2">
                 LAYANAN UNGGULAN
               </p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
                 Pilihan Layanan Fleksibel
               </h2>
-            </motion.div>
+            </div>
 
             {/* 4 Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-              {SERVICES.map((service, index) => {
+              {SERVICES.map((service) => {
                 const Icon = service.icon;
                 return (
-                  <motion.div
+                  <div
                     key={service.id}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.1 }}
                     className="bg-white rounded-[32px] p-8 sm:p-10 border border-gray-200 shadow-xl shadow-gray-200/50 hover:shadow-2xl hover:border-amber-400 hover:-translate-y-2 transition-all duration-300 flex flex-col items-center text-center group min-h-[380px] justify-center"
                   >
                     <div className="flex flex-col items-center">
@@ -127,7 +112,7 @@ export default function LayananClient() {
                         {service.description}
                       </p>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </div>

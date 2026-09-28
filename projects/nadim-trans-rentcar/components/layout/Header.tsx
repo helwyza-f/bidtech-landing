@@ -7,7 +7,6 @@ import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
 import { NAV_ITEMS } from "@/constants/navigation";
 import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -48,7 +47,7 @@ export default function Header() {
                 src="/icons/icon-2.webp"
                 alt="Nadim Trans RentCar Emblem"
                 fill
-                priority
+                sizes="48px"
                 className="object-contain drop-shadow-[0_2px_10px_rgba(212,175,55,0.45)]"
               />
             </div>
@@ -57,7 +56,6 @@ export default function Header() {
               alt="Nadim Trans Rentcar"
               width={240}
               height={80}
-              priority
               className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </Link>
@@ -105,14 +103,8 @@ export default function Header() {
       </div>
 
       {/* Mobile Menu Drawer */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden bg-slate-950 border-b border-amber-500/20 shadow-2xl overflow-hidden text-white"
-          >
+      {isMobileMenuOpen && (
+          <div className="md:hidden bg-slate-950 border-b border-amber-500/20 shadow-2xl overflow-hidden text-white animate-in fade-in slide-in-from-top-2 duration-200">
             <div className="px-4 pt-3 pb-6 space-y-1.5">
               {NAV_ITEMS.map((item) => {
                 const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
@@ -139,9 +131,8 @@ export default function Header() {
                 </Link>
               </div>
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+      )}
     </header>
   );
 }

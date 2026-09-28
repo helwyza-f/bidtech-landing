@@ -10,7 +10,15 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
     let cleanup: (() => void) | undefined;
     let cancelled = false;
 
-    void import('lenis').then(({ default: Lenis }) => {
+    const desktopMotion = window.matchMedia(
+      "(min-width: 1280px) and (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)"
+    );
+
+    // Native scrolling is faster and more predictable on touch devices. Lenis is
+    // deliberately a progressive desktop enhancement, not part of the mobile path.
+    if (!desktopMotion.matches) return;
+
+    const idleId = window.setTimeout(() => void import('lenis').then(({ default: Lenis }) => {
       if (cancelled) return;
 
       const lenis = new Lenis({
@@ -60,10 +68,11 @@ export default function SmoothScroll({ children }: { children: React.ReactNode }
           delete (window as unknown as { __lenis?: Lenis }).__lenis;
         }
       };
-    });
+    }));
 
     return () => {
       cancelled = true;
+      window.clearTimeout(idleId);
       cleanup?.();
     };
   }, []);

@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: bidtech-production
+  group: vps-shared-repository
   cancel-in-progress: false
 
 jobs:

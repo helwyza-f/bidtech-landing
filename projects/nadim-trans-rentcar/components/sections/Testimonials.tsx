@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion } from "framer-motion";
 import { Star, ArrowLeft, ArrowRight } from "lucide-react";
 
 interface TestimonialItem {
@@ -62,13 +61,7 @@ export default function Testimonials() {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-start">
 
           {/* Kolom Kiri: Judul dan Tombol Navigasi */}
-          <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.6 }}
-            className="lg:col-span-4 flex flex-col justify-between h-full"
-          >
+          <div className="lg:col-span-4 flex flex-col justify-between h-full">
             <div>
               <p className="text-xs font-bold tracking-widest uppercase text-amber-600 mb-3">
                 TESTIMONIAL PELANGGAN
@@ -117,22 +110,17 @@ export default function Testimonials() {
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
-          </motion.div>
+          </div>
 
           {/* Kolom Kanan: Kartu Testimonial */}
           <div className="lg:col-span-8 overflow-hidden">
-            <motion.div
+            <div
               className="flex gap-6"
-              animate={{ x: `calc(-${currentIndex * 50}% - ${currentIndex * 12}px)` }}
-              transition={{ type: "spring", stiffness: 260, damping: 28 }}
+              style={{ transform: `translateX(calc(-${currentIndex * 50}% - ${currentIndex * 12}px))`, transition: "transform 300ms ease-out" }}
             >
               {TESTIMONIALS.map((item, index) => (
-                <motion.div
+                <div
                   key={item.id}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.2 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   className="w-full sm:w-[calc(50%-12px)] flex-shrink-0 bg-slate-950 rounded-[28px] p-8 md:p-9 text-white shadow-2xl border-2 border-amber-500/30 flex flex-col justify-between"
                 >
                   <div>
@@ -166,9 +154,9 @@ export default function Testimonials() {
                       </p>
                     </div>
                   </div>
-                </motion.div>
+                </div>
               ))}
-            </motion.div>
+            </div>
           </div>
 
         </div>

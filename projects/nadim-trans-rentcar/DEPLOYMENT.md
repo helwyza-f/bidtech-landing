@@ -143,6 +143,15 @@ docker compose up -d --build
 ```
 *Zero downtime: Docker akan mem-build image baru dan menggantikan container lama secara otomatis.*
 
+### Cache Cloudflare (wajib setelah deploy)
+
+Di **Caching → Cache Rules**, buat dua rule untuk `nadimtrans.com`:
+
+1. Path `/_next/image`: jadikan **Eligible for cache**, gunakan cache key yang menyertakan **seluruh query string**, dan pilih **Respect existing headers** untuk browser serta edge TTL.
+2. Path yang diawali `/_next/static/`, `/images/`, atau `/icons/`: jadikan **Eligible for cache** dan pilih **Respect existing headers**.
+
+Nginx dan Next.js pada repository ini mengirim `Cache-Control: public, max-age=31536000, immutable` untuk aset tersebut. Saat mengganti gambar, gunakan nama file/URL baru dan perbarui referensinya di kode agar pengunjung tidak menerima gambar lama dari cache satu tahun.
+
 ---
 
 ## 6. Verifikasi SEO, AEO, dan GEO

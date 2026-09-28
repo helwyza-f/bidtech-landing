@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Users, Gauge, Briefcase, Star, ArrowLeft, ArrowRight, Fuel, Car } from "lucide-react";
 import { ALL_CARS } from "@/lib/data";
@@ -49,13 +48,7 @@ export default function Features() {
         
         {/* Header Section dengan Tombol Navigasi Panah */}
         <div className="flex flex-col md:flex-row md:items-end justify-between mb-8 sm:mb-12 gap-6">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5 }}
-            className="max-w-2xl"
-          >
+          <div className="max-w-2xl">
             {/* Gold Accent */}
             <div className="flex items-center gap-1.5 mb-3">
               <span className="w-4 sm:w-5 h-1.5 -skew-x-12 bg-amber-200 rounded-[1px] shadow-sm" />
@@ -75,16 +68,10 @@ export default function Features() {
             <p className="text-gray-600 mt-2.5 sm:mt-3 text-sm sm:text-base leading-relaxed max-w-xl">
               Pilih kendaraan impian untuk perjalanan bisnis, liburan keluarga, maupun penjemputan Bandara Hang Nadim Batam. Unit terawat, AC dingin, dan siap jalan.
             </p>
-          </motion.div>
+          </div>
 
           {/* Tombol Panah Navigasi & Indikator Halaman */}
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="flex items-center gap-3 shrink-0 self-start md:self-end"
-          >
+          <div className="flex items-center gap-3 shrink-0 self-start md:self-end">
             {/* Dots Indicator */}
             <div className="flex items-center gap-2 mr-2">
               {Array.from({ length: totalPages }).map((_, idx) => (
@@ -135,20 +122,12 @@ export default function Features() {
             >
               <ArrowRight className="w-5 h-5" />
             </button>
-          </motion.div>
+          </div>
         </div>
 
         {/* Grid 3 Mobil Per Halaman dengan Transisi Animasi Halus */}
         <div className="relative min-h-[480px]">
-          <AnimatePresence mode="wait" initial={false}>
-            <motion.div
-              key={currentPage}
-              initial={{ opacity: 0, x: direction * 35 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -direction * 35 }}
-              transition={{ duration: 0.35, ease: "easeOut" }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-            >
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8" key={currentPage}>
               {currentCars.map((car) => (
                 <div
                   key={car.id}
@@ -165,7 +144,6 @@ export default function Features() {
                           src={car.image}
                           alt={car.name}
                           fill
-                          priority={currentPage === 0}
                           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                           className="object-contain p-3 sm:p-4 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_12px_20px_rgba(0,0,0,0.12)]"
                         />
@@ -264,8 +242,7 @@ export default function Features() {
                   </div>
                 </div>
               ))}
-            </motion.div>
-          </AnimatePresence>
+            </div>
         </div>
 
         {/* Catalog Action */}

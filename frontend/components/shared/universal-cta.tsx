@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { ArrowRight, ShieldCheck, Zap } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Reveal } from "@/components/animations/reveal";
 
 interface UniversalCtaProps {
@@ -17,10 +17,10 @@ export function UniversalCta({ className = "" }: UniversalCtaProps) {
       id="cta"
     >
       <Reveal y={24}>
-        <div className="relative overflow-hidden rounded-[32px] sm:rounded-[40px] border border-[#cdeec3] bg-[radial-gradient(ellipse_at_top_right,rgba(163,230,53,0.3),transparent_60%),linear-gradient(135deg,#f0faee_0%,#fbfefb_45%,#edf8eb_100%)] p-6 sm:p-10 md:p-12 lg:p-14 shadow-[0_24px_70px_rgba(95,201,74,0.14)]">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-8 items-center">
+        <div className="relative overflow-hidden rounded-[32px] border border-[#cdeec3] bg-[radial-gradient(ellipse_at_top_right,rgba(163,230,53,0.3),transparent_60%),linear-gradient(135deg,#f0faee_0%,#fbfefb_45%,#edf8eb_100%)] p-6 shadow-[0_24px_70px_rgba(95,201,74,0.14)] sm:rounded-[40px] sm:p-10 md:p-12 lg:py-14 lg:pl-14 lg:pr-0">
+          <div className="grid grid-cols-1 items-center gap-10 lg:min-h-[470px] lg:grid-cols-12 lg:items-stretch lg:gap-8">
             {/* Left Content Column */}
-            <div className="lg:col-span-7 space-y-6 text-left">
+            <div className="relative z-10 space-y-6 text-left lg:col-span-7 lg:self-center">
               <h2
                 className="font-[family-name:var(--font-sora)] text-2xl min-[400px]:text-3xl sm:text-4xl lg:text-[44px] font-extrabold tracking-tight text-slate-950 leading-[1.18]"
                 id="universal-cta-title"
@@ -77,51 +77,19 @@ export function UniversalCta({ className = "" }: UniversalCtaProps) {
               </div>
             </div>
 
-            {/* Right Visual Column (Laptop Mockup + 2 Floating Badges) */}
-            <div className="lg:col-span-5 relative flex items-center justify-center pt-6 lg:pt-0">
-              <div className="relative w-full max-w-[440px] sm:max-w-[480px] lg:max-w-[500px]">
-                {/* Floating Badge 1: Top-Left */}
-                <div className="absolute -top-4 left-1 sm:-top-8 sm:-left-4 z-20 flex items-center gap-2 sm:gap-3 rounded-2xl bg-white/95 backdrop-blur-md border border-slate-100/90 px-3 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_16px_36px_rgba(0,0,0,0.09)] transition-transform duration-300 hover:scale-105 max-w-[92%] sm:max-w-none">
-                  <div className="flex size-7 sm:size-9 shrink-0 items-center justify-center rounded-xl bg-[#e8f7e2] text-[#45a02e]">
-                    <Zap className="size-3.5 sm:size-5 fill-[#45a02e] text-[#45a02e]" />
-                  </div>
-                  <div className="text-left">
-                    <div className="flex items-center gap-1.5 text-[11px] sm:text-[13px] font-bold text-slate-900 leading-tight">
-                      <span className="size-2 rounded-full bg-[#45a02e] animate-pulse" />
-                      <span>Live Project Status</span>
-                    </div>
-                    <p className="text-[9px] sm:text-[11px] text-slate-500 font-medium mt-0.5">
-                      Ready to Launch • Instant Support
-                    </p>
-                  </div>
-                </div>
-
-                {/* Main Laptop Mockup Image */}
-                <div className="relative aspect-[4/3] w-full filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)]">
+            {/* Right Visual Column */}
+            <div className="relative flex min-h-[420px] items-center justify-center pt-6 sm:min-h-[500px] lg:absolute lg:inset-y-0 lg:right-0 lg:w-[43%] lg:min-h-0 lg:pt-0">
+              <div className="relative h-[420px] w-full max-w-[440px] sm:h-[500px] sm:max-w-[480px] lg:absolute lg:inset-0 lg:h-auto lg:max-w-none">
+                {/* Main CTA Visual */}
+                <div className="relative h-full w-full origin-bottom filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)] max-sm:translate-y-6 max-sm:scale-[1.12]">
                   <Image
-                    src="/images/hero/image 239.webp"
-                    alt="Laptop Analytics Dashboard BidTech"
+                    src="/images/cta/model.png"
+                    alt="Konsultan BidTech menunjukkan website di ponsel"
                     fill
-                    sizes="(min-width: 1024px) 500px, 90vw"
-                    className="object-contain"
+                    sizes="(min-width: 1024px) 500px, (min-width: 640px) 480px, 90vw"
+                    className="object-contain object-bottom"
                     priority
                   />
-                </div>
-
-                {/* Floating Badge 2: Bottom-Right */}
-                <div className="absolute -bottom-3 right-1 sm:-bottom-6 sm:-right-2 z-20 flex items-center gap-2 sm:gap-3 rounded-2xl bg-white/95 backdrop-blur-md border border-slate-100/90 px-3 sm:px-4 py-1.5 sm:py-2.5 shadow-[0_16px_36px_rgba(0,0,0,0.09)] transition-transform duration-300 hover:scale-105 max-w-[92%] sm:max-w-none">
-                  <div className="flex size-7 sm:size-9 shrink-0 items-center justify-center rounded-xl bg-[#e8f7e2] text-[#45a02e]">
-                    <ShieldCheck className="size-3.5 sm:size-5 text-[#45a02e]" />
-                  </div>
-                  <div className="text-left">
-                    <div className="text-[11px] sm:text-[13px] font-bold text-slate-900 leading-tight">
-                      100+ Proyek Berhasil
-                    </div>
-                    <div className="flex items-center gap-1 text-[10px] sm:text-[11px] text-amber-500 mt-0.5">
-                      <span className="tracking-tighter">★★★★★</span>
-                      <span className="font-bold text-slate-700 ml-0.5 text-[10px] sm:text-[11px]">5.0 Star</span>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>

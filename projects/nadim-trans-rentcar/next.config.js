@@ -6,9 +6,9 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   compress: true,
-  transpilePackages: ["lenis"],
   images: {
-    unoptimized: true,
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 31536000,
   },
   output: isStaticDemoBuild ? "export" : "standalone",
   ...(isStaticDemoBuild ? { basePath: demoBasePath, trailingSlash: true } : {}),

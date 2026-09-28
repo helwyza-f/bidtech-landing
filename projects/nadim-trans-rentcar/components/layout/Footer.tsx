@@ -17,6 +17,7 @@ export default function Footer() {
                       src="/icons/icon-2.webp"
                       alt="PT. Nadim Auto Transindo Logo"
                       fill
+                      sizes="48px"
                       className="object-contain drop-shadow-[0_2px_10px_rgba(212,175,55,0.45)]"
                     />
                   </div>

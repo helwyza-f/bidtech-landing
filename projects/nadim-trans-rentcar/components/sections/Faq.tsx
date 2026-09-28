@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 
 const FAQ_ITEMS = [
@@ -43,32 +42,22 @@ export default function Faq() {
       <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
 
         {/* Section Header */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-8 sm:mb-10"
-        >
+        <div className="text-center mb-8 sm:mb-10">
           <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-gray-900 tracking-tight mb-3">
             Pertanyaan Umum
           </h2>
           <p className="text-gray-500 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
             Semua yang perlu Anda ketahui sebelum memulai perjalanan.
           </p>
-        </motion.div>
+        </div>
 
         {/* FAQ Accordion List */}
         <div className="space-y-4">
           {FAQ_ITEMS.map((item, idx) => {
             const isExpanded = expandedIndex === idx;
             return (
-              <motion.div
+              <div
                 key={item.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.4, delay: idx * 0.08 }}
                 className="bg-white rounded-2xl shadow-sm border border-gray-100/80 overflow-hidden transition-shadow duration-300 hover:shadow-md"
               >
                 <button
@@ -87,22 +76,14 @@ export default function Faq() {
                   </div>
                 </button>
 
-                <AnimatePresence initial={false}>
-                  {isExpanded && (
-                    <motion.div
-                      key="content"
-                      initial={{ height: 0, opacity: 0 }}
-                      animate={{ height: "auto", opacity: 1 }}
-                      exit={{ height: 0, opacity: 0 }}
-                      transition={{ duration: 0.3, ease: "easeInOut" }}
-                    >
+                {isExpanded && (
+                    <div className="animate-in fade-in slide-in-from-top-1 duration-200">
                       <div className="px-6 sm:px-8 pb-6 pt-1 text-gray-600 text-sm sm:text-base leading-relaxed border-t border-gray-50">
                         {item.answer}
                       </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                    </div>
+                )}
+              </div>
             );
           })}
         </div>

@@ -6,11 +6,7 @@ export const id = {
     services: "Layanan",
     testimonials: "Ulasan",
     contact: "Hubungi Kami",
-    custom: "Layanan",
-    tutorial: "Portofolio",
-    template: "Cari Design",
     pricing: "Harga",
-    about: "Beranda",
   },
   header: {
     cta: "Dashboard",
@@ -43,7 +39,7 @@ export const id = {
       {
         title: "Bisnis Maju Tanpa Website? Kehilangan Peluang!",
         subtitle:
-          "8 dari 10 bisnis penyewaan mobil yang memiliki website, punya pelanggan lebih banyak 80% daripada yang belum punya website bisnis.",
+          "8 dari 10 bisnis penyewaan mobil yang memiliki website, punya pelanggan lebih banyak 80% daripada yang belum punya website bisnis. Kalau kamu kapan?",
         modelAlt: "Pengusaha memegang laptop dengan gestur semangat, varian kedua",
         decoratives: [
           "Pelanggan Baru",
@@ -65,9 +61,8 @@ export const id = {
         ],
       },
       {
-        title: "Peluang Lebih Besar, Dengan Website Lebih Professional!",
-        subtitle:
-          "Bisnis tanpa aplikasi dan website dapat kehilangan profit hingga 20% setiap tahunnya.",
+        title: "Profit Yang Lebih Maksimal, Tanpa Biaya Admin Aplikasi.",
+        subtitle: "Bisnis penjualan yang menggunakan e-commerce, selalu kehilangan 10-20% profitnya akibat biaya admin dari aplikasi. Maksimalkan profitmu dengan aplikasimu sendiri.",
         modelAlt: "Pengusaha memegang laptop dengan gestur semangat",
         decoratives: [
           "Proses Lebih Cepat",
@@ -102,19 +97,19 @@ export const id = {
     popularBadge: "POPULER",
     items: [
       {
-        title: "Website Development",
-        description: "Website modern dengan desain yang menarik dan pengalaman pengguna yang optimal.",
-        features: ["Company Profile Website", "Landing Page & E-Commerce", "UI/UX Design", "SEO Friendly"],
+        title: "Website Professional",
+        description: "Tampilkan bisnis/usaha/organisasi di pencarian Google dengan website professional.",
+        features: ["Pengerjaan 7-14 hari kerja", "Bisnis masuk pencarian Google", "Bisnis bisa ditemukan AI (ChatGPT, Claude, dll)", "Website 24/7 aman anti hacker dan bot."],
       },
       {
-        title: "Mobile App Development",
-        description: "Aplikasi mobile yang cepat, stabil, dan mudah digunakan.",
-        features: ["Android & iOS", "UI/UX Design", "Website Company Profile", "Dashboard"],
+        title: "Aplikasi Mobile/HP",
+        description: "Bosan dengan website? Buat aplikasi mobile absensi karyawanmu atau marketplace bisnismu.",
+        features: ["Bisa di Android & IOS", "Include Tutorial dan Training Aplikasi", "Pengerjaan 14-28 hari kerja", "Aplikasi stabil 24/7"],
       },
       {
-        title: "Custom Business System",
-        description: "Sistem bisnis yang disesuaikan dengan kebutuhan perusahaan.",
-        features: ["ERP & CRM", "Dashboard Analytics", "Custom Software"],
+        title: "Dashboard CRM/ERP",
+        description: "Mengelola data nasabah? Absensi karyawan? Menjadi lebih mudah dengan aplikasi.",
+        features: ["Konsultasi offline gratis", "Pelatihan penggunaan aplikasi gratis", "Dukungan teknis & Customer Service 1x24 jam", "DP 30-50% pengerjaan proyek"],
       },
     ],
   },
@@ -228,7 +223,7 @@ export const id = {
               "Solusi pencatatan keuangan yang membantu pengguna memantau transaksi, mengelola anggaran, dan menganalisis pola pengeluaran secara sistematis dan berbasis data.",
           },
         ],
-      },  
+      },
     ],
   },
   why: {
@@ -260,45 +255,55 @@ export const id = {
     cta: "Lihat Portofolio",
     items: [
       {
-        id: "stokin",
-        title: "Stokin",
-        tag: "MOBILE",
-        tagType: "slate",
-        image: "/images/web_stokin.webp",
-        description:
-          "Solusi kelola stok terpadu yang membantu pemilik bisnis memantau ketersediaan barang, mengelola kategori dan harga produk, serta menganalisis nilai persediaan secara efisien dari satu aplikasi.",
-        href: "#contact",
-      },
-      {
         id: "ayocuci",
         title: "Ayo Cuci",
-        tag: "• WEB & MOBILE",
+        tag: "WEB & MOBILE",
         tagType: "amber",
-        image: "/images/web_ayocuci.webp",
+        image: "/images/portofolio/ayocuci.webp",
         description:
           "AyoCuci adalah aplikasi kasir laundry modern berbasis koin tanpa biaya langganan bulanan. Solusi praktis dan hemat untuk kelola transaksi, cetak nota, serta pantau laporan bisnis langsung dari HP.",
-        href: "#contact",
+        href: "https://ayocuci.co.id/",
       },
       {
-        id: "saturupiah",
-        title: "Satu Rupiah",
-        tag: "FINANCE",
-        tagType: "slate",
-        image: "/images/web_satuRupiah.webp",
-        description:
-          "Solusi keuangan pribadi atau bisnis yang membantu pengguna mencatat pemasukan dan pengeluaran secara teratur dan memantau kesehatan finansial secara menyeluruh dari satu aplikasi.",
-        href: "#contact",
-      },
-      {
-        id: "rentcar",
-        title: "Rentcar",
-        tag: "• WEB & MOBILE",
+        id: "nadimtrans",
+        title: "Nadim Trans Batam",
+        tag: "WEB",
         tagType: "amber",
-        image: "/images/design_thumbnail/rentcar.webp",
+        image: "/images/portofolio/nadimtrans.webp",
         description:
-          "Platform booking dan manajemen rental mobil digital dengan fitur cek armada real-time, kalkulasi tarif sewa otomatis, dan invoice transaksi terintegrasi.",
-        href: "/demo/automotive",
+          "PT. Nadim Auto Transindo atau lebih dikenal dengan Nadimtrans Rentcar Batam, merupakan perusahaan penyedia layanan rental mobil dan transportasi di Batam.",
+        href: "https://nadimtrans.com/",
       },
+      {
+        id: "hkti",
+        title: "HKTI Kota Batam",
+        tag: "WEB",
+        tagType: "amber",
+        image: "/images/portofolio/hkti.webp",
+        description:
+          "DPC HIMPUNAN KERUKUNAN TANI INDONESIA (HKTI) KOTA BATAM - Menghimpun potensi petani, memodernisasi agribisnis, dan memperjuangkan kedaulatan pangan maritim",
+        href: "https://hktikotabatam.org/",
+      },
+      {
+        id: "vissociety",
+        title: "Vis Society",
+        tag: "WEB",
+        tagType: "amber",
+        image: "/images/portofolio/vissociety.webp",
+        description:
+          "VIS Society adalah organisasi lintas industri, lintas profesi, dan lintas jabatan/usia yang dibentuk sebagai wadah bagi mereka yang mempunyai keinginan untuk selalu belajar dan bertumbuh.",
+        href: "https://www.vissociety.org/",
+      },
+      {
+        id: "crmpiposmart",
+        title: "CRM Piposmart",
+        tag: "WEB",
+        tagType: "amber",
+        image: "/images/portofolio/crmpiposmart.webp",
+        description:
+          "Platform mengelola data nasabah Piposmart menjadi laporan, serta menjadi platform penghubung Tim Admin dan Tim Marketing dengan satu data nasabah yang sama, untuk menjalankan fungsi perusahaan PT. Piposmart Digital Indonesia.",
+        href: "https://crm.piposmart.com/",
+      },                  
     ],
   },
   howItWorks: {

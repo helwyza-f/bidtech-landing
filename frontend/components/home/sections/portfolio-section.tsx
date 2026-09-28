@@ -420,6 +420,7 @@ export function PortfolioSection() {
                       <Link
                         className="block w-full rounded-full py-2 sm:py-2.5 text-center text-xs sm:text-sm font-semibold bg-[#45a02e] text-white hover:bg-[#3b8e26] shadow-[0_4px_16px_rgba(69,160,46,0.25)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 cursor-pointer"
                         href={item.href}
+                        target="blank"
                       >
                         {t.portfolioSection.cta}
                       </Link>

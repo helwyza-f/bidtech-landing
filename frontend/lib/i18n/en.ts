@@ -6,11 +6,7 @@ export const en = {
     services: "Services",
     testimonials: "Testimonials",
     contact: "Contact Us",
-    custom: "Services",
-    tutorial: "Portfolio",
-    template: "Find Design",
     pricing: "Pricing",
-    about: "Home",
   },
   header: {
     cta: "Dashboard",
@@ -65,9 +61,8 @@ export const en = {
         ],
       },
       {
-        title: "Bigger Opportunities With a More Professional Website!",
-        subtitle:
-          "Businesses without apps and websites can lose up to 20% profit every year.",
+        title: "Maximize Your Profits, Without App Platform Fees.",
+        subtitle: "Businesses selling through e-commerce platforms often lose 10-20% their profits to fees. Maximize your profits with application.",
         modelAlt: "Business owner holding a laptop with an energetic gesture",
         decoratives: [
           "Faster Process",
@@ -102,19 +97,19 @@ export const en = {
     popularBadge: "POPULAR",
     items: [
       {
-        title: "Website Development",
-        description: "Modern websites with an attractive design and an optimal user experience.",
-        features: ["Company Profile Website", "Landing Page & E-Commerce", "UI/UX Design", "SEO Friendly"],
+        title: "Professional Website",
+        description: "Showcase your business/company/organization on Google Search with a professional website.",
+        features: ["Get the website with 7-14 business days", "Get your business listed on Google Search", "Make your business discoverable by AI", "Secure 24/7 website protection hackers & bots"],
       },
       {
-        title: "Mobile App Development",
-        description: "Fast, stable, and easy-to-use mobile applications.",
-        features: ["Android & iOS", "UI/UX Design", "Company Profile Website", "Dashboard"],
+        title: "Mobile Application",
+        description: "Tired of websites? Build a mobile app for your business marketplace, SaaS, etc.",
+        features: ["Available on Android & iOS", "Includes App Tutorial & Training", "14-28 business days", "Stable 24/7 application with cloud server"],
       },
       {
-        title: "Custom Business System",
-        description: "Business systems tailored to your company's needs.",
-        features: ["ERP & CRM", "Dashboard Analytics", "Custom Software"],
+        title: "CRM/ERP Dashboard",
+        description: "Managing customer data? Employee attendance? Make it easier with a custom business application.",
+        features: ["Free offline consultation", "Free application usage training", "Technical & customer support & Service within 24 hours", "30-50% project down payment"],
       },
     ],
   },

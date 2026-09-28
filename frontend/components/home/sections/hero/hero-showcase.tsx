@@ -99,18 +99,9 @@ export function HeroShowcase() {
         <HeroBlob className="pointer-events-none left-1/2 top-1/2 h-[520px] w-[520px] -translate-x-1/2 -translate-y-1/2 sm:h-[680px] sm:w-[680px] lg:left-[40%] lg:h-[820px] lg:w-[820px]" />
 
         <div
-          className="relative mt-3 mx-auto max-w-4xl overflow-hidden sm:mt-5 lg:mx-0"
+          className="relative mt-3 mx-auto max-w-4xl sm:mt-5 lg:mx-0"
           style={{ height: `${titleBoxHeightPx}px` }}
         >
-          <div
-            ref={measureRef}
-            aria-hidden="true"
-            className="font-[family-name:var(--font-sora)] pointer-events-none absolute inset-x-0 top-0 font-bold tracking-tight"
-            style={{ visibility: "hidden", lineHeight: TITLE_LINE_HEIGHT }}
-          >
-            {longestTitle.title}
-          </div>
-
           <h1
             className="font-[family-name:var(--font-sora)] relative font-bold tracking-tight text-slate-950"
             style={{ fontSize: `${resolvedFontSizePx}px`, lineHeight: TITLE_LINE_HEIGHT }}
@@ -173,7 +164,7 @@ export function HeroShowcase() {
           <Image src={HERO_RIGHT_BLOB_SRC} alt="" fill className="object-contain opacity-90" priority />
         </div>
 
-        <div className="relative h-full min-h-[320px] xs:min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] w-full overflow-hidden">
+        <div className="relative h-full min-h-[320px] xs:min-h-[380px] sm:min-h-[440px] lg:min-h-[480px] w-full">
           {decorativesVisible &&
             behindCards.map((card) => (
               <HeroDecorativeCard card={card} key={card.id} registerRef={registerDecorative} />

@@ -29,6 +29,49 @@ html.lenis body {
   pointer-events: none;
 }
 
+@media (min-width: 1280px) and (prefers-reduced-motion: no-preference) {
+  .desktop-reveal {
+    animation: desktop-reveal 560ms cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+
+  .desktop-car {
+    animation: desktop-car-enter 1.1s cubic-bezier(0.16, 1, 0.3, 1) 150ms both;
+  }
+}
+
+@keyframes desktop-reveal {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 16px, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@keyframes desktop-car-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(200px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',

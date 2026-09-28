@@ -4,7 +4,6 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { notFound, useParams } from "next/navigation";
-import { motion, AnimatePresence } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -154,12 +153,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
             <div className="lg:col-span-7 xl:col-span-8 space-y-8">
 
               {/* Photo Showcase & Thumbnails */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4 }}
-                className="bg-white rounded-3xl p-4 sm:p-6 border border-gray-200/80 shadow-sm"
-              >
+              <div className="bg-white rounded-3xl p-4 sm:p-6 border border-gray-200/80 shadow-sm">
                 {/* Main Large Display Image */}
                 <div className="relative h-64 sm:h-96 md:h-[420px] w-full rounded-2xl overflow-hidden bg-white mb-4 flex items-center justify-center border border-gray-200/80 shadow-sm">
                   {(selectedImage || car.image) ? (
@@ -210,7 +204,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     ))}
                   </div>
                 )}
-              </motion.div>
+              </div>
 
               {/* Title & Key Highlights */}
               <div className="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/80 shadow-sm space-y-6">
@@ -305,8 +299,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                   >
                     Deskripsi & Kenyamanan
                     {activeTab === "overview" && (
-                      <motion.div
-                        layoutId="activeDetailTab"
+                      <div
                         className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"
                       />
                     )}
@@ -319,8 +312,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                   >
                     Fitur & Fasilitas
                     {activeTab === "features" && (
-                      <motion.div
-                        layoutId="activeDetailTab"
+                      <div
                         className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"
                       />
                     )}
@@ -333,8 +325,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                   >
                     Syarat & Ketentuan
                     {activeTab === "terms" && (
-                      <motion.div
-                        layoutId="activeDetailTab"
+                      <div
                         className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"
                       />
                     )}
@@ -343,12 +334,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
 
                 {/* Tab 1: Overview */}
                 {activeTab === "overview" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-6"
-                  >
+                  <div className="space-y-6">
                     <p className="text-gray-600 leading-relaxed text-sm sm:text-[15px]">
                       {car.description}
                     </p>
@@ -364,17 +350,12 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                         ))}
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 )}
 
                 {/* Tab 2: Features */}
                 {activeTab === "features" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-4"
-                  >
+                  <div className="space-y-4">
                     <p className="text-gray-600 text-xs sm:text-sm mb-4">
                       Dilengkapi dengan deretan fitur canggih untuk menjamin kenyamanan dan keamanan tingkat tinggi:
                     </p>
@@ -389,17 +370,12 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                         </div>
                       ))}
                     </div>
-                  </motion.div>
+                  </div>
                 )}
 
                 {/* Tab 3: Terms */}
                 {activeTab === "terms" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="space-y-4"
-                  >
+                  <div className="space-y-4">
                     <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 flex items-start gap-3">
                       <ShieldCheck className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
                       <div className="text-xs text-amber-950 space-y-1">
@@ -418,7 +394,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                         </div>
                       ))}
                     </div>
-                  </motion.div>
+                  </div>
                 )}
               </div>
             </div>
@@ -660,15 +636,9 @@ export default function VehicleDetailClient({ id }: { id: string }) {
         </div>
 
         {/* Modal Booking Form */}
-        <AnimatePresence>
-          {isBookingModalOpen && (
+        {isBookingModalOpen && (
             <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-              <motion.div
-                initial={{ opacity: 0, scale: 0.95 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.95 }}
-                className="bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-gray-100 relative max-h-[90vh] overflow-y-auto"
-              >
+              <div className="animate-in fade-in zoom-in-95 duration-200 bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-gray-100 relative max-h-[90vh] overflow-y-auto">
                 {!isBookedSuccess ? (
                   <>
                     <div className="flex justify-between items-center mb-6">
@@ -782,10 +752,9 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     </div>
                   </div>
                 )}
-              </motion.div>
+              </div>
             </div>
           )}
-        </AnimatePresence>
       </main>
 
       <Footer />

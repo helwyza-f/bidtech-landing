@@ -3,7 +3,6 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -68,19 +67,14 @@ export default function KendaraanClient() {
           </div>
 
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="max-w-3xl mx-auto"
-            >
+            <div className="max-w-3xl mx-auto">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white drop-shadow-md">
                 Pilihan Armada <span className="text-amber-400">Terbaik di Batam</span>
               </h1>
               <p className="text-gray-200 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
                 Temukan kendaraan sempurna untuk perjalanan bisnis, liburan keluarga, maupun antar-jemput VVIP Bandara Hang Nadim dengan standar kenyamanan dan kebersihan tertinggi.
               </p>
-            </motion.div>
+            </div>
           </div>
         </section>
 
@@ -165,13 +159,9 @@ export default function KendaraanClient() {
               </div>
             ) : (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                {filteredAndSortedCars.map((car, index) => (
-                  <motion.div
+                {filteredAndSortedCars.map((car) => (
+                  <div
                     key={car.id}
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: index * 0.05 }}
                     className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-amber-300/80 transition-all duration-300 group flex flex-col justify-between"
                   >
                     <div>
@@ -181,7 +171,6 @@ export default function KendaraanClient() {
                             src={car.image}
                             alt={`${car.name} - Rental Sewa Mobil Batam Murah`}
                             fill
-                            priority={index < 6}
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="object-contain p-4 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_12px_20px_rgba(0,0,0,0.12)]"
                           />
@@ -257,7 +246,7 @@ export default function KendaraanClient() {
                         </Button>
                       </Link>
                     </div>
-                  </motion.div>
+                  </div>
                 ))}
               </div>
             )}

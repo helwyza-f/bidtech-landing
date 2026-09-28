@@ -2,28 +2,11 @@
 
 import { useCallback, useEffect, useRef, useState, type UIEvent } from "react";
 import Image from "next/image";
-import { ChevronLeft, ChevronRight, Globe, Settings2, Smartphone } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 import { Reveal } from "@/components/animations/reveal";
+import { serviceMeta } from "@/lib/data/services";
 import { useLanguage } from "@/lib/i18n";
-
-const serviceMeta = [
-  {
-    image: "/images/hero/Visual-3.webp",
-    icon: Globe,
-    isPopular: false,
-  },
-  {
-    image: "/images/hero/Visual-1.webp",
-    icon: Smartphone,
-    isPopular: true,
-  },
-  {
-    image: "/images/hero/Visual-2.webp",
-    icon: Settings2,
-    isPopular: false,
-  },
-];
 
 function getClosestSlideIndex(slider: HTMLElement) {
   const slides = Array.from(slider.children) as HTMLElement[];
