@@ -3,11 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { notFound, useParams } from "next/navigation";
+import { useLocale, useTranslations } from "next-intl";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
-import { getCarById, getRelatedCars } from "@/lib/data";
+import { getCar, getRelatedCarsForLocale } from "@/lib/localizedData";
+import { formatRupiah, getLocalizedPath, type Locale } from "@/lib/i18n";
 import {
   Users,
   Gauge,
@@ -31,11 +32,15 @@ import {
 } from "lucide-react";
 
 export default function VehicleDetailClient({ id }: { id: string }) {
-  const car = getCarById(id || "1");
+  const locale = useLocale() as Locale;
+  const t = useTranslations();
+  const car = getCar(locale, id || "1");
 
   const [selectedImage, setSelectedImage] = useState<string>(car?.image || "");
   const [activeTab, setActiveTab] = useState<"overview" | "features" | "terms">("overview");
-  const [driverOption, setDriverOption] = useState<"with-driver" | "self-drive">("self-drive");
+  const priceNote = car?.priceNote?.toLowerCase() ?? "";
+  const isAllIn = priceNote.includes("all in") || priceNote.includes("all-in");
+  const [driverOption, setDriverOption] = useState<"with-driver" | "self-drive">(isAllIn ? "with-driver" : "self-drive");
   const [rentalDays, setRentalDays] = useState<number>(1);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
   const [customerName, setCustomerName] = useState("");
@@ -51,13 +56,13 @@ export default function VehicleDetailClient({ id }: { id: string }) {
         <main className="min-h-screen pt-32 pb-20 flex items-center justify-center bg-gray-50">
           <div className="text-center p-8 bg-white rounded-3xl shadow-xl border border-gray-100 max-w-md mx-auto">
             <CarIcon className="w-16 h-16 text-gray-400 mx-auto mb-4" />
-            <h1 className="text-2xl font-bold text-gray-900 mb-2">Kendaraan Tidak Ditemukan</h1>
+            <h1 className="text-2xl font-bold text-gray-900 mb-2">{t("vehicle.notFoundTitle")}</h1>
             <p className="text-gray-600 text-sm mb-6">
-              Maaf, data kendaraan yang Anda cari tidak tersedia atau telah dihapus dari armada kami.
+              {t("vehicle.notFoundDescription")}
             </p>
-            <Link href="/kendaraan">
+            <Link href={getLocalizedPath(locale, "/kendaraan")}>
               <Button className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 rounded-xl px-6 py-3 font-bold shadow-lg shadow-amber-500/20">
-                Kembali ke Daftar Kendaraan
+                {t("vehicle.backToList")}
               </Button>
             </Link>
           </div>
@@ -68,11 +73,14 @@ export default function VehicleDetailClient({ id }: { id: string }) {
   }
 
   const galleryImages = car.gallery && car.gallery.length > 0 ? car.gallery : (car.image ? [car.image] : []);
-  const relatedCars = getRelatedCars(car.id, car.category, 3);
+  const relatedCars = getRelatedCarsForLocale(locale, car.id, car.category, 3);
 
-  const driverCostPerDay = driverOption === "with-driver" ? 250000 : 0;
+  const driverCostPerDay = !isAllIn && driverOption === "with-driver" ? 250000 : 0;
   const totalCost = (car.price + driverCostPerDay) * rentalDays;
-  const totalCostFormatted = new Intl.NumberFormat("id-ID").format(totalCost);
+  const totalCostFormatted = formatRupiah(totalCost, locale);
+  const durationLabel = isAllIn
+    ? t("vehicle.allInDuration", { count: rentalDays })
+    : t("vehicle.rentalDays", { count: rentalDays });
 
   const handleBookingSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -81,12 +89,12 @@ export default function VehicleDetailClient({ id }: { id: string }) {
 
   const handleWhatsAppBooking = () => {
     const text = encodeURIComponent(
-      `Halo NadimTrans RentCar, saya tertarik untuk menyewa unit:\n` +
-      `- Kendaraan: ${car.name} (${car.category})\n` +
-      `- Paket: ${driverOption === "with-driver" ? "Dengan Supir" : "Lepas Kunci"}\n` +
-      `- Durasi: ${rentalDays} Hari\n` +
-      `- Estimasi Total: Rp ${totalCostFormatted}\n` +
-      `Mohon info ketersediaan unit untuk tanggal terkait. Terima kasih!`
+      `${t("vehicle.whatsappGreeting")}\n` +
+      `- ${t("vehicle.whatsappVehicle")}: ${car.name} (${car.category})\n` +
+      `- ${t("vehicle.whatsappPackage")}: ${isAllIn ? car.priceNote : driverOption === "with-driver" ? t("vehicle.withDriver") : t("vehicle.selfDrive")}\n` +
+      `- ${t("vehicle.whatsappDuration")}: ${durationLabel}\n` +
+      `- ${t("vehicle.whatsappEstimate")}: ${totalCostFormatted}\n` +
+      t("vehicle.whatsappClosing")
     );
     window.open(`https://wa.me/6281331412062?text=${text}`, "_blank");
   };
@@ -100,12 +108,12 @@ export default function VehicleDetailClient({ id }: { id: string }) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-6">
           <div className="flex flex-wrap items-center justify-between gap-4 py-2">
             <nav className="flex items-center gap-2 text-xs sm:text-sm text-gray-500">
-              <Link href="/" className="hover:text-amber-600 transition-colors font-medium">
-                Beranda
+              <Link href={getLocalizedPath(locale, "/")} className="hover:text-amber-600 transition-colors font-medium">
+                {t("vehicle.breadcrumbHome")}
               </Link>
               <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
-              <Link href="/kendaraan" className="hover:text-amber-600 transition-colors font-medium">
-                Kendaraan
+              <Link href={getLocalizedPath(locale, "/kendaraan")} className="hover:text-amber-600 transition-colors font-medium">
+                {t("vehicle.breadcrumbVehicles")}
               </Link>
               <ChevronRight className="w-3.5 h-3.5 text-gray-400" />
               <span className="text-gray-900 font-semibold truncate max-w-[200px] sm:max-w-none">
@@ -120,7 +128,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                   ? "bg-red-50 border-red-200 text-red-500"
                   : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
                   }`}
-                aria-label="Simpan favorit"
+                aria-label={t("common.saved")}
               >
                 <Heart className={`w-4 h-4 ${isLiked ? "fill-current" : ""}`} />
               </button>
@@ -133,11 +141,11 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     });
                   } else {
                     navigator.clipboard.writeText(window.location.href);
-                    alert("Tautan berhasil disalin ke clipboard!");
+                    alert(t("common.copied"));
                   }
                 }}
                 className="p-2.5 rounded-full border border-gray-200 bg-white text-gray-600 hover:bg-gray-50 transition-all"
-                aria-label="Bagikan"
+                aria-label={t("common.share")}
               >
                 <Share2 className="w-4 h-4" />
               </button>
@@ -153,7 +161,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
             <div className="lg:col-span-7 xl:col-span-8 space-y-8">
 
               {/* Photo Showcase & Thumbnails */}
-              <div className="bg-white rounded-3xl p-4 sm:p-6 border border-gray-200/80 shadow-sm">
+              <div id="galeri" className="scroll-mt-24 sm:scroll-mt-28 bg-white rounded-3xl p-4 sm:p-6 border border-gray-200/80 shadow-sm">
                 {/* Main Large Display Image */}
                 <div className="relative h-64 sm:h-96 md:h-[420px] w-full rounded-2xl overflow-hidden bg-white mb-4 flex items-center justify-center border border-gray-200/80 shadow-sm">
                   {(selectedImage || car.image) ? (
@@ -169,8 +177,8 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                       <div className="w-16 h-16 rounded-2xl bg-white shadow-sm border border-gray-100 flex items-center justify-center mb-3 text-slate-400">
                         <CarIcon className="w-8 h-8" />
                       </div>
-                      <p className="text-base font-bold text-slate-800 uppercase tracking-wider">Area Foto Unit Kendaraan</p>
-                      <p className="text-xs text-slate-500 mt-1 max-w-sm">Slot foto utama {car.name} (Dapat diunggah berkala oleh admin)</p>
+                      <p className="text-base font-bold text-slate-800 uppercase tracking-wider">{t("vehicle.photoPlaceholder")}</p>
+                      <p className="text-xs text-slate-500 mt-1 max-w-sm">{t("vehicle.photoPlaceholderDescription", { name: car.name })}</p>
                     </div>
                   )}
                   <div className="absolute top-4 left-4">
@@ -182,7 +190,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     <span className="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-bold bg-white/95 backdrop-blur-sm text-gray-900 shadow-md">
                       <Star className="w-3.5 h-3.5 text-amber-500 fill-amber-500" />
                       <span>{car.rating}</span>
-                      <span className="text-gray-400 font-normal">({car.reviews} ulasan)</span>
+                      <span className="text-gray-400 font-normal">({car.reviews} {t("common.reviews")})</span>
                     </span>
                   </div>
                 </div>
@@ -218,12 +226,12 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     </h1>
                   </div>
                   <div className="text-left sm:text-right">
-                    <span className="text-xs text-gray-500 block">Tarif Sewa Harian</span>
+                    <span className="text-xs text-gray-500 block">{t("vehicle.rentalRate")}</span>
                     <div className="flex items-baseline gap-1 sm:justify-end">
                       <span className="text-2xl sm:text-3xl font-black text-amber-600">
-                        Rp {car.priceFormatted}
+                        {formatRupiah(car.price, locale)}
                       </span>
-                      <span className="text-xs text-gray-500 font-medium">/ 24 Jam</span>
+                      <span className="text-xs text-gray-500 font-medium">{car.priceNote}</span>
                     </div>
                   </div>
                 </div>
@@ -231,24 +239,24 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                 {/* Specs Grid Bar */}
                 <div>
                   <h3 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-4">
-                    Spesifikasi Utama
+                    {t("vehicle.primarySpecs")}
                   </h3>
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-3.5">
                     <div className="bg-[#F8FAFC] border border-gray-100 rounded-2xl p-4 flex flex-col items-center text-center justify-center">
                       <Users className="w-5 h-5 text-amber-600 mb-2" />
-                      <span className="text-xs text-gray-500">Kapasitas</span>
-                      <span className="font-bold text-gray-900 text-sm">{car.specs.seats} Penumpang</span>
+                      <span className="text-xs text-gray-500">{t("vehicle.capacity")}</span>
+                      <span className="font-bold text-gray-900 text-sm">{car.specs.seats} {t("common.passengers")}</span>
                     </div>
 
                     <div className="bg-[#F8FAFC] border border-gray-100 rounded-2xl p-4 flex flex-col items-center text-center justify-center">
                       <Briefcase className="w-5 h-5 text-amber-600 mb-2" />
-                      <span className="text-xs text-gray-500">Bagasi</span>
-                      <span className="font-bold text-gray-900 text-sm">{car.specs.luggage} Koper Besar</span>
+                      <span className="text-xs text-gray-500">{t("vehicle.luggage")}</span>
+                      <span className="font-bold text-gray-900 text-sm">{car.specs.luggage} {t("common.luggage")}</span>
                     </div>
 
                     <div className="bg-[#F8FAFC] border border-gray-100 rounded-2xl p-4 flex flex-col items-center text-center justify-center">
                       <Gauge className="w-5 h-5 text-amber-600 mb-2" />
-                      <span className="text-xs text-gray-500">Transmisi</span>
+                      <span className="text-xs text-gray-500">{t("vehicle.transmission")}</span>
                       <span className="font-bold text-gray-900 text-sm truncate max-w-full">
                         {car.specs.transmission}
                       </span>
@@ -256,7 +264,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
 
                     <div className="bg-[#F8FAFC] border border-gray-100 rounded-2xl p-4 flex flex-col items-center text-center justify-center">
                       <Fuel className="w-5 h-5 text-amber-600 mb-2" />
-                      <span className="text-xs text-gray-500">Bahan Bakar</span>
+                      <span className="text-xs text-gray-500">{t("vehicle.fuel")}</span>
                       <span className="font-bold text-gray-900 text-sm truncate max-w-full">
                         {car.specs.fuel}
                       </span>
@@ -269,19 +277,19 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                   <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 pt-2">
                     {car.specs.engine && (
                       <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-100 text-xs">
-                        <span className="text-gray-500 block mb-0.5">Mesin:</span>
+                        <span className="text-gray-500 block mb-0.5">{t("vehicle.engine")}:</span>
                         <span className="font-semibold text-gray-900">{car.specs.engine}</span>
                       </div>
                     )}
                     {car.specs.power && (
                       <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-100 text-xs">
-                        <span className="text-gray-500 block mb-0.5">Tenaga Maksimal:</span>
+                        <span className="text-gray-500 block mb-0.5">{t("vehicle.power")}:</span>
                         <span className="font-semibold text-gray-900">{car.specs.power}</span>
                       </div>
                     )}
                     {car.specs.acceleration && (
                       <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-100 text-xs">
-                        <span className="text-gray-500 block mb-0.5">Akselerasi:</span>
+                        <span className="text-gray-500 block mb-0.5">{t("vehicle.acceleration")}:</span>
                         <span className="font-semibold text-gray-900">{car.specs.acceleration}</span>
                       </div>
                     )}
@@ -297,7 +305,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     className={`pb-4 text-sm font-bold transition-all relative ${activeTab === "overview" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
                       }`}
                   >
-                    Deskripsi & Kenyamanan
+                    {t("vehicle.overview")}
                     {activeTab === "overview" && (
                       <div
                         className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"
@@ -310,7 +318,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     className={`pb-4 text-sm font-bold transition-all relative ${activeTab === "features" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
                       }`}
                   >
-                    Fitur & Fasilitas
+                    {t("vehicle.features")}
                     {activeTab === "features" && (
                       <div
                         className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"
@@ -323,7 +331,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     className={`pb-4 text-sm font-bold transition-all relative ${activeTab === "terms" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
                       }`}
                   >
-                    Syarat & Ketentuan
+                    {t("vehicle.terms")}
                     {activeTab === "terms" && (
                       <div
                         className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"
@@ -340,7 +348,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     </p>
 
                     <div>
-                      <h4 className="font-bold text-gray-900 text-sm mb-3">Keuntungan Sewa di NadimTrans RentCar:</h4>
+                      <h4 className="font-bold text-gray-900 text-sm mb-3">{t("vehicle.benefits")}</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {car.included.map((item, idx) => (
                           <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-700">
@@ -357,7 +365,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                 {activeTab === "features" && (
                   <div className="space-y-4">
                     <p className="text-gray-600 text-xs sm:text-sm mb-4">
-                      Dilengkapi dengan deretan fitur canggih untuk menjamin kenyamanan dan keamanan tingkat tinggi:
+                      {t("vehicle.featureIntro")}
                     </p>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3.5">
                       {car.features.map((feat, idx) => (
@@ -379,8 +387,8 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     <div className="p-4 rounded-2xl bg-amber-50/70 border border-amber-200/80 flex items-start gap-3">
                       <ShieldCheck className="w-5 h-5 text-amber-600 flex-shrink-0 mt-0.5" />
                       <div className="text-xs text-amber-950 space-y-1">
-                        <span className="font-bold block">Dokumen Wajib Diverifikasi:</span>
-                        <p>Pastikan Anda menyiapkan identitas resmi sebelum melakukan serah terima kendaraan.</p>
+                        <span className="font-bold block">{t("vehicle.verificationTitle")}</span>
+                        <p>{t("vehicle.verificationDescription")}</p>
                       </div>
                     </div>
 
@@ -404,21 +412,21 @@ export default function VehicleDetailClient({ id }: { id: string }) {
               <div className="sticky top-28 space-y-6">
                 <div className="bg-white rounded-3xl p-6 sm:p-7 border border-gray-200/80 shadow-xl shadow-amber-500/5">
                   <div className="pb-5 border-b border-gray-100">
-                    <span className="text-xs font-semibold text-gray-500 block mb-1">Total Estimasi Sewa</span>
+                    <span className="text-xs font-semibold text-gray-500 block mb-1">{t("vehicle.totalRentalEstimate")}</span>
                     <div className="flex items-baseline gap-1.5">
                       <span className="text-3xl font-black text-amber-600">
-                        Rp {totalCostFormatted}
+                        {totalCostFormatted}
                       </span>
-                      <span className="text-xs text-gray-500">({rentalDays} Hari)</span>
+                      <span className="text-xs text-gray-500">({durationLabel})</span>
                     </div>
                   </div>
 
                   {/* Form Options */}
                   <div className="py-5 space-y-4 border-b border-gray-100">
                     {/* Driver Options Toggle */}
-                    <div>
+                    {!isAllIn ? <div>
                       <label className="block text-xs font-bold text-gray-700 mb-2">
-                        Opsi Pengemudi
+                        {t("vehicle.driverOption")}
                       </label>
                       <div className="grid grid-cols-2 gap-2">
                         <button
@@ -429,7 +437,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                             : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
                             }`}
                         >
-                          Lepas Kunci
+                          {t("vehicle.selfDrive")}
                         </button>
                         <button
                           type="button"
@@ -439,15 +447,15 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                             : "bg-white border-gray-200 text-gray-600 hover:bg-gray-50"
                             }`}
                         >
-                          + Supir (+250rb/hr)
+                          {t("vehicle.driverSurcharge")}
                         </button>
                       </div>
-                    </div>
+                    </div> : <p className="rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2.5 text-xs font-semibold text-emerald-800">{t("vehicle.allInIncluded")}</p>}
 
                     {/* Rental Duration Counter */}
                     <div>
                       <label className="block text-xs font-bold text-gray-700 mb-2">
-                        Durasi Sewa (Hari)
+                        {isAllIn ? t("vehicle.allInPackageCount") : t("vehicle.rentalDuration")}
                       </label>
                       <div className="flex items-center justify-between border border-gray-200 rounded-xl p-1.5 bg-gray-50">
                         <button
@@ -458,7 +466,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                           -
                         </button>
                         <span className="font-extrabold text-sm text-gray-900">
-                          {rentalDays} Hari
+                          {durationLabel}
                         </span>
                         <button
                           type="button"
@@ -473,22 +481,22 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     {/* Cost Breakdown */}
                     <div className="space-y-2 pt-2 text-xs text-gray-600">
                       <div className="flex justify-between">
-                        <span>Sewa Mobil ({rentalDays}x)</span>
+                        <span>{isAllIn ? t("vehicle.allInPackage", { count: rentalDays }) : t("vehicle.carRental", { count: rentalDays })}</span>
                         <span className="font-semibold text-gray-900">
-                          Rp {new Intl.NumberFormat("id-ID").format(car.price * rentalDays)}
+                          {formatRupiah(car.price * rentalDays, locale)}
                         </span>
                       </div>
-                      {driverOption === "with-driver" && (
+                      {!isAllIn && driverOption === "with-driver" && (
                         <div className="flex justify-between text-amber-700">
-                          <span>Jasa Supir ({rentalDays}x)</span>
+                          <span>{t("vehicle.driverService", { count: rentalDays })}</span>
                           <span className="font-semibold">
-                            Rp {new Intl.NumberFormat("id-ID").format(driverCostPerDay * rentalDays)}
+                            {formatRupiah(driverCostPerDay * rentalDays, locale)}
                           </span>
                         </div>
                       )}
                       <div className="flex justify-between text-emerald-600">
-                        <span>Asuransi Komprehensif</span>
-                        <span className="font-bold">Gratis</span>
+                        <span>{t("vehicle.insurance")}</span>
+                        <span className="font-bold">{t("vehicle.free")}</span>
                       </div>
                     </div>
                   </div>
@@ -503,7 +511,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                       className="w-full border-emerald-500 text-emerald-900 hover:bg-emerald-500 bg-emerald-300 hover:text-emerald-800 font-bold h-12 rounded-2xl transition-all inline-flex items-center justify-center gap-2"
                     >
                       <PhoneCall className="w-4 h-4 text-emerald-600" />
-                      <span>Chat WhatsApp Cepat</span>
+                      <span>{t("vehicle.quickWhatsapp")}</span>
                     </Button>
                   </div>
 
@@ -511,26 +519,26 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                   <div className="mt-6 pt-5 border-t border-gray-100 grid grid-cols-2 gap-3 text-[11px] text-gray-500">
                     <div className="flex items-center gap-1.5">
                       <ShieldCheck className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                      <span>Transaksi 100% Aman</span>
+                      <span>{t("vehicle.safeTransaction")}</span>
                     </div>
                     <div className="flex items-center gap-1.5">
                       <Clock className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                      <span>Konfirmasi Instan</span>
+                      <span>{t("vehicle.instantConfirmation")}</span>
                     </div>
                   </div>
                 </div>
 
                 {/* Assistance Box */}
                 <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/80 border border-amber-500/30 rounded-3xl p-6 text-white shadow-xl shadow-black/20">
-                  <h4 className="font-bold text-base mb-1 text-amber-400">Butuh Bantuan Khusus?</h4>
+                  <h4 className="font-bold text-base mb-1 text-amber-400">{t("vehicle.specialHelpTitle")}</h4>
                   <p className="text-xs text-slate-300 mb-4 leading-relaxed">
-                    Ingin sewa jangka panjang, sewa bulanan perusahaan, atau mobil pengantin? Hubungi tim support VIP kami.
+                    {t("vehicle.specialHelpDescription")}
                   </p>
                   <Link
-                    href="/#faq"
+                    href={getLocalizedPath(locale, "/#faq")}
                     className="inline-flex items-center gap-1 text-xs font-bold text-slate-950 bg-amber-500 hover:bg-amber-400 px-4 py-2 rounded-xl transition-colors shadow-md shadow-amber-500/20"
                   >
-                    <span>Hubungi Tim Support</span>
+                    <span>{t("vehicle.contactSupport")}</span>
                     <ChevronRight className="w-3.5 h-3.5" />
                   </Link>
                 </div>
@@ -545,17 +553,17 @@ export default function VehicleDetailClient({ id }: { id: string }) {
               <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-amber-600 block mb-1">
-                    Pilihan Serupa
+                    {t("vehicle.similarVehicles")}
                   </span>
                   <h2 className="text-2xl sm:text-3xl font-extrabold text-gray-900 tracking-tight">
-                    Rekomendasi Kendaraan Lainnya
+                    {t("vehicle.related")}
                   </h2>
                 </div>
                 <Link
-                  href="/kendaraan"
+                  href={getLocalizedPath(locale, "/kendaraan")}
                   className="inline-flex items-center gap-1 text-xs sm:text-sm font-bold text-amber-600 hover:text-amber-700 transition-colors group"
                 >
-                  <span>Lihat Semua Armada</span>
+                  <span>{t("vehicle.viewAllFleet")}</span>
                   <ChevronRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </Link>
               </div>
@@ -578,7 +586,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-slate-50 via-gray-50 to-amber-50/30 flex flex-col items-center justify-center text-slate-400 group-hover:text-amber-500 transition-colors">
                             <CarIcon className="w-7 h-7 mb-1" />
-                            <span className="text-[11px] font-semibold uppercase tracking-wider">Foto Unit</span>
+                            <span className="text-[11px] font-semibold uppercase tracking-wider">{t("vehicle.unitPhoto")}</span>
                           </div>
                         )}
                         <div className="absolute top-3 right-3">
@@ -598,20 +606,20 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                           </div>
                           <div className="text-right">
                             <span className="text-sm font-bold text-amber-600">
-                              Rp {relCar.priceFormatted}
+                              {formatRupiah(relCar.price, locale)}
                             </span>
-                            <span className="text-[10px] text-gray-400 block">/ hari</span>
+                            <span className="text-[10px] text-gray-400 block">{relCar.priceNote}</span>
                           </div>
                         </div>
 
                         <div className="flex items-center justify-between py-2.5 border-y border-gray-100 text-xs text-gray-600">
                           <div className="flex items-center gap-1">
                             <Users className="w-3.5 h-3.5 text-amber-600" />
-                            <span>{relCar.specs.seats} Kursi</span>
+                            <span>{relCar.specs.seats} {t("common.seats")}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <Briefcase className="w-3.5 h-3.5 text-amber-600" />
-                            <span>{relCar.specs.luggage} Tas</span>
+                            <span>{relCar.specs.luggage} {t("common.luggage")}</span>
                           </div>
                           <div className="flex items-center gap-1">
                             <Gauge className="w-3.5 h-3.5 text-amber-600" />
@@ -622,9 +630,9 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     </div>
 
                     <div className="p-5 pt-0">
-                      <Link href={`/kendaraan/${relCar.id}`}>
+                      <Link href={`${getLocalizedPath(locale, `/kendaraan/${relCar.id}`)}#galeri`}>
                         <Button className="w-full bg-slate-950 hover:bg-amber-500 hover:text-slate-950 text-amber-400 border border-amber-500/40 transition-all font-semibold rounded-xl text-xs h-10 shadow-sm">
-                          Sewa Sekarang
+                          {t("catalog.bookNow")}
                         </Button>
                       </Link>
                     </div>
@@ -643,11 +651,11 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                   <>
                     <div className="flex justify-between items-center mb-6">
                       <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
-                        Formulir Pemesanan
+                        {t("vehicle.booking")}
                       </h3>
                       <button
                         onClick={() => setIsBookingModalOpen(false)}
-                        aria-label="Tutup popup"
+                        aria-label={t("vehicle.closePopup")}
                         className="p-1.5 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
                       >
                         ✕
@@ -665,7 +673,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                       <div>
                         <h4 className="font-bold text-gray-900 text-sm">{car.name}</h4>
                         <span className="text-xs text-amber-600 font-semibold">
-                          Rp {totalCostFormatted} / {rentalDays} Hari ({driverOption === "with-driver" ? "Dengan Supir" : "Lepas Kunci"})
+                          {totalCostFormatted} / {durationLabel} ({isAllIn ? car.priceNote : driverOption === "with-driver" ? t("vehicle.withDriver") : t("vehicle.selfDrive")})
                         </span>
                       </div>
                     </div>
@@ -673,21 +681,21 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     <form onSubmit={handleBookingSubmit} className="space-y-4">
                       <div>
                         <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                          Nama Lengkap
+                          {t("vehicle.name")}
                         </label>
                         <input
                           type="text"
                           required
                           value={customerName}
                           onChange={(e) => setCustomerName(e.target.value)}
-                          placeholder="Masukkan nama sesuai KTP"
+                          placeholder={t("vehicle.namePlaceholder")}
                           className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 text-sm"
                         />
                       </div>
 
                       <div>
                         <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                          Nomor WhatsApp
+                          {t("vehicle.phone")}
                         </label>
                         <input
                           type="tel"
@@ -701,7 +709,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
 
                       <div>
                         <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                          Tanggal Mulai Sewa
+                          {t("vehicle.pickupStartDate")}
                         </label>
                         <input
                           type="date"
@@ -719,13 +727,13 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                           onClick={() => setIsBookingModalOpen(false)}
                           className="flex-1 rounded-xl h-12"
                         >
-                          Batal
+                          {t("vehicle.cancel")}
                         </Button>
                         <Button
                           type="submit"
                           className="flex-1 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold rounded-xl h-12 shadow-md shadow-amber-500/25"
                         >
-                          Konfirmasi Booking
+                          {t("vehicle.confirmBooking")}
                         </Button>
                       </div>
                     </form>
@@ -735,9 +743,9 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
                       <CheckCircle2 className="w-10 h-10" />
                     </div>
-                    <h3 className="text-2xl font-bold text-gray-900">Pemesanan Terkirim!</h3>
+                    <h3 className="text-2xl font-bold text-gray-900">{t("vehicle.bookingSent")}</h3>
                     <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-sm mx-auto">
-                      Terima kasih, <strong>{customerName || "Pelanggan"}</strong>. Permintaan sewa unit <strong>{car.name}</strong> telah kami terima. Tim kami akan segera menghubungi WhatsApp <strong>{customerPhone}</strong> dalam 10 menit.
+                      {t("vehicle.bookingSentDescription", { name: customerName || (locale === "id" ? "Pelanggan" : "Customer"), vehicle: car.name, phone: customerPhone })}
                     </p>
                     <div className="pt-4">
                       <Button
@@ -747,7 +755,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                         }}
                         className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 rounded-xl px-8 h-11 font-bold shadow-md shadow-amber-500/20"
                       >
-                        Selesai
+                        {t("vehicle.done")}
                       </Button>
                     </div>
                   </div>

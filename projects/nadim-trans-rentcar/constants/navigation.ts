@@ -1,6 +1,6 @@
 export const NAV_ITEMS = [
-  { label: 'Beranda', href: '/' },
-  { label: 'Kendaraan', href: '/kendaraan' },
-  { label: 'Layanan', href: '/layanan' },
-  { label: 'FAQ', href: '/faq' },
+  { label: "nav.home", href: "/" },
+  { label: "nav.vehicles", href: "/kendaraan" },
+  { label: "nav.services", href: "/layanan" },
+  { label: "nav.faq", href: "/faq" },
 ];

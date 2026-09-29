@@ -1,30 +1,16 @@
-import { Search, Calendar, Key } from "lucide-react";
+"use client";
 
-const STEPS = [
-  {
-    number: "01",
-    title: "01. Pilih Kendaraan",
-    description:
-      "Jelajahi armada premium kami dan temukan yang paling sesuai dengan kebutuhan Anda.",
-    icon: Search,
-  },
-  {
-    number: "02",
-    title: "02. Tentukan Tanggal",
-    description:
-      "Pilih jadwal Anda dan layanan tambahan seperti asuransi atau GPS.",
-    icon: Calendar,
-  },
-  {
-    number: "03",
-    title: "03. Konfirmasi & Berkendara",
-    description:
-      "Selesaikan pemesanan dan kami akan menyiapkan mobil Anda.",
-    icon: Key,
-  },
-];
+import { Search, Calendar, Key } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 export default function HowToBook() {
+  const t = useTranslations();
+  const steps = [
+    { number: "01", title: t("home.steps.chooseTitle"), description: t("home.steps.chooseDescription"), icon: Search },
+    { number: "02", title: t("home.steps.dateTitle"), description: t("home.steps.dateDescription"), icon: Calendar },
+    { number: "03", title: t("home.steps.confirmTitle"), description: t("home.steps.confirmDescription"), icon: Key },
+  ];
+
   return (
     <section className="relative w-full py-12 sm:py-16 md:py-20 bg-[#121214] text-white flex flex-col justify-center overflow-hidden">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -32,11 +18,11 @@ export default function HowToBook() {
         {/* Header Section */}
         <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
           <p className="text-xs font-semibold tracking-[0.25em] text-zinc-400 uppercase mb-4">
-            PROSES MUDAH
+            {t("home.howEyebrow")}
           </p>
 
           <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-white">
-            Tiga Langkah Menuju Kebebasan
+            {t("home.howTitle")}
           </h2>
         </div>
 
@@ -46,7 +32,7 @@ export default function HowToBook() {
           <div className="hidden md:block absolute top-[44px] left-[15%] right-[15%] h-[1px] bg-zinc-800 z-0" />
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-8 relative z-10">
-            {STEPS.map((step) => {
+            {steps.map((step) => {
               const Icon = step.icon;
               return (
                 <div

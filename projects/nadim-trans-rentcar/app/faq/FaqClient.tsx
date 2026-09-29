@@ -2,6 +2,7 @@
 
 import { useState, useMemo } from "react";
 import Image from "next/image";
+import { useLocale, useTranslations } from "next-intl";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import {
@@ -14,32 +15,36 @@ import {
   Headphones,
 } from "lucide-react";
 
-import { ALL_FAQS } from "@/lib/faqData";
+import { getFaqs } from "@/lib/localizedData";
+import type { Locale } from "@/lib/i18n";
 
 // Categorized FAQs
 export const FAQ_CATEGORIES = [
-  { id: "pemesanan", name: "Pemesanan", icon: Car, title: "Pemesanan Kendaraan" },
-  { id: "dokumen", name: "Dokumen & Syarat", icon: FileText, title: "Dokumen & Persyaratan" },
-  { id: "pembayaran", name: "Pembayaran", icon: CreditCard, title: "Metode & Ketentuan Pembayaran" },
-  { id: "asuransi", name: "Asuransi", icon: Shield, title: "Cakupan & Layanan Asuransi" },
+  { id: "pemesanan", nameKey: "faq.booking", icon: Car, titleKey: "faq.bookingTitle" },
+  { id: "dokumen", nameKey: "faq.documents", icon: FileText, titleKey: "faq.documentsTitle" },
+  { id: "pembayaran", nameKey: "faq.payment", icon: CreditCard, titleKey: "faq.paymentTitle" },
+  { id: "asuransi", nameKey: "faq.insurance", icon: Shield, titleKey: "faq.insuranceTitle" },
 ];
 
 export default function FaqClient() {
   const [activeCategory, setActiveCategory] = useState("pemesanan");
   const [searchQuery, setSearchQuery] = useState("");
   const [expandedId, setExpandedId] = useState<number | null>(1);
+  const locale = useLocale() as Locale;
+  const t = useTranslations();
+  const faqs = getFaqs(locale);
 
   // Filter FAQs based on search or active category
   const displayedFaqs = useMemo(() => {
     if (searchQuery.trim() !== "") {
-      return ALL_FAQS.filter(
+      return faqs.filter(
         (faq) =>
           faq.question.toLowerCase().includes(searchQuery.toLowerCase()) ||
           faq.answer.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
-    return ALL_FAQS.filter((faq) => faq.category === activeCategory);
-  }, [activeCategory, searchQuery]);
+    return faqs.filter((faq) => faq.category === activeCategory);
+  }, [activeCategory, faqs, searchQuery]);
 
   const activeCategoryObj = FAQ_CATEGORIES.find((c) => c.id === activeCategory);
 
@@ -53,7 +58,7 @@ export default function FaqClient() {
           <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
             <Image
               src="/images/background-3.webp"
-              alt="Pusat Bantuan Batam - NadimTrans RentCar"
+              alt="NadimTrans RentCar Batam"
               fill
               priority
               sizes="100vw"
@@ -67,10 +72,10 @@ export default function FaqClient() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white drop-shadow-md">
-                Pusat Bantuan & <span className="text-amber-400">FAQ Batam</span>
+                {t("faq.title")}
               </h1>
               <p className="text-gray-200 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed mb-8 drop-shadow-sm">
-                Temukan jawaban lengkap seputar ketentuan sewa lepas kunci, layanan dengan supir, metode pembayaran, hingga antar jemput Bandara Hang Nadim Batam.
+                {t("faq.description")}
               </p>
 
               {/* Centered Search Bar */}
@@ -78,7 +83,7 @@ export default function FaqClient() {
                 <Search className="w-4 h-4 text-gray-400 absolute left-5 top-1/2 -translate-y-1/2 pointer-events-none" />
                 <input
                   type="text"
-                  placeholder="Cari pertanyaan anda..."
+                  placeholder={t("faq.searchPlaceholder")}
                   value={searchQuery}
                   onChange={(e) => setSearchQuery(e.target.value)}
                   className="w-full pl-12 pr-6 py-3.5 bg-white text-gray-900 placeholder-gray-400 rounded-full text-sm sm:text-base focus:outline-none focus:ring-4 focus:ring-amber-500/30 shadow-lg shadow-black/20 transition-all border border-amber-500/30"
@@ -96,7 +101,7 @@ export default function FaqClient() {
               {/* Left Column: Category Sidebar */}
               <div className="lg:col-span-4">
                 <p className="text-xs font-bold uppercase tracking-widest text-amber-600 mb-4">
-                  KATEGORI
+                  {t("faq.category")}
                 </p>
                 <div className="space-y-1.5">
                   {FAQ_CATEGORIES.map((cat) => {
@@ -121,7 +126,7 @@ export default function FaqClient() {
                             isActive ? "text-amber-600" : "text-gray-500"
                           }`}
                         />
-                        <span>{cat.name}</span>
+                        <span>{t(cat.nameKey)}</span>
                       </button>
                     );
                   })}
@@ -131,23 +136,23 @@ export default function FaqClient() {
               {/* Right Column: FAQs Accordion */}
               <div className="lg:col-span-8">
                 <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                  {searchQuery ? `Hasil Pencarian: "${searchQuery}"` : activeCategoryObj?.title}
+                  {searchQuery ? t("faq.results", { query: searchQuery }) : activeCategoryObj ? t(activeCategoryObj.titleKey) : ""}
                 </h2>
 
                 {displayedFaqs.length === 0 ? (
                   <div className="bg-gray-50 rounded-2xl p-10 text-center border border-gray-100">
                     <HelpCircle className="w-10 h-10 text-gray-300 mx-auto mb-3" />
                     <p className="text-base font-bold text-gray-800 mb-1">
-                      Tidak ada pertanyaan yang cocok
+                      {t("faq.emptyTitle")}
                     </p>
                     <p className="text-xs text-gray-500 mb-4">
-                      Coba gunakan kata kunci lain atau pilih kategori di sebelah kiri.
+                      {t("faq.emptyDescription")}
                     </p>
                     <button
                       onClick={() => setSearchQuery("")}
                       className="text-xs text-amber-600 font-bold hover:underline"
                     >
-                      Reset Pencarian
+                      {t("faq.reset")}
                     </button>
                   </div>
                 ) : (
@@ -206,10 +211,10 @@ export default function FaqClient() {
             {/* 3. Masih Memiliki Pertanyaan? Bottom Card */}
             <div className="mt-20 bg-slate-950 rounded-3xl p-8 sm:p-12 md:p-14 text-white text-center shadow-2xl border-2 border-amber-500/30">
               <h3 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-3 tracking-tight text-white">
-                Masih memiliki pertanyaan?
+                {t("faq.helpTitle")}
               </h3>
               <p className="text-gray-300 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-8 font-normal">
-                Tim spesialis layanan pelanggan NadimTrans RentCar siap membantu Anda 24/7. Hubungi kami untuk konsultasi unit atau booking cepat.
+                {t("faq.helpDescription")}
               </p>
 
               <a
@@ -219,7 +224,7 @@ export default function FaqClient() {
                 className="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black text-xs sm:text-sm px-8 py-4 rounded-full inline-flex items-center gap-2 shadow-lg shadow-amber-500/25 transition-all hover:scale-105 active:scale-95"
               >
                 <Headphones className="w-4 h-4" />
-                <span>Chat WhatsApp CS Batam</span>
+                <span>{t("faq.chat")}</span>
               </a>
             </div>
 

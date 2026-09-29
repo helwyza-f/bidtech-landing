@@ -5,13 +5,19 @@ import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Menu, X } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { NAV_ITEMS } from "@/constants/navigation";
 import { Button } from "@/components/ui/button";
+import LanguageSwitcher from "@/components/layout/LanguageSwitcher";
+import { getLocalizedPath, removeLocalePrefix, type Locale } from "@/lib/i18n";
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const pathname = usePathname();
+  const locale = useLocale() as Locale;
+  const t = useTranslations();
+  const currentPath = removeLocalePrefix(pathname);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,10 +28,10 @@ export default function Header() {
   }, []);
 
   const hasHeroBanner =
-    pathname === "/" ||
-    pathname === "/kendaraan" ||
-    pathname === "/layanan" ||
-    pathname === "/faq";
+    currentPath === "/" ||
+    currentPath === "/kendaraan" ||
+    currentPath === "/layanan" ||
+    currentPath === "/faq";
 
   const isSolid = isScrolled || !hasHeroBanner || isMobileMenuOpen;
 
@@ -41,7 +47,7 @@ export default function Header() {
         <div className="flex justify-between items-center h-16 sm:h-20">
 
           {/* Logo Brand NTR */}
-          <Link href="/" className="flex-shrink-0 flex items-center gap-2.5 sm:gap-3 group py-1">
+          <Link href={getLocalizedPath(locale, "/")} className="flex-shrink-0 flex items-center gap-2.5 sm:gap-3 group py-1">
             <div className="relative h-11 sm:h-12 w-11 sm:w-12 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/icons/icon-2.webp"
@@ -63,18 +69,18 @@ export default function Header() {
           {/* Desktop Navigation */}
           <nav className="hidden md:flex gap-8 items-center">
             {NAV_ITEMS.map((item) => {
-              const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
+              const isActive = item.href === "/" ? currentPath === "/" : currentPath.startsWith(item.href);
               return (
                 <Link
                   key={item.label}
-                  href={item.href}
+                  href={getLocalizedPath(locale, item.href)}
                   className={`text-sm tracking-wide transition-colors ${
                     isActive
                       ? "font-bold text-amber-400"
                       : "font-medium text-white/90 hover:text-amber-300"
                   }`}
                 >
-                  {item.label}
+                  {t(item.label)}
                 </Link>
               );
             })}
@@ -82,9 +88,10 @@ export default function Header() {
 
           {/* Desktop Right CTA */}
           <div className="hidden md:flex items-center gap-3">
-            <Link href="/#faq">
+            <LanguageSwitcher />
+            <Link href={getLocalizedPath(locale, "/#faq")}>
               <Button size="lg" className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-400 hover:to-yellow-400 text-slate-950 rounded-xl font-bold px-6 shadow-md shadow-amber-500/25 transition-all hover:scale-[1.02] active:scale-95">
-                Hubungi Kami
+                {t("nav.contact")}
               </Button>
             </Link>
           </div>
@@ -94,7 +101,7 @@ export default function Header() {
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="p-1.5 rounded-xl text-white hover:bg-white/10 transition-colors focus:outline-none"
-              aria-label="Toggle navigation menu"
+              aria-label={isMobileMenuOpen ? t("nav.closeMenu") : t("nav.openMenu")}
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -106,12 +113,13 @@ export default function Header() {
       {isMobileMenuOpen && (
           <div className="md:hidden bg-slate-950 border-b border-amber-500/20 shadow-2xl overflow-hidden text-white animate-in fade-in slide-in-from-top-2 duration-200">
             <div className="px-4 pt-3 pb-6 space-y-1.5">
+              <LanguageSwitcher mobile onNavigate={() => setIsMobileMenuOpen(false)} />
               {NAV_ITEMS.map((item) => {
-                const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
+                const isActive = item.href === "/" ? currentPath === "/" : currentPath.startsWith(item.href);
                 return (
                   <Link
                     key={item.label}
-                    href={item.href}
+                    href={getLocalizedPath(locale, item.href)}
                     onClick={() => setIsMobileMenuOpen(false)}
                     className={`block px-4 py-3 rounded-xl text-base font-semibold transition-colors ${
                       isActive
@@ -119,14 +127,14 @@ export default function Header() {
                         : "text-gray-200 hover:bg-white/5 hover:text-amber-300"
                     }`}
                   >
-                    {item.label}
+                    {t(item.label)}
                   </Link>
                 );
               })}
               <div className="pt-3 mt-2 border-t border-white/10">
-                <Link href="/#faq" onClick={() => setIsMobileMenuOpen(false)}>
+                <Link href={getLocalizedPath(locale, "/#faq")} onClick={() => setIsMobileMenuOpen(false)}>
                   <Button size="lg" className="w-full justify-center bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 text-slate-950 font-bold rounded-xl py-3 shadow-md shadow-amber-500/30">
-                    Hubungi Kami
+                    {t("nav.contact")}
                   </Button>
                 </Link>
               </div>

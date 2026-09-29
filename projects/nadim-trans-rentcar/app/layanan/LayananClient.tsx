@@ -4,43 +4,17 @@ import Image from "next/image";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Key, UserCheck, Plane, ShieldCheck } from "lucide-react";
-
-const SERVICES = [
-  {
-    id: 1,
-    title: "Sewa Lepas Kunci",
-    description:
-      "Kebebasan penuh mengemudi sendiri di Kota Batam dengan pilihan kendaraan terawat prima, bersih, dan wangi.",
-    icon: Key,
-    iconColor: "text-amber-500",
-  },
-  {
-    id: 2,
-    title: "Sewa Dengan Supir",
-    description:
-      "Nikmati perjalanan tanpa stres bersama pengemudi profesional, ramah, dan hafal seluruh rute penting di Batam.",
-    icon: UserCheck,
-    iconColor: "text-yellow-600",
-  },
-  {
-    id: 3,
-    title: "Antar Jemput Bandara",
-    description:
-      "Layanan eksklusif tepat waktu untuk penjemputan dan pengantaran Bandara Internasional Hang Nadim Batam.",
-    icon: Plane,
-    iconColor: "text-amber-600",
-  },
-  {
-    id: 4,
-    title: "Bus Pariwisata & Hiace",
-    description:
-      "Akomodasi perjalanan rombongan wisata, family gathering, serta rombongan dinas instansi di Batam.",
-    icon: ShieldCheck,
-    iconColor: "text-amber-700",
-  },
-];
+import { useTranslations } from "next-intl";
 
 export default function LayananClient() {
+  const t = useTranslations();
+  const services = [
+    { id: 1, title: t("services.selfDriveTitle"), description: t("services.selfDriveDescription"), icon: Key, iconColor: "text-amber-500" },
+    { id: 2, title: t("services.driverTitle"), description: t("services.driverDescription"), icon: UserCheck, iconColor: "text-yellow-600" },
+    { id: 3, title: t("services.airportTitle"), description: t("services.airportDescription"), icon: Plane, iconColor: "text-amber-600" },
+    { id: 4, title: t("services.groupTitle"), description: t("services.groupDescription"), icon: ShieldCheck, iconColor: "text-amber-700" },
+  ];
+
   return (
     <>
       <Header />
@@ -51,7 +25,7 @@ export default function LayananClient() {
           <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
             <Image
               src="/images/background-3.webp"
-              alt="Layanan Transportasi Batam - NadimTrans RentCar"
+              alt={t("services.heroImageAlt")}
               fill
               priority
               sizes="100vw"
@@ -65,10 +39,10 @@ export default function LayananClient() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div>
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white drop-shadow-md">
-                Layanan & Solusi <span className="text-amber-400">Transportasi Batam</span>
+                {t("services.heroTitle")}
               </h1>
               <p className="text-gray-200 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
-                Pilihan layanan mobilitas terlengkap yang dirancang untuk kenyamanan, keamanan, dan ketepatan waktu Anda selama berada di Batam.
+                {t("services.heroDescription")}
               </p>
             </div>
           </div>
@@ -80,16 +54,16 @@ export default function LayananClient() {
             {/* Section Heading */}
             <div className="text-center mb-14 sm:mb-20">
               <p className="text-xs font-bold tracking-widest uppercase text-amber-600 mb-2">
-                LAYANAN UNGGULAN
+                {t("services.eyebrow")}
               </p>
               <h2 className="text-3xl sm:text-4xl font-extrabold text-gray-900 tracking-tight">
-                Pilihan Layanan Fleksibel
+                {t("services.flexibleTitle")}
               </h2>
             </div>
 
             {/* 4 Cards Grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
-              {SERVICES.map((service) => {
+              {services.map((service) => {
                 const Icon = service.icon;
                 return (
                   <div

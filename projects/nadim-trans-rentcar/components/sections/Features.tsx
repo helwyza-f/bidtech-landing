@@ -3,17 +3,22 @@
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Users, Gauge, Briefcase, Star, ArrowLeft, ArrowRight, Fuel, Car } from "lucide-react";
-import { ALL_CARS } from "@/lib/data";
+import { getCars } from "@/lib/localizedData";
+import { formatRupiah, getLocalizedPath, type Locale } from "@/lib/i18n";
 
 const CARS_PER_PAGE = 3;
 
 export default function Features() {
   const [currentPage, setCurrentPage] = useState(0);
   const [direction, setDirection] = useState(0);
+  const locale = useLocale() as Locale;
+  const t = useTranslations();
+  const cars = getCars(locale);
 
-  const totalPages = Math.ceil(ALL_CARS.length / CARS_PER_PAGE);
+  const totalPages = Math.ceil(cars.length / CARS_PER_PAGE);
 
   const handlePrev = () => {
     if (currentPage > 0) {
@@ -34,7 +39,7 @@ export default function Features() {
     setCurrentPage(pageIndex);
   };
 
-  const currentCars = ALL_CARS.slice(
+  const currentCars = cars.slice(
     currentPage * CARS_PER_PAGE,
     (currentPage + 1) * CARS_PER_PAGE
   );
@@ -55,18 +60,18 @@ export default function Features() {
               <span className="w-4 sm:w-5 h-1.5 -skew-x-12 bg-amber-500 rounded-[1px] shadow-sm" />
               <span className="w-4 sm:w-5 h-1.5 -skew-x-12 bg-amber-700 rounded-[1px] shadow-sm" />
               <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-amber-600 ml-1.5">
-                Armada Pilihan NadimTrans
+                {t("home.fleetEyebrow")}
               </span>
             </div>
 
             {/* Title with Bebas Neue Accent */}
             <h2 className="font-bebas text-3xl sm:text-5xl lg:text-6xl font-black text-gray-900 tracking-wide uppercase leading-tight sm:leading-[0.95]">
-              Eksplorasi Koleksi Mobil <br className="hidden sm:inline" />
-              <span className="text-amber-500">Terbaik di Batam</span>
+              {t("home.fleetTitle")} <br className="hidden sm:inline" />
+              <span className="text-amber-500">{t("home.fleetTitleAccent")}</span>
             </h2>
 
             <p className="text-gray-600 mt-2.5 sm:mt-3 text-sm sm:text-base leading-relaxed max-w-xl">
-              Pilih kendaraan impian untuk perjalanan bisnis, liburan keluarga, maupun penjemputan Bandara Hang Nadim Batam. Unit terawat, AC dingin, dan siap jalan.
+              {t("home.fleetDescription")}
             </p>
           </div>
 
@@ -79,7 +84,7 @@ export default function Features() {
                   key={idx}
                   type="button"
                   onClick={() => goToPage(idx)}
-                  aria-label={`Ke halaman ${idx + 1}`}
+                  aria-label={t("home.carouselPage", { count: idx + 1 })}
                   className={`h-2.5 rounded-full transition-all duration-300 cursor-pointer ${
                     currentPage === idx
                       ? "w-8 bg-gradient-to-r from-amber-400 to-amber-600"
@@ -94,7 +99,7 @@ export default function Features() {
               type="button"
               onClick={handlePrev}
               disabled={currentPage === 0}
-              aria-label="Halaman sebelumnya"
+              aria-label={t("home.previousFleet")}
               className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-all duration-200 cursor-pointer ${
                 currentPage === 0
                   ? "border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50/50"
@@ -111,7 +116,7 @@ export default function Features() {
               type="button"
               onClick={handleNext}
               disabled={currentPage >= totalPages - 1}
-              aria-label="Halaman selanjutnya"
+              aria-label={t("home.nextFleet")}
               className={`w-11 h-11 sm:w-12 sm:h-12 rounded-full border flex items-center justify-center transition-all duration-200 cursor-pointer ${
                 currentPage >= totalPages - 1
                   ? "border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50/50"
@@ -136,7 +141,7 @@ export default function Features() {
                   <div>
                     {/* Foto Mobil */}
                     <Link
-                      href={`/kendaraan/${car.id}`}
+                      href={getLocalizedPath(locale, `/kendaraan/${car.id}`)}
                       className="block relative h-52 sm:h-56 bg-white overflow-hidden cursor-pointer border-b border-gray-100"
                     >
                       {car.image ? (
@@ -152,7 +157,7 @@ export default function Features() {
                           <div className="w-12 h-12 rounded-xl bg-white shadow-sm border border-gray-100 flex items-center justify-center mb-2 text-slate-400 group-hover:text-amber-500 transition-colors">
                             <Car className="w-6 h-6" />
                           </div>
-                          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Area Foto Unit</span>
+                          <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{t("vehicle.photoPlaceholder")}</span>
                         </div>
                       )}
 
@@ -182,7 +187,7 @@ export default function Features() {
                     {/* Detail Info */}
                     <div className="p-5 sm:p-6">
                       <div className="flex justify-between items-start mb-3.5">
-                        <Link href={`/kendaraan/${car.id}`} className="block">
+                        <Link href={getLocalizedPath(locale, `/kendaraan/${car.id}`)} className="block">
                           <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors leading-tight">
                             {car.name}
                           </h3>
@@ -197,13 +202,13 @@ export default function Features() {
                         <div className="flex flex-col items-center justify-center gap-1 text-center">
                           <Users className="w-4 h-4 text-amber-500" />
                           <span className="text-[11px] text-gray-700 font-semibold leading-none">
-                            {car.specs.seats} Kursi
+                            {car.specs.seats} {t("common.seats")}
                           </span>
                         </div>
                         <div className="flex flex-col items-center justify-center gap-1 text-center border-x border-gray-200/80">
                           <Briefcase className="w-4 h-4 text-amber-500" />
                           <span className="text-[11px] text-gray-700 font-semibold leading-none">
-                            {car.specs.luggage} Koper
+                            {car.specs.luggage} {t("common.luggage")}
                           </span>
                         </div>
                         <div className="flex flex-col items-center justify-center gap-1 text-center">
@@ -218,13 +223,13 @@ export default function Features() {
                       <div className="flex items-baseline justify-between pt-1">
                         <div>
                           <span className="text-[10px] uppercase tracking-wider font-semibold text-gray-400 block">
-                            Tarif Sewa
+                            {t("home.rentalRate")}
                           </span>
                           <div className="flex items-baseline gap-1">
                             <span className="font-bebas text-2xl sm:text-3xl font-bold text-amber-600 tracking-wide leading-none">
-                              Rp {car.priceFormatted}
+                              {formatRupiah(car.price, locale)}
                             </span>
-                            <span className="text-xs text-gray-500 font-medium">/ hari</span>
+                            <span className="text-xs text-gray-500 font-medium">{car.priceNote}</span>
                           </div>
                         </div>
                       </div>
@@ -233,9 +238,9 @@ export default function Features() {
 
                   {/* Tombol Sewa */}
                   <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-0">
-                    <Link href={`/kendaraan/${car.id}`} className="block w-full">
+                    <Link href={`${getLocalizedPath(locale, `/kendaraan/${car.id}`)}#galeri`} className="block w-full">
                       <Button className="w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl h-11 shadow-sm hover:shadow-md shadow-amber-500/25 transition-all hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2 group/btn cursor-pointer">
-                        <span>Sewa Sekarang</span>
+                        <span>{t("catalog.bookNow")}</span>
                         <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />
                       </Button>
                     </Link>
@@ -247,12 +252,12 @@ export default function Features() {
 
         {/* Catalog Action */}
         <div className="mt-8 sm:mt-10 flex items-center justify-center">
-          <Link href="/kendaraan">
+          <Link href={getLocalizedPath(locale, "/kendaraan")}>
             <Button
               variant="outline"
               className="px-7 py-3 rounded-xl text-sm font-bold text-slate-900 bg-white hover:bg-amber-50 border border-amber-400/60 hover:border-amber-500 transition-colors h-auto cursor-pointer shadow-sm"
             >
-              Jelajahi Semua Kendaraan
+              {t("home.exploreAll")}
             </Button>
           </Link>
         </div>

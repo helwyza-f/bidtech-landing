@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Star, ArrowLeft, ArrowRight } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface TestimonialItem {
   id: number;
@@ -12,40 +13,16 @@ interface TestimonialItem {
   avatar: string;
 }
 
-const TESTIMONIALS: TestimonialItem[] = [
-  {
-    id: 1,
-    rating: 5,
-    quote:
-      '"Sewa Toyota Alphard VIP untuk penjemputan relasi bisnis dari Singapura di Bandara Hang Nadim sangat memuaskan. Supir berpakaian rapi, tepat waktu, dan unit sangat bersih harum."',
-    author: "Hendra Wijaya",
-    role: "DIREKTUR EKSEKUTIF",
-    avatar: "",
-  },
-  {
-    id: 2,
-    rating: 5,
-    quote:
-      '"Unit Fortuner GR Sport dan Innova Zenix kondisinya sangat mulus seperti baru. Proses sewa lepas kunci cepat, respons admin WhatsApp sangat ramah dan solutif."',
-    author: "Calvin Tan",
-    role: "PENGUSAHA / INVESTOR BATAM",
-    avatar: "",
-  },
-  {
-    id: 3,
-    rating: 5,
-    quote:
-      '"Liburan keliling Batam bersama keluarga jadi jauh lebih praktis dan hemat dengan Avanza dari NadimTrans. Mobil langsung diantar ke pelabuhan ferry tepat waktu."',
-    author: "Rina Anggraini",
-    role: "WISATAWAN KELUARGA JAKARTA",
-    avatar: "",
-  },
-];
-
 export default function Testimonials() {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const t = useTranslations();
+  const testimonials: TestimonialItem[] = [
+    { id: 1, rating: 5, quote: t("home.testimonialItems.oneQuote"), author: "Hendra Wijaya", role: t("home.testimonialItems.oneRole"), avatar: "" },
+    { id: 2, rating: 5, quote: t("home.testimonialItems.twoQuote"), author: "Calvin Tan", role: t("home.testimonialItems.twoRole"), avatar: "" },
+    { id: 3, rating: 5, quote: t("home.testimonialItems.threeQuote"), author: "Rina Anggraini", role: t("home.testimonialItems.threeRole"), avatar: "" },
+  ];
 
-  const maxIndex = TESTIMONIALS.length - 2;
+  const maxIndex = testimonials.length - 2;
 
   const handlePrev = () => {
     setCurrentIndex((prev) => Math.max(prev - 1, 0));
@@ -64,15 +41,15 @@ export default function Testimonials() {
           <div className="lg:col-span-4 flex flex-col justify-between h-full">
             <div>
               <p className="text-xs font-bold tracking-widest uppercase text-amber-600 mb-3">
-                TESTIMONIAL PELANGGAN
+                {t("home.testimonialsEyebrow")}
               </p>
 
               <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-gray-900 tracking-tight leading-[1.15] mb-6">
-                Kepuasan Nyata Perjalanan di Batam
+                {t("home.testimonialsTitle")}
               </h2>
 
               <p className="text-sm text-gray-500 leading-relaxed max-w-sm mb-8">
-                Dengarkan langsung pengalaman para pelanggan, pebisnis, dan keluarga yang telah mempercayakan perjalanan mereka kepada PT. Nadim Auto Transindo.
+                {t("home.testimonialsDescription")}
               </p>
             </div>
 
@@ -82,7 +59,7 @@ export default function Testimonials() {
                 type="button"
                 onClick={handlePrev}
                 disabled={currentIndex === 0}
-                aria-label="Previous testimonials"
+                aria-label={t("home.previousTestimonials")}
                 className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 cursor-pointer ${
                   currentIndex === 0
                     ? "border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50/50"
@@ -98,7 +75,7 @@ export default function Testimonials() {
                 type="button"
                 onClick={handleNext}
                 disabled={currentIndex >= maxIndex}
-                aria-label="Next testimonials"
+                aria-label={t("home.nextTestimonials")}
                 className={`w-12 h-12 rounded-full border flex items-center justify-center transition-all duration-200 cursor-pointer ${
                   currentIndex >= maxIndex
                     ? "border-gray-200 text-gray-300 cursor-not-allowed bg-gray-50/50"
@@ -118,7 +95,7 @@ export default function Testimonials() {
               className="flex gap-6"
               style={{ transform: `translateX(calc(-${currentIndex * 50}% - ${currentIndex * 12}px))`, transition: "transform 300ms ease-out" }}
             >
-              {TESTIMONIALS.map((item, index) => (
+              {testimonials.map((item) => (
                 <div
                   key={item.id}
                   className="w-full sm:w-[calc(50%-12px)] flex-shrink-0 bg-slate-950 rounded-[28px] p-8 md:p-9 text-white shadow-2xl border-2 border-amber-500/30 flex flex-col justify-between"

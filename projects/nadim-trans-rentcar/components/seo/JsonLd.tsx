@@ -1,13 +1,17 @@
 import React from "react";
-import { COMPANY_INFO, ALL_CARS, Car } from "@/lib/data";
+import { COMPANY_INFO, type Car } from "@/lib/data";
+import { getCars } from "@/lib/localizedData";
+import { formatRupiah, getLocalizedPath, translate, type Locale } from "@/lib/i18n";
 
 const SITE_URL = "https://nadimstrans.com";
 
-export function LocalBusinessJsonLd() {
+export function LocalBusinessJsonLd({ locale }: { locale: Locale }) {
+  const localizedRoot = getLocalizedPath(locale, "/");
+  const cars = getCars(locale);
   const schema = {
     "@context": "https://schema.org",
     "@type": "AutoRental",
-    "@id": `${SITE_URL}/#autorental`,
+    "@id": `${SITE_URL}${localizedRoot}#autorental`,
     name: COMPANY_INFO.brand,
     legalName: COMPANY_INFO.name,
     alternateName: [
@@ -16,18 +20,18 @@ export function LocalBusinessJsonLd() {
       "Rental Mobil Batam NadimTrans",
       "PT Nadim Auto Transindo",
     ],
-    url: SITE_URL,
+    url: `${SITE_URL}${localizedRoot}`,
+    inLanguage: locale === "id" ? "id-ID" : "en",
     logo: `${SITE_URL}/icon.png`,
     image: [
       `${SITE_URL}/images/Alphard.webp`,
       `${SITE_URL}/images/Fortuner.webp`,
       `${SITE_URL}/images/Innova-Zenix.webp`,
     ],
-    description:
-      "NadimTrans RentCar (PT. Nadim Auto Transindo) adalah penyedia jasa rental mobil dan layanan transportasi terpercaya di Batam. Melayani rental mobil harian, mingguan, hingga bulanan, sewa mobil lepas kunci 24 jam, mobil dengan supir profesional, antar-jemput Bandara Internasional Hang Nadim (BTH), kebutuhan perjalanan bisnis maupun wisata, serta armada premium seperti Toyota Alphard VIP, Innova Zenix, Fortuner, Avanza, dan Hiace. Your Journey, Our Commitment.",
+    description: translate(locale, "metadata.homeDescription"),
     telephone: COMPANY_INFO.phone,
     email: COMPANY_INFO.email,
-    priceRange: "Rp 250.000 - Rp 3.500.000",
+    priceRange: `${formatRupiah(250000, locale)} - ${formatRupiah(3800000, locale)}`,
     currenciesAccepted: "IDR",
     paymentAccepted: "Cash, Credit Card, Debit Card, Bank Transfer, QRIS",
     address: {
@@ -120,8 +124,8 @@ export function LocalBusinessJsonLd() {
     },
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Katalog Rental Mobil Batam",
-      itemListElement: ALL_CARS.slice(0, 10).map((car) => ({
+      name: locale === "id" ? "Katalog Rental Mobil Batam" : "Batam Car Rental Catalogue",
+      itemListElement: cars.slice(0, 10).map((car) => ({
         "@type": "Offer",
         itemOffered: {
           "@type": "Product",
@@ -133,7 +137,7 @@ export function LocalBusinessJsonLd() {
         price: car.price,
         priceCurrency: "IDR",
         availability: "https://schema.org/InStock",
-        url: `${SITE_URL}/kendaraan/${car.id}`,
+        url: `${SITE_URL}${getLocalizedPath(locale, `/kendaraan/${car.id}`)}`,
       })),
     },
     sameAs: [
@@ -151,24 +155,25 @@ export function LocalBusinessJsonLd() {
   );
 }
 
-export function WebSiteJsonLd() {
+export function WebSiteJsonLd({ locale }: { locale: Locale }) {
+  const localizedRoot = getLocalizedPath(locale, "/");
   const schema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${SITE_URL}/#website`,
-    url: SITE_URL,
+    "@id": `${SITE_URL}${localizedRoot}#website`,
+    url: `${SITE_URL}${localizedRoot}`,
+    inLanguage: locale === "id" ? "id-ID" : "en",
     name: "NadimTrans RentCar Batam",
     alternateName: "NadimTrans",
-    description:
-      "Situs resmi sewa mobil Batam terpercaya lepas kunci dan dengan supir profesional.",
+    description: translate(locale, "metadata.homeDescription"),
     publisher: {
-      "@id": `${SITE_URL}/#autorental`,
+      "@id": `${SITE_URL}${localizedRoot}#autorental`,
     },
     potentialAction: {
       "@type": "SearchAction",
       target: {
         "@type": "EntryPoint",
-        urlTemplate: `${SITE_URL}/kendaraan?q={search_term_string}`,
+        urlTemplate: `${SITE_URL}${getLocalizedPath(locale, "/kendaraan")}?q={search_term_string}`,
       },
       "query-input": "required name=search_term_string",
     },
@@ -184,12 +189,15 @@ export function WebSiteJsonLd() {
 
 export function FAQPageJsonLd({
   faqs,
+  locale,
 }: {
   faqs: Array<{ question: string; answer: string }>;
+  locale: Locale;
 }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
+    inLanguage: locale === "id" ? "id-ID" : "en",
     mainEntity: faqs.map((faq) => ({
       "@type": "Question",
       name: faq.question,
@@ -208,11 +216,13 @@ export function FAQPageJsonLd({
   );
 }
 
-export function VehicleJsonLd({ car }: { car: Car }) {
+export function VehicleJsonLd({ car, locale }: { car: Car; locale: Locale }) {
+  const vehiclePath = getLocalizedPath(locale, `/kendaraan/${car.id}`);
   const schema = {
     "@context": "https://schema.org",
     "@type": ["Car", "Product"],
-    "@id": `${SITE_URL}/kendaraan/${car.id}#car`,
+    "@id": `${SITE_URL}${vehiclePath}#car`,
+    inLanguage: locale === "id" ? "id-ID" : "en",
     name: car.name,
     image: [`${SITE_URL}${car.image}`],
     description: car.description,
@@ -238,9 +248,9 @@ export function VehicleJsonLd({ car }: { car: Car }) {
       priceCurrency: "IDR",
       priceValidUntil: "2026-12-31",
       availability: "https://schema.org/InStock",
-      url: `${SITE_URL}/kendaraan/${car.id}`,
+      url: `${SITE_URL}${vehiclePath}`,
       seller: {
-        "@id": `${SITE_URL}/#autorental`,
+        "@id": `${SITE_URL}${getLocalizedPath(locale, "/")}#autorental`,
       },
     },
   };
@@ -255,17 +265,20 @@ export function VehicleJsonLd({ car }: { car: Car }) {
 
 export function BreadcrumbJsonLd({
   items,
+  locale,
 }: {
   items: Array<{ name: string; url: string }>;
+  locale: Locale;
 }) {
   const schema = {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    inLanguage: locale === "id" ? "id-ID" : "en",
     itemListElement: items.map((item, index) => ({
       "@type": "ListItem",
       position: index + 1,
       name: item.name,
-      item: item.url.startsWith("http") ? item.url : `${SITE_URL}${item.url}`,
+      item: item.url.startsWith("http") ? item.url : `${SITE_URL}${getLocalizedPath(locale, item.url)}`,
     })),
   };
 

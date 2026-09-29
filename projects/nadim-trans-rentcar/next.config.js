@@ -1,4 +1,6 @@
 /** @type {import('next').NextConfig} */
+const createNextIntlPlugin = require("next-intl/plugin");
+const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
 const isStaticDemoBuild = process.env.BUILD_STATIC_DEMO === "true";
 const demoBasePath = process.env.NEXT_PUBLIC_DEMO_BASE_PATH || "";
 
@@ -35,7 +37,7 @@ const nextConfig = {
           },
           {
             key: "Permissions-Policy",
-            value: "camera=(), microphone=(), geolocation=(self)",
+            value: "camera=(), microphone=(), geolocation=()",
           },
         ],
       },
@@ -43,4 +45,4 @@ const nextConfig = {
   },
 };
 
-module.exports = nextConfig;
+module.exports = withNextIntl(nextConfig);

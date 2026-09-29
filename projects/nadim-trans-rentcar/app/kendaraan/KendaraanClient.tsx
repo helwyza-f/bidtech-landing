@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { useLocale, useTranslations } from "next-intl";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
@@ -14,15 +15,20 @@ import {
   Star,
   Car as CarIcon,
 } from "lucide-react";
-import { ALL_CARS, CATEGORIES } from "@/lib/data";
+import { CATEGORIES } from "@/lib/data";
+import { getCars } from "@/lib/localizedData";
+import { formatRupiah, getLocalizedPath, type Locale } from "@/lib/i18n";
 
 export default function KendaraanClient() {
   const [selectedCategory, setSelectedCategory] = useState<string>("Semua");
   const [searchQuery, setSearchQuery] = useState("");
   const [sortBy, setSortBy] = useState("popular");
+  const locale = useLocale() as Locale;
+  const t = useTranslations();
+  const cars = getCars(locale);
 
   const filteredAndSortedCars = useMemo(() => {
-    let result = ALL_CARS.filter((car) => {
+    let result = cars.filter((car) => {
       const matchesCategory =
         selectedCategory === "Semua" || car.category === selectedCategory;
       const matchesSearch =
@@ -40,7 +46,7 @@ export default function KendaraanClient() {
     }
 
     return result;
-  }, [selectedCategory, searchQuery, sortBy]);
+  }, [cars, selectedCategory, searchQuery, sortBy]);
 
   return (
     <>
@@ -69,10 +75,10 @@ export default function KendaraanClient() {
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
             <div className="max-w-3xl mx-auto">
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold tracking-tight mb-4 text-white drop-shadow-md">
-                Pilihan Armada <span className="text-amber-400">Terbaik di Batam</span>
+                {t("catalog.title")}
               </h1>
               <p className="text-gray-200 text-sm sm:text-base md:text-lg max-w-2xl mx-auto leading-relaxed drop-shadow-sm">
-                Temukan kendaraan sempurna untuk perjalanan bisnis, liburan keluarga, maupun antar-jemput VVIP Bandara Hang Nadim dengan standar kenyamanan dan kebersihan tertinggi.
+                {t("catalog.description")}
               </p>
             </div>
           </div>
@@ -94,7 +100,7 @@ export default function KendaraanClient() {
                         : "bg-gray-100 text-gray-700 hover:bg-amber-50 hover:text-amber-700"
                     }`}
                   >
-                    {cat}
+                    {cat === "Semua" ? t("common.all") : cat}
                   </button>
                 ))}
               </div>
@@ -105,7 +111,7 @@ export default function KendaraanClient() {
                   <Search className="w-4 h-4 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none" />
                   <input
                     type="text"
-                    placeholder="Cari mobil..."
+                    placeholder={t("catalog.searchPlaceholder")}
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     className="w-full pl-10 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-amber-500 focus:bg-white transition-all"
@@ -116,12 +122,12 @@ export default function KendaraanClient() {
                   <select
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    aria-label="Urutkan kendaraan"
+                    aria-label={t("catalog.sortLabel")}
                     className="py-2 pl-3 pr-8 bg-gray-50 border border-gray-200 rounded-xl text-sm font-medium text-gray-700 focus:outline-none focus:ring-2 focus:ring-amber-500 cursor-pointer"
                   >
-                    <option value="popular">Terpopuler</option>
-                    <option value="price-low">Harga: Termurah</option>
-                    <option value="price-high">Harga: Tertinggi</option>
+                    <option value="popular">{t("catalog.sortPopular")}</option>
+                    <option value="price-low">{t("catalog.sortLowest")}</option>
+                    <option value="price-high">{t("catalog.sortHighest")}</option>
                   </select>
                 </div>
               </div>
@@ -134,7 +140,7 @@ export default function KendaraanClient() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex justify-between items-center mb-8">
               <p className="text-sm text-gray-500 font-medium">
-                Menampilkan <span className="text-gray-900 font-bold">{filteredAndSortedCars.length}</span> armada pilihan di Batam
+                {t("catalog.showing", { count: filteredAndSortedCars.length })}
               </p>
             </div>
 
@@ -142,10 +148,10 @@ export default function KendaraanClient() {
               <div className="bg-white rounded-3xl p-12 text-center border border-gray-100 max-w-md mx-auto my-8">
                 <Search className="w-12 h-12 text-gray-300 mx-auto mb-4" />
                 <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  Tidak Ada Mobil yang Cocok
+                  {t("catalog.noMatchTitle")}
                 </h3>
                 <p className="text-sm text-gray-500 mb-6">
-                  Coba gunakan kata kunci pencarian lain atau pilih kategori yang berbeda.
+                  {t("catalog.noMatchDescription")}
                 </p>
                 <Button
                   onClick={() => {
@@ -154,7 +160,7 @@ export default function KendaraanClient() {
                   }}
                   className="bg-gradient-to-r from-amber-500 to-amber-600 text-slate-950 font-bold rounded-xl"
                 >
-                  Reset Filter
+                  {t("faq.reset")}
                 </Button>
               </div>
             ) : (
@@ -164,12 +170,12 @@ export default function KendaraanClient() {
                     key={car.id}
                     className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-amber-300/80 transition-all duration-300 group flex flex-col justify-between"
                   >
-                    <div>
-                      <Link href={`/kendaraan/${car.id}`} className="block relative h-60 bg-white overflow-hidden cursor-pointer border-b border-gray-100">
+                    <div className="flex flex-1 flex-col">
+                      <Link href={getLocalizedPath(locale, `/kendaraan/${car.id}`)} className="block relative h-60 bg-white overflow-hidden cursor-pointer border-b border-gray-100">
                         {car.image ? (
                           <Image
                             src={car.image}
-                            alt={`${car.name} - Rental Sewa Mobil Batam Murah`}
+                            alt={car.name}
                             fill
                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                             className="object-contain p-4 transition-transform duration-500 group-hover:scale-105 drop-shadow-[0_12px_20px_rgba(0,0,0,0.12)]"
@@ -179,7 +185,7 @@ export default function KendaraanClient() {
                             <div className="w-12 h-12 rounded-xl bg-white shadow-sm border border-gray-100 flex items-center justify-center mb-2 text-slate-400 group-hover:text-amber-500 transition-colors">
                               <CarIcon className="w-6 h-6" />
                             </div>
-                            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Area Foto Unit</span>
+                            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">{t("vehicle.photoPlaceholder")}</span>
                           </div>
                         )}
                         <div className="absolute top-4 left-4 z-10 flex gap-2">
@@ -198,9 +204,9 @@ export default function KendaraanClient() {
                         </div>
                       </Link>
 
-                      <div className="p-6">
+                      <div className="flex flex-1 flex-col pt-6 px-6">
                         <div className="flex justify-between items-start mb-4">
-                          <Link href={`/kendaraan/${car.id}`} className="block">
+                          <Link href={getLocalizedPath(locale, `/kendaraan/${car.id}`)} className="block">
                             <h2 className="text-xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors">
                               {car.name}
                             </h2>
@@ -208,23 +214,23 @@ export default function KendaraanClient() {
                           </Link>
                           <div className="text-right">
                             <span className="text-lg font-black text-amber-600">
-                              Rp {car.priceFormatted}
+                              {formatRupiah(car.price, locale)}
                             </span>
-                            <span className="text-xs text-gray-500 block">/ hari</span>
+                            <span className="text-xs text-gray-500 block">{car.priceNote}</span>
                           </div>
                         </div>
 
-                        <div className="grid grid-cols-3 gap-2 py-4 border-y border-gray-100 mb-6 bg-gray-50/70 rounded-xl px-3">
+                        <div className="mt-auto grid grid-cols-3 gap-2 py-4 border-y border-gray-100 mb-6 bg-gray-50/70 rounded-xl px-3">
                           <div className="flex flex-col items-center gap-1 text-center">
                             <Users className="w-4 h-4 text-amber-500" />
                             <span className="text-xs text-gray-700 font-medium">
-                              {car.specs.seats} Kursi
+                              {car.specs.seats} {t("common.seats")}
                             </span>
                           </div>
                           <div className="flex flex-col items-center gap-1 text-center border-x border-gray-200">
                             <Briefcase className="w-4 h-4 text-amber-500" />
                             <span className="text-xs text-gray-700 font-medium">
-                              {car.specs.luggage} Tas
+                              {car.specs.luggage} {t("common.luggage")}
                             </span>
                           </div>
                           <div className="flex flex-col items-center gap-1 text-center">
@@ -237,12 +243,12 @@ export default function KendaraanClient() {
                       </div>
                     </div>
 
-                    <div className="px-6 pb-6 pt-0">
-                      <Link href={`/kendaraan/${car.id}`} className="block w-full">
+                    <div className="mt-auto px-6 pb-6 pt-0">
+                      <Link href={`${getLocalizedPath(locale, `/kendaraan/${car.id}`)}#galeri`} className="block w-full">
                         <Button
                           className="w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-black h-12 rounded-xl shadow-md shadow-amber-500/20 transition-all hover:scale-[1.02] active:scale-95"
                         >
-                          Sewa Sekarang
+                          {t("catalog.bookNow")}
                         </Button>
                       </Link>
                     </div>

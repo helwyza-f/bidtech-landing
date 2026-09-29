@@ -1,7 +1,12 @@
+"use client";
+
 import Image from "next/image";
+import { useTranslations } from "next-intl";
 import { WHY_CHOOSE_US_FEATURES } from "@/constants/features";
 
 export default function WhyChooseUs() {
+  const t = useTranslations();
+
   return (
     <section id="why-choose-us" className="relative w-full py-12 sm:py-16 md:py-20 bg-white flex items-center overflow-hidden">
       <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -15,7 +20,7 @@ export default function WhyChooseUs() {
                 <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-slate-900">
                   <Image
                     src="/images/nadimtrans.webp"
-                    alt="Kantor Fisik & Armada PT. Nadim Auto Transindo Batam"
+                  alt="PT. Nadim Auto Transindo Batam"
                     fill
                     sizes="(max-width: 768px) 100vw, 420px"
                     className="object-cover transition-transform duration-700 hover:scale-105"
@@ -29,7 +34,7 @@ export default function WhyChooseUs() {
                   100%
                 </div>
                 <div className="text-[10px] sm:text-xs font-black uppercase tracking-wider text-slate-900 mt-1 whitespace-nowrap">
-                  Unit Terawat & Legal
+                  {t("home.legalFleet")}
                 </div>
               </div>
             </div>
@@ -38,12 +43,11 @@ export default function WhyChooseUs() {
           {/* Right Column: Features */}
           <div className="lg:col-span-7">
             <p className="text-xs font-bold tracking-widest uppercase text-amber-600 mb-3">
-              MENGAPA MEMILIH NADIMTRANS RENTCAR
+              {t("home.whyEyebrow")}
             </p>
 
             <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-gray-900 tracking-tight leading-[1.18] mb-6 sm:mb-8">
-              Standar Baru dalam <br className="hidden sm:block" />
-              Mobilitas Perjalanan di Batam
+              {t("home.whyTitle")}
             </h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-10">
@@ -51,7 +55,7 @@ export default function WhyChooseUs() {
                 const Icon = feature.icon;
                 return (
                   <div
-                    key={feature.title}
+                    key={feature.titleKey}
                     className="group flex flex-col items-start"
                   >
                     <div className="w-12 h-12 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center mb-4 transition-all duration-300 group-hover:scale-110 group-hover:bg-gradient-to-br group-hover:from-amber-400 group-hover:to-amber-600 group-hover:text-slate-950 shadow-sm">
@@ -59,11 +63,11 @@ export default function WhyChooseUs() {
                     </div>
 
                     <h3 className="text-lg font-bold text-gray-900 mb-2">
-                      {feature.title}
+                      {t(feature.titleKey)}
                     </h3>
 
                     <p className="text-sm text-gray-600 leading-relaxed">
-                      {feature.description}
+                      {t(feature.descriptionKey)}
                     </p>
                   </div>
                 );

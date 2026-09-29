@@ -1,9 +1,16 @@
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, Clock, MapPin } from "lucide-react";
+import { useLocale, useTranslations } from "next-intl";
 import { COMPANY_INFO } from "@/lib/data";
+import { getLocalizedPath, type Locale } from "@/lib/i18n";
 
 export default function Footer() {
+  const locale = useLocale() as Locale;
+  const t = useTranslations();
+
   return (
     <footer className="bg-slate-950 text-gray-300 border-t border-amber-500/20 pt-16 pb-12">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -11,7 +18,7 @@ export default function Footer() {
           <div className="lg:col-span-4 flex flex-col justify-between">
             <div>
               <div className="mb-5">
-                <Link href="/" className="inline-flex items-center gap-3 group">
+                <Link href={getLocalizedPath(locale, "/")} className="inline-flex items-center gap-3 group">
                   <div className="relative h-12 w-12 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
                     <Image
                       src="/icons/icon-2.webp"
@@ -31,7 +38,7 @@ export default function Footer() {
                 </Link>
               </div>
               <p className="text-sm text-gray-400 leading-relaxed max-w-sm mb-6">
-                Solusi transportasi nyaman, aman, dan terpercaya di Batam. Melayani rental mobil harian, mingguan, bulanan, sewa lepas kunci, paket mobil + supir, antar jemput Bandara Hang Nadim, hingga kebutuhan bisnis dan wisata. Your Journey, Our Commitment.
+                {t("footer.description")}
               </p>
 
               <div className="flex items-center gap-3">
@@ -91,39 +98,39 @@ export default function Footer() {
 
           <div className="lg:col-span-2">
             <h3 className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-6">
-              Tautan Cepat
+              {t("footer.quickLinks")}
             </h3>
             <ul className="space-y-3.5">
               <li>
                 <Link
-                  href="/"
+                  href={getLocalizedPath(locale, "/")}
                   className="text-sm font-medium text-gray-300 hover:text-amber-300 transition-colors"
                 >
-                  Beranda
+                  {t("nav.home")}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/kendaraan"
+                  href={getLocalizedPath(locale, "/kendaraan")}
                   className="text-sm font-medium text-gray-300 hover:text-amber-300 transition-colors"
                 >
-                  Daftar Mobil
+                  {t("footer.vehicleList")}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/layanan"
+                  href={getLocalizedPath(locale, "/layanan")}
                   className="text-sm font-medium text-gray-300 hover:text-amber-300 transition-colors"
                 >
-                  Layanan & Paket
+                  {t("footer.servicesPackages")}
                 </Link>
               </li>
               <li>
                 <Link
-                  href="/faq"
+                  href={getLocalizedPath(locale, "/faq")}
                   className="text-sm font-medium text-gray-300 hover:text-amber-300 transition-colors"
                 >
-                  Tanya Jawab (FAQ)
+                  {t("footer.faqLink")}
                 </Link>
               </li>
             </ul>
@@ -131,7 +138,7 @@ export default function Footer() {
 
           <div className="lg:col-span-3">
             <h3 className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-6">
-              Kontak Layanan
+              {t("footer.serviceContact")}
             </h3>
             <ul className="space-y-4">
               <li className="flex items-center gap-3">
@@ -157,7 +164,7 @@ export default function Footer() {
               <li className="flex items-center gap-3">
                 <Clock className="w-4 h-4 text-amber-400 flex-shrink-0" />
                 <span className="text-sm font-medium text-gray-300">
-                  24 Jam Setiap Hari (Siaga CS)
+                  {t("footer.alwaysReady")}
                 </span>
               </li>
             </ul>
@@ -165,7 +172,7 @@ export default function Footer() {
 
           <div className="lg:col-span-3">
             <h3 className="text-xs font-bold uppercase tracking-widest text-amber-400 mb-6">
-              Kantor & Pool Batam
+              {t("footer.office")}
             </h3>
             <div className="flex items-start gap-3">
               <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0 mt-1" />
@@ -191,13 +198,13 @@ export default function Footer() {
               href="#"
               className="text-[11px] sm:text-xs font-semibold tracking-wider text-gray-400 hover:text-amber-300 uppercase transition-colors"
             >
-              Kebijakan Privasi
+              {t("footer.privacy")}
             </a>
             <a
               href="#"
               className="text-[11px] sm:text-xs font-semibold tracking-wider text-gray-400 hover:text-amber-300 uppercase transition-colors"
             >
-              Syarat & Ketentuan
+              {t("footer.terms")}
             </a>
           </div>
         </div>

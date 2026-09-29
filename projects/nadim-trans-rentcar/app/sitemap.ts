@@ -1,43 +1,44 @@
 import { MetadataRoute } from "next";
-import { getAllCars } from "@/lib/data";
+import { getCars } from "@/lib/localizedData";
+import { SITE_URL } from "@/lib/seo";
+
+type SitemapPage = {
+  path: string;
+  changeFrequency: "daily" | "weekly";
+  priority: number;
+};
+
+const localizedUrl = (locale: "id" | "en", path: string) =>
+  `${SITE_URL}${locale === "en" ? "/en" : ""}${path}`;
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://nadimstrans.com";
   const now = new Date();
-
-  const staticPages: MetadataRoute.Sitemap = [
-    {
-      url: baseUrl,
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 1.0,
-    },
-    {
-      url: `${baseUrl}/kendaraan`,
-      lastModified: now,
-      changeFrequency: "daily",
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/layanan`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/faq`,
-      lastModified: now,
-      changeFrequency: "weekly",
-      priority: 0.8,
-    },
+  const staticPages: SitemapPage[] = [
+    { path: "", changeFrequency: "daily", priority: 1 },
+    { path: "/kendaraan", changeFrequency: "daily", priority: 0.9 },
+    { path: "/layanan", changeFrequency: "weekly", priority: 0.8 },
+    { path: "/faq", changeFrequency: "weekly", priority: 0.8 },
   ];
 
-  const vehiclePages: MetadataRoute.Sitemap = getAllCars().map((car) => ({
-    url: `${baseUrl}/kendaraan/${car.id}`,
-    lastModified: now,
-    changeFrequency: "weekly",
-    priority: car.featured ? 0.9 : 0.7,
-  }));
+  const pages: SitemapPage[] = [
+    ...staticPages,
+    ...getCars("id").map((car) => ({
+      path: `/kendaraan/${car.id}`,
+      changeFrequency: "weekly" as const,
+      priority: car.featured ? 0.9 : 0.7,
+    })),
+  ];
 
-  return [...staticPages, ...vehiclePages];
+  return pages.flatMap(({ path, changeFrequency, priority }) => {
+    const idUrl = localizedUrl("id", path);
+    const enUrl = localizedUrl("en", path);
+    const alternates = {
+      languages: { id: idUrl, en: enUrl, "x-default": idUrl },
+    };
+
+    return [
+      { url: idUrl, lastModified: now, changeFrequency, priority, alternates },
+      { url: enUrl, lastModified: now, changeFrequency, priority, alternates },
+    ];
+  });
 }

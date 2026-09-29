@@ -2,36 +2,15 @@
 
 import { useState } from "react";
 import { ChevronDown } from "lucide-react";
-
-const FAQ_ITEMS = [
-  {
-    id: 1,
-    question: "Cakupan asuransi apa yang termasuk?",
-    answer:
-      "Setiap sewa kendaraan sudah mencakup asuransi komprehensif dasar, termasuk perlindungan terhadap kerusakan akibat tabrakan (CDW), perlindungan pencurian, dan tanggung jawab hukum pihak ketiga. Anda juga dapat memilih opsi asuransi perlindungan penuh tanpa biaya deductible saat reservasi.",
-  },
-  {
-    id: 2,
-    question: "Apa saja persyaratan usia?",
-    answer:
-      "Usia minimum untuk menyewa armada umum kami adalah 21 tahun dengan kepemilikan SIM aktif sekurang-kurangnya 1 tahun. Untuk kategori mobil sport mewah dan supercar tertentu, usia minimum pengemudi adalah 25 tahun.",
-  },
-  {
-    id: 3,
-    question: "Bisakah saya mengembalikan mobil di lokasi yang berbeda?",
-    answer:
-      "Tentu saja. Kami menyediakan layanan pengembalian satu arah (one-way rental) antar lokasi kantor cabang kami, bandara, ataupun hotel pilihan Anda. Silakan pilih opsi lokasi pengembalian yang berbeda saat melakukan pemesanan.",
-  },
-  {
-    id: 4,
-    question: "Dokumen apa yang saya perlukan saat penjemputan?",
-    answer:
-      "Anda hanya perlu menyiapkan KTP/Paspor asli yang masih berlaku, SIM A asli yang aktif, dan kartu kredit atau metode pembayaran atas nama penyewa untuk deposit jaminan.",
-  },
-];
+import { useLocale, useTranslations } from "next-intl";
+import { getFaqs } from "@/lib/localizedData";
+import type { Locale } from "@/lib/i18n";
 
 export default function Faq() {
   const [expandedIndex, setExpandedIndex] = useState<number | null>(null);
+  const locale = useLocale() as Locale;
+  const t = useTranslations();
+  const faqItems = getFaqs(locale).filter((faq) => [5, 10, 15, 16].includes(faq.id));
 
   const toggleFAQ = (index: number) => {
     setExpandedIndex(expandedIndex === index ? null : index);
@@ -44,16 +23,16 @@ export default function Faq() {
         {/* Section Header */}
         <div className="text-center mb-8 sm:mb-10">
           <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-gray-900 tracking-tight mb-3">
-            Pertanyaan Umum
+            {t("home.faqTitle")}
           </h2>
           <p className="text-gray-500 text-sm sm:text-base max-w-xl mx-auto leading-relaxed">
-            Semua yang perlu Anda ketahui sebelum memulai perjalanan.
+            {t("home.faqDescription")}
           </p>
         </div>
 
         {/* FAQ Accordion List */}
         <div className="space-y-4">
-          {FAQ_ITEMS.map((item, idx) => {
+          {faqItems.map((item, idx) => {
             const isExpanded = expandedIndex === idx;
             return (
               <div
