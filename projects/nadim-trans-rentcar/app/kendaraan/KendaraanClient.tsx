@@ -171,7 +171,7 @@ export default function KendaraanClient() {
                     className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 hover:shadow-xl hover:border-amber-300/80 transition-all duration-300 group flex flex-col justify-between"
                   >
                     <div className="flex flex-1 flex-col">
-                      <Link href={getLocalizedPath(locale, `/kendaraan/${car.id}`)} className="block relative h-60 bg-white overflow-hidden cursor-pointer border-b border-gray-100">
+                      <Link href={getLocalizedPath(locale, `/kendaraan/${car.slug}`)} className="block relative h-60 bg-white overflow-hidden cursor-pointer border-b border-gray-100">
                         {car.image ? (
                           <Image
                             src={car.image}
@@ -206,7 +206,7 @@ export default function KendaraanClient() {
 
                       <div className="flex flex-1 flex-col pt-6 px-6">
                         <div className="flex justify-between items-start mb-4">
-                          <Link href={getLocalizedPath(locale, `/kendaraan/${car.id}`)} className="block">
+                          <Link href={getLocalizedPath(locale, `/kendaraan/${car.slug}`)} className="block">
                             <h2 className="text-xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors">
                               {car.name}
                             </h2>
@@ -244,7 +244,7 @@ export default function KendaraanClient() {
                     </div>
 
                     <div className="mt-auto px-6 pb-6 pt-0">
-                      <Link href={`${getLocalizedPath(locale, `/kendaraan/${car.id}`)}#galeri`} className="block w-full">
+                      <Link href={`${getLocalizedPath(locale, `/kendaraan/${car.slug}`)}#galeri`} className="block w-full">
                         <Button
                           className="w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-black h-12 rounded-xl shadow-md shadow-amber-500/20 transition-all hover:scale-[1.02] active:scale-95"
                         >

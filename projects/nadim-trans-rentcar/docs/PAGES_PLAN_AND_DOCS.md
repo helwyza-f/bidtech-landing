@@ -11,7 +11,7 @@ Dokumen ini memuat perencanaan strategis (*Plan*), hierarki antarmuka (*UI/UX Ar
 | :---: | :--- | :--- | :---: | :--- |
 | **1** | **Beranda** | `/` | SSR / Client Animation | `Header`, `Hero`, `Features`, `WhyChooseUs`, `HowToBook`, `Testimonials`, `Faq`, `CTA`, `Footer` |
 | **2** | **Kendaraan** | `/kendaraan` | Client Component | `Header`, `KendaraanPage`, Filter Sticky, Search & Sortir, Grid Armada, `Footer` |
-| **2b** | **Detail Kendaraan** | `/kendaraan/[id]` | SSG (Static 8 Unit) | `VehicleDetailPage`, `VehicleDetailClient`, Image Gallery, Booking Form, WA Link |
+| **2b** | **Detail Kendaraan** | `/kendaraan/[slug]` | SSG (Static 8 Unit) | `VehicleDetailPage`, `VehicleDetailClient`, Image Gallery, Booking Form, WA Link |
 | **3** | **Layanan** | `/layanan` | Client Component | `Header`, `LayananPage`, 4 Service Cards Grid, Value Props, `Footer` |
 | **4** | **FAQ** | `/faq` | Client Component | `Header`, `FaqPage`, Search FAQ, 4 Kategori Tab, Accordion, Contact Card, `Footer` |
 
@@ -105,7 +105,7 @@ Dokumen ini memuat perencanaan strategis (*Plan*), hierarki antarmuka (*UI/UX Ar
 
 ---
 
-## 3. Sub-Menu Detail Kendaraan (`/kendaraan/[id]`)
+## 3. Sub-Menu Detail Kendaraan (`/kendaraan/[slug]`)
 
 ### A. Rencana & Tujuan (Plan)
 - **Tujuan**: Halaman profil spesifik unit kendaraan untuk memberikan transparansi penuh mengenai kondisi fisik mobil, spesifikasi teknis, fasilitas inklusi, dan formulir kalkulasi pemesanan.

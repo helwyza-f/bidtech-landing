@@ -237,17 +237,15 @@ export function getCars(locale: Locale): Car[] {
   return ALL_CARS.map((car) => localizeCar(car, locale));
 }
 
-export function getCar(locale: Locale, id: number | string): Car | undefined {
-  const numericId = typeof id === "string" ? parseInt(id, 10) : id;
-  const car = ALL_CARS.find((item) => item.id === numericId);
+export function getCar(locale: Locale, slug: string): Car | undefined {
+  const car = ALL_CARS.find((item) => item.slug === slug);
   return car ? localizeCar(car, locale) : undefined;
 }
 
-export function getRelatedCarsForLocale(locale: Locale, currentId: number | string, category: string, limit = 3): Car[] {
-  const numericId = typeof currentId === "string" ? parseInt(currentId, 10) : currentId;
+export function getRelatedCarsForLocale(locale: Locale, currentSlug: string, category: string, limit = 3): Car[] {
   const cars = getCars(locale);
-  const sameCategory = cars.filter((car) => car.id !== numericId && car.category === category);
-  const otherCars = cars.filter((car) => car.id !== numericId && car.category !== category);
+  const sameCategory = cars.filter((car) => car.slug !== currentSlug && car.category === category);
+  const otherCars = cars.filter((car) => car.slug !== currentSlug && car.category !== category);
   return [...sameCategory, ...otherCars].slice(0, limit);
 }
 

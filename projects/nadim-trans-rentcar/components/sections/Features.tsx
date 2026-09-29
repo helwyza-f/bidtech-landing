@@ -141,7 +141,7 @@ export default function Features() {
                   <div>
                     {/* Foto Mobil */}
                     <Link
-                      href={getLocalizedPath(locale, `/kendaraan/${car.id}`)}
+                      href={getLocalizedPath(locale, `/kendaraan/${car.slug}`)}
                       className="block relative h-52 sm:h-56 bg-white overflow-hidden cursor-pointer border-b border-gray-100"
                     >
                       {car.image ? (
@@ -187,7 +187,7 @@ export default function Features() {
                     {/* Detail Info */}
                     <div className="p-5 sm:p-6">
                       <div className="flex justify-between items-start mb-3.5">
-                        <Link href={getLocalizedPath(locale, `/kendaraan/${car.id}`)} className="block">
+                        <Link href={getLocalizedPath(locale, `/kendaraan/${car.slug}`)} className="block">
                           <h3 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors leading-tight">
                             {car.name}
                           </h3>
@@ -238,7 +238,7 @@ export default function Features() {
 
                   {/* Tombol Sewa */}
                   <div className="px-5 sm:px-6 pb-5 sm:pb-6 pt-0">
-                    <Link href={`${getLocalizedPath(locale, `/kendaraan/${car.id}`)}#galeri`} className="block w-full">
+                    <Link href={`${getLocalizedPath(locale, `/kendaraan/${car.slug}`)}#galeri`} className="block w-full">
                       <Button className="w-full bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-400 hover:to-yellow-400 text-slate-950 font-black text-xs uppercase tracking-wider rounded-xl h-11 shadow-sm hover:shadow-md shadow-amber-500/25 transition-all hover:scale-[1.01] active:scale-95 flex items-center justify-center gap-2 group/btn cursor-pointer">
                         <span>{t("catalog.bookNow")}</span>
                         <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover/btn:translate-x-1" />

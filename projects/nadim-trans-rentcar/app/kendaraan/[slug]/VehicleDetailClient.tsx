@@ -31,10 +31,10 @@ import {
   Heart,
 } from "lucide-react";
 
-export default function VehicleDetailClient({ id }: { id: string }) {
+export default function VehicleDetailClient({ slug }: { slug: string }) {
   const locale = useLocale() as Locale;
   const t = useTranslations();
-  const car = getCar(locale, id || "1");
+  const car = getCar(locale, slug);
 
   const [selectedImage, setSelectedImage] = useState<string>(car?.image || "");
   const [activeTab, setActiveTab] = useState<"overview" | "features" | "terms">("overview");
@@ -73,7 +73,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
   }
 
   const galleryImages = car.gallery && car.gallery.length > 0 ? car.gallery : (car.image ? [car.image] : []);
-  const relatedCars = getRelatedCarsForLocale(locale, car.id, car.category, 3);
+  const relatedCars = getRelatedCarsForLocale(locale, car.slug, car.category, 3);
 
   const driverCostPerDay = !isAllIn && driverOption === "with-driver" ? 250000 : 0;
   const totalCost = (car.price + driverCostPerDay) * rentalDays;
@@ -630,7 +630,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     </div>
 
                     <div className="p-5 pt-0">
-                      <Link href={`${getLocalizedPath(locale, `/kendaraan/${relCar.id}`)}#galeri`}>
+                      <Link href={`${getLocalizedPath(locale, `/kendaraan/${relCar.slug}`)}#galeri`}>
                         <Button className="w-full bg-slate-950 hover:bg-amber-500 hover:text-slate-950 text-amber-400 border border-amber-500/40 transition-all font-semibold rounded-xl text-xs h-10 shadow-sm">
                           {t("catalog.bookNow")}
                         </Button>

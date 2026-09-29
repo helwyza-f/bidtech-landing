@@ -12,6 +12,7 @@ export interface CarSpec {
 
 export interface Car {
   id: number;
+  slug: string;
   name: string;
   type: string;
   category: "MPV" | "SUV" | "City Car" | "Sedan" | "Minibus";
@@ -61,6 +62,7 @@ export const MISSION_POINTS = [
 export const ALL_CARS: Car[] = [
   {
     id: 16,
+    slug: "alphard-gen-4-all-in",
     name: "Alphard Gen 4 All In",
     type: "Flagship Luxury Hybrid MPV",
     category: "MPV",
@@ -108,6 +110,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 17,
+    slug: "hiace-premio-basic-all-in",
     name: "Hiace Premio Basic All In",
     type: "Premium Passenger Minibus",
     category: "Minibus",
@@ -155,7 +158,8 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 1,
-    name: "Alphard Gen 3 All in ",
+    slug: "alphard-gen-3-all-in",
+    name: "Alphard Gen 3 All in",
     type: "Luxury Executive MPV",
     category: "MPV",
     price: 2800000,
@@ -202,7 +206,8 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 2,
-    name: "Hiace Commuter All In ",
+    slug: "hiace-commuter-all-in",
+    name: "Hiace Commuter All In",
     type: "High-Capacity Passenger Minibus",
     category: "Minibus",
     price: 1300000,
@@ -249,6 +254,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 3,
+    slug: "hiace-premio-vip-all-in",
     name: "Hiace Premio VIP All In",
     type: "Premium Executive Minibus",
     category: "Minibus",
@@ -296,6 +302,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 4,
+    slug: "toyota-fortuner-gr-sport",
     name: "Toyota Fortuner GR Sport",
     type: "Premium Tough SUV",
     category: "SUV",
@@ -343,6 +350,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 5,
+    slug: "toyota-innova-zenix",
     name: "Toyota Innova Zenix",
     type: "Modern TNGA Crossover MPV",
     category: "MPV",
@@ -390,6 +398,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 6,
+    slug: "toyota-innova-reborn",
     name: "Toyota Innova Reborn",
     type: "Reliable Mid-Size MPV",
     category: "MPV",
@@ -437,6 +446,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 7,
+    slug: "hyundai-stargazer",
     name: "Hyundai Stargazer",
     type: "Futuristic Family MPV",
     category: "MPV",
@@ -484,6 +494,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 8,
+    slug: "toyota-new-avanza",
     name: "Toyota New Avanza",
     type: "Modern Compact MPV",
     category: "MPV",
@@ -530,6 +541,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 9,
+    slug: "daihatsu-new-xenia",
     name: "Daihatsu New Xenia",
     type: "Dynamic Family MPV",
     category: "MPV",
@@ -575,6 +587,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 10,
+    slug: "toyota-raize",
     name: "Toyota Raize",
     type: "Compact Turbo SUV",
     category: "SUV",
@@ -621,6 +634,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 11,
+    slug: "daihatsu-rocky",
     name: "Daihatsu Rocky",
     type: "Compact Urban SUV",
     category: "SUV",
@@ -666,6 +680,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 12,
+    slug: "honda-new-brio",
     name: "Honda New Brio",
     type: "Sporty Compact City Car",
     category: "City Car",
@@ -712,6 +727,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 13,
+    slug: "toyota-new-agya",
     name: "Toyota New Agya",
     type: "Agile Modern City Car",
     category: "City Car",
@@ -757,6 +773,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 14,
+    slug: "toyota-new-calya",
     name: "Toyota New Calya",
     type: "Economy 7-Seater Family MPV",
     category: "MPV",
@@ -802,6 +819,7 @@ export const ALL_CARS: Car[] = [
   },
   {
     id: 15,
+    slug: "daihatsu-new-ayla",
     name: "Daihatsu New Ayla",
     type: "Compact Economy City Car",
     category: "City Car",

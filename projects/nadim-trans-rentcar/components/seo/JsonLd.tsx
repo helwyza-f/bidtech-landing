@@ -137,7 +137,7 @@ export function LocalBusinessJsonLd({ locale }: { locale: Locale }) {
         price: car.price,
         priceCurrency: "IDR",
         availability: "https://schema.org/InStock",
-        url: `${SITE_URL}${getLocalizedPath(locale, `/kendaraan/${car.id}`)}`,
+        url: `${SITE_URL}${getLocalizedPath(locale, `/kendaraan/${car.slug}`)}`,
       })),
     },
     sameAs: [
@@ -217,7 +217,7 @@ export function FAQPageJsonLd({
 }
 
 export function VehicleJsonLd({ car, locale }: { car: Car; locale: Locale }) {
-  const vehiclePath = getLocalizedPath(locale, `/kendaraan/${car.id}`);
+  const vehiclePath = getLocalizedPath(locale, `/kendaraan/${car.slug}`);
   const schema = {
     "@context": "https://schema.org",
     "@type": ["Car", "Product"],

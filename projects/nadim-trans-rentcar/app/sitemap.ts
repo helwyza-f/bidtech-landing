@@ -23,7 +23,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const pages: SitemapPage[] = [
     ...staticPages,
     ...getCars("id").map((car) => ({
-      path: `/kendaraan/${car.id}`,
+      path: `/kendaraan/${car.slug}`,
       changeFrequency: "weekly" as const,
       priority: car.featured ? 0.9 : 0.7,
     })),
