@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { getLocalizedPath, translate, type Locale } from "@/lib/i18n";
 
-export const SITE_URL = "https://nadimstrans.com";
+export const SITE_URL = "https://nadimtrans.com";
 
 const OPEN_GRAPH_LOCALE: Record<Locale, string> = {
   id: "id_ID",

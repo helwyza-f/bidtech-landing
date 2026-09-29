@@ -1,4 +1,4 @@
-# Panduan Deployment NadimTrans RentCar (nadimstrans.com)
+# Panduan Deployment NadimTrans RentCar (nadimtrans.com)
 
 Panduan ini menjelaskan langkah demi langkah untuk melakukan deploy aplikasi Next.js **NadimTrans RentCar** ke VPS (Ubuntu / Debian) menggunakan **Docker**, **Docker Compose**, dan **Reverse Proxy Nginx** dengan SSL (HTTPS) dari Let's Encrypt.
 
@@ -26,7 +26,7 @@ Panduan ini menjelaskan langkah demi langkah untuk melakukan deploy aplikasi Nex
 
 ## 2. Persiapan Server VPS
 
-Pastikan domain `nadimstrans.com` dan `www.nadimstrans.com` sudah diarahkan (DNS A Record) ke **IP Publik VPS Anda**.
+Pastikan domain `nadimtrans.com` dan `www.nadimtrans.com` sudah diarahkan (DNS A Record) ke **IP Publik VPS Anda**.
 
 Masuk ke VPS via SSH lalu instal paket yang dibutuhkan:
 
@@ -48,11 +48,11 @@ newgrp docker
 
 ## 3. Clone Repository & Build Container
 
-1. Masuk ke direktori kerja di VPS (misal `/var/www/nadimstrans`):
+1. Masuk ke direktori kerja di VPS (misal `/var/www/nadimtrans`):
    ```bash
    cd /var/www
-   git clone https://github.com/helwyza-f/bidtech-landing.git nadimstrans
-   cd nadimstrans/projects/nadim-trans-rentcar
+   git clone https://github.com/helwyza-f/bidtech-landing.git nadimtrans
+   cd nadimtrans/projects/nadim-trans-rentcar
    ```
 
 2. Jalankan container dengan Docker Compose:
@@ -81,7 +81,7 @@ newgrp docker
 Sebelum sertifikat SSL diterbitkan, buat konfigurasi sementara agar Certbot dapat memverifikasi domain Anda:
 
 ```bash
-sudo nano /etc/nginx/sites-available/nadimstrans.com.conf
+sudo nano /etc/nginx/sites-available/nadimtrans.com.conf
 ```
 
 Tempelkan konfigurasi port 80 berikut:
@@ -89,7 +89,7 @@ Tempelkan konfigurasi port 80 berikut:
 server {
     listen 80;
     listen [::]:80;
-    server_name nadimstrans.com www.nadimstrans.com;
+    server_name nadimtrans.com www.nadimtrans.com;
 
     location / {
         proxy_pass http://127.0.0.1:3040;
@@ -104,7 +104,7 @@ server {
 
 Aktifkan konfigurasi dan restart Nginx:
 ```bash
-sudo ln -s /etc/nginx/sites-available/nadimstrans.com.conf /etc/nginx/sites-enabled/
+sudo ln -s /etc/nginx/sites-available/nadimtrans.com.conf /etc/nginx/sites-enabled/
 sudo nginx -t
 sudo systemctl reload nginx
 ```
@@ -112,16 +112,16 @@ sudo systemctl reload nginx
 ### Langkah B: Dapatkan Sertifikat SSL Gratis dengan Certbot
 Jalankan perintah berikut:
 ```bash
-sudo certbot --nginx -d nadimstrans.com -d www.nadimstrans.com
+sudo certbot --nginx -d nadimtrans.com -d www.nadimtrans.com
 ```
 *Ikuti petunjuk di layar (masukkan email dan setujui ToS).*
 
 ### Langkah C: Terapkan Konfigurasi Produksi Lengkap
-Setelah sertifikat berhasil diterbitkan, ganti file `/etc/nginx/sites-available/nadimstrans.com.conf` dengan template produksi yang sudah disediakan di proyek ini:
+Setelah sertifikat berhasil diterbitkan, ganti file `/etc/nginx/sites-available/nadimtrans.com.conf` dengan template produksi yang sudah disediakan di proyek ini:
 
 ```bash
 # Salin konfigurasi produksi dari repository
-sudo cp /var/www/nadimstrans/projects/nadim-trans-rentcar/nginx/nadimstrans.com.conf /etc/nginx/sites-available/nadimstrans.com.conf
+sudo cp /var/www/nadimtrans/projects/nadim-trans-rentcar/nginx/nadimtrans.com.conf /etc/nginx/sites-available/nadimtrans.com.conf
 
 # Test konfigurasi
 sudo nginx -t
@@ -137,7 +137,7 @@ sudo systemctl reload nginx
 Ketika ada update kode di branch `satria` atau `main`:
 
 ```bash
-cd /var/www/nadimstrans/projects/nadim-trans-rentcar
+cd /var/www/nadimtrans/projects/nadim-trans-rentcar
 git pull
 docker compose up -d --build
 ```
@@ -156,9 +156,9 @@ Nginx dan Next.js pada repository ini mengirim `Cache-Control: public, max-age=3
 
 ## 6. Verifikasi SEO, AEO, dan GEO
 
-Setelah situs live di `https://nadimstrans.com`:
-- **Sitemap**: Buka `https://nadimstrans.com/sitemap.xml` dan submit ke **Google Search Console**.
-- **Robots.txt**: Buka `https://nadimstrans.com/robots.txt`.
-- **AEO / LLM Crawler**: Buka `https://nadimstrans.com/llms.txt`.
+Setelah situs live di `https://nadimtrans.com`:
+- **Sitemap**: Buka `https://nadimtrans.com/sitemap.xml` dan submit ke **Google Search Console**.
+- **Robots.txt**: Buka `https://nadimtrans.com/robots.txt`.
+- **AEO / LLM Crawler**: Buka `https://nadimtrans.com/llms.txt`.
 - **Schema Validator**: Uji URL di [Google Rich Results Test](https://search.google.com/test/rich-results) untuk memverifikasi JSON-LD `AutoRental`, `FAQPage`, `BreadcrumbList`, dan `Vehicle`.
 - **PageSpeed & Performance**: Uji di [Google PageSpeed Insights](https://pagespeed.web.dev/).

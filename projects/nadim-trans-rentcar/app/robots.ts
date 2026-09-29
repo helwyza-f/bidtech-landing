@@ -21,7 +21,7 @@ export default function robots(): MetadataRoute.Robots {
         allow: "/",
       },
     ],
-    sitemap: "https://nadimstrans.com/sitemap.xml",
-    host: "https://nadimstrans.com",
+    sitemap: "https://nadimtrans.com/sitemap.xml",
+    host: "https://nadimtrans.com",
   };
 }

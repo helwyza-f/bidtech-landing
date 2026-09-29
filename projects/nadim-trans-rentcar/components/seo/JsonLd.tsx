@@ -3,7 +3,7 @@ import { COMPANY_INFO, type Car } from "@/lib/data";
 import { getCars } from "@/lib/localizedData";
 import { formatRupiah, getLocalizedPath, translate, type Locale } from "@/lib/i18n";
 
-const SITE_URL = "https://nadimstrans.com";
+const SITE_URL = "https://nadimtrans.com";
 
 export function LocalBusinessJsonLd({ locale }: { locale: Locale }) {
   const localizedRoot = getLocalizedPath(locale, "/");
