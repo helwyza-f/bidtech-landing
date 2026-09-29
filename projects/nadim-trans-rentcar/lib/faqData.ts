@@ -10,9 +10,23 @@ export const ALL_FAQS: FaqItem[] = [
   {
     id: 1,
     category: "pemesanan",
-    question: "Bagaimana cara menyewa kendaraan di Nadim Trans RentCar?",
+    question: "Bagaimana cara menyewa kendaraan di NadimTrans RentCar?",
     answer:
-      "Proses penyewaan sangat mudah. Anda dapat memilih kendaraan melalui halaman 'Kendaraan', memilih tanggal sewa, dan mengisi formulir pemesanan. Tim kami akan menghubungi Anda untuk konfirmasi akhir dan pengaturan pengiriman atau pengambilan kendaraan.",
+      "Pilih unit di halaman Kendaraan, tentukan tanggal dan kebutuhan perjalanan Anda, lalu kirim permintaan pemesanan. Tim NadimTrans akan menghubungi Anda untuk mengonfirmasi ketersediaan unit, jadwal, titik jemput, dan detail perjalanan.",
+  },
+  {
+    id: 15,
+    category: "pemesanan",
+    question: "Apa yang termasuk dalam paket All In?",
+    answer:
+      "Paket All In sudah mencakup kendaraan, supir, dan BBM untuk pemakaian di area Batam. Paket ini tersedia untuk Alphard Gen 3, Alphard Gen 4, Hiace Commuter, Hiace Premio Basic, dan Hiace Premio VIP.",
+  },
+  {
+    id: 16,
+    category: "pemesanan",
+    question: "Berapa lama durasi paket All In?",
+    answer:
+      "Paket All In berlaku hingga 10 jam per pemesanan. Apabila perjalanan membutuhkan waktu lebih lama, silakan konfirmasikan kebutuhan overtime kepada tim NadimTrans saat pemesanan.",
   },
   {
     id: 2,
@@ -40,7 +54,7 @@ export const ALL_FAQS: FaqItem[] = [
     category: "pemesanan",
     question: "Bisakah mobil diantar langsung ke bandara atau hotel saya?",
     answer:
-      "Ya, kami menyediakan layanan pengantaran dan penjemputan armada gratis ke bandara utama (Bandara Hang Nadim BTH) dan hotel-hotel berbintang di dalam area Kota Batam.",
+      "Ya, layanan antar-jemput tersedia untuk Bandara Hang Nadim, terminal ferry, hotel, dan titik lain di area Batam. Sampaikan lokasi jemput dan tujuan Anda saat pemesanan agar tim dapat mengonfirmasi pengaturannya.",
   },
 
   // 2. Dokumen & Syarat
@@ -79,7 +93,7 @@ export const ALL_FAQS: FaqItem[] = [
     category: "pembayaran",
     question: "Apakah ada biaya tersembunyi selain harga sewa yang tertera?",
     answer:
-      "Tidak ada biaya tersembunyi. Harga yang tertera sudah mencakup asuransi komprehensif dasar dan pajak. Biaya tambahan hanya berlaku jika Anda memilih add-on seperti sopir ekstra atau asuransi Super CDW.",
+      "Tidak ada biaya tersembunyi. Untuk unit berlabel All In, tarif sudah mencakup mobil, supir, dan BBM hingga 10 jam pemakaian di area Batam. Biaya tambahan hanya dapat berlaku untuk overtime atau kebutuhan di luar kesepakatan awal.",
   },
   {
     id: 11,

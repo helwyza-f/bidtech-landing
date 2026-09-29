@@ -55,7 +55,7 @@ export default function Features() {
               <span className="w-4 sm:w-5 h-1.5 -skew-x-12 bg-amber-500 rounded-[1px] shadow-sm" />
               <span className="w-4 sm:w-5 h-1.5 -skew-x-12 bg-amber-700 rounded-[1px] shadow-sm" />
               <span className="text-[11px] sm:text-xs font-black uppercase tracking-widest text-amber-600 ml-1.5">
-                Armada Pilihan Nadim Trans
+                Armada Pilihan NadimTrans
               </span>
             </div>
 

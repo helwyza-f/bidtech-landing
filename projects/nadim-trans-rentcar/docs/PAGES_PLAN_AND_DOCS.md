@@ -1,7 +1,7 @@
 # Dokumen Rencana & Arsitektur Halaman Menu (Plan & Docs)
-## Website Nadim Trans RentCar (PT. Nadim Auto Transindo)
+## Website NadimTrans RentCar (PT. Nadim Auto Transindo)
 
-Dokumen ini memuat perencanaan strategis (*Plan*), hierarki antarmuka (*UI/UX Architecture*), alur data (*Data Flow*), serta dokumentasi teknis (*Docs*) dari setiap halaman dan menu pada website **Nadim Trans RentCar Batam**.
+Dokumen ini memuat perencanaan strategis (*Plan*), hierarki antarmuka (*UI/UX Architecture*), alur data (*Data Flow*), serta dokumentasi teknis (*Docs*) dari setiap halaman dan menu pada website **NadimTrans RentCar Batam**.
 
 ---
 
@@ -131,7 +131,7 @@ Dokumen ini memuat perencanaan strategis (*Plan*), hierarki antarmuka (*UI/UX Ar
 #### 4. Integrasi WhatsApp Otomatis
 - Tombol pemesanan langsung membuka percakapan WhatsApp resmi PT. Nadim Auto Transindo dengan pesan terformat otomatis:
   ```text
-  Halo Nadim Trans RentCar, saya tertarik untuk menyewa unit:
+  Halo NadimTrans RentCar, saya tertarik untuk menyewa unit:
   - Mobil: Toyota Alphard VIP (ID: 1)
   - Tarif: Rp 3.000.000 / Hari
   Mohon informasi ketersediaan tanggal sewa. Terima kasih.

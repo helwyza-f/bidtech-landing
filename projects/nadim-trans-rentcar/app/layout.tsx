@@ -23,11 +23,11 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   metadataBase: new URL("https://nadimstrans.com"),
   title: {
-    default: "Nadim Trans RentCar - Rental Mobil Batam Terpercaya Lepas Kunci & Driver",
-    template: "%s | Nadim Trans RentCar Batam",
+    default: "NadimTrans RentCar - Rental Mobil Batam Terpercaya Lepas Kunci & Driver",
+    template: "%s | NadimTrans RentCar Batam",
   },
   description:
-    "Jasa sewa dan rental mobil terbaik di Batam. Melayani sewa mobil lepas kunci 24 jam, mobil dengan supir berpengalaman, antar jemput Bandara Hang Nadim, armada Alphard VIP, Innova Zenix, Fortuner, Avanza, dan Hiace. Hubungi 0812-7660-3878.",
+    "Jasa sewa dan rental mobil terbaik di Batam. Melayani sewa mobil lepas kunci 24 jam, mobil dengan supir berpengalaman, antar jemput Bandara Hang Nadim, armada Alphard VIP, Innova Zenix, Fortuner, Avanza, dan Hiace. Hubungi 0813-3141-2062.",
   keywords: [
     "rental mobil batam",
     "sewa mobil batam",
@@ -43,14 +43,17 @@ export const metadata: Metadata = {
     "rental mobil batam center",
     "sewa mobil nagoya batam",
     "pt nadim auto transindo",
-    "nadim trans rentcar",
+    "nadimtrans rentcar",
     "nadimstrans.com",
     "rental mobil murah batam",
   ],
-  authors: [{ name: "PT. Nadim Auto Transindo", url: "https://nadimstrans.com" }],
-  creator: "PT. Nadim Auto Transindo",
-  publisher: "Nadim Trans RentCar Batam",
-  applicationName: "Nadim Trans RentCar",
+  authors: [
+    { name: "PT. Nadim Auto Transindo", url: "https://nadimstrans.com" },
+    { name: "Bidtech Solutions", url: "https://bidtech.co.id" }
+  ],
+  creator: "Bidtech Solutions (https://bidtech.co.id)",
+  publisher: "NadimTrans RentCar Batam",
+  applicationName: "NadimTrans RentCar",
   generator: "Next.js",
   formatDetection: {
     telephone: true,
@@ -64,25 +67,25 @@ export const metadata: Metadata = {
     type: "website",
     locale: "id_ID",
     url: "https://nadimstrans.com",
-    siteName: "Nadim Trans RentCar Batam",
-    title: "Nadim Trans RentCar - Rental Mobil Batam Terpercaya Lepas Kunci & Driver",
+    siteName: "NadimTrans RentCar Batam",
+    title: "NadimTrans RentCar - Rental Mobil Batam Terpercaya Lepas Kunci & Driver",
     description:
       "Layanan rental mobil terbaik di Kota Batam. Tersedia sewa lepas kunci & dengan supir, antar jemput Bandara Hang Nadim, unit baru, bersih, dan bergaransi.",
     images: [
       {
-        url: "/images/Alphard.webp",
+        url: "/images/nadimtrans.webp",
         width: 1661,
         height: 947,
-        alt: "Nadim Trans RentCar Batam - Rental Mobil Terpercaya di Batam",
+        alt: "NadimTrans RentCar Batam - Rental Mobil Terpercaya di Batam",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nadim Trans RentCar - Rental Mobil Batam Terpercaya",
+    title: "NadimTrans RentCar - Rental Mobil Batam Terpercaya",
     description:
       "Layanan rental mobil terlengkap di Batam: Lepas Kunci, Supir Profesional, Antar Jemput Bandara Hang Nadim 24 Jam.",
-    images: ["/images/Alphard.webp"],
+    images: ["/images/nadimtrans.webp"],
   },
   robots: {
     index: true,
@@ -108,7 +111,7 @@ export const metadata: Metadata = {
     "geo.placename": "Kota Batam, Kepulauan Riau, Indonesia",
     "geo.position": "1.1192;104.0535",
     "ICBM": "1.1192, 104.0535",
-    "DC.title": "Nadim Trans RentCar Batam",
+    "DC.title": "NadimTrans RentCar Batam",
     "DC.creator": "PT. Nadim Auto Transindo",
     "DC.subject": "Rental Mobil Batam, Sewa Mobil Batam",
     "target-country": "id",

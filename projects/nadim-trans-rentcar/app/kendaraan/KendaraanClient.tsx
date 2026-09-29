@@ -53,7 +53,7 @@ export default function KendaraanClient() {
           <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
             <Image
               src="/images/background-3.webp"
-              alt="Showroom PT. Nadim Auto Transindo - Nadim Trans RentCar Batam"
+              alt="Showroom PT. Nadim Auto Transindo - NadimTrans RentCar Batam"
               fill
               priority
               sizes="100vw"

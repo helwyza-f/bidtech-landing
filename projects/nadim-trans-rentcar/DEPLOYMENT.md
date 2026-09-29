@@ -1,6 +1,6 @@
-# Panduan Deployment Nadim Trans RentCar (nadimstrans.com)
+# Panduan Deployment NadimTrans RentCar (nadimstrans.com)
 
-Panduan ini menjelaskan langkah demi langkah untuk melakukan deploy aplikasi Next.js **Nadim Trans RentCar** ke VPS (Ubuntu / Debian) menggunakan **Docker**, **Docker Compose**, dan **Reverse Proxy Nginx** dengan SSL (HTTPS) dari Let's Encrypt.
+Panduan ini menjelaskan langkah demi langkah untuk melakukan deploy aplikasi Next.js **NadimTrans RentCar** ke VPS (Ubuntu / Debian) menggunakan **Docker**, **Docker Compose**, dan **Reverse Proxy Nginx** dengan SSL (HTTPS) dari Let's Encrypt.
 
 ---
 

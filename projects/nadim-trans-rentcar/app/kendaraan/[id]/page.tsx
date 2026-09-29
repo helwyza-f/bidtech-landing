@@ -20,11 +20,11 @@ export function generateMetadata({
   if (!car) {
     return {
       title: "Mobil Tidak Ditemukan",
-      description: "Kendaraan yang Anda cari tidak tersedia di armada Nadim Trans RentCar Batam.",
+      description: "Kendaraan yang Anda cari tidak tersedia di armada NadimTrans RentCar Batam.",
     };
   }
 
-  const title = `Sewa ${car.name} Batam - Rp ${car.priceFormatted}/hari | Nadim Trans`;
+  const title = `Sewa ${car.name} Batam - Rp ${car.priceFormatted}/hari | NadimTrans`;
   const description = `Rental ${car.name} di Batam. Kategori ${car.category} (${car.specs.seats} Kursi, ${car.specs.luggage} Koper, Transmisi ${car.specs.transmission}). Tersedia lepas kunci 24 jam & dengan driver profesional. Antar jemput Bandara Hang Nadim gratis.`;
   const imageUrl = car.image.startsWith("http")
     ? car.image
@@ -55,7 +55,7 @@ export function generateMetadata({
           url: imageUrl,
           width: 1200,
           height: 630,
-          alt: `Sewa ${car.name} Batam - Nadim Trans RentCar`,
+          alt: `Sewa ${car.name} Batam - NadimTrans RentCar`,
         },
       ],
     },

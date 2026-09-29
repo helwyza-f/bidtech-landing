@@ -51,7 +51,7 @@ export default function LayananClient() {
           <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
             <Image
               src="/images/background-3.webp"
-              alt="Layanan Transportasi Batam - Nadim Trans RentCar"
+              alt="Layanan Transportasi Batam - NadimTrans RentCar"
               fill
               priority
               sizes="100vw"

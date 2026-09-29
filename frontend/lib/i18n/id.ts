@@ -266,13 +266,13 @@ export const id = {
       },
       {
         id: "nadimtrans",
-        title: "Nadim Trans Batam",
+        title: "NadimTrans Rentcar Batam",
         tag: "WEB",
         tagType: "amber",
         image: "/images/portofolio/nadimtrans.webp",
         description:
-          "PT. Nadim Auto Transindo atau lebih dikenal dengan Nadimtrans Rentcar Batam, merupakan perusahaan penyedia layanan rental mobil dan transportasi di Batam.",
-        href: "https://nadimtrans.com/",
+          "PT. Nadim Auto Transindo atau lebih dikenal dengan NadimTrans Rentcar Batam, merupakan perusahaan penyedia layanan rental mobil dan transportasi di Batam.",
+        href: "https://nadimstrans.com/",
       },
       {
         id: "hkti",

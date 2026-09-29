@@ -13,7 +13,7 @@ const HOME_FAQS = [
   {
     question: "Apakah melayani sewa dan rental mobil lepas kunci di Batam?",
     answer:
-      "Ya, Nadim Trans RentCar melayani sewa mobil lepas kunci 24 jam di Kota Batam dengan syarat mudah seperti KTP asli, SIM A aktif, dan deposit jaminan yang refundable 100%.",
+      "Ya, NadimTrans RentCar melayani sewa mobil lepas kunci 24 jam di Kota Batam dengan syarat mudah seperti KTP asli, SIM A aktif, dan deposit jaminan yang refundable 100%.",
   },
   {
     question: "Bisakah mobil diantar langsung ke Bandara Hang Nadim atau Pelabuhan Batam?",
@@ -23,7 +23,7 @@ const HOME_FAQS = [
   {
     question: "Cakupan asuransi apa yang termasuk dalam sewa mobil?",
     answer:
-      "Setiap sewa kendaraan di Nadim Trans RentCar sudah mencakup asuransi komprehensif dasar termasuk Collision Damage Waiver (CDW), proteksi pencurian, dan tanggung jawab hukum pihak ketiga.",
+      "Setiap sewa kendaraan di NadimTrans RentCar sudah mencakup asuransi komprehensif dasar termasuk Collision Damage Waiver (CDW), proteksi pencurian, dan tanggung jawab hukum pihak ketiga.",
   },
   {
     question: "Dokumen apa yang diperlukan untuk menyewa kendaraan?",
@@ -31,7 +31,7 @@ const HOME_FAQS = [
       "Untuk WNI cukup menyiapkan KTP asli yang masih berlaku dan SIM A aktif. Untuk WNA memerlukan Paspor asli dan International Driving Permit (SIM Internasional).",
   },
   {
-    question: "Apa saja pilihan armada yang tersedia di Nadim Trans RentCar Batam?",
+    question: "Apa saja pilihan armada yang tersedia di NadimTrans RentCar Batam?",
     answer:
       "Armada kami sangat lengkap mulai dari Toyota Alphard VIP, Innova Zenix Hybrid, Innova Reborn, Fortuner GR Sport, Avanza, Xenia, Brio, Calya, hingga Toyota Hiace Premio & Commuter untuk rombongan.",
   },

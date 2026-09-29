@@ -2,8 +2,8 @@ import { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Nadim Trans RentCar Batam",
-    short_name: "Nadim Trans",
+    name: "NadimTrans RentCar Batam",
+    short_name: "NadimTrans",
     description:
       "Layanan Rental & Sewa Mobil Mewah dan Terpercaya di Kota Batam. Lepas Kunci 24 Jam dan Driver Profesional.",
     start_url: "/",

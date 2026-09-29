@@ -14,7 +14,7 @@ export default function WhyChooseUs() {
               <div className="relative bg-white p-3 sm:p-4 rounded-3xl shadow-2xl ring-1 ring-amber-500/20 -rotate-2 hover:rotate-0 transition-transform duration-500 ease-out">
                 <div className="relative aspect-[3/4] w-full overflow-hidden rounded-2xl bg-slate-900">
                   <Image
-                    src="/images/background-1.webp"
+                    src="/images/nadimtrans.webp"
                     alt="Kantor Fisik & Armada PT. Nadim Auto Transindo Batam"
                     fill
                     sizes="(max-width: 768px) 100vw, 420px"
@@ -38,7 +38,7 @@ export default function WhyChooseUs() {
           {/* Right Column: Features */}
           <div className="lg:col-span-7">
             <p className="text-xs font-bold tracking-widest uppercase text-amber-600 mb-3">
-              MENGAPA MEMILIH NADIM TRANS RENTCAR
+              MENGAPA MEMILIH NADIMTRANS RENTCAR
             </p>
 
             <h2 className="text-3xl sm:text-4xl lg:text-[44px] font-bold text-gray-900 tracking-tight leading-[1.18] mb-6 sm:mb-8">

@@ -53,7 +53,7 @@ export default function FaqClient() {
           <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
             <Image
               src="/images/background-3.webp"
-              alt="Pusat Bantuan Batam - Nadim Trans RentCar"
+              alt="Pusat Bantuan Batam - NadimTrans RentCar"
               fill
               priority
               sizes="100vw"
@@ -209,11 +209,11 @@ export default function FaqClient() {
                 Masih memiliki pertanyaan?
               </h3>
               <p className="text-gray-300 text-xs sm:text-sm md:text-base max-w-xl mx-auto leading-relaxed mb-8 font-normal">
-                Tim spesialis layanan pelanggan Nadim Trans RentCar siap membantu Anda 24/7. Hubungi kami untuk konsultasi unit atau booking cepat.
+                Tim spesialis layanan pelanggan NadimTrans RentCar siap membantu Anda 24/7. Hubungi kami untuk konsultasi unit atau booking cepat.
               </p>
 
               <a
-                href="https://wa.me/6281276603878"
+                href="https://wa.me/6281331412062"
                 target="_blank"
                 rel="noreferrer"
                 className="bg-gradient-to-r from-amber-400 via-yellow-500 to-amber-600 hover:from-amber-300 hover:to-yellow-400 text-slate-950 font-black text-xs sm:text-sm px-8 py-4 rounded-full inline-flex items-center gap-2 shadow-lg shadow-amber-500/25 transition-all hover:scale-105 active:scale-95"

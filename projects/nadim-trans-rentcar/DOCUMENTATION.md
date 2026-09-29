@@ -1,6 +1,6 @@
-# Dokumentasi Proyek Website Nadim Trans RentCar (PT. Nadim Auto Transindo)
+# Dokumentasi Proyek Website NadimTrans RentCar (PT. Nadim Auto Transindo)
 
-Dokumentasi resmi arsitektur sistem, struktur data armada, panduan tema warna, dan alur pengerjaan untuk website **Nadim Trans RentCar Batam**.
+Dokumentasi resmi arsitektur sistem, struktur data armada, panduan tema warna, dan alur pengerjaan untuk website **NadimTrans RentCar Batam**.
 
 ---
 
@@ -9,11 +9,15 @@ Dokumentasi resmi arsitektur sistem, struktur data armada, panduan tema warna, d
 | Komponen | Keterangan |
 | :--- | :--- |
 | **Nama Legal** | PT. Nadim Auto Transindo |
-| **Brand Layanan** | Nadim Trans RentCar |
+| **Brand Layanan** | NadimTrans RentCar |
+| **Slogan** | LIBURANS, KERJAANS, dan SEMUA URUSANS, INGAT NADIMTRANS |
 | **Domisili / Wilayah Operasional** | Batam, Kepulauan Riau |
-| **Alamat Kantor Fisik** | Perumahan KDA Cluster Kepodang, Jl. Kepodang 3 No. 2, Belian, Kec. Batam Kota, Kota Batam, Kepulauan Riau 29464 |
-| **Nomor Kontak / WhatsApp** | `+62 812-7660-3878` / `+62 822-7132-2301` |
-| **Email Resmi** | `pt.nadimautotransindo@gmail.com` |
+| **Alamat Kantor Fisik** | Perum KDA Cluster Nuri Kepodang, Jl. Kepodang 3 No. 2, Belian, Kec. Batam Kota, Kota Batam, Kepulauan Riau 29464 |
+| **Google Maps** | https://maps.app.goo.gl/uVKJECyfgTPvikvn9 |
+| **Nomor Kontak / WhatsApp** | `+62 813-3141-2062` (Admin 1) / `+62 812-7600-3879` (Admin 2) |
+| **Email Resmi** | `nadimtransindobatam@yahoo.com` |
+| **Instagram** | @nadimtransrentcar.batam |
+| **TikTok** | @nadim.trans.batam |
 | **Fokus Layanan** | Rental Mobil Lepas Kunci, Sewa Mobil + Supir, Antar Jemput Bandara Hang Nadim, Carter Pariwisata & Pernikahan Batam |
 
 ---

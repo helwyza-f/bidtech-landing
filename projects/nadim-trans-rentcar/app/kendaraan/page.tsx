@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     canonical: "/kendaraan",
   },
   openGraph: {
-    title: "Daftar Armada Rental Mobil Batam - Nadim Trans RentCar",
+    title: "Daftar Armada Rental Mobil Batam - NadimTrans RentCar",
     description:
       "Temukan kendaraan terbaik untuk perjalanan bisnis dan wisata di Batam. Tersedia sewa lepas kunci & dengan supir profesional.",
     url: "https://nadimstrans.com/kendaraan",
@@ -30,13 +30,13 @@ export const metadata: Metadata = {
         url: "/images/Alphard.webp",
         width: 1661,
         height: 947,
-        alt: "Koleksi Armada Rental Mobil Batam Nadim Trans",
+        alt: "Koleksi Armada Rental Mobil Batam NadimTrans",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Daftar Armada Rental Mobil Batam - Nadim Trans RentCar",
+    title: "Daftar Armada Rental Mobil Batam - NadimTrans RentCar",
     description:
       "Rental mobil terlengkap di Batam: MPV, SUV, City Car, hingga Minibus Hiace.",
     images: ["/images/Alphard.webp"],

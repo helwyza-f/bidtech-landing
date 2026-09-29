@@ -81,14 +81,14 @@ export default function VehicleDetailClient({ id }: { id: string }) {
 
   const handleWhatsAppBooking = () => {
     const text = encodeURIComponent(
-      `Halo Nadim Trans RentCar, saya tertarik untuk menyewa unit:\n` +
+      `Halo NadimTrans RentCar, saya tertarik untuk menyewa unit:\n` +
       `- Kendaraan: ${car.name} (${car.category})\n` +
       `- Paket: ${driverOption === "with-driver" ? "Dengan Supir" : "Lepas Kunci"}\n` +
       `- Durasi: ${rentalDays} Hari\n` +
       `- Estimasi Total: Rp ${totalCostFormatted}\n` +
       `Mohon info ketersediaan unit untuk tanggal terkait. Terima kasih!`
     );
-    window.open(`https://wa.me/6281276603878?text=${text}`, "_blank");
+    window.open(`https://wa.me/6281331412062?text=${text}`, "_blank");
   };
 
   return (
@@ -128,7 +128,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                 onClick={() => {
                   if (navigator.share) {
                     navigator.share({
-                      title: `${car.name} - Nadim Trans RentCar`,
+                      title: `${car.name} - NadimTrans RentCar`,
                       url: window.location.href,
                     });
                   } else {
@@ -340,7 +340,7 @@ export default function VehicleDetailClient({ id }: { id: string }) {
                     </p>
 
                     <div>
-                      <h4 className="font-bold text-gray-900 text-sm mb-3">Keuntungan Sewa di Nadim Trans RentCar:</h4>
+                      <h4 className="font-bold text-gray-900 text-sm mb-3">Keuntungan Sewa di NadimTrans RentCar:</h4>
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {car.included.map((item, idx) => (
                           <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-700">

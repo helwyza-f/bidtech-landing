@@ -45,7 +45,7 @@ export default function Header() {
             <div className="relative h-11 sm:h-12 w-11 sm:w-12 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/icons/icon-2.webp"
-                alt="Nadim Trans RentCar Emblem"
+                alt="NadimTrans RentCar Emblem"
                 fill
                 sizes="48px"
                 className="object-contain drop-shadow-[0_2px_10px_rgba(212,175,55,0.45)]"
@@ -53,7 +53,7 @@ export default function Header() {
             </div>
             <Image
               src="/icons/icon-3.webp"
-              alt="Nadim Trans Rentcar"
+              alt="NadimTrans Rentcar"
               width={240}
               height={80}
               className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"

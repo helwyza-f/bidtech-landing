@@ -35,7 +35,7 @@ const TESTIMONIALS: TestimonialItem[] = [
     id: 3,
     rating: 5,
     quote:
-      '"Liburan keliling Batam bersama keluarga jadi jauh lebih praktis dan hemat dengan Avanza dari Nadim Trans. Mobil langsung diantar ke pelabuhan ferry tepat waktu."',
+      '"Liburan keliling Batam bersama keluarga jadi jauh lebih praktis dan hemat dengan Avanza dari NadimTrans. Mobil langsung diantar ke pelabuhan ferry tepat waktu."',
     author: "Rina Anggraini",
     role: "WISATAWAN KELUARGA JAKARTA",
     avatar: "",

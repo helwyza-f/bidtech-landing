@@ -23,7 +23,7 @@ export default function Footer() {
                   </div>
                   <Image
                     src="/icons/icon-3.webp"
-                    alt="Nadim Trans Rentcar"
+                    alt="NadimTrans Rentcar"
                     width={240}
                     height={80}
                     className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
@@ -31,7 +31,7 @@ export default function Footer() {
                 </Link>
               </div>
               <p className="text-sm text-gray-400 leading-relaxed max-w-sm mb-6">
-                Solusi transportasi nyaman, aman, dan terpercaya di Batam. Melayani sewa mobil lepas kunci, paket mobil + supir, antar jemput Bandara Hang Nadim, hingga pariwisata.
+                Solusi transportasi nyaman, aman, dan terpercaya di Batam. Melayani rental mobil harian, mingguan, bulanan, sewa lepas kunci, paket mobil + supir, antar jemput Bandara Hang Nadim, hingga kebutuhan bisnis dan wisata. Your Journey, Our Commitment.
               </p>
 
               <div className="flex items-center gap-3">
@@ -46,7 +46,9 @@ export default function Footer() {
                 </a>
 
                 <a
-                  href="#"
+                  href={COMPANY_INFO.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   aria-label="Instagram"
                   className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-amber-400 hover:border-amber-500/50 hover:bg-amber-500/10 flex items-center justify-center transition-colors"
                 >
@@ -59,6 +61,18 @@ export default function Footer() {
                     <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
                     <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                     <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                </a>
+
+                <a
+                  href={COMPANY_INFO.tiktok}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="TikTok"
+                  className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 text-gray-400 hover:text-amber-400 hover:border-amber-500/50 hover:bg-amber-500/10 flex items-center justify-center transition-colors"
+                >
+                  <svg className="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M16.6 5.82s.51.5 0 0A4.278 4.278 0 0 1 15.54 3h-3.09v12.4a2.592 2.592 0 0 1-2.59 2.5c-1.42 0-2.6-1.16-2.6-2.6 0-1.72 1.66-3.01 3.37-2.48V9.66c-3.45-.46-6.47 2.22-6.47 5.64 0 3.33 2.76 5.7 5.69 5.7 3.14 0 5.69-2.55 5.69-5.7V9.01a7.35 7.35 0 0 0 4.3 1.38V7.3s-1.88.09-3.24-1.48z" />
                   </svg>
                 </a>
 
@@ -155,16 +169,21 @@ export default function Footer() {
             </h3>
             <div className="flex items-start gap-3">
               <MapPin className="w-4 h-4 text-amber-400 flex-shrink-0 mt-1" />
-              <span className="text-sm font-medium text-gray-300 leading-relaxed">
+              <a
+                href={COMPANY_INFO.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-sm font-medium text-gray-300 leading-relaxed hover:text-amber-300 transition-colors"
+              >
                 {COMPANY_INFO.address}
-              </span>
+              </a>
             </div>
           </div>
         </div>
 
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[11px] sm:text-xs font-semibold tracking-wider text-gray-400 uppercase text-center sm:text-left">
-            © 2024 PT. NADIM AUTO TRANSINDO (NADIM TRANS RENTCAR). ALL RIGHTS RESERVED.
+            © 2024 PT. NADIM AUTO TRANSINDO (NADIMTRANS RENTCAR). ALL RIGHTS RESERVED.
           </p>
 
           <div className="flex items-center gap-6 sm:gap-8">

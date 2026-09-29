@@ -28,10 +28,11 @@ export default function Hero() {
               <span className="h-2 w-5 -skew-x-12 rounded-[1px] bg-gradient-to-r from-[#8A6510] to-[#5A4211] shadow-sm" />
             </div>
             <h1 className="desktop-reveal font-bebas text-center text-[32px] font-black italic uppercase leading-[0.95] tracking-wider text-white drop-shadow-xl xs:text-[38px] sm:text-5xl md:text-5xl lg:text-[60px] xl:text-left xl:text-[68px] 2xl:text-[76px]">
-              <span className="block py-0.5">PENGALAMAN</span>
-              <span className="block py-0.5">BERKENDARA <span className="text-amber-400 drop-shadow-[0_2px_15px_rgba(212,175,55,0.4)]">TERBAIK DI BATAM</span></span>
+              <span className="block py-0.5">LIBURANS, KERJAANS, </span>
+              <span className="block py-0.5">dan SEMUA URUSANS, <span className="text-amber-400 drop-shadow-[0_2px_15px_rgba(212,175,55,0.4)]">INGAT NADIMTRANS</span></span>
             </h1>
             <p className="desktop-reveal mx-auto max-w-md text-center text-[11px] leading-snug text-gray-200/95 drop-shadow sm:max-w-lg sm:text-sm md:text-base lg:max-w-2xl lg:text-lg xl:mx-0 xl:max-w-xl xl:text-left">Solusi rental mobil lepas kunci & ber-supir terpercaya dari PT. Nadim Auto Transindo. Layanan cepat, armada terawat, dan siap mengantar perjalanan Anda di seluruh Kota Batam.</p>
+            <p className="desktop-reveal mx-auto max-w-md text-center text-[10px] font-bold uppercase tracking-wide text-amber-300 drop-shadow sm:max-w-lg sm:text-xs md:text-sm lg:max-w-2xl xl:mx-0 xl:max-w-xl xl:text-left">LIBURANS, KERJAANS, dan SEMUA URUSANS, INGAT NADIMTRANS</p>
           </div>
 
           <div className="desktop-reveal mx-auto flex w-full max-w-lg flex-col items-center justify-center gap-2 pt-0.5 sm:flex-row sm:gap-4 sm:pt-1 xl:mx-0 xl:justify-start">
@@ -41,7 +42,7 @@ export default function Hero() {
 
           <div className="desktop-car desktop-reveal relative my-1 w-full max-w-[340px] select-none pt-2 pb-1 pointer-events-none sm:my-2 sm:max-w-[460px] sm:pt-3 sm:pb-2 md:max-w-[580px] md:pt-4 md:pb-3 lg:max-w-[660px] xl:absolute xl:right-[1%] xl:bottom-[3%] xl:z-10 xl:w-[50%] xl:max-w-[720px] 2xl:right-[2%] 2xl:bottom-[4%] 2xl:max-w-[850px]">
             <div className="relative"><div className="absolute top-1/2 left-1/2 h-[65%] w-[85%] -translate-x-1/2 -translate-y-1/2 rounded-full bg-amber-500/15 blur-2xl md:blur-3xl xl:h-[75%] xl:bg-gradient-to-tr xl:from-amber-500/20 xl:via-yellow-500/10 xl:to-transparent" />
-              <Image src="/images/Alphard.webp" alt="Armada Toyota Alphard VIP Nadim Trans RentCar Batam" width={1661} height={947} priority sizes="(max-width: 639px) 92vw, (max-width: 1023px) 460px, (max-width: 1279px) 660px, (max-width: 1535px) 720px, 850px" className="relative z-10 h-auto w-full object-contain drop-shadow-[0_16px_25px_rgba(0,0,0,0.85)] md:drop-shadow-[0_24px_35px_rgba(0,0,0,0.9)] xl:drop-shadow-[0_28px_40px_rgba(0,0,0,0.9)]" />
+              <Image src="/images/Alphard.webp" alt="Armada Toyota Alphard VIP NadimTrans RentCar Batam" width={1661} height={947} priority sizes="(max-width: 639px) 92vw, (max-width: 1023px) 460px, (max-width: 1279px) 660px, (max-width: 1535px) 720px, 850px" className="relative z-10 h-auto w-full object-contain drop-shadow-[0_16px_25px_rgba(0,0,0,0.85)] md:drop-shadow-[0_24px_35px_rgba(0,0,0,0.9)] xl:drop-shadow-[0_28px_40px_rgba(0,0,0,0.9)]" />
               <div className="absolute -bottom-1 right-[6%] left-[6%] h-4 rounded-[100%] bg-black/90 blur-md md:-bottom-2 md:h-6 md:blur-lg xl:right-[5%] xl:left-[5%] xl:h-7 xl:bg-black/95 xl:blur-xl" />
             </div>
           </div>

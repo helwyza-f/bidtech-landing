@@ -20,7 +20,7 @@ export const metadata: Metadata = {
     canonical: "/faq",
   },
   openGraph: {
-    title: "FAQ & Pusat Bantuan Rental Mobil Batam - Nadim Trans RentCar",
+    title: "FAQ & Pusat Bantuan Rental Mobil Batam - NadimTrans RentCar",
     description:
       "Temukan jawaban seputar syarat sewa lepas kunci, supir, deposit jaminan, dan layanan antar jemput Bandara Hang Nadim.",
     url: "https://nadimstrans.com/faq",
@@ -29,13 +29,13 @@ export const metadata: Metadata = {
         url: "/images/Alphard.webp",
         width: 1661,
         height: 947,
-        alt: "Pusat Bantuan dan FAQ Nadim Trans RentCar Batam",
+        alt: "Pusat Bantuan dan FAQ NadimTrans RentCar Batam",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "FAQ Rental Mobil Batam - Nadim Trans RentCar",
+    title: "FAQ Rental Mobil Batam - NadimTrans RentCar",
     description:
       "Pelajari persyaratan sewa lepas kunci, asuransi, dan prosedur pemesanan rental mobil di Batam.",
     images: ["/images/Alphard.webp"],

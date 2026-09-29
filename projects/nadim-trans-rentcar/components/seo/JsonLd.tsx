@@ -11,9 +11,9 @@ export function LocalBusinessJsonLd() {
     name: COMPANY_INFO.brand,
     legalName: COMPANY_INFO.name,
     alternateName: [
-      "Nadim Trans",
-      "Nadim Trans Rent Car Batam",
-      "Rental Mobil Batam Nadim Trans",
+      "NadimTrans",
+      "NadimTrans Rent Car Batam",
+      "Rental Mobil Batam NadimTrans",
       "PT Nadim Auto Transindo",
     ],
     url: SITE_URL,
@@ -24,7 +24,7 @@ export function LocalBusinessJsonLd() {
       `${SITE_URL}/images/Innova-Zenix.webp`,
     ],
     description:
-      "Nadim Trans RentCar adalah penyedia jasa rental dan sewa mobil terpercaya di Batam. Menyediakan sewa mobil lepas kunci 24 jam, mobil dengan supir ramah & berpengalaman, layanan antar-jemput Bandara Internasional Hang Nadim (BTH), serta armada premium seperti Toyota Alphard VIP, Innova Zenix, Fortuner, Avanza, dan Hiace.",
+      "NadimTrans RentCar (PT. Nadim Auto Transindo) adalah penyedia jasa rental mobil dan layanan transportasi terpercaya di Batam. Melayani rental mobil harian, mingguan, hingga bulanan, sewa mobil lepas kunci 24 jam, mobil dengan supir profesional, antar-jemput Bandara Internasional Hang Nadim (BTH), kebutuhan perjalanan bisnis maupun wisata, serta armada premium seperti Toyota Alphard VIP, Innova Zenix, Fortuner, Avanza, dan Hiace. Your Journey, Our Commitment.",
     telephone: COMPANY_INFO.phone,
     email: COMPANY_INFO.email,
     priceRange: "Rp 250.000 - Rp 3.500.000",
@@ -33,7 +33,7 @@ export function LocalBusinessJsonLd() {
     address: {
       "@type": "PostalAddress",
       streetAddress:
-        "Perumahan KDA Cluster Kepodang, Jl. Kepodang 3 No. 2, Belian, Kec. Batam Kota",
+        "Perum KDA Cluster Nuri Kepodang, Jl. Kepodang 3 No. 2, Belian, Kec. Batam Kota",
       addressLocality: "Kota Batam",
       addressRegion: "Kepulauan Riau",
       postalCode: "29464",
@@ -44,6 +44,7 @@ export function LocalBusinessJsonLd() {
       latitude: 1.1192,
       longitude: 104.0535,
     },
+    hasMap: COMPANY_INFO.mapsUrl,
     openingHoursSpecification: [
       {
         "@type": "OpeningHoursSpecification",
@@ -136,8 +137,9 @@ export function LocalBusinessJsonLd() {
       })),
     },
     sameAs: [
-      "https://wa.me/6281276603878",
-      "https://www.instagram.com/nadimtransrentcar",
+      `https://wa.me/${COMPANY_INFO.whatsapp}`,
+      COMPANY_INFO.instagram,
+      COMPANY_INFO.tiktok,
     ],
   };
 
@@ -155,8 +157,8 @@ export function WebSiteJsonLd() {
     "@type": "WebSite",
     "@id": `${SITE_URL}/#website`,
     url: SITE_URL,
-    name: "Nadim Trans RentCar Batam",
-    alternateName: "Nadim Trans",
+    name: "NadimTrans RentCar Batam",
+    alternateName: "NadimTrans",
     description:
       "Situs resmi sewa mobil Batam terpercaya lepas kunci dan dengan supir profesional.",
     publisher: {
