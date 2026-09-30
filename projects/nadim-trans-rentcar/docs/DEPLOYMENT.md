@@ -49,25 +49,26 @@ newgrp docker
 ## 3. Clone Repository & Build Container
 
 1. Masuk ke direktori kerja di VPS (misal `/var/www/nadimtrans`):
+
    ```bash
    cd /var/www
    git clone https://github.com/helwyza-f/bidtech-landing.git nadimtrans
    cd nadimtrans/projects/nadim-trans-rentcar
    ```
-
 2. Jalankan container dengan Docker Compose:
+
    ```bash
    # Build image dan jalankan di background
    docker compose up -d --build
    ```
-
 3. Periksa status container:
+
    ```bash
    docker ps
    # Container 'nadimtrans-web' akan berstatus Up dan port 127.0.0.1:3040->3040/tcp
    ```
-
 4. Uji koneksi lokal Next.js di dalam VPS:
+
    ```bash
    curl -I http://127.0.0.1:3040
    # Respon harus berupa HTTP/1.1 200 OK
@@ -78,6 +79,7 @@ newgrp docker
 ## 4. Konfigurasi Nginx & Penerbitan SSL
 
 ### Langkah A: Setup Awal Nginx untuk Penerbitan Sertifikat (HTTP)
+
 Sebelum sertifikat SSL diterbitkan, buat konfigurasi sementara agar Certbot dapat memverifikasi domain Anda:
 
 ```bash
@@ -85,6 +87,7 @@ sudo nano /etc/nginx/sites-available/nadimtrans.com.conf
 ```
 
 Tempelkan konfigurasi port 80 berikut:
+
 ```nginx
 server {
     listen 80;
@@ -103,6 +106,7 @@ server {
 ```
 
 Aktifkan konfigurasi dan restart Nginx:
+
 ```bash
 sudo ln -s /etc/nginx/sites-available/nadimtrans.com.conf /etc/nginx/sites-enabled/
 sudo nginx -t
@@ -110,13 +114,17 @@ sudo systemctl reload nginx
 ```
 
 ### Langkah B: Dapatkan Sertifikat SSL Gratis dengan Certbot
+
 Jalankan perintah berikut:
+
 ```bash
 sudo certbot --nginx -d nadimtrans.com -d www.nadimtrans.com
 ```
+
 *Ikuti petunjuk di layar (masukkan email dan setujui ToS).*
 
 ### Langkah C: Terapkan Konfigurasi Produksi Lengkap
+
 Setelah sertifikat berhasil diterbitkan, ganti file `/etc/nginx/sites-available/nadimtrans.com.conf` dengan template produksi yang sudah disediakan di proyek ini:
 
 ```bash
@@ -141,6 +149,7 @@ cd /var/www/nadimtrans/projects/nadim-trans-rentcar
 git pull
 docker compose up -d --build
 ```
+
 *Zero downtime: Docker akan mem-build image baru dan menggantikan container lama secara otomatis.*
 
 ### Cache Cloudflare (wajib setelah deploy)
@@ -157,6 +166,7 @@ Nginx dan Next.js pada repository ini mengirim `Cache-Control: public, max-age=3
 ## 6. Verifikasi SEO, AEO, dan GEO
 
 Setelah situs live di `https://nadimtrans.com`:
+
 - **Sitemap**: Buka `https://nadimtrans.com/sitemap.xml` dan submit ke **Google Search Console**.
 - **Robots.txt**: Buka `https://nadimtrans.com/robots.txt`.
 - **AEO / LLM Crawler**: Buka `https://nadimtrans.com/llms.txt`.

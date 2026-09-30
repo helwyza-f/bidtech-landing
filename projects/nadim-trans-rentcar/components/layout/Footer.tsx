@@ -190,7 +190,7 @@ export default function Footer() {
 
         <div className="border-t border-white/10 pt-8 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-[11px] sm:text-xs font-semibold tracking-wider text-gray-400 uppercase text-center sm:text-left">
-            © 2024 PT. NADIM AUTO TRANSINDO (NADIMTRANS RENTCAR). ALL RIGHTS RESERVED.
+            © 2022 PT. NADIM AUTO TRANSINDO (NADIMTRANS RENTCAR). ALL RIGHTS RESERVED.
           </p>
 
           <div className="flex items-center gap-6 sm:gap-8">
