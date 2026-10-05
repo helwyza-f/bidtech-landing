@@ -1,13 +1,13 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { useLocale, useTranslations } from "next-intl";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
-import RentalDateSelector from "@/components/ui/RentalDateSelector";
+import VehicleBookingWidget from "@/components/booking/VehicleBookingWidget";
 import { getCar, getRelatedCarsForLocale } from "@/lib/localizedData";
 import { formatRupiah, getLocalizedPath, type Locale } from "@/lib/i18n";
 import {
@@ -29,22 +29,7 @@ import {
   ArrowLeft,
   Share2,
   Heart,
-  KeyRound,
-  UserRoundCheck,
 } from "lucide-react";
-
-const ONE_DAY_MS = 86_400_000;
-
-function createToday(): Date {
-  const now = new Date();
-  return new Date(now.getFullYear(), now.getMonth(), now.getDate(), 12);
-}
-
-function differenceInCalendarDays(later: Date, earlier: Date): number {
-  const laterUtc = Date.UTC(later.getFullYear(), later.getMonth(), later.getDate());
-  const earlierUtc = Date.UTC(earlier.getFullYear(), earlier.getMonth(), earlier.getDate());
-  return Math.round((laterUtc - earlierUtc) / ONE_DAY_MS);
-}
 
 export default function VehicleDetailClient({ slug }: { slug: string }) {
   const locale = useLocale() as Locale;
@@ -53,23 +38,7 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
 
   const [selectedImage, setSelectedImage] = useState<string>(car?.image || "");
   const [activeTab, setActiveTab] = useState<"overview" | "features" | "terms">("overview");
-  const priceNote = car?.priceNote?.toLowerCase() ?? "";
-  const isAllIn = priceNote.includes("all in") || priceNote.includes("all-in");
-  const [driverOption, setDriverOption] = useState<"with-driver" | "self-drive">(isAllIn ? "with-driver" : "self-drive");
-  const [startDate, setStartDate] = useState<Date | null>(null);
-  const [endDate, setEndDate] = useState<Date | null>(null);
-  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
-  const [customerName, setCustomerName] = useState("");
-  const [customerPhone, setCustomerPhone] = useState("");
-  const [pickupDate, setPickupDate] = useState("");
-  const [isBookedSuccess, setIsBookedSuccess] = useState(false);
   const [isLiked, setIsLiked] = useState(false);
-
-  useEffect(() => {
-    const today = createToday();
-    setStartDate(today);
-    setEndDate(today);
-  }, []);
 
   if (!car) {
     return (
@@ -96,42 +65,6 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
 
   const galleryImages = car.gallery && car.gallery.length > 0 ? car.gallery : (car.image ? [car.image] : []);
   const relatedCars = getRelatedCarsForLocale(locale, car.slug, car.category, 3);
-
-  const rentalDays = startDate && endDate ? differenceInCalendarDays(endDate, startDate) + 1 : 1;
-  const driverCostPerDay = !isAllIn && driverOption === "with-driver" ? 250000 : 0;
-  const totalCost = (car.price + driverCostPerDay) * rentalDays;
-  const totalCostFormatted = formatRupiah(totalCost, locale);
-  const durationLabel = isAllIn
-    ? t("vehicle.allInDuration", { count: rentalDays })
-    : t("vehicle.rentalDays", { count: rentalDays });
-  const dateFormatter = new Intl.DateTimeFormat(locale === "id" ? "id-ID" : "en-US", {
-    day: "numeric",
-    month: "long",
-    year: "numeric",
-  });
-  const rentalPeriod = startDate && endDate
-    ? `${dateFormatter.format(startDate)} - ${dateFormatter.format(endDate)}`
-    : "";
-
-  const handleBookingSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setIsBookedSuccess(true);
-  };
-
-  const handleWhatsAppBooking = () => {
-    if (!startDate || !endDate) return;
-
-    const text = encodeURIComponent(
-      `${t("vehicle.whatsappGreeting")}\n\n` +
-      `- ${t("vehicle.whatsappVehicle")}: ${car.name} (${car.category})\n` +
-      `- ${t("vehicle.whatsappPackage")}: ${isAllIn ? car.priceNote : driverOption === "with-driver" ? t("vehicle.withDriver") : t("vehicle.selfDrive")}\n` +
-      `- ${t("vehicle.whatsappRentalPeriod")}: ${rentalPeriod}\n` +
-      `- ${t("vehicle.whatsappDuration")}: ${durationLabel}\n` +
-      `- ${t("vehicle.whatsappEstimate")}: ${totalCostFormatted}\n\n` +
-      t("vehicle.whatsappClosing")
-    );
-    window.open(`https://wa.me/6281331412062?text=${text}`, "_blank");
-  };
 
   return (
     <>
@@ -249,136 +182,14 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
               </div>
 
               {/* Mobile Booking Card - Visible only on mobile */}
-              <div className="lg:hidden bg-white rounded-3xl p-6 sm:p-7 border border-gray-200/80 shadow-xl shadow-amber-500/5">
-                <div className="pb-5 border-b border-gray-100">
-                  <span className="text-xs font-semibold text-gray-500 block mb-1">{t("vehicle.totalRentalEstimate")}</span>
-                  <div className="flex items-baseline gap-1.5">
-                    <span className="text-3xl font-black text-amber-600">
-                      {totalCostFormatted}
-                    </span>
-                    <span className="text-xs text-gray-500">({durationLabel})</span>
-                  </div>
-                </div>
-
-                {/* Form Options */}
-                <div className="py-5 space-y-4 border-b border-gray-100">
-                  {/* Driver Options Toggle */}
-                  {!isAllIn ? (
-                    <div>
-                      <div className="grid grid-cols-2 gap-2">
-                        <button
-                          type="button"
-                          aria-pressed={driverOption === "self-drive"}
-                          onClick={() => setDriverOption("self-drive")}
-                          className={`flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-xl border px-2 py-2.5 text-xs font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 active:scale-[0.98] ${driverOption === "self-drive"
-                            ? "bg-amber-50 border-amber-500 text-amber-800 shadow-sm"
-                            : "bg-white border-gray-200 text-gray-600 hover:border-amber-300 hover:bg-amber-50/40"
-                            }`}
-                        >
-                          <KeyRound aria-hidden="true" className="h-4 w-4 flex-shrink-0" />
-                          <span className="truncate text-[11px] leading-tight sm:text-xs">{t("vehicle.selfDrive")}</span>
-                        </button>
-                        <button
-                          type="button"
-                          aria-pressed={driverOption === "with-driver"}
-                          onClick={() => setDriverOption("with-driver")}
-                          className={`flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-xl border px-2 py-2 text-xs font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 active:scale-[0.98] ${driverOption === "with-driver"
-                            ? "bg-amber-50 border-amber-500 text-amber-800 shadow-sm"
-                            : "bg-white border-gray-200 text-gray-600 hover:border-amber-300 hover:bg-amber-50/40"
-                            }`}
-                        >
-                          <UserRoundCheck aria-hidden="true" className="h-4 w-4 flex-shrink-0" />
-                          <span className="min-w-0 text-left leading-tight">
-                            <span className="block truncate text-[11px] sm:text-xs">{t("vehicle.withDriver")}</span>
-                            <span className="mt-0.5 block whitespace-nowrap text-[9px] font-semibold opacity-75 sm:text-[10px]">
-                              {t("vehicle.driverDailyRate")}
-                            </span>
-                          </span>
-                        </button>
-                      </div>
-                    </div>
-                  ) : (
-                    <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-emerald-800">
-                      <span aria-hidden="true" className="flex flex-shrink-0 items-center -space-x-0.5">
-                        <KeyRound className="h-3.5 w-3.5" />
-                        <UserRoundCheck className="h-4 w-4" />
-                      </span>
-                      <p className="min-w-0 text-[10px] font-semibold leading-snug sm:text-[11px]">
-                        {t("vehicle.allInIncluded")}
-                      </p>
-                    </div>
-                  )}
-
-                  {startDate && endDate ? (
-                    <RentalDateSelector
-                      locale={locale}
-                      startDate={startDate}
-                      endDate={endDate}
-                      onChange={(nextStartDate, nextEndDate) => {
-                        setStartDate(nextStartDate);
-                        setEndDate(nextEndDate);
-                      }}
-                    />
-                  ) : (
-                    <div
-                      aria-label={t("vehicle.loadingRentalDates")}
-                      aria-busy="true"
-                      className="space-y-3 rounded-2xl border border-gray-200 p-4"
-                    >
-                      <div className="h-4 w-28 animate-pulse rounded bg-gray-200" />
-                      <div className="h-11 animate-pulse rounded-xl bg-gray-100" />
-                      <div className="h-56 animate-pulse rounded-xl bg-gray-100" />
-                    </div>
-                  )}
-
-                  {/* Cost Breakdown */}
-                  <div className="space-y-2 pt-2 text-xs text-gray-600">
-                    <div className="flex justify-between">
-                      <span>{isAllIn ? t("vehicle.allInPackage", { count: rentalDays }) : t("vehicle.carRental", { count: rentalDays })}</span>
-                      <span className="font-semibold text-gray-900">
-                        {formatRupiah(car.price * rentalDays, locale)}
-                      </span>
-                    </div>
-                    {!isAllIn && driverOption === "with-driver" && (
-                      <div className="flex justify-between text-amber-700">
-                        <span>{t("vehicle.driverService", { count: rentalDays })}</span>
-                        <span className="font-semibold">
-                          {formatRupiah(driverCostPerDay * rentalDays, locale)}
-                        </span>
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Actions */}
-                <div className="pt-5 space-y-3">
-                  <Button
-                    variant="outline"
-                    onClick={handleWhatsAppBooking}
-                    className="w-full border-emerald-500 text-emerald-900 hover:bg-emerald-500 bg-emerald-300 hover:text-emerald-800 font-bold h-12 rounded-2xl transition-all inline-flex items-center justify-center gap-2"
-                  >
-                    <PhoneCall className="w-4 h-4 text-emerald-600" />
-                    <span>{t("vehicle.quickWhatsapp")}</span>
-                  </Button>
-                </div>
-
-                {/* Trust Badges */}
-                <div className="mt-6 pt-5 border-t border-gray-100 grid grid-cols-2 gap-3 text-[11px] text-gray-500">
-                  <div className="flex items-center gap-1.5">
-                    <ShieldCheck className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                    <span>{t("vehicle.safeTransaction")}</span>
-                  </div>
-                  <div className="flex items-center gap-1.5">
-                    <Clock className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                    <span>{t("vehicle.instantConfirmation")}</span>
-                  </div>
-                </div>
+              <div className="lg:hidden">
+                <VehicleBookingWidget car={car} locale={locale} variant="mobile" />
               </div>
 
               {/* Title & Key Highlights */}
               <div className="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/80 shadow-sm space-y-6">
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-gray-100">
-                  <div>
+                <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4 pb-6 border-b border-gray-100">
+                  <div className="min-w-0">
                     <span className="text-xs font-bold uppercase tracking-wider text-amber-600 mb-1 block">
                       {car.type}
                     </span>
@@ -386,13 +197,19 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
                       {car.name}
                     </h1>
                   </div>
-                  <div className="text-left sm:text-right">
-                    <span className="text-xs text-gray-500 block">{t("vehicle.rentalRate")}</span>
-                    <div className="flex items-baseline gap-1 sm:justify-end">
-                      <span className="text-2xl sm:text-3xl font-black text-amber-600">
+                  <div className="sm:text-right flex-shrink-0">
+                    <span className="text-xs font-semibold text-gray-400 uppercase tracking-wider block mb-1">
+                      {t("vehicle.rentalRate")}
+                    </span>
+                    <div className="flex flex-col sm:items-end">
+                      <span className="text-3xl sm:text-4xl font-black text-amber-600 tracking-tight leading-none">
                         {formatRupiah(car.price, locale)}
                       </span>
-                      <span className="text-xs text-gray-500 font-medium">{car.priceNote}</span>
+                      {car.priceNote && (
+                        <span className="text-xs text-gray-500 font-medium mt-1.5 block sm:text-right max-w-[280px] leading-snug">
+                          {car.priceNote}
+                        </span>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -513,7 +330,7 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {car.included.map((item, idx) => (
                           <div key={idx} className="flex items-start gap-2.5 text-xs sm:text-sm text-gray-700">
-                            <CheckCircle2 className="w-4 h-4 text-emerald-600 flex-shrink-0 mt-0.5" />
+                            <CheckCircle2 className="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" />
                             <span>{item}</span>
                           </div>
                         ))}
@@ -571,133 +388,7 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
             {/* Right Column: Sticky Booking / Reservation Form (4-5 Cols) - Desktop Only */}
             <div className="hidden lg:block lg:col-span-5 xl:col-span-4">
               <div className="sticky top-28 space-y-6">
-                <div className="bg-white rounded-3xl p-6 sm:p-7 border border-gray-200/80 shadow-xl shadow-amber-500/5">
-                  <div className="pb-5 border-b border-gray-100">
-                    <span className="text-xs font-semibold text-gray-500 block mb-1">{t("vehicle.totalRentalEstimate")}</span>
-                    <div className="flex items-baseline gap-1.5">
-                      <span className="text-3xl font-black text-amber-600">
-                        {totalCostFormatted}
-                      </span>
-                      <span className="text-xs text-gray-500">({durationLabel})</span>
-                    </div>
-                  </div>
-
-                  {/* Form Options */}
-                  <div className="py-5 space-y-4 border-b border-gray-100">
-                    {/* Driver Options Toggle */}
-                    {!isAllIn ? (
-                      <div>
-                        <div className="grid grid-cols-2 gap-2">
-                          <button
-                            type="button"
-                            aria-pressed={driverOption === "self-drive"}
-                            onClick={() => setDriverOption("self-drive")}
-                            className={`flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-xl border px-2 py-2.5 text-xs font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 active:scale-[0.98] ${driverOption === "self-drive"
-                              ? "bg-amber-50 border-amber-500 text-amber-800 shadow-sm"
-                              : "bg-white border-gray-200 text-gray-600 hover:border-amber-300 hover:bg-amber-50/40"
-                              }`}
-                          >
-                            <KeyRound aria-hidden="true" className="h-4 w-4 flex-shrink-0" />
-                            <span className="truncate text-[11px] leading-tight sm:text-xs">{t("vehicle.selfDrive")}</span>
-                          </button>
-                          <button
-                            type="button"
-                            aria-pressed={driverOption === "with-driver"}
-                            onClick={() => setDriverOption("with-driver")}
-                            className={`flex min-h-12 min-w-0 items-center justify-center gap-2 rounded-xl border px-2 py-2 text-xs font-bold transition-all duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:ring-offset-2 active:scale-[0.98] ${driverOption === "with-driver"
-                              ? "bg-amber-50 border-amber-500 text-amber-800 shadow-sm"
-                              : "bg-white border-gray-200 text-gray-600 hover:border-amber-300 hover:bg-amber-50/40"
-                              }`}
-                          >
-                            <UserRoundCheck aria-hidden="true" className="h-4 w-4 flex-shrink-0" />
-                            <span className="min-w-0 text-left leading-tight">
-                              <span className="block truncate text-[11px] sm:text-xs">{t("vehicle.withDriver")}</span>
-                              <span className="mt-0.5 block whitespace-nowrap text-[9px] font-semibold opacity-75 sm:text-[10px]">
-                                {t("vehicle.driverDailyRate")}
-                              </span>
-                            </span>
-                          </button>
-                        </div>
-                      </div>
-                    ) : (
-                      <div className="flex items-center gap-2 rounded-xl border border-emerald-200 bg-emerald-50 px-3 py-2 text-emerald-800">
-                        <span aria-hidden="true" className="flex flex-shrink-0 items-center -space-x-0.5">
-                          <KeyRound className="h-3.5 w-3.5" />
-                          <UserRoundCheck className="h-4 w-4" />
-                        </span>
-                        <p className="min-w-0 text-[10px] font-semibold leading-snug sm:text-[11px]">
-                          {t("vehicle.allInIncluded")}
-                        </p>
-                      </div>
-                    )}
-
-                    {startDate && endDate ? (
-                      <RentalDateSelector
-                        locale={locale}
-                        startDate={startDate}
-                        endDate={endDate}
-                        onChange={(nextStartDate, nextEndDate) => {
-                          setStartDate(nextStartDate);
-                          setEndDate(nextEndDate);
-                        }}
-                      />
-                    ) : (
-                      <div
-                        aria-label={t("vehicle.loadingRentalDates")}
-                        aria-busy="true"
-                        className="space-y-3 rounded-2xl border border-gray-200 p-4"
-                      >
-                        <div className="h-4 w-28 animate-pulse rounded bg-gray-200" />
-                        <div className="h-11 animate-pulse rounded-xl bg-gray-100" />
-                        <div className="h-56 animate-pulse rounded-xl bg-gray-100" />
-                      </div>
-                    )}
-
-                    {/* Cost Breakdown */}
-                    <div className="space-y-2 pt-2 text-xs text-gray-600">
-                      <div className="flex justify-between">
-                        <span>{isAllIn ? t("vehicle.allInPackage", { count: rentalDays }) : t("vehicle.carRental", { count: rentalDays })}</span>
-                        <span className="font-semibold text-gray-900">
-                          {formatRupiah(car.price * rentalDays, locale)}
-                        </span>
-                      </div>
-                      {!isAllIn && driverOption === "with-driver" && (
-                        <div className="flex justify-between text-amber-700">
-                          <span>{t("vehicle.driverService", { count: rentalDays })}</span>
-                          <span className="font-semibold">
-                            {formatRupiah(driverCostPerDay * rentalDays, locale)}
-                          </span>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Actions */}
-                  <div className="pt-5 space-y-3">
-                    {/*   */}
-
-                    <Button
-                      variant="outline"
-                      onClick={handleWhatsAppBooking}
-                      className="w-full border-emerald-500 text-emerald-900 hover:bg-emerald-500 bg-emerald-300 hover:text-emerald-800 font-bold h-12 rounded-2xl transition-all inline-flex items-center justify-center gap-2"
-                    >
-                      <PhoneCall className="w-4 h-4 text-emerald-600" />
-                      <span>{t("vehicle.quickWhatsapp")}</span>
-                    </Button>
-                  </div>
-
-                  {/* Trust Badges */}
-                  <div className="mt-6 pt-5 border-t border-gray-100 grid grid-cols-2 gap-3 text-[11px] text-gray-500">
-                    <div className="flex items-center gap-1.5">
-                      <ShieldCheck className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                      <span>{t("vehicle.safeTransaction")}</span>
-                    </div>
-                    <div className="flex items-center gap-1.5">
-                      <Clock className="w-4 h-4 text-amber-500 flex-shrink-0" />
-                      <span>{t("vehicle.instantConfirmation")}</span>
-                    </div>
-                  </div>
-                </div>
+                <VehicleBookingWidget car={car} locale={locale} variant="desktop" />
 
                 {/* Assistance Box */}
                 <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/80 border border-amber-500/30 rounded-3xl p-6 text-white shadow-xl shadow-black/20">
@@ -768,7 +459,7 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
                 </Link>
               </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-7">
                 {relatedCars.map((relCar) => (
                   <div
                     key={relCar.id}
@@ -796,42 +487,44 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
                         </div>
                       </div>
 
-                      <div className="p-5">
-                        <div className="flex justify-between items-start mb-3">
-                          <div>
-                            <h3 className="font-bold text-gray-900 group-hover:text-amber-600 transition-colors text-base">
+                      <div className="p-4 sm:p-5">
+                        <div className="flex justify-between items-start gap-2 mb-3 min-h-[3rem]">
+                          <div className="min-w-0 flex-1">
+                            <h3 className="font-bold text-gray-900 group-hover:text-amber-600 transition-colors text-base truncate">
                               {relCar.name}
                             </h3>
-                            <p className="text-xs text-gray-500">{relCar.type}</p>
+                            <p className="text-xs text-gray-500 line-clamp-2 leading-snug mt-0.5">{relCar.type}</p>
                           </div>
-                          <div className="text-right">
-                            <span className="text-sm font-bold text-amber-600">
+                          <div className="text-right flex-shrink-0">
+                            <span className="text-sm sm:text-base font-black text-amber-600 block whitespace-nowrap">
                               {formatRupiah(relCar.price, locale)}
                             </span>
-                            <span className="text-[10px] text-gray-400 block">{relCar.priceNote}</span>
+                            <span className="text-[10px] text-gray-400 block whitespace-nowrap">{relCar.priceNote}</span>
                           </div>
                         </div>
 
-                        <div className="flex items-center justify-between py-2.5 border-y border-gray-100 text-xs text-gray-600">
-                          <div className="flex items-center gap-1">
-                            <Users className="w-3.5 h-3.5 text-amber-600" />
-                            <span>{relCar.specs.seats} {t("common.seats")}</span>
+                        <div className="grid grid-cols-3 gap-1 py-2.5 px-1.5 sm:px-2 bg-gray-50/80 rounded-xl border border-gray-100 text-xs text-gray-600 mb-2">
+                          <div className="flex items-center justify-center gap-1 min-w-0">
+                            <Users className="w-3.5 h-3.5 text-amber-600 flex-shrink-0" />
+                            <span className="text-[11px] font-semibold truncate">{relCar.specs.seats} {t("common.seats")}</span>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <Briefcase className="w-3.5 h-3.5 text-amber-600" />
-                            <span>{relCar.specs.luggage} {t("common.luggage")}</span>
+                          <div className="flex items-center justify-center gap-1 border-x border-gray-200/80 min-w-0">
+                            <Briefcase className="w-3.5 h-3.5 text-amber-600 flex-shrink-0" />
+                            <span className="text-[11px] font-semibold truncate">{relCar.specs.luggage} {t("common.luggage")}</span>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <Gauge className="w-3.5 h-3.5 text-amber-600" />
-                            <span className="truncate max-w-[70px]">{relCar.specs.transmission}</span>
+                          <div className="flex items-center justify-center gap-1 min-w-0">
+                            <Gauge className="w-3.5 h-3.5 text-amber-600 flex-shrink-0" />
+                            <span className="text-[11px] font-semibold truncate" title={relCar.specs.transmission}>
+                              {relCar.specs.transmission.replace("Otomatis", "Matic").replace("Automatic", "Auto")}
+                            </span>
                           </div>
                         </div>
                       </div>
                     </div>
 
-                    <div className="p-5 pt-0">
+                    <div className="p-4 sm:p-5 pt-0">
                       <Link href={`${getLocalizedPath(locale, `/kendaraan/${relCar.slug}`)}#galeri`}>
-                        <Button className="w-full bg-slate-950 hover:bg-amber-500 hover:text-slate-950 text-amber-400 border border-amber-500/40 transition-all font-semibold rounded-xl text-xs h-10 shadow-sm">
+                        <Button className="w-full bg-slate-950 hover:bg-amber-500 hover:text-slate-950 text-amber-400 border border-amber-500/40 transition-all font-semibold rounded-xl text-xs h-10 shadow-sm cursor-pointer active:scale-98">
                           {t("catalog.bookNow")}
                         </Button>
                       </Link>
@@ -843,126 +536,6 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
           )}
         </div>
 
-        {/* Modal Booking Form */}
-        {isBookingModalOpen && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
-              <div className="animate-in fade-in zoom-in-95 duration-200 bg-white rounded-3xl max-w-lg w-full p-6 sm:p-8 shadow-2xl border border-gray-100 relative max-h-[90vh] overflow-y-auto">
-                {!isBookedSuccess ? (
-                  <>
-                    <div className="flex justify-between items-center mb-6">
-                      <h3 className="text-xl sm:text-2xl font-bold text-gray-900">
-                        {t("vehicle.booking")}
-                      </h3>
-                      <button
-                        onClick={() => setIsBookingModalOpen(false)}
-                        aria-label={t("vehicle.closePopup")}
-                        className="p-1.5 rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
-                      >
-                        ✕
-                      </button>
-                    </div>
-
-                    <div className="flex items-center gap-4 p-4 rounded-2xl bg-gray-50 border border-gray-100 mb-6">
-                      <div className="relative w-20 h-14 rounded-xl overflow-hidden bg-slate-900 flex-shrink-0 flex items-center justify-center">
-                        {car.image ? (
-                          <Image src={car.image} alt={car.name} fill className="object-contain p-1 drop-shadow-md" />
-                        ) : (
-                          <CarIcon className="w-6 h-6 text-gray-400" />
-                        )}
-                      </div>
-                      <div>
-                        <h4 className="font-bold text-gray-900 text-sm">{car.name}</h4>
-                        <span className="text-xs text-amber-600 font-semibold">
-                          {totalCostFormatted} / {durationLabel} ({isAllIn ? car.priceNote : driverOption === "with-driver" ? t("vehicle.withDriver") : t("vehicle.selfDrive")})
-                        </span>
-                      </div>
-                    </div>
-
-                    <form onSubmit={handleBookingSubmit} className="space-y-4">
-                      <div>
-                        <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                          {t("vehicle.name")}
-                        </label>
-                        <input
-                          type="text"
-                          required
-                          value={customerName}
-                          onChange={(e) => setCustomerName(e.target.value)}
-                          placeholder={t("vehicle.namePlaceholder")}
-                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 text-sm"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                          {t("vehicle.phone")}
-                        </label>
-                        <input
-                          type="tel"
-                          required
-                          value={customerPhone}
-                          onChange={(e) => setCustomerPhone(e.target.value)}
-                          placeholder="Contoh: 081234567890"
-                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 text-sm"
-                        />
-                      </div>
-
-                      <div>
-                        <label className="block text-xs font-bold text-gray-700 mb-1.5">
-                          {t("vehicle.pickupStartDate")}
-                        </label>
-                        <input
-                          type="date"
-                          required
-                          value={pickupDate}
-                          onChange={(e) => setPickupDate(e.target.value)}
-                          className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-amber-500/30 focus:border-amber-500 text-sm"
-                        />
-                      </div>
-
-                      <div className="pt-2 flex gap-3">
-                        <Button
-                          type="button"
-                          variant="outline"
-                          onClick={() => setIsBookingModalOpen(false)}
-                          className="flex-1 rounded-xl h-12"
-                        >
-                          {t("vehicle.cancel")}
-                        </Button>
-                        <Button
-                          type="submit"
-                          className="flex-1 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 font-bold rounded-xl h-12 shadow-md shadow-amber-500/25"
-                        >
-                          {t("vehicle.confirmBooking")}
-                        </Button>
-                      </div>
-                    </form>
-                  </>
-                ) : (
-                  <div className="text-center py-6 space-y-4">
-                    <div className="w-16 h-16 bg-emerald-100 text-emerald-600 rounded-full flex items-center justify-center mx-auto">
-                      <CheckCircle2 className="w-10 h-10" />
-                    </div>
-                    <h3 className="text-2xl font-bold text-gray-900">{t("vehicle.bookingSent")}</h3>
-                    <p className="text-xs sm:text-sm text-gray-600 leading-relaxed max-w-sm mx-auto">
-                      {t("vehicle.bookingSentDescription", { name: customerName || (locale === "id" ? "Pelanggan" : "Customer"), vehicle: car.name, phone: customerPhone })}
-                    </p>
-                    <div className="pt-4">
-                      <Button
-                        onClick={() => {
-                          setIsBookingModalOpen(false);
-                          setIsBookedSuccess(false);
-                        }}
-                        className="bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-slate-950 rounded-xl px-8 h-11 font-bold shadow-md shadow-amber-500/20"
-                      >
-                        {t("vehicle.done")}
-                      </Button>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          )}
       </main>
 
       <Footer />

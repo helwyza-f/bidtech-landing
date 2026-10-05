@@ -1,6 +1,19 @@
+@import "leaflet/dist/leaflet.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Ensure Leaflet tiles and markers render properly and never get hidden by Tailwind image resets */
+.leaflet-container {
+  font-family: inherit;
+}
+
+.leaflet-tile {
+  visibility: inherit !important;
+  max-width: none !important;
+  max-height: none !important;
+}
 
 * {
   margin: 0;

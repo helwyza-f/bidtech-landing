@@ -47,8 +47,8 @@ export default function Header() {
         <div className="flex justify-between items-center h-16 sm:h-20">
 
           {/* Logo Brand NTR */}
-          <Link href={getLocalizedPath(locale, "/")} className="flex-shrink-0 flex items-center gap-2.5 sm:gap-3 group py-1">
-            <div className="relative h-11 sm:h-12 w-11 sm:w-12 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
+          <Link href={getLocalizedPath(locale, "/")} className="flex-shrink-0 flex items-center gap-2 sm:gap-2.5 lg:gap-3 group py-1">
+            <div className="relative h-9 w-9 sm:h-10 sm:w-10 lg:h-12 lg:w-12 flex-shrink-0 transition-transform duration-300 group-hover:scale-105">
               <Image
                 src="/icons/icon-2.webp"
                 alt="NadimTrans RentCar Emblem"
@@ -62,19 +62,19 @@ export default function Header() {
               alt="NadimTrans Rentcar"
               width={240}
               height={80}
-              className="h-10 sm:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
+              className="h-8 sm:h-9 md:h-10 lg:h-12 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.02]"
             />
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex gap-8 items-center">
+          {/* Desktop & Tablet Navigation */}
+          <nav className="hidden md:flex gap-3.5 lg:gap-7 xl:gap-8 items-center">
             {NAV_ITEMS.map((item) => {
               const isActive = item.href === "/" ? currentPath === "/" : currentPath.startsWith(item.href);
               return (
                 <Link
                   key={item.label}
                   href={getLocalizedPath(locale, item.href)}
-                  className={`text-sm tracking-wide transition-colors ${
+                  className={`text-xs lg:text-sm tracking-wide transition-colors whitespace-nowrap ${
                     isActive
                       ? "font-bold text-amber-400"
                       : "font-medium text-white/90 hover:text-amber-300"
@@ -86,11 +86,11 @@ export default function Header() {
             })}
           </nav>
 
-          {/* Desktop Right CTA */}
-          <div className="hidden md:flex items-center gap-3">
+          {/* Desktop & Tablet Right CTA */}
+          <div className="hidden md:flex items-center gap-2 lg:gap-3 flex-shrink-0">
             <LanguageSwitcher />
             <Link href={getLocalizedPath(locale, "/#faq")}>
-              <Button size="lg" className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-400 hover:to-yellow-400 text-slate-950 rounded-xl font-bold px-6 shadow-md shadow-amber-500/25 transition-all hover:scale-[1.02] active:scale-95">
+              <Button size="sm" className="bg-gradient-to-r from-amber-500 via-yellow-500 to-amber-600 hover:from-amber-400 hover:to-yellow-400 text-slate-950 rounded-xl font-bold px-3.5 sm:px-4 lg:px-6 h-9 lg:h-11 text-xs lg:text-sm shadow-md shadow-amber-500/25 transition-all hover:scale-[1.02] active:scale-95 whitespace-nowrap">
                 {t("nav.contact")}
               </Button>
             </Link>
