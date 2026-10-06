@@ -15,7 +15,63 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // Jika sudah berada di rute bahasa spesifik, jangan alihkan
+  // 0. Cek parameter override ?lang= jika ada
+  const langQuery = request.nextUrl.searchParams.get("lang")?.toLowerCase();
+  if (langQuery === "id" || langQuery === "en-sg" || langQuery === "ms" || langQuery === "en") {
+    const url = request.nextUrl.clone();
+    url.searchParams.delete("lang");
+    if (langQuery === "id") {
+      url.pathname = pathname.replace(/^\/(en-sg|ms|en)(\/|$)/, "/") || "/";
+    } else {
+      const cleanPath = pathname.replace(/^\/(en-sg|ms|en)(\/|$)/, "/") || "/";
+      url.pathname = cleanPath === "/" ? `/${langQuery}` : `/${langQuery}${cleanPath}`;
+    }
+    const response = NextResponse.redirect(url);
+    response.cookies.set(LANGUAGE_PREFERENCE_KEY, langQuery, {
+      maxAge: 60 * 60 * 24 * 365,
+      path: "/",
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production" || request.nextUrl.protocol === "https:",
+    });
+    return response;
+  }
+
+  // 1. Cek preferensi cookie manual yang pernah disimpan pengguna
+  const rawCookie = request.cookies.get(LANGUAGE_PREFERENCE_KEY)?.value;
+  const storedLocale = rawCookie?.trim().replace(/^["']|["']$/g, "").toLowerCase();
+
+  if (storedLocale) {
+    if (storedLocale === "id") {
+      // Jika pengguna memilih ID tapi membuka URL ber-prefix (misal /en-sg), arahkan ke rute ID
+      if (
+        pathname.startsWith("/en-sg") ||
+        pathname.startsWith("/ms") ||
+        pathname.startsWith("/en")
+      ) {
+        const url = request.nextUrl.clone();
+        url.pathname = pathname.replace(/^\/(en-sg|ms|en)(\/|$)/, "/") || "/";
+        return NextResponse.redirect(url);
+      }
+      // Jika sudah di rute default (ID), izinkan langsung dan JANGAN PERNAH dialihkan ke SG/MY
+      return NextResponse.next();
+    }
+
+    if (storedLocale === "en-sg" || storedLocale === "ms" || storedLocale === "en") {
+      // Jika pengguna memilih bahasa asing tapi membuka rute non-prefix, alihkan ke bahasa pilihannya
+      if (
+        !pathname.startsWith("/en-sg") &&
+        !pathname.startsWith("/ms") &&
+        !pathname.startsWith("/en")
+      ) {
+        const url = request.nextUrl.clone();
+        url.pathname = pathname === "/" ? `/${storedLocale}` : `/${storedLocale}${pathname}`;
+        return NextResponse.redirect(url);
+      }
+      return NextResponse.next();
+    }
+  }
+
+  // Jika sudah berada di rute bahasa spesifik, jangan lakukan auto-deteksi
   if (
     pathname.startsWith("/en-sg") ||
     pathname.startsWith("/ms") ||
@@ -24,79 +80,76 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // 1. Cek preferensi cookie manual yang pernah disimpan pengguna
-  const storedLocale = request.cookies.get(LANGUAGE_PREFERENCE_KEY)?.value;
-  if (storedLocale) {
-    if (storedLocale === "en-sg" || storedLocale === "ms" || storedLocale === "en") {
+  // 2. Jika belum ada preferensi, auto-deteksi HANYA pada halaman utama (root /)
+  if (pathname === "/") {
+    const isHttps = process.env.NODE_ENV === "production" || request.nextUrl.protocol === "https:";
+    const country = (
+      request.headers.get("x-vercel-ip-country") ||
+      request.headers.get("cf-ipcountry") ||
+      request.geo?.country ||
+      ""
+    ).toUpperCase();
+
+    if (country === "SG") {
       const url = request.nextUrl.clone();
-      url.pathname = pathname === "/" ? `/${storedLocale}` : `/${storedLocale}${pathname}`;
-      return NextResponse.redirect(url);
+      url.pathname = "/en-sg";
+      const response = NextResponse.redirect(url);
+      response.cookies.set(LANGUAGE_PREFERENCE_KEY, "en-sg", {
+        maxAge: 60 * 60 * 24 * 365,
+        path: "/",
+        sameSite: "lax",
+        secure: isHttps,
+      });
+      return response;
     }
-    // Jika preference 'id', tetap berada di rute default (tanpa prefix)
-    return NextResponse.next();
-  }
 
-  // 2. Cek Header Geo-IP Server (didukung otomatis oleh Vercel, Cloudflare, dsb.)
-  const country = (
-    request.headers.get("x-vercel-ip-country") ||
-    request.headers.get("cf-ipcountry") ||
-    request.geo?.country ||
-    ""
-  ).toUpperCase();
+    if (country === "MY") {
+      const url = request.nextUrl.clone();
+      url.pathname = "/ms";
+      const response = NextResponse.redirect(url);
+      response.cookies.set(LANGUAGE_PREFERENCE_KEY, "ms", {
+        maxAge: 60 * 60 * 24 * 365,
+        path: "/",
+        sameSite: "lax",
+        secure: isHttps,
+      });
+      return response;
+    }
 
-  if (country === "SG") {
-    const url = request.nextUrl.clone();
-    url.pathname = pathname === "/" ? "/en-sg" : `/en-sg${pathname}`;
-    const response = NextResponse.redirect(url);
-    response.cookies.set(LANGUAGE_PREFERENCE_KEY, "en-sg", {
-      maxAge: 60 * 60 * 24 * 365,
-      path: "/",
-      sameSite: "lax",
-    });
-    return response;
-  }
+    // 3. Cek Header Accept-Language browser (hanya jika negara bukan ID)
+    if (country !== "ID") {
+      const acceptLang = (request.headers.get("accept-language") || "").toLowerCase();
+      if (acceptLang.includes("en-sg") || (acceptLang.includes("sg") && !acceptLang.includes("id"))) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/en-sg";
+        const response = NextResponse.redirect(url);
+        response.cookies.set(LANGUAGE_PREFERENCE_KEY, "en-sg", {
+          maxAge: 60 * 60 * 24 * 365,
+          path: "/",
+          sameSite: "lax",
+          secure: isHttps,
+        });
+        return response;
+      }
 
-  if (country === "MY") {
-    const url = request.nextUrl.clone();
-    url.pathname = pathname === "/" ? "/ms" : `/ms${pathname}`;
-    const response = NextResponse.redirect(url);
-    response.cookies.set(LANGUAGE_PREFERENCE_KEY, "ms", {
-      maxAge: 60 * 60 * 24 * 365,
-      path: "/",
-      sameSite: "lax",
-    });
-    return response;
-  }
-
-  // 3. Cek Header Accept-Language browser
-  const acceptLang = (request.headers.get("accept-language") || "").toLowerCase();
-  if (acceptLang.includes("en-sg") || (acceptLang.includes("sg") && !acceptLang.includes("id"))) {
-    const url = request.nextUrl.clone();
-    url.pathname = pathname === "/" ? "/en-sg" : `/en-sg${pathname}`;
-    const response = NextResponse.redirect(url);
-    response.cookies.set(LANGUAGE_PREFERENCE_KEY, "en-sg", {
-      maxAge: 60 * 60 * 24 * 365,
-      path: "/",
-      sameSite: "lax",
-    });
-    return response;
-  }
-
-  if (
-    acceptLang.startsWith("ms") ||
-    acceptLang.includes("ms-my") ||
-    acceptLang.includes("en-my") ||
-    acceptLang.includes("-my")
-  ) {
-    const url = request.nextUrl.clone();
-    url.pathname = pathname === "/" ? "/ms" : `/ms${pathname}`;
-    const response = NextResponse.redirect(url);
-    response.cookies.set(LANGUAGE_PREFERENCE_KEY, "ms", {
-      maxAge: 60 * 60 * 24 * 365,
-      path: "/",
-      sameSite: "lax",
-    });
-    return response;
+      if (
+        acceptLang.startsWith("ms") ||
+        acceptLang.includes("ms-my") ||
+        acceptLang.includes("en-my") ||
+        acceptLang.includes("-my")
+      ) {
+        const url = request.nextUrl.clone();
+        url.pathname = "/ms";
+        const response = NextResponse.redirect(url);
+        response.cookies.set(LANGUAGE_PREFERENCE_KEY, "ms", {
+          maxAge: 60 * 60 * 24 * 365,
+          path: "/",
+          sameSite: "lax",
+          secure: isHttps,
+        });
+        return response;
+      }
+    }
   }
 
   return NextResponse.next();

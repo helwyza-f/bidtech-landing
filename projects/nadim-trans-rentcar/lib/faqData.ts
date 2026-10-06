@@ -47,7 +47,7 @@ export const ALL_FAQS: FaqItem[] = [
     category: "pemesanan",
     question: "Metode pembayaran apa saja yang diterima?",
     answer:
-      "Kami menerima Transfer Bank (BCA, Mandiri, BNI, BRI), Kartu Kredit/Debit (Visa, MasterCard), Virtual Account, serta e-Wallet dan QRIS terverifikasi.",
+      "Kami menerima transfer bank dan e-Wallet resmi A/n Dwi Gandhi Herdian: BNI (0352721997), BCA (0611847466), Mandiri (1090022349898), SeaBank (901960264464), dan DANA (081276003870). Pembayaran pelunasan juga dapat dilakukan saat serah terima kunci kendaraan.",
   },
   {
     id: 5,

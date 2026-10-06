@@ -1355,16 +1355,6 @@ export default function DeliveryMapPicker({
 
       {/* 4. Detail Alamat / Patokan Penjemputan (Headlight / Highlight Section) */}
       <div className="space-y-2 pt-1">
-        <div className="flex items-center justify-between gap-2">
-          <div className="flex items-center gap-1.5 min-w-0">
-            <div className="w-6 h-6 rounded-lg bg-gray-900 text-white flex items-center justify-center flex-shrink-0 shadow-2xs">
-              <MapPin className="w-3.5 h-3.5 text-white" />
-            </div>
-            <label className="text-xs sm:text-[13px] font-black text-gray-900 tracking-tight block truncate">
-              {locale === "id" ? "Detail Alamat" : "Pick-up Address & Details"}
-            </label>
-          </div>
-        </div>
         <div className="relative rounded-xl border border-gray-200 focus-within:border-gray-900 focus-within:ring-2 focus-within:ring-gray-900/10 bg-white shadow-2xs transition-all">
           <textarea
             rows={2}
@@ -1386,14 +1376,6 @@ export default function DeliveryMapPicker({
             className="w-full text-xs sm:text-[13px] p-3 text-gray-900 bg-transparent placeholder:text-gray-400 focus:outline-none leading-relaxed resize-none"
           />
         </div>
-        <p className="text-[10px] sm:text-[11px] text-gray-500 flex items-center gap-1 leading-tight">
-          <span className="text-gray-400">💡</span>
-          <span>
-            {locale === "id"
-              ? "Tulis patokan jelas agar tim driver kami mudah menemukan lokasi Anda."
-              : "Provide clear landmarks to help our driver team locate you easily."}
-          </span>
-        </p>
       </div>
 
       {/* 5. Dedicated Floating Leaflet Map Popup Modal (via React Portal) */}

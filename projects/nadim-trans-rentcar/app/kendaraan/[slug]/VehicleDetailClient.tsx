@@ -7,7 +7,7 @@ import { useLocale, useTranslations } from "next-intl";
 import Header from "@/components/layout/Header";
 import Footer from "@/components/layout/Footer";
 import { Button } from "@/components/ui/button";
-import VehicleBookingWidget from "@/components/booking/VehicleBookingWidget";
+import VehicleBookingWidget, { type RentalPackage } from "@/components/booking/VehicleBookingWidget";
 import { getCar, getRelatedCarsForLocale } from "@/lib/localizedData";
 import { formatRupiah, getLocalizedPath, type Locale } from "@/lib/i18n";
 import {
@@ -65,6 +65,21 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
 
   const galleryImages = car.gallery && car.gallery.length > 0 ? car.gallery : (car.image ? [car.image] : []);
   const relatedCars = getRelatedCarsForLocale(locale, car.slug, car.category, 3);
+
+  const isInherentlyAllIn =
+    car.slug.includes("all-in") ||
+    car.priceNote?.toLowerCase().includes("all in") ||
+    car.priceNote?.toLowerCase().includes("all-in");
+
+  const [selectedPackage, setSelectedPackage] = useState<RentalPackage>(
+    isInherentlyAllIn ? "all-in" : "self-drive"
+  );
+
+  const driverSurcharge = 250000;
+  const currentDailyRate = selectedPackage === "with-driver" ? car.price + driverSurcharge : car.price;
+  const currentPriceNote = selectedPackage === "with-driver"
+    ? (locale === "id" ? "/ hari (dengan supir)" : locale === "ms" ? "/ hari (dengan pemandu)" : "/ day (with driver)")
+    : car.priceNote;
 
   return (
     <>
@@ -183,7 +198,13 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
 
               {/* Mobile Booking Card - Visible only on mobile */}
               <div className="lg:hidden">
-                <VehicleBookingWidget car={car} locale={locale} variant="mobile" />
+                <VehicleBookingWidget
+                  car={car}
+                  locale={locale}
+                  variant="mobile"
+                  selectedPackage={selectedPackage}
+                  onPackageChange={setSelectedPackage}
+                />
               </div>
 
               {/* Title & Key Highlights */}
@@ -202,12 +223,12 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
                       {t("vehicle.rentalRate")}
                     </span>
                     <div className="flex flex-col sm:items-end">
-                      <span className="text-3xl sm:text-4xl font-black text-amber-600 tracking-tight leading-none">
-                        {formatRupiah(car.price, locale)}
+                      <span className="text-3xl sm:text-4xl font-black text-amber-600 tracking-tight leading-none transition-all duration-300">
+                        {formatRupiah(currentDailyRate, locale)}
                       </span>
-                      {car.priceNote && (
-                        <span className="text-xs text-gray-500 font-medium mt-1.5 block sm:text-right max-w-[280px] leading-snug">
-                          {car.priceNote}
+                      {currentPriceNote && (
+                        <span className="text-xs text-gray-500 font-medium mt-1.5 block sm:text-right max-w-[280px] leading-snug transition-all duration-300">
+                          {currentPriceNote}
                         </span>
                       )}
                     </div>
@@ -380,6 +401,44 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
                         </div>
                       ))}
                     </div>
+
+                    {/* Informasi Rekening Pembayaran Resmi (Tanpa Icon) */}
+                    <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 text-xs text-gray-700 space-y-2.5">
+                      <div className="flex flex-wrap justify-between items-baseline gap-1 pb-2 border-b border-gray-200">
+                        <span className="font-bold text-gray-900 text-sm">
+                          {locale === "id"
+                            ? "Metode Pembayaran Transfer Resmi"
+                            : locale === "ms"
+                            ? "Kaedah Pembayaran Pindahan Rasmi"
+                            : "Official Bank Transfer Methods"}
+                        </span>
+                        <span className="font-semibold text-amber-900 bg-amber-100/80 px-2 py-0.5 rounded text-[11px]">
+                          A/n Dwi Gandhi Herdian
+                        </span>
+                      </div>
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
+                        <div className="flex justify-between py-1.5 px-3 rounded-xl bg-white border border-gray-200/70">
+                          <span className="font-bold text-gray-800">BNI</span>
+                          <span className="font-mono font-bold text-gray-900">0352721997</span>
+                        </div>
+                        <div className="flex justify-between py-1.5 px-3 rounded-xl bg-white border border-gray-200/70">
+                          <span className="font-bold text-gray-800">BCA</span>
+                          <span className="font-mono font-bold text-gray-900">0611847466</span>
+                        </div>
+                        <div className="flex justify-between py-1.5 px-3 rounded-xl bg-white border border-gray-200/70">
+                          <span className="font-bold text-gray-800">MANDIRI</span>
+                          <span className="font-mono font-bold text-gray-900">1090022349898</span>
+                        </div>
+                        <div className="flex justify-between py-1.5 px-3 rounded-xl bg-white border border-gray-200/70">
+                          <span className="font-bold text-gray-800">SEA BANK</span>
+                          <span className="font-mono font-bold text-gray-900">901960264464</span>
+                        </div>
+                        <div className="flex justify-between py-1.5 px-3 rounded-xl bg-white border border-gray-200/70 sm:col-span-2">
+                          <span className="font-bold text-gray-800">DANA</span>
+                          <span className="font-mono font-bold text-gray-900">081276003870</span>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 )}
               </div>
@@ -388,7 +447,13 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
             {/* Right Column: Sticky Booking / Reservation Form (4-5 Cols) - Desktop Only */}
             <div className="hidden lg:block lg:col-span-5 xl:col-span-4">
               <div className="sticky top-28 space-y-6">
-                <VehicleBookingWidget car={car} locale={locale} variant="desktop" />
+                <VehicleBookingWidget
+                  car={car}
+                  locale={locale}
+                  variant="desktop"
+                  selectedPackage={selectedPackage}
+                  onPackageChange={setSelectedPackage}
+                />
 
                 {/* Assistance Box */}
                 <div className="bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/80 border border-amber-500/30 rounded-3xl p-6 text-white shadow-xl shadow-black/20">

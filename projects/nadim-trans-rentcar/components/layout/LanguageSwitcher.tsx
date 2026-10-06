@@ -18,20 +18,27 @@ export default function LanguageSwitcher({ mobile = false, onNavigate }: Languag
   const pathname = usePathname();
   const t = useTranslations("language");
 
-  const savePreference = (nextLocale: Locale) => {
+  const handleSelectLocale = (nextLocale: Locale) => {
     try {
       window.localStorage.setItem(LANGUAGE_PREFERENCE_KEY, nextLocale);
-      document.cookie = `${LANGUAGE_PREFERENCE_KEY}=${nextLocale}; path=/; max-age=31536000; SameSite=Lax`;
+      const isHttps = typeof window !== "undefined" && window.location.protocol === "https:";
+      const secureFlag = isHttps ? "; Secure" : "";
+      document.cookie = `${LANGUAGE_PREFERENCE_KEY}=${nextLocale}; path=/; max-age=31536000; SameSite=Lax${secureFlag}`;
     } catch {
-      // The selected route still works if browser storage is unavailable.
+      // Browser storage fallback
     }
     setIsOpen(false);
     onNavigate?.();
+
+    const targetPath = getLocalizedPath(nextLocale, pathname);
+    // Gunakan server-side set-locale endpoint agar Set-Cookie header HTTP valid di hosting
+    // dan root layout (HTML lang & messages) ter-refresh sempurna
+    const targetUrl = `/api/set-locale?locale=${nextLocale}&redirect=${encodeURIComponent(targetPath)}`;
+    window.location.href = targetUrl;
   };
 
   const hrefFor = (nextLocale: Locale) => {
-    const href = getLocalizedPath(nextLocale, pathname);
-    return href;
+    return getLocalizedPath(nextLocale, pathname);
   };
 
   const options: Array<{ locale: Locale; label: string; code: string; currency: string }> = [
@@ -63,22 +70,29 @@ export default function LanguageSwitcher({ mobile = false, onNavigate }: Languag
           role="menu"
           className={`z-[60] overflow-hidden rounded-xl border border-white/15 bg-slate-950 shadow-2xl shadow-black/40 ${mobile ? "relative mt-2 w-full" : "absolute right-0 mt-2 w-60"}`}
         >
-          {options.map((option) => (
-            <Link
-              key={option.locale}
-              href={hrefFor(option.locale)}
-              role="menuitem"
-              onClick={() => savePreference(option.locale)}
-              className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors hover:bg-white/10 ${locale === option.locale ? "bg-amber-500/15 text-amber-300" : "text-gray-200"}`}
-            >
-              <span className="w-7 text-xs font-black tracking-wider text-amber-400 flex-shrink-0">{option.code}</span>
-              <div className="flex-1 min-w-0 flex flex-col">
-                <span className="truncate">{option.label}</span>
-                <span className="text-[11px] text-amber-300/80 font-medium">{option.currency}</span>
-              </div>
-              {locale === option.locale && <Check className="h-4 w-4 text-amber-400 flex-shrink-0" />}
-            </Link>
-          ))}
+          {options.map((option) => {
+            const targetPath = hrefFor(option.locale);
+            const actionUrl = `/api/set-locale?locale=${option.locale}&redirect=${encodeURIComponent(targetPath)}`;
+            return (
+              <a
+                key={option.locale}
+                href={actionUrl}
+                role="menuitem"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleSelectLocale(option.locale);
+                }}
+                className={`flex items-center gap-3 px-4 py-3 text-sm font-medium transition-colors hover:bg-white/10 ${locale === option.locale ? "bg-amber-500/15 text-amber-300" : "text-gray-200"}`}
+              >
+                <span className="w-7 text-xs font-black tracking-wider text-amber-400 flex-shrink-0">{option.code}</span>
+                <div className="flex-1 min-w-0 flex flex-col">
+                  <span className="truncate">{option.label}</span>
+                  <span className="text-[11px] text-amber-300/80 font-medium">{option.currency}</span>
+                </div>
+                {locale === option.locale && <Check className="h-4 w-4 text-amber-400 flex-shrink-0" />}
+              </a>
+            );
+          })}
         </div>
       )}
     </div>

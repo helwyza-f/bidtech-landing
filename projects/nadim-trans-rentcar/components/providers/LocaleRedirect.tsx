@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect } from "react";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname } from "next/navigation";
 import {
   detectVisitorLocale,
   getLocalizedPath,
@@ -17,15 +17,24 @@ interface LocaleRedirectProps {
 
 export default function LocaleRedirect({ locale, detectBrowserLocale = false }: LocaleRedirectProps) {
   const pathname = usePathname();
-  const router = useRouter();
 
   useEffect(() => {
     try {
-      // 1. Cek apakah ada preferensi manual yang pernah dipilih pengguna
-      const storedLocale = window.localStorage.getItem(LANGUAGE_PREFERENCE_KEY) as Locale | null;
+      // 1. Cek preferensi yang pernah disimpan pengguna (localStorage atau cookie)
+      const getCookieLocale = (): Locale | null => {
+        if (typeof document === "undefined") return null;
+        const match = document.cookie.match(new RegExp(`(?:^|; )${LANGUAGE_PREFERENCE_KEY}=([^;]*)`));
+        const val = match ? decodeURIComponent(match[1]).trim().replace(/^["']|["']$/g, "").toLowerCase() : null;
+        return (LOCALES as readonly string[]).includes(val as Locale) ? (val as Locale) : null;
+      };
+
+      const storedLocale =
+        ((window.localStorage.getItem(LANGUAGE_PREFERENCE_KEY) as Locale | null)?.toLowerCase() as Locale | null) ||
+        getCookieLocale();
+
       if (storedLocale && (LOCALES as readonly string[]).includes(storedLocale)) {
         if (storedLocale !== locale) {
-          router.replace(getLocalizedPath(storedLocale, pathname));
+          window.location.href = getLocalizedPath(storedLocale, pathname);
         }
         return;
       }
@@ -33,12 +42,15 @@ export default function LocaleRedirect({ locale, detectBrowserLocale = false }: 
       // 2. Jika tidak diaktifkan auto detection pada layout ini, selesai
       if (!detectBrowserLocale) return;
 
+      const isHttps = typeof window !== "undefined" && window.location.protocol === "https:";
+      const secureFlag = isHttps ? "; Secure" : "";
+
       // 3. Deteksi Instan (Timezone Sistem & Preferensi Bahasa Browser)
       const detectedLocale = detectVisitorLocale();
       if (detectedLocale !== locale) {
         window.localStorage.setItem(LANGUAGE_PREFERENCE_KEY, detectedLocale);
-        document.cookie = `${LANGUAGE_PREFERENCE_KEY}=${detectedLocale}; path=/; max-age=31536000; SameSite=Lax`;
-        router.replace(getLocalizedPath(detectedLocale, pathname));
+        document.cookie = `${LANGUAGE_PREFERENCE_KEY}=${detectedLocale}; path=/; max-age=31536000; SameSite=Lax${secureFlag}`;
+        window.location.href = getLocalizedPath(detectedLocale, pathname);
         return;
       }
 
@@ -60,8 +72,8 @@ export default function LocaleRedirect({ locale, detectBrowserLocale = false }: 
 
           if (geoLocale && geoLocale !== locale) {
             window.localStorage.setItem(LANGUAGE_PREFERENCE_KEY, geoLocale);
-            document.cookie = `${LANGUAGE_PREFERENCE_KEY}=${geoLocale}; path=/; max-age=31536000; SameSite=Lax`;
-            router.replace(getLocalizedPath(geoLocale, pathname));
+            document.cookie = `${LANGUAGE_PREFERENCE_KEY}=${geoLocale}; path=/; max-age=31536000; SameSite=Lax${secureFlag}`;
+            window.location.href = getLocalizedPath(geoLocale, pathname);
           }
         })
         .catch(() => {
@@ -72,7 +84,7 @@ export default function LocaleRedirect({ locale, detectBrowserLocale = false }: 
     } catch {
       // Abaikan jika browser storage tidak tersedia
     }
-  }, [detectBrowserLocale, locale, pathname, router]);
+  }, [detectBrowserLocale, locale, pathname]);
 
   return null;
 }
