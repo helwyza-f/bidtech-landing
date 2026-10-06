@@ -1,9 +1,55 @@
-export const LOCALES = ["id", "en"] as const;
+export const LOCALES = ["id", "en", "en-sg", "ms"] as const;
 
 export type Locale = (typeof LOCALES)[number];
 
 export const DEFAULT_LOCALE: Locale = "id";
 export const LANGUAGE_PREFERENCE_KEY = "nadimtrans-locale";
+
+export interface CurrencyConfig {
+  code: string;
+  symbol: string;
+  rate: number; // 1 unit asing = berapa IDR (misal: 1 MYR = 4.000 IDR, 1 SGD = 12.000 IDR, 1 USD = 16.000 IDR)
+  locale: string;
+}
+
+export const CURRENCIES: Record<Locale, CurrencyConfig> = {
+  id: { code: "IDR", symbol: "Rp", rate: 1, locale: "id-ID" },
+  en: { code: "IDR", symbol: "Rp", rate: 1, locale: "id-ID" },
+  "en-sg": { code: "SGD", symbol: "S$", rate: 12000, locale: "en-SG" },
+  ms: { code: "MYR", symbol: "RM", rate: 4000, locale: "ms-MY" },
+};
+
+/**
+ * Mengonversi nilai Rupiah (IDR) ke mata uang target berdasarkan locale.
+ */
+export function convertPrice(valueInIdr: number, locale: Locale): number {
+  const config = CURRENCIES[locale] ?? CURRENCIES.id;
+  if (config.rate === 1) return valueInIdr;
+  return Math.round(valueInIdr / config.rate);
+}
+
+/**
+ * Format mata uang lengkap sesuai locale aktif (Rp / $ / S$ / RM).
+ */
+export function formatCurrency(valueInIdr: number, locale: Locale): string {
+  const config = CURRENCIES[locale] ?? CURRENCIES.id;
+  const converted = convertPrice(valueInIdr, locale);
+  const formatted = new Intl.NumberFormat(config.locale, {
+    maximumFractionDigits: 0,
+  }).format(converted);
+
+  if (locale === "id" || locale === "en") return `Rp ${formatted}`;
+  if (locale === "ms") return `RM ${formatted}`;
+  if (locale === "en-sg") return `S$ ${formatted}`;
+  return `Rp ${formatted}`;
+}
+
+/**
+ * Alias formatRupiah agar kompatibel ke semua komponen yang sudah mengimpornya.
+ */
+export function formatRupiah(value: number, locale: Locale): string {
+  return formatCurrency(value, locale);
+}
 
 type TranslationValue = string | { [key: string]: TranslationValue };
 export type TranslationMessages = { [key: string]: TranslationValue };
@@ -13,7 +59,9 @@ export const MESSAGES: Record<Locale, TranslationMessages> = {
     language: {
       label: "Bahasa",
       indonesian: "Bahasa Indonesia",
-      english: "English",
+      english: "English (Global)",
+      englishSg: "English (Singapore)",
+      melayu: "Bahasa Melayu",
       choose: "Pilih bahasa",
     },
     nav: {
@@ -163,8 +211,8 @@ export const MESSAGES: Record<Locale, TranslationMessages> = {
       pricing: "Ringkasan Harga",
       totalRentalEstimate: "Total Estimasi Sewa",
       driverOption: "Opsi Pengemudi",
-      driverSurcharge: "+ Supir (+Rp250.000/hari)",
-      driverDailyRate: "+Rp250.000/hari",
+      driverSurcharge: "+ Supir",
+      driverDailyRate: "+Supir/hari",
       allInIncluded: "Paket All In sudah termasuk driver dan BBM hingga 10 jam.",
       choosePackage: "Pilih Paket Sewa",
       selfDrive: "Lepas Kunci",
@@ -279,7 +327,9 @@ export const MESSAGES: Record<Locale, TranslationMessages> = {
     language: {
       label: "Language",
       indonesian: "Bahasa Indonesia",
-      english: "English",
+      english: "English (Global)",
+      englishSg: "English (Singapore)",
+      melayu: "Bahasa Melayu",
       choose: "Choose language",
     },
     nav: {
@@ -429,8 +479,8 @@ export const MESSAGES: Record<Locale, TranslationMessages> = {
       pricing: "Price Summary",
       totalRentalEstimate: "Estimated Rental Total",
       driverOption: "Driver Option",
-      driverSurcharge: "+ Driver (+Rp250,000/day)",
-      driverDailyRate: "+Rp250,000/day",
+      driverSurcharge: "+ Driver",
+      driverDailyRate: "+Driver/day",
       allInIncluded: "The All-In package already includes a driver and fuel for up to 10 hours.",
       choosePackage: "Choose a Rental Package",
       selfDrive: "Self-drive",
@@ -541,34 +591,639 @@ export const MESSAGES: Record<Locale, TranslationMessages> = {
       faqDescription: "Answers about Batam car rentals, booking requirements, chauffeur packages, payment, insurance, and Hang Nadim Airport transfers.",
     },
   },
+  "en-sg": {
+    language: {
+      label: "Language",
+      indonesian: "Bahasa Indonesia",
+      english: "English (Global)",
+      englishSg: "English (Singapore)",
+      melayu: "Bahasa Melayu",
+      choose: "Choose language",
+    },
+    nav: {
+      home: "Home",
+      vehicles: "Vehicles",
+      services: "Services",
+      faq: "FAQ",
+      contact: "Contact Us",
+      openMenu: "Open navigation menu",
+      closeMenu: "Close navigation menu",
+    },
+    common: {
+      brand: "NadimTrans RentCar",
+      all: "All",
+      search: "Search",
+      noResults: "No matching results",
+      currency: "S$",
+      perDay: "/ day",
+      seats: "Seats",
+      passengers: "Passengers",
+      luggage: "Suitcases",
+      reviews: "reviews",
+      featured: "Featured",
+      back: "Back",
+      share: "Share",
+      saved: "Save favourite",
+      copied: "Link copied to clipboard!",
+      vehicle: "Vehicle",
+      vehicles: "vehicles",
+      driver: "Driver",
+      fuel: "Fuel",
+      hours: "hours",
+      days: "days",
+    },
+    hero: {
+      titleLineOne: "SINGAPORE TO BATAM,",
+      titleLineTwoPrefix: "SEAMLESS TRAVEL,",
+      titleAccent: "CHOOSE NADIMTRANS",
+      description: "Premium self-drive & chauffeured car rental for Singapore travellers visiting Batam. Direct ferry terminal pick-up (Batam Centre, Harbour Bay, Sekupang, Nongsapura) & Hang Nadim Airport.",
+      tagline: "SEAMLESS TRAVEL ACROSS BATAM, REMEMBER NADIMTRANS",
+      exploreFleet: "EXPLORE FLEET",
+      bookNow: "BOOK IN SGD",
+      scroll: "SCROLL DOWN",
+      fleet: "PRIME FLEET",
+      service: "VIP CHAUFFEUR",
+      trusted: "SG RECOGNISED",
+      imageAlt: "NadimTrans RentCar Batam VIP Toyota Alphard fleet for Singapore visitors",
+    },
+    home: {
+      fleetEyebrow: "Recommended Fleet for Singapore Visitors",
+      fleetTitle: "Explore Top Vehicles",
+      fleetTitleAccent: "for Your Journey",
+      fleetDescription: "Rent comfortable MPVs, SUVs, and luxury Alphards with transparent rates. Free delivery to Batam ferry terminals and Hang Nadim Airport.",
+      rentalRate: "Rental Rate",
+      exploreAll: "View All Vehicles",
+      carouselPage: "Go to page {count}",
+      previousFleet: "Previous fleet page",
+      nextFleet: "Next fleet page",
+      whyEyebrow: "WHY CHOOSE NADIMTRANS RENTCAR",
+      whyTitle: "Premier Mobility for Singapore Travellers in Batam",
+      legalFleet: "Clean, Legal & Reliable",
+      whyFeatures: {
+        priceTitle: "Best Rate Guarantee",
+        priceDescription: "Transparent SGD pricing with no hidden charges. Ferry terminal pick-up ready upon arrival.",
+        supportTitle: "24/7 Concierge Support",
+        supportDescription: "Instant WhatsApp assistance for Singapore guests before and during your trip.",
+        flexibleTitle: "Flexible Booking",
+        flexibleDescription: "Change or adjust your reservation smoothly with our reservation team.",
+        deliveryTitle: "Ferry & Airport Delivery",
+        deliveryDescription: "Direct vehicle delivery to Harbour Bay, Batam Centre, or Hang Nadim Airport.",
+      },
+      howEyebrow: "SIMPLE PROCESS",
+      howTitle: "Three Easy Steps to Ride",
+      steps: {
+        chooseTitle: "01. Choose a Vehicle",
+        chooseDescription: "Browse our premium fleet with transparent Singapore Dollar rates.",
+        dateTitle: "02. Pick Dates & Arrival Ferry",
+        dateDescription: "Specify your ferry terminal and rental dates.",
+        confirmTitle: "03. Confirm & Travel",
+        confirmDescription: "Your driver or car will be waiting when your ferry docks.",
+      },
+      testimonialsEyebrow: "CUSTOMER TESTIMONIALS",
+      testimonialsTitle: "Trusted by Singapore Travellers in Batam",
+      testimonialsDescription: "See reviews from business executives and families travelling from Singapore to Batam with NadimTrans.",
+      previousTestimonials: "Previous testimonials",
+      nextTestimonials: "Next testimonials",
+      testimonialItems: {
+        oneQuote: "\"Booked the Alphard VIP for a corporate delegation arriving from HarbourFront Singapore at Batam Centre. Pristine car, punctual driver, exceptional service.\"",
+        oneRole: "SINGAPORE BUSINESS DIRECTOR",
+        twoQuote: "\"Super convenient self-drive rental for a weekend golf getaway in Batam. Fast WhatsApp booking and car delivered right to Harbour Bay terminal.\"",
+        twoRole: "FREQUENT SG TRAVELLER",
+        threeQuote: "\"Family holiday in Batam made effortless with an Avanza from NadimTrans. Hassle-free drop-off and pickup in SGD equivalent.\"",
+        threeRole: "SINGAPORE FAMILY VACATION",
+      },
+      faqTitle: "Frequently Asked Questions",
+      faqDescription: "Helpful guide for Singapore visitors renting cars in Batam.",
+    },
+    footer: {
+      description: "Premium car rental solution for Singapore visitors in Batam. Offering daily self-drive, luxury chauffeured packages, and direct pick-up at Harbour Bay & Batam Centre ferry terminals. Your Journey, Our Commitment.",
+      quickLinks: "Quick Links",
+      vehicleList: "Vehicle List",
+      servicesPackages: "Services & Rates",
+      faqLink: "FAQ for SG Visitors",
+      serviceContact: "Service Hotline",
+      alwaysReady: "24/7 Dedicated Support",
+      office: "Batam Operations & Pool",
+      rights: "© 2022 PT. NADIM AUTO TRANSINDO (NADIMTRANS RENTCAR). ALL RIGHTS RESERVED.",
+      privacy: "Privacy Policy",
+      terms: "Terms & Conditions",
+    },
+    catalog: {
+      title: "Vehicle Catalogue",
+      description: "Explore all cars for short getaways, golf tours, and business visits in Batam.",
+      searchPlaceholder: "Search cars...",
+      sortLabel: "Sort vehicles",
+      sortPopular: "Most popular",
+      sortLowest: "Lowest price",
+      sortHighest: "Highest price",
+      showing: "Showing {count} vehicles",
+      noMatchTitle: "No Matching Vehicles",
+      noMatchDescription: "Try a different search term or category.",
+      viewDetails: "View Details",
+      bookNow: "Book Now",
+    },
+    vehicle: {
+      notFoundTitle: "Vehicle Not Found",
+      notFoundDescription: "Sorry, this vehicle is unavailable or has been removed.",
+      backToList: "Back to Fleet",
+      breadcrumbHome: "Home",
+      breadcrumbVehicles: "Vehicles",
+      rentalRate: "Rental Rate",
+      primarySpecs: "Key Specifications",
+      capacity: "Capacity",
+      luggage: "Luggage",
+      transmission: "Transmission",
+      fuel: "Fuel",
+      engine: "Engine",
+      power: "Maximum power",
+      acceleration: "Acceleration",
+      overview: "Overview & Comfort",
+      features: "Features & Amenities",
+      terms: "Terms & Conditions",
+      benefits: "Benefits of renting with NadimTrans RentCar:",
+      featureIntro: "Equipped with features designed for comfortable and secure travel in Batam:",
+      verificationTitle: "Documents to Verify:",
+      verificationDescription: "Please prepare your passport and valid driving licence for vehicle collection.",
+      pricing: "Pricing Summary",
+      totalRentalEstimate: "Total Rental Estimate",
+      driverOption: "Driver Option",
+      driverSurcharge: "+ Driver",
+      driverDailyRate: "+Driver/day",
+      allInIncluded: "The All-In package includes professional driver and fuel for up to 10 hours.",
+      choosePackage: "Choose Rental Package",
+      selfDrive: "Self-Drive",
+      withDriver: "With Chauffeur",
+      rentalDuration: "Rental Duration",
+      rentalDates: "Rental Dates",
+      rentalDatesHint: "Select start date and end date.",
+      quickDuration: "Quick duration",
+      quickDurationDays: "{count} Day(s)",
+      rentalFrom: "Rental from",
+      rentalUntil: "Until",
+      previousMonth: "Previous month",
+      nextMonth: "Next month",
+      loadingRentalDates: "Loading calendar...",
+      allInPackageCount: "All-In Packages",
+      carRental: "Vehicle Rental ({count}x)",
+      allInPackage: "All-In Package ({count}x 10 hrs)",
+      driverService: "Driver Service ({count}x)",
+      insurance: "Comprehensive Insurance",
+      free: "Included",
+      quickWhatsapp: "Fast WhatsApp Booking",
+      safeTransaction: "100% Secure",
+      instantConfirmation: "Instant Confirmation",
+      specialHelpTitle: "Travelling with Group or Corporate?",
+      specialHelpDescription: "Need long-term company rental, VIP transport, or ferry terminal coordination? Contact our VIP support.",
+      contactSupport: "Contact VIP Support",
+      similarVehicles: "Similar Vehicles",
+      viewAllFleet: "View All Vehicles",
+      unitPhoto: "Vehicle Photo",
+      closePopup: "Close",
+      cancel: "Cancel",
+      confirmBooking: "Confirm Booking",
+      pickupStartDate: "Rental Start Date",
+      namePlaceholder: "Enter name as shown on passport",
+      bookingSent: "Booking Request Received!",
+      bookingSentDescription: "Thank you, {name}. Your booking request for {vehicle} has been received. Our team will contact your WhatsApp at {phone}.",
+      done: "Done",
+      rentalDays: "{count} Day(s)",
+      allInDuration: "{count} Package(s) (10 hrs)",
+      estimatedTotal: "Estimated Total",
+      bookWhatsapp: "Book via WhatsApp",
+      booking: "Booking Form",
+      name: "Full Name",
+      phone: "WhatsApp Number (with country code)",
+      pickupDate: "Pick-up Date & Ferry Terminal",
+      submitBooking: "Submit Request",
+      bookingSuccess: "Booking request received",
+      bookingSuccessDescription: "The NadimTrans team will contact you to confirm ferry terminal pick-up and schedule.",
+      related: "Other Recommended Vehicles",
+      allVehicles: "View All Vehicles",
+      photoPlaceholder: "Vehicle Photo Area",
+      photoPlaceholderDescription: "Main photo for {name}.",
+      whatsappGreeting: "Hello NadimTrans RentCar, I am booking from Singapore for unit:",
+      whatsappVehicle: "Vehicle",
+      whatsappPackage: "Package",
+      whatsappRentalPeriod: "Rental Period",
+      whatsappDuration: "Duration",
+      whatsappEstimate: "Estimated Total",
+      whatsappClosing: "Please confirm availability and ferry terminal delivery. Thank you!",
+      whatsappQuestion: "I would like to inquire about ferry terminal pick-up and vehicle rental in Batam.",
+    },
+    services: {
+      title: "Batam Transport Services for Singapore Visitors",
+      description: "Ferry terminal transfers, luxury chauffeured rides, and self-drive rentals in Batam.",
+      heroTitle: "Batam Transport Services & Solutions",
+      heroDescription: "Dedicated mobility solutions for Singapore visitors: Harbour Bay, Batam Centre, Sekupang transfers and corporate visits.",
+      eyebrow: "FEATURED SERVICES",
+      heroImageAlt: "Batam transport services by NadimTrans RentCar",
+      flexibleTitle: "Flexible Options",
+      selfDriveTitle: "Self-Drive Rental",
+      selfDriveDescription: "Total freedom to explore Batam yourself in clean, air-conditioned, well-maintained cars.",
+      driverTitle: "Chauffeured Rental",
+      driverDescription: "Stress-free travel with experienced local drivers who know Batam's top dining, golf, and business spots.",
+      airportTitle: "Ferry & Airport Transfers",
+      airportDescription: "Prompt pick-up right at Batam Centre, Harbour Bay, Sekupang ferry terminals or Hang Nadim Airport.",
+      groupTitle: "Tour Bus & Hiace",
+      groupDescription: "Minibuses and coaches for golf groups, corporate retreats, and family trips.",
+    },
+    faq: {
+      title: "Batam Help Centre & FAQ for Singapore Travellers",
+      description: "Everything you need to know about renting a car in Batam, SGD payments, driving licence requirements, and ferry pickups.",
+      searchPlaceholder: "Search questions...",
+      category: "CATEGORIES",
+      booking: "Booking",
+      documents: "Documents & Licences",
+      payment: "Payment & Currency",
+      insurance: "Insurance",
+      bookingTitle: "Vehicle Booking",
+      documentsTitle: "Documents & Requirements",
+      paymentTitle: "Payment in SGD & Methods",
+      insuranceTitle: "Insurance Coverage",
+      results: "Search results: \"{query}\"",
+      emptyTitle: "No matching questions",
+      emptyDescription: "Try another keyword or select a category on the left.",
+      reset: "Reset Search",
+      helpTitle: "Need Help Booking from Singapore?",
+      helpDescription: "Our concierge team is available 24/7 on WhatsApp to assist your ferry arrivals and itinerary.",
+      chat: "WhatsApp Concierge Support",
+    },
+    metadata: {
+      homeTitle: "NadimTrans RentCar - Batam Car Rental in SGD (Ferry & Airport Pick-Up)",
+      homeDescription: "Top Batam car rental for Singapore visitors. Self-drive & chauffeured cars, Harbour Bay & Batam Centre ferry terminal delivery, transparent SGD rates.",
+      catalogTitle: "Batam Car Rental Fleet in SGD - Self-Drive & Chauffeur",
+      catalogDescription: "Browse Batam car rental fleet with Singapore Dollar rates: Alphard, Fortuner, Innova, Avanza, and Hiace.",
+      servicesTitle: "Batam Car Rental Services for SG Visitors - NadimTrans",
+      servicesDescription: "Self-drive, chauffeur service, and ferry terminal transfers in Batam for Singapore travellers.",
+      faqTitle: "FAQ Batam Car Rental - Driving in Batam for Singaporeans",
+      faqDescription: "Answers on renting a car in Batam for Singapore visitors: driving licence, ferry terminal pick-up, payment, and insurance.",
+    },
+  },
+  ms: {
+    language: {
+      label: "Bahasa",
+      indonesian: "Bahasa Indonesia",
+      english: "English (Global)",
+      englishSg: "English (Singapura)",
+      melayu: "Bahasa Melayu",
+      choose: "Pilih bahasa",
+    },
+    nav: {
+      home: "Laman Utama",
+      vehicles: "Kenderaan",
+      services: "Perkhidmatan",
+      faq: "Soalan Lazim",
+      contact: "Hubungi Kami",
+      openMenu: "Buka menu navigasi",
+      closeMenu: "Tutup menu navigasi",
+    },
+    common: {
+      brand: "NadimTrans RentCar",
+      all: "Semua",
+      search: "Cari",
+      noResults: "Tiada hasil yang sepadan",
+      currency: "RM",
+      perDay: "/ hari",
+      seats: "Tempat Duduk",
+      passengers: "Penumpang",
+      luggage: "Bagasi",
+      reviews: "ulasan",
+      featured: "Pilihan",
+      back: "Kembali",
+      share: "Kongsi",
+      saved: "Simpan kegemaran",
+      copied: "Pautan berjaya disalin ke papan keratan!",
+      vehicle: "Kenderaan",
+      vehicles: "kenderaan",
+      driver: "Pemandu",
+      fuel: "Bahan Api",
+      hours: "jam",
+      days: "hari",
+    },
+    hero: {
+      titleLineOne: "PERCUTIAN, KERJA,",
+      titleLineTwoPrefix: "dan SEMUA URUSAN,",
+      titleAccent: "INGAT NADIMTRANS",
+      description: "Solusi kereta sewa pandu sendiri & berpemandu dipercayai daripada PT. Nadim Auto Transindo. Perkhidmatan pantas, kenderaan terpelihara, dan sedia menemani perjalanan anda di seluruh Batam.",
+      tagline: "PERCUTIAN, KERJA, dan SEMUA URUSAN, INGAT NADIMTRANS",
+      exploreFleet: "TEROKAI ARMADA",
+      bookNow: "TEMPAH DALAM RM",
+      scroll: "GELONGSOR KE BAWAH",
+      fleet: "UNIT PRIMA",
+      service: "PERKHIDMATAN & PEMANDU",
+      trusted: "DIPERCAYAI",
+      imageAlt: "Armada Toyota Alphard VIP NadimTrans RentCar Batam",
+    },
+    home: {
+      fleetEyebrow: "Armada Pilihan NadimTrans",
+      fleetTitle: "Terokai Koleksi Kereta",
+      fleetTitleAccent: "Pilihan Terbaik",
+      fleetDescription: "Pilih kenderaan impian untuk percutian keluarga, urusan kerja, atau pengambilan di Terminal Feri & Lapangan Terbang Hang Nadim Batam dengan kadar telus.",
+      rentalRate: "Kadar Sewaan",
+      exploreAll: "Lihat Semua Kenderaan",
+      carouselPage: "Ke halaman {count}",
+      previousFleet: "Halaman armada sebelumnya",
+      nextFleet: "Halaman armada seterusnya",
+      whyEyebrow: "MENGAPA MEMILIH NADIMTRANS RENTCAR",
+      whyTitle: "Piawaian Baharu Mobiliti Perjalanan di Batam",
+      legalFleet: "Kenderaan Terpelihara & Sah",
+      whyFeatures: {
+        priceTitle: "Jaminan Kadar Terbaik",
+        priceDescription: "Kadar sewaan telus mengikut senarai harga rasmi tanpa sebarang kos tersembunyi.",
+        supportTitle: "Perkhidmatan 24/7",
+        supportDescription: "Sokongan concierge tersedia sepanjang masa untuk membantu setiap urusan perjalanan anda.",
+        flexibleTitle: "Tempahan Fleksibel",
+        flexibleDescription: "Ubah atau batalkan tempahan anda dengan mudah bersama pasukan khidmat pelanggan kami.",
+        deliveryTitle: "Penghantaran ke Jeti / Hotel",
+        deliveryDescription: "Kami menghantar kereta terus ke Terminal Feri Batam Centre, Harbour Bay, hotel atau lapangan terbang.",
+      },
+      howEyebrow: "PROSES MUDAH",
+      howTitle: "Tiga Langkah Mudah Menuju Perjalanan",
+      steps: {
+        chooseTitle: "01. Pilih Kenderaan",
+        chooseDescription: "Terokai armada premium kami dengan pilihan kenderaan berkualiti.",
+        dateTitle: "02. Tentukan Tarikh & Lokasi Feri",
+        dateDescription: "Pilih jadual anda dan lokasi ketibaan feri atau lapangan terbang.",
+        confirmTitle: "03. Sahkan & Pandu",
+        confirmDescription: "Selesaikan tempahan dan kenderaan anda sedia menunggu saat anda tiba di Batam.",
+      },
+      testimonialsEyebrow: "TESTIMONI PELANGGAN",
+      testimonialsTitle: "Kepuasan Nyata Perjalanan di Batam",
+      testimonialsDescription: "Dengarkan pengalaman sebenar para pelanggan dari Malaysia dan pelancong yang mempercayai perjalanan mereka kepada PT. Nadim Auto Transindo.",
+      previousTestimonials: "Testimoni sebelumnya",
+      nextTestimonials: "Testimoni seterusnya",
+      testimonialItems: {
+        oneQuote: "\"Sewa Toyota Alphard VIP untuk menyambut tetamu korporat dari Johor di Terminal Feri Batam Centre sangat memuaskan. Pemandu segak, berhemah, dan kereta amat bersih wangi.\"",
+        oneRole: "PENGARAH EKSEKUTIF",
+        twoQuote: "\"Unit Fortuner dan Innova Zenix sangat selesa dan berkeadaan seperti baharu. Proses sewa pandu sendiri pantas, perkhidmatan amat memuaskan.\"",
+        twoRole: "PELANCONG DARI MALAYSIA",
+        threeQuote: "\"Bercuti keliling Batam bersama keluarga jadi jimat dan santai dengan Avanza daripada NadimTrans. Kereta dihantar tepat pada masanya di jeti feri.\"",
+        threeRole: "PELANCONG KELUARGA KUALA LUMPUR",
+      },
+      faqTitle: "Soalan Lazim",
+      faqDescription: "Segala maklumat yang perlu anda ketahui sebelum memulakan perjalanan di Batam.",
+    },
+    footer: {
+      description: "Solusi pengangkutan selesa, selamat, dan dipercayai di Batam. Menyediakan sewa kereta harian, mingguan, bulanan, sewa pandu sendiri, pakej kereta + pemandu, penghantaran ke jeti feri dan Lapangan Terbang Hang Nadim. Your Journey, Our Commitment.",
+      quickLinks: "Pautan Pantas",
+      vehicleList: "Senarai Kereta",
+      servicesPackages: "Perkhidmatan & Pakej",
+      faqLink: "Soalan Lazim (FAQ)",
+      serviceContact: "Hubungi Perkhidmatan",
+      alwaysReady: "24 Jam Setiap Hari (Siaga CS)",
+      office: "Pejabat & Pusat Operasi Batam",
+      rights: "© 2022 PT. NADIM AUTO TRANSINDO (NADIMTRANS RENTCAR). HAK CIPTA TERPELIHARA.",
+      privacy: "Dasar Privasi",
+      terms: "Terma & Syarat",
+    },
+    catalog: {
+      title: "Katalog Kenderaan",
+      description: "Cari kenderaan terbaik untuk perjalanan perniagaan, percutian keluarga, atau urusan harian anda di Batam.",
+      searchPlaceholder: "Cari kenderaan...",
+      sortLabel: "Susun kenderaan",
+      sortPopular: "Paling popular",
+      sortLowest: "Harga terendah",
+      sortHighest: "Harga tertinggi",
+      showing: "Menampilkan {count} kenderaan",
+      noMatchTitle: "Tiada Kenderaan Yang Sepadan",
+      noMatchDescription: "Cuba gunakan kata kunci lain atau pilih kategori yang berbeza.",
+      viewDetails: "Lihat Butiran",
+      bookNow: "Tempah Sekarang",
+    },
+    vehicle: {
+      notFoundTitle: "Kenderaan Tidak Dijumpai",
+      notFoundDescription: "Maaf, data kenderaan yang anda cari tidak tersedia dalam armada kami.",
+      backToList: "Kembali ke Senarai Kenderaan",
+      breadcrumbHome: "Laman Utama",
+      breadcrumbVehicles: "Kenderaan",
+      rentalRate: "Kadar Sewaan",
+      primarySpecs: "Spesifikasi Utama",
+      capacity: "Kapasiti",
+      luggage: "Bagasi",
+      transmission: "Transmisi",
+      fuel: "Bahan Api",
+      engine: "Enjin",
+      power: "Kuasa Maksimum",
+      acceleration: "Pecutan",
+      overview: "Keterangan & Keselesaan",
+      features: "Ciri & Kemudahan",
+      terms: "Terma & Syarat",
+      benefits: "Kelebihan Menyewa Bersama NadimTrans RentCar:",
+      featureIntro: "Dilengkapi ciri-ciri moden untuk menyokong keselesaan dan keselamatan perjalanan anda:",
+      verificationTitle: "Dokumen Wajib Disahkan:",
+      verificationDescription: "Sila sediakan pasport dan lesen memandu sah sebelum penyerahan kenderaan.",
+      pricing: "Ringkasan Harga",
+      totalRentalEstimate: "Jumlah Anggaran Sewaan",
+      driverOption: "Pilihan Pemandu",
+      driverSurcharge: "+ Pemandu",
+      driverDailyRate: "+Pemandu/hari",
+      allInIncluded: "Pakej All In sudah merangkumi pemandu dan bahan api sehingga 10 jam.",
+      choosePackage: "Pilih Pakej Sewaan",
+      selfDrive: "Pandu Sendiri",
+      withDriver: "Bersama Pemandu",
+      rentalDuration: "Tempoh Sewaan",
+      rentalDates: "Tarikh Sewaan",
+      rentalDatesHint: "Pilih tarikh mula, kemudian tarikh selesai.",
+      quickDuration: "Pilih durasi pantas",
+      quickDurationDays: "{count} Hari",
+      rentalFrom: "Sewa dari",
+      rentalUntil: "Sehingga",
+      previousMonth: "Bulan sebelumnya",
+      nextMonth: "Bulan berikutnya",
+      loadingRentalDates: "Memuatkan kalendar tarikh sewa",
+      allInPackageCount: "Bilangan Pakej All In",
+      carRental: "Sewa Kereta ({count}x)",
+      allInPackage: "Pakej All In ({count}x 10 Jam)",
+      driverService: "Perkhidmatan Pemandu ({count}x)",
+      insurance: "Insurans Komprehensif",
+      free: "Percuma",
+      quickWhatsapp: "Sembang WhatsApp Pantas",
+      safeTransaction: "Transaksi 100% Selamat",
+      instantConfirmation: "Pengesahan Segera",
+      specialHelpTitle: "Perlukan Bantuan Khas?",
+      specialHelpDescription: "Mahu sewaan jangka panjang, sewaan syarikat bulanan, atau kereta pengantin? Hubungi pasukan VIP kami.",
+      contactSupport: "Hubungi Pasukan Sokongan",
+      similarVehicles: "Pilihan Serupa",
+      viewAllFleet: "Lihat Semua Kenderaan",
+      unitPhoto: "Gambar Unit",
+      closePopup: "Tutup tetingkap",
+      cancel: "Batal",
+      confirmBooking: "Sahkan Tempahan",
+      pickupStartDate: "Tarikh Mula Sewa",
+      namePlaceholder: "Masukkan nama seperti dalam pasport / kad pengenalan",
+      bookingSent: "Tempahan Berjaya Dihantar!",
+      bookingSentDescription: "Terima kasih, {name}. Permintaan sewa {vehicle} telah diterima. Pasukan kami akan segera menghubungi WhatsApp {phone}.",
+      done: "Selesai",
+      rentalDays: "{count} Hari",
+      allInDuration: "{count} Pakej (10 Jam)",
+      estimatedTotal: "Anggaran Jumlah",
+      bookWhatsapp: "Tempah melalui WhatsApp",
+      booking: "Borang Tempahan",
+      name: "Nama Penuh",
+      phone: "Nombor WhatsApp",
+      pickupDate: "Tarikh Pengambilan",
+      submitBooking: "Hantar Permintaan",
+      bookingSuccess: "Permintaan tempahan diterima",
+      bookingSuccessDescription: "Pasukan NadimTrans akan menghubungi anda bagi mengesahkan ketersediaan dan butiran perjalanan.",
+      related: "Cadangan Kenderaan Lain",
+      allVehicles: "Lihat Semua Kenderaan",
+      photoPlaceholder: "Kawasan Gambar Unit Kenderaan",
+      photoPlaceholderDescription: "Slot gambar utama bagi {name}.",
+      whatsappGreeting: "Salam NadimTrans RentCar, saya berminat untuk menyewa unit:",
+      whatsappVehicle: "Kenderaan",
+      whatsappPackage: "Pakej",
+      whatsappRentalPeriod: "Tempoh Sewaan",
+      whatsappDuration: "Durasi",
+      whatsappEstimate: "Anggaran Jumlah",
+      whatsappClosing: "Sila maklumkan ketersediaan unit untuk tempoh tersebut. Terima kasih!",
+      whatsappQuestion: "Saya ingin bertanyakan maklumat lanjut dan memerlukan bantuan khas bagi keperluan sewaan kenderaan saya.",
+    },
+    services: {
+      title: "Perkhidmatan Kereta Sewa Batam",
+      description: "Pilih perkhidmatan yang paling sesuai untuk setiap urusan anda di Batam.",
+      heroTitle: "Perkhidmatan & Solusi Pengangkutan Batam",
+      heroDescription: "Pilihan perkhidmatan mobiliti lengkap yang direka khas untuk keselesaan, keselamatan, dan ketepatan masa anda di Batam.",
+      eyebrow: "PERKHIDMATAN UNGGUL",
+      heroImageAlt: "Perkhidmatan pengangkutan Batam daripada NadimTrans RentCar",
+      flexibleTitle: "Pilihan Fleksibel",
+      selfDriveTitle: "Sewa Pandu Sendiri",
+      selfDriveDescription: "Kebebasan sepenuhnya memandu sendiri di Batam dengan pilihan kenderaan bersih, wangi, dan dalam keadaan terbaik.",
+      driverTitle: "Sewa Bersama Pemandu",
+      driverDescription: "Nikmati perjalanan tenang bersama pemandu profesional, mesra, dan mahir selok-belok jalan di Batam.",
+      airportTitle: "Antar Jemput Lapangan Terbang & Feri",
+      airportDescription: "Perkhidmatan eksklusif tepat masa untuk pengambilan dan penghantaran di Lapangan Terbang Hang Nadim & Terminal Feri Batam.",
+      groupTitle: "Bas Pelancongan & Hiace",
+      groupDescription: "Akomodasi perjalanan untuk rombongan pelancong, perjumpaan keluarga, dan delegasi korporat di Batam.",
+    },
+    faq: {
+      title: "Pusat Bantuan & Soalan Lazim Batam",
+      description: "Ketahui maklumat lengkap mengenai syarat sewa pandu sendiri, perkhidmatan berpemandu, kaedah pembayaran dalam RM, dan pengambilan di lapangan terbang/jeti.",
+      searchPlaceholder: "Cari soalan anda...",
+      category: "KATEGORI",
+      booking: "Tempahan",
+      documents: "Dokumen & Syarat",
+      payment: "Pembayaran",
+      insurance: "Insurans",
+      bookingTitle: "Tempahan Kenderaan",
+      documentsTitle: "Dokumen & Keperluan",
+      paymentTitle: "Kaedah & Terma Pembayaran",
+      insuranceTitle: "Perlindungan & Servis Insurans",
+      results: "Hasil Carian: \"{query}\"",
+      emptyTitle: "Tiada soalan yang sepadan",
+      emptyDescription: "Cuba gunakan kata kunci lain atau pilih kategori di sebelah kiri.",
+      reset: "Set Semula Carian",
+      helpTitle: "Masih mempunyai soalan?",
+      helpDescription: "Pasukan perkhidmatan pelanggan NadimTrans RentCar sedia membantu anda 24/7. Hubungi kami untuk bantuan pantas.",
+      chat: "Sembang WhatsApp CS Batam",
+    },
+    metadata: {
+      homeTitle: "NadimTrans RentCar - Kereta Sewa Batam Dipercayai Pandu Sendiri & Pemandu",
+      homeDescription: "Perkhidmatan sewa kereta terbaik di Batam dalam kadar Ringgit (RM). Pandu sendiri 24 jam, pemandu berpengalaman, pemindahan Lapangan Terbang Hang Nadim & Terminal Feri Batam.",
+      catalogTitle: "Senarai Armada Kereta Sewa Batam - Pandu Sendiri & Pemandu",
+      catalogDescription: "Pilihan lengkap kereta sewa Batam: Alphard, Innova, Fortuner, Avanza, Hiace, dan banyak lagi. Kadar Ringgit telus dan armada bersih.",
+      servicesTitle: "Perkhidmatan Kereta Sewa Batam - NadimTrans RentCar",
+      servicesDescription: "Perkhidmatan kereta sewa pandu sendiri, dengan pemandu, penghantaran feri/lapangan terbang di Batam.",
+      faqTitle: "Pusat Bantuan & Soalan Lazim Kereta Sewa Batam",
+      faqDescription: "Jawapan mengenai kereta sewa Batam: syarat sewa, pakej berpemandu, pembayaran dalam RM, dan insurans.",
+    },
+  },
 };
 
 export function getMessages(locale: Locale): TranslationMessages {
-  return MESSAGES[locale];
+  return MESSAGES[locale] ?? MESSAGES.id;
 }
 
 export function translate(locale: Locale, key: string, values: Record<string, string | number> = {}): string {
+  const currentMessages = MESSAGES[locale] ?? MESSAGES.id;
   const translation = key.split(".").reduce<TranslationValue | undefined>((current, segment) => {
     if (!current || typeof current === "string") return undefined;
     return current[segment];
-  }, MESSAGES[locale]);
+  }, currentMessages);
 
   if (typeof translation !== "string") return key;
 
   return translation.replace(/\{(\w+)\}/g, (_, name: string) => String(values[name] ?? `{${name}}`));
 }
 
-export function formatRupiah(value: number, locale: Locale): string {
-  const numberLocale = locale === "id" ? "id-ID" : "en-US";
-  return `Rp ${new Intl.NumberFormat(numberLocale, { maximumFractionDigits: 0 }).format(value)}`;
-}
-
 export function removeLocalePrefix(pathname: string): string {
-  if (pathname === "/en") return "/";
-  return pathname.replace(/^\/en(?=\/|$)/, "") || "/";
+  for (const loc of ["en-sg", "en", "ms"] as const) {
+    if (pathname === `/${loc}`) return "/";
+    if (pathname.startsWith(`/${loc}/`)) {
+      return pathname.replace(new RegExp(`^\\/${loc}(?=\\/|$)`), "") || "/";
+    }
+  }
+  return pathname || "/";
 }
 
 export function getLocalizedPath(locale: Locale, pathname: string): string {
   const basePath = removeLocalePrefix(pathname);
-  return locale === "en" ? (basePath === "/" ? "/en" : `/en${basePath}`) : basePath;
+  if (locale === "id") return basePath;
+  return basePath === "/" ? `/${locale}` : `/${locale}${basePath}`;
+}
+
+/**
+ * Mendeteksi preferensi locale pengunjung secara otomatis:
+ * 1. Timezone perangkat (Asia/Singapore -> en-sg, Asia/Kuala_Lumpur/Kuching -> ms, Indonesia -> id)
+ * 2. Bahasa sistem browser (navigator.languages & navigator.language)
+ */
+export function detectVisitorLocale(): Locale {
+  if (typeof window === "undefined") return "id";
+
+  // 1. Cek Timezone sistem perangkat pengguna (instant 0ms)
+  try {
+    const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
+    if (tz) {
+      if (tz === "Asia/Singapore") return "en-sg";
+      if (tz === "Asia/Kuala_Lumpur" || tz === "Asia/Kuching") return "ms";
+      if (
+        tz === "Asia/Jakarta" ||
+        tz === "Asia/Pontianak" ||
+        tz === "Asia/Makassar" ||
+        tz === "Asia/Jayapura"
+      ) {
+        return "id";
+      }
+    }
+  } catch {
+    // Lewati jika timezone tidak didukung
+  }
+
+  // 2. Cek semua preferensi bahasa di browser
+  try {
+    const candidateLanguages: string[] = [];
+    if (Array.isArray(navigator.languages) && navigator.languages.length > 0) {
+      candidateLanguages.push(...navigator.languages);
+    }
+    if (navigator.language) {
+      candidateLanguages.push(navigator.language);
+    }
+
+    const normalized = candidateLanguages.map((l) => (l || "").toLowerCase());
+
+    for (const lang of normalized) {
+      // Singapore: en-sg, zh-sg, ms-sg, ta-sg
+      if (lang === "en-sg" || lang.endsWith("-sg") || lang.includes("sg")) {
+        return "en-sg";
+      }
+      // Malaysia: ms, ms-my, en-my, zh-my, ta-my
+      if (lang === "ms" || lang.startsWith("ms-") || lang.endsWith("-my") || lang.includes("my")) {
+        return "ms";
+      }
+      // Indonesia: id, id-id
+      if (lang === "id" || lang.startsWith("id-")) {
+        return "id";
+      }
+    }
+
+    // Bahasa Inggris global
+    for (const lang of normalized) {
+      if (lang.startsWith("en")) {
+        return "en";
+      }
+    }
+  } catch {
+    // Lewati jika navigator tidak didukung
+  }
+
+  return "id";
 }

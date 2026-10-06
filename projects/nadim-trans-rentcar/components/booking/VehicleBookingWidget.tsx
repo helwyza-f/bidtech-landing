@@ -5,7 +5,10 @@ import { useTranslations } from "next-intl";
 import dynamic from "next/dynamic";
 import { Button } from "@/components/ui/button";
 import RentalDateSelector from "@/components/ui/RentalDateSelector";
-import type { DeliveryLocationData } from "@/components/booking/DeliveryMapPicker";
+import {
+  formatDistrictDisplay,
+  type DeliveryLocationData,
+} from "@/components/booking/DeliveryMapPicker";
 import { formatRupiah, type Locale } from "@/lib/i18n";
 import type { Car } from "@/lib/data";
 import { KeyRound, UserRoundCheck, Clock, Sparkles } from "lucide-react";
@@ -125,13 +128,13 @@ export default function VehicleBookingWidget({
     if (selectedPackage === "self-drive") {
       return {
         dailyTotal: car.price,
-        packageLabel: locale === "id" ? "Lepas Kunci" : "Self-Drive",
+        packageLabel: locale === "id" ? "Lepas Kunci" : locale === "ms" ? "Pandu Sendiri" : "Self-Drive",
       };
     }
 
     return {
       dailyTotal: car.price + 250000,
-      packageLabel: locale === "id" ? "Dengan Supir" : "With Driver",
+      packageLabel: locale === "id" ? "Dengan Supir" : locale === "ms" ? "Bersama Pemandu" : "With Driver",
     };
   };
 
@@ -140,7 +143,7 @@ export default function VehicleBookingWidget({
   const totalCostFormatted = formatRupiah(totalCost, locale);
 
   const dateFormatter = new Intl.DateTimeFormat(
-    locale === "id" ? "id-ID" : "en-US",
+    locale === "id" ? "id-ID" : locale === "ms" ? "ms-MY" : locale === "en-sg" ? "en-SG" : "en-US",
     {
       day: "numeric",
       month: "short",
@@ -153,30 +156,41 @@ export default function VehicleBookingWidget({
       ? `${dateFormatter.format(startDate)} - ${dateFormatter.format(endDate)}`
       : "";
 
-  const durationLabel = `${rentalDays} ${locale === "id" ? "Hari" : "Days"}`;
+  const durationLabel = `${rentalDays} ${locale === "id" || locale === "ms" ? "Hari" : "Days"}`;
 
   // WhatsApp Handler dengan data lengkap & titik Maps real-time
   const handleWhatsAppOrder = () => {
     if (!startDate || !endDate) return;
 
+    const isMalay = locale === "ms";
+    const isIndo = locale === "id";
+
+    const greeting = isIndo
+      ? "Halo NadimTrans RentCar, saya ingin memesan rental mobil:"
+      : isMalay
+      ? "Salam NadimTrans RentCar, saya ingin menempah kereta sewa:"
+      : "Hello NadimTrans RentCar, I would like to book a car:";
+
+    const closing = isIndo
+      ? "Mohon konfirmasi ketersediaan unit dan jadwal pengantaran. Terima kasih!"
+      : isMalay
+      ? "Sila sahkan ketersediaan unit dan jadual penghantaran. Terima kasih!"
+      : "Please confirm unit availability and delivery schedule. Thank you!";
+
     const messageLines = [
-      locale === "id"
-        ? "Halo NadimTrans RentCar, saya ingin memesan rental mobil:"
-        : "Hello NadimTrans RentCar, I would like to book a car:",
+      greeting,
       "",
-      `- ${locale === "id" ? "Kendaraan" : "Vehicle"}: ${car.name} (${car.type})`,
-      `- ${locale === "id" ? "Pilihan Layanan" : "Rental Package"}: ${packageLabel}`,
-      `- ${locale === "id" ? "Periode Sewa" : "Rental Period"}: ${rentalPeriod} (${durationLabel})`,
-      `- ${locale === "id" ? "Jam Pengantaran" : "Delivery Time"}: ${deliveryTime} WIB`,
-      `- ${locale === "id" ? "Layanan" : "Service"}: ${locale === "id" ? "Diantar Langsung ke Lokasi" : "Direct Delivery to Location"}`,
-      `- ${locale === "id" ? "Wilayah / Kecamatan" : "Sub-District"}: Kec. ${deliveryData.kecamatan || "Batam Kota"}`,
-      `- ${locale === "id" ? "Detail Alamat / Patokan" : "Delivery Address"}: ${deliveryData.address || "-"}`,
-      `- ${locale === "id" ? "Titik Google Maps Driver" : "Google Maps Pin Link"}: ${deliveryData.googleMapsUrl}`,
-      `- ${locale === "id" ? "Estimasi Total Biaya" : "Estimated Total"}: ${totalCostFormatted}`,
+      `- ${isIndo ? "Kendaraan" : isMalay ? "Kenderaan" : "Vehicle"}: ${car.name} (${car.type})`,
+      `- ${isIndo ? "Pilihan Layanan" : isMalay ? "Pakej Sewaan" : "Rental Package"}: ${packageLabel}`,
+      `- ${isIndo || isMalay ? "Periode Sewa" : "Rental Period"}: ${rentalPeriod} (${durationLabel})`,
+      `- ${isIndo ? "Jam Pengantaran" : isMalay ? "Masa Penghantaran" : "Delivery Time"}: ${deliveryTime} WIB`,
+      `- ${isIndo ? "Layanan" : isMalay ? "Perkhidmatan" : "Service"}: ${isIndo ? "Diantar Langsung ke Lokasi" : isMalay ? "Dihantar Terus ke Lokasi" : "Direct Delivery to Location"}`,
+      `- ${isIndo ? "Wilayah / Kecamatan" : isMalay ? "Kawasan / Daerah" : "Sub-District"}: Kec. ${deliveryData.kecamatan || "Batam Kota"}`,
+      `- ${isIndo ? "Detail Alamat / Patokan" : isMalay ? "Butiran Alamat / Tanda Arah" : "Delivery Address"}: ${deliveryData.address || "-"}`,
+      `- ${isIndo ? "Titik Google Maps Driver" : isMalay ? "Pautan Google Maps Pemandu" : "Google Maps Pin Link"}: ${deliveryData.googleMapsUrl}`,
+      `- ${isIndo ? "Estimasi Total Biaya" : isMalay ? "Anggaran Jumlah Kos" : "Estimated Total"}: ${totalCostFormatted}`,
       "",
-      locale === "id"
-        ? "Mohon konfirmasi ketersediaan unit dan jadwal pengantaran. Terima kasih!"
-        : "Please confirm unit availability and delivery schedule. Thank you!",
+      closing,
     ];
 
     const encodedText = encodeURIComponent(messageLines.join("\n"));
@@ -190,7 +204,7 @@ export default function VehicleBookingWidget({
       {/* 1. Header: Total Estimasi Sewa */}
       <div className={isSplitOnTablet ? "pb-3 border-b border-gray-100 md:pb-0 md:border-b-0" : "pb-3 border-b border-gray-100"}>
         <span className="text-xs md:text-sm font-semibold text-gray-500 block mb-0.5">
-          {locale === "id" ? "Total Estimasi Sewa" : "Total Rental Estimate"}
+          {locale === "id" ? "Total Estimasi Sewa" : locale === "ms" ? "Jumlah Anggaran Sewaan" : "Total Rental Estimate"}
         </span>
         <div className="flex flex-wrap items-baseline gap-x-2 gap-y-0.5">
           <span className="text-[28px] leading-tight sm:text-4xl font-black text-[#cd7f32]">
@@ -199,7 +213,7 @@ export default function VehicleBookingWidget({
           <span className="text-xs md:text-sm text-gray-500 font-semibold">
             {isDateSelected
               ? `(${durationLabel})`
-              : (locale === "id" ? "/ hari" : "/ day")}
+              : (locale === "id" || locale === "ms" ? "/ hari" : "/ day")}
           </span>
         </div>
       </div>
@@ -235,7 +249,7 @@ export default function VehicleBookingWidget({
             >
               <KeyRound className="h-4 w-4 text-amber-600 flex-shrink-0" />
               <span className="text-xs font-bold leading-tight">
-                {locale === "id" ? "Lepas Kunci" : "Self-Drive"}
+                {locale === "id" ? "Lepas Kunci" : locale === "ms" ? "Pandu Sendiri" : "Self-Drive"}
               </span>
             </button>
 
@@ -252,10 +266,10 @@ export default function VehicleBookingWidget({
               <UserRoundCheck className="h-4 w-4 text-amber-600 flex-shrink-0" />
               <div className="text-left leading-tight">
                 <span className="block text-xs font-bold">
-                  {locale === "id" ? "Dengan Supir" : "With Driver"}
+                  {locale === "id" ? "Dengan Supir" : locale === "ms" ? "Bersama Pemandu" : "With Driver"}
                 </span>
                 <span className="text-[10px] text-gray-500 font-semibold mt-0.5 block">
-                  +Rp250.000/hari
+                  +{formatRupiah(250000, locale)}/{locale === "id" || locale === "ms" ? "hari" : "day"}
                 </span>
               </div>
             </button>
@@ -293,27 +307,56 @@ export default function VehicleBookingWidget({
 
       {/* 6. Rincian Akhir & Tombol WhatsApp (Semua di halaman yang sama) */}
       <div className="pt-3 border-t border-gray-100 space-y-3">
-        {/* Ringkasan Singkat Pesanan */}
-        <div className="p-3 md:p-4 rounded-2xl bg-amber-50/50 border border-amber-200/60 space-y-1.5 text-xs md:text-[13px] text-gray-700">
-          <div className="flex justify-between font-medium">
-            <span className="text-gray-500">{locale === "id" ? "Kendaraan & Layanan:" : "Vehicle & Option:"}</span>
-            <span className="font-bold text-gray-900 text-right">{car.name} ({packageLabel})</span>
+        {/* Ringkasan Singkat Pesanan (Background Putih, Luas & Berjarak, Baris Terpisah Rapi) */}
+        <div className="p-3.5 sm:p-4 rounded-2xl bg-white border border-gray-200/90 shadow-2xs space-y-2.5 sm:space-y-3 text-xs sm:text-[13px] text-gray-700">
+          {/* 1. Kendaraan */}
+          <div className="flex items-start justify-between gap-3">
+            <span className="text-gray-500 flex-shrink-0">
+              {locale === "id" ? "Kendaraan:" : "Vehicle:"}
+            </span>
+            <span className="font-bold text-gray-900 text-right leading-snug">
+              {car.name}
+            </span>
           </div>
-          <div className="flex justify-between font-medium">
-            <span className="text-gray-500">{locale === "id" ? "Jadwal Pengantaran:" : "Delivery Schedule:"}</span>
-            <span className="font-bold text-gray-900 text-right">
+
+          {/* 2. Layanan */}
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-gray-500 flex-shrink-0">
+              {locale === "id" ? "Layanan:" : "Service:"}
+            </span>
+            <span className="font-semibold text-gray-900 text-right">
+              {packageLabel}
+            </span>
+          </div>
+
+          {/* 3. Jadwal Pengantaran */}
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-gray-500 flex-shrink-0">
+              {locale === "id" ? "Jadwal Pengantaran:" : "Delivery Schedule:"}
+            </span>
+            <span className="font-semibold text-gray-900 text-right">
               {startDate ? dateFormatter.format(startDate) : "-"} ({deliveryTime} WIB)
             </span>
           </div>
-          <div className="flex justify-between font-medium">
-            <span className="text-gray-500">{locale === "id" ? "Titik Antar / Jemput:" : "Delivery / Pick-up Spot:"}</span>
-            <span className="font-bold text-amber-800 truncate max-w-[60%] text-right">
-              Kec. {deliveryData.kecamatan || "Batam Kota"}
+
+          {/* 4. Titik Antar / Jemput */}
+          <div className="flex items-center justify-between gap-3">
+            <span className="text-gray-500 flex-shrink-0">
+              {locale === "id" ? "Titik Antar / Jemput:" : "Delivery Spot:"}
+            </span>
+            <span className="font-semibold text-gray-900 text-right">
+              Kec. {formatDistrictDisplay(deliveryData.kecamatan || "Batam Kota")}
             </span>
           </div>
-          <div className="flex justify-between items-baseline pt-1.5 border-t border-amber-200/80 font-extrabold text-sm text-gray-900">
-            <span>{locale === "id" ? "Total Estimasi Sewa:" : "Total Rental Estimate:"}</span>
-            <span className="text-[#cd7f32] text-base font-black">{totalCostFormatted}</span>
+
+          {/* 5. Total Estimasi Sewa */}
+          <div className="flex items-center justify-between gap-3 pt-2.5 sm:pt-3 border-t border-gray-100">
+            <span className="font-extrabold text-xs sm:text-sm text-gray-900">
+              {locale === "id" ? "Total Estimasi Sewa:" : "Total Rental Estimate:"}
+            </span>
+            <span className="text-amber-600 sm:text-base font-black tracking-tight">
+              {totalCostFormatted}
+            </span>
           </div>
         </div>
 

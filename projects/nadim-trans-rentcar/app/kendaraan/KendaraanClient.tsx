@@ -205,18 +205,18 @@ export default function KendaraanClient() {
                       </Link>
 
                       <div className="flex flex-1 flex-col pt-6 px-6">
-                        <div className="flex justify-between items-start mb-4">
-                          <Link href={getLocalizedPath(locale, `/kendaraan/${car.slug}`)} className="block">
-                            <h2 className="text-xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors">
+                        <div className="flex justify-between items-start gap-4 mb-4">
+                          <Link href={getLocalizedPath(locale, `/kendaraan/${car.slug}`)} className="block min-w-0 flex-1">
+                            <h2 className="text-lg sm:text-xl font-bold text-gray-900 group-hover:text-amber-600 transition-colors leading-snug">
                               {car.name}
                             </h2>
-                            <p className="text-gray-500 text-sm">{car.type}</p>
+                            <p className="text-gray-500 text-xs sm:text-sm mt-0.5">{car.type}</p>
                           </Link>
-                          <div className="text-right">
-                            <span className="text-lg font-black text-amber-600">
+                          <div className="text-right flex-shrink-0">
+                            <span className="text-lg font-black text-amber-600 block whitespace-nowrap">
                               {formatRupiah(car.price, locale)}
                             </span>
-                            <span className="text-xs text-gray-500 block">{car.priceNote}</span>
+                            <span className="text-xs text-gray-500 block mt-0.5 whitespace-nowrap">{car.priceNote}</span>
                           </div>
                         </div>
 

@@ -488,7 +488,7 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
                       </div>
 
                       <div className="p-4 sm:p-5">
-                        <div className="flex justify-between items-start gap-2 mb-3 min-h-[3rem]">
+                        <div className="flex justify-between items-start gap-3.5 sm:gap-4 mb-3 min-h-[3rem]">
                           <div className="min-w-0 flex-1">
                             <h3 className="font-bold text-gray-900 group-hover:text-amber-600 transition-colors text-base truncate">
                               {relCar.name}

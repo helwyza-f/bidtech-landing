@@ -25,6 +25,12 @@ const LEGACY_VEHICLE_ID_TO_SLUG = {
   15: "daihatsu-new-ayla",
   16: "alphard-gen-4-all-in",
   17: "hiace-premio-basic-all-in",
+  18: "mitsubishi-xpander",
+  19: "honda-new-hrv",
+  20: "toyota-hiace-luxury-all-in",
+  21: "isuzu-elf-long-all-in",
+  22: "medium-bus-34-seat-all-in",
+  23: "big-bus-50-seat-all-in",
 };
 
 const nextConfig = {

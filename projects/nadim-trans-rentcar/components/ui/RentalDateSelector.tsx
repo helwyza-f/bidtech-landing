@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState } from "react";
-import { ChevronLeft, ChevronRight, Clock } from "lucide-react";
+import { ChevronLeft, ChevronRight, Clock, ChevronDown } from "lucide-react";
 import { useTranslations } from "next-intl";
 import type { Locale } from "@/lib/i18n";
 
@@ -141,7 +141,7 @@ export default function RentalDateSelector({
       {/* Sewa Dari, Jam Pengantaran & Hingga (Tata letak presisi, rapi & tidak overflow garis pemisah) */}
       <dl className={`grid ${deliveryTime ? "grid-cols-[1fr_auto_1fr]" : "grid-cols-2"} divide-x divide-gray-200 border-y border-gray-100 py-3 items-center`}>
         {/* 1. SEWA DARI */}
-        <div className="min-w-0 pr-3 sm:pr-4">
+        <div className="min-w-0 pr-2 sm:pr-4">
           <dt className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
             {t("rentalFrom")}
           </dt>
@@ -150,15 +150,11 @@ export default function RentalDateSelector({
           </dd>
         </div>
 
-        {/* 2. JAM ANTAR (Terlihat jelas bisa diedit & penting dengan badge wajib dan icon pensil) */}
+        {/* 2. ATUR JAM ANTAR (Desain bersih tanpa badge Penting, interaktif dengan dropdown hint) */}
         {deliveryTime && (
-          <div className="min-w-0 px-2 sm:px-4 text-center">
-            <dt className="text-[10px] font-bold uppercase tracking-wider text-amber-950 flex items-center justify-center gap-1">
-              <Clock className="w-3 h-3 text-amber-700" />
-              <span>{locale === "id" ? "Jam Antar" : "Time"}</span>
-              <span className="text-[9px] font-black text-amber-800 bg-amber-200/80 px-1 py-0.2 rounded uppercase tracking-tight">
-                {locale === "id" ? "Penting" : "Req"}
-              </span>
+          <div className="min-w-0 px-1.5 sm:px-3 text-center">
+            <dt className="text-[10px] font-bold uppercase tracking-wider text-gray-500 flex items-center justify-center gap-1">
+              <span>{locale === "id" ? "Atur Jam Antar" : "Set Time"}</span>
             </dt>
             <dd className="mt-1 flex items-center justify-center">
               <div
@@ -169,26 +165,30 @@ export default function RentalDateSelector({
                     timeInputRef.current?.focus();
                   }
                 }}
-                className="group inline-flex items-center gap-1.5 bg-gradient-to-r from-amber-50 via-white to-amber-50 hover:from-amber-100 hover:to-orange-50 border-2 border-amber-400 hover:border-amber-500 rounded-xl px-2.5 py-1 transition-all cursor-pointer shadow-xs hover:shadow-md active:scale-95 ring-2 ring-amber-400/20"
-                title={locale === "id" ? "Klik untuk ubah jam pengantaran" : "Click to edit delivery time"}
+                className="relative group inline-flex items-center gap-1 sm:gap-1.5 bg-white hover:bg-gray-50 border border-gray-300 hover:border-gray-900 rounded-xl px-2 sm:px-2.5 py-1 transition-all cursor-pointer shadow-2xs hover:shadow-xs active:scale-95"
+                title={locale === "id" ? "Klik untuk atur jam pengantaran" : "Click to set delivery time"}
               >
-                <Clock className="w-3.5 h-3.5 text-amber-700 flex-shrink-0 group-hover:scale-110 transition-transform" />
+                <Clock className="w-3.5 h-3.5 text-gray-700 flex-shrink-0 group-hover:text-gray-900 transition-colors" />
+                <span className="text-xs font-black text-gray-900 tracking-tight">
+                  {deliveryTime}
+                </span>
+                <span className="text-[10px] font-bold text-gray-500">WIB</span>
+                <ChevronDown className="w-3 h-3 text-gray-400 group-hover:text-gray-700 transition-colors flex-shrink-0" />
                 <input
                   ref={timeInputRef}
                   type="time"
                   value={deliveryTime}
                   onChange={(e) => onDeliveryTimeChange?.(e.target.value)}
-                  className="text-xs font-black text-amber-950 bg-transparent focus:outline-none cursor-pointer w-[54px] p-0 text-center [&::-webkit-calendar-picker-indicator]:hidden [&::-webkit-inner-spin-button]:hidden"
-                  aria-label={locale === "id" ? "Jam Pengantaran" : "Delivery Time"}
+                  className="absolute inset-0 opacity-0 cursor-pointer w-full h-full"
+                  aria-label={locale === "id" ? "Atur Jam Pengantaran" : "Set Delivery Time"}
                 />
-                <span className="text-[9px] font-black text-amber-900 tracking-tight">WIB</span>
               </div>
             </dd>
           </div>
         )}
 
         {/* 3. HINGGA */}
-        <div className="min-w-0 pl-3 sm:pl-4 text-right sm:text-left">
+        <div className="min-w-0 pl-2 sm:pl-4 text-right sm:text-left">
           <dt className="text-[10px] font-bold uppercase tracking-wider text-gray-400">
             {t("rentalUntil")}
           </dt>

@@ -6,17 +6,23 @@ export const SITE_URL = "https://nadimtrans.com";
 const OPEN_GRAPH_LOCALE: Record<Locale, string> = {
   id: "id_ID",
   en: "en_US",
+  "en-sg": "en_SG",
+  ms: "ms_MY",
 };
 
 export function localizedAlternates(locale: Locale, pathname: string) {
   const idPath = getLocalizedPath("id", pathname);
   const enPath = getLocalizedPath("en", pathname);
+  const enSgPath = getLocalizedPath("en-sg", pathname);
+  const msPath = getLocalizedPath("ms", pathname);
 
   return {
     canonical: getLocalizedPath(locale, pathname),
     languages: {
       id: idPath,
       en: enPath,
+      "en-SG": enSgPath,
+      ms: msPath,
       "x-default": idPath,
     },
   };
@@ -63,7 +69,7 @@ export function rootMetadata(locale: Locale): Metadata {
     metadataBase: new URL(SITE_URL),
     title: {
       default: title,
-      template: locale === "id" ? "%s | NadimTrans RentCar Batam" : "%s | NadimTrans RentCar Batam",
+      template: "%s | NadimTrans RentCar Batam",
     },
     description,
     applicationName: "NadimTrans RentCar",

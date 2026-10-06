@@ -1139,21 +1139,6 @@ export default function DeliveryMapPicker({
 
   return (
     <div className="space-y-3 pt-1">
-      {/* 1. Header: Wilayah Pengantaran Terdeteksi (Jelas, besar, tanpa terpotong) */}
-      <div className="flex items-center gap-3 bg-gradient-to-r from-amber-50/90 via-orange-50/50 to-amber-50/90 border border-amber-300/80 p-3 sm:p-3.5 rounded-2xl shadow-xs">
-        <div className="w-9 h-9 rounded-xl bg-amber-500/20 border border-amber-400/50 flex items-center justify-center flex-shrink-0 text-amber-800 shadow-xs">
-          <MapPin className="w-4.5 h-4.5 text-amber-700" />
-        </div>
-        <div className="flex-1 min-w-0">
-          <span className="text-[10px] sm:text-[11px] font-bold tracking-wider text-amber-800/80 uppercase block leading-tight">
-            {locale === "id" ? "Wilayah Pengantaran:" : "Delivery District:"}
-          </span>
-          <span className="font-black text-amber-950 text-base sm:text-lg block leading-snug">
-            Kecamatan {formatDistrictDisplay(value.kecamatan || "Batam Kota")}
-          </span>
-        </div>
-      </div>
-
       {/* 2. Pencarian Alamat & Tempat dengan Live Autocomplete (Sekarang di Atas Peta) */}
       <div ref={searchWrapperRef} className="relative space-y-2 pt-0.5">
         {/* Form Cari Alamat dengan Icon Searching yang Nyatu */}
@@ -1368,30 +1353,47 @@ export default function DeliveryMapPicker({
         </div>
       </div>
 
-      {/* 4. Detail Alamat / Patokan Penjemputan */}
-      <div className="space-y-1.5 pt-1">
-        <label className="text-xs font-bold text-gray-800 block">
-          {locale === "id" ? "Detail Alamat / Patokan Penjemputan:" : "Pick-up Address / Landmark Details:"}
-        </label>
-        <textarea
-          rows={2}
-          value={value.address}
-          onChange={(e) => {
-            const updatedAddress = e.target.value;
-            const detectedKecamatan = detectKecamatan(value.latitude, value.longitude, updatedAddress);
-            onChange({
-              ...value,
-              address: updatedAddress,
-              kecamatan: detectedKecamatan,
-            });
-          }}
-          placeholder={
-            locale === "id"
-              ? "Contoh: Lobi Kedatangan Bandara Hang Nadim / Hotel Marriott kamar 402 / Nama Perumahan"
-              : "e.g. Arrival Lobby Hang Nadim Airport / Hotel Marriott Room 402 / Housing Complex"
-          }
-          className="w-full text-xs p-3 rounded-xl border border-gray-200 bg-white placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-500 leading-relaxed resize-none shadow-xs"
-        />
+      {/* 4. Detail Alamat / Patokan Penjemputan (Headlight / Highlight Section) */}
+      <div className="space-y-2 pt-1">
+        <div className="flex items-center justify-between gap-2">
+          <div className="flex items-center gap-1.5 min-w-0">
+            <div className="w-6 h-6 rounded-lg bg-gray-900 text-white flex items-center justify-center flex-shrink-0 shadow-2xs">
+              <MapPin className="w-3.5 h-3.5 text-white" />
+            </div>
+            <label className="text-xs sm:text-[13px] font-black text-gray-900 tracking-tight block truncate">
+              {locale === "id" ? "Detail Alamat" : "Pick-up Address & Details"}
+            </label>
+          </div>
+        </div>
+        <div className="relative rounded-xl border border-gray-200 focus-within:border-gray-900 focus-within:ring-2 focus-within:ring-gray-900/10 bg-white shadow-2xs transition-all">
+          <textarea
+            rows={2}
+            value={value.address}
+            onChange={(e) => {
+              const updatedAddress = e.target.value;
+              const detectedKecamatan = detectKecamatan(value.latitude, value.longitude, updatedAddress);
+              onChange({
+                ...value,
+                address: updatedAddress,
+                kecamatan: detectedKecamatan,
+              });
+            }}
+            placeholder={
+              locale === "id"
+                ? "Contoh: Lobi Kedatangan Bandara Hang Nadim / Hotel Marriott kamar 402 / Nama Perumahan"
+                : "e.g. Arrival Lobby Hang Nadim Airport / Hotel Marriott Room 402 / Housing Complex"
+            }
+            className="w-full text-xs sm:text-[13px] p-3 text-gray-900 bg-transparent placeholder:text-gray-400 focus:outline-none leading-relaxed resize-none"
+          />
+        </div>
+        <p className="text-[10px] sm:text-[11px] text-gray-500 flex items-center gap-1 leading-tight">
+          <span className="text-gray-400">💡</span>
+          <span>
+            {locale === "id"
+              ? "Tulis patokan jelas agar tim driver kami mudah menemukan lokasi Anda."
+              : "Provide clear landmarks to help our driver team locate you easily."}
+          </span>
+        </p>
       </div>
 
       {/* 5. Dedicated Floating Leaflet Map Popup Modal (via React Portal) */}

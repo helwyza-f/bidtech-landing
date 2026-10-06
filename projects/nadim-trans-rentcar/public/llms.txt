@@ -50,6 +50,8 @@ Menjadi perusahaan rental mobil dan layanan transportasi terpercaya di Batam yan
 - **Toyota Innova Zenix**: Mulai dari Rp 600.000 / Hari
 - **Toyota Innova Reborn**: Mulai dari Rp 550.000 / Hari
 - **Toyota Fortuner GR Sport**: Mulai dari Rp 1.300.000 / Hari
+- **Honda New HR-V**: Mulai dari Rp 650.000 / Hari
+- **Mitsubishi Xpander**: Mulai dari Rp 450.000 / Hari
 - **Toyota All New Avanza**: Mulai dari Rp 350.000 / Hari
 - **Daihatsu All New Xenia**: Mulai dari Rp 350.000 / Hari
 - **Honda Brio**: Mulai dari Rp 300.000 / Hari
@@ -58,7 +60,11 @@ Menjadi perusahaan rental mobil dan layanan transportasi terpercaya di Batam yan
 - **Daihatsu Rocky**: Mulai dari Rp 350.000 / Hari
 - **Hyundai Stargazer**: Mulai dari Rp 400.000 / Hari
 - **Toyota Hiace Commuter (14 Seat)**: Mulai dari Rp 1.300.000 / Hari (Include Driver)
-- **Toyota Hiace Premio (11-13 Seat)**: Mulai dari Rp 2.000.000 / Hari (Include Driver)
+- **Toyota Hiace Premio (10-12 Seat)**: Mulai dari Rp 2.000.000 / Hari (Include Driver)
+- **Toyota Hiace Premio Luxury (VIP Captain Seat 10 Seat)**: Mulai dari Rp 2.500.000 / 12 Jam (Include Driver & BBM)
+- **Isuzu Elf Long (19 Seat)**: Mulai dari Rp 1.400.000 / 12 Jam (Include Driver & BBM)
+- **Medium Bus Pariwisata (34 Seat)**: Mulai dari Rp 1.600.000 / 12 Jam (Include Driver & BBM)
+- **Big Bus Pariwisata (50 Seat)**: Mulai dari Rp 2.500.000 / 12 Jam (Include Driver & BBM)
 
 ## Persyaratan Sewa
 - **WNI (Lepas Kunci)**: KTP Asli, SIM A aktif (minimal 1 tahun), deposit jaminan (refundable 100%), tiket pesawat / bukti booking hotel (jika wisatawan).

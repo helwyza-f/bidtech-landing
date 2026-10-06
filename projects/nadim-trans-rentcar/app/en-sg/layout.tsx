@@ -11,9 +11,9 @@ export const viewport: Viewport = {
   themeColor: "#020617",
 };
 
-export const metadata = rootMetadata("en");
+export const metadata = rootMetadata("en-sg");
 
-export default function EnglishLayout({ children }: { children: React.ReactNode }) {
-  unstable_setRequestLocale("en");
-  return <RootDocument locale="en" detectBrowserLocale>{children}</RootDocument>;
+export default function EnglishSingaporeLayout({ children }: { children: React.ReactNode }) {
+  unstable_setRequestLocale("en-sg");
+  return <RootDocument locale="en-sg">{children}</RootDocument>;
 }

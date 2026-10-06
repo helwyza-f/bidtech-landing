@@ -1,6 +1,6 @@
 import { ALL_CARS, CATEGORIES, type Car, type CarSpec } from "@/lib/data";
 import { ALL_FAQS, type FaqItem } from "@/lib/faqData";
-import type { Locale } from "@/lib/i18n";
+import { formatCurrency, type Locale } from "@/lib/i18n";
 
 type EnglishCarCopy = Pick<Car, "type" | "priceNote" | "description" | "features" | "included" | "terms"> & {
   specs: Partial<CarSpec>;
@@ -16,7 +16,7 @@ const ALL_IN_INCLUDED = [
 const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   1: {
     type: "Luxury Executive MPV",
-    priceNote: "Up to 10 hours (All-In: Driver & Fuel)",
+    priceNote: "/ 10 hrs (All-In)",
     specs: { transmission: "Automatic CVT", fuel: "Premium Petrol", acceleration: "8.9 seconds (0–100 km/h)" },
     description: "Toyota Alphard Gen 3 sets a high standard for executive travel in Batam. It is ideal for VVIP airport pick-ups, official visits, business guests from Singapore or Malaysia, weddings, and formal events.",
     features: ["Executive ottoman captain seats with heating and ventilation", "Dual electric panoramic sunroofs", "Rear-seat entertainment monitor and premium audio", "Automatic electric sliding doors on both sides", "Quiet cabin with high-privacy glass", "360-degree camera and Toyota Safety Sense"],
@@ -25,7 +25,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   2: {
     type: "High-Capacity Passenger Minibus",
-    priceNote: "Up to 10 hours (All-In: Driver & Fuel)",
+    priceNote: "/ 10 hrs (All-In)",
     specs: { transmission: "5-speed manual", fuel: "Diesel", acceleration: "14.5 seconds (0–100 km/h)" },
     description: "Toyota Hiace Commuter is a high-capacity van for up to 15 passengers. It is a practical choice for sightseeing groups, company events, airport or ferry transfers, and study trips in Batam.",
     features: ["Spacious seating for up to 15 passengers", "Ceiling-ducted air conditioning to the rear rows", "Reclining ergonomic seats with individual seat belts", "Wide sliding door for easy boarding", "Comfortable suspension for longer trips", "Complete audio and multimedia system"],
@@ -34,7 +34,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   3: {
     type: "Premium Executive Minibus",
-    priceNote: "Up to 10 hours (All-In: Driver & Fuel)",
+    priceNote: "/ 10 hrs (All-In)",
     specs: { transmission: "6-speed manual", fuel: "Diesel", acceleration: "12.8 seconds (0–100 km/h)" },
     description: "Toyota Hiace Premio combines a modern semi-bonnet design with a spacious, quiet, and refined cabin. It is a dependable option for corporate delegates, official guests, and VIP family trips in Batam.",
     features: ["Modern aerodynamic semi-bonnet design", "Spacious cabin with captain-seat-style seating", "Quiet cabin insulation and comfortable suspension", "Touchscreen head unit and USB ports in every row", "Vehicle Stability Control and Hill Start Assist", "Emergency Brake Signal and dual SRS airbags"],
@@ -43,7 +43,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   4: {
     type: "Premium Passenger Minibus",
-    priceNote: "Up to 10 hours (All-In: Driver & Fuel)",
+    priceNote: "/ 10 hrs (All-In)",
     specs: { transmission: "6-speed manual", fuel: "Diesel", acceleration: "12.8 seconds (0–100 km/h)" },
     description: "Toyota Hiace Premio Basic offers a roomy, modern cabin for group travel in Batam. It is well suited to family tours, company visits, airport transfers, and group journeys with a complete driver-and-fuel package.",
     features: ["Comfortable capacity for up to 12 passengers", "Ceiling-ducted air conditioning to the rear rows", "Spacious semi-bonnet cabin with reclining seats", "Wide sliding door for easy passenger access", "Audio system and USB ports for group trips", "Vehicle Stability Control and Hill Start Assist"],
@@ -52,7 +52,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   5: {
     type: "Premium Tough SUV",
-    priceNote: "Per day (Car only) / Rp 2,000,000 (Car with driver for 12 hours)",
+    priceNote: "/ day",
     specs: { transmission: "6-speed automatic sport", fuel: "Turbo diesel", acceleration: "9.2 seconds (0–100 km/h)" },
     description: "Toyota Fortuner GR Sport delivers capable performance with a bold Gazoo Racing-inspired presence. It suits industrial-site visits, business trips, and refined family travel around Batam.",
     features: ["Exclusive GR Sport body kit and badges", "More stable and comfortable GR Sport suspension", "Power back door with kick sensor", "9-inch head unit with smartphone mirroring", "360-degree surround monitor and blind-spot detection", "Dual-zone digital climate control"],
@@ -61,7 +61,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   6: {
     type: "Modern TNGA Crossover MPV",
-    priceNote: "Per day (Car only) / Rp 1,200,000 (Car with driver for 12 hours)",
+    priceNote: "/ day",
     specs: { transmission: "Direct-Shift 10-speed CVT", fuel: "Petrol", acceleration: "9.6 seconds (0–100 km/h)" },
     description: "Toyota Innova Zenix uses a front-wheel-drive TNGA platform for a quiet ride, generous space, and sedan-like comfort. It is a customer favourite for business and family travel in Batam.",
     features: ["TNGA platform for excellent ride comfort", "Spacious seven-seat cabin with generous legroom", "10-inch infotainment with Apple CarPlay and Android Auto", "Electric parking brake with auto brake hold", "Fast-cooling dual-blower digital air conditioning", "Vehicle Stability Control and Hill Start Assist"],
@@ -70,7 +70,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   7: {
     type: "Reliable Mid-Size MPV",
-    priceNote: "Per day (Car only) / Rp 1,000,000 (Car with driver for 12 hours)",
+    priceNote: "/ day",
     specs: { transmission: "6-speed automatic / manual", fuel: "Diesel / petrol", acceleration: "10.8 seconds (0–100 km/h)" },
     description: "Toyota Innova Reborn is a long-standing favourite for comfortable family travel in Indonesia. Its sturdy platform and supple suspension make it a reliable choice for every part of Batam.",
     features: ["Robust chassis and comfortable suspension", "Spacious seven-seat cabin with comfortable armrests", "Triple-blower air conditioning for every row", "Touchscreen multimedia system and clear audio", "Eco and Power driving modes", "Dual SRS airbags and ABS with EBD"],
@@ -79,7 +79,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   8: {
     type: "Futuristic Family MPV",
-    priceNote: "Per day (Car only)",
+    priceNote: "/ day",
     specs: { transmission: "Automatic IVT", fuel: "Petrol", acceleration: "10.4 seconds (0–100 km/h)" },
     description: "Hyundai Stargazer combines a futuristic one-curve silhouette with an ergonomic, flexible cabin. Smart storage, even air conditioning, and quiet insulation make every journey more comfortable.",
     features: ["Futuristic horizontal DRL and distinctive H-rear lamp", "8-inch touchscreen with smartphone integration", "Wireless charger and USB ports", "Tyre Pressure Monitoring System", "Rear-view camera with dynamic guidelines", "Ample cup holders and clever storage"],
@@ -88,7 +88,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   9: {
     type: "Modern Compact MPV",
-    priceNote: "Per day (Car only)",
+    priceNote: "/ day",
     specs: { transmission: "Automatic CVT / manual", fuel: "Petrol", acceleration: "11.2 seconds (0–100 km/h)" },
     description: "Toyota New Avanza offers a new front-wheel-drive platform, a quieter cabin, and flexible sofa-mode seating. It is an efficient and dependable family vehicle for daily travel in Batam.",
     features: ["Flexible long sofa-mode seating", "Modern 9-inch head unit with smartphone mirroring", "Tilt steering and push-button start", "Dual airbags and ABS, EBD, and BA", "Fast-cooling dual-blower air conditioning"],
@@ -97,7 +97,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   10: {
     type: "Dynamic Family MPV",
-    priceNote: "Per day (Car only)",
+    priceNote: "/ day",
     specs: { transmission: "Automatic CVT / manual", fuel: "Petrol", acceleration: "11.3 seconds (0–100 km/h)" },
     description: "Daihatsu New Xenia offers a sporty character, a roomy cabin, and excellent fuel efficiency. Its tight turning radius is ideal for relaxed outings and business travel in Batam.",
     features: ["Sporty exterior with shark-fin antenna", "Spacious seven-seat cabin with sofa mode", "Touchscreen head unit with Android Auto and CarPlay", "205 mm ground clearance", "Light and responsive electric power steering"],
@@ -106,7 +106,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   11: {
     type: "Compact Turbo SUV",
-    priceNote: "Per day (Car only)",
+    priceNote: "/ day",
     specs: { transmission: "Automatic CVT", fuel: "Petrol", acceleration: "10.0 seconds (0–100 km/h)" },
     description: "Toyota Raize blends a sporty SUV appearance with responsive turbo performance. It is agile in Batam traffic, easy to park, and ideal for travellers who value confident style.",
     features: ["Responsive and fuel-efficient turbocharged engine", "7-inch TFT digital instrument cluster", "9-inch floating touchscreen", "Paddle shift and Sport driving mode", "LED headlamps with sequential indicators"],
@@ -115,7 +115,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   12: {
     type: "Compact Urban SUV",
-    priceNote: "Per day (Car only)",
+    priceNote: "/ day",
     specs: { transmission: "Automatic D-CVT", fuel: "Petrol", acceleration: "10.2 seconds (0–100 km/h)" },
     description: "Daihatsu Rocky delivers a capable urban-SUV style with a smooth D-CVT and high ground clearance. It suits travellers who want to explore Barelang and Batam's city corners with confidence.",
     features: ["Smooth D-CVT transmission", "Full digital meter cluster with four displays", "9-inch touchscreen with smartphone connection", "Quality active-subwoofer audio system", "Hill Start Assist and Vehicle Stability Control"],
@@ -124,7 +124,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   13: {
     type: "Sporty Compact City Car",
-    priceNote: "Per day (Car only)",
+    priceNote: "/ day",
     specs: { transmission: "Automatic CVT / manual", fuel: "Petrol", acceleration: "11.5 seconds (0–100 km/h)" },
     description: "Honda New Brio is a leading city car with sporty design, precise handling, a comfortable cabin, and excellent fuel economy. It is practical for solo travellers, couples, and quick business trips in Batam.",
     features: ["Class-leading 1.2L i-VTEC engine", "Rear parking camera and sensors", "Touchscreen audio with Bluetooth and USB", "Light and precise electric power steering", "Sporty grille and two-tone alloy wheels"],
@@ -133,7 +133,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   14: {
     type: "Agile Modern City Car",
-    priceNote: "Per day (Car only)",
+    priceNote: "/ day",
     specs: { transmission: "Automatic CVT", fuel: "Petrol", acceleration: "11.8 seconds (0–100 km/h)" },
     description: "Toyota New Agya has a newer platform for a more stable drive and a spacious interior. Efficient and agile on narrow streets, it is a great choice for exploring Batam's culinary destinations.",
     features: ["New platform for steadier handling", "Efficient and capable 1.2L WA-VE engine", "Modern 7-inch touchscreen head unit", "Paddle shift and dynamic driving mode", "Vehicle Stability Control and Hill Start Assist"],
@@ -142,7 +142,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   15: {
     type: "Economy 7-Seater Family MPV",
-    priceNote: "Per day (Car only)",
+    priceNote: "/ day",
     specs: { transmission: "Automatic / manual", fuel: "Petrol", acceleration: "12.0 seconds (0–100 km/h)" },
     description: "Toyota New Calya is an affordable seven-seat transport option in Batam. Its efficient fuel use and air-conditioned cabin offer practical comfort for families and work teams.",
     features: ["Flexible and economical seven-seat capacity", "Touchscreen head unit with Bluetooth and USB", "Rear air circulator for cooler back rows", "Electric power steering and ABS with EBD", "Larger boot space when the third row is folded"],
@@ -151,7 +151,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   16: {
     type: "Flagship Luxury Hybrid MPV",
-    priceNote: "Up to 10 hours (All-In: Driver & Fuel)",
+    priceNote: "/ 10 hrs (All-In)",
     specs: { transmission: "Automatic e-CVT", fuel: "Hybrid petrol", acceleration: "8.9 seconds (0–100 km/h)" },
     description: "Toyota Alphard Gen 4 delivers a new standard of VIP travel in Batam, with elegant design, a quiet cabin, and first-class comfort. It is an exceptional choice for VVIP guests, business travel, weddings, and exclusive airport or ferry transfers.",
     features: ["Executive captain seats with ottoman and electric adjustment", "Dual power sliding doors and power back door", "Spacious cabin with zoned digital air conditioning", "Panoramic roof and premium cabin lighting", "Toyota Safety Sense and 360-degree camera", "Premium audio and charging ports"],
@@ -160,7 +160,7 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   17: {
     type: "Premium Passenger Minibus",
-    priceNote: "Up to 10 hours (All-In: Driver & Fuel)",
+    priceNote: "/ 10 hrs (All-In)",
     specs: { transmission: "6-speed manual", fuel: "Diesel", acceleration: "12.8 seconds (0–100 km/h)" },
     description: "Toyota Hiace Premio Basic provides a spacious, comfortable, and modern cabin for group travel in Batam. It is ideal for family tours, company visits, airport transfers, and group journeys with driver and fuel included.",
     features: ["Comfortable capacity for up to 12 passengers", "Ceiling-ducted air conditioning to the rear rows", "Spacious semi-bonnet cabin with reclining seats", "Wide sliding door for easy passenger access", "Audio system and USB ports for group travel", "Vehicle Stability Control and Hill Start Assist"],
@@ -169,12 +169,66 @@ const ENGLISH_CARS: Record<number, EnglishCarCopy> = {
   },
   18: {
     type: "Compact Economy City Car",
-    priceNote: "Per day (Car only)",
+    priceNote: "/ day",
     specs: { transmission: "Automatic D-CVT / manual", fuel: "Petrol", acceleration: "12.2 seconds (0–100 km/h)" },
     description: "Daihatsu New Ayla is one of Batam's most economical rental choices. It is fuel-efficient, nimble, easy to park, and practical for daily personal travel or short business trips.",
     features: ["Excellent value and fuel efficiency", "Smooth D-CVT transmission", "Modern touchscreen with smartphone support", "Practical luggage room for daily essentials", "Dual SRS airbags and seat-belt reminder"],
     included: ["Clean, well-maintained vehicle", "Basic insurance", "Friendly and responsive customer service"],
     terms: ["Original ID card and valid driving licence", "Refundable security deposit", "Minimum rental period is 24 hours", "For use on Batam Island only"],
+  },
+  19: {
+    type: "Modern Dynamic 7-Seater MPV",
+    priceNote: "/ day",
+    specs: { transmission: "Automatic CVT / manual", fuel: "Petrol", acceleration: "11.5 seconds (0–100 km/h)" },
+    description: "Mitsubishi Xpander offers a bold Dynamic Shield design, generous ground clearance (220 mm), and a remarkably quiet cabin. It is a top choice for family trips, island sightseeing in Batam, and corporate transfers.",
+    features: ["Roomy 7-seat cabin with flexible sofa-mode seating", "Smooth suspension and high ground clearance (220 mm)", "8-inch touchscreen with Apple CarPlay & Android Auto", "Digital air conditioning reaching third row", "Safety features including ASC, HSA, ABS, and Dual Airbags", "Convenient USB charging ports for all rows"],
+    included: ["Clean, sanitized, ready-to-use vehicle", "Comprehensive vehicle insurance", "Self-drive 24h or driver options", "Complimentary delivery in Batam Center"],
+    terms: ["Valid ID and driving licence for self-drive", "Refundable security deposit", "Minimum rental duration is 24 hours", "12-hour driver package available for Rp 950,000"],
+  },
+  20: {
+    type: "Stylish Premium Compact SUV",
+    priceNote: "/ day",
+    specs: { transmission: "Automatic CVT", fuel: "Petrol", acceleration: "9.8 seconds (0–100 km/h)" },
+    description: "All New Honda HR-V combines a sleek coupe-style SUV exterior with refined interior comfort and advanced features. Ideal for executives, couples on holiday, and business travellers in Batam.",
+    features: ["Coupe-inspired sporty SUV exterior", "Advanced Honda SENSING safety suite", "8-inch audio touchscreen with smartphone mirroring", "Ultra Seats with 4-way interior versatility", "7-inch digital TFT instrument cluster & smart key", "Walk-away auto door lock and multi-angle rear camera"],
+    included: ["Premium clean condition vehicle", "Full comprehensive insurance", "Self-drive 24h or professional driver option", "Delivery available across Batam"],
+    terms: ["Valid original ID card / passport and driving licence", "Refundable security deposit", "Minimum rental duration is 24 hours", "12-hour driver package available for Rp 1,200,000"],
+  },
+  21: {
+    type: "VIP Executive Captain Seat Van",
+    priceNote: "/ 12 hrs (All-In)",
+    specs: { transmission: "6-speed manual / automatic", fuel: "Diesel", acceleration: "12.0 seconds (0–100 km/h)" },
+    description: "Toyota Hiace Premio Luxury delivers premier VIP road comfort in Batam. Equipped with plush reclining captain seats with legrests, ambient lighting, quiet acoustic insulation, and full multimedia entertainment for corporate delegates, dignitaries, and private family travel.",
+    features: ["VIP executive captain seats with legrest & electric recline", "Refined interior with wooden accents & ambient lighting", "Ceiling-mounted TV / multimedia entertainment & audio", "Dedicated individual AC blowers for every seat", "Professional driver and fuel included for 12 hours", "Comfortable VIP capacity for up to 10 guests"],
+    included: ALL_IN_INCLUDED,
+    terms: ["Advance booking recommended at least 2 days prior", "All-In package includes vehicle, driver, and fuel for Batam routes", "Standard duration is 12 hours per day", "Hourly overtime available upon prior arrangement"],
+  },
+  22: {
+    type: "High-Capacity Group Minibus (19-Seater)",
+    priceNote: "/ 12 hrs (All-In)",
+    specs: { transmission: "6-speed manual", fuel: "Diesel", acceleration: "15.0 seconds (0–100 km/h)" },
+    description: "Isuzu Elf Long is the most practical and cost-effective passenger minibus for group travel in Batam. Seating up to 19 passengers with comfortable reclining seats, ample luggage space, and reliable performance for airport transfers, corporate outings, and island tours.",
+    features: ["Generous capacity for up to 19 passengers", "Ceiling-ducted AC vents across all rows", "Ergonomic reclining seats with individual seat belts", "Driver and fuel included for 12 hours", "Spacious rear luggage space for baggage and cargo", "Public address microphone and audio system for guides"],
+    included: ALL_IN_INCLUDED,
+    terms: ["Advance booking required at least 1 day prior", "Rental covers 12 hours of operational use in Batam", "Maximum capacity is 19 passengers", "Parking fees and tourist attraction entrance tickets are excluded"],
+  },
+  23: {
+    type: "Executive Tour & Charter Bus (34-Seater)",
+    priceNote: "/ 12 hrs (All-In)",
+    specs: { transmission: "Manual", fuel: "Diesel", acceleration: "N/A" },
+    description: "Medium Tourism Bus (34 seats) provides executive mass transportation for tour groups, corporate gatherings, MICE delegations, and study trips in Batam. Fitted with full AC, karaoke audio system, comfortable 2-2 reclining seats, and smooth suspension.",
+    features: ["Comfortable 34 passenger capacity (2-2 configuration)", "Full cabin air conditioning with even air distribution", "Karaoke entertainment system, LCD TV, and clear sound", "Reclining seats with armrests and USB charging ports", "Spacious undercarriage luggage bays for tour bags", "Experienced Batam tour driver and fuel included for 12 hours"],
+    included: ALL_IN_INCLUDED,
+    terms: ["Booking recommended at least 3 days in advance", "Package covers 12 hours of use in Batam City", "Full-day Barelang and Marina tour itineraries available", "Overtime available upon prior agreement"],
+  },
+  24: {
+    type: "Grand Tourism Coach (50-Seater)",
+    priceNote: "/ 12 hrs (All-In)",
+    specs: { transmission: "6-speed manual", fuel: "Diesel", acceleration: "N/A" },
+    description: "Big Tourism Coach (50 seats) is PT. Nadim Auto Transindo's largest vehicle for grand group journeys in Batam. Ideally suited for multinational company gatherings, school study tours, international conferences, and cross-border visitor groups from Singapore and Malaysia.",
+    features: ["Extra-large capacity for up to 50 passengers (2-2 layout)", "Ergonomic reclining seats with generous legroom", "Complete entertainment: full AC, dual LED TVs, karaoke & mics", "Huge under-floor luggage compartments for dozens of suitcases", "Air suspension for a remarkably smooth and silent ride", "Experienced tourism coach captain and fuel included for 12 hours"],
+    included: ALL_IN_INCLUDED,
+    terms: ["Booking recommended 3–7 days before the event", "Standard usage covers 12 hours within Batam Island", "Maximum capacity of 50 passengers for safety and comfort", "Custom tour itinerary coordination available upon request"],
   },
 };
 
@@ -196,6 +250,12 @@ const ENGLISH_CAR_COPY_KEY: Record<number, number> = {
   15: 18,
   16: 16,
   17: 17,
+  18: 19,
+  19: 20,
+  20: 21,
+  21: 22,
+  22: 23,
+  23: 24,
 };
 
 const ENGLISH_FAQS: Record<number, Pick<FaqItem, "question" | "answer">> = {
@@ -218,18 +278,62 @@ const ENGLISH_FAQS: Record<number, Pick<FaqItem, "question" | "answer">> = {
 };
 
 function formatPrice(value: number, locale: Locale): string {
-  return new Intl.NumberFormat(locale === "id" ? "id-ID" : "en-US", { maximumFractionDigits: 0 }).format(value);
+  return formatCurrency(value, locale);
+}
+
+function getSimplePriceNote(note: string | undefined, locale: Locale): string {
+  const isEnglish = locale === "en" || locale === "en-sg";
+  if (!note) return isEnglish ? "/ day" : "/ hari";
+
+  const lower = note.toLowerCase();
+  const isAllIn = lower.includes("all in") || lower.includes("all-in") || lower.includes("jam") || lower.includes("hour");
+  const is12Hours = note.includes("12");
+
+  if (isAllIn) {
+    if (is12Hours) {
+      return isEnglish ? "/ 12 hrs (All-In)" : "/ 12 jam (All In)";
+    }
+    return isEnglish ? "/ 10 hrs (All-In)" : "/ 10 jam (All In)";
+  }
+
+  return isEnglish ? "/ day" : "/ hari";
 }
 
 function localizeCar(car: Car, locale: Locale): Car {
-  if (locale === "id") return car;
+  const simpleNote = getSimplePriceNote(car.priceNote, locale);
 
-  const copy = ENGLISH_CARS[ENGLISH_CAR_COPY_KEY[car.id]];
+  if (locale === "id") {
+    return {
+      ...car,
+      priceFormatted: formatCurrency(car.price, "id"),
+      priceNote: simpleNote,
+    };
+  }
+
+  if (locale === "ms") {
+    return {
+      ...car,
+      priceFormatted: formatCurrency(car.price, "ms"),
+      priceNote: simpleNote,
+    };
+  }
+
+  // Locale "en" & "en-sg"
+  const copyKey = ENGLISH_CAR_COPY_KEY[car.id];
+  const copy = copyKey ? ENGLISH_CARS[copyKey] : undefined;
+  if (!copy) {
+    return {
+      ...car,
+      priceFormatted: formatPrice(car.price, locale),
+      priceNote: simpleNote,
+    };
+  }
   return {
     ...car,
     ...copy,
     priceFormatted: formatPrice(car.price, locale),
-    specs: { ...car.specs, ...copy.specs },
+    priceNote: simpleNote,
+    specs: { ...car.specs, ...(copy.specs || {}) },
   };
 }
 
@@ -250,7 +354,8 @@ export function getRelatedCarsForLocale(locale: Locale, currentSlug: string, cat
 }
 
 export function getLocalizedCategories(locale: Locale): string[] {
-  return CATEGORIES.map((category) => (locale === "en" && category === "Semua" ? "All" : category));
+  if (locale === "id" || locale === "ms") return [...CATEGORIES];
+  return CATEGORIES.map((category) => (category === "Semua" ? "All" : category));
 }
 
 export function getFaqs(locale: Locale): FaqItem[] {
