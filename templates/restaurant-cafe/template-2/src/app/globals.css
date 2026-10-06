@@ -1,9 +1,0 @@
-@import "tailwindcss";
-@import "tw-animate-css";
-
-@custom-variant dark (&:where(.dark, .dark *));
-
-@import "../styles/theme.css";
-@import "../styles/base.css";
-@import "../styles/animations.css";
-@import "../styles/utilities.css";
