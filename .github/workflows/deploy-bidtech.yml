@@ -116,6 +116,11 @@ jobs:
       - name: Build images
         run: docker compose build
 
+      - name: Report frontend image size
+        run: |
+          docker image ls bidtech-frontend:latest --format 'table {{.Repository}}\t{{.Tag}}\t{{.Size}}'
+          docker image inspect bidtech-frontend:latest --format 'Frontend image size (bytes): {{.Size}}'
+
       - name: Start MySQL
         run: docker compose up -d --wait mysql
 

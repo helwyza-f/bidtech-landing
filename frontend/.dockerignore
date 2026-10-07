@@ -1,2 +1,11 @@
 node_modules
 .next
+.git
+.gitignore
+.DS_Store
+Dockerfile
+README*
+docs
+coverage
+*.log
+npm-debug.log*
