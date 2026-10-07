@@ -217,7 +217,7 @@ export const TEMPLATES: TemplateItem[] = [
     previewHref: "/demo/afindo",
     tags: ["Jasa", "Konstruksi", "PT"],
     icon: House,
-  }, 
+  },
 ];
 
 /**

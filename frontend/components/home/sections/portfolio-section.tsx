@@ -3,7 +3,6 @@
 import {
   useCallback,
   useEffect,
-  useMemo,
   useRef,
   useState,
   type TouchEvent,
@@ -15,183 +14,201 @@ import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Reveal } from "@/components/animations/reveal";
 import { useLanguage } from "@/lib/i18n";
 
-const REPEAT_COUNT = 7;
-const BASE_SET = 3;
+/* =========================================================================
+   AUTHENTIC FULL-SCREEN VECTOR DEVICE FRAMES (Desktop, iPhone, iPad)
+   ========================================================================= */
+
+interface DeviceFrameProps {
+  imageSrc: string;
+  alt: string;
+  priority?: boolean;
+}
+
+/** 1. Vector Desktop (MacBook / Monitor Frame - Headlight Centerpiece) */
+function VectorDesktop({ imageSrc, alt, priority }: DeviceFrameProps) {
+  return (
+    <div className="relative mx-auto w-[88%] sm:w-[90%] md:w-[92%] transition-all duration-500 drop-shadow-[0_20px_45px_rgba(0,0,0,0.4)]">
+      {/* Desktop Display Chassis */}
+      <div className="relative rounded-t-[18px] sm:rounded-t-[22px] bg-[#0b0f19] p-2 sm:p-2.5 pb-2 shadow-[0_25px_50px_rgba(0,0,0,0.5)] border-[2.5px] sm:border-[3px] border-[#334155] ring-1 ring-white/10">
+        {/* Centered Camera Notch with Lens & Status LED */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-14 sm:w-16 h-2.5 sm:h-3 bg-[#0b0f19] rounded-b-md z-30 flex items-center justify-center gap-1.5 shadow-sm">
+          {/* Camera Lens */}
+          <span className="size-1.5 sm:size-2 rounded-full bg-[#020617] ring-1 ring-slate-800 flex items-center justify-center">
+            <span className="size-0.5 sm:size-1 rounded-full bg-blue-500/80" />
+          </span>
+          {/* Green Status LED */}
+          <span className="size-0.5 sm:size-1 rounded-full bg-emerald-400 shadow-[0_0_3px_#34d399]" />
+        </div>
+
+        {/* 16:10 Full-Screen Display */}
+        <div className="relative aspect-[16/10] w-full overflow-hidden rounded-[8px] sm:rounded-[10px] bg-slate-950 shadow-inner">
+          <Image
+            src={imageSrc}
+            alt={alt}
+            fill
+            className="object-cover object-top transition-opacity duration-500"
+            sizes="(max-width: 768px) 90vw, (max-width: 1024px) 58vw, 620px"
+            priority={priority}
+          />
+          {/* Specular Diagonal Glass Sheen */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent z-10"
+          />
+        </div>
+      </div>
+
+      {/* Aluminum Unibody Base with Opening Thumb Scoop */}
+      <div className="relative h-3 sm:h-4 w-[105%] -left-[2.5%] rounded-b-xl bg-gradient-to-b from-[#64748b] via-[#475569] to-[#1e293b] border-t border-slate-300/40 shadow-2xl flex justify-center">
+        <div className="h-1 sm:h-1.5 w-16 sm:w-22 rounded-b-sm bg-[#090d16] shadow-inner" />
+      </div>
+    </div>
+  );
+}
+
+/** 2. Vector iPhone (Tilted -7deg, Full-Screen Seamless Display with Zero Cuts) */
+function VectorIPhone({ imageSrc, alt, priority }: DeviceFrameProps) {
+  return (
+    <div
+      className="absolute -bottom-3 sm:-bottom-5 -left-1 sm:left-1 md:left-2 w-[24%] sm:w-[25%] md:w-[24%] max-w-[145px] sm:max-w-[165px] z-20 -rotate-[7deg] transform-gpu origin-bottom-center transition-all duration-500 hover:-rotate-[4deg] drop-shadow-[0_20px_35px_rgba(0,0,0,0.55)] select-none"
+      style={{ willChange: "transform" }}
+    >
+      {/* Titanium Chassis Enclosure */}
+      <div className="relative rounded-[32px] sm:rounded-[36px] bg-[#090d16] p-[3px] sm:p-[3.5px] border-[2.5px] sm:border-[3px] border-[#475569] ring-1 ring-white/10 shadow-2xl">
+        {/* Hardware Buttons - Left (Action Button, Volume Up, Volume Down) */}
+        <div className="absolute -left-[3.5px] top-10 sm:top-12 w-[2.5px] h-3 bg-slate-400 rounded-l-sm" />
+        <div className="absolute -left-[3.5px] top-15 sm:top-18 w-[2.5px] h-5 bg-slate-400 rounded-l-sm" />
+        <div className="absolute -left-[3.5px] top-22 sm:top-26 w-[2.5px] h-5 bg-slate-400 rounded-l-sm" />
+
+        {/* Hardware Buttons - Right (Power Button) */}
+        <div className="absolute -right-[3.5px] top-14 sm:top-17 w-[2.5px] h-7 sm:h-8 bg-slate-400 rounded-r-sm" />
+
+        {/* 100% Full-Bleed iPhone Screen (No Gaps, Perfectly Clipped) */}
+        <div className="relative aspect-[9/18.8] w-full overflow-hidden rounded-[26px] sm:rounded-[30px] bg-slate-950 shadow-inner">
+          <Image
+            src={imageSrc}
+            alt={alt}
+            fill
+            className="object-cover object-top transition-opacity duration-500"
+            sizes="(max-width: 768px) 30vw, 165px"
+            priority={priority}
+          />
+
+          {/* Authentic Top Notch with Ear-Speaker & Camera Lens */}
+          <div className="absolute top-0 left-1/2 -translate-x-1/2 w-16 sm:w-20 h-3 sm:h-3.5 bg-[#090d16] rounded-b-[12px] z-30 flex items-center justify-center gap-1 shadow-sm">
+            {/* Front Camera Lens */}
+            <span className="size-1.5 rounded-full bg-[#020617] ring-1 ring-slate-800 flex items-center justify-center">
+              <span className="size-0.5 rounded-full bg-blue-500/80" />
+            </span>
+            {/* Ear-Speaker Micro Grille */}
+            <span className="w-5 sm:w-6 h-[2px] rounded-full bg-slate-700" />
+          </div>
+
+          {/* Specular Diagonal Glass Sheen */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/[0.08] via-transparent to-transparent z-20"
+          />
+
+          {/* iOS Bottom Home Bar */}
+          <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-10 sm:w-12 h-[2.5px] rounded-full bg-white/70 shadow-sm pointer-events-none z-30" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/** 3. Vector iPad (Tilted +7deg, Full-Screen Seamless Display with Zero Cuts) */
+function VectorIPad({ imageSrc, alt, priority }: DeviceFrameProps) {
+  return (
+    <div
+      className="absolute -bottom-2 sm:-bottom-4 -right-1 sm:right-1 md:right-2 w-[31%] sm:w-[32%] md:w-[31%] max-w-[190px] sm:max-w-[220px] z-10 rotate-[7deg] transform-gpu origin-bottom-center transition-all duration-500 hover:rotate-[4deg] drop-shadow-[0_20px_35px_rgba(0,0,0,0.55)] select-none"
+      style={{ willChange: "transform" }}
+    >
+      {/* Aluminum Symmetrical Chassis Enclosure */}
+      <div className="relative rounded-[22px] sm:rounded-[26px] bg-[#090d16] p-[3px] sm:p-[3.5px] border-[2.5px] sm:border-[3px] border-[#475569] ring-1 ring-white/10 shadow-2xl">
+        {/* Hardware Button - Top Power */}
+        <div className="absolute -top-[3.5px] right-6 sm:right-8 w-6 sm:w-7 h-[2.5px] bg-slate-400 rounded-t-sm" />
+        {/* Hardware Button - Right Volume */}
+        <div className="absolute -right-[3.5px] top-7 sm:top-9 w-[2.5px] h-7 sm:h-8 bg-slate-400 rounded-r-sm" />
+
+        {/* 100% Full-Bleed iPad Screen (No Gaps, Perfectly Clipped) */}
+        <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[16px] sm:rounded-[20px] bg-slate-950 shadow-inner">
+          <Image
+            src={imageSrc}
+            alt={alt}
+            fill
+            className="object-cover object-top transition-opacity duration-500"
+            sizes="(max-width: 768px) 38vw, 220px"
+            priority={priority}
+          />
+
+          {/* FaceTime HD Camera Dot */}
+          <div className="absolute top-1 left-1/2 -translate-x-1/2 size-1.5 rounded-full bg-[#020617] ring-1 ring-slate-800 flex items-center justify-center shadow-sm z-30">
+            <span className="size-0.5 rounded-full bg-blue-500/80" />
+          </div>
+
+          {/* Specular Diagonal Glass Sheen */}
+          <div
+            aria-hidden
+            className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-transparent via-white/[0.05] to-transparent z-20"
+          />
+
+          {/* iPadOS Bottom Home Bar */}
+          <div className="absolute bottom-1.5 left-1/2 -translate-x-1/2 w-14 sm:w-16 h-[2.5px] rounded-full bg-white/70 shadow-sm pointer-events-none z-30" />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* =========================================================================
+   MAIN PORTFOLIO SECTION (5 SLIDES)
+   ========================================================================= */
 
 export function PortfolioSection() {
   const { t } = useLanguage();
   const items = t.portfolioSection.items;
   const itemCount = items.length;
 
-  // Start with Ayo Cuci (index 1) in the canonical center set (BASE_SET = 3)
-  const [currentIndex, setCurrentIndex] = useState(() => BASE_SET * itemCount + 1);
-  const [enableTransition, setEnableTransition] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const [isPaused, setIsPaused] = useState(false);
-
-  const containerRef = useRef<HTMLDivElement>(null);
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  const [dimensions, setDimensions] = useState({
-    containerWidth: 1000,
-    cardWidth: 320,
-    gap: 16,
-    leftMargin: 0,
-    isThreeCardView: true,
-  });
+  const [isTransitioning, setIsTransitioning] = useState(false);
 
   const touchStartX = useRef<number | null>(null);
   const touchStartY = useRef<number | null>(null);
   const touchEndX = useRef<number | null>(null);
   const touchEndY = useRef<number | null>(null);
-  const dragStartX = useRef<number | null>(null);
-  const isDragging = useRef(false);
 
-  const updateFromWidth = useCallback((width: number) => {
-    if (width <= 0) return;
-    const isThree = width >= 680;
-    let gapW = 16;
-    let cardW = 320;
-    let margin = 0;
-
-    if (!isThree) {
-      // Mobile (<680px): exactly 1 full card visible cleanly in center without being clipped
-      gapW = width < 380 ? 12 : 16;
-      cardW = Math.min(Math.round(width - 24), 400);
-    } else {
-      // Desktop / Tablet (>=680px): exactly 3 cards fit in width without any clipping
-      if (width < 900) {
-        gapW = 12;
-      } else if (width < 1200) {
-        gapW = 16;
-      } else {
-        gapW = 20;
-      }
-
-      // Calculate card width dynamically from the exact container width
-      const totalAvailable = width - 2 * gapW;
-      const rawCardW = Math.floor(totalAvailable / 3);
-      cardW = Math.min(370, rawCardW);
-      margin = Math.max(0, Math.floor((width - (3 * cardW + 2 * gapW)) / 2));
-    }
-
-    setDimensions({
-      containerWidth: width,
-      cardWidth: cardW,
-      gap: gapW,
-      leftMargin: margin,
-      isThreeCardView: isThree,
-    });
+  const goToSlide = useCallback((newIndex: number) => {
+    setIsTransitioning(true);
+    setCurrentIndex(newIndex);
+    const timeout = setTimeout(() => {
+      setIsTransitioning(false);
+    }, 350);
+    return () => clearTimeout(timeout);
   }, []);
-
-  // ResizeObserver dynamically measures containerRef client width in real-time
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const initialW = el.clientWidth;
-    if (initialW > 0) {
-      updateFromWidth(initialW);
-    }
-
-    const observer = new ResizeObserver((entries) => {
-      for (const entry of entries) {
-        const width = entry.contentRect.width;
-        if (width > 0) {
-          updateFromWidth(width);
-        }
-      }
-    });
-
-    observer.observe(el);
-    return () => observer.disconnect();
-  }, [updateFromWidth]);
-
-  // Multi-copy infinite items list
-  const extendedItems = useMemo(() => {
-    const result: Array<
-      (typeof items)[number] & {
-        virtualIndex: number;
-        originalIndex: number;
-        uniqueKey: string;
-      }
-    > = [];
-
-    for (let set = 0; set < REPEAT_COUNT; set++) {
-      for (let i = 0; i < itemCount; i++) {
-        const virtualIndex = set * itemCount + i;
-        result.push({
-          ...items[i],
-          virtualIndex,
-          originalIndex: i,
-          uniqueKey: `portfolio-set-${set}-${items[i].id}-${virtualIndex}`,
-        });
-      }
-    }
-    return result;
-  }, [items, itemCount]);
-
-  // Handle re-enabling transitions after silent wrap-around reset
-  useEffect(() => {
-    if (!enableTransition) {
-      const id1 = requestAnimationFrame(() => {
-        const id2 = requestAnimationFrame(() => {
-          setEnableTransition(true);
-        });
-        return () => cancelAnimationFrame(id2);
-      });
-      return () => cancelAnimationFrame(id1);
-    }
-  }, [enableTransition]);
 
   const handleNext = useCallback(() => {
-    setEnableTransition(true);
-    setCurrentIndex((prev) => prev + 1);
-  }, []);
+    goToSlide((currentIndex + 1) % itemCount);
+  }, [currentIndex, itemCount, goToSlide]);
 
   const handlePrev = useCallback(() => {
-    setEnableTransition(true);
-    setCurrentIndex((prev) => prev - 1);
-  }, []);
+    goToSlide((currentIndex - 1 + itemCount) % itemCount);
+  }, [currentIndex, itemCount, goToSlide]);
 
-  // Silent snap when sliding into edge sets to ensure seamless infinite loop
-  const handleTransitionEnd = (e: React.TransitionEvent<HTMLDivElement>) => {
-    if (e.target !== trackRef.current) return;
-    const normalized = ((currentIndex % itemCount) + itemCount) % itemCount;
-
-    // If drifted away from the center set (Set 2 or Set 4 and beyond)
-    if (currentIndex < 2 * itemCount || currentIndex >= 4 * itemCount) {
-      setEnableTransition(false);
-      setCurrentIndex(BASE_SET * itemCount + normalized);
-    }
+  const handleDotClick = (index: number) => {
+    if (index === currentIndex) return;
+    goToSlide(index);
   };
 
-  // Dot navigation: find shortest circular direction
-  const handleDotClick = (targetOriginalIndex: number) => {
-    setEnableTransition(true);
-    const currentNormalized =
-      ((currentIndex % itemCount) + itemCount) % itemCount;
-    let diff = targetOriginalIndex - currentNormalized;
-    if (diff > itemCount / 2) diff -= itemCount;
-    if (diff < -itemCount / 2) diff += itemCount;
-    if (diff !== 0) {
-      setCurrentIndex((prev) => prev + diff);
-    }
-  };
-
-  // Clicking a visible side card smoothly centers it
-  const handleCardClick = (targetVirtualIndex: number) => {
-    if (targetVirtualIndex === currentIndex) return;
-    setEnableTransition(true);
-    setCurrentIndex(targetVirtualIndex);
-  };
-
-  // Autoplay timer (4s, pauses on hover/touch)
+  // Autoplay (6s interval, paused on hover or touch)
   useEffect(() => {
     if (isPaused) return;
 
     const timer = setInterval(() => {
       handleNext();
-    }, 4000);
+    }, 6000);
 
     return () => clearInterval(timer);
   }, [isPaused, handleNext]);
@@ -225,12 +242,12 @@ export function PortfolioSection() {
       touchStartY.current !== null && touchEndY.current !== null
         ? touchStartY.current - touchEndY.current
         : 0;
-    const minSwipeDistance = 30; // Responsive sensitivity for mobile
+    const minSwipeDistance = 35;
 
-    // Disambiguate: only trigger slide transition if horizontal movement exceeds vertical
+    // Disambiguate horizontal swipe from vertical scrolling
     if (
       Math.abs(distanceX) > minSwipeDistance &&
-      Math.abs(distanceX) > Math.abs(distanceY) * 1.1
+      Math.abs(distanceX) > Math.abs(distanceY) * 1.2
     ) {
       if (distanceX > 0) {
         handleNext();
@@ -245,35 +262,6 @@ export function PortfolioSection() {
     touchEndY.current = null;
   };
 
-  // Desktop Mouse Drag Handlers
-  const handleMouseDown = (e: React.MouseEvent) => {
-    setIsPaused(true);
-    dragStartX.current = e.clientX;
-    isDragging.current = true;
-  };
-
-  const handleMouseUp = (e: React.MouseEvent) => {
-    setIsPaused(false);
-    if (!isDragging.current || dragStartX.current === null) return;
-    const distance = dragStartX.current - e.clientX;
-    const minSwipeDistance = 45;
-
-    if (distance > minSwipeDistance) {
-      handleNext();
-    } else if (distance < -minSwipeDistance) {
-      handlePrev();
-    }
-
-    dragStartX.current = null;
-    isDragging.current = false;
-  };
-
-  const handleMouseLeave = () => {
-    setIsPaused(false);
-    dragStartX.current = null;
-    isDragging.current = false;
-  };
-
   // Keyboard navigation
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowLeft") {
@@ -283,272 +271,225 @@ export function PortfolioSection() {
     }
   };
 
-  // Center offset calculation:
-  // On desktop/tablet (isThreeCardView): exactly 3 cards fit in the viewport without any clipping
-  // On mobile (<680px): single card centered with peek
-  const { containerWidth, cardWidth, gap, leftMargin, isThreeCardView } = dimensions;
-  const translateX = isThreeCardView
-    ? leftMargin + (cardWidth + gap) * (1 - currentIndex)
-    : containerWidth / 2 - (currentIndex * (cardWidth + gap) + cardWidth / 2);
-  const realActiveIndex = ((currentIndex % itemCount) + itemCount) % itemCount;
+  const activeItem = items[currentIndex] || items[0];
 
   return (
     <section
-      className="landing-panel relative overflow-hidden py-10 sm:py-16 md:py-20"
+      className="landing-panel relative overflow-hidden py-12 sm:py-16 md:py-20 lg:py-24"
       id="portfolio"
     >
-      {/* Ambient green glow background */}
+      {/* Ambient background glow */}
       <div
         aria-hidden
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[500px] bg-[radial-gradient(ellipse_75%_55%_at_50%_0%,rgba(95,201,74,0.14),transparent_70%)]"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-[520px] bg-[radial-gradient(ellipse_75%_55%_at_50%_0%,rgba(95,201,74,0.12),transparent_70%)]"
       />
       <div
         aria-hidden
-        className="pointer-events-none absolute left-1/2 top-4 -translate-x-1/2 -z-10 h-56 w-full max-w-2xl rounded-full bg-[#5fc94a]/[0.08] blur-3xl"
+        className="pointer-events-none absolute left-1/2 top-10 -translate-x-1/2 -z-10 h-64 w-full max-w-3xl rounded-full bg-[#5fc94a]/[0.06] blur-3xl"
       />
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 md:px-8">
         {/* Section Header */}
         <Reveal className="mx-auto max-w-3xl text-center">
           <div className="flex justify-center">
-            <span className="rounded-full bg-[#f0f9ea] border border-[#d6f2c9] px-4 sm:px-5 py-1 sm:py-1.5 text-[11px] sm:text-xs font-bold uppercase tracking-[0.2em] text-[#45a02e]">
+            <span className="rounded-full bg-[#f0f9ea] border border-[#d6f2c9] px-4 sm:px-5 py-1 text-xs font-bold uppercase tracking-[0.2em] text-[#45a02e]">
               {t.portfolioSection.badge}
             </span>
           </div>
-          <h2 className="mt-3 sm:mt-4 font-[family-name:var(--font-sora)] text-2xl font-extrabold tracking-tight text-slate-950 sm:text-3xl lg:text-[38px] leading-tight">
+          <h2 className="mt-3 sm:mt-4 font-[family-name:var(--font-sora)] text-2xl sm:text-3xl lg:text-[40px] font-extrabold tracking-tight text-slate-950 leading-tight">
             {t.portfolioSection.titlePrefix}{" "}
             <span className="text-[#45a02e]">{t.portfolioSection.titleHighlight}</span>
           </h2>
-          <p className="mt-2.5 sm:mt-3 max-w-2xl mx-auto text-xs sm:text-sm leading-relaxed text-slate-600">
+          <p className="mt-2.5 sm:mt-3 max-w-2xl mx-auto text-xs sm:text-sm md:text-base leading-relaxed text-slate-600">
             {t.portfolioSection.subtitle}
           </p>
         </Reveal>
-      </div>
 
-      {/* Centered Infinite Carousel Slider Track Container */}
-      <div className="relative mx-auto mt-6 sm:mt-10 flex w-full max-w-7xl items-center justify-center px-2 sm:px-4 lg:px-6">
-        {/* Desktop / Tablet Left Arrow Button */}
-        <button
-          aria-label="Portofolio sebelumnya"
-          className="hidden sm:flex size-10 lg:size-12 shrink-0 items-center justify-center rounded-full bg-white border border-slate-200/90 text-slate-700 shadow-md transition-all hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer z-20 mr-2 sm:mr-3 lg:mr-4"
-          onClick={handlePrev}
-          type="button"
-        >
-          <ChevronLeft className="size-5" />
-        </button>
-
-        {/* 3-Card Viewport on Desktop / 1-Card Centered on Mobile */}
+        {/* Main Showcase Wrapper with Absolute Centered Navigation Arrows */}
         <div
-          className="relative flex-1 min-w-0 overflow-hidden touch-pan-y focus:outline-none py-6 sm:py-8"
-          onKeyDown={handleKeyDown}
-          onMouseDown={handleMouseDown}
+          className="relative mx-auto mt-8 sm:mt-12 lg:mt-16 max-w-6xl px-2 sm:px-8 md:px-12 lg:px-14 select-none"
           onMouseEnter={() => setIsPaused(true)}
-          onMouseLeave={handleMouseLeave}
-          onMouseUp={handleMouseUp}
+          onMouseLeave={() => setIsPaused(false)}
           onTouchEnd={onTouchEnd}
           onTouchMove={onTouchMove}
           onTouchStart={onTouchStart}
-          ref={containerRef}
+          onKeyDown={handleKeyDown}
           tabIndex={0}
+          role="region"
+          aria-label="Carousel Portofolio"
         >
-          {/* Sliding Flex Track with Continuous Looping */}
-          <div
-            className="flex items-stretch select-none will-change-transform py-2"
-            onTransitionEnd={handleTransitionEnd}
-            ref={trackRef}
-            style={{
-              gap: `${gap}px`,
-              transform: `translateX(${translateX}px)`,
-              transition: enableTransition
-                ? "transform 500ms cubic-bezier(0.25, 1, 0.5, 1)"
-                : "none",
-            }}
+          {/* Consistent Left Arrow Button (Fixed Anchor on Desktop & Tablet) */}
+          <button
+            aria-label="Portofolio sebelumnya"
+            className="hidden sm:flex absolute left-0 lg:-left-2 top-1/2 -translate-y-1/2 size-11 sm:size-12 lg:size-13 shrink-0 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer z-30"
+            onClick={handlePrev}
+            type="button"
           >
-          {extendedItems.map((item) => {
-            const isActive = item.virtualIndex === currentIndex;
+            <ChevronLeft className="size-5 sm:size-6" />
+          </button>
 
-            return (
-              <div
-                className={`group relative flex shrink-0 flex-col justify-between rounded-[20px] sm:rounded-[26px] overflow-hidden bg-white transition-all duration-500 select-none ${
-                  isActive
-                    ? "border-2 border-[#45a02e] shadow-[0_12px_32px_rgba(69,160,46,0.16)] sm:shadow-[0_16px_40px_rgba(69,160,46,0.16)] scale-100 z-10 opacity-100"
-                    : "border-2 border-slate-200/80 shadow-[0_4px_16px_rgba(0,0,0,0.03)] scale-[0.95] opacity-75 sm:opacity-80 hover:opacity-100 hover:border-slate-300 cursor-pointer"
-                }`}
-                key={item.uniqueKey}
-                onClick={() => {
-                  if (!isActive) handleCardClick(item.virtualIndex);
-                }}
-                style={{ width: `${cardWidth}px` }}
-              >
-                {/* Visual Image */}
-                <div className="relative aspect-video object-contain w-full overflow-hidden bg-slate-100 border border-slate-100">
-                  <Image
-                    alt={item.title}
-                    className="object-cover transition-transform duration-700 group-hover:scale-105 pointer-events-none"
-                    draggable={false}
-                    fill
-                    sizes="(min-width: 1024px) 400px, 85vw"
-                    src={item.image}
+          {/* Consistent Right Arrow Button (Fixed Anchor on Desktop & Tablet) */}
+          <button
+            aria-label="Portofolio berikutnya"
+            className="hidden sm:flex absolute right-0 lg:-right-2 top-1/2 -translate-y-1/2 size-11 sm:size-12 lg:size-13 shrink-0 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-[0_4px_16px_rgba(0,0,0,0.08)] transition-all duration-300 hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer z-30"
+            onClick={handleNext}
+            type="button"
+          >
+            <ChevronRight className="size-5 sm:size-6" />
+          </button>
+
+          {/* 2-Column Showcase Content */}
+          <div className="w-full">
+            <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-10 lg:gap-12 xl:gap-14 items-center">
+              
+              {/* LEFT COLUMN: Authentic Vector Device Trio (Desktop Headlight + Tilted iPhone & iPad) */}
+              <div className="md:col-span-7 w-full">
+                <div
+                  className={`relative w-full max-w-[440px] sm:max-w-[520px] md:max-w-none mx-auto pt-2 pb-14 sm:pb-16 px-1 sm:px-2 select-none transition-all duration-350 ease-out ${
+                    isTransitioning ? "opacity-80 scale-[0.99]" : "opacity-100 scale-100"
+                  }`}
+                >
+                  {/* 1. Desktop Monitor / MacBook (Prominent Headlight Centerpiece) */}
+                  <VectorDesktop
+                    imageSrc={activeItem.laptopImage || activeItem.image}
+                    alt={`${activeItem.title} Desktop View`}
+                    priority
+                  />
+
+                  {/* 2. Vector iPhone (Left Overlap, Tilted ~-7deg, 100% Full Screen) */}
+                  <VectorIPhone
+                    imageSrc={activeItem.mobileImage || activeItem.image}
+                    alt={`${activeItem.title} iPhone View`}
+                    priority
+                  />
+
+                  {/* 3. Vector iPad (Right Overlap, Tilted ~+7deg, 100% Full Screen) */}
+                  <VectorIPad
+                    imageSrc={activeItem.tabletImage || activeItem.image}
+                    alt={`${activeItem.title} iPad View`}
+                    priority
                   />
                 </div>
+              </div>
 
-                <div className="p-3.5 sm:p-5">
-                  {/* Title & Tag Row */}
-                  <div className="mt-3 sm:mt-4 flex items-center justify-between gap-1.5 sm:gap-2">
-                    <h3 className="font-[family-name:var(--font-sora)] text-sm sm:text-base lg:text-lg font-bold tracking-tight text-slate-900 truncate">
-                      {item.title}
-                    </h3>
-                    {item.tagType === "amber" ? (
-                      <span className="inline-flex items-center gap-1 rounded-full bg-amber-50 border border-amber-200/80 px-2 sm:px-2.5 py-0.5 text-[10px] sm:text-[11px] font-bold text-amber-700 tracking-wide shrink-0">
-                        {item.tag}
-                      </span>
-                    ) : (
-                      <span className="rounded-md bg-slate-100 px-2 sm:px-2.5 py-0.5 text-[10px] sm:text-[11px] font-bold uppercase tracking-wider text-slate-600 shrink-0">
-                        {item.tag}
-                      </span>
-                    )}
-                  </div>
+              {/* RIGHT COLUMN: Project Information & Details */}
+              <div
+                className={`md:col-span-5 flex flex-col justify-center text-left transition-all duration-350 ease-out md:min-h-[420px] ${
+                  isTransitioning ? "opacity-80 translate-y-0.5" : "opacity-100 translate-y-0"
+                }`}
+              >
+                {/* Solution Title */}
+                <h3 className="font-[family-name:var(--font-sora)] text-2xl sm:text-3xl lg:text-[34px] font-extrabold tracking-tight text-slate-950 leading-tight">
+                  {activeItem.solutionTitle || "Solusi Digital Kami"}
+                </h3>
 
-                  {/* Description */}
-                  <p className="mt-2 sm:mt-2.5 text-[11px] sm:text-xs text-slate-600 leading-relaxed line-clamp-3 min-h-[46px] sm:min-h-[52px]">
-                    {item.description}
+                {/* Quote Box with Green Accent Left Border */}
+                <div className="mt-4 sm:mt-5 border-l-[3.5px] sm:border-l-4 border-[#22c55e] pl-4 sm:pl-5 py-0.5 min-h-[78px] sm:min-h-[88px] flex items-center">
+                  <p className="text-sm sm:text-[15px] leading-relaxed text-slate-600 sm:text-slate-700 font-normal">
+                    “{activeItem.description}”
                   </p>
+                </div>
 
-                  {/* Bottom Action Button */}
-                  <div className="mt-3 sm:mt-4 pt-1">
-                    {isActive ? (
-                      <Link
-                        className="block w-full rounded-full py-2 sm:py-2.5 text-center text-xs sm:text-sm font-semibold bg-[#45a02e] text-white hover:bg-[#3b8e26] shadow-[0_4px_16px_rgba(69,160,46,0.25)] hover:-translate-y-0.5 active:scale-95 transition-all duration-300 cursor-pointer"
-                        href={item.href}
-                        target="blank"
+                {/* 3 Metric Stats */}
+                <div className="mt-6 sm:mt-8 grid grid-cols-3 gap-3 sm:gap-4 pt-1 sm:pt-2">
+                  {activeItem.stats.map((stat, idx) => (
+                    <div key={idx} className="flex flex-col">
+                      <span
+                        className={`font-[family-name:var(--font-sora)] text-2xl sm:text-3xl font-extrabold tracking-tight ${
+                          idx === 1 ? "text-[#22c55e]" : "text-slate-950"
+                        }`}
                       >
-                        {t.portfolioSection.cta}
-                      </Link>
-                    ) : (
-                      <button
-                        className="block w-full rounded-full py-2 sm:py-2.5 text-center text-xs sm:text-sm font-semibold border border-[#45a02e] text-[#45a02e] bg-white hover:bg-[#45a02e] hover:text-white hover:-translate-y-0.5 active:scale-95 transition-all duration-300 cursor-pointer"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleCardClick(item.virtualIndex);
-                        }}
-                        type="button"
-                      >
-                        {t.portfolioSection.cta}
-                      </button>
-                    )}
-                  </div>
+                        {stat.value}
+                      </span>
+                      <span className="mt-1 text-xs sm:text-sm font-medium text-slate-500 leading-snug">
+                        {stat.label}
+                      </span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* CTA Action Button */}
+                <div className="mt-7 sm:mt-9">
+                  <Link
+                    href={activeItem.href}
+                    target={activeItem.href.startsWith("http") ? "_blank" : undefined}
+                    rel={activeItem.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                    className="inline-flex w-full items-center justify-center rounded-full bg-[#22c55e] px-8 py-3.5 sm:py-4 text-center text-sm sm:text-base font-bold text-white shadow-[0_8px_24px_rgba(34,197,94,0.32)] transition-all duration-300 hover:bg-[#16a34a] hover:shadow-[0_12px_28px_rgba(34,197,94,0.42)] hover:-translate-y-0.5 active:scale-[0.99] cursor-pointer"
+                  >
+                    {t.portfolioSection.cta}
+                  </Link>
                 </div>
               </div>
-            );
-          })}
+
+            </div>
           </div>
         </div>
 
-        {/* Desktop / Tablet Right Arrow Button */}
-        <button
-          aria-label="Portofolio berikutnya"
-          className="hidden sm:flex size-10 lg:size-12 shrink-0 items-center justify-center rounded-full bg-white border border-slate-200/90 text-slate-700 shadow-md transition-all hover:border-[#45a02e] hover:text-[#45a02e] hover:scale-105 active:scale-95 cursor-pointer z-20 ml-2 sm:ml-3 lg:ml-4"
-          onClick={handleNext}
-          type="button"
-        >
-          <ChevronRight className="size-5" />
-        </button>
-      </div>
+        {/* Mobile Slide Controls: Dedicated Consistent Navigation [<] [ • • • • • ] [>] */}
+        <div className="mt-6 flex sm:hidden items-center justify-center gap-3">
+          <button
+            aria-label="Portofolio sebelumnya"
+            className="flex size-10 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-sm active:scale-90 transition-transform cursor-pointer"
+            onClick={handlePrev}
+            type="button"
+          >
+            <ChevronLeft className="size-5" />
+          </button>
 
-      {/* Mobile Navigation Controls: Ergonomic Bottom Controls with [<] [ • • • • ] [>] */}
-      <div className="mt-5 flex sm:hidden items-center justify-center gap-3">
-        <button
-          aria-label="Portofolio sebelumnya"
-          className="flex size-9 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-sm active:scale-90 transition-transform cursor-pointer"
-          onClick={handlePrev}
-          type="button"
-        >
-          <ChevronLeft className="size-4" />
-        </button>
+          <div className="flex items-center gap-2">
+            {items.map((item, index) => {
+              const isActive = currentIndex === index;
 
-        <div className="flex items-center gap-1.5">
+              return (
+                <button
+                  aria-label={`Lihat ${item.title}`}
+                  className={`cursor-pointer transition-all duration-300 ${
+                    isActive
+                      ? "h-2 w-7 rounded-full bg-[#22c55e]"
+                      : "h-2 w-2 rounded-full bg-slate-200 hover:bg-slate-300"
+                  }`}
+                  key={item.id}
+                  onClick={() => handleDotClick(index)}
+                  type="button"
+                />
+              );
+            })}
+          </div>
+
+          <button
+            aria-label="Portofolio berikutnya"
+            className="flex size-10 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-sm active:scale-90 transition-transform cursor-pointer"
+            onClick={handleNext}
+            type="button"
+          >
+            <ChevronRight className="size-5" />
+          </button>
+        </div>
+
+        {/* Desktop & Tablet Bottom Pagination Dots (Exactly 5 Dots) */}
+        <div
+          aria-label="Paginasi portofolio"
+          className="mt-8 sm:mt-12 hidden sm:flex items-center justify-center gap-2"
+        >
           {items.map((item, index) => {
-            const isActive = realActiveIndex === index;
+            const isActive = currentIndex === index;
 
             return (
               <button
                 aria-label={`Lihat ${item.title}`}
-                className={`relative cursor-pointer transition-all duration-300 ${
+                className={`cursor-pointer transition-all duration-300 ${
                   isActive
-                    ? "h-2 w-7 rounded-full bg-[#d6f2c9] overflow-hidden"
-                    : "h-2 w-2 rounded-full bg-slate-300 hover:bg-slate-400"
+                    ? "h-2 w-7 sm:w-8 rounded-full bg-[#22c55e]"
+                    : "h-2 w-2 rounded-full bg-slate-200 hover:bg-slate-300"
                 }`}
                 key={item.id}
                 onClick={() => handleDotClick(index)}
                 type="button"
-              >
-                {isActive && (
-                  <span
-                    key={`mob-${realActiveIndex}-${isPaused}`}
-                    className="absolute inset-y-0 left-0 rounded-full bg-[#45a02e]"
-                    style={{
-                      animationName: "slideProgress",
-                      animationDuration: "4000ms",
-                      animationTimingFunction: "linear",
-                      animationFillMode: "forwards",
-                      animationPlayState: isPaused ? "paused" : "running",
-                    }}
-                  />
-                )}
-              </button>
+              />
             );
           })}
         </div>
-
-        <button
-          aria-label="Portofolio berikutnya"
-          className="flex size-9 items-center justify-center rounded-full bg-white border border-slate-200 text-slate-700 shadow-sm active:scale-90 transition-transform cursor-pointer"
-          onClick={handleNext}
-          type="button"
-        >
-          <ChevronRight className="size-4" />
-        </button>
-      </div>
-
-      {/* Desktop & Tablet Pagination Dots with Active Countdown Progress Bar */}
-      <div
-        aria-label="Paginasi portofolio"
-        className="mt-6 sm:mt-8 hidden sm:flex items-center justify-center gap-2"
-      >
-        {items.map((item, index) => {
-          const isActive = realActiveIndex === index;
-
-          return (
-            <button
-              aria-label={`Lihat ${item.title}`}
-              className={`relative cursor-pointer transition-all duration-300 ${
-                isActive
-                  ? "h-2.5 w-8 sm:w-9 rounded-full bg-[#d6f2c9] overflow-hidden"
-                  : "h-2.5 w-2.5 rounded-full bg-slate-300 hover:bg-slate-400"
-              }`}
-              key={item.id}
-              onClick={() => handleDotClick(index)}
-              type="button"
-            >
-              {isActive && (
-                <span
-                  key={`desk-${realActiveIndex}-${isPaused}`}
-                  className="absolute inset-y-0 left-0 rounded-full bg-[#45a02e]"
-                  style={{
-                    animationName: "slideProgress",
-                    animationDuration: "4000ms",
-                    animationTimingFunction: "linear",
-                    animationFillMode: "forwards",
-                    animationPlayState: isPaused ? "paused" : "running",
-                  }}
-                />
-              )}
-            </button>
-          );
-        })}
       </div>
     </section>
   );
 }
-
-

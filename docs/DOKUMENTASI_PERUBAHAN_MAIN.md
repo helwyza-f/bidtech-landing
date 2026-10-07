@@ -1,18 +1,18 @@
 # Dokumentasi Pembaruan Branch `main` ke `satria`
 **Repository:** `bidtech-landing`  
-**Status Sinkronisasi:** Up-to-date (Komit HEAD: `4a9c53d`)  
-**Tanggal Rangkuman:** 6 Oktober 2026  
+**Status Sinkronisasi:** Up-to-date (Komit HEAD: `0ff7b6c`)  
+**Tanggal Rangkuman:** 7 Oktober 2026  
 **Author Kontributor:** `achul`, `satt12 (Satria)`
 
 ---
 
 ## 1. Status Sinkronisasi Git
 
-Branch `satria` telah disinkronkan sepenuhnya dengan branch `main` (`origin/main`). Kedua branch saat ini berada pada commit identik dan working tree dalam keadaan bersih (*clean*).
+Branch `satria` telah disinkronkan sepenuhnya dengan branch `main` (`origin/main`). Kedua branch saat ini berada pada commit identik.
 
 - **Branch Aktif:** `satria`
 - **Tracking Remote:** `origin/satria` (identik dengan `origin/main`)
-- **Commit Terakhir:** `4a9c53d82aff237539b9f134d329d10888351d9a`
+- **Commit Terakhir:** `0ff7b6c6a86a936a3d57abd95d761c6fb8826d30`
 - **Status Integrasi:** Tidak ada merge conflict, semua perubahan dari `main` sudah ditarik secara penuh (*Fast-Forward / Up-to-date*).
 
 ---
@@ -23,6 +23,8 @@ Berikut daftar komit riwayat pembaruan yang digabungkan ke branch `satria`:
 
 | Hash Komit | Penulis | Tanggal | Pesan Komit & Cakupan |
 | :--- | :--- | :--- | :--- |
+| **`0ff7b6c`** | `satt12` | 2026-10-06 | feat: perbaikan ringkasan order form, bug switch bahasa ID di hosting, dan info rekening pembayaran resmi |
+| **`8b746d1`** | `satt12` | 2026-10-06 | feat: multi-bahasa 4 locale (ID, EN, EN-SG, MS), konversi kurs otomatis (SGD & MYR), auto locale detection, dan optimasi UI katalog mobil |
 | **`4a9c53d`** | `satt12` | 2026-10-05 | Fitur peta interaktif pengantaran mobil, pemilihan jadwal sewa, dan optimasi responsif iPad & mobile |
 | **`6ab30fc`** | `achul` | 2026-09-30 | Revisi `nadimtrans.com` gambar Alphard dan fitur kalender sewa interaktif |
 | **`3027cca`** | `achul` | 2026-09-29 | Migrasi parameter detail kendaraan menggunakan slug ramah SEO (`/kendaraan/[slug]`) |
