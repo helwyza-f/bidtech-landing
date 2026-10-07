@@ -164,6 +164,9 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: deploy-config
+          # .env.example starts with a dot; upload-artifact excludes dotfiles
+          # by default, so they'd silently vanish from the artifact otherwise.
+          include-hidden-files: true
           path: |
             compose.yml
             compose.prod.yml
