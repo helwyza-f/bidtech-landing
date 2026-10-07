@@ -15,5 +15,5 @@ export const metadata = rootMetadata("en");
 
 export default function EnglishLayout({ children }: { children: React.ReactNode }) {
   unstable_setRequestLocale("en");
-  return <RootDocument locale="en" detectBrowserLocale>{children}</RootDocument>;
+  return <RootDocument locale="en">{children}</RootDocument>;
 }

@@ -19,10 +19,11 @@ export default function LanguageSwitcher({ mobile = false, onNavigate }: Languag
   const t = useTranslations("language");
 
   const handleSelectLocale = (nextLocale: Locale) => {
+    const isHttps = typeof window !== "undefined" && window.location.protocol === "https:";
+    const secureFlag = isHttps ? "; Secure" : "";
+
     try {
       window.localStorage.setItem(LANGUAGE_PREFERENCE_KEY, nextLocale);
-      const isHttps = typeof window !== "undefined" && window.location.protocol === "https:";
-      const secureFlag = isHttps ? "; Secure" : "";
       document.cookie = `${LANGUAGE_PREFERENCE_KEY}=${nextLocale}; path=/; max-age=31536000; SameSite=Lax${secureFlag}`;
     } catch {
       // Browser storage fallback
@@ -31,10 +32,12 @@ export default function LanguageSwitcher({ mobile = false, onNavigate }: Languag
     onNavigate?.();
 
     const targetPath = getLocalizedPath(nextLocale, pathname);
-    // Gunakan server-side set-locale endpoint agar Set-Cookie header HTTP valid di hosting
-    // dan root layout (HTML lang & messages) ter-refresh sempurna
-    const targetUrl = `/api/set-locale?locale=${nextLocale}&redirect=${encodeURIComponent(targetPath)}`;
-    window.location.href = targetUrl;
+
+    // Beritahu endpoint server di background untuk Set-Cookie HTTP header
+    fetch(`/api/set-locale?locale=${nextLocale}`, { cache: "no-store" }).catch(() => {});
+
+    // Navigasi langsung ke URL target (langsung ke rute publik, tanpa hop backend redirect)
+    window.location.assign(targetPath);
   };
 
   const hrefFor = (nextLocale: Locale) => {
@@ -72,11 +75,10 @@ export default function LanguageSwitcher({ mobile = false, onNavigate }: Languag
         >
           {options.map((option) => {
             const targetPath = hrefFor(option.locale);
-            const actionUrl = `/api/set-locale?locale=${option.locale}&redirect=${encodeURIComponent(targetPath)}`;
             return (
               <a
                 key={option.locale}
-                href={actionUrl}
+                href={targetPath}
                 role="menuitem"
                 onClick={(e) => {
                   e.preventDefault();

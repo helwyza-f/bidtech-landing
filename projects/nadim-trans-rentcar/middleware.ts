@@ -1,10 +1,25 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { LANGUAGE_PREFERENCE_KEY } from "@/lib/i18n";
+import { LANGUAGE_PREFERENCE_KEY, LOCALES, type Locale } from "@/lib/i18n";
+
+/**
+ * Mendapatkan origin publik yang sesungguhnya (mengatasi reverse proxy Nginx / Docker
+ * agar tidak me-redirect ke 127.0.0.1:3040 yang menyebabkan blank page di browser pengunjung).
+ */
+function getPublicOrigin(request: NextRequest): string {
+  const forwardedHost =
+    request.headers.get("x-forwarded-host") ||
+    request.headers.get("host") ||
+    request.nextUrl.host;
+  const forwardedProto =
+    request.headers.get("x-forwarded-proto") ||
+    (request.url.startsWith("https") ? "https" : request.nextUrl.protocol.replace(":", ""));
+  return `${forwardedProto}://${forwardedHost}`;
+}
 
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
-  // Lewati file statis, aset Next, gambar, favicon, dsb.
+  // Lewati file statis, aset Next, API, gambar, favicon, dsb.
   if (
     pathname.startsWith("/_next") ||
     pathname.startsWith("/api") ||
@@ -15,74 +30,71 @@ export function middleware(request: NextRequest) {
     return NextResponse.next();
   }
 
-  // 0. Cek parameter override ?lang= jika ada
+  const origin = getPublicOrigin(request);
+  const isHttps = origin.startsWith("https") || process.env.NODE_ENV === "production";
+
+  // 0. Cek parameter override ?lang= jika ada (misal dari share link / marketing)
   const langQuery = request.nextUrl.searchParams.get("lang")?.toLowerCase();
-  if (langQuery === "id" || langQuery === "en-sg" || langQuery === "ms" || langQuery === "en") {
-    const url = request.nextUrl.clone();
-    url.searchParams.delete("lang");
-    if (langQuery === "id") {
-      url.pathname = pathname.replace(/^\/(en-sg|ms|en)(\/|$)/, "/") || "/";
-    } else {
-      const cleanPath = pathname.replace(/^\/(en-sg|ms|en)(\/|$)/, "/") || "/";
-      url.pathname = cleanPath === "/" ? `/${langQuery}` : `/${langQuery}${cleanPath}`;
-    }
-    const response = NextResponse.redirect(url);
+  if (langQuery && (LOCALES as readonly string[]).includes(langQuery)) {
+    const cleanPath = pathname.replace(/^\/(en-sg|ms|en)(\/|$)/, "/") || "/";
+    const targetPath =
+      langQuery === "id"
+        ? cleanPath
+        : cleanPath === "/"
+        ? `/${langQuery}`
+        : `/${langQuery}${cleanPath}`;
+
+    const redirectUrl = new URL(targetPath, origin);
+    const response = NextResponse.redirect(redirectUrl);
     response.cookies.set(LANGUAGE_PREFERENCE_KEY, langQuery, {
       maxAge: 60 * 60 * 24 * 365,
       path: "/",
       sameSite: "lax",
-      secure: process.env.NODE_ENV === "production" || request.nextUrl.protocol === "https:",
+      secure: isHttps,
     });
     return response;
   }
 
-  // 1. Cek preferensi cookie manual yang pernah disimpan pengguna
-  const rawCookie = request.cookies.get(LANGUAGE_PREFERENCE_KEY)?.value;
-  const storedLocale = rawCookie?.trim().replace(/^["']|["']$/g, "").toLowerCase();
-
-  if (storedLocale) {
-    if (storedLocale === "id") {
-      // Jika pengguna memilih ID tapi membuka URL ber-prefix (misal /en-sg), arahkan ke rute ID
-      if (
-        pathname.startsWith("/en-sg") ||
-        pathname.startsWith("/ms") ||
-        pathname.startsWith("/en")
-      ) {
-        const url = request.nextUrl.clone();
-        url.pathname = pathname.replace(/^\/(en-sg|ms|en)(\/|$)/, "/") || "/";
-        return NextResponse.redirect(url);
-      }
-      // Jika sudah di rute default (ID), izinkan langsung dan JANGAN PERNAH dialihkan ke SG/MY
-      return NextResponse.next();
+  // 1. Jika URL sudah memiliki prefix bahasa eksplisit (/en, /en-sg, /ms),
+  // JANGAN PERNAH dialihkan ke URL lain! Pengguna sengaja mengakses bahasa tersebut.
+  // Cukup sinkronkan cookie preferensi dengan locale URL aktif.
+  const prefixMatch = pathname.match(/^\/(en-sg|ms|en)(\/|$)/);
+  if (prefixMatch) {
+    const currentLocale = prefixMatch[1] as Locale;
+    const response = NextResponse.next();
+    const rawCookie = request.cookies.get(LANGUAGE_PREFERENCE_KEY)?.value?.trim().toLowerCase();
+    if (rawCookie !== currentLocale) {
+      response.cookies.set(LANGUAGE_PREFERENCE_KEY, currentLocale, {
+        maxAge: 60 * 60 * 24 * 365,
+        path: "/",
+        sameSite: "lax",
+        secure: isHttps,
+      });
     }
-
-    if (storedLocale === "en-sg" || storedLocale === "ms" || storedLocale === "en") {
-      // Jika pengguna memilih bahasa asing tapi membuka rute non-prefix, alihkan ke bahasa pilihannya
-      if (
-        !pathname.startsWith("/en-sg") &&
-        !pathname.startsWith("/ms") &&
-        !pathname.startsWith("/en")
-      ) {
-        const url = request.nextUrl.clone();
-        url.pathname = pathname === "/" ? `/${storedLocale}` : `/${storedLocale}${pathname}`;
-        return NextResponse.redirect(url);
-      }
-      return NextResponse.next();
-    }
+    return response;
   }
 
-  // Jika sudah berada di rute bahasa spesifik, jangan lakukan auto-deteksi
-  if (
-    pathname.startsWith("/en-sg") ||
-    pathname.startsWith("/ms") ||
-    pathname.startsWith("/en")
-  ) {
+  // 2. Cek preferensi cookie pengguna saat mengakses rute tanpa prefix (default ID)
+  const rawCookie = request.cookies.get(LANGUAGE_PREFERENCE_KEY)?.value;
+  const storedLocale = rawCookie?.trim().replace(/^["']|["']$/g, "").toLowerCase() as Locale | undefined;
+
+  // Jika pengguna sebelumnya memilih bahasa asing dan sekarang membuka root '/',
+  // arahkan ke bahasa pilihannya menggunakan public origin.
+  if (storedLocale && storedLocale !== "id" && (LOCALES as readonly string[]).includes(storedLocale)) {
+    if (pathname === "/") {
+      const redirectUrl = new URL(`/${storedLocale}`, origin);
+      return NextResponse.redirect(redirectUrl);
+    }
     return NextResponse.next();
   }
 
-  // 2. Jika belum ada preferensi, auto-deteksi HANYA pada halaman utama (root /)
+  // Jika preferensi adalah 'id', biarkan rute default tanpa redirect
+  if (storedLocale === "id") {
+    return NextResponse.next();
+  }
+
+  // 3. Jika belum ada preferensi sama sekali, auto-deteksi HANYA pada root '/'
   if (pathname === "/") {
-    const isHttps = process.env.NODE_ENV === "production" || request.nextUrl.protocol === "https:";
     const country = (
       request.headers.get("x-vercel-ip-country") ||
       request.headers.get("cf-ipcountry") ||
@@ -91,9 +103,7 @@ export function middleware(request: NextRequest) {
     ).toUpperCase();
 
     if (country === "SG") {
-      const url = request.nextUrl.clone();
-      url.pathname = "/en-sg";
-      const response = NextResponse.redirect(url);
+      const response = NextResponse.redirect(new URL("/en-sg", origin));
       response.cookies.set(LANGUAGE_PREFERENCE_KEY, "en-sg", {
         maxAge: 60 * 60 * 24 * 365,
         path: "/",
@@ -104,9 +114,7 @@ export function middleware(request: NextRequest) {
     }
 
     if (country === "MY") {
-      const url = request.nextUrl.clone();
-      url.pathname = "/ms";
-      const response = NextResponse.redirect(url);
+      const response = NextResponse.redirect(new URL("/ms", origin));
       response.cookies.set(LANGUAGE_PREFERENCE_KEY, "ms", {
         maxAge: 60 * 60 * 24 * 365,
         path: "/",
@@ -116,13 +124,11 @@ export function middleware(request: NextRequest) {
       return response;
     }
 
-    // 3. Cek Header Accept-Language browser (hanya jika negara bukan ID)
+    // Cek Header Accept-Language browser (hanya jika negara bukan ID)
     if (country !== "ID") {
       const acceptLang = (request.headers.get("accept-language") || "").toLowerCase();
       if (acceptLang.includes("en-sg") || (acceptLang.includes("sg") && !acceptLang.includes("id"))) {
-        const url = request.nextUrl.clone();
-        url.pathname = "/en-sg";
-        const response = NextResponse.redirect(url);
+        const response = NextResponse.redirect(new URL("/en-sg", origin));
         response.cookies.set(LANGUAGE_PREFERENCE_KEY, "en-sg", {
           maxAge: 60 * 60 * 24 * 365,
           path: "/",
@@ -138,9 +144,7 @@ export function middleware(request: NextRequest) {
         acceptLang.includes("en-my") ||
         acceptLang.includes("-my")
       ) {
-        const url = request.nextUrl.clone();
-        url.pathname = "/ms";
-        const response = NextResponse.redirect(url);
+        const response = NextResponse.redirect(new URL("/ms", origin));
         response.cookies.set(LANGUAGE_PREFERENCE_KEY, "ms", {
           maxAge: 60 * 60 * 24 * 365,
           path: "/",
