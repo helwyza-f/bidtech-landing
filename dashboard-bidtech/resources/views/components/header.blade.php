@@ -1,51 +1,59 @@
-<header class="bg-white">
-  <div class="mx-auto flex h-16 max-w-7xl items-center gap-8 px-4 sm:px-6 lg:px-8">
-    <a class="block" href="{{ url('https://bidtech.co.id') }}">
-        <img src="{{ asset('images/logo/logo.webp') }}" alt="Logo Bidtech" class="h-8">
-    </a>
+@php
+    $step = $step ?? 1;
 
-    <div class="flex flex-1 items-center justify-end md:justify-between">
-      <nav aria-label="Global" class="hidden md:block">
-        <ul class="flex items-center gap-6 text-sm">
-          <li>
-            <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Cari Design </a>
-          </li>
+    // Deteksi pasti berdasarkan route aktif agar tidak bergantung pada sisa session
+    if (request()->routeIs('checkout.domain*')) {
+        $currentFlow = 'template-first';
+    } elseif (request()->routeIs('checkout.pilih-template*')) {
+        $currentFlow = 'domain-first';
+    } else {
+        $currentFlow = $flow ?? (session('checkout.flow') ?? 'template-first');
+    }
 
-          <li>
-            <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Custom </a>
-          </li>
+    $step1Label = $currentFlow === 'domain-first' ? 'Template' : 'Domain';
+@endphp
 
-          <li>
-            <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Portofolio </a>
-          </li>
+<header class="border-b border-[#E4E9E6] bg-white sticky top-0 z-50">
+    <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-4">
+        <!-- Sisi Kiri: Logo BIDTECH -->
+        <a href="{{ url('https://bidtech.co.id') }}" class="flex items-center gap-2">
+            <img src="{{ asset('images/logo/logo.webp') }}" alt="Logo Bidtech" class="h-7 sm:h-8 w-auto object-contain">
+        </a>
 
-          <li>
-            <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Tutorial </a>
-          </li>
+        <!-- Sisi Kanan: Keterangan Stepper (Template/Domain, Data diri, Ringkasan, Bayar) -->
+        <div class="flex items-center gap-2 sm:gap-4 overflow-x-auto">
+            @foreach([
+                1 => $step1Label,
+                2 => 'Data diri',
+                3 => 'Ringkasan',
+                4 => 'Bayar',
+            ] as $number => $label)
+                <div class="flex items-center gap-2 shrink-0">
+                    <span @class([
+                        'flex size-6 sm:size-7 items-center justify-center rounded-full text-xs font-bold transition',
+                        'bg-[#22C55E] text-white shadow-xs' => $number <= $step,
+                        'bg-[#E4E9E6] text-[#6B7B75]' => $number > $step,
+                    ])>
+                        {{ $number < $step ? '✓' : $number }}
+                    </span>
+                    <span @class([
+                        'text-xs sm:text-sm transition',
+                        'font-bold text-[#0B1B17]' => $number === $step,
+                        'font-medium text-[#0B1B17]' => $number < $step,
+                        'font-medium text-[#6B7B75]' => $number > $step,
+                    ])>
+                        {{ $label }}
+                    </span>
+                </div>
 
-          <li>
-            <a class="text-gray-500 transition hover:text-gray-500/75" href="#"> Hubungi Kami </a>
-          </li>
-        </ul>
-      </nav>
-
-      <div class="flex items-center gap-4">
-        <div class="sm:flex sm:gap-4">
-          <a
-            class="block rounded-md bg-teal-600 px-5 py-2.5 text-sm font-medium text-white transition hover:bg-teal-700"
-            href="#"
-          >
-            Masuk
-          </a>
-
-          <a
-            class="hidden rounded-md bg-gray-100 px-5 py-2.5 text-sm font-medium text-teal-600 transition hover:text-teal-600/75 sm:block"
-            href="#"
-          >
-            Kembali
-          </a>
+                @if($number < 4)
+                    <div @class([
+                        'h-0.5 w-6 sm:w-12 shrink-0 transition',
+                        'bg-[#22C55E]' => $number < $step,
+                        'bg-[#E4E9E6]' => $number >= $step,
+                    ])></div>
+                @endif
+            @endforeach
         </div>
-      </div>
     </div>
-  </div>
 </header>

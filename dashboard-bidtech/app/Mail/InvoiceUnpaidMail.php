@@ -44,7 +44,7 @@ class InvoiceUnpaidMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.invoice_unpaid',
+            view: 'emails.unpaid-invoice',
             with: [
                 'order'        => $this->order,
                 'template'     => $this->order->template,

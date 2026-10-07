@@ -4,11 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Facades\Storage;
 
 class Template extends Model
 {
+    public const DEFAULT_TEMPLATE_PRICE = 1000000;
+    public const DEFAULT_SERVER_PRICE = 500000;
+    public const DEFAULT_SERVICE_PRICE = 500000;
+
     protected $fillable = [
-        'id',
+        'slug',
         'name',
         'category',
         'price',
@@ -79,46 +84,46 @@ class Template extends Model
             if (str_starts_with($this->demo_url, 'http://') || str_starts_with($this->demo_url, 'https://')) {
                 return $this->demo_url;
             }
-            $baseUrl = config('app.frontend_url', env('LANDING_URL', 'http://localhost:3000'));
+            $baseUrl = config('app.frontend_url');
             return rtrim($baseUrl, '/') . '/' . ltrim($this->demo_url, '/');
         }
 
-        $baseUrl = config('app.frontend_url', env('LANDING_URL', 'http://localhost:3000'));
+        $baseUrl = config('app.frontend_url');
         $paths = [
-            1  => '/demo/automotive',
-            2  => '/demo/restaurant-cafe-2',
-            3  => '/demo/restaurant-cafe',
-            4  => '/demo/beauty-wellness',
-            5  => '/demo/community-pro',
-            6  => '/demo/organization',
-            7  => '/demo/e-commerce',
-            8  => '/demo/property',
-            9  => '/demo/beauty-wellness-2',
-            10 => '/demo/smartbelajar',
-            11 => '/demo/nivoraacademy',
-            12 => '/demo/aliansi-kepemimpinan-indonesia',
-            13 => '/demo/tehin',
-            14 => '/demo/agak-rapi',
-            15 => '/demo/pinjammobil',
-            16 => '/demo/forcevault',
-            17 => '/demo/elevasi',
+            'rentcar-sewa-mobil' => '/demo/automotive',
+            'deny-restaurant' => '/demo/restaurant-cafe-2',
+            'chefs-table' => '/demo/restaurant-cafe',
+            'ironforce' => '/demo/beauty-wellness',
+            'yayasan-bakti-nusantara' => '/demo/community-pro',
+            'harapan-kita' => '/demo/organization',
+            'konterku' => '/demo/e-commerce',
+            'denn-house' => '/demo/property',
+            'chulla' => '/demo/beauty-wellness-2',
+            'smartbelajar' => '/demo/smartbelajar',
+            'nivora-academy' => '/demo/nivoraacademy',
+            'aliansi-kepemimpinan-indonesia' => '/demo/aliansi-kepemimpinan-indonesia',
+            'tehin' => '/demo/tehin',
+            'agak-rapi' => '/demo/agak-rapi',
+            'pinjammobil' => '/demo/pinjammobil',
+            'forcevault' => '/demo/forcevault',
+            'elevasi' => '/demo/elevasi',
         ];
 
-        return rtrim($baseUrl, '/') . ($paths[$this->id] ?? '/template-website');
+        return rtrim($baseUrl, '/') . ($paths[$this->slug] ?? '/template-website');
     }
 
     /**
-     * URL preview gambar aset (mendukung public assets maupun uploads)
+     * URL preview gambar template pada object storage S3-compatible (prefix "templates/").
      */
     public function getPreviewUrlAttribute(): string
     {
         if (empty($this->preview)) {
-            return asset('images/design_thumbnail/rentcar.webp');
+            return 'https://media.bidtech.co.id/bidtech/templates/rentcar.webp';
         }
         if (str_starts_with($this->preview, 'http://') || str_starts_with($this->preview, 'https://')) {
             return $this->preview;
         }
-        return asset(ltrim($this->preview, '/'));
+        return Storage::disk('s3')->url(ltrim($this->preview, '/'));
     }
 
     /**
@@ -140,5 +145,82 @@ class Template extends Model
         $this->increment('views');
         return (int) $this->fresh()->views;
     }
-}
 
+    /**
+     * Bentuk JSON untuk API publik yang dikonsumsi frontend Next.js.
+     *
+     * @param  bool  $listing  true untuk item di daftar (memakai teks/tag cadangan); false untuk detail
+     */
+    public function toPublicArray(bool $listing): array
+    {
+        $tags = $this->tags_list;
+
+        if ($listing && empty($tags)) {
+            $tags = [$this->category, 'Responsive'];
+        }
+
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'category' => $this->category,
+            'subcategory' => $this->description ?? $this->template_desc ?? ($listing ? 'Website profesional modern siap pakai' : null),
+            'description' => $this->description,
+            'image' => $this->preview_url,
+            'previewHref' => $this->landing_url,
+            'demo_url' => $this->landing_url,
+            'tags' => $tags,
+            'views' => (int) $this->views,
+            'pricing' => [
+                'total' => $this->total_package_price,
+                'formatted_total' => 'Rp ' . number_format($this->total_package_price, 0, ',', '.'),
+                'template_price' => (int) $this->template_price,
+                'server_price' => (int) $this->server_price,
+                'service_price' => (int) $this->service_price,
+                'template_desc' => $this->template_desc,
+                'server_desc' => $this->server_desc,
+                'service_desc' => $this->service_desc,
+            ],
+            'is_active' => (bool) $this->is_active,
+            'checkout_url' => url('/checkout/' . $this->id . '/domain'),
+        ];
+    }
+
+    /**
+     * Rincian harga pesanan template ini bersama harga domain, dikurangi diskon.
+     * Satu-satunya rumus subtotal/total: Order::priceBreakdown() memakai rumus yang sama dari snapshot harganya.
+     *
+     * @return array{templatePrice: int, serverPrice: int, servicePrice: int, domainPrice: int, discountAmount: int,
+     *     packageTotal: int, subtotal: int, totalPrice: int}
+     */
+    public function priceBreakdown(int $domainPrice, int $discountAmount = 0): array
+    {
+        return static::breakdown(
+            (int) ($this->template_price ?? self::DEFAULT_TEMPLATE_PRICE),
+            (int) ($this->server_price ?? self::DEFAULT_SERVER_PRICE),
+            (int) ($this->service_price ?? self::DEFAULT_SERVICE_PRICE),
+            $domainPrice,
+            $discountAmount,
+        );
+    }
+
+    /**
+     * Rumus harga: paket = template + server + layanan; subtotal = paket + domain; total = subtotal - diskon (min 0).
+     * Kunci hasilnya sama dengan variabel yang dibaca view checkout.
+     */
+    public static function breakdown(int $template, int $server, int $service, int $domain, int $discount = 0): array
+    {
+        $package = $template + $server + $service;
+        $subtotal = $package + $domain;
+
+        return [
+            'templatePrice'  => $template,
+            'serverPrice'    => $server,
+            'servicePrice'   => $service,
+            'domainPrice'    => $domain,
+            'discountAmount' => $discount,
+            'packageTotal'   => $package,
+            'subtotal'       => $subtotal,
+            'totalPrice'     => max(0, $subtotal - $discount),
+        ];
+    }
+}

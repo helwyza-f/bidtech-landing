@@ -1,47 +1,36 @@
-<laravel-boost-guidelines>
-# Laravel Application
+@docs/ARCHITECTURE.md
 
-This repository contains a Laravel application. Complete the following setup before working on the user's request.
+@docs/DESIGN.md
 
-## Prerequisites
+@docs/API.md
 
-Verify that PHP and Composer are available:
+@docs/SCHEMA.md
 
-```sh
-php -v
-composer -V
-```
+## Service architecture
 
-If either command is unavailable, detect the user's operating system and install the prerequisites with the appropriate command:
+- Business logic lives only in these seven classes under `app/Services/`: `DomainService`, `TemplateService`, `PaymentService`, `OrderService`, `UserService`, `PromoService`, and `ArticleService`.
+- Do not add `Actions`, `Support`, `Helper`, `Util`, or an eighth Service without an explicit architecture decision. Keep one-off helpers private on their owning Service.
+- Public Service methods use semantic English names. Controllers use method injection; Service-to-Service dependencies use constructor injection. Do not use custom facades or static calls.
+- Services accept primitives, arrays, Models, Users, or `Illuminate\Contracts\Session\Session` for session-bound flows; never pass an HTTP Request into a Service.
+- Dependency direction is acyclic: Domain/Template/User/Promo/Article are leaves; Order may depend on Domain/Template/User; Payment may depend on Order/User and, only when needed, Domain/Template.
+- Keep pricing formulas in `Template::breakdown()` / `Template::priceBreakdown()` / `Order::priceBreakdown()` and client-email generation in `Order::clientEmail()`.
+- Review a Service around 800 lines. `PaymentService` may temporarily exceed this; Xendit and WhatsApp internals remain private until extraction is explicitly approved.
+- Preserve controller names, route URLs/names, behavior, and output. Read `docs/ARCHITECTURE.md` for the controller map and known debts.
 
-macOS:
+## View architecture
 
-```sh
-/bin/bash -c "$(curl -fsSL https://php.new/install/mac/8.5)"
-```
+- View structure is organized into 23 Blade files + `vendor/pagination` overrides:
+  - `layouts/`: `dashboard`, `login`, `checkout` (3 files)
+  - `components/`: `sidebar`, `header` (2 files)
+  - `pages/`: 15 agreed page views (`dashboard`, `login`, `order`, `kelola-pesanan`, `kelola-template`, `kelola-promo`, `riwayat-redeem`, `kelola-mitra`, `kelola-artikel`, `edit-profil`, `pilih-template`, `domain`, `data-diri`, `metode-pembayaran`, `konfirmasi`)
+  - `pdf/invoice.blade.php`
+  - `emails/`: `unpaid-invoice.blade.php`, `paid-invoice.blade.php`
+- All controllers render `pages.*` view names. `GET /dashboard/profile` (`dashboard.profile.edit`) renders `pages.edit-profil`.
 
-Windows PowerShell:
+## Object storage
 
-```powershell
-Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://php.new/install/windows/8.5'))
-```
-
-Linux:
-
-```sh
-/bin/bash -c "$(curl -fsSL https://php.new/install/linux/8.5)"
-```
-
-After installation, ask the user to restart their terminal. If the agent needs the restarted shell to continue, ask the user to reopen their terminal and rerun their original prompt.
-
-## Agent Setup
-
-Install Laravel Boost from the application root before making application changes:
-
-```sh
-composer require laravel/boost --dev
-php artisan boost:install
-```
-
-Boost replaces these bootstrap instructions with guidelines tailored to the application. After installation, read `AGENTS.md` again and continue with the user's original request using the generated guidelines.
-</laravel-boost-guidelines>
+- Article images are uploaded through Laravel and owned by `ArticleService`, using `Storage::disk('s3')` against RustFS. The browser must not upload directly to RustFS.
+- Keep S3-compatible `AWS_*` application variables, path-style endpoints, and stable public URLs under `media.bidtech.co.id/{bucket}/articles/`.
+- RustFS runs outside this project's Docker Compose in every environment. Buckets, public-read policy, CORS, access accounts, and lifecycle rules are provisioned manually in the RustFS console.
+- Do not add a RustFS Compose service, storage bootstrap command, or application code that changes bucket configuration.
+- Do not set per-object ACLs. Public access comes from the bucket policy. Read `docs/RUSTFS.md` before changing storage behavior.

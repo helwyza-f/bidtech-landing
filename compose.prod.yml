@@ -1,0 +1,14 @@
+services:
+  frontend:
+    container_name: BidTech-Frontend
+    image: ${REGISTRY}/${GHCR_OWNER}/bidtech-frontend:${IMAGE_TAG}
+    restart: unless-stopped
+
+  app:
+    container_name: BidTech-Dashboard
+    image: ${REGISTRY}/${GHCR_OWNER}/bidtech-dashboard:${IMAGE_TAG}
+    restart: unless-stopped
+
+  mysql:
+    container_name: BidTech-Dashboard-MySQL
+    restart: unless-stopped

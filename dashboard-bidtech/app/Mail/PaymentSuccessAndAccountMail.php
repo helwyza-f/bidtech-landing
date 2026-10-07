@@ -49,7 +49,7 @@ class PaymentSuccessAndAccountMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.payment_success_account',
+            view: 'emails.paid-invoice',
             with: [
                 'order'           => $this->order,
                 'user'            => $this->user,

@@ -8,23 +8,25 @@ use Illuminate\Http\Request;
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
         web: __DIR__.'/../routes/web.php',
+        api: __DIR__.'/../routes/api.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Register alias middleware 'admin' untuk cek role admin
+        // Register alias middleware 'role' — satu-satunya gerbang role, dipakai 'role:ADMIN', 'role:MEDIA', dst
         $middleware->alias([
-            'admin' => \App\Http\Middleware\AdminMiddleware::class,
+            'role' => \App\Http\Middleware\EnsureUserHasRole::class,
         ]);
 
-        $middleware->validateCsrfTokens(except: [
+        $middleware->preventRequestForgery(
+        except: [
             'webhook/xendit',
             'api/webhook/xendit',
             'webhook/idcloudhost',
             'api/webhook/idcloudhost',
             'templates/view/*',
-            'api/templates/view/*',
-        ]);
+        ],
+    );
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         $exceptions->shouldRenderJsonWhen(

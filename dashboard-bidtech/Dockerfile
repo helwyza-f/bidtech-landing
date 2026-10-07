@@ -9,7 +9,7 @@ COPY . .
 RUN composer dump-autoload --no-dev --optimize --no-interaction
 
 # ---- Stage 2: frontend assets (Vite) -------------------------------------
-FROM node:22-alpine AS assets
+FROM node:24-alpine AS assets
 WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm ci
@@ -40,6 +40,7 @@ COPY --from=vendor /app/bootstrap/cache ./bootstrap/cache
 COPY --from=assets /app/public/build ./public/build
 
 COPY docker/nginx.conf /etc/nginx/http.d/default.conf
+COPY docker/uploads.ini /usr/local/etc/php/conf.d/uploads.ini
 COPY docker/supervisord.conf /etc/supervisor/supervisord.conf
 COPY docker/entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh \

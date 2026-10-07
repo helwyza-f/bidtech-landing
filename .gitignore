@@ -15,3 +15,4 @@ backend/
 .claude
 .agents
 frontend/public/demo/
+.sql

@@ -3,18 +3,23 @@
 namespace App\Models;
 
 use App\Enums\OrderStatus;
+use App\Enums\DomainStatus;
+use App\Enums\WebsiteStatus;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Support\Str;
 
 class Order extends Model
 {
     use HasFactory;
 
+    public const CLIENT_EMAIL_DOMAIN = 'bidtech.co.id';
+
     protected $fillable = [
         'order_number',
         'template_id',
+        'client_id',
         'domain_name',
         'domain_price',
         'domain_duration',
@@ -29,14 +34,18 @@ class Order extends Model
         'service_desc',
 
         // Snapshot Promo & Diskon
-        'promo_id',
-        'promo_code',
+        'coupon_id',
+        'coupon_code',
         'discount_amount',
 
         // Snapshot Mitra
         'is_partner_order',
         'partner_name',
         'partner_commission_amount',
+        'commission_paid_out_at',
+        'domain_status',
+        'domain_final',
+        'website_status',
 
         'full_name',
         'email',
@@ -61,6 +70,9 @@ class Order extends Model
             'discount_amount'           => 'integer',
             'is_partner_order'          => 'boolean',
             'partner_commission_amount' => 'integer',
+            'commission_paid_out_at'     => 'datetime',
+            'domain_status'              => DomainStatus::class,
+            'website_status'             => WebsiteStatus::class,
             'status'                    => OrderStatus::class,
             'payment_expires_at'        => 'datetime',
             'paid_at'                   => 'datetime',
@@ -73,14 +85,14 @@ class Order extends Model
         return $this->belongsTo(Template::class);
     }
 
-    public function promo(): BelongsTo
+    public function coupon(): BelongsTo
     {
-        return $this->belongsTo(Promo::class);
+        return $this->belongsTo(Coupon::class);
     }
 
-    public function user(): HasOne
+    public function client(): BelongsTo
     {
-        return $this->hasOne(User::class);
+        return $this->belongsTo(User::class, 'client_id');
     }
 
     public function isPaid(): bool
@@ -95,60 +107,69 @@ class Order extends Model
     }
 
     /**
-     * Hitung Subtotal kotor sebelum diskon (Template + Server + Layanan + Domain)
+     * Rincian harga dari snapshot di order ini; komponen yang kosong jatuh ke harga template
+     * (`$fallbackTemplate`, atau relasi template order), lalu ke harga bawaan.
+     *
+     * @return array{templatePrice: int, serverPrice: int, servicePrice: int, domainPrice: int, discountAmount: int,
+     *     packageTotal: int, subtotal: int, totalPrice: int}
+     */
+    public function priceBreakdown(?Template $fallbackTemplate = null): array
+    {
+        $template = $fallbackTemplate ?? $this->template;
+
+        return Template::breakdown(
+            (int) ($this->template_price ?? $template?->template_price ?? Template::DEFAULT_TEMPLATE_PRICE),
+            (int) ($this->server_price ?? $template?->server_price ?? Template::DEFAULT_SERVER_PRICE),
+            (int) ($this->service_price ?? $template?->service_price ?? Template::DEFAULT_SERVICE_PRICE),
+            (int) $this->domain_price,
+            (int) ($this->discount_amount ?? 0),
+        );
+    }
+
+    /**
+     * Subtotal kotor sebelum diskon (Template + Server + Layanan + Domain)
      */
     public function getSubtotalAttribute(): int
     {
-        $templatePrice = $this->template_price ?? $this->template?->template_price ?? 1000000;
-        $serverPrice   = $this->server_price ?? $this->template?->server_price ?? 500000;
-        $servicePrice  = $this->service_price ?? $this->template?->service_price ?? 500000;
-        $domainPrice   = $this->domain_price ?? 0;
-
-        return $templatePrice + $serverPrice + $servicePrice + $domainPrice;
+        return $this->priceBreakdown()['subtotal'];
     }
 
     /**
-     * Hitung Total Tagihan Bersih setelah dipotong Diskon Kode Promo (digunakan di Fonnte & Invoice)
+     * Total tagihan bersih setelah dipotong diskon kode promo (digunakan di Fonnte & Invoice)
      */
     public function getTotalPriceAttribute(): int
     {
-        return max(0, $this->subtotal - ($this->discount_amount ?? 0));
+        return $this->priceBreakdown()['totalPrice'];
     }
 
     /**
-     * Dapatkan akun user klien untuk order ini, atau buatkan otomatis jika belum ada (1 Template 1 Akun)
+     * Bagian depan email akun klien: nama domain sebelum titik pertama, hanya huruf kecil/angka/strip
+     * (sat.org.id -> "sat"). Kosong setelah dibersihkan -> "proyek-xxxx".
      */
-    public function getOrCreateUser(): User
+    public function clientEmailName(): string
     {
-        $user = User::where('order_id', $this->id)->first();
+        $domain = strtolower(trim((string) $this->domain_name));
+        $name = preg_replace('/[^a-z0-9\-]/', '', explode('.', $domain)[0] ?? 'proyek');
 
-        $domainName = strtolower(trim($this->domain_name ?: 'bisnis.com'));
-        $baseName = explode('.', $domainName)[0] ?? 'proyek';
-        $cleanBase = preg_replace('/[^a-z0-9\-]/', '', $baseName);
-        if (empty($cleanBase)) {
-            $cleanBase = 'proyek-' . strtolower(\Illuminate\Support\Str::random(4));
-        }
-        $expectedEmail = "{$cleanBase}@bidtech.co.id";
+        return $name !== '' ? $name : 'proyek-' . strtolower(Str::random(4));
+    }
 
-        if (!$user) {
-            if (User::where('email', $expectedEmail)->exists()) {
-                $cleanOrder = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $this->order_number));
-                $expectedEmail = "{$cleanBase}.{$cleanOrder}@bidtech.co.id";
-            }
+    /**
+     * Email akun klien: {nama-domain}@bidtech.co.id. Email di order hanya untuk mengirim invoice;
+     * login memakai email ini.
+     */
+    public function clientEmail(?string $name = null): string
+    {
+        return ($name ?? $this->clientEmailName()) . '@' . self::CLIENT_EMAIL_DOMAIN;
+    }
 
-            $user = User::create([
-                'order_id'       => $this->id,
-                'name'           => $this->full_name,
-                'email'          => $expectedEmail,
-                'whatsapp'       => $this->whatsapp,
-                'password'       => \Illuminate\Support\Facades\Hash::make('Password123!'),
-                'domain_final'   => $this->domain_name,
-                'domain_status'  => \App\Enums\DomainStatus::PendingRegistration,
-                'website_status' => \App\Enums\WebsiteStatus::InProgress,
-            ]);
-        }
+    /**
+     * Varian bila email dasar sudah dipakai order lain: {nama}.{nomor-order}@bidtech.co.id
+     */
+    public function clientEmailWithOrderNumber(string $name): string
+    {
+        $orderPart = strtolower(preg_replace('/[^a-zA-Z0-9]/', '', $this->order_number));
 
-        return $user;
+        return $this->clientEmail("{$name}.{$orderPart}");
     }
 }
-

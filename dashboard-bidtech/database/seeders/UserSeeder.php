@@ -2,9 +2,8 @@
 
 namespace Database\Seeders;
 
-use App\Enums\DomainStatus;
 use App\Enums\OrderStatus;
-use App\Enums\WebsiteStatus;
+use App\Enums\Role;
 use App\Models\Order;
 use App\Models\Template;
 use App\Models\User;
@@ -22,16 +21,12 @@ class UserSeeder extends Seeder
         // AKUN ADMIN (Dashboard Admin Bidtech)
         // ==========================================
         User::firstOrCreate(
-            ['email' => 'admin@bidtech.com'],
+            ['email' => 'admin@bidtech.co.id'],
             [
-                'order_id'       => null,
                 'name'           => 'Administrator',
                 'whatsapp'       => '08000000000',
                 'password'       => Hash::make('adminBidtechOFFICIAL321!'),
-                'is_admin'       => true,
-                'domain_status'  => DomainStatus::Registered,
-                'domain_final'   => null,
-                'website_status' => WebsiteStatus::InProgress,
+                'role'           => Role::Admin,
             ]
         );
 
@@ -47,25 +42,22 @@ class UserSeeder extends Seeder
                 'domain_name'   => 'bisnissaya.com',
                 'domain_price'  => 150000,
                 'full_name'     => 'User Testing',
-                'email'         => 'test@bidtech.com',
+                'email'         => 'pelanggan@example.test',
                 'whatsapp'      => '08123456789',
                 'status'        => OrderStatus::Paid,
                 'paid_at'       => now(),
             ]
         );
 
-        User::firstOrCreate(
-            ['email' => 'test@bidtech.com'],
+        $client = User::firstOrCreate(
+            ['email' => 'test@bidtech.co.id'],
             [
-                'order_id'       => $order->id,
                 'name'           => 'User Testing',
                 'whatsapp'       => '08123456789',
                 'password'       => Hash::make('password123'),
-                'is_admin'       => false,
-                'domain_status'  => DomainStatus::Registered,
-                'domain_final'   => 'bisnissaya.com',
-                'website_status' => WebsiteStatus::InProgress,
+                'role'           => Role::Klien,
             ]
         );
+        $order->update(['client_id' => $client->id, 'domain_final' => 'bisnissaya.com', 'domain_status' => 'registered']);
     }
 }

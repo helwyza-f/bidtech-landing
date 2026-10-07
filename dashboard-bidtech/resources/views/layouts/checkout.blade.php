@@ -14,11 +14,25 @@
 <body class="min-h-screen bg-[#F4F6F5] font-sans text-[#0B1B17] antialiased">
 
     {{-- Initial Page Load Skeleton Screen --}}
-    @include('components.skeletons.checkout_page_skeleton')
+    <div id="checkout-page-skeleton" class="page-skeleton-overlay fixed inset-0 z-[100] bg-[#F4F6F5] overflow-hidden pointer-events-none" aria-hidden="true">
+        <header class="border-b border-[#E4E9E6] bg-white sticky top-0 z-50">
+            <div class="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8 py-4">
+                <div class="h-8 w-28 sm:w-36 rounded-lg bg-slate-200 animate-shimmer"></div>
+                <div class="flex items-center gap-2 sm:gap-4">
+                    @foreach([1, 2, 3, 4] as $n)
+                        <div class="flex items-center gap-2 shrink-0">
+                            <div class="size-6 sm:size-7 rounded-full bg-slate-200 animate-shimmer"></div>
+                            <div class="hidden sm:block h-3.5 w-14 rounded-md bg-slate-200 animate-shimmer"></div>
+                        </div>
+                    @endforeach
+                </div>
+            </div>
+        </header>
+    </div>
 
     {{-- Main Page Content Container --}}
     <div id="page-content-wrapper" class="page-content-wrapper loading">
-        @include('components.header_checkout')
+        @include('components.header')
 
         <main class="w-full">        
             @yield('content')

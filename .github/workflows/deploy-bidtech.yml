@@ -4,9 +4,23 @@ on:
   push:
     branches:
       - main
+    paths:
+      - "templates/**"
+      - "frontend/**"
+      - "dashboard-bidtech/**"
+      - "compose.yml"
+      - "compose.prod.yml"
+      - ".github/workflows/deploy-bidtech.yml"
   pull_request:
     branches:
       - main
+    paths: 
+      - "templates/**"
+      - "frontend/**"
+      - "dashboard-bidtech/**"
+      - "compose.yml"
+      - "compose.prod.yml"
+      - ".github/workflows/deploy-bidtech.yml"
   workflow_dispatch:
 
 concurrency:
@@ -14,9 +28,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-frontend:
-    name: Build & Test Frontend
+  build:
+    name: Build, Test & Push Images
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    env:
+      REGISTRY: ghcr.io
+      WHATSAPP_API_KEY: ${{ secrets.WHATSAPP_API_KEY }}
+      IDCLOUDHOST_API_KEY: ${{ secrets.IDCLOUDHOST_API_KEY }}
+      XENDIT_WEBHOOK_TOKEN: ${{ secrets.XENDIT_WEBHOOK_TOKEN }}
+      XENDIT_SECRET_KEY: ${{ secrets.XENDIT_SECRET_KEY }}
+      MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
+      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+      APP_KEY: ${{ secrets.APP_KEY }}
+      DB_DATABASE: "bidtech"
 
     steps:
       - name: Checkout repository
@@ -25,7 +52,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "24"
           cache: npm
           cache-dependency-path: frontend/package-lock.json
 
@@ -33,63 +60,12 @@ jobs:
         working-directory: frontend
         run: npm run demos:build
 
-      - name: Build frontend Docker image
-        working-directory: frontend
-        run: docker build -t bidtech-frontend:ci .
+      - name: Render frontend .env
+        run: cp frontend/.env.example frontend/.env
 
-      - name: Run frontend container with npm start
-        run: docker run -d --name frontend-ci -p 3000:3000 bidtech-frontend:ci npm run start
-
-      - name: Wait for frontend to be ready
+      - name: Render dashboard .env
         run: |
-          for i in $(seq 1 30); do
-            if curl -sf http://localhost:3000 > /dev/null; then
-              echo "Frontend is up"
-              exit 0
-            fi
-            sleep 2
-          done
-          echo "Frontend did not become ready in time"
-          docker logs frontend-ci
-          exit 1
-
-      - name: Smoke test homepage
-        run: curl -sf http://localhost:3000 > /dev/null
-
-      - name: Smoke test all template demos
-        run: node scripts/test-demos.js --server=http://localhost:3000
-
-      - name: Dump frontend logs on failure
-        if: failure()
-        run: docker logs frontend-ci || true
-
-      - name: Cleanup frontend container
-        if: always()
-        run: docker rm -f frontend-ci || true
-
-  build-dashboard:
-    name: Build & Test Dashboard
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: dashboard-bidtech
-        shell: bash
-    env:
-      WHATSAPP_API_KEY: ${{ secrets.WHATSAPP_API_KEY }}
-      IDCLOUDHOST_API_KEY: ${{ secrets.IDCLOUDHOST_API_KEY }}
-      XENDIT_WEBHOOK_TOKEN: ${{ secrets.XENDIT_WEBHOOK_TOKEN }}
-      XENDIT_SECRET_KEY: ${{ secrets.XENDIT_SECRET_KEY }}
-      MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
-      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
-      APP_KEY: ${{ secrets.APP_KEY }}
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-
-      - name: Generate .env from .env.example with secret overrides
-        run: |
-          cp .env.example .env
+          cp dashboard-bidtech/.env.example dashboard-bidtech/.env
           python3 <<'PY'
           import os
           from pathlib import Path
@@ -117,7 +93,7 @@ jobs:
                       .replace("\n", "\\n")
               ) + '"'
 
-          path = Path(".env")
+          path = Path("dashboard-bidtech/.env")
           lines = path.read_text().splitlines()
           found = set()
           output = []
@@ -146,30 +122,93 @@ jobs:
       - name: Run migrations
         run: docker compose run --rm app php artisan migrate --force --seed
 
-      - name: Start app
-        run: docker compose up -d --wait app
+      - name: Start app & frontend
+        run: docker compose up -d --wait app frontend
 
-      - name: Health check
+      - name: Health check dashboard
         run: curl -sf http://127.0.0.1:8000/up > /dev/null
+
+      - name: Health check frontend
+        run: curl -sf http://127.0.0.1:3010 > /dev/null
+
+      - name: Smoke test all template demos
+        run: node scripts/test-demos.js --server=http://127.0.0.1:3010
 
       - name: Dump logs on failure
         if: failure()
         run: docker compose logs
 
+      - name: Log in to GHCR
+        if: success()
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login "$REGISTRY" -u "${{ github.actor }}" --password-stdin
+
+      - name: Tag & push images
+        if: success()
+        env:
+          OWNER: ${{ github.repository_owner }}
+        run: |
+          OWNER=$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')
+          for IMAGE in frontend dashboard; do
+            docker tag "bidtech-$IMAGE:latest" "$REGISTRY/$OWNER/bidtech-$IMAGE:${{ github.sha }}"
+            docker tag "bidtech-$IMAGE:latest" "$REGISTRY/$OWNER/bidtech-$IMAGE:latest"
+            docker push "$REGISTRY/$OWNER/bidtech-$IMAGE:${{ github.sha }}"
+            docker push "$REGISTRY/$OWNER/bidtech-$IMAGE:latest"
+          done
+
       - name: Cleanup
         if: always()
         run: docker compose down -v
 
+      - name: Upload deploy config for VPS
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: deploy-config
+          path: |
+            compose.yml
+            compose.prod.yml
+            dashboard-bidtech/.env.example
+            frontend/.env.example
+          retention-days: 1
+
   deploy:
     name: Deploy to VPS
-    needs: [build-frontend, build-dashboard]
+    needs: [build]
     if: github.ref == 'refs/heads/main' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      packages: read
 
     steps:
+      - name: Download deploy config
+        uses: actions/download-artifact@v4
+        with:
+          name: deploy-config
+
+      - name: Ensure /opt/bidtech exists on VPS
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          script: mkdir -p /opt/bidtech
+
+      - name: Copy compose & env templates to VPS
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USER }}
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
+          source: "compose.yml,compose.prod.yml,dashboard-bidtech/.env.example,frontend/.env.example"
+          target: "/opt/bidtech"
+          strip_components: 0
+          overwrite: true
+
       - name: Execute Remote SSH Deploy on VPS
         uses: appleboy/ssh-action@v1.0.3
         env:
+          GHCR_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           WHATSAPP_API_KEY: ${{ secrets.WHATSAPP_API_KEY }}
           IDCLOUDHOST_API_KEY: ${{ secrets.IDCLOUDHOST_API_KEY }}
           XENDIT_WEBHOOK_TOKEN: ${{ secrets.XENDIT_WEBHOOK_TOKEN }}
@@ -177,49 +216,26 @@ jobs:
           MAIL_PASSWORD: ${{ secrets.MAIL_PASSWORD }}
           DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
           APP_KEY: ${{ secrets.APP_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
 
           timeout: 2m
-          command_timeout: 30m
+          command_timeout: 60m
 
-          envs: WHATSAPP_API_KEY,IDCLOUDHOST_API_KEY,XENDIT_WEBHOOK_TOKEN,XENDIT_SECRET_KEY,MAIL_PASSWORD,DB_PASSWORD,APP_KEY
+          envs: GHCR_TOKEN,WHATSAPP_API_KEY,IDCLOUDHOST_API_KEY,XENDIT_WEBHOOK_TOKEN,XENDIT_SECRET_KEY,MAIL_PASSWORD,DB_PASSWORD,APP_KEY,AWS_ACCESS_KEY_ID,AWS_SECRET_ACCESS_KEY
 
           script: |
             set -e
-            echo "1.) Akses folder bidtech di VPS"
-            cd /opt/bidtech-new
-            git fetch origin main
-            git reset --hard origin/main
-            git clean -fd
-            git pull origin main || git pull
+            cd /opt/bidtech
 
-            echo "2.) Deploy frontend"
-            cd /opt/bidtech-new/frontend
-            rm .env
-            cp .env.example .env
-            npm run demos:build
-            TAG=$(date +%Y%m%d%H%M)
-            IMAGE_NAME="bidtech-frontend:$TAG"
-            docker build -t "$IMAGE_NAME" .
+            echo "1.) Render .env frontend & dashboard"
+            cp frontend/.env.example frontend/.env
 
-            docker stop BidTech-Frontend 2>/dev/null || true
-            docker rm BidTech-Frontend 2>/dev/null || true
-
-            docker run -d \
-              --name BidTech-Frontend \
-              --restart unless-stopped \
-              --network bidtech-api \
-              --env-file /opt/bidtech-new/frontend/.env \
-              -p 127.0.0.1:3010:3000 \
-              "$IMAGE_NAME"
-
-            echo "3.) Deploy dashboard-bidtech"
-            cd /opt/bidtech-new/dashboard-bidtech
-            rm .env
-            cp .env.example .env
+            cp dashboard-bidtech/.env.example dashboard-bidtech/.env
             python3 <<'PY'
             import os
             from pathlib import Path
@@ -235,13 +251,20 @@ jobs:
                 "DB_PASSWORD": os.environ.get("DB_PASSWORD", ""),
                 "APP_KEY": os.environ.get("APP_KEY", ""),
                 "DB_HOST": "mysql",
+                "AWS_ACCESS_KEY_ID": os.environ.get("AWS_ACCESS_KEY_ID", ""),
+                "AWS_SECRET_ACCESS_KEY": os.environ.get("AWS_SECRET_ACCESS_KEY", ""),
+                "AWS_DEFAULT_REGION": "us-east-1",
+                "AWS_BUCKET": "bidtech",
+                "AWS_URL": "https://media.bidtech.co.id/bidtech",
+                "AWS_ENDPOINT": "https://media.bidtech.co.id",
+                "AWS_USE_PATH_STYLE_ENDPOINT": "true",
             }
 
             overrides.update({
                 "APP_ENV": "production",
                 "APP_DEBUG": "false",
                 "APP_URL": "https://dashboard.bidtech.co.id",
-            })            
+            })
 
             def dotenv_value(value):
                 # Docker Compose-compatible double-quoted value.
@@ -253,7 +276,7 @@ jobs:
                         .replace("\n", "\\n")
                 ) + '"'
 
-            path = Path(".env")
+            path = Path("dashboard-bidtech/.env")
             lines = path.read_text().splitlines()
             found = set()
             output = []
@@ -273,15 +296,25 @@ jobs:
             path.write_text("\n".join(output) + "\n")
             PY
 
-            docker compose -f compose.yml -f compose.prod.yml build
+            echo "2.) Login ke GHCR & tarik image"
+            export REGISTRY="ghcr.io"
+            export GHCR_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
+            export IMAGE_TAG="${{ github.sha }}"
+            
+            export DB_DATABASE="bidtech"
+            
+            echo "$GHCR_TOKEN" | docker login "$REGISTRY" -u "${{ github.actor }}" --password-stdin
+            docker compose -f compose.yml -f compose.prod.yml pull
+
+            echo "3.) Up stack & migrate"
             docker compose -f compose.yml -f compose.prod.yml up -d --wait mysql
             docker compose -f compose.yml -f compose.prod.yml run --rm app php artisan migrate --force --seed
-            docker compose -f compose.yml -f compose.prod.yml up -d --wait app
+            docker compose -f compose.yml -f compose.prod.yml run --rm app php artisan db:seed --class=SeptemberSeeder
+            docker compose -f compose.yml -f compose.prod.yml up -d --wait app frontend
 
             echo "==> Status"
-            docker ps | grep BidTech-Frontend || true
             docker compose -f compose.yml -f compose.prod.yml ps
 
             echo "==> Logs"
-            docker logs --tail 100 BidTech-Frontend
             docker compose -f compose.yml -f compose.prod.yml logs --tail 100 app
+            docker compose -f compose.yml -f compose.prod.yml logs --tail 100 frontend
