@@ -10,7 +10,7 @@ Dokumentasi resmi arsitektur sistem, struktur data armada, panduan tema warna, d
 | :--- | :--- |
 | **Nama Legal** | PT. Nadim Auto Transindo |
 | **Brand Layanan** | NadimTrans RentCar |
-| **Slogan** | LIBURANS, KERJAANS, dan SEMUA URUSANS, INGAT NADIMTRANS |
+| **Slogan** | LIBURAN, KERJAAN, dan SEMUA URUSAN, INGAT NADIMTRANS |
 | **Domisili / Wilayah Operasional** | Batam, Kepulauan Riau |
 | **Alamat Kantor Fisik** | Perum KDA Cluster Nuri Kepodang, Jl. Kepodang 3 No. 2, Belian, Kec. Batam Kota, Kota Batam, Kepulauan Riau 29464 |
 | **Google Maps** | https://maps.app.goo.gl/uVKJECyfgTPvikvn9 |
@@ -183,16 +183,43 @@ Untuk menambah atau mengedit harga mobil, Anda cukup mengedit file **`lib/data.t
 
 ---
 
-## 7. Perintah Menjalankan Proyek
+## 7. Fitur Khusus & Multi-Bahasa Internasional
+
+### A. Dukungan Multi-Bahasa (4 Locale)
+Website mendukung 4 locale lengkap dengan navigasi otomatis dan switcher interaktif:
+1. **Indonesia (`/` atau `/id`)**: Bahasa default Indonesia.
+2. **English Global (`/en`)**: Untuk wisatawan mancanegara.
+3. **Singapore English (`/en-sg`)**: Khusus wisatawan Singapura dengan konversi otomatis mata uang ke **SGD** dan opsi terminal feri Batam.
+4. **Bahasa Melayu (`/ms`)**: Khusus wisatawan Malaysia dengan konversi otomatis mata uang ke **MYR**.
+
+### B. Konversi Kurs Otomatis (IDR, SGD, MYR)
+- **IDR**: Format `Rp X.XXX.XXX`.
+- **SGD**: Dikonversi otomatis berdasarkan rate kurs dinamis dengan format `S$ XX.XX`.
+- **MYR**: Dikonversi otomatis dengan format `RM XX.XX`.
+
+### C. Peta Interaktif Titik Antar / Jemput (Delivery Map Picker)
+- Menggunakan **Leaflet & OpenStreetMap** terintegrasi.
+- Pengguna dapat memilih preset titik lokasi populer di Batam (Bandara Hang Nadim, Batam Centre Ferry Terminal, Harbour Bay, Sekupang, Nongsapura, Mega Mall, Nagoya Hill, dll) atau menggeser pin koordinat langsung di peta.
+- Dilengkapi tombol **Popup Fullscreen / Expand Map** untuk kenyamanan pengguna di mobile dan iPad/tablet.
+
+### D. Switcher Bahasa & Auto-Close
+- Dilengkapi pendeteksi klik di luar (*click outside*) dan tombol `ESC` untuk menutup dropdown bahasa secara instan.
+- Menggunakan cookie `NEXT_LOCALE` dengan secure flag saat HTTPS aktif di production hosting.
+
+---
+
+## 8. Perintah Menjalankan & Membangun Proyek
 
 1. **Menjalankan Dev Server Lokal**:
    ```bash
+   cd projects/nadim-trans-rentcar
    npm run dev
    ```
    Buka peramban di `http://localhost:3000`.
 
-2. **Membuat Build Produksi**:
+2. **Membuat Build Produksi (SSG & Dynamic Routes)**:
    ```bash
+   cd projects/nadim-trans-rentcar
    npm run build
    ```
-   Menghasilkan 15 rute statis yang teroptimasi secara otomatis.
+   Menghasilkan 116 rute statis teroptimasi penuh untuk seluruh kombinasi locale (`id`, `en`, `en-sg`, `ms`) dan katalog armada.

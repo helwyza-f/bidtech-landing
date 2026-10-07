@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import Link from "next/link";
 import { Check, ChevronDown, Globe2 } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
@@ -14,9 +14,37 @@ interface LanguageSwitcherProps {
 
 export default function LanguageSwitcher({ mobile = false, onNavigate }: LanguageSwitcherProps) {
   const [isOpen, setIsOpen] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
   const locale = useLocale() as Locale;
   const pathname = usePathname();
   const t = useTranslations("language");
+
+  // Tutup dropdown otomatis jika pengguna mengklik di luar area switcher
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleClickOutside = (event: MouseEvent | TouchEvent) => {
+      if (containerRef.current && !containerRef.current.contains(event.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    document.addEventListener("touchstart", handleClickOutside);
+    document.addEventListener("keydown", handleKeyDown);
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+      document.removeEventListener("touchstart", handleClickOutside);
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isOpen]);
 
   const handleSelectLocale = (nextLocale: Locale) => {
     const isHttps = typeof window !== "undefined" && window.location.protocol === "https:";
@@ -54,7 +82,7 @@ export default function LanguageSwitcher({ mobile = false, onNavigate }: Languag
   const currentDisplayCode = locale === "en-sg" ? "SG" : locale === "ms" ? "MY" : locale.toUpperCase();
 
   return (
-    <div className={`relative ${mobile ? "w-full" : ""}`}>
+    <div ref={containerRef} className={`relative ${mobile ? "w-full" : ""}`}>
       <button
         type="button"
         onClick={() => setIsOpen((open) => !open)}
