@@ -1,22 +1,22 @@
-name: Nadim Trans CI/CD Pipeline
+name: HKTI CI/CD Pipeline
 
 on:
   push:
     branches:
       - main
     paths:
-      - "projects/nadim-trans-rentcar/**"
-      - ".github/workflows/deploy-nadimtrans.yml"
+      - "projects/hkti/**"
+      - ".github/workflows/deploy-hkti.yml"
   pull_request:
     branches:
       - main
     paths:
-      - "projects/nadim-trans-rentcar/**"
-      - ".github/workflows/deploy-nadimtrans.yml"
+      - "projects/hkti/**"
+      - ".github/workflows/deploy-hkti.yml"
   workflow_dispatch:
 
 concurrency:
-  group: deploy-nadimtrans
+  group: deploy-hkti
   cancel-in-progress: false
 
 jobs:
@@ -30,19 +30,15 @@ jobs:
       REGISTRY: ghcr.io
     defaults:
       run:
-        working-directory: projects/nadim-trans-rentcar
+        working-directory: projects/hkti
         shell: bash
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: "20"
-          cache: npm
-          cache-dependency-path: projects/nadim-trans-rentcar/package-lock.json
+      - name: Render build environment
+        run: cp .env.example .env
 
       - name: Build image
         run: docker compose build
@@ -51,7 +47,7 @@ jobs:
         run: docker compose up -d --wait
 
       - name: Health check
-        run: curl -sf http://127.0.0.1:3040/ > /dev/null
+        run: curl -sf http://127.0.0.1:3020/ > /dev/null
 
       - name: Dump logs on failure
         if: failure()
@@ -67,10 +63,10 @@ jobs:
           OWNER: ${{ github.repository_owner }}
         run: |
           OWNER=$(echo "$OWNER" | tr '[:upper:]' '[:lower:]')
-          docker tag "nadimtrans-web:latest" "$REGISTRY/$OWNER/nadimtrans:${{ github.sha }}"
-          docker tag "nadimtrans-web:latest" "$REGISTRY/$OWNER/nadimtrans:latest"
-          docker push "$REGISTRY/$OWNER/nadimtrans:${{ github.sha }}"
-          docker push "$REGISTRY/$OWNER/nadimtrans:latest"
+          docker tag "hkti-batam:latest" "$REGISTRY/$OWNER/hktibatam:${{ github.sha }}"
+          docker tag "hkti-batam:latest" "$REGISTRY/$OWNER/hktibatam:latest"
+          docker push "$REGISTRY/$OWNER/hktibatam:${{ github.sha }}"
+          docker push "$REGISTRY/$OWNER/hktibatam:latest"
 
       - name: Cleanup
         if: always()
@@ -78,15 +74,15 @@ jobs:
 
       - name: Stage deploy config
         run: |
-          mkdir -p /tmp/deploy-nadimtrans
-          cp compose.yml compose.prod.yml /tmp/deploy-nadimtrans/
+          mkdir -p /tmp/deploy-hkti
+          cp compose.yml compose.prod.yml /tmp/deploy-hkti/
 
       - name: Upload deploy config for VPS
         uses: actions/upload-artifact@v4
         with:
-          name: deploy-config-nadimtrans
+          name: deploy-config-hkti
           include-hidden-files: true
-          path: /tmp/deploy-nadimtrans/*
+          path: /tmp/deploy-hkti/*
           retention-days: 1
 
   deploy:
@@ -102,15 +98,15 @@ jobs:
       - name: Download deploy config
         uses: actions/download-artifact@v4
         with:
-          name: deploy-config-nadimtrans
+          name: deploy-config-hkti
 
-      - name: Ensure /opt/nadimtrans exists on VPS
+      - name: Ensure /opt/hkti exists on VPS
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: mkdir -p /opt/nadimtrans
+          script: mkdir -p /opt/hkti
 
       - name: Copy compose config to VPS
         uses: appleboy/scp-action@v0.1.7
@@ -119,7 +115,7 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           source: "compose.yml,compose.prod.yml"
-          target: "/opt/nadimtrans"
+          target: "/opt/hkti"
           strip_components: 0
           overwrite: true
 
@@ -136,12 +132,12 @@ jobs:
           envs: GHCR_TOKEN
           script: |
             set -e
-            cd /opt/nadimtrans
+            cd /opt/hkti
             export REGISTRY="ghcr.io"
             export GHCR_OWNER=$(echo "${{ github.repository_owner }}" | tr '[:upper:]' '[:lower:]')
             export IMAGE_TAG="${{ github.sha }}"
             echo "$GHCR_TOKEN" | docker login "$REGISTRY" -u "${{ github.actor }}" --password-stdin
             docker compose -f compose.yml -f compose.prod.yml pull
-            docker compose -f compose.yml -f compose.prod.yml up -d --wait nadimtrans-web
+            docker compose -f compose.yml -f compose.prod.yml up -d --wait web
             docker compose -f compose.yml -f compose.prod.yml ps
-            docker compose -f compose.yml -f compose.prod.yml logs --tail 100 nadimtrans-web
+            docker compose -f compose.yml -f compose.prod.yml logs --tail 100 web

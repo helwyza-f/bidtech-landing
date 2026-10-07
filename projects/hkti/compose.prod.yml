@@ -1,0 +1,5 @@
+services:
+  web:
+    container_name: hkti-batam
+    image: ${REGISTRY}/${GHCR_OWNER}/hktibatam:${IMAGE_TAG}
+    restart: unless-stopped

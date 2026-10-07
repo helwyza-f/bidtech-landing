@@ -46,28 +46,19 @@ newgrp docker
 
 ---
 
-## 3. Clone Repository & Build Container
+## 3. Deployment Container via CI/CD
 
-1. Masuk ke direktori kerja di VPS (misal `/var/www/nadimtrans`):
+Deployment produksi dikelola otomatis oleh workflow `.github/workflows/deploy-nadimtrans.yml`. GitHub Actions membangun image satu kali, mengujinya, lalu memublikasikan image `ghcr.io/<owner>/nadimtrans` dengan tag commit dan `latest`. VPS hanya menerima file Compose di `/opt/nadimtrans`, menarik image yang sudah jadi, lalu menjalankan container; tidak ada clone repository atau build source di VPS.
 
-   ```bash
-   cd /var/www
-   git clone https://github.com/helwyza-f/bidtech-landing.git nadimtrans
-   cd nadimtrans/projects/nadim-trans-rentcar
-   ```
-2. Jalankan container dengan Docker Compose:
+Setelah workflow deploy selesai:
 
-   ```bash
-   # Build image dan jalankan di background
-   docker compose up -d --build
-   ```
-3. Periksa status container:
+1. Periksa status container:
 
    ```bash
    docker ps
    # Container 'nadimtrans-web' akan berstatus Up dan port 127.0.0.1:3040->3040/tcp
    ```
-4. Uji koneksi lokal Next.js di dalam VPS:
+2. Uji koneksi lokal Next.js di dalam VPS:
 
    ```bash
    curl -I http://127.0.0.1:3040
@@ -129,7 +120,7 @@ Setelah sertifikat berhasil diterbitkan, ganti file `/etc/nginx/sites-available/
 
 ```bash
 # Salin konfigurasi produksi dari repository
-sudo cp /var/www/nadimtrans/projects/nadim-trans-rentcar/nginx/nadimtrans.com.conf /etc/nginx/sites-available/nadimtrans.com.conf
+sudo cp /opt/nadimtrans/nginx/nadimtrans.com.conf /etc/nginx/sites-available/nadimtrans.com.conf
 
 # Test konfigurasi
 sudo nginx -t
@@ -140,17 +131,11 @@ sudo systemctl reload nginx
 
 ---
 
-## 5. Pembaruan Aplikasi (CI/CD atau Manual Update)
+## 5. Pembaruan Aplikasi
 
-Ketika ada update kode di branch `satria` atau `main`:
+Push perubahan ke branch `main` untuk memicu build, smoke test, publikasi image GHCR, dan deploy otomatis ke `/opt/nadimtrans`. Untuk menjalankan ulang deployment dari commit `main` yang sama tanpa perubahan kode, buka workflow **Nadim Trans CI/CD Pipeline** di GitHub Actions lalu pilih **Run workflow** (`workflow_dispatch`).
 
-```bash
-cd /var/www/nadimtrans/projects/nadim-trans-rentcar
-git pull
-docker compose up -d --build
-```
-
-*Zero downtime: Docker akan mem-build image baru dan menggantikan container lama secara otomatis.*
+VPS tidak memakai checkout Git dan tidak membangun image. Workflow selalu menarik image `ghcr.io/<owner>/nadimtrans:<commit-sha>` yang sudah lolos job build.
 
 ### Cache Cloudflare (wajib setelah deploy)
 

@@ -5,6 +5,8 @@ out
 .gitignore
 .env
 .env.local
+compose.yml
+compose.prod.yml
 npm-debug.log*
 *.log
 .DS_Store

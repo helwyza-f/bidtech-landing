@@ -1,0 +1,5 @@
+services:
+  nadimtrans-web:
+    container_name: nadimtrans-web
+    image: ${REGISTRY}/${GHCR_OWNER}/nadimtrans:${IMAGE_TAG}
+    restart: unless-stopped

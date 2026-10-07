@@ -4,19 +4,15 @@ Situs ini adalah **static export** Next.js (`output: "export"`), dikemas jadi im
 
 Arsitektur: `Cloudflare (proxied, Full Strict) → nginx host (443, TLS) → 127.0.0.1:3020 → container Docker (nginx internal, serve out/)`.
 
-## Build & jalankan via Docker
+## Build & deploy via CI/CD
 
-```bash
-cp .env.example .env   # isi NEXT_PUBLIC_SITE_URL dst — dibaca docker-compose sebagai build args
-docker compose build
-docker compose up -d
-```
+Deployment produksi dikelola oleh `.github/workflows/deploy-hkti.yml`. GitHub Actions menyalin `.env.example` menjadi `.env` untuk build, membangun dan menguji image satu kali, lalu memublikasikannya sebagai `ghcr.io/<owner>/hktibatam`. VPS hanya menerima file Compose di `/opt/hkti`, menarik image berdasarkan tag commit, dan menjalankan container tanpa checkout Git atau build source.
 
-Catatan penting: `NEXT_PUBLIC_*` di-inline ke HTML/JS **saat build**, bukan saat container jalan. Jadi kalau ganti nilainya di `.env` (mis. baru dapat `NEXT_PUBLIC_GA_ID`), wajib `docker compose build && docker compose up -d` ulang — restart saja tidak cukup.
+Catatan penting: `NEXT_PUBLIC_*` di-inline ke HTML/JS **saat build**, bukan saat container berjalan. Untuk mengganti nilainya, edit `projects/hkti/.env.example`, commit, lalu push ke `main` agar CI membangun dan men-deploy image baru. Menjalankan ulang commit yang sudah ada dapat dilakukan melalui **Run workflow** (`workflow_dispatch`). Mengedit `.env` langsung di VPS atau me-restart container tidak berpengaruh.
 
-Cek container: `docker compose logs -f web` dan `curl -I http://127.0.0.1:3020/`.
+Cek container di VPS dengan `docker logs -f hkti-batam` dan `curl -I http://127.0.0.1:3020/`.
 
-File terkait: [Dockerfile](Dockerfile) (multi-stage: build Next.js → runtime nginx:alpine), [docker/nginx.conf](docker/nginx.conf) (nginx di dalam container), [docker-compose.yml](docker-compose.yml).
+File terkait: [Dockerfile](Dockerfile) (multi-stage: build Next.js → runtime nginx:alpine), [docker/nginx.conf](docker/nginx.conf) (nginx di dalam container), [compose.yml](compose.yml), dan [compose.prod.yml](compose.prod.yml).
 
 ### Build manual tanpa Docker (opsional, untuk debug)
 
@@ -50,7 +46,7 @@ Caching, gzip, dan security header untuk aset statis (`/_next/static/`, `/images
 ## Setelah domain live
 
 - [ ] Submit `https://hktikotabatam.org/sitemap.xml` ke **Google Search Console** dan **Bing Webmaster Tools**.
-- [ ] Isi `NEXT_PUBLIC_GSC_VERIFICATION` / `NEXT_PUBLIC_BING_VERIFICATION` di `.env` produksi (dari properti yang didaftarkan), lalu rebuild & redeploy.
-- [ ] Isi `NEXT_PUBLIC_GA_ID` setelah punya properti GA4.
+- [ ] Isi `NEXT_PUBLIC_GSC_VERIFICATION` / `NEXT_PUBLIC_BING_VERIFICATION` di `projects/hkti/.env.example` (dari properti yang didaftarkan), lalu commit dan biarkan CI rebuild serta redeploy.
+- [ ] Isi `NEXT_PUBLIC_GA_ID` di `projects/hkti/.env.example` setelah punya properti GA4, lalu deploy melalui CI.
 - [ ] Validasi structured data: tempel HTML hasil `curl https://hktikotabatam.org/` ke [Google Rich Results Test](https://search.google.com/test/rich-results).
 - [ ] Cek `sameAs` di `constants/index.ts` (`SOCIAL_LINKS`) — lengkapi Facebook/YouTube begitu link resmi didapat, lalu rebuild.

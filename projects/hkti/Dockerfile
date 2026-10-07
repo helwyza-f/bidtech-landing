@@ -5,7 +5,7 @@ FROM node:20-alpine AS builder
 WORKDIR /app
 
 # NEXT_PUBLIC_* vars are inlined into the static HTML/JS at build time,
-# so they must be passed as build args (see docker-compose.yml), not runtime env.
+# so they must be passed as build args (see compose.yml), not runtime env.
 ARG NEXT_PUBLIC_SITE_URL=https://hktikotabatam.org
 ARG NEXT_PUBLIC_GA_ID=
 ARG NEXT_PUBLIC_GSC_VERIFICATION=

@@ -1,10 +1,11 @@
-version: "3.8"
+name: nadimtrans
 
 services:
   nadimtrans-web:
     build:
       context: .
       dockerfile: Dockerfile
+    image: nadimtrans-web:latest
     container_name: nadimtrans-web
     restart: unless-stopped
     ports:

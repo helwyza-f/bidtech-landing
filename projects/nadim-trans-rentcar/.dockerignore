@@ -9,6 +9,8 @@ yarn-error.log*
 .dockerignore
 Dockerfile
 docker-compose*.yml
+compose.yml
+compose.prod.yml
 README.md
 DOCUMENTATION.md
 INSTALLATION.md
