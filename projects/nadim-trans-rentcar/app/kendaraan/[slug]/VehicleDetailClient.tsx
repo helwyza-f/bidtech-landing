@@ -37,7 +37,7 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
   const car = getCar(locale, slug);
 
   const [selectedImage, setSelectedImage] = useState<string>(car?.image || "");
-  const [activeTab, setActiveTab] = useState<"overview" | "features" | "terms">("overview");
+  const [activeTab, setActiveTab] = useState<"overview" | "features" | "terms">("terms");
   const [isLiked, setIsLiked] = useState(false);
 
   if (!car) {
@@ -298,23 +298,25 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
 
               {/* Tabs Navigation for Details */}
               <div className="bg-white rounded-3xl p-6 sm:p-8 border border-gray-200/80 shadow-sm space-y-6">
-                <div className="flex border-b border-gray-200 gap-6">
+                <div className="flex border-b border-gray-200 gap-4 sm:gap-6 overflow-x-auto scrollbar-none">
+                  {/* Tab: Syarat & Ketentuan (Paling Kiri) */}
                   <button
-                    onClick={() => setActiveTab("overview")}
-                    className={`pb-4 text-sm font-bold transition-all relative ${activeTab === "overview" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
+                    onClick={() => setActiveTab("terms")}
+                    className={`pb-4 text-sm font-bold transition-all relative flex-shrink-0 ${activeTab === "terms" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
                       }`}
                   >
-                    {t("vehicle.overview")}
-                    {activeTab === "overview" && (
+                    {t("vehicle.terms")}
+                    {activeTab === "terms" && (
                       <div
                         className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"
                       />
                     )}
                   </button>
 
+                  {/* Tab: Fitur & Fasilitas (Tengah) */}
                   <button
                     onClick={() => setActiveTab("features")}
-                    className={`pb-4 text-sm font-bold transition-all relative ${activeTab === "features" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
+                    className={`pb-4 text-sm font-bold transition-all relative flex-shrink-0 ${activeTab === "features" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
                       }`}
                   >
                     {t("vehicle.features")}
@@ -325,13 +327,14 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
                     )}
                   </button>
 
+                  {/* Tab: Deskripsi & Kenyamanan (Paling Kanan) */}
                   <button
-                    onClick={() => setActiveTab("terms")}
-                    className={`pb-4 text-sm font-bold transition-all relative ${activeTab === "terms" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
+                    onClick={() => setActiveTab("overview")}
+                    className={`pb-4 text-sm font-bold transition-all relative flex-shrink-0 ${activeTab === "overview" ? "text-amber-600" : "text-gray-500 hover:text-gray-900"
                       }`}
                   >
-                    {t("vehicle.terms")}
-                    {activeTab === "terms" && (
+                    {t("vehicle.overview")}
+                    {activeTab === "overview" && (
                       <div
                         className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-gradient-to-r from-amber-500 to-amber-600 rounded-full"
                       />
@@ -400,44 +403,6 @@ export default function VehicleDetailClient({ slug }: { slug: string }) {
                           <span>{term}</span>
                         </div>
                       ))}
-                    </div>
-
-                    {/* Informasi Rekening Pembayaran Resmi (Tanpa Icon) */}
-                    <div className="p-4 rounded-2xl bg-gray-50 border border-gray-200 text-xs text-gray-700 space-y-2.5">
-                      <div className="flex flex-wrap justify-between items-baseline gap-1 pb-2 border-b border-gray-200">
-                        <span className="font-bold text-gray-900 text-sm">
-                          {locale === "id"
-                            ? "Metode Pembayaran Transfer Resmi"
-                            : locale === "ms"
-                            ? "Kaedah Pembayaran Pindahan Rasmi"
-                            : "Official Bank Transfer Methods"}
-                        </span>
-                        <span className="font-semibold text-amber-900 bg-amber-100/80 px-2 py-0.5 rounded text-[11px]">
-                          A/n Dwi Gandhi Herdian
-                        </span>
-                      </div>
-                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs pt-1">
-                        <div className="flex justify-between py-1.5 px-3 rounded-xl bg-white border border-gray-200/70">
-                          <span className="font-bold text-gray-800">BNI</span>
-                          <span className="font-mono font-bold text-gray-900">0352721997</span>
-                        </div>
-                        <div className="flex justify-between py-1.5 px-3 rounded-xl bg-white border border-gray-200/70">
-                          <span className="font-bold text-gray-800">BCA</span>
-                          <span className="font-mono font-bold text-gray-900">0611847466</span>
-                        </div>
-                        <div className="flex justify-between py-1.5 px-3 rounded-xl bg-white border border-gray-200/70">
-                          <span className="font-bold text-gray-800">MANDIRI</span>
-                          <span className="font-mono font-bold text-gray-900">1090022349898</span>
-                        </div>
-                        <div className="flex justify-between py-1.5 px-3 rounded-xl bg-white border border-gray-200/70">
-                          <span className="font-bold text-gray-800">SEA BANK</span>
-                          <span className="font-mono font-bold text-gray-900">901960264464</span>
-                        </div>
-                        <div className="flex justify-between py-1.5 px-3 rounded-xl bg-white border border-gray-200/70 sm:col-span-2">
-                          <span className="font-bold text-gray-800">DANA</span>
-                          <span className="font-mono font-bold text-gray-900">081276003870</span>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 )}

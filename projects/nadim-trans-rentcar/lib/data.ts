@@ -34,7 +34,7 @@ export interface Car {
 export const COMPANY_INFO = {
   name: "PT. Nadim Auto Transindo",
   brand: "NadimTrans RentCar",
-  tagline: "LIBURANS, KERJAANS, dan SEMUA URUSANS, INGAT NADIMTRANS",
+  tagline: "LIBURAN, KERJAAN, dan SEMUA URUSAN, INGAT NADIMTRANS",
   city: "Batam",
   address: "Perum KDA Cluster Nuri Kepodang, Jl. Kepodang 3 No. 2, Belian, Kec. Batam Kota, Kota Batam, Kepulauan Riau 29464",
   phone: "+62 813-3141-2062",

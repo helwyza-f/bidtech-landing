@@ -1309,7 +1309,7 @@ export default function DeliveryMapPicker({
 
       {/* 3. Interactive Map Section (Sekarang di Bawah Kolom Pencarian) */}
       <div className="space-y-1.5">
-        <div className="relative rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-gray-100">
+        <div className="relative isolate z-0 rounded-2xl overflow-hidden border border-gray-200 shadow-sm bg-gray-100">
           {/* Leaflet Map DOM Element */}
           <div
             ref={mapContainerRef}
@@ -1321,7 +1321,7 @@ export default function DeliveryMapPicker({
           <button
             type="button"
             onClick={() => setIsMapPopupOpen(true)}
-            className="absolute top-2.5 right-2.5 z-[400] w-8 h-8 rounded-lg bg-white shadow-md border border-gray-200/90 flex items-center justify-center text-gray-700 hover:text-gray-950 hover:bg-gray-50 active:scale-90 transition-all cursor-pointer"
+            className="absolute top-2.5 right-2.5 z-20 w-8 h-8 rounded-lg bg-white shadow-md border border-gray-200/90 flex items-center justify-center text-gray-700 hover:text-gray-950 hover:bg-gray-50 active:scale-90 transition-all cursor-pointer"
             title={locale === "id" ? "Perbesar Peta (Popup)" : "Expand Map (Popup)"}
             aria-label="Expand map"
           >
