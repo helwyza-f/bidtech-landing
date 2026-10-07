@@ -192,7 +192,7 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_PRIVATE_KEY }}
-          script: mkdir -p /opt/bidtech
+          script: mkdir -p /opt/bidtech/frontend /opt/bidtech/dashboard-bidtech
 
       - name: Copy compose & env templates to VPS
         uses: appleboy/scp-action@v0.1.7
