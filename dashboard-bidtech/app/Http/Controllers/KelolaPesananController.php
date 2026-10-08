@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Order;
+use App\Services\Export\OrderExportService;
 use App\Services\OrderService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Halaman pesanan: admin mengelola seluruh pesanan klien, klien melihat detail order & invoicenya.
@@ -33,6 +35,23 @@ class KelolaPesananController extends Controller
         }
 
         return view('pages.order', $orders->clientOrder($user));
+    }
+
+    /**
+     * Ekspor laporan penjualan pesanan ke format Excel (.xlsx) sesuai filter aktif.
+     */
+    public function exportExcel(Request $request, OrderExportService $exportService): StreamedResponse
+    {
+        $filters = [
+            'category' => $request->query('category', 'all'),
+            'status' => $request->query('status', 'all'),
+            'period' => $request->query('period', 'all'),
+            'month' => (int) $request->query('month', date('n')),
+            'year' => (int) $request->query('year', date('Y')),
+            'search' => (string) $request->query('search', ''),
+        ];
+
+        return $exportService->download($filters, $request->user());
     }
 
     /**

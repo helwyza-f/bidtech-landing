@@ -11,7 +11,7 @@
             <h1 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">Kelola Pesanan Klien</h1>
             <p class="text-sm text-slate-500 mt-1">Pantau seluruh transaksi, filter periode pesanan bulanan/tahunan, dan ubah status domain & website klien secara manual.</p>
         </div>
-        <div class="flex items-center gap-3">
+        <div class="flex flex-wrap items-center gap-3">
             @php
                 $activePeriodText = 'Semua Waktu';
                 if ($stats['period'] === 'monthly') {
@@ -20,10 +20,17 @@
                     $activePeriodText = 'Tahun ' . $stats['selected_year'];
                 }
             @endphp
-            <span class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300/60 shadow-2xs">
+            <span class="inline-flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300/60 shadow-2xs">
                 <i data-lucide="calendar" class="w-4 h-4"></i>
                 <span>Periode: {{ $activePeriodText }}</span>
             </span>
+
+            <a href="{{ route('dashboard.order.export', request()->query()) }}"
+               class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-700 hover:bg-emerald-800 active:scale-95 text-white text-xs font-bold transition shadow-sm cursor-pointer"
+               title="Unduh laporan penjualan format Excel (.xlsx) sesuai filter aktif">
+                <i data-lucide="file-spreadsheet" class="w-4 h-4 text-emerald-200"></i>
+                <span>Ekspor Excel</span>
+            </a>
         </div>
     </div>
 
@@ -115,12 +122,20 @@
                     Total <strong class="text-slate-800">{{ $orders->total() }}</strong> pesanan ditemukan di sistem
                 </p>
             </div>
-            @if($stats['search'] || $stats['category'] !== 'all' || $stats['status'] !== 'all' || $stats['period'] !== 'all')
-                <a href="{{ route('dashboard.order') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold text-xs transition" title="Reset Semua Filter">
-                    <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
-                    <span>Reset Filter</span>
+            <div class="flex items-center gap-2">
+                <a href="{{ route('dashboard.order.export', request()->query()) }}"
+                   class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl border border-emerald-600/30 bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-semibold text-xs transition shadow-2xs"
+                   title="Unduh data tabel saat ini ke format Excel (.xlsx)">
+                    <i data-lucide="file-spreadsheet" class="w-3.5 h-3.5 text-emerald-600"></i>
+                    <span>Ekspor Excel</span>
                 </a>
-            @endif
+                @if($stats['search'] || $stats['category'] !== 'all' || $stats['status'] !== 'all' || $stats['period'] !== 'all')
+                    <a href="{{ route('dashboard.order') }}" class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-semibold text-xs transition" title="Reset Semua Filter">
+                        <i data-lucide="rotate-ccw" class="w-3.5 h-3.5"></i>
+                        <span>Reset Filter</span>
+                    </a>
+                @endif
+            </div>
         </div>
 
         <!-- ================= UNIFIED SEARCH & FILTER TOOLBAR DI ATAS TABEL ================= -->

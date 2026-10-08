@@ -47,6 +47,7 @@ Route::middleware('auth')->group(function () {
     // Pesanan (Admin = kelola seluruh klien, Klien = detail order & invoice)
     Route::get('/dashboard/order', [KelolaPesananController::class, 'index'])->name('dashboard.order');
     Route::get('/dashboard/orders', fn () => redirect()->route('dashboard.order'))->name('dashboard.orders');
+    Route::get('/dashboard/order/export', [KelolaPesananController::class, 'exportExcel'])->middleware('role:ADMIN')->name('dashboard.order.export');
     Route::post('/dashboard/order/{order}/update-status', [KelolaPesananController::class, 'updateStatus'])->middleware('role:ADMIN')->name('dashboard.order.update-status');
 
     // Admin CMS (Templates, Promos, Usages, Partners)
