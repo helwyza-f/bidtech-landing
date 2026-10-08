@@ -109,7 +109,7 @@ export function TemplatePreviewSection() {
         </Reveal>
 
         {/* Category Filter Pills */}
-        <div className="mt-7 sm:mt-8 flex flex-wrap items-center justify-center gap-1.5 sm:gap-2.5">
+        <div className="mt-7 sm:mt-9 md:mt-10 mx-auto flex max-w-4xl flex-wrap items-center justify-center gap-2 xs:gap-2.5 sm:gap-3 md:gap-3.5 px-2 sm:px-4">
           {CATEGORY_TABS.map((tab) => {
             const isActive = activeCategory === tab.id;
             const count =
@@ -121,16 +121,16 @@ export function TemplatePreviewSection() {
               <button
                 key={tab.id}
                 onClick={() => setActiveCategory(tab.id)}
-                className={`inline-flex items-center gap-1.5 rounded-full px-3 sm:px-4 py-1.5 text-xs sm:text-sm font-semibold transition-all duration-200 cursor-pointer ${
+                className={`inline-flex items-center gap-1.5 xs:gap-2 sm:gap-2.5 rounded-full px-3.5 xs:px-4.5 sm:px-5 md:px-6 py-2 xs:py-2.5 sm:py-3 text-xs xs:text-sm sm:text-[15px] font-semibold transition-all duration-200 cursor-pointer shadow-xs hover:shadow-sm hover:scale-[1.02] active:scale-[0.98] ${
                   isActive
-                    ? "bg-[#45a02e] text-white shadow-sm shadow-[#45a02e]/20"
-                    : "bg-white border border-slate-200 text-slate-700 hover:border-[#45a02e] hover:text-[#45a02e]"
+                    ? "bg-[#45a02e] text-white shadow-md shadow-[#45a02e]/25 border border-transparent"
+                    : "bg-white border border-slate-200/90 text-slate-700 hover:border-[#45a02e] hover:text-[#45a02e]"
                 }`}
                 type="button"
               >
                 <span>{tab.name}</span>
                 <span
-                  className={`text-xs ${
+                  className={`text-xs sm:text-sm font-semibold transition-colors ${
                     isActive ? "text-white/90" : "text-slate-400"
                   }`}
                 >
