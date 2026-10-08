@@ -1,8 +1,9 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import {
-  Search, Globe, LayoutTemplate, Loader2,
+  Search, Globe, Loader2,
   CheckCircle2, XCircle, ArrowRight, Sparkles, Check,
 } from "lucide-react";
 import Link from "next/link";
@@ -21,6 +22,8 @@ const LARAVEL_CHECKOUT_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhos
 const DOMAIN_SEARCH_URL = `${LARAVEL_CHECKOUT_URL.replace(/\/$/, "")}/api/domain/search`;
 
 export function HeroDomainSearch() {
+  const router = useRouter();
+  const [activeTab, setActiveTab] = useState<"domain" | "template">("domain");
   const [keyword, setKeyword] = useState("");
   const [results, setResults] = useState<DomainItem[]>([]);
   const [isSearching, setIsSearching] = useState(false);
@@ -71,8 +74,9 @@ export function HeroDomainSearch() {
     }
   };
 
-  // Realtime debounce: trigger setelah 500ms ketika base >= 4 karakter
+  // Realtime debounce: trigger setelah 500ms ketika base >= 4 karakter dan tab domain
   useEffect(() => {
+    if (activeTab !== "domain") return;
     const base = keyword.trim().replace(/\..+$/, "");
     if (base.length < 4) {
       const timer = setTimeout(() => {
@@ -86,15 +90,26 @@ export function HeroDomainSearch() {
     }
     const timer = setTimeout(() => handleSearch(keyword.trim()), 500);
     return () => clearTimeout(timer);
-  }, [keyword, hasSearched]);
+  }, [keyword, hasSearched, activeTab]);
 
   const handleSubmit = (e?: React.FormEvent) => {
     if (e) e.preventDefault();
-    if (!keyword.trim()) {
-      inputRef.current?.focus();
+    const q = keyword.trim();
+    if (!q) {
+      if (activeTab === "template") {
+        router.push("/template-website");
+      } else {
+        inputRef.current?.focus();
+      }
       return;
     }
-    handleSearch(keyword.trim());
+
+    if (activeTab === "template") {
+      router.push(`/template-website?q=${encodeURIComponent(q)}`);
+      return;
+    }
+
+    handleSearch(q);
   };
 
   const handleSelectDomain = (item: DomainItem) => {
@@ -121,76 +136,97 @@ export function HeroDomainSearch() {
 
   return (
     <div className="relative w-full z-30">
-      <div className="rounded-2xl border border-slate-200/70 bg-white shadow-[0_4px_32px_rgba(0,0,0,0.09)] overflow-hidden">
+      <div className="rounded-2xl sm:rounded-3xl border-2 border-[#5bb82e] bg-white shadow-[0_8px_32px_rgba(91,184,46,0.12)] p-4 sm:p-5 md:p-6 overflow-hidden">
 
-        {/* Tab Buttons */}
-        <div className="flex items-center gap-2 px-4 pt-4 pb-0">
-          <span
-            className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold bg-brand-primary text-white shadow-sm"
+        {/* Tab Buttons matching design capsule */}
+        <div className="inline-flex items-center rounded-full bg-slate-100/90 p-1 border border-slate-200/50">
+          <button
+            type="button"
+            onClick={() => setActiveTab("domain")}
+            className={`inline-flex items-center gap-2 rounded-full px-4 sm:px-5 py-2 text-xs sm:text-sm font-bold transition shadow-xs cursor-pointer ${
+              activeTab === "domain"
+                ? "bg-[#5bb82e] text-white shadow-xs"
+                : "bg-transparent text-slate-600 hover:text-slate-900"
+            }`}
           >
-            <Globe className="size-[15px]" />
+            <Globe className="size-4" />
             <span>Cek Domain</span>
-          </span>
-          <Link
-            href="/template-website"
-            className="inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-slate-500 hover:text-slate-800 hover:bg-slate-100 transition-all"
+          </button>
+
+          <button
+            type="button"
+            onClick={() => {
+              setActiveTab("template");
+              if (activeTab === "template" || keyword.trim()) {
+                router.push(keyword.trim() ? `/template-website?q=${encodeURIComponent(keyword.trim())}` : "/template-website");
+              }
+            }}
+            className={`inline-flex items-center gap-2 rounded-full px-4 sm:px-5 py-2 text-xs sm:text-sm transition shadow-xs cursor-pointer ${
+              activeTab === "template"
+                ? "bg-[#5bb82e] text-white font-bold shadow-xs"
+                : "bg-transparent text-slate-600 hover:text-slate-900 font-semibold"
+            }`}
           >
-            <LayoutTemplate className="size-[15px]" />
+            <svg className="size-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <line x1="3" y1="12" x2="21" y2="12"/>
+              <line x1="3" y1="18" x2="21" y2="18"/>
+            </svg>
             <span>Jelajahi Template</span>
-          </Link>
+          </button>
         </div>
 
-        {/* Divider */}
-        <div className="mx-4 mt-3 h-px bg-slate-100" />
-
-        {/* Search Input Form */}
+        {/* Search Input Form matching design */}
         <form
           onSubmit={handleSubmit}
-          onClick={() => inputRef.current?.focus()}
-          className="px-4 py-3 cursor-text"
+          className="mt-4 sm:mt-5 flex items-center rounded-full border border-slate-200 bg-white p-1.5 pl-4 sm:pl-5 shadow-xs focus-within:border-[#5bb82e] focus-within:ring-2 focus-within:ring-[#5bb82e]/20 transition-all"
         >
-          <div className="flex items-center gap-3">
-            {isSearching ? (
-              <Loader2 className="size-5 text-brand-primary animate-spin shrink-0" />
-            ) : (
-              <Search className="size-5 text-slate-400 shrink-0" />
-            )}
-            <input
-              ref={inputRef}
-              id="hero-domain-input"
-              type="text"
-              value={keyword}
-              onChange={(e) => setKeyword(e.target.value)}
-              placeholder="Ketik nama domain impian Anda... (contoh: bisniskeren)"
-              className="w-full bg-transparent py-2 text-base text-slate-800 placeholder:text-slate-400 placeholder:font-normal font-medium focus:outline-none"
-              autoComplete="off"
-              spellCheck={false}
-            />
+          {isSearching ? (
+            <Loader2 className="size-5 text-[#5bb82e] animate-spin shrink-0" />
+          ) : (
+            <Search className="size-5 text-slate-400 shrink-0" />
+          )}
+          <input
+            ref={inputRef}
+            id="hero-domain-input"
+            type="text"
+            value={keyword}
+            onChange={(e) => setKeyword(e.target.value)}
+            placeholder="Ketik nama domain atau desain impian Anda"
+            className="w-full bg-transparent px-3 py-2 text-sm sm:text-base text-slate-800 placeholder:text-slate-400 font-normal outline-none"
+            autoComplete="off"
+            spellCheck={false}
+          />
 
-            {keyword && (
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setKeyword("");
-                  setHasSearched(false);
-                  setResults([]);
-                  setErrorMessage("");
-                  inputRef.current?.focus();
-                }}
-                className="text-slate-400 hover:text-slate-600 p-1 text-xs rounded-full hover:bg-slate-100 transition shrink-0 cursor-pointer"
-                title="Hapus"
-              >
-                ✕
-              </button>
-            )}
-          </div>
+          {keyword && (
+            <button
+              type="button"
+              onClick={(e) => {
+                e.stopPropagation();
+                setKeyword("");
+                setHasSearched(false);
+                setResults([]);
+                setErrorMessage("");
+                inputRef.current?.focus();
+              }}
+              className="text-slate-400 hover:text-slate-600 p-1 mr-1 text-xs rounded-full hover:bg-slate-100 transition shrink-0 cursor-pointer"
+              title="Hapus"
+            >
+              ✕
+            </button>
+          )}
+
+          <button
+            type="submit"
+            className="rounded-full bg-[#5bb82e] hover:bg-[#4ea625] text-white px-6 sm:px-8 py-2.5 sm:py-3 text-xs sm:text-sm font-semibold transition shadow-xs shrink-0 cursor-pointer"
+          >
+            Telusuri
+          </button>
         </form>
 
         {/* Results — muncul di dalam card setelah search */}
         {hasSearched && (
-          <>
-            <div className="mx-4 h-px bg-slate-100" />
+          <div className="mt-4 pt-4 border-t border-slate-100">
 
             {/* Filter bar */}
             {!isSearching && results.length > 0 && (
@@ -319,7 +355,7 @@ export function HeroDomainSearch() {
                 Domain langsung aktif otomatis bersama paket template pilihan Anda.
               </div>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>

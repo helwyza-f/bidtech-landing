@@ -21,7 +21,25 @@ export function SmartNavLink({ children, className, href, onNavigate }: SmartNav
   const handleClick = (event: MouseEvent<HTMLAnchorElement>) => {
     onNavigate?.();
 
+    const normalizePath = (p: string | null) => (p || "").replace(/\/$/, "") || "/";
+    const currentPath = normalizePath(pathname);
+    const targetPath = normalizePath(href);
+
+    // 1. Jika mengklik menu link yang sama dengan halaman yang sedang aktif saat ini:
+    // (misal di Beranda klik logo/Beranda, di /template-website klik Cari Design, di /tutorial klik Tutorial, dll)
+    if (!isHashLink && currentPath === targetPath) {
+      event.preventDefault();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+      if (window.location.hash) {
+        window.history.pushState(null, "", href);
+        window.dispatchEvent(new HashChangeEvent("hashchange"));
+      }
+      return;
+    }
+
     if (!isHashLink) {
+      // Pindah ke rute halaman lain: pastikan posisi selalu kembali ke paling atas
+      window.scrollTo({ top: 0, behavior: "instant" });
       return;
     }
 
@@ -32,7 +50,7 @@ export function SmartNavLink({ children, className, href, onNavigate }: SmartNav
       return;
     }
 
-    scrollToSection(href);
+    scrollToSection(href, "smooth");
   };
 
   return (

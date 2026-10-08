@@ -50,13 +50,15 @@ export function SiteFooter() {
         {/* Top Header Row: Logo, Tagline & Back to Top Button */}
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 sm:gap-8 pb-8 sm:pb-14 border-b border-slate-100">
           <div className="max-w-2xl">
-            <Image
-              src={logoAssets.footer.src}
-              alt={logoAssets.footer.alt}
-              width={logoAssets.footer.width}
-              height={logoAssets.footer.height}
-              className="h-8 sm:h-12 w-auto object-contain"
-            />
+            <SmartNavLink className="inline-block cursor-pointer transition-opacity hover:opacity-90" href="/">
+              <Image
+                src={logoAssets.footer.src}
+                alt={logoAssets.footer.alt}
+                width={logoAssets.footer.width}
+                height={logoAssets.footer.height}
+                className="h-8 sm:h-12 w-auto object-contain"
+              />
+            </SmartNavLink>
             <h3 className="mt-3.5 sm:mt-5 font-[family-name:var(--font-sora)] text-lg sm:text-2xl lg:text-[28px] font-bold tracking-tight text-slate-950 leading-snug">
               {t.footer.description}
             </h3>
@@ -114,7 +116,7 @@ export function SiteFooter() {
                 <li key={item}>
                   <a
                     className="transition-colors hover:text-[#45a02e]"
-                    href={item === "FAQ" ? "#faq" : "#contact"}
+                    href={item === "FAQ" ? "/hubungi-kami#faq" : item === "Hubungi Kami" ? "/hubungi-kami" : "#contact"}
                   >
                     {item}
                   </a>

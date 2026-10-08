@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Inter, Playfair_Display, Sora } from "next/font/google";
+import { Inter, Playfair_Display, Plus_Jakarta_Sans, Sora } from "next/font/google";
 
 import { AnnouncementBar } from "@/components/layouts/announcement-bar";
 import { SiteHeader } from "@/components/layouts/site-header";
@@ -12,6 +12,12 @@ import "../styles/global.css";
 
 const sora = Sora({ subsets: ["latin"], variable: "--font-sora", display: "swap" });
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter", display: "swap" });
+const plusJakartaSans = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-plus-jakarta",
+  display: "swap",
+  weight: ["400", "500", "600", "700", "800"],
+});
 const playfair = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-playfair",
@@ -124,7 +130,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="id" className={`${sora.variable} ${inter.variable} ${playfair.variable}`}>
+    <html lang="id" className={`${sora.variable} ${inter.variable} ${playfair.variable} ${plusJakartaSans.variable}`}>
       <head>
         <StructuredData />
       </head>
