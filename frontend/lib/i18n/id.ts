@@ -253,7 +253,7 @@ export const id = {
     subtitle:
       "Jelajahi koleksi sistem dan website unggulan yang telah kami kembangkan dengan teknologi mutakhir dan performa tinggi.",
     cta: "Lihat Semua Portofolio",
-    allPortfolioHref: "/template-website",
+    allPortfolioHref: "/portofolio",
     items: [
       {
         id: "ayocuci",
@@ -718,7 +718,7 @@ export const id = {
     navItems: [
       { label: "Beranda", href: "#hero" },
       { label: "Layanan", href: "#services" },
-      { label: "Portofolio", href: "#portfolio" },
+      { label: "Portofolio", href: "/portofolio" },
       { label: "Tentang Kami", href: "#about" },
     ],
     servicesTitle: "Layanan",

@@ -200,6 +200,7 @@ export function PortfolioSection() {
   const itemCount = items.length;
 
   const [currentIndex, setCurrentIndex] = useState(0);
+  const activeItem = items[currentIndex] || items[0];
   const [isPaused, setIsPaused] = useState(false);
 
   const touchStartX = useRef<number | null>(null);
@@ -383,7 +384,12 @@ export function PortfolioSection() {
                         {/* 1. Project Title (Fixed Height Container to Guarantee Zero Shift) */}
                         <div className="h-9 sm:h-10 lg:h-11 flex items-center">
                           <h3 className="font-[family-name:var(--font-sora)] text-2xl sm:text-[28px] lg:text-[32px] font-extrabold tracking-tight text-[#111729] leading-tight truncate">
-                            {item.title}
+                            <Link
+                              href={`/portofolio?id=${item.id}`}
+                              className="hover:text-[#6ab135] transition-colors"
+                            >
+                              {item.title}
+                            </Link>
                           </h3>
                         </div>
 
@@ -417,7 +423,7 @@ export function PortfolioSection() {
                 {/* 4. Full-width Green CTA Button: Permanently Anchored in Position */}
                 <div className="mt-6 sm:mt-8 pt-1">
                   <Link
-                    href={t.portfolioSection.allPortfolioHref || "/template-website"}
+                    href={activeItem?.id ? `/portofolio?id=${activeItem.id}` : "/portofolio"}
                     className="inline-flex w-full items-center justify-center rounded-xl sm:rounded-2xl bg-[#6ab135] py-3.5 sm:py-4 px-6 sm:px-8 text-center text-sm sm:text-base font-bold text-white shadow-[0_4px_16px_rgba(106,177,53,0.28)] transition-all duration-300 hover:bg-[#5aa02b] hover:shadow-[0_8px_24px_rgba(106,177,53,0.38)] hover:-translate-y-0.5 active:scale-[0.99] cursor-pointer"
                   >
                     {t.portfolioSection.cta}

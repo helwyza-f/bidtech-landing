@@ -52,7 +52,7 @@ export function UniversalCta({ className = "" }: UniversalCtaProps) {
 
                 {/* Secondary Button: Portofolio */}
                 <Link
-                  href="/template-website"
+                  href="/portofolio"
                   className="inline-flex w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-slate-300 bg-white hover:bg-slate-50 text-slate-800 px-6 sm:px-7 py-3.5 sm:py-4 text-sm font-semibold shadow-sm transition-all duration-200 hover:-translate-y-0.5 active:scale-95 cursor-pointer text-center"
                 >
                   <span>Lihat Portofolio</span>
@@ -83,7 +83,7 @@ export function UniversalCta({ className = "" }: UniversalCtaProps) {
                 {/* Main CTA Visual */}
                 <div className="relative h-full w-full origin-bottom filter drop-shadow-[0_20px_40px_rgba(0,0,0,0.14)] max-sm:translate-y-6 max-sm:scale-[1.12]">
                   <Image
-                    src="/images/cta/model.png"
+                    src="/images/cta/model-8.webp"
                     alt="Konsultan BidTech menunjukkan website di ponsel"
                     fill
                     sizes="(min-width: 1024px) 500px, (min-width: 640px) 480px, 90vw"

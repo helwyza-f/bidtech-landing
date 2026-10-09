@@ -437,7 +437,7 @@ export default function HubungiKamiPage() {
                 <div className="relative flex justify-center items-end lg:col-span-5 h-[340px] sm:h-[420px] lg:h-[460px]">
                   <div className="relative h-full w-full max-w-[420px]">
                     <Image
-                      src="/images/cta/model.png"
+                      src="/images/cta/model-8.webp"
                       alt="Konsultan BidTech menunjukkan aplikasi website di smartphone"
                       fill
                       sizes="(min-width: 1024px) 450px, (min-width: 640px) 400px, 90vw"

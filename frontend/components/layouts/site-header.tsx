@@ -87,7 +87,7 @@ export function SiteHeader() {
     { label: t.nav.findDesign ?? "Cari Design", href: "/template-website" },
     { label: t.nav.tutorial ?? "Tutorial", href: "/tutorial" },
     { label: t.nav.custom ?? "Custom", href: "#services" },
-    { label: t.nav.portfolio ?? "Portofolio", href: "#portfolio" },
+    { label: t.nav.portfolio ?? "Portofolio", href: "/portofolio" },
     { label: t.nav.contact ?? "Hubungi Kami", href: "/hubungi-kami" },
   ];
 

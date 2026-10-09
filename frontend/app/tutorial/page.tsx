@@ -531,7 +531,7 @@ export default function TutorialPage() {
                     </a>
 
                     <Link
-                      href="/#portfolio"
+                      href="/portofolio"
                       className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-200 bg-white hover:bg-slate-50 text-slate-800 px-6 sm:px-7 py-3.5 text-xs sm:text-sm font-semibold shadow-xs transition-all duration-200 hover:-translate-y-0.5 active:scale-95"
                     >
                       <span>Lihat Portofolio</span>
@@ -560,7 +560,7 @@ export default function TutorialPage() {
                 <div className="relative flex justify-center items-end lg:col-span-5 h-[340px] sm:h-[420px] lg:h-[460px]">
                   <div className="relative h-full w-full max-w-[420px]">
                     <Image
-                      src="/images/cta/model.png"
+                      src="/images/cta/model-8.webp"
                       alt="Konsultan BidTech menunjukkan aplikasi website di smartphone"
                       fill
                       sizes="(min-width: 1024px) 450px, (min-width: 640px) 400px, 90vw"

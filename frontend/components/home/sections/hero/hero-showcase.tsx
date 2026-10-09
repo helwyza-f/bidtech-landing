@@ -166,7 +166,7 @@ function HeroModelSlider({ activeSlide }: { activeSlide: 0 | 1 }) {
       {/* Model Container with proportional heights for Mobile, iPad, and Desktop */}
       <div className="relative h-[380px] xs:h-[420px] sm:h-[480px] md:h-[480px] lg:h-[530px] xl:h-[580px] w-full max-w-[420px] xs:max-w-[460px] sm:max-w-[500px] md:max-w-[520px] lg:max-w-[580px] xl:max-w-[620px] overflow-hidden">
         {/* ========================================================= */}
-        {/* SLIDE 1: MODEL-4 (Wanita memegang laptop dengan semangat) */}
+        {/* SLIDE 1: MODEL-6 (Wanita memegang laptop dengan semangat) */}
         {/* ========================================================= */}
         <div
           className={`absolute inset-0 transition-all duration-700 ease-in-out ${
@@ -204,10 +204,10 @@ function HeroModelSlider({ activeSlide }: { activeSlide: 0 | 1 }) {
             </div>
           </div>
 
-          {/* Gambar Model 4 (Wanita memegang laptop) */}
+          {/* Gambar Model 6 (Wanita memegang laptop) */}
           <div className="relative h-full w-full">
             <Image
-              src="/images/hero/model-4.webp"
+              src="/images/hero/model-6.webp"
               alt="Pengusaha wanita sukses memegang laptop aplikasi profesional"
               fill
               className="object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_88%,transparent_100%)]"
@@ -217,7 +217,7 @@ function HeroModelSlider({ activeSlide }: { activeSlide: 0 | 1 }) {
         </div>
 
         {/* ========================================================= */}
-        {/* SLIDE 2: MODEL-5 (Pria memegang smartphone dengan bangga) */}
+        {/* SLIDE 2: MODEL-7 (Pria kemeja hijau memegang smartphone)  */}
         {/* ========================================================= */}
         <div
           className={`absolute inset-0 transition-all duration-700 ease-in-out ${
@@ -255,10 +255,10 @@ function HeroModelSlider({ activeSlide }: { activeSlide: 0 | 1 }) {
             </div>
           </div>
 
-          {/* Gambar Model 5 (Pria memegang smartphone) */}
+          {/* Gambar Model 7 (Pria memegang smartphone) */}
           <div className="relative h-full w-full">
             <Image
-              src="/images/hero/model-5.webp"
+              src="/images/hero/model-7.webp"
               alt="Pengusaha pria sukses memegang smartphone website profesional"
               fill
               className="object-contain object-bottom [mask-image:linear-gradient(to_bottom,black_88%,transparent_100%)] [-webkit-mask-image:linear-gradient(to_bottom,black_88%,transparent_100%)]"

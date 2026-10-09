@@ -252,7 +252,7 @@ export const en = {
     subtitle:
       "Explore our collection of flagship systems and web applications built with cutting-edge technology and high performance.",
     cta: "View All Portfolio",
-    allPortfolioHref: "/template-website",
+    allPortfolioHref: "/portofolio",
     items: [
       {
         id: "ayocuci",
@@ -717,7 +717,7 @@ export const en = {
     navItems: [
       { label: "Home", href: "#hero" },
       { label: "Services", href: "#services" },
-      { label: "Portfolio", href: "#portfolio" },
+      { label: "Portfolio", href: "/portofolio" },
       { label: "About Us", href: "#about" },
     ],
     servicesTitle: "Services",
